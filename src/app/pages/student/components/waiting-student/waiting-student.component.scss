@@ -1,0 +1,23 @@
+.width-fit {
+  //max-width: 100vw;
+}
+
+.text-valid {
+  color: #52c41a;
+}
+
+.text-invalid {
+  color: #ff4d4f;
+}
+
+.table {
+  max-width: calc(100vw - 352px);
+}
+
+.custom-action{
+  cursor: pointer;
+  padding-right: 5px;
+  &:hover{
+    color: #1677ff;
+  }
+}

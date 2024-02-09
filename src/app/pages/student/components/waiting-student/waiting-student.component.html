@@ -1,0 +1,61 @@
+<div class="width-fit">
+  <nz-table #basicTable nzOuterBordered [nzData]="data" [nzScroll]="{ x: '800px' }" class="table">
+    <thead>
+    <tr>
+      <th nzLeft nzAlign="center" [nzWidth]="'80px'">
+        STT
+      </th>
+      <th
+        *ngFor="let column of listOfColumn"
+        [nzWidth]="column.colWith"
+        [nzAlign]="'center'"
+      >
+        {{column.title}}
+      </th>
+      <th nzRight nzAlign="center" [nzWidth]="'180px'">
+        Chức năng
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr
+      *ngFor="let item of data; index as i"
+    >
+      <td nzLeft nzAlign="center" >{{ i + 1 }}</td>
+      <td nzAlign="center" >{{ item.registrationDate }}</td>
+      <td nzAlign="center">{{ item.ticket }}</td>
+      <td nzAlign="center">{{ item.studentName }}</td>
+      <td nzAlign="center">{{ item.phoneNumber }}</td>
+      <td nzAlign="center">{{ item.email }}</td>
+      <td nzAlign="center">{{ item.studentCode }}</td>
+      <td nzAlign="center">{{ item.presenter }}</td>
+      <td nzAlign="center">{{ item.creatorName }}</td>
+      <td nzAlign="center">{{ item.courseName }}</td>
+      <td nzAlign="center">{{ item.scores }}</td>
+      <td nzAlign="center">
+        <span class="text-valid" *ngIf="item.emailStatus === 'valid'">Đã xác thực</span>
+        <span class="text-invalid" *ngIf="item.emailStatus !== 'valid'">Chưa xác thực</span>
+      </td>
+      <td nzAlign="center">
+        <span class="text-valid" *ngIf="item.userStatus === 'valid'">Có tài khoản</span>
+        <span class="text-invalid" *ngIf="item.userStatus !== 'valid'">Chưa có tài khoản</span>
+      </td>
+      <td nzRight nzAlign="center">
+        <span class="custom-action">Chi tiết</span>
+
+        <span class="custom-action" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+          Chăm sóc
+          <span nz-icon nzType="down"></span>
+        </span>
+
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item>Nhận</li>
+            <li nz-menu-item>Không nhận</li>
+          </ul>
+        </nz-dropdown-menu>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>

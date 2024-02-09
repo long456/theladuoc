@@ -1,0 +1,9 @@
+<ng-container *ngFor="let item of menuData" >
+  <li *ngIf="item.children" nz-submenu nzTitle={{item.name}} nzIcon="{{item.icon}}">
+    <app-menu-item [menuData]="item.children"></app-menu-item>
+  </li>
+  <li *ngIf="!item.children" nz-menu-item nzMatchRouter >
+    {{item.name}}
+  </li>
+</ng-container>
+

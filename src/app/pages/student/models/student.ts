@@ -1,0 +1,15 @@
+export interface Student {
+  id: string,
+  registrationDate: string,
+  ticket: 'free' | 'vip' | 'premium',
+  studentName: string,
+  phoneNumber: string,
+  email: string,
+  studentCode: string,
+  presenter: string,
+  creatorName: string,
+  courseName: string,
+  scores: string,
+  emailStatus: 'valid' | 'invalid',
+  userStatus: 'valid' | 'invalid',
+}
