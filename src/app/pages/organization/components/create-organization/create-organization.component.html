@@ -1,0 +1,150 @@
+<div class="title-page">
+  {{isCreate? 'Tạo tổ chức' : 'Thiết lập tổ chức'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="orgForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">
+            Tên tổ chức
+            <span class="text-danger">*</span>
+          </span>
+          <input
+            nz-input autofocus formControlName="name"
+            [nzStatus]="(this.orgForm.get('name')?.invalid && (orgForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(orgForm.get('name')?.touched || isSubmit)  && orgForm.get('name')?.hasError('required')"
+          >
+            Tên tổ chức không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="9" class="text-right">
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">
+            Email
+          </span>
+          <input
+            nz-input autofocus formControlName="email"
+            [nzStatus]="(this.orgForm.get('email')?.invalid && (orgForm.get('email')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(orgForm.get('email')?.touched || isSubmit)  && orgForm.get('email')?.hasError('email')"
+          >
+            Email không đúng định dạng
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">
+            Số điện thoại
+          </span>
+          <input
+            nz-input autofocus formControlName="mobile"
+            [nzStatus]="(this.orgForm.get('mobile')?.invalid && (orgForm.get('mobile')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(orgForm.get('mobile')?.touched || isSubmit)  && orgForm.get('mobile')?.hasError('pattern')"
+          >
+            Số điện thoại không đúng định dạng
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">
+            Tên miền trang quản trị
+          </span>
+          <input
+            nz-input autofocus formControlName="websiteCms"
+            [nzStatus]="(this.orgForm.get('websiteCms')?.invalid && (orgForm.get('websiteCms')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(orgForm.get('websiteCms')?.touched || isSubmit)  && orgForm.get('websiteCms')?.hasError('required')"
+          >
+            Tên miền trang quản trị không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">
+            Kiểu chia data
+          </span>
+
+          <div>
+            <nz-select class="width-100" formControlName="splitData">
+              <nz-option [nzValue]="0" nzLabel="Jack"></nz-option>
+              <nz-option [nzValue]="1" nzLabel="Lucy"></nz-option>
+            </nz-select>
+          </div>
+
+<!--          <span class="text-danger"-->
+<!--                *ngIf="(orgForm.get('websiteCms')?.touched || isSubmit)  && orgForm.get('websiteCms')?.hasError('required')"-->
+<!--          >-->
+<!--            Tên miền trang quản trị không được để trống-->
+<!--          </span>-->
+        </div>
+
+        <div nz-col [nzSpan]="18">
+          <span class="text-label">
+            Tên miền trang chủ
+          </span>
+
+          <span class="input-website">
+            <input
+              #inputWebsite
+              nz-input
+              [class.inactive]="!isActive"
+              [(ngModel)]="webData"
+              [ngModelOptions]="{standalone: true}"
+            >
+            <button nz-button nzType="primary" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="changeActive()">
+              <span nz-icon nzType="plus" *ngIf="!isActive"></span>
+              <span nz-icon nzType="check" *ngIf="isActive"></span>
+            </button>
+          </span>
+
+
+
+          <div class="domain-list" [class.invalid]="this.orgForm.get('website')?.invalid && isSubmit">
+            <div
+              class="domain-item"
+              *ngFor="let item of orgForm.get('website')?.value"
+            >
+              {{item}}
+              <button nz-button nzType="text" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="deleteWeb(item)">
+                <span nz-icon nzType="delete" class="color-dagger"></span>
+              </button>
+            </div>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(orgForm.get('website')?.touched || isSubmit)  && orgForm.get('website')?.hasError('required')"
+          >
+            Tên miền không được để trống
+          </span>
+
+        </div>
+
+
+      </div>
+    </form>
+
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="editOrg()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="title-page">
+  {{isCreate? 'Tạo form đăng ký' : 'Chỉnh sửa form đăng ký'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form>
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="9">
+          Tiêu đề
+        </div>
+
+        <div nz-col [nzSpan]="9" class="text-right">
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          Đường dẫn trang thank you
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          Đường dẫn trang chuyển hướng
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          Đường dẫn nhóm zalo
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          Mô tả
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          Nội dung trang thank you
+        </div>
+      </div>
+    </form>
+  </div>
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="editForm()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

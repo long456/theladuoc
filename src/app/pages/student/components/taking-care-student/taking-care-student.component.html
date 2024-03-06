@@ -1,0 +1,71 @@
+<div>
+  <nz-collapse class="filter-form" [class.expand]="isExpand" >
+    <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
+      <app-filter-form [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"></app-filter-form>
+    </nz-collapse-panel>
+  </nz-collapse>
+
+  <app-table [rows]="rowData">
+    <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+    <table-column header="Ngày đăng ký" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+    <table-column header="Loại vé" key="ticket">
+      <ng-template appCell let-data>
+        <nz-tag [nzColor]="'red'" *ngIf="data.ticket === 'PREMIUM'">{{data.ticket}}</nz-tag>
+        <nz-tag [nzColor]="'blue'" *ngIf="data.ticket === 'FREE'">{{data.ticket}}</nz-tag>
+        <nz-tag [nzColor]="'gold'" *ngIf="data.ticket === 'VIP'">{{data.ticket}}</nz-tag>
+      </ng-template>
+    </table-column>
+    <table-column header="Số tiền" key="price" [width]="'150px'"></table-column>
+    <table-column header="Tên học viên" key="name" [width]="'180px'"></table-column>
+    <table-column header="Thanh toán" key="price" [width]="'180px'">
+      <ng-template appCell let-data>
+        <span class="text-valid" *ngIf="data.price">Đã xác thực</span>
+        <span class="text-invalid" *ngIf="!data.price">Chưa xác thực</span>
+      </ng-template>
+    </table-column>
+    <table-column header="Số điện thoại" key="mobile" [width]="'120px'"></table-column>
+    <table-column header="Email" key="email" [width]="'150px'"></table-column>
+    <table-column header="Mã học viên" key="code" [width]="'180px'"></table-column>
+    <table-column header="Người giới thiệu" key="userRef" [width]="'180px'"></table-column>
+    <table-column header="Tên diễn giả" key="lecturerName" [width]="'180px'"></table-column>
+    <table-column header="Tên khóa học" key="courseName" [width]="'180px'"></table-column>
+    <table-column header="Số điểm" key="code"></table-column>
+    <table-column header="Nhân viên chăm sóc" key="userRef"></table-column>
+    <table-column header="Xác thực email" key="isAuthEmail" [width]="'180px'">
+      <ng-template appCell let-data>
+        <span class="text-valid" *ngIf="data.isAuthEmail">Đã xác thực</span>
+        <span class="text-invalid" *ngIf="!data.isAuthEmail">Chưa xác thực</span>
+      </ng-template>
+    </table-column>
+    <table-column header="Trạng thái" key="isAccount" [width]="'180px'">
+      <ng-template appCell let-data>
+        <span class="text-valid" *ngIf="data.isAccount">Đã xác thực</span>
+        <span class="text-invalid" *ngIf="!data.isAccount">Chưa xác thực</span>
+      </ng-template>
+    </table-column>
+
+    <table-column [width]="'180px'" fixColumn="right" >
+      <ng-template appHeader>
+        Chức năng
+      </ng-template>
+
+      <ng-template appCell let-data>
+        <span class="custom-action">Chi tiết</span>
+
+        <span class="custom-action" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+          Chăm sóc
+          <span nz-icon nzType="down"></span>
+        </span>
+
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+<!--            <li nz-menu-item>Gọi điện</li>-->
+            <li nz-menu-item>Đổi loại vé</li>
+            <li nz-menu-item>Tải lên hóa đơn</li>
+            <li nz-menu-item>Xác thực thanh toán</li>
+          </ul>
+        </nz-dropdown-menu>
+      </ng-template>
+    </table-column>
+  </app-table>
+</div>

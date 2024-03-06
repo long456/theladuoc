@@ -1,0 +1,35 @@
+.flex-content{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.text-align-right{
+  text-align: right;
+  padding-right: 8px;
+}
+
+.min-width{
+  width: 250px;
+}
+
+.select-item{
+  width: 100%;
+}
+
+.btn-area{
+  text-align: right;
+}
+
+.btn-form {
+  min-width: 80px;
+  min-height: 36px;
+  margin-left: 8px;
+  border-radius: 4px;
+}
+
+
+.primary {
+  background-color: #40a9ff;
+  color: white;
+}

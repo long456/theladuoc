@@ -1,0 +1,22 @@
+<div>
+  <app-table [rows]="rowData">
+    <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+    <table-column header="Tên tổ chức" key="OrganizationName" [width]="'200px'"></table-column>
+    <table-column header="Email tổ chức" key="roleName" [width]="'200px'"></table-column>
+    <table-column header="SĐT tổ chức" key="roleName" [width]="'200px'"></table-column>
+    <table-column header="Người đại diện" key="RepresentativeName" [width]="'200px'"></table-column>
+
+
+    <table-column [width]="'180px'" fixColumn="right" >
+      <ng-template appHeader>
+        Chức năng
+      </ng-template>
+
+      <ng-template appCell let-data>
+        <span class="custom-action" (click)="edit(data)">Sửa</span>
+      </ng-template>
+    </table-column>
+  </app-table>
+
+  <router-outlet></router-outlet>
+</div>

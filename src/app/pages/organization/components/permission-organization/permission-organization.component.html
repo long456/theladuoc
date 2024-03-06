@@ -1,0 +1,40 @@
+<div class="title-page">
+  Phân quyền tổ chức
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <span class="text-label">Danh sách quyền chọn</span>
+
+    <div class="permission-picker">
+      <div nz-row  *ngFor="let permission of listPermission" class="permission-group">
+        <div class="permission-group-label">
+          <label nz-checkbox [(ngModel)]="permission.checked" (ngModelChange)="updateAllChecked($event,permission)">{{permission.name}}</label>
+        </div>
+        <div nz-col [nzSpan]="20" class="permission-border">
+          <div *ngIf="permission.children.length > 0" class="permission-area">
+            <nz-checkbox-wrapper (nzOnChange)="valueChange($event, permission)" class="wd-100">
+              <div nz-row>
+                <ng-container *ngFor="let item of permission.children">
+                  <div nz-col [nzSpan]="8" class="permission">
+                    <label nz-checkbox [nzValue]=item.id [(ngModel)]="item.checked">{{item.name}}</label>
+                  </div>
+                </ng-container>
+              </div >
+            </nz-checkbox-wrapper>
+          </div>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        Lưu
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

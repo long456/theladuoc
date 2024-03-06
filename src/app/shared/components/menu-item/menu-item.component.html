@@ -2,7 +2,7 @@
   <li *ngIf="item.children" nz-submenu nzTitle={{item.name}} nzIcon="{{item.icon}}">
     <app-menu-item [menuData]="item.children"></app-menu-item>
   </li>
-  <li *ngIf="!item.children" nz-menu-item nzMatchRouter >
+  <li *ngIf="!item.children" nz-menu-item nzMatchRouter (click)="navigate(item.link)">
     {{item.name}}
   </li>
 </ng-container>

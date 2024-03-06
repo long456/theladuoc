@@ -1,0 +1,16 @@
+.spin-screen{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  &.hide{
+    display: none;
+  }
+}
+
+.size-loading{
+  font-size: 30px;
+}

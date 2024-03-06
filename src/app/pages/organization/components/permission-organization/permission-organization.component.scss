@@ -1,0 +1,87 @@
+.title-page{
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-bottom: 15px;
+}
+
+.text-label{
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.btn-panel{
+  text-align: end;
+  position: sticky;
+  top: 0;
+}
+
+.btn {
+  min-width: 80px;
+  min-height: 36px;
+  margin-left: 8px;
+  border-radius: 4px;
+}
+
+
+.primary {
+  background-color: #40a9ff;
+  color: white;
+}
+
+.permission-picker{
+  margin-top: 50px;
+}
+
+.permission-group{
+  margin-bottom: 70px;
+  position: relative;
+}
+
+.permission-border{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 1px solid #DEDEDE;
+}
+
+.permission-area{
+  padding-left: 15px;
+}
+
+.permission-group-label{
+  position: absolute;
+  top: -39px;
+  padding-top: 8px;
+  padding-left: 15px;
+  border: 1px solid #dedede;
+  font-weight: 600;
+  padding-bottom: 8px;
+  background-color: #f9f7f7;
+  border-radius: 8px 8px 0 0;
+}
+
+.permission{
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.wd-100{
+  width: 100%;
+}
+
+.checkbox-ant{
+  height: 16px;
+  width: 16px;
+  &:hover {
+    border-color: #1890ff;
+  }
+}
+
+.permission-status{
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: end;
+}
