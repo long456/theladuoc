@@ -1,0 +1,47 @@
+:host {
+  display: flex;
+  width: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-layout {
+  height: 100vh;
+  flex-direction: row;
+  width: 100%;
+}
+
+.app-content{
+  overflow: hidden;
+}
+
+nz-header {
+  padding: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.app-header {
+  position: relative;
+  height: 64px;
+  padding: 0;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+}
+
+nz-content {
+  margin: 24px;
+}
+
+.inner-content {
+  overflow: auto;
+  padding: 24px;
+  background: #fff;
+  height: 100%;
+  position: relative;
+}
+
+.layout-content{
+  overflow: hidden;
+}

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {MenuItem} from "./shared/models/MenuItem";
 
 @Component({
   selector: 'app-root',

@@ -1,0 +1,51 @@
+<nz-table
+  #table
+  [nzData]="rows"
+  class="table-width"
+  nzOuterBordered
+  [nzScroll]="{ x: '1500px', y: '590px' }"
+>
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns" nzAlign="center"
+          [nzWidth]="column.width"
+          [nzLeft]="column.fixColumn === 'left'"
+          [nzRight]="column.fixColumn === 'right'"
+      >
+        <ng-container *ngIf="column.tplHeader">
+          <ng-container *ngTemplateOutlet="column.tplHeader.template"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="!column.tplHeader">
+          {{ column.header }}
+        </ng-container>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of table.data; index as i">
+      <td
+        *ngFor="let column of columns"
+        nzAlign="center"
+        [nzLeft]="column.fixColumn === 'left'"
+        [nzRight]="column.fixColumn === 'right'"
+      >
+        <ng-container *ngIf="column.tplCell">
+          <ng-container *ngTemplateOutlet="column.tplCell.template; context: { $implicit: data }"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="!column.tplCell">
+          <ng-container [ngSwitch]="column.dataType">
+            <ng-container *ngSwitchCase="COL_DATA_TYPE.DATE">
+              {{ data[column.key] | date: 'dd/MM/YYYY' }}
+            </ng-container>
+            <ng-container *ngSwitchCase="COL_DATA_TYPE.INDEX">
+              {{i + 1}}
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              {{ data[column.key] }}
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

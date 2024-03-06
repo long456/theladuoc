@@ -1,0 +1,41 @@
+<div class="title-page">
+  Danh sách tổ chức
+</div>
+
+
+<div class="header-btn">
+  <button nz-button class="add-btn primary" (click)="createOrg()">Thêm mới</button>
+</div>
+
+<app-table [rows]="rowData">
+  <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+  <table-column header="Tên tổ chức" key="name" [width]="'200px'"></table-column>
+  <table-column header="Admin" key="userName" [width]="'200px'"></table-column>
+  <table-column header="Website" key="website" [width]="'200px'"></table-column>
+
+  <table-column [width]="'180px'" fixColumn="right" >
+    <ng-template appHeader>
+      Chức năng
+    </ng-template>
+
+    <ng-template appCell let-data>
+      <span class="custom-action">
+        <span
+          nzTooltipTitle="Thiết lập" nzTooltipPlacement="top" nz-tooltip
+          nz-icon nzType="setting" nzTheme="outline" (click)="edit(data)"></span>
+        </span>
+
+      <span class="custom-action">
+        <span
+          nzTooltipTitle="Phân quyền" nzTooltipPlacement="top" nz-tooltip
+          nz-icon nzType="tool" nzTheme="outline" (click)="updatePermission(data)"></span>
+      </span>
+
+<!--      <span class="custom-action">-->
+<!--        <span-->
+<!--          nzTooltipTitle="Xóa" nzTooltipPlacement="top" nz-tooltip-->
+<!--          nz-icon nzType="delete" nzTheme="outline" class="delete"></span>-->
+<!--      </span>-->
+    </ng-template>
+  </table-column>
+</app-table>

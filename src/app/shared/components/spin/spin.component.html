@@ -1,0 +1,15 @@
+<!--<nz-spin-->
+<!--  nzSimple-->
+<!--  class="spin-screen"-->
+<!--&gt;-->
+<!--</nz-spin>-->
+<ng-template #indicatorTemplate>
+  <span nz-icon nzType="loading" class="size-loading"></span>
+</ng-template>
+<nz-spin
+  nzSimple
+  [nzIndicator]="indicatorTemplate"
+  [class.hide]="!isSpinning"
+  class="spin-screen"
+>
+</nz-spin>

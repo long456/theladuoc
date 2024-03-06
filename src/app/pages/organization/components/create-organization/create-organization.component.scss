@@ -1,0 +1,89 @@
+.title-page{
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-bottom: 15px;
+}
+
+.btn-panel{
+  text-align: end;
+  position: sticky;
+  top: 0;
+}
+
+.btn {
+  min-width: 80px;
+  min-height: 36px;
+  margin-left: 8px;
+  border-radius: 4px;
+}
+
+
+.primary {
+  background-color: #40a9ff;
+  color: white;
+}
+
+.text-label{
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.text-danger{
+  color: red;
+  width: 100%;
+}
+
+.color-dagger{
+  color: #ff4d4f;
+}
+
+.text-right{
+  text-align: right;
+}
+
+.input-website{
+  input{
+    transition: 0.25s;
+    width: 30%;
+    margin-right: 4px;
+    border-radius: 8px;
+    &.inactive{
+      width: 0;
+      padding: 0;
+      border: none;
+      margin-right: 0;
+    }
+  }
+  margin-left: 8px;
+}
+
+.size-custom{
+
+}
+
+.domain-list{
+  margin-top: 10px;
+  border: 1px dashed #40a9ff;
+  min-height: 60px;
+  padding: 15px 20px;
+  &.invalid {
+    border: 1px dashed #ff4d4f;
+  }
+}
+
+.domain-item{
+  display: flex;
+  justify-content: space-between;
+  color: #1890ff;
+  &:hover{
+    background-color: #f5f5f5;
+    transition: background-color .3s;
+  }
+}
+
+.width-100{
+  width: 100%;
+}
+

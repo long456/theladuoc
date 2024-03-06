@@ -5,17 +5,17 @@
           [(nzCollapsed)]="isCollapsed">
   <div class="sidebar-logo">
     <a href="https://ng.ant.design/" target="_blank">
-      <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-      <h1>Thế Là Được</h1>
+      <img src="assets/img/black-logo.png" alt="logo">
+      <img class="text-logo" src="assets/img/text-logo.svg">
     </a>
   </div>
   <ul nz-menu nzMode="inline" nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
     <ng-container *ngFor="let item of treeMenu">
       <li *ngIf="item.children"
-        nz-submenu nzTitle={{item.name}} nzIcon="{{item.icon}}">
+        nz-submenu nzTitle={{item.name}} nzIcon="{{item.icon}}" >
         <app-menu-item [menuData]="item.children" ></app-menu-item>
       </li>
-      <li *ngIf="!item.children" nz-menu-item>
+      <li *ngIf="!item.children" nz-menu-item >
         {{item.name}}
       </li>
     </ng-container>

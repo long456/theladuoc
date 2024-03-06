@@ -6,10 +6,17 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import {SharedModule} from "../../shared/shared.module";
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { TakingCareStudentComponent } from './components/taking-care-student/taking-care-student.component';
+import { StudyingStudentComponent } from './components/studying-student/studying-student.component';
 
 @NgModule({
   declarations: [
-    WaitingStudentComponent
+    WaitingStudentComponent,
+    TakingCareStudentComponent,
+    StudyingStudentComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +24,10 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzGridModule,
     NzDropDownModule,
     NzIconModule,
-    StudentRoutingModule
+    StudentRoutingModule,
+    NzTagModule,
+    NzCollapseModule,
+    SharedModule
   ]
 })
 export class StudentModule { }

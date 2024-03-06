@@ -1,0 +1,32 @@
+<form [formGroup]="filterForm">
+  <div nz-row [nzGutter]=[8,8]>
+    <div nz-col nzSpan="7" *ngFor="let item of filterData" class="flex-content">
+      <div nz-col nzSpan="6" class="text-align-right">
+        <span>{{item.title}}</span>
+      </div>
+
+      <div class="min-width">
+        <ng-container *ngIf="!item.type">
+          <input nz-input [formControlName]="item.name">
+        </ng-container>
+
+        <ng-container *ngIf="item.type === 'date-range'">
+          <nz-range-picker nzFormat='dd/MM/YYYY' [formControlName]="item.name"></nz-range-picker>
+        </ng-container>
+
+        <ng-container *ngIf="item.type === 'select'">
+          <nz-select class="select-item" [formControlName]="item.name">
+            <nz-option *ngFor="let ele of item.data"  [nzValue]="ele.key" [nzLabel]="ele.label"></nz-option>
+          </nz-select>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-area">
+    <button nz-button class="btn-form primary" (click)="filter()">Gửi</button>
+    <button nz-button class="btn-form" (click)="clearForm()">Làm mới</button>
+  </div>
+</form>
+
+

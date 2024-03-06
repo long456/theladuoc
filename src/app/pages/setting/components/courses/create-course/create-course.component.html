@@ -1,0 +1,96 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới khóa học' : 'Chỉnh sửa khóa học'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="courseForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên khóa học
+            <span class="text-danger">*</span>
+          </span>
+          <input
+            #courseName
+            nz-input autofocus formControlName="title"
+            [nzStatus]="(this.courseForm.get('title')?.invalid && (courseForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(courseForm.get('title')?.touched || isSubmit)  && courseForm.get('title')?.hasError('required')"
+          >
+            Tên khóa học không được để trống
+          </span>
+        </div>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">Mã khóa học</span>
+          <input
+            nz-input formControlName="courseCode"
+            [nzStatus]="(this.courseForm.get('courseCode')?.invalid && (courseForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''"
+          >
+          <span class="text-danger"
+                *ngIf="(courseForm.get('courseCode')?.touched || isSubmit)  && courseForm.get('courseCode')?.hasError('pattern')"
+          >
+            Mã khóa học không đúng định dạng
+          </span>
+        </div>
+        <div nz-col [nzSpan]="8" >
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="24" class="no-padding">
+          <div nz-col [nzSpan]="16">
+            <div class="text-label">Mô tả</div>
+            <textarea nz-input placeholder="Nhập mô tả" formControlName="description"></textarea>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Giáo viên
+            <span class="text-danger">*</span>
+          </span>
+
+          <div>
+            <nz-select
+              formControlName="teacherId"
+              [nzStatus]="(this.courseForm.get('teacherId')?.invalid && (courseForm.get('teacherId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <nz-option
+                *ngFor="let teacher of listTeacher"
+                [nzValue]="teacher.id"
+                [nzLabel]="teacher.fullName"
+                >
+              </nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(courseForm.get('teacherId')?.touched || isSubmit) && courseForm.get('teacherId')?.hasError('required')"
+          >
+            Tên giáo viên không được để trống
+          </span>
+        </div>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">Số thứ tự</span>
+          <div>
+            <nz-input-number
+              class="input-nz-number"
+              [nzMin]="0" [nzStep]="1" formControlName="sort"></nz-input-number>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>
