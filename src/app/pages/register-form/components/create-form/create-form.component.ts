@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-create-form',
@@ -9,10 +10,29 @@ export class CreateFormComponent implements OnInit{
 
   isCreate = false;
 
-  constructor() {
+  isSubmit = false;
+
+  builderForm!: FormGroup
+
+  constructor(
+    private fb: FormBuilder,
+  ) {
   }
 
   ngOnInit() {
+    this.builderForm = this.fb.group({
+      title: [''],
+      hasFullName: [true],
+      hasEmail: [true],
+      hasPhoneNumber: [true],
+      hasArea: [false],
+      hasGender: [false],
+      hasDob: [false],
+      hasAddress: [false],
+      hasDemand: [false],
+      thankYouHtml: [''],
+      status: []
+    })
   }
 
   editForm() {}

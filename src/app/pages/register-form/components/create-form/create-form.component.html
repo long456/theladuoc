@@ -4,10 +4,14 @@
 
 <div nz-row>
   <div nz-col [nzSpan]="20">
-    <form>
+    <form [formGroup]="builderForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="9">
-          Tiêu đề
+          <span class="text-label">
+            Tiêu đề
+          </span>
+
+          <input nz-input formControlName="title">
         </div>
 
         <div nz-col [nzSpan]="9" class="text-right">
@@ -17,27 +21,83 @@
         </div>
 
         <div nz-col [nzSpan]="9">
-          Đường dẫn trang thank you
+          <span class="text-label">
+            Đường dẫn nhóm zalo
+          </span>
+
+          <input nz-input formControlName="title">
         </div>
 
         <div nz-col [nzSpan]="9">
-          Đường dẫn trang chuyển hướng
+          <span class="text-label">
+            Đường dẫn trang chuyển hướng
+          </span>
+
+          <input nz-input formControlName="title">
+        </div>
+
+        <div nz-col [nzSpan]="18">
+          <span class="text-label">
+            Mô tả
+          </span>
+
+          <textarea nz-input formControlName="title"></textarea>
         </div>
 
         <div nz-col [nzSpan]="9">
-          Đường dẫn nhóm zalo
+          <span class="text-label">
+            Đường dẫn trang thank you
+          </span>
+
+          <input nz-input formControlName="title">
         </div>
 
-        <div nz-col [nzSpan]="9">
-          Mô tả
+        <div nz-col [nzSpan]="18">
+          <span class="text-label">
+            Nội dung trang thank you
+          </span>
+
+<!--          <angular-editor formControlName="thankYouHtml" [config]="editorConfig"></angular-editor>-->
         </div>
 
-        <div nz-col [nzSpan]="9">
-          Nội dung trang thank you
+        <div nz-col [nzSpan]="18">
+          <span class="text-label">
+            Các thông tin cần thu thập
+          </span>
+
+          <div nz-row [nzGutter]=[8,8] class="form-selection">
+            <div nz-col nzSpan="8">
+              <label nz-checkbox [nzDisabled]="true" formControlName="hasFullName">Họ & tên (Bắt buộc)</label>
+            </div>
+            <div nz-col nzSpan="8">
+              <label nz-checkbox [nzDisabled]="true" formControlName="hasEmail">Email (Bắt buộc)</label>
+            </div>
+            <div nz-col nzSpan="8">
+              <label nz-checkbox [nzDisabled]="true" formControlName="hasPhoneNumber">Số điện thoại (Bắt buộc)</label>
+            </div>
+            <div nz-col nzSpan="8">
+              <label nz-checkbox formControlName="hasAddress">Địa chỉ</label>
+            </div>
+            <div nz-col nzSpan="8">
+              <label nz-checkbox formControlName="hasGender">Giới tính</label>
+            </div>
+            <div nz-col nzSpan="8">
+              <label nz-checkbox formControlName="hasDob">Ngày sinh</label>
+            </div>
+            <div nz-col nzSpan="8">
+              <label nz-checkbox formControlName="hasArea">Khu vực địa lý</label>
+            </div>
+            <div nz-col nzSpan="8">
+              <label nz-checkbox formControlName="hasDemand">Nhu cầu</label>
+            </div>
+          </div>
+
         </div>
       </div>
     </form>
+
   </div>
+
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="editForm()">
