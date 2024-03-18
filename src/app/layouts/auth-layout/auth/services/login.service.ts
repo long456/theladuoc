@@ -14,4 +14,9 @@ export class LoginService {
   login(email: string, password: string): Observable<any> {
     return this.http.post('login/cms', {"email": email, "password": password});
   }
+
+  logOut(): Observable<void> {
+    localStorage.clear();
+    return this.http.get<void>('User/logout-cms')
+  }
 }

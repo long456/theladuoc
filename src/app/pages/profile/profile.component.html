@@ -1,0 +1,270 @@
+<div>
+  <nz-tabset [nzTabPosition]="'left'">
+    <nz-tab [nzTitle]="'Thông tin'">
+      <div class="user-title">
+        Thông tin người dùng
+      </div>
+
+      <nz-divider></nz-divider>
+      <form [formGroup]="userForm">
+        <div nz-row class="user-profile">
+          <div nz-col nzSpan="16" class="profile-content">
+            <div nz-row [nzGutter]=[24,16] class="info-user">
+              <div nz-col [nzSpan]="12">
+                <span class="title-text">
+                  Họ và tên
+                </span>
+                <input
+                  nz-input autofocus
+                  formControlName="fullName"
+                  [nzStatus]="(userForm.get('fullName')?.invalid && (userForm.get('fullName')?.touched)) ? 'error' : ''"
+                >
+
+                <span class="text-danger"
+                        *ngIf="(userForm.get('fullName')?.touched)  && userForm.get('fullName')?.hasError('required')"
+                  >
+                  Họ và tên không được để trống
+                </span>
+              </div>
+              <div nz-col [nzSpan]="12">
+                <span class="title-text">
+                  Ngày sinh
+                </span>
+                <nz-date-picker style="width: 100%" [nzFormat]="'dd/MM/YYYY'" formControlName="birthday"></nz-date-picker>
+              </div>
+              <div nz-col [nzSpan]="12">
+                <span class="title-text">
+                  Giới tính
+                </span>
+                <nz-select style="width: 100%" formControlName="sex">
+                  <nz-option [nzValue]="1" nzLabel="Nam"></nz-option>
+                  <nz-option [nzValue]="2" nzLabel="Nữ"></nz-option>
+                </nz-select>
+              </div>
+              <div nz-col [nzSpan]="12">
+                <span class="title-text">
+                  Địa chỉ
+                </span>
+                <input nz-input formControlName="address">
+              </div>
+              <div nz-col [nzSpan]="12">
+                <span class="title-text">
+                  Số điện thoại
+                </span>
+                  <input
+                    nz-input formControlName="mobile"
+                    [nzStatus]="(userForm.get('mobile')?.invalid && (userForm.get('mobile')?.touched)) ? 'error' : ''"
+                  >
+
+                  <span class="text-danger"
+                        *ngIf="(userForm.get('mobile')?.touched)  && userForm.get('mobile')?.hasError('pattern')"
+                  >
+                  Số điện thoại không đúng định dạng
+                </span>
+              </div>
+              <div nz-col [nzSpan]="12">
+              <span class="title-text">
+                Email
+              </span>
+                <input nz-input readonly formControlName="email">
+              </div>
+              <div nz-col [nzSpan]="12">
+              <span class="title-text">
+                Mã giới thiệu
+              </span>
+                <input nz-input readonly formControlName="code">
+              </div>
+
+              <div class="user-btn">
+                <button
+                  nz-button nzType="primary" [disabled]="userForm.invalid"
+                  (click)="updateUserProfile()"
+                >
+                  Lưu
+                </button>
+                <button nz-button>Quay lại</button>
+              </div>
+            </div>
+          </div>
+
+          <div nz-col nzSpan="8" class="user-avatar">
+            <nz-avatar  [nzSize]="200" nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+            <button nz-button nzType="primary" nzShape="round" class="change-ava-btn">Thay ảnh đại diện</button>
+          </div>
+        </div>
+      </form>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="'Đổi mật khẩu'">
+      <div class="user-title">
+        Đổi mật khẩu
+      </div>
+      <nz-divider></nz-divider>
+
+      <div nz-row class="password-card">
+        <form nz-col [nzSpan]="12" class="password-form" [formGroup]="forgetPasswordForm">
+          <div nz-col [nzSpan]="8">
+            <p style="font-size: 15px; font-weight: 500">Mật khẩu bắt buộc phải chứa:</p>
+
+            <p>
+              <span nz-icon nzType="close" nzTheme="outline" class="error"
+                    *ngIf="forgetPasswordForm.get('password')?.hasError('minlength')">
+              </span>
+              <span nz-icon nzType="check" nzTheme="outline" class="success"
+                    *ngIf="!forgetPasswordForm.get('password')?.hasError('minlength') &&
+                            forgetPasswordForm.get('password')?.value !== null">
+              </span>
+              <span [class.valid]="!forgetPasswordForm.get('password')?.hasError('minlength') &&
+                                    forgetPasswordForm.get('password')?.value !== null">
+                Ít nhất 8 ký tự
+              </span>
+            </p>
+            <p>
+              <span nz-icon nzType="close" nzTheme="outline" class="error"
+                    *ngIf="forgetPasswordForm.get('password')?.hasError('noUppercase')">
+              </span>
+              <span nz-icon nzType="check" nzTheme="outline" class="success"
+                    *ngIf="!forgetPasswordForm.get('password')?.hasError('noUppercase') &&
+                            forgetPasswordForm.get('password')?.value !== null">
+              </span>
+              <span [class.valid]="!forgetPasswordForm.get('password')?.hasError('noUppercase') &&
+                                    forgetPasswordForm.get('password')?.value !== null">
+                Ít nhất 1 ký tự chữ hoa (A-Z)
+              </span>
+            </p>
+            <p>
+              <span nz-icon nzType="close" nzTheme="outline" class="error"
+                    *ngIf="forgetPasswordForm.get('password')?.hasError('noLowercase')">
+              </span>
+              <span nz-icon nzType="check" nzTheme="outline" class="success"
+                    *ngIf="!forgetPasswordForm.get('password')?.hasError('noLowercase') &&
+                            forgetPasswordForm.get('password')?.value !== null">
+              </span>
+              <span [class.valid]="!forgetPasswordForm.get('password')?.hasError('noLowercase') &&
+                                    forgetPasswordForm.get('password')?.value !== null">
+                Ít nhất 1 ký tự chữ thường (a-z)
+              </span>
+            <p>
+              <span nz-icon nzType="close" nzTheme="outline" class="error"
+                    *ngIf="forgetPasswordForm.get('password')?.hasError('noDigit')">
+              </span>
+              <span nz-icon nzType="check" nzTheme="outline" class="success"
+                    *ngIf="!forgetPasswordForm.get('password')?.hasError('noDigit') &&
+                            forgetPasswordForm.get('password')?.value !== null">
+              </span>
+              <span [class.valid]="!forgetPasswordForm.get('password')?.hasError('noDigit') &&
+                                    forgetPasswordForm.get('password')?.value !== null">
+                Ít nhất 1 ký tự chữ số (0-9)
+              </span>
+            </p>
+          </div>
+
+          <div class="password-form-content">
+            <div class="password-input">
+              <span class="title-text">
+                Nhập mật khẩu cũ
+              </span>
+
+              <nz-input-group
+                [nzSuffix]="suffixTemplate"
+                [nzStatus]="(forgetPasswordForm.get('oldPassword')?.invalid &&
+                            (forgetPasswordForm.get('oldPassword')?.touched)) ? 'error' : ''">
+                <input
+                  [type]="passwordVisible ? 'text' : 'password'"
+                  nz-input
+                  formControlName="oldPassword"
+                  placeholder="nhập mật khẩu cũ"/>
+              </nz-input-group>
+<!--          old password error text list-->
+              <span
+                class="text-danger"
+                *ngIf="(forgetPasswordForm.get('oldPassword')?.touched) &&
+                        forgetPasswordForm.get('oldPassword')?.hasError('required')">
+                  Mật khẩu cũ không được để trống
+                </span>
+            </div>
+
+            <div class="password-input">
+              <span class="title-text">
+                Nhập mật khẩu mới
+              </span>
+
+              <nz-input-group
+                [nzSuffix]="suffixTemplate"
+                [nzStatus]="(forgetPasswordForm.get('password')?.invalid &&
+                            (forgetPasswordForm.get('password')?.touched)) ? 'error' : ''">
+                <input
+                  [type]="passwordVisible ? 'text' : 'password'"
+                  nz-input
+                  formControlName="password"
+                  placeholder="nhập mật khẩu mới"
+                />
+              </nz-input-group>
+<!--          password error text list-->
+              <span
+                class="text-danger"
+                *ngIf="(forgetPasswordForm.get('password')?.touched) &&
+                        forgetPasswordForm.get('password')?.hasError('required')">
+                  Mật khẩu mới không được để trống
+              </span>
+            </div>
+
+            <div class="password-input">
+              <span class="title-text">
+                Nhập lại mật khẩu mới
+              </span>
+
+              <nz-input-group
+                [nzSuffix]="suffixTemplate"
+                [nzStatus]="(forgetPasswordForm.get('confirmPassword')?.invalid &&
+                            (forgetPasswordForm.get('confirmPassword')?.touched) ||
+                            forgetPasswordForm.hasError('missMatch'))
+                            ? 'error' : ''">
+                <input
+                  [type]="passwordVisible ? 'text' : 'password'"
+                  nz-input
+                  formControlName="confirmPassword"
+                  placeholder="nhập lại mật khẩu mới"
+                />
+              </nz-input-group>
+<!--          confirmPassword error text list-->
+              <span
+                class="text-danger"
+                *ngIf="(forgetPasswordForm.get('confirmPassword')?.touched) &&
+                        forgetPasswordForm.get('confirmPassword')?.hasError('required')">
+                Nhập lại mật khẩu mới không được để trống
+              </span>
+
+              <span
+                class="text-danger"
+                *ngIf="(forgetPasswordForm.get('confirmPassword')?.touched) &&
+                        forgetPasswordForm.hasError('missMatch')">
+                Nhập lại mật khẩu mới phải trùng với mật khẩu đã nhập
+              </span>
+            </div>
+
+            <ng-template #suffixTemplate>
+                <span
+                  nz-icon
+                   style="cursor: pointer"
+                  [nzType]="passwordVisible ? 'eye' : 'eye-invisible'"
+                  (click)="passwordVisible = !passwordVisible"
+                ></span>
+            </ng-template>
+
+            <div class="password-btn">
+              <button
+                nz-button nzType="primary"
+                [disabled]="forgetPasswordForm.invalid"
+                (click)="changePassword()"
+              >
+                Lưu
+              </button>
+              <button nz-button (click)="navigateBack()">Quay lại</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </nz-tab>
+  </nz-tabset>
+</div>

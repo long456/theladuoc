@@ -4,6 +4,7 @@ export enum COL_DATA_TYPE {
   CURRENCY,
   DATE,
   INDEX,
+  SELECTION
 }
 
 export type FIX_COLUMN = 'left' | 'right' | 'none'

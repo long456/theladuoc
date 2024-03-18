@@ -11,7 +11,15 @@
             Tiêu đề
           </span>
 
-          <input nz-input formControlName="title">
+          <input
+            nz-input formControlName="title" autofocus
+            [nzStatus]="(this.builderForm.get('title')?.invalid && (builderForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(builderForm.get('title')?.touched || isSubmit)  && builderForm.get('title')?.hasError('required')"
+          >
+            Tiêu đề không được để trống
+          </span>
         </div>
 
         <div nz-col [nzSpan]="9" class="text-right">
@@ -25,7 +33,15 @@
             Đường dẫn nhóm zalo
           </span>
 
-          <input nz-input formControlName="title">
+          <input
+            nz-input formControlName="zaloLink"
+            [nzStatus]="(this.builderForm.get('zaloLink')?.invalid && (builderForm.get('zaloLink')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(builderForm.get('zaloLink')?.touched || isSubmit)  && builderForm.get('zaloLink')?.hasError('pattern')"
+          >
+            Đường dẫn nhóm zalo không đúng định dạng
+          </span>
         </div>
 
         <div nz-col [nzSpan]="9">
@@ -33,7 +49,15 @@
             Đường dẫn trang chuyển hướng
           </span>
 
-          <input nz-input formControlName="title">
+          <input
+            nz-input formControlName="redirectLink"
+            [nzStatus]="(this.builderForm.get('redirectLink')?.invalid && (builderForm.get('redirectLink')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(builderForm.get('redirectLink')?.touched || isSubmit)  && builderForm.get('redirectLink')?.hasError('pattern')"
+          >
+            Đường dẫn trang chuyển hướng không đúng định dạng
+          </span>
         </div>
 
         <div nz-col [nzSpan]="18">
@@ -49,15 +73,28 @@
             Đường dẫn trang thank you
           </span>
 
-          <input nz-input formControlName="title">
+          <input
+            nz-input formControlName="thankYouUrl"
+            [nzStatus]="(this.builderForm.get('thankYouUrl')?.invalid && (builderForm.get('thankYouUrl')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(builderForm.get('thankYouUrl')?.touched || isSubmit)  && builderForm.get('thankYouUrl')?.hasError('pattern')"
+          >
+            Đường dẫn trang thank you không đúng định dạng
+          </span>
         </div>
 
         <div nz-col [nzSpan]="18">
           <span class="text-label">
             Nội dung trang thank you
           </span>
-
-<!--          <angular-editor formControlName="thankYouHtml" [config]="editorConfig"></angular-editor>-->
+          <ckeditor
+            name="ckeditor_text"
+            formControlName="thankYouHtml"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
+            [config]="ckEditorConfig"
+            (ready)="onCkEditorReady($event)"
+          ></ckeditor>
         </div>
 
         <div nz-col [nzSpan]="18">

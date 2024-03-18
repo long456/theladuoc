@@ -69,6 +69,10 @@ const routes: Routes = [
   {
     path: 'register-form',
     loadChildren: () => import('../register-form/register-form.module').then(m => m.RegisterFormModule),
+  },
+  {
+    path: 'ticket',
+    loadChildren: () => import('../ticket/ticket.module').then(m => m.TicketModule),
   }
 ]
 

@@ -7,6 +7,7 @@ import { CreateFormComponent } from './components/create-form/create-form.compon
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
     FormsModule,
     ReactiveFormsModule,
     NzSwitchModule,
-    NzCheckboxModule
+    NzCheckboxModule,
+    CKEditorModule
   ]
 })
 export class RegisterFormModule { }

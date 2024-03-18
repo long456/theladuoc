@@ -22,6 +22,11 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { SpinComponent } from './components/spin/spin.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { HeaderComponent } from './layouts/header/header.component';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,8 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
     ColumnDirective,
     HeaderDirective,
     FilterFormComponent,
-    SpinComponent
+    SpinComponent,
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -47,23 +53,28 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
     NzSelectModule,
     ReactiveFormsModule,
     NzButtonModule,
-    NzSpinModule
-  ],
-  exports: [
-    SideBarComponent,
-    TableComponent,
-    ColumnDirective,
-    CellDirective,
-    HeaderDirective,
-    FilterFormComponent,
     NzSpinModule,
-    SpinComponent,
-    NzButtonModule,
-    NzInputModule,
-    NzGridModule,
-    NzIconModule,
-    NzModalModule,
-    NzToolTipModule
-  ]
+    NzDropDownModule,
+    NzDividerModule,
+    NzCheckboxModule,
+    NzPaginationModule
+  ],
+    exports: [
+        SideBarComponent,
+        TableComponent,
+        ColumnDirective,
+        CellDirective,
+        HeaderDirective,
+        FilterFormComponent,
+        NzSpinModule,
+        SpinComponent,
+        NzButtonModule,
+        NzInputModule,
+        NzGridModule,
+        NzIconModule,
+        NzModalModule,
+        NzToolTipModule,
+        HeaderComponent,
+    ]
 })
 export class SharedModule { }

@@ -110,6 +110,11 @@ export class SideBarComponent {
               link: '',
             },
             {
+              name : 'Vé khóa học',
+              icon: '',
+              link: 'page/setting/ticket',
+            },
+            {
               name : 'Form đăng ký',
               icon: '',
               link: 'page/setting/register-form',

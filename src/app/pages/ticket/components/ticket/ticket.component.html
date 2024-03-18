@@ -1,0 +1,51 @@
+<div class="title-page">
+  Danh sách vé khóa học
+</div>
+
+<div class="header-btn">
+  <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+
+  <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>
+
+  <app-table
+    [rows]="rowData"
+    (onItemSelection)="getItemSelection($event)"
+    [page]="pageInfo.page"
+    [pageSize]="pageInfo.pageSize"
+    [pageTotal]="pageInfo.pageTotal"
+    [clientPagination]="false"
+    (pageIndexChange)="page$.next($event)"
+    (pageSizeChange)="pageSize$.next($event)"
+    [loading]="loading"
+  >
+    <table-column [dataType]="COL_DATA_TYPE.SELECTION"></table-column>
+    <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+    <table-column header="Ngày tạo" key="createDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+    <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
+    <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
+    <table-column header="Tên landing page" key="teacherName" [width]="'200px'"></table-column>
+    <table-column header="Tên vé" key="name" [width]="'200px'"></table-column>
+    <table-column header="Mã vé" key="teacherName" [width]="'200px'"></table-column>
+    <table-column header="Giá vé" key="price" [width]="'200px'">
+      <ng-template appCell let-data>
+        <span>{{data.price}} VND</span>
+      </ng-template>
+    </table-column>
+    <table-column header="Trạng thái" key="status" [width]="'180px'">
+      <ng-template appCell let-data>
+        <span class="text-valid" *ngIf="data.status">Đang hoạt động</span>
+        <span class="text-invalid" *ngIf="!data.status">Không hoạt động</span>
+      </ng-template>
+    </table-column>
+
+    <table-column [width]="'180px'" fixColumn="right" >
+      <ng-template appHeader>
+        Chức năng
+      </ng-template>
+
+      <ng-template appCell let-data>
+        <span class="custom-action" (click)="edit(data)">Sửa</span>
+      </ng-template>
+    </table-column>
+  </app-table>
+</div>

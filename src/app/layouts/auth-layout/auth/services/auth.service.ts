@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from "rxjs";
-import {UserData} from "../models/user-data";
+import {BehaviorSubject, Observable} from "rxjs";
+import {UserData, UserPasswordData} from "../models/user-data";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,9 @@ export class AuthService {
 
   private userData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   setUserData(data: UserData) :void {
     this.userData.next(data);
@@ -31,4 +34,18 @@ export class AuthService {
     }
     return false;
   }
+
+  getUserProfile(): Observable<any> {
+    return this.http.get('User/profile')
+  }
+
+  updateUserProfile(data: any): Observable<any> {
+    return this.http.post('User/update-profile', data)
+  }
+
+  updateUserPassword(data: UserPasswordData): Observable<any> {
+    return this.http.post('User/update-password', data)
+  }
+
+
 }

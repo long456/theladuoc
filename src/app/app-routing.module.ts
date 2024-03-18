@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {PageComponent} from "./layouts/page-layout/page/page.component";
 import {AuthComponent} from "./layouts/auth-layout/auth/auth.component";
+import {ProfileComponent} from "./pages/profile/profile.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
       {
         path: 'organization',
         loadChildren: () => import('./pages/organization/organization.module').then(m => m.OrganizationModule),
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('./pages/profile/profile.component').then(c => c.ProfileComponent),
+        // components: ProfileComponent,
       }
     ]
   },

@@ -1,0 +1,27 @@
+<div class="header-side-bar">
+  <button
+    nz-button nzType="default" nzShape="circle"
+    nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click">
+    <span nz-icon nzType="user"></span>
+  </button>
+
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu>
+      <li nz-menu-item>
+        <button nz-button nzType="text" (click)="editProfile()">
+          <span nz-icon nzType="user" nzTheme="outline"></span>
+          Thông tin user
+        </button>
+      </li>
+
+      <nz-divider class="header-menu-divine"></nz-divider>
+
+      <li nz-menu-item>
+        <button nz-button nzType="text" (click)="signOut()">
+          <span nz-icon nzType="logout" nzTheme="outline"></span>
+          Đăng xuất
+        </button>
+      </li>
+    </ul>
+  </nz-dropdown-menu>
+</div>

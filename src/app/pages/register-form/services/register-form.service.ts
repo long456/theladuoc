@@ -12,6 +12,10 @@ export class RegisterFormService {
   ) { }
 
   getAllForm(): Observable<any>{
-    return this.http.get('FormRegister')
+    return this.http.get('FormRegister');
+  }
+
+  createForm(data: any): Observable<any> {
+    return this.http.post('FormRegister', data);
   }
 }

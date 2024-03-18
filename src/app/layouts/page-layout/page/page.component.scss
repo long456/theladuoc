@@ -7,7 +7,7 @@
 }
 
 .app-layout {
-  height: 100vh;
+  height:  calc(100vh - 1px);
   flex-direction: row;
   width: 100%;
 }

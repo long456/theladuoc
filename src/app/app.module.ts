@@ -17,6 +17,7 @@ import {SharedModule} from "./shared/shared.module";
 import {PageComponent} from "./layouts/page-layout/page/page.component";
 import {AuthComponent} from "./layouts/auth-layout/auth/auth.component";
 import {HttpRequestInterceptor} from "./shared/interceptors/http-request.inperceptor";
+import {ProfileComponent} from "./pages/profile/profile.component";
 
 registerLocaleData(en);
 
@@ -26,7 +27,8 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     PageComponent,
-    AuthComponent
+    AuthComponent,
+    // ProfileComponent
   ],
   imports: [
     BrowserModule,

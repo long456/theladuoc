@@ -14,7 +14,7 @@
           <input
             #courseName
             nz-input autofocus formControlName="title"
-            [nzStatus]="(this.courseForm.get('title')?.invalid && (courseForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
+            [nzStatus]="(courseForm.get('title')?.invalid && (courseForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
                 *ngIf="(courseForm.get('title')?.touched || isSubmit)  && courseForm.get('title')?.hasError('required')"
