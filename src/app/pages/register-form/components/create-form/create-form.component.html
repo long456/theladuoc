@@ -68,22 +68,6 @@
           <textarea nz-input formControlName="title"></textarea>
         </div>
 
-        <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            Đường dẫn trang thank you
-          </span>
-
-          <input
-            nz-input formControlName="thankYouUrl"
-            [nzStatus]="(this.builderForm.get('thankYouUrl')?.invalid && (builderForm.get('thankYouUrl')?.touched || isSubmit)) ? 'error' : ''">
-
-          <span class="text-danger"
-                *ngIf="(builderForm.get('thankYouUrl')?.touched || isSubmit)  && builderForm.get('thankYouUrl')?.hasError('pattern')"
-          >
-            Đường dẫn trang thank you không đúng định dạng
-          </span>
-        </div>
-
         <div nz-col [nzSpan]="18">
           <span class="text-label">
             Nội dung trang thank you

@@ -39,6 +39,11 @@ export class SideBarComponent {
           link: '',
           children: [
             {
+              name : 'Chưa chia',
+              icon: '',
+              link: 'page/student/none-divide',
+            },
+            {
               name : 'Đang chờ',
               icon: '',
               link: 'page/student/waiting',
@@ -107,7 +112,7 @@ export class SideBarComponent {
             {
               name : 'Landing page',
               icon: '',
-              link: '',
+              link: 'page/setting/landing-page',
             },
             {
               name : 'Vé khóa học',

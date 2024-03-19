@@ -19,7 +19,7 @@ export class TableComponent implements OnInit{
 
   @Input() loading = false;
   @Input() rows = <any>[];
-  @Input() clientPagination = false;
+  @Input() clientPagination = true;
   @Input() page = 1;
   @Input() pageSize = 10;
   @Input() pageTotal = 0;
@@ -38,7 +38,6 @@ export class TableComponent implements OnInit{
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.page, this.pageSize, this.pageTotal)
   }
 
   onItemChecked(data: any) {

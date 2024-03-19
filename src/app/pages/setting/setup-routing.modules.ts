@@ -22,7 +22,6 @@ const routes: Routes = [
       {
         path:'list',
         data: {permission: 'role_list'},
-        canActivate: [AuthGuardService],
         component: ListPermisionComponent
       },
       {
@@ -69,6 +68,10 @@ const routes: Routes = [
   {
     path: 'register-form',
     loadChildren: () => import('../register-form/register-form.module').then(m => m.RegisterFormModule),
+  },
+  {
+    path: 'landing-page',
+    loadChildren: () => import('../landing-page/landing-page.module').then(m => m.LandingPageModule),
   },
   {
     path: 'ticket',

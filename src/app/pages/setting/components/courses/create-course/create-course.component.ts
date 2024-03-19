@@ -27,6 +27,21 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
 
   isExpand = false;
 
+  ckEditorConfig: any = {
+    toolbar: [
+      ['Source', 'Templates', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat'],
+      [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],
+      [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ],
+      [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl' ],
+      [ 'Link', 'Unlink', 'Anchor' ],
+      [ 'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ],
+      [ 'Styles', 'Format', 'Font', 'FontSize' ],
+      [ 'TextColor', 'BGColor' ],
+      [ 'Maximize', 'ShowBlocks' ]
+    ],
+    extraAllowedContent: 'style meta script section svg;link[!href,target];a[!href,target]'
+  };
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -44,8 +59,13 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
       courseCode: ['', Validators.pattern('^[a-zA-Z0-9\\-]+$')],
       description: [''],
       teacherId: [null, [Validators.required]],
-      sort: [1],
-      status: [1]
+      status: [1],
+      type: [1],
+      registerPoint: [0],
+      directReferralPoint: [0],
+      indirectReferralPoint: [0],
+      referralHtmlTop:  [''],
+      referralHtmlBottom: [''],
     })
 
     if (!this.isCreate) {
@@ -54,11 +74,7 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
         this.courseId = id;
         this.courseService.getCourseById(id).subscribe({
           next: res => {
-            if (res.success) {
-              this.courseForm.patchValue(res.data)
-            } else {
-              this.message.error(res.errorMessages);
-            }
+            this.courseForm.patchValue(res)
           }
         })
       })
@@ -133,6 +149,14 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
       .replace(/\s+/g, '-') // Replace spaces with hyphens
       .replace(/-+/g, '-') // Remove consecutive hyphens
       .trim(); // Trim leading and trailing spaces
+  }
+
+  formatterVnd(value: number): string {
+    return `${value} VND`
+  }
+
+  parserVnd(value: string): string {
+    return value.replace(' VND', '');
   }
 
   navigateBack() {

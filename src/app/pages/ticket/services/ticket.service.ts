@@ -11,9 +11,12 @@ export class TicketService {
     private http: HttpClient,
   ) {}
 
-  getAllTicket(): Observable<any> {
-
-    return this.http.get('Ticket');
+  getAllTicket(page?: any, pageSize?: any ): Observable<any> {
+    const data = {
+      PageIndex: page,
+      PageSize: pageSize
+    }
+    return this.http.get('Ticket', {params: data});
   }
 
   createTicket(data: any): Observable<any>  {

@@ -3,7 +3,7 @@ import {CourseService} from "../../../services/course.service";
 import {COL_DATA_TYPE, filterItem} from "../../../../../shared/models/Table";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {switchMap} from "rxjs";
+import {BehaviorSubject, combineLatest, delay, map, mergeMap, Observable, switchMap, tap} from "rxjs";
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
@@ -12,8 +12,6 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   styleUrls: ['./list-course.component.scss']
 })
 export class ListCourseComponent implements OnInit{
-
-  rowData: any;
 
   COL_DATA_TYPE = COL_DATA_TYPE;
 
@@ -55,6 +53,22 @@ export class ListCourseComponent implements OnInit{
     },
   ]
 
+  itemSelectList: number[] = [];
+
+  coursePage$ !: Observable<{
+    rows: any[],
+    filter?: any,
+    page: number;
+    pageSize: number;
+    rowTotal: number;
+  }>;
+
+  page$ = new BehaviorSubject(1);
+  pageSize$ = new BehaviorSubject(10);
+  filterList$ = new BehaviorSubject(null);
+
+  loading = false;
+
   constructor(
     private courseService : CourseService,
     private router: Router,
@@ -64,19 +78,29 @@ export class ListCourseComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.getCourseData();
-  }
-
-  getCourseData(filter? : any): void {
-    this.courseService.getAllCourse(filter).subscribe({
-      next: res => {
-        if (res.success) {
-          this.rowData = res.data.courseList;
-        } else {
-          this.message.error(res.errorMessages);
-        }
-      }
-    })
+    this.coursePage$ = combineLatest([
+      this.page$,
+      this.pageSize$,
+      this.filterList$
+    ])
+    .pipe(
+      tap(() => this.loading = true),
+      mergeMap(([page, pageSize, filter]) => {
+        return this.courseService.getAllCourse(page, pageSize, filter)
+          .pipe(
+            map((value) => {
+              return {
+                rows: value.data.courseList,
+                page: value.data.paginationInfo.pageCurrent,
+                pageSize: value.data.paginationInfo.pageSize,
+                rowTotal: value.data.paginationInfo.totalItem,
+              }
+            })
+          )
+      }),
+      delay(200),
+      tap(() => this.loading = false),
+    )
   }
 
   setExpand(event: any) {
@@ -84,7 +108,7 @@ export class ListCourseComponent implements OnInit{
   }
 
   handleFilterForm(event: any) {
-    this.getCourseData(event)
+    this.filterList$.next(event)
   }
 
   create() {
@@ -95,37 +119,35 @@ export class ListCourseComponent implements OnInit{
     this.router.navigate(['/page/setting/course/' + data.id])
   }
 
-  delete(data: any) {
-    this.modal.confirm({
-      nzTitle: 'Xác nhận xóa',
-      nzContent: 'Bạn có chắc chắn muốn xóa khóa học này không ?',
-      nzOkText: 'Xóa',
-      nzCancelText: 'Hủy',
-      nzOnOk: () => {
-        this.courseService.deleteCourse(data.id)
-          .pipe(
-            switchMap(res => {
-              if (res.success) {
-                this.message.success(res.messages);
-                return this.courseService.getAllCourse()
+  getItemSelection(e: any) {
+    this.itemSelectList = e;
+  }
+
+  delete() {
+    if (this.itemSelectList.length === 0) {
+      this.message.error('Chưa có mục nào được chọn')
+    } else {
+      this.modal.confirm({
+        nzTitle: 'Xác nhận xóa',
+        nzContent: 'Bạn có chắc chắn muốn xóa những mục đã chọn ?',
+        nzOnOk: () => {
+          this.courseService.softDeleteCourse(this.itemSelectList)
+            .pipe(
+            ).subscribe({
+            next: value => {
+              if (value.success) {
+                this.message.success(value.messages);
+                this.pageSize$.next(10)
               } else {
-                throw new Error(res.errorMessages)
-              }
-            })
-          )
-          .subscribe({
-            next: res => {
-              if (res.success) {
-                this.rowData = res.data.courseList;
-              } else {
-                this.message.error(res.errorMessages);
+                this.message.error(value.errorMessages)
               }
             },
             error: err => {
-              this.message.error(err);
+              this.message.error(err.error);
             }
           })
-      }
-    })
+        }
+      });
+    }
   }
 }

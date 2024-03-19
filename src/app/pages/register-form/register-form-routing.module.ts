@@ -17,7 +17,7 @@ const routes: Routes = [
     path:':id',
     data: {isCreate: false},
     component: CreateFormComponent
-  }
+  },
 ];
 
 @NgModule({

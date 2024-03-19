@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {RegisterFormService} from "../../services/register-form.service";
 import {NzMessageService} from "ng-zorro-antd/message";
 
@@ -14,6 +14,8 @@ export class CreateFormComponent implements OnInit{
   isCreate = false;
 
   isSubmit = false;
+
+  formId = 0;
 
   builderForm!: FormGroup
 
@@ -37,6 +39,7 @@ export class CreateFormComponent implements OnInit{
     private route: ActivatedRoute,
     private registerFormService: RegisterFormService,
     private message: NzMessageService,
+    private router: Router,
   ) {
   }
 
@@ -54,11 +57,27 @@ export class CreateFormComponent implements OnInit{
       hasAddress: [false],
       hasDemand: [false],
       thankYouHtml: [''],
-      thankYouUrl: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
       zaloLink: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
       redirectLink: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
       status: [1]
     })
+
+    if (!this.isCreate) {
+      this.route.params.pipe().subscribe(params => {
+        const {id} = params;
+        this.formId = id;
+
+        this.registerFormService.getFormDataById(id).subscribe({
+          next: res => {
+            this.builderForm.patchValue(res)
+          },
+          error: err => {
+            this.message.error(err.error);
+            this.navigateBack();
+          }
+        })
+      })
+    }
   }
 
   editForm() {
@@ -66,41 +85,45 @@ export class CreateFormComponent implements OnInit{
     if (this.builderForm.valid) {
       const data = {
         ...this.builderForm.value,
-
         status: this.builderForm.get('status')?.value ? 1 : 0,
       }
-      delete data.title,
 
-      this.registerFormService.createForm(data).subscribe({
-        next: res => {
-          if (res.success) {
-            this.message.success(res.messages)
-          } else {
-            this.message.error(res.errorMessages)
+      if (this.isCreate) {
+        this.registerFormService.createForm(data).subscribe({
+          next: res => {
+            if (res.success) {
+              this.message.success(res.messages)
+              this.navigateBack()
+            } else {
+              this.message.error(res.errorMessages)
+            }
+          },
+          error: err => {
+            this.message.error(err.error)
           }
-        },
-        error: err => {
-          console.log(err)
-          this.message.error(err)
-        }
-      })
+        })
+      } else {
+        this.registerFormService.updateFormDataById(this.formId, data).subscribe({
+          next: res => {
+            if (res.success) {
+              this.message.success(res.messages)
+              this.navigateBack();
+            } else {
+              this.message.error(res.errorMessages)
+            }
+          }
+        })
+      }
+
     }
-    console.log(this.builderForm.value)
   }
 
   navigateBack() {
-
+    this.router.navigate(['page/setting/register-form'])
   }
 
   onCkEditorReady( editor: any ): boolean {
     const result = true;
-    // editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-    //   return new UploadAdapter (loader, {}, currentComponent.httpClient);
-    // };
-
-
-    // console.log('editor');
-    // console.log(editor);
 
     return result;
   }

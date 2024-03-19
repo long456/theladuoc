@@ -1,0 +1,46 @@
+<div>
+  <form [formGroup]="paymentForm">
+    <div nz-row [nzGutter]=[16,16]>
+      <div nz-col [nzSpan]="24">
+        <span>
+          Tên học viên
+        </span>
+
+        <div>
+          <input nz-input formControlName="name" readonly/>
+        </div>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <span>
+          Trạng thái
+        </span>
+
+        <div>
+          <nz-select class="with-100" formControlName="isPay">
+            <nz-option [nzValue]="0" nzLabel="Chưa thanh toán"></nz-option>
+<!--            <nz-option [nzValue]="1" nzLabel="Thanh toán một phần"></nz-option>-->
+            <nz-option [nzValue]="2" nzLabel="Đã thanh toán"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <span>
+          Số tiền
+        </span>
+
+        <div>
+          <nz-input-number
+            class="with-100"
+            formControlName="price"
+            [nzMin]="0"
+            [nzStep]="1000"
+            [nzFormatter]="formatterVnd"
+            [nzParser]="parserVnd"
+          ></nz-input-number>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -15,6 +15,7 @@ import { CreateCourseComponent } from './components/courses/create-course/create
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
+import {CKEditorModule} from "ckeditor4-angular";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {NzCollapseModule} from "ng-zorro-antd/collapse";
     ReactiveFormsModule,
     NzInputNumberModule,
     NzSelectModule,
-    NzCollapseModule
+    NzCollapseModule,
+    CKEditorModule
   ]
 })
 export class SettingModule { }
