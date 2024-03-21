@@ -64,6 +64,7 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
       registerPoint: [0],
       directReferralPoint: [0],
       indirectReferralPoint: [0],
+      coursePrice: [0],
       referralHtmlTop:  [''],
       referralHtmlBottom: [''],
     })
@@ -88,16 +89,16 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit() {
-      fromEvent(this.courseNameField.nativeElement, 'keydown')
-      .pipe(
-        debounceTime(250),
-        map((event: any) => event.target.value.trim()),
-        distinctUntilChanged()
-      )
-      .subscribe(inputData => {
-        const slug = this.renderSlug(inputData);
-        this.courseForm.get('courseCode')?.patchValue(slug);
-      });
+    fromEvent(this.courseNameField.nativeElement, 'keydown')
+    .pipe(
+      debounceTime(250),
+      map((event: any) => event.target.value.trim()),
+      distinctUntilChanged()
+    )
+    .subscribe(inputData => {
+      const slug = this.renderSlug(inputData);
+      this.courseForm.get('courseCode')?.patchValue(slug);
+    });
   }
 
   edit(): void {
@@ -121,7 +122,7 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
             }
           },
           error: err => {
-
+            this.message.error(err.error);
           }
         })
       } else {

@@ -55,19 +55,17 @@ export class CreatePermissionComponent implements OnInit{
           this.permissionStatus = item.data.isActive
           this.listPermission = [...item.data.permissions].map(ele => {
             let data:  any[] = []
-            item.children.map((e : any) => {
+            ele.children.map((e : any) => {
               if (e.checked) {
                 data.push(e.id)
               }
             })
             return {
-              ...item,
+              ...ele,
               data: data
             }
           })
-
         })
-
       })
     }
   }

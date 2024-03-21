@@ -93,6 +93,22 @@ export class SideBarComponent {
               link: 'page/setting/permission',
             },
             {
+              name : 'Referral',
+              icon: '',
+              children: [
+                {
+                  name : 'Cuộc thi tính điểm',
+                  icon: '',
+                  link: 'page/setting/referral/loyalty',
+                },
+                {
+                  name : 'Tri ân học viên',
+                  icon: '',
+                  link: '',
+                },
+              ]
+            },
+            {
               name : 'Khóa học',
               icon: '',
               link: 'page/setting/course',
@@ -123,6 +139,22 @@ export class SideBarComponent {
               name : 'Form đăng ký',
               icon: '',
               link: 'page/setting/register-form',
+            },
+            {
+              name : 'Email',
+              icon: '',
+              children: [
+                {
+                  name : 'Email hệ thống',
+                  icon: '',
+                  link: 'page/setting/email/system-email',
+                },
+                {
+                  name : 'Email thông báo',
+                  icon: '',
+                  link: 'page/setting/email/notifications-email',
+                },
+              ]
             },
           ]
         },

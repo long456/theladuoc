@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {COL_DATA_TYPE, FIX_COLUMN, filterItem} from "../../../../shared/models/Table";
-import {BehaviorSubject, combineLatest, delay, map, mergeMap, Observable, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {StudentService} from "../../services/student.service";
 import {NzModalService} from "ng-zorro-antd/modal";
@@ -53,7 +53,7 @@ export class TakingCareStudentComponent implements OnInit{
     .pipe(
       tap(() => this.loading = true),
       mergeMap(([page, pageSize, filter]) => {
-        return this.studentService.getWaitingStudent(page, pageSize, filter)
+        return this.studentService.getTakeCareStudent(page, pageSize, filter)
           .pipe(
             map((value) => {
               return {
@@ -62,6 +62,10 @@ export class TakingCareStudentComponent implements OnInit{
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
               }
+            }),
+            catchError(err => {
+              this.message.error('Lỗi load dữ liệu học viên đang chăm')
+              return of(err.message)
             })
           )
       }),

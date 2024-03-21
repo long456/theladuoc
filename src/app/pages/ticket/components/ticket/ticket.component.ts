@@ -64,6 +64,10 @@ export class TicketComponent implements OnInit{
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
               }
+            }),
+            catchError(err => {
+              this.message.error('Lỗi load dữ liệu vé')
+              return of(err.message)
             })
           )
       }),

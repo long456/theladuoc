@@ -65,14 +65,38 @@ export class LandingPageComponent implements OnInit{
   }
 
   create() {
-
+    this.router.navigate(['/page/setting/landing-page/create'])
   }
 
   delete() {
-
+    if (this.itemSelectList.length === 0) {
+      this.message.error('Chưa có mục nào được chọn')
+    } else {
+      this.modal.confirm({
+        nzTitle: 'Xác nhận xóa',
+        nzContent: 'Bạn có chắc chắn muốn xóa những mục đã chọn ?',
+        nzOnOk: () => {
+          this.landingPageService.softDeleteLandingPage(this.itemSelectList)
+            .pipe(
+            ).subscribe({
+            next: value => {
+              if (value.success) {
+                this.message.success(value.messages);
+                this.pageSize$.next(10)
+              } else {
+                this.message.error(value.errorMessages)
+              }
+            },
+            error: err => {
+              this.message.error(err.error);
+            }
+          })
+        }
+      });
+    }
   }
 
   edit(data: any) {
-
+    this.router.navigate(['/page/setting/landing-page/' + data.id])
   }
 }

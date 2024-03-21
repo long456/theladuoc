@@ -76,6 +76,14 @@ const routes: Routes = [
   {
     path: 'ticket',
     loadChildren: () => import('../ticket/ticket.module').then(m => m.TicketModule),
+  },
+  {
+    path: 'email',
+    loadChildren: () => import('../email/email.module').then(m => m.EmailModule),
+  },
+  {
+    path: 'referral',
+    loadChildren: () => import('../referral/referral.module').then(m => m.ReferralModule),
   }
 ]
 

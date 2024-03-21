@@ -3,7 +3,7 @@ import {COL_DATA_TYPE} from "../../../../shared/models/Table";
 import {Router} from "@angular/router";
 import {RegisterFormService} from "../../services/register-form.service";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {BehaviorSubject, combineLatest, delay, map, mergeMap, Observable, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {NzModalService} from "ng-zorro-antd/modal";
 
 @Component({
@@ -54,6 +54,10 @@ export class RegisterFormComponent implements OnInit{
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
               }
+            }),
+            catchError(err => {
+              this.message.error('Lỗi load dữ liệu form đăng ký')
+              return of(err.message)
             })
           )
       }),

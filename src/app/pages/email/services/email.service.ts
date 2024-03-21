@@ -1,0 +1,63 @@
+import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class EmailService {
+
+  constructor(
+    private http: HttpClient,
+  ) { }
+
+  getListSystemEmail(page?: any, pageSize?: any, filter?: any): Observable<any>{
+    let option = {
+      PageIndex: page,
+      pageSize: pageSize,
+    }
+
+    if (filter) {
+      option = {
+        ...filter,
+        PageIndex: page,
+        pageSize: pageSize,
+      }
+    }
+
+    return this.http.get('EmailTemplate', {params: option})
+  }
+
+  getListNotificationsEmail(page?: any, pageSize?: any, filter?: any): Observable<any>{
+    let option = {
+      PageIndex: page,
+      pageSize: pageSize,
+    }
+
+    if (filter) {
+      option = {
+        ...filter,
+        PageIndex: page,
+        pageSize: pageSize,
+      }
+    }
+
+    return this.http.get('', {params: option})
+  }
+
+  softDeleteNotificationsEmail(data: number[]): Observable<any> {
+    return this.http.delete('',{body: data})
+  }
+
+  getEmailById(id: number): Observable<any> {
+    return this.http.get('EmailTemplate/' + id)
+  }
+
+  updateEmail(data: any, id: number): Observable<any>{
+    return this.http.put('EmailTemplate/' + id, data)
+  }
+
+  createEmail(data: any): Observable<any>{
+    return this.http.post('EmailTemplate', data)
+  }
+}

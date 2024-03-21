@@ -3,7 +3,7 @@ import {CourseService} from "../../../services/course.service";
 import {COL_DATA_TYPE, filterItem} from "../../../../../shared/models/Table";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {BehaviorSubject, combineLatest, delay, map, mergeMap, Observable, switchMap, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, switchMap, tap} from "rxjs";
 import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
@@ -95,6 +95,10 @@ export class ListCourseComponent implements OnInit{
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
               }
+            }),
+            catchError(err => {
+              this.message.error('Lỗi load dữ liệu khóa học')
+              return of(err.message)
             })
           )
       }),
@@ -150,4 +154,6 @@ export class ListCourseComponent implements OnInit{
       });
     }
   }
+
+
 }

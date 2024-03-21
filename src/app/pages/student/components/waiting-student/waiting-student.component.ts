@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Student} from "../../models/student";
 import {StudentWaitingService} from "../../services/student-waiting.service";
 import {COL_DATA_TYPE, FIX_COLUMN, filterItem} from "../../../../shared/models/Table";
-import {BehaviorSubject, combineLatest, delay, map, mergeMap, Observable, switchMap, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, switchMap, tap} from "rxjs";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {StudentService} from "../../services/student.service";
 import {NzModalService} from "ng-zorro-antd/modal";
@@ -151,6 +151,10 @@ export class WaitingStudentComponent implements OnInit{
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
               }
+            }),
+            catchError(err => {
+              this.message.error('Lỗi load dữ liệu học viên đang chờ')
+              return of(err.message)
             })
           )
       }),

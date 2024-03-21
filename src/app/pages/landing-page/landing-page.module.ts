@@ -5,6 +5,10 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { CreateLandingPageComponent } from './components/create-landing-page/create-landing-page.component';
 import {SharedModule} from "../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NzSwitchModule} from "ng-zorro-antd/switch";
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzCollapseModule} from "ng-zorro-antd/collapse";
+import {CKEditorModule} from "ckeditor4-angular";
 
 
 
@@ -19,6 +23,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    NzSwitchModule,
+    NzSelectModule,
+    NzCollapseModule,
+    CKEditorModule
   ]
 })
 export class LandingPageModule { }

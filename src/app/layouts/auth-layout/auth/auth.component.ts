@@ -39,7 +39,7 @@ export class AuthComponent implements OnInit{
       this.loginService.login(this.loginForm.value.email.trim(), this.loginForm.value.password.trim()).subscribe(res => {
         if (res.success === true) {
           this.addTokenKey(res.token);
-          // this.authService.setUserData(res.data);
+          this.authService.setUserData(res.data);
           this.router.navigate(['page']);
         } else {
           this.message.error(res.errorMessages)

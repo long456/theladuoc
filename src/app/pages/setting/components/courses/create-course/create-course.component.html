@@ -22,11 +22,12 @@
             Tên khóa học không được để trống
           </span>
         </div>
+
         <div nz-col [nzSpan]="8">
           <span class="text-label">Mã khóa học</span>
           <input
             nz-input formControlName="courseCode"
-            [nzStatus]="(this.courseForm.get('courseCode')?.invalid && (courseForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''"
+            [nzStatus]="(courseForm.get('courseCode')?.invalid && (courseForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''"
           >
           <span class="text-danger"
                 *ngIf="(courseForm.get('courseCode')?.touched || isSubmit)  && courseForm.get('courseCode')?.hasError('pattern')"
@@ -34,6 +35,7 @@
             Mã khóa học không đúng định dạng
           </span>
         </div>
+
         <div nz-col [nzSpan]="8" >
           <div class="text-label">Trạng thái</div>
           <nz-switch formControlName="status">
@@ -147,7 +149,7 @@
               <div>
                 <nz-input-number
                   class="input-nz-number"
-                  formControlName="indirectReferralPoint"
+                  formControlName="coursePrice"
                   [nzMin]="0"
                   [nzMax]="100"
                   [nzStep]="1"

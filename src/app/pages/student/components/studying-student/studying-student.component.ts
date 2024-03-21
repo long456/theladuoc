@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {COL_DATA_TYPE, FIX_COLUMN, filterItem} from "../../../../shared/models/Table";
 import {StudyingStudentService} from "../../services/studying-student.service";
-import {BehaviorSubject, combineLatest, delay, map, mergeMap, Observable, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {StudentService} from "../../services/student.service";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-studying-student',
@@ -35,6 +36,7 @@ export class StudyingStudentComponent implements OnInit{
 
   constructor(
     private studentService: StudentService,
+    private message: NzMessageService,
   ) {
   }
 
@@ -56,6 +58,10 @@ export class StudyingStudentComponent implements OnInit{
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
               }
+            }),
+            catchError(err => {
+              this.message.error('Lỗi load dữ liệu học viên đang học')
+              return of(err.message)
             })
           )
       }),

@@ -18,4 +18,16 @@ export class LandingPageService {
     }
     return this.http.get('LandingPage', {params: data});
   }
+
+  createLandingPage(data: any): Observable<any>{
+    return this.http.post('LandingPage' , data)
+  }
+
+  getLandingPageById(id : number): Observable<any>{
+    return this.http.get('LandingPage/' + id)
+  }
+
+  softDeleteLandingPage(data: any): Observable<any>{
+    return this.http.delete('LandingPage/soft-delete' , data)
+  }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {COL_DATA_TYPE, FIX_COLUMN, filterItem} from "../../../../shared/models/Table";
-import {BehaviorSubject, combineLatest, delay, map, mergeMap, Observable, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {StudentService} from "../../services/student.service";
@@ -56,6 +56,10 @@ export class NonDividedStudentComponent implements OnInit{
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
               }
+            }),
+            catchError(err => {
+              this.message.error('Lỗi load dữ liệu học viên chưa chia')
+              return of(err.message)
             })
           )
       }),
