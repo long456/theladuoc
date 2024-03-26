@@ -124,6 +124,7 @@ export class CreatePermissionComponent implements OnInit{
           next: res => {
             if (res.success) {
               this.message.success('Tạo nhóm quyền thành công')
+              this.navigateBack();
             }
           },
           error: (err) => {
@@ -137,8 +138,8 @@ export class CreatePermissionComponent implements OnInit{
           next: res => {
             if (res.success) {
               this.message.success('Chỉnh sửa nhóm quyền thành công')
+              this.navigateBack();
             }
-            this.navigateBack();
           },
           error: err => {
             this.message.error(err)

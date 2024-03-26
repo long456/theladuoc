@@ -80,16 +80,24 @@
 
           <div>
             <nz-select class="width-100" formControlName="splitData">
-              <nz-option [nzValue]="0" nzLabel="Jack"></nz-option>
-              <nz-option [nzValue]="1" nzLabel="Lucy"></nz-option>
+              <nz-option [nzValue]="1" nzLabel="Tự động"></nz-option>
+              <nz-option [nzValue]="2" nzLabel="Thủ công"></nz-option>
             </nz-select>
           </div>
+        </div>
 
-<!--          <span class="text-danger"-->
-<!--                *ngIf="(orgForm.get('websiteCms')?.touched || isSubmit)  && orgForm.get('websiteCms')?.hasError('required')"-->
-<!--          >-->
-<!--            Tên miền trang quản trị không được để trống-->
-<!--          </span>-->
+        <div nz-col [nzSpan]="9" *ngIf="!isCreate">
+          <span class="text-label">
+            Người đại diện
+          </span>
+
+          <div>
+            <nz-select class="width-100" formControlName="userId">
+              <nz-option *ngFor="let user of listDirectors"
+                [nzValue]="user.id" [nzLabel]="user.fullName"
+              ></nz-option>
+            </nz-select>
+          </div>
         </div>
 
         <div nz-col [nzSpan]="18">

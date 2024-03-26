@@ -121,7 +121,7 @@ export class SideBarComponent {
                 {
                   name : 'Header & Footer',
                   icon: '',
-                  link: 'page/setting/website/list-layouts',
+                  link: 'page/setting/website-config/config',
                 },
               ]
             },

@@ -1,0 +1,68 @@
+.title-page{
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-bottom: 15px;
+}
+
+.btn-panel{
+  text-align: end;
+  position: sticky;
+  top: 0;
+}
+
+.btn {
+  min-width: 80px;
+  min-height: 36px;
+  margin-left: 8px;
+  border-radius: 4px;
+}
+
+
+.primary {
+  background-color: #40a9ff;
+  color: white;
+}
+
+.text-label{
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.text-danger{
+  color: red;
+  width: 100%;
+}
+
+.color-picker{
+  min-width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  border: 1px solid #d9d9d9;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all .2s;
+  padding: 0px 8px;
+  width: fit-content;
+  &:hover{
+    border: 1px solid #1890ff;
+  }
+  input{
+    -webkit-appearance: none;
+    appearance: none;
+    border: 0;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background-color: white;
+    cursor: pointer;
+  }
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: 1px solid rgba(0, 0, 0, .06);
+}

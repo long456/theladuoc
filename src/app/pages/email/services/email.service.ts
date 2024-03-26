@@ -15,6 +15,7 @@ export class EmailService {
     let option = {
       PageIndex: page,
       pageSize: pageSize,
+      type: 1,
     }
 
     if (filter) {
@@ -32,6 +33,7 @@ export class EmailService {
     let option = {
       PageIndex: page,
       pageSize: pageSize,
+      type: 2,
     }
 
     if (filter) {
@@ -42,11 +44,11 @@ export class EmailService {
       }
     }
 
-    return this.http.get('', {params: option})
+    return this.http.get('EmailTemplate', {params: option})
   }
 
   softDeleteNotificationsEmail(data: number[]): Observable<any> {
-    return this.http.delete('',{body: data})
+    return this.http.delete('EmailTemplate/soft-delete',{body: data})
   }
 
   getEmailById(id: number): Observable<any> {

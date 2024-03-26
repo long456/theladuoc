@@ -4,6 +4,7 @@ import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observ
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {EmailService} from "../../services/email.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-notifications-email-list',
@@ -32,6 +33,7 @@ export class NotificationsEmailListComponent implements OnInit{
     private emailService: EmailService,
     private message: NzMessageService,
     private modal :NzModalService,
+    private router: Router,
   ) {
   }
 
@@ -47,7 +49,7 @@ export class NotificationsEmailListComponent implements OnInit{
           .pipe(
             map((value) => {
               return {
-                rows: value.data.courseList,
+                rows: value.data.emailTemplateList,
                 page: value.data.paginationInfo.pageCurrent,
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
@@ -68,8 +70,12 @@ export class NotificationsEmailListComponent implements OnInit{
     this.itemSelectList = e;
   }
 
-  edit(data: any) {
+  create() {
+    this.router.navigate(['/page/setting/email/notifications-email/create'])
+  }
 
+  edit(data: any) {
+    this.router.navigate(['/page/setting/email/notifications-email/' + data.id])
   }
 
   delete() {

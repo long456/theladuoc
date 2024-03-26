@@ -1,5 +1,5 @@
 <div class="title-page">
-  Danh sách khóa học
+  Danh sách học viên chưa chia
 </div>
 
 <div class="header-btn">
@@ -61,8 +61,8 @@
       </table-column>
       <table-column header="Trạng thái" key="isAccount" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-valid" *ngIf="data.isAccount">Đã xác thực</span>
-          <span class="text-invalid" *ngIf="!data.isAccount">Chưa xác thực</span>
+          <span class="text-valid" *ngIf="data.isAccount">Có tài khoản</span>
+          <span class="text-invalid" *ngIf="!data.isAccount">Chưa có tài khoản</span>
         </ng-template>
       </table-column>
 

@@ -38,11 +38,10 @@ export class FilterFormComponent implements OnInit{
 
   getSubmitData() {
     const isDateRange = this.filterData.filter(item => item.type === "date-range");
-
     const data = {...this.filterForm.value}
 
     if (isDateRange.length > 0) {
-      if (this.filterForm.value[isDateRange[0].name] !== '') {
+      if (this.filterForm.value[isDateRange[0].name] !== '' && this.filterForm.value[isDateRange[0].name] !== null) {
         data['startDate'] = formatDate(this.filterForm.value[isDateRange[0].name][0] ,'dd/MM/YYYY', 'en-US');
         data['endDate'] = formatDate(this.filterForm.value[isDateRange[0].name][0] ,'dd/MM/YYYY', 'en-US');
       } else {
@@ -53,7 +52,7 @@ export class FilterFormComponent implements OnInit{
     delete data[isDateRange[0].name];
 
     for (const prop in data) {
-      if (data[prop] === '') {
+      if (data[prop] === '' || data[prop] === null) {
         delete data[prop]
       }
     }

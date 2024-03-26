@@ -25,6 +25,8 @@ export class CreateOrganizationComponent implements OnInit{
 
   organizationId!: number
 
+  listDirectors: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -41,7 +43,8 @@ export class CreateOrganizationComponent implements OnInit{
       name: ['', [Validators.required]],
       websiteCms: ['', [Validators.required]],
       website: [[], [Validators.required]],
-      splitData: [0],
+      splitData: [1],
+      userId: [null],
       email: ['', [Validators.email]],
       mobile: ['', [Validators.pattern('[0-9]{10,15}')]],
       status: [true]
@@ -55,7 +58,8 @@ export class CreateOrganizationComponent implements OnInit{
         this.organizationService.getOrganizationById(id).subscribe({
           next: res => {
             if (res.success) {
-              this.orgForm.patchValue(res.data.organization)
+              this.orgForm.patchValue(res.data.organization);
+              this.listDirectors = res.data.directors;
             }
           }
         })

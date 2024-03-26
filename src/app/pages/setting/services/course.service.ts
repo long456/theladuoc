@@ -13,8 +13,8 @@ export class CourseService {
 
   getAllCourse(page?: any, pageSize?: any, filter?: any): Observable<any>{
     let option = {
-      PageIndex: page,
-      pageSize: pageSize,
+      PageIndex: page = 1,
+      pageSize: pageSize = 10,
     }
 
     if (filter) {
@@ -49,5 +49,9 @@ export class CourseService {
 
   getAllTeacher(): Observable<any>{
     return this.http.get('User/get-list-option-lecturer')
+  }
+
+  getListCourse(): Observable<any>{
+    return this.http.get('Course/get-course-list')
   }
 }

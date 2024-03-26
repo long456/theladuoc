@@ -41,6 +41,16 @@ const routes: Routes = [
         path:'list',
         component: NotificationsEmailListComponent
       },
+      {
+        path:'create',
+        data: {type: 'notifications', isCreate: true},
+        component: EditEmailComponent
+      },
+      {
+        path:':id',
+        data: {type: 'notifications', isCreate: false},
+        component: EditEmailComponent
+      },
     ]
   },
 ]

@@ -18,7 +18,53 @@ export class StudyingStudentComponent implements OnInit{
 
   isExpand = false;
 
-  listOfColumn: filterItem[] = []
+  listOfColumn: filterItem[] = [
+    {
+      title: 'Ngày đăng ký',
+      name: 'createdDate',
+      type: "date-range"
+    },
+    {
+      title: 'Tên học viên',
+      name: 'name',
+    },
+    {
+      title: 'Số điện thoại',
+      name: 'mobile',
+    },
+    {
+      title: 'Email',
+      name: 'email',
+    },
+    {
+      title: 'Mã học viên',
+      name: 'code',
+    },
+    {
+      title: 'Người giới thiệu',
+      name: 'userRef',
+    },
+    {
+      title: 'Tên diễn giả',
+      name: 'lecturerName',
+    },
+    {
+      title: 'Thuộc tổ chức',
+      name: 'organizationName',
+    },
+    {
+      title: 'Nhân viên chăm sóc',
+      name: 'caregiverName',
+    },
+    {
+      title: 'Khóa học gần nhất',
+      name: 'latestCourseName',
+    },
+    {
+      title: 'Tổng học phí',
+      name: 'totalPrice',
+    },
+  ];
 
   studyingStudent$!: Observable<{
     rows: any[],
@@ -75,7 +121,7 @@ export class StudyingStudentComponent implements OnInit{
   }
 
   handleFilterForm(event: any) {
-
+    this.filterList$.next(event)
   }
 
   detail(data: any) {

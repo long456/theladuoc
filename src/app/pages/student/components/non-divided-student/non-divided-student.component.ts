@@ -30,7 +30,113 @@ export class NonDividedStudentComponent implements OnInit{
 
   loading = false;
 
-  listOfColumn: filterItem[] = []
+  listOfColumn: filterItem[] = [
+    {
+      title: 'Ngày đăng ký',
+      name: 'createdDate',
+      type: "date-range"
+    },
+    {
+      title: 'Loại vé',
+      name: 'ticket',
+    },
+    {
+      title: 'Tên học viên',
+      name: 'name',
+    },
+    {
+      title: 'Số điện thoại',
+      name: 'mobile',
+    },
+    {
+      title: 'Email',
+      name: 'email',
+    },
+    {
+      title: 'Mã học viên',
+      name: 'code',
+    },
+    {
+      title: 'Người giới thiệu',
+      name: 'userRef',
+    },
+    {
+      title: 'Tên diễn giả',
+      name: 'lecturerName',
+    },
+    {
+      title: 'Tên khóa học',
+      name: 'courseName',
+    },
+    {
+      title: 'Số điểm',
+      name: '',
+    },
+    {
+      title: 'Số tiền',
+      name: 'price',
+    },
+    {
+      title: 'Tên landing page',
+      name: 'landingPageName',
+    },
+    {
+      title: 'Xác thực email',
+      name: 'isAuthEmail',
+      type: "select",
+      value: true,
+      data: [
+        {
+          label: 'Đã xác thực',
+          key: true
+        },
+        {
+          label: 'Chưa xác thực',
+          key: false
+        }
+      ]
+    },
+    {
+      title: 'Trạng thái',
+      name: 'isAccount',
+      type: "select",
+      value: true,
+      data: [
+        {
+          label: 'Đã xác thực',
+          key: true
+        },
+        {
+          label: 'Chưa xác thực',
+          key: false
+        }
+      ]
+    },
+    {
+      title: 'Thanh toán',
+      name: 'isPay',
+      type: "select",
+      value: true,
+      data: [
+        {
+          label: 'Chưa thanh toán',
+          key: 0
+        },
+        {
+          label: 'Thanh toán một phần',
+          key: 1
+        },
+        {
+          label: 'Đã thanh toán',
+          key: 2
+        }
+      ]
+    },
+    {
+      title: 'Thuộc tổ chức',
+      name: 'organizationName',
+    },
+  ];
 
   constructor(
     private router: Router,

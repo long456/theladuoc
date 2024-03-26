@@ -58,7 +58,7 @@
           <div>
             <nz-select
               formControlName="teacherId"
-              [nzStatus]="(this.courseForm.get('teacherId')?.invalid && (courseForm.get('teacherId')?.touched || isSubmit)) ? 'error' : ''"
+              [nzStatus]="(courseForm.get('teacherId')?.invalid && (courseForm.get('teacherId')?.touched || isSubmit)) ? 'error' : ''"
             >
               <nz-option
                 *ngFor="let teacher of listTeacher"

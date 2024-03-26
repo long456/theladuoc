@@ -62,10 +62,6 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'website',
-    loadChildren: () => import('./modules/website/website.module').then(m => m.WebsiteModule),
-  },
-  {
     path: 'register-form',
     loadChildren: () => import('../register-form/register-form.module').then(m => m.RegisterFormModule),
   },
@@ -84,6 +80,10 @@ const routes: Routes = [
   {
     path: 'referral',
     loadChildren: () => import('../referral/referral.module').then(m => m.ReferralModule),
+  },
+  {
+    path: 'website-config',
+    loadChildren: () => import('../website-config/website-config.module').then(m => m.WebsiteConfigModule),
   }
 ]
 

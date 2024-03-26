@@ -25,22 +25,6 @@ export class WaitingStudentComponent implements OnInit{
     {
       title: 'Loại vé',
       name: 'ticket',
-      type: "select",
-      value: 'vip',
-      data: [
-        {
-          key: 'vip',
-          label: 'VIP'
-        },
-        {
-          key: 'free',
-          label: 'FREE'
-        },
-        {
-          key: 'premium',
-          label: 'PREMIUM'
-        }
-      ]
     },
     {
       title: 'Tên học viên',
@@ -75,6 +59,18 @@ export class WaitingStudentComponent implements OnInit{
       name: '',
     },
     {
+      title: 'Số tiền',
+      name: 'price',
+    },
+    {
+      title: 'Tên landing page',
+      name: 'landingPageName',
+    },
+    {
+      title: 'Nhân viên chăm sóc',
+      name: 'caregiverName',
+    },
+    {
       title: 'Xác thực email',
       name: 'isAuthEmail',
       type: "select",
@@ -105,6 +101,30 @@ export class WaitingStudentComponent implements OnInit{
           key: false
         }
       ]
+    },
+    {
+      title: 'Thanh toán',
+      name: 'isPay',
+      type: "select",
+      value: true,
+      data: [
+        {
+          label: 'Chưa thanh toán',
+          key: 0
+        },
+        {
+          label: 'Thanh toán một phần',
+          key: 1
+        },
+        {
+          label: 'Đã thanh toán',
+          key: 2
+        }
+      ]
+    },
+    {
+      title: 'Thuộc tổ chức',
+      name: 'organizationName',
     },
   ];
 
