@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {WebConfigService} from "../../services/web-config.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {NzTreeNodeOptions} from "ng-zorro-antd/tree";
 
 
 @Component({
@@ -19,6 +20,23 @@ export class EditConfigComponent implements OnInit{
   bgFooterValue = 'Chọn màu';
 
   configId = 0;
+
+  nodes :NzTreeNodeOptions[] = [
+    {
+      title: 'Home',
+      key: '1',
+      children: [
+        {
+          title: 'A',
+          key: 'a',
+          parentKey: '1'
+        }
+      ]
+    },{
+      title: 'About',
+      key: '2',
+    }
+  ]
   constructor(
     private fb: FormBuilder,
     private message: NzMessageService,
@@ -93,5 +111,9 @@ export class EditConfigComponent implements OnInit{
     } else {
       this.bgFooterValue = e.target.value
     }
+  }
+
+  editNavigation() {
+
   }
 }

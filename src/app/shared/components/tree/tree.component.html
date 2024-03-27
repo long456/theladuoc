@@ -1,0 +1,30 @@
+<nz-tree
+  #nzTreeComponent
+  [nzData]="treeData"
+  [nzTreeTemplate]="treeNode"
+></nz-tree>
+
+<button
+  nz-button nzType="primary" [nzSize]="'small'"
+  nz-tooltip nzTooltipTitle="Nhấn vào đây để thêm navigation">
+  <span nz-icon nzType="plus" nzTheme="outline"></span>
+</button>
+
+<ng-template #treeNode let-node>
+  <span class="node">
+    {{ node.title }}
+    <span>
+      <i class="icon-node icon-add"
+         nz-icon
+         nzType="plus"
+         nzTheme="outline"
+      ></i>
+      <i class="icon-node icon-delete"
+         nz-icon
+         nzType="delete"
+         nzTheme="outline"
+      ></i>
+    </span>
+  </span>
+
+</ng-template>

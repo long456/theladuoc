@@ -20,14 +20,15 @@ export class PaymentCheckComponent implements OnInit{
   ) {}
 
   ngOnInit() {
-    console.log(this.nzModalData)
     this.paymentForm = this.fb.group({
       id: [null],
       name: [''],
       isPay: [0],
       price: [0],
     })
-
+    if (this.nzModalData.studentData.price === null) {
+      this.nzModalData.studentData.price = 0
+    }
     this.paymentForm.patchValue(this.nzModalData.studentData)
   }
 

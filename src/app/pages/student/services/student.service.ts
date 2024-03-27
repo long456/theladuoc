@@ -89,12 +89,12 @@ export class StudentService {
     return this.http.get('UserAffiliate/studying', {params: option})
   }
 
-  takeCareStudent(id: number): Observable<any>{
-    return this.http.post('UserAffiliate/receive-care-user-waiting', {id : id})
+  takeCareStudent(list: string): Observable<any>{
+    return this.http.post('UserAffiliate/receive-care-user-waiting', {userAffIds : list})
   }
 
-  rejectStudent(id: number): Observable<any>{
-    return this.http.post('UserAffiliate/not-receive-care-user-waiting', {id : id})
+  rejectStudent(list: string): Observable<any>{
+    return this.http.post('UserAffiliate/not-receive-care-user-waiting', {userAffIds : list})
   }
 
   setPaymentCheck(data: any): Observable<any>{

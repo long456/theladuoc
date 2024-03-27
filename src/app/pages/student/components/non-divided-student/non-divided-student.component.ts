@@ -103,11 +103,11 @@ export class NonDividedStudentComponent implements OnInit{
       value: true,
       data: [
         {
-          label: 'Đã xác thực',
+          label: 'Đã có tài khoản',
           key: true
         },
         {
-          label: 'Chưa xác thực',
+          label: 'Chưa có tài khoản',
           key: false
         }
       ]
@@ -137,6 +137,8 @@ export class NonDividedStudentComponent implements OnInit{
       name: 'organizationName',
     },
   ];
+
+  itemSelectList: number[] = [];
 
   constructor(
     private router: Router,
@@ -182,30 +184,29 @@ export class NonDividedStudentComponent implements OnInit{
     this.filterList$.next(event)
   }
 
-  takeCareStudent(data: any) {
-    this.studentService.takeCareStudent(data.id).subscribe({
-      next: res => {
-        if (res.success) {
-          this.pageSize$.next(10);
-          this.message.success(res.messages)
-        } else {
-          this.message.error(res.errorMessages)
+  takeCareStudent() {
+    if (this.itemSelectList.length === 0) {
+      this.message.error('Chưa có mục nào được chọn')
+    } else {
+      let data = JSON.stringify(this.itemSelectList)
+      this.studentService.takeCareStudent(data).subscribe({
+        next: res => {
+          if (res.success) {
+            this.pageSize$.next(10);
+            this.message.success(res.messages)
+          } else {
+            this.message.error(res.errorMessages)
+          }
         }
-      }
-    })
+      })
+    }
   }
 
-  rejectStudent(data: any){
-    this.studentService.rejectStudent(data.id).subscribe({
-      next: res => {
-        if (res.success) {
-          this.pageSize$.next(10);
-          this.message.success(res.messages)
-        } else {
-          this.message.error(res.errorMessages)
-        }
-      }
-    })
+
+  getItemSelection(e: any) {
+    this.itemSelectList = e;
   }
+
+  detail(data: any) {}
 
 }

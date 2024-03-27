@@ -134,7 +134,28 @@
   </nz-tab>
 <!--  NAVIGATION-->
   <nz-tab nzTitle="Navigation">
+    <div nz-row>
+      <div nz-col [nzSpan]="20">
+        <div nz-row>
+          <div nz-col [nzSpan]="12" >
+            <app-tree [treeData]="nodes"></app-tree>
+          </div>
+          <div nz-col [nzSpan]="12" >
+            abc
+          </div>
+        </div>
+      </div>
 
+      <div nz-col [nzSpan]="4">
+        <div class="btn-panel">
+          <button class="btn primary" nz-button (click)="editNavigation()">
+            Lưu
+          </button>
+
+          <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+        </div>
+      </div>
+    </div>
   </nz-tab>
 </nz-tabset>
 

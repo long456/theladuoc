@@ -52,7 +52,7 @@
         <ng-container *ngIf="!column.tplCell">
           <ng-container [ngSwitch]="column.dataType">
             <ng-container *ngSwitchCase="COL_DATA_TYPE.DATE">
-              {{ data[column.key] | date: 'dd/MM/YYYY hh:mm:ss' }}
+              {{ data[column.key] | date: 'dd/MM/YYYY HH:mm:ss' }}
             </ng-container>
             <ng-container *ngSwitchCase="COL_DATA_TYPE.INDEX">
               {{i + 1}}

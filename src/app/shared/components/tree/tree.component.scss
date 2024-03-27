@@ -1,0 +1,22 @@
+.node{
+  display: flex;
+  span{
+    display: none;
+    padding-left: 8px;
+  }
+
+  &:hover{
+    span {
+      display: block;
+    }
+  }
+}
+
+.icon-add{
+  color: #1890ff;
+  padding-right: 8px;
+}
+
+.icon-delete{
+  color: #ff4d4f;
+}

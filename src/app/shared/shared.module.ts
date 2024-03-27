@@ -27,6 +27,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { TreeComponent } from './components/tree/tree.component';
+import { NzTreeModule } from 'ng-zorro-antd/tree';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     FilterFormComponent,
     SpinComponent,
     HeaderComponent,
+    TreeComponent,
   ],
   imports: [
     CommonModule,
@@ -57,7 +60,8 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
     NzDropDownModule,
     NzDividerModule,
     NzCheckboxModule,
-    NzPaginationModule
+    NzPaginationModule,
+    NzTreeModule
   ],
     exports: [
         SideBarComponent,
@@ -75,6 +79,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
         NzModalModule,
         NzToolTipModule,
         HeaderComponent,
+        TreeComponent,
     ]
 })
 export class SharedModule { }

@@ -97,11 +97,11 @@ export class TakingCareStudentComponent implements OnInit{
       value: true,
       data: [
         {
-          label: 'Đã xác thực',
+          label: 'Đã có tài khoản',
           key: true
         },
         {
-          label: 'Chưa xác thực',
+          label: 'Chưa có tài khoản',
           key: false
         }
       ]
@@ -198,7 +198,7 @@ export class TakingCareStudentComponent implements OnInit{
 
   paymentCheck(data : any) {
     this.modal.create<PaymentCheckComponent>({
-      nzTitle: 'Modal Title',
+      nzTitle: 'Xác thực thanh toán',
       nzContent: PaymentCheckComponent,
       nzViewContainerRef: this.viewContainerRef,
       nzData: {

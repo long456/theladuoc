@@ -12,7 +12,7 @@
     </nz-collapse>
 
 
-<!--    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>-->
+    <button nz-button class="add-btn primary" (click)="takeCareStudent()">Chăm sóc</button>
 <!--    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>-->
 
     <app-table
@@ -24,7 +24,9 @@
       (pageIndexChange)="page$.next($event)"
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
+      (onItemSelection)="getItemSelection($event)"
     >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Ngày đăng ký" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
       <table-column header="Loại vé" key="ticket">
@@ -72,19 +74,8 @@
         </ng-template>
 
         <ng-template appCell let-data>
-<!--          <span class="custom-action" (click)="detail(data)">Chi tiết</span>-->
+          <span class="custom-action" (click)="detail(data)">Chi tiết</span>
 
-          <span class="custom-action" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
-          Chăm sóc
-          <span nz-icon nzType="down"></span>
-        </span>
-
-          <nz-dropdown-menu #menu="nzDropdownMenu">
-            <ul nz-menu>
-              <li nz-menu-item (click)="takeCareStudent(data)">Nhận chăm sóc</li>
-<!--              <li nz-menu-item (click)="rejectStudent(data)">Không nhận</li>-->
-            </ul>
-          </nz-dropdown-menu>
         </ng-template>
       </table-column>
     </app-table>

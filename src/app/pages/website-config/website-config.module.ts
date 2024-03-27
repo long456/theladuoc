@@ -20,7 +20,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    NzTabsModule
+    NzTabsModule,
   ]
 })
 export class WebsiteConfigModule { }
