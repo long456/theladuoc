@@ -27,7 +27,11 @@ export class LandingPageService {
     return this.http.get('LandingPage/' + id)
   }
 
+  updateLandingPage(id: number, data: any): Observable<any>{
+    return this.http.put('LandingPage/'+ id, data)
+  }
+
   softDeleteLandingPage(data: any): Observable<any>{
-    return this.http.delete('LandingPage/soft-delete' , data)
+    return this.http.delete('LandingPage/soft-delete' , {body: data})
   }
 }

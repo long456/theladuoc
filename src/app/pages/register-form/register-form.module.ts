@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { CKEditorModule } from 'ckeditor4-angular';
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CKEditorModule } from 'ckeditor4-angular';
     ReactiveFormsModule,
     NzSwitchModule,
     NzCheckboxModule,
-    CKEditorModule
+    CKEditorModule,
+    NzSelectModule
   ]
 })
 export class RegisterFormModule { }

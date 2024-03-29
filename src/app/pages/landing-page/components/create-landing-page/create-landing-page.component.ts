@@ -3,6 +3,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {debounceTime, distinctUntilChanged, fromEvent, map} from "rxjs";
+import {LandingPageService} from "../../services/landing-page.service";
+import {CourseService} from "../../../setting/services/course.service";
 
 @Component({
   selector: 'app-create-landing-page',
@@ -34,13 +36,17 @@ export class CreateLandingPageComponent implements OnInit, AfterViewInit{
     extraAllowedContent: 'style meta script section svg;link[!href,target];a[!href,target]'
   };
 
+  landingPageId = 0;
 
+  listCourse: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private landingPageService: LandingPageService,
+    private courseService: CourseService
   ) {}
 
   ngOnInit() {
@@ -50,11 +56,26 @@ export class CreateLandingPageComponent implements OnInit, AfterViewInit{
       name: [null, [Validators.required]],
       status: [1],
       courseId: [null, [Validators.required]],
-      websiteId: [null],
       landingPageCode: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
       htmlContent: [],
       pixelCode: [],
       seoOgTag: [],
+    })
+
+    if (!this.isCreate) {
+      this.route.params.pipe().subscribe(params => {
+        const {id} = params;
+        this.landingPageId = id;
+        this.landingPageService.getLandingPageById(id).subscribe({
+          next: res => {
+            this.landingPageForm.patchValue(res)
+          }
+        })
+      })
+    }
+
+    this.courseService.getListCourse().subscribe(res => {
+      this.listCourse = res;
     })
   }
 
@@ -84,7 +105,41 @@ export class CreateLandingPageComponent implements OnInit, AfterViewInit{
   }
 
   edit() {
-    console.log(this.landingPageForm.value)
+    this.isSubmit = true;
+    if (this.landingPageForm.valid) {
+      const data = {
+        ...this.landingPageForm.value,
+        courseId: parseInt(this.landingPageForm.get('courseId')?.value),
+        status: this.landingPageForm.get('status')?.value ? 1 : 0,
+      }
+
+      if (this.isCreate) {
+        this.landingPageService.createLandingPage(data).subscribe({
+          next: res => {
+            if (res.success) {
+              this.message.success(res.messages);
+              this.navigateBack();
+            } else {
+              this.message.error(res.errorMessages);
+            }
+          },
+          error: err => {
+            this.message.error(err.error);
+          }
+        })
+      } else {
+        this.landingPageService.updateLandingPage(this.landingPageId, data).subscribe({
+          next: res => {
+            if (res.success) {
+              this.message.success(res.messages);
+              this.navigateBack();
+            } else {
+              this.message.error(res.errorMessages);
+            }
+          },
+        })
+      }
+    }
   }
 
   navigateBack() {

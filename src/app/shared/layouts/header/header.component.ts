@@ -16,10 +16,10 @@ export class HeaderComponent {
 
   signOut() {
     this.loginService.logOut()
-    this.router.navigate(['auth']).then();
+    this.router.navigate(['auth']);
   }
 
   editProfile() {
-    this.router.navigate(['page/profile']).then();
+    this.router.navigate(['page/profile']);
   }
 }

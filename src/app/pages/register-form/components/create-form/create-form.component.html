@@ -44,19 +44,45 @@
           </span>
         </div>
 
-        <div nz-col [nzSpan]="9">
+        <div nz-col [nzSpan]="9" *ngIf="!isCreate">
           <span class="text-label">
             Đường dẫn trang chuyển hướng
           </span>
 
-          <input
+          <input [readonly]="!isCreate"
             nz-input formControlName="redirectLink"
-            [nzStatus]="(this.builderForm.get('redirectLink')?.invalid && (builderForm.get('redirectLink')?.touched || isSubmit)) ? 'error' : ''">
+            [nzStatus]="(builderForm.get('redirectLink')?.invalid && (builderForm.get('redirectLink')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
                 *ngIf="(builderForm.get('redirectLink')?.touched || isSubmit)  && builderForm.get('redirectLink')?.hasError('pattern')"
           >
             Đường dẫn trang chuyển hướng không đúng định dạng
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">
+            Khóa học
+            <span class="text-danger">*</span>
+          </span>
+
+          <div>
+            <nz-select [nzDisabled]="!isCreate"
+                       formControlName="courseId"
+                       [nzStatus]="(builderForm.get('courseId')?.invalid && (builderForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <nz-option
+                *ngFor="let course of listCourse"
+                [nzValue]="course.id"
+                [nzLabel]="course.title"
+              ></nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(builderForm.get('courseId')?.touched || isSubmit) && builderForm.get('courseId')?.hasError('required')"
+          >
+            Tên khóa học không được để trống
           </span>
         </div>
 

@@ -43,7 +43,7 @@ export class FilterFormComponent implements OnInit{
     if (isDateRange.length > 0) {
       if (this.filterForm.value[isDateRange[0].name] !== '' && this.filterForm.value[isDateRange[0].name] !== null) {
         data['startDate'] = formatDate(this.filterForm.value[isDateRange[0].name][0] ,'dd/MM/YYYY', 'en-US');
-        data['endDate'] = formatDate(this.filterForm.value[isDateRange[0].name][0] ,'dd/MM/YYYY', 'en-US');
+        data['endDate'] = formatDate(this.filterForm.value[isDateRange[0].name][1] ,'dd/MM/YYYY', 'en-US');
       } else {
         data['startDate'] = ''
         data['endDate'] = ''

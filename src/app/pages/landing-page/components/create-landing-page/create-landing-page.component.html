@@ -49,15 +49,15 @@
           </span>
 
           <div>
-            <nz-select
+            <nz-select [nzDisabled]="!isCreate"
               formControlName="courseId"
               [nzStatus]="(landingPageForm.get('courseId')?.invalid && (landingPageForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
             >
-<!--              <nz-option-->
-<!--                *ngFor="let teacher of listTeacher"-->
-<!--                [nzValue]="teacher.id"-->
-<!--                [nzLabel]="teacher.fullName"-->
-<!--              ></nz-option>-->
+              <nz-option
+                *ngFor="let course of listCourse"
+                [nzValue]="course.id"
+                [nzLabel]="course.title"
+              ></nz-option>
             </nz-select>
           </div>
 

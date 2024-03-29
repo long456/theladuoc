@@ -84,7 +84,11 @@ const routes: Routes = [
   {
     path: 'website-config',
     loadChildren: () => import('../website-config/website-config.module').then(m => m.WebsiteConfigModule),
-  }
+  },
+  {
+    path: 'class',
+    loadChildren: () => import('../class/class.module').then(m => m.ClassModule),
+  },
 ]
 
 @NgModule({

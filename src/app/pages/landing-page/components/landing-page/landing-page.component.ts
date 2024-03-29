@@ -61,6 +61,7 @@ export class LandingPageComponent implements OnInit{
   }
 
   getItemSelection(e: any) {
+    console.log(e)
     this.itemSelectList = e;
   }
 
@@ -88,6 +89,7 @@ export class LandingPageComponent implements OnInit{
               }
             },
             error: err => {
+              console.log(err)
               this.message.error(err.error);
             }
           })

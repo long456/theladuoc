@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RegisterFormService} from "../../services/register-form.service";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {CourseService} from "../../../setting/services/course.service";
 
 @Component({
   selector: 'app-create-form',
@@ -34,12 +35,15 @@ export class CreateFormComponent implements OnInit{
     extraAllowedContent: 'style meta script section svg;link[!href,target];a[!href,target]'
   };
 
+  listCourse: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private registerFormService: RegisterFormService,
     private message: NzMessageService,
     private router: Router,
+    private courseService: CourseService
   ) {
   }
 
@@ -58,7 +62,8 @@ export class CreateFormComponent implements OnInit{
       hasDemand: [false],
       thankYouHtml: [''],
       zaloLink: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
-      redirectLink: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
+      redirectLink: [null],
+      courseId: [null,[Validators.required]],
       status: [1]
     })
 
@@ -78,6 +83,10 @@ export class CreateFormComponent implements OnInit{
         })
       })
     }
+
+    this.courseService.getListCourse().subscribe(res => {
+      this.listCourse = res;
+    })
   }
 
   editForm() {

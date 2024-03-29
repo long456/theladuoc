@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {WebConfigService} from "../../services/web-config.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {NzTreeNodeOptions} from "ng-zorro-antd/tree";
+import {TreeNode} from "../../../../shared/models/Tree";
 
 
 @Component({
@@ -21,20 +21,26 @@ export class EditConfigComponent implements OnInit{
 
   configId = 0;
 
-  nodes :NzTreeNodeOptions[] = [
+  nodes: TreeNode[] = [
     {
-      title: 'Home',
-      key: '1',
+      name: 'Home',
+      url: '',
+      navCode: '',
+      parentCode: '',
+    },
+    {
+      name: 'About',
+      url: '',
+      navCode: '',
+      parentCode: '',
       children: [
         {
-          title: 'A',
-          key: 'a',
-          parentKey: '1'
+          name: 'Permission',
+          url: '',
+          navCode: '',
+          parentCode: '',
         }
       ]
-    },{
-      title: 'About',
-      key: '2',
     }
   ]
   constructor(

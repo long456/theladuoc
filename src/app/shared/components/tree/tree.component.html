@@ -1,30 +1,55 @@
-<nz-tree
-  #nzTreeComponent
-  [nzData]="treeData"
-  [nzTreeTemplate]="treeNode"
-></nz-tree>
-
-<button
-  nz-button nzType="primary" [nzSize]="'small'"
-  nz-tooltip nzTooltipTitle="Nhấn vào đây để thêm navigation">
-  <span nz-icon nzType="plus" nzTheme="outline"></span>
-</button>
-
-<ng-template #treeNode let-node>
-  <span class="node">
-    {{ node.title }}
-    <span>
-      <i class="icon-node icon-add"
-         nz-icon
-         nzType="plus"
-         nzTheme="outline"
-      ></i>
-      <i class="icon-node icon-delete"
-         nz-icon
-         nzType="delete"
-         nzTheme="outline"
-      ></i>
+<nz-tree-view [nzTreeControl]="treeControl" [nzDataSource]="dataSource">
+  <nz-tree-node *nzTreeNodeDef="let node" nzTreeNodePadding>
+    <nz-tree-node-toggle nzTreeNodeNoopToggle></nz-tree-node-toggle>
+    <nz-tree-node-option
+      [nzSelected]="selectListSelection.isSelected(node)"
+      (nzClick)="selectListSelection.toggle(node)"
+    >
+    <span class="node">
+      {{ node.name }}
+      <span>
+        <i class="icon-node icon-add"
+           nz-icon
+           nzType="plus"
+           nzTheme="outline"
+        ></i>
+        <i class="icon-node icon-delete"
+           nz-icon
+           nzType="delete"
+           nzTheme="outline"
+        ></i>
+      </span>
     </span>
-  </span>
+    </nz-tree-node-option>
+  </nz-tree-node>
 
-</ng-template>
+  <nz-tree-node *nzTreeNodeDef="let node; when: hasChild" nzTreeNodePadding>
+    <nz-tree-node-toggle>
+      <span nz-icon nzType="caret-down" nzTreeNodeToggleRotateIcon></span>
+    </nz-tree-node-toggle>
+    <nz-tree-node-option
+      [nzSelected]="selectListSelection.isSelected(node)"
+      (nzClick)="selectListSelection.toggle(node)"
+    >
+      <span class="node">
+        {{ node.name }}
+        <span>
+          <i class="icon-node icon-add"
+             nz-icon
+             nzType="plus"
+             nzTheme="outline"
+          ></i>
+          <i class="icon-node icon-delete"
+             nz-icon
+             nzType="delete"
+             nzTheme="outline"
+          ></i>
+        </span>
+      </span>
+    </nz-tree-node-option>
+  </nz-tree-node>
+</nz-tree-view>
+
+<button nz-button nzType="primary" (click)="addNavigation()">
+  <span nz-icon nzType="plus"></span>
+</button>

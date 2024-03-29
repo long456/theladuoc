@@ -28,7 +28,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { TreeComponent } from './components/tree/tree.component';
-import { NzTreeModule } from 'ng-zorro-antd/tree';
+import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,8 @@ import { NzTreeModule } from 'ng-zorro-antd/tree';
     NzDividerModule,
     NzCheckboxModule,
     NzPaginationModule,
-    NzTreeModule
+    NzToolTipModule,
+    NzTreeViewModule
   ],
     exports: [
         SideBarComponent,

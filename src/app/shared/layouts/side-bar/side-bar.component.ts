@@ -109,11 +109,6 @@ export class SideBarComponent {
               ]
             },
             {
-              name : 'Khóa học',
-              icon: '',
-              link: 'page/setting/course',
-            },
-            {
               name : 'Website',
               icon: '',
               link: '',
@@ -124,6 +119,16 @@ export class SideBarComponent {
                   link: 'page/setting/website-config/config',
                 },
               ]
+            },
+            {
+              name : 'Khóa học',
+              icon: '',
+              link: 'page/setting/course',
+            },
+            {
+              name : 'Lớp học',
+              icon: '',
+              link: 'page/setting/class',
             },
             {
               name : 'Landing page',
