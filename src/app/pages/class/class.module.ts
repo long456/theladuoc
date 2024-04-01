@@ -6,12 +6,15 @@ import {ClassRoutingModule} from "./class-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NzListModule } from 'ng-zorro-antd/list';
+import {NzSelectModule} from "ng-zorro-antd/select";
+import { CreateLessonComponent } from './components/create-lesson/create-lesson.component';
 
 
 @NgModule({
   declarations: [
     ClassComponent,
-    CreateClassComponent
+    CreateClassComponent,
+    CreateLessonComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +22,8 @@ import { NzListModule } from 'ng-zorro-antd/list';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    NzListModule
+    NzListModule,
+    NzSelectModule
   ]
 })
 export class ClassModule { }

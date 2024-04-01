@@ -34,3 +34,8 @@
   color: red;
   width: 100%;
 }
+
+::ng-deep nz-list-header{
+  font-size: 16px;
+  font-weight: 500;
+}
