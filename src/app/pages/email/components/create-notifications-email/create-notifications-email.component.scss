@@ -26,18 +26,11 @@
 
 .text-label{
   font-size: 14px;
-  //text-transform: uppercase;
-  font-weight: 500;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .text-danger{
   color: red;
   width: 100%;
-}
-
-.btn-group{
-  text-align: end;
-  button {
-    margin-left: 8px;
-  }
 }

@@ -25,6 +25,22 @@ export class ClassService {
       }
     }
 
-    return this.http.get('AttendanceProgram/attendance-list', {params: option})
+    return this.http.get('Class', {params: option})
+  }
+
+  createClass(data: any): Observable<any> {
+    return this.http.post('Class', data)
+  }
+
+  getClassById(id: number): Observable<any> {
+    return this.http.get('Class/' + id)
+  }
+
+  updateClass(id: number, data: any): Observable<any> {
+    return this.http.put('Class/' + id, data)
+  }
+
+  softDeleteClass(list: number[]): Observable<any> {
+    return this.http.delete('Class/soft-delete', {body: list})
   }
 }

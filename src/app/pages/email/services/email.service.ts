@@ -62,4 +62,17 @@ export class EmailService {
   createEmail(data: any): Observable<any>{
     return this.http.post('EmailTemplate', data)
   }
+
+  getNotificationsEmailById(id: number): Observable<any> {
+    return this.http.get('EmailTemplate/' + id)
+  }
+
+  createNotificationsEmail(data: any): Observable<any>{
+    return this.http.post('EmailTemplate', data)
+  }
+
+  updateNotificationsEmail(data: any, id: number): Observable<any>{
+    return this.http.put('EmailTemplate/' + id, data)
+  }
+
 }

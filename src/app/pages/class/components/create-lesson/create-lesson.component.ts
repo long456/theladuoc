@@ -1,5 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {Component, inject, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {NZ_MODAL_DATA, NzModalRef} from "ng-zorro-antd/modal";
+import {LessonService} from "../../../lesson/services/lesson.service";
+import {DatePipe} from "@angular/common";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-create-lesson',
@@ -7,17 +11,70 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   styleUrls: ['./create-lesson.component.scss']
 })
 export class CreateLessonComponent implements OnInit{
-
   lessonForm!: FormGroup;
+
+  readonly #modal = inject(NzModalRef);
+  readonly nzModalData= inject(NZ_MODAL_DATA);
+
+  isSubmit: boolean = false;
+
+  isLoading: boolean = false;
+
+  datePipe = new DatePipe('en-US');
 
   constructor(
     private fb: FormBuilder,
+    private modal: NzModalRef,
+    private lessonService: LessonService,
+    private message: NzMessageService,
   ) {
   }
 
   ngOnInit() {
     this.lessonForm = this.fb.group({
-
+      name: [null, [Validators.required]],
+      duration: [null, [Validators.required]],
     })
   }
+
+  closeModal() {
+    this.modal.destroy();
+  }
+
+  addLesson() {
+    this.isSubmit = true;
+    if (this.lessonForm.valid) {
+      this.isLoading = true;
+      let data = {
+        ...this.lessonForm.value,
+        classId: this.nzModalData.id,
+        startTime: this.datePipe.transform(this.lessonForm.value.duration[0], 'yyyy-MM-ddTHH:mm:ss') + 'Z',
+        endTime: this.datePipe.transform(this.lessonForm.value.duration[1], 'yyyy-MM-ddTHH:mm:ss') + 'Z',
+      }
+      delete data.duration
+      console.log(data)
+      this.lessonService.createLesson(data)
+        .pipe()
+        .subscribe({
+        next: value => {
+          console.log(value)
+          if(value.success) {
+            this.message.success(value.message);
+            this.isLoading = false;
+            this.closeModal();
+          } else {
+            this.message.error(value.errorMessages);
+            this.isLoading = false;
+            this.closeModal();
+          }
+        },
+        error: err => {
+          this.isLoading = false;
+          this.message.error(err.error);
+        }
+      })
+    }
+
+  }
+
 }

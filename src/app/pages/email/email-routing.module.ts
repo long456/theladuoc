@@ -5,6 +5,7 @@ import {SystemEmailListComponent} from "./components/system-email-list/system-em
 import {NotificationsEmailComponent} from "./components/notifications-email/notifications-email.component";
 import {NotificationsEmailListComponent} from "./components/notifications-email-list/notifications-email-list.component";
 import {EditEmailComponent} from "./components/edit-email/edit-email.component";
+import {CreateNotificationsEmailComponent} from "./components/create-notifications-email/create-notifications-email.component";
 
 
 const routes: Routes = [
@@ -44,12 +45,12 @@ const routes: Routes = [
       {
         path:'create',
         data: {type: 'notifications', isCreate: true},
-        component: EditEmailComponent
+        component: CreateNotificationsEmailComponent
       },
       {
         path:':id',
         data: {type: 'notifications', isCreate: false},
-        component: EditEmailComponent
+        component: CreateNotificationsEmailComponent
       },
     ]
   },

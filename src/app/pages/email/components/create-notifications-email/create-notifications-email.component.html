@@ -1,0 +1,89 @@
+<div class="title-page">
+  <span>Thiết lập email thông báo</span>
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="emailNotificationForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tiêu đề email
+            <span class="text-danger">*</span>
+          </span>
+          <input
+            nz-input autofocus formControlName="emailSubject"
+            [nzStatus]="(emailNotificationForm.get('emailSubject')?.invalid && (emailNotificationForm.get('emailSubject')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(emailNotificationForm.get('emailSubject')?.touched || isSubmit)  && emailNotificationForm.get('emailSubject')?.hasError('required')"
+          >
+            Tiêu đề email không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="2" nzOffset="4">
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="4" nzOffset="2">
+          <div class="text-label">Điểm danh</div>
+          <nz-switch formControlName="isAttendance">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Khóa học
+            <span class="text-danger">*</span>
+          </span>
+
+          <div>
+            <nz-select
+              formControlName="courseId"
+              style="display: block;"
+              [nzPlaceHolder]="'Chọn khóa học'"
+              [nzStatus]="(emailNotificationForm.get('courseId')?.invalid && (emailNotificationForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <nz-option
+                *ngFor="let course of courseList"
+                [nzValue]="course.id"
+                [nzLabel]="course.title + ' - ' + course.courseCode"
+              ></nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(emailNotificationForm.get('courseId')?.touched || isSubmit) && emailNotificationForm.get('courseId')?.hasError('required')"
+          >
+            Tên khóa học không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="18">
+          <span class="text-label">
+            Nội dung email
+          </span>
+          <ckeditor
+            name="ckeditor_text"
+            formControlName="content"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
+            [config]="ckEditorConfig"
+          ></ckeditor>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {ClassService} from "../../services/class.service";
@@ -36,6 +36,8 @@ export class CreateClassComponent implements OnInit {
 
   listCourse: any[] = [];
 
+  classId!: number;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -43,8 +45,6 @@ export class CreateClassComponent implements OnInit {
     private message: NzMessageService,
     private classService: ClassService,
     private courseService: CourseService,
-    private modal: NzModalService,
-    private viewContainerRef: ViewContainerRef
   ) {
   }
 
@@ -52,31 +52,76 @@ export class CreateClassComponent implements OnInit {
     this.isCreate = this.route.snapshot.data['isCreate'];
 
     this.classForm = this.fb.group({
-      name: [],
+      name: [null, [Validators.required]],
       courseId: [],
-      attendanceProgramId: [],
-      startTime: [],
-      endTime: [],
-      attendanceUrl: [],
     });
 
     this.courseService.getListCourse().subscribe(res => {
       this.listCourse = res;
     })
+
+    if (!this.isCreate) {
+      this.route.params.pipe().subscribe(params => {
+        const {id} = params;
+        this.classId = id;
+      })
+
+      this.pathClassData(this.classId);
+    }
   }
 
-  edit() {}
-
-  navigateBack() {}
-
-  addLesson() {
-    this.modal.create<CreateLessonComponent>({
-      nzTitle: 'Tạo buổi học',
-      nzContent: CreateLessonComponent,
-      nzViewContainerRef: this.viewContainerRef,
-      nzOnOk: instance => {
-
+  pathClassData(id: number) {
+    this.classService.getClassById(id).subscribe({
+      next: res => {
+        let data = {
+          ...res,
+          name: res.className
+        }
+        this.classForm.patchValue(data)
       }
-    });
+    })
+  }
+
+  edit() {
+    if (this.classForm.valid) {
+      if(this.isCreate) {
+        this.classService.createClass(this.classForm.value).subscribe({
+            next: res => {
+              if (res.success) {
+                this.message.success(res.messages);
+                this.navigateBack();
+              } else {
+                this.message.error(res.errorMessages);
+              }
+            },
+            error: err => {
+              this.message.error(err.error);
+            }
+          }
+        )
+      } else {
+        let data = {
+          name: this.classForm.value.name
+        }
+        this.classService.updateClass(this.classId,data).subscribe({
+            next: res => {
+              if (res.success) {
+                this.message.success(res.messages);
+                this.navigateBack();
+              } else {
+                this.message.error(res.errorMessages);
+              }
+            },
+            error: err => {
+              this.message.error(err.error);
+            }
+          }
+        )
+      }
+    }
+  }
+
+  navigateBack() {
+    this.router.navigate(['/page/setting/class'])
   }
 }

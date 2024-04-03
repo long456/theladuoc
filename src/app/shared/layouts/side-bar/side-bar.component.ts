@@ -131,6 +131,11 @@ export class SideBarComponent {
               link: 'page/setting/class',
             },
             {
+              name : 'Buổi học',
+              icon: '',
+              link: 'page/setting/lesson',
+            },
+            {
               name : 'Landing page',
               icon: '',
               link: 'page/setting/landing-page',
