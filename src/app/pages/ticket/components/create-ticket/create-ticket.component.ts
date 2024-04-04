@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {TicketService} from "../../services/ticket.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {CourseService} from "../../../setting/services/course.service";
 
 @Component({
   selector: 'app-create-ticket',
@@ -19,12 +20,15 @@ export class CreateTicketComponent implements OnInit{
 
   ticketId = 0;
 
+  listCourse: any[] = [];
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private message: NzMessageService,
     private fb: FormBuilder,
-    private ticketService: TicketService
+    private ticketService: TicketService,
+    private courseService: CourseService
   ) {}
 
   ngOnInit() {
@@ -32,6 +36,7 @@ export class CreateTicketComponent implements OnInit{
 
     this.ticketForm = this.fb.group({
       name: [null, Validators.required],
+      courseId: [null, [Validators.required]],
       price: [0],
       type: [],
       status: [1],
@@ -52,6 +57,10 @@ export class CreateTicketComponent implements OnInit{
         })
       })
     }
+
+    this.courseService.getListCourse().subscribe(res => {
+      this.listCourse = res;
+    })
   }
 
   edit() {

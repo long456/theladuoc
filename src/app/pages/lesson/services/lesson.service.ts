@@ -35,4 +35,8 @@ export class LessonService {
   createLesson(data: any): Observable<any>{
     return this.http.post('Lesson', data)
   }
+
+  updateLesson(id: number, data: any): Observable<any>{
+    return this.http.put('Lesson/'+ id, data)
+  }
 }

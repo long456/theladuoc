@@ -5,6 +5,7 @@ import {CourseService} from "../../../services/course.service";
 import {teacher} from "../../../models/course";
 import {debounceTime, distinctUntilChanged, fromEvent, map, switchMap} from "rxjs";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {config} from "../../../../../shared/models/ckeditor";
 
 @Component({
   selector: 'app-create-course',
@@ -27,20 +28,7 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
 
   isExpand = false;
 
-  ckEditorConfig: any = {
-    toolbar: [
-      ['Source', 'Templates', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat'],
-      [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],
-      [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ],
-      [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl' ],
-      [ 'Link', 'Unlink', 'Anchor' ],
-      [ 'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ],
-      [ 'Styles', 'Format', 'Font', 'FontSize' ],
-      [ 'TextColor', 'BGColor' ],
-      [ 'Maximize', 'ShowBlocks' ]
-    ],
-    extraAllowedContent: 'style meta script section svg;link[!href,target];a[!href,target]'
-  };
+  ckEditorConfig: any = config;
 
   constructor(
     private route: ActivatedRoute,

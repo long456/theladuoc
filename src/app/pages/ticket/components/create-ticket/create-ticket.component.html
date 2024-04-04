@@ -30,15 +30,33 @@
             <nz-switch formControlName="status"
             ></nz-switch>
           </div>
-
         </div>
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Loại vé
+            Khóa học
+            <span class="text-danger">*</span>
           </span>
 
-          <input nz-input autofocus formControlName="type">
+          <div>
+            <nz-select [nzDisabled]="!isCreate"
+                       style="display: block"
+                       formControlName="courseId"
+                       [nzStatus]="(ticketForm.get('courseId')?.invalid && (ticketForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <nz-option
+                *ngFor="let course of listCourse"
+                [nzValue]="course.id"
+                [nzLabel]="course.title"
+              ></nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(ticketForm.get('courseId')?.touched || isSubmit) && ticketForm.get('courseId')?.hasError('required')"
+          >
+            Tên khóa học không được để trống
+          </span>
         </div>
 
         <div nz-col [nzSpan]="9">

@@ -5,6 +5,7 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {debounceTime, distinctUntilChanged, fromEvent, map} from "rxjs";
 import {LandingPageService} from "../../services/landing-page.service";
 import {CourseService} from "../../../setting/services/course.service";
+import {config} from "../../../../shared/models/ckeditor";
 
 @Component({
   selector: 'app-create-landing-page',
@@ -21,20 +22,7 @@ export class CreateLandingPageComponent implements OnInit, AfterViewInit{
 
   landingPageForm!: FormGroup;
 
-  ckEditorConfig: any = {
-    toolbar: [
-      ['Source', 'Templates', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat'],
-      [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ],
-      [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ],
-      [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl' ],
-      [ 'Link', 'Unlink', 'Anchor' ],
-      [ 'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ],
-      [ 'Styles', 'Format', 'Font', 'FontSize' ],
-      [ 'TextColor', 'BGColor' ],
-      [ 'Maximize', 'ShowBlocks' ]
-    ],
-    extraAllowedContent: 'style meta script section svg;link[!href,target];a[!href,target]'
-  };
+  ckEditorConfig: any = config
 
   landingPageId = 0;
 

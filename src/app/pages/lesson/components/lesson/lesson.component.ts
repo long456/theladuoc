@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {COL_DATA_TYPE, filterItem} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {LessonService} from "../../services/lesson.service";
 import {NzModalService} from "ng-zorro-antd/modal";
+import {CreateLessonComponent} from "../../../class/components/create-lesson/create-lesson.component";
 
 @Component({
   selector: 'app-lesson',
@@ -36,6 +37,7 @@ export class LessonComponent implements OnInit{
     private message: NzMessageService,
     private lessonService: LessonService,
     private modal :NzModalService,
+    private viewContainerRef: ViewContainerRef
   ) {}
 
   ngOnInit() {
@@ -68,7 +70,18 @@ export class LessonComponent implements OnInit{
     )
   }
 
-  edit(data: any) {}
+  edit(data: any) {
+    this.modal.create<CreateLessonComponent>({
+      nzTitle: 'Sửa buổi học',
+      nzContent: CreateLessonComponent,
+      nzViewContainerRef: this.viewContainerRef,
+      nzData: {
+        isCreate: false,
+        data: data,
+      },
+      nzFooter: null
+    });
+  }
 
   delete() {
     if (this.itemSelectList.length === 0) {

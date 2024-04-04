@@ -22,6 +22,8 @@ export class CreateLessonComponent implements OnInit{
 
   datePipe = new DatePipe('en-US');
 
+  isCreate!: boolean;
+
   constructor(
     private fb: FormBuilder,
     private modal: NzModalRef,
@@ -34,7 +36,21 @@ export class CreateLessonComponent implements OnInit{
     this.lessonForm = this.fb.group({
       name: [null, [Validators.required]],
       duration: [null, [Validators.required]],
-    })
+    });
+
+    this.isCreate = this.nzModalData.isCreate;
+
+    if (!this.isCreate) {
+      const time = this.nzModalData.data.timeFrame.split(' - ')
+      const data = {
+        name: this.nzModalData.data.className,
+        duration: [
+          new Date(time[0]),
+          new Date(time[1])
+        ]
+      };
+      this.lessonForm.patchValue(data);
+    }
   }
 
   closeModal() {
@@ -52,27 +68,43 @@ export class CreateLessonComponent implements OnInit{
         endTime: this.datePipe.transform(this.lessonForm.value.duration[1], 'yyyy-MM-ddTHH:mm:ss') + 'Z',
       }
       delete data.duration
-      console.log(data)
-      this.lessonService.createLesson(data)
-        .pipe()
-        .subscribe({
-        next: value => {
-          console.log(value)
-          if(value.success) {
-            this.message.success(value.message);
+      if (this.isCreate) {
+        this.lessonService.createLesson(data).subscribe({
+          next: value => {
+            if(value.success) {
+              this.message.success(value.message);
+              this.isLoading = false;
+              this.closeModal();
+            } else {
+              this.message.error(value.errorMessages);
+              this.isLoading = false;
+              this.closeModal();
+            }
+          },
+          error: err => {
             this.isLoading = false;
-            this.closeModal();
-          } else {
-            this.message.error(value.errorMessages);
-            this.isLoading = false;
-            this.closeModal();
+            this.message.error(err);
           }
-        },
-        error: err => {
-          this.isLoading = false;
-          this.message.error(err.error);
-        }
-      })
+        })
+      } else {
+        this.lessonService.updateLesson(this.nzModalData.data.id, data).subscribe({
+          next: value => {
+            if(value.success) {
+              this.message.success(value.message);
+              this.isLoading = false;
+              this.closeModal();
+            } else {
+              this.message.error(value.errorMessages);
+              this.isLoading = false;
+              this.closeModal();
+            }
+          },
+          error: err => {
+            this.isLoading = false;
+            this.message.error(err);
+          }
+        })
+      }
     }
 
   }

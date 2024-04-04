@@ -117,7 +117,10 @@ export class ClassComponent implements OnInit {
       nzTitle: 'Tạo buổi học',
       nzContent: CreateLessonComponent,
       nzViewContainerRef: this.viewContainerRef,
-      nzData: data,
+      nzData: {
+        isCreate: true,
+        data: data,
+      },
       nzFooter: null
     });
   }
