@@ -8,6 +8,7 @@ import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzIconModule} from "ng-zorro-antd/icon";
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 import {
   AbstractControl,
   FormBuilder,
@@ -27,7 +28,7 @@ import {Router} from "@angular/router";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
   imports: [NzTabsModule, NzGridModule, NzDividerModule, NzInputModule, ReactiveFormsModule, CommonModule,
-    NzSelectModule, NzAvatarModule, NzButtonModule, NzDatePickerModule, NzIconModule],
+    NzSelectModule, NzAvatarModule, NzButtonModule, NzDatePickerModule, NzIconModule, NzUploadModule],
   standalone: true
 })
 export class ProfileComponent implements OnInit{
@@ -36,6 +37,8 @@ export class ProfileComponent implements OnInit{
   forgetPasswordForm!: FormGroup;
 
   userForm!: FormGroup;
+
+  file: any;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -168,5 +171,16 @@ export class ProfileComponent implements OnInit{
 
   navigateBack() {
     this.router.navigate(['/page']);
+  }
+
+  handleChange(e: any) {
+    let data = new FormData();
+    data.append('file', e.target.files[0])
+    console.log(data.getAll('file'))
+    this.authService.updateAvatar(e.target.files[0]).subscribe({
+      next: res =>{
+        console.log(res)
+      }
+    })
   }
 }

@@ -89,7 +89,15 @@
 
           <div nz-col nzSpan="8" class="user-avatar">
             <nz-avatar  [nzSize]="200" nzIcon="user" nzSrc="//zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
-            <button nz-button nzType="primary" nzShape="round" class="change-ava-btn">Thay ảnh đại diện</button>
+
+            <button
+              nz-button nzType="primary" nzShape="round" class="change-ava-btn"
+            >
+              Thay ảnh đại diện
+            </button>
+
+<!--            <input type="file" (change)="handleChange($event)" accept="image/*,.jpg,.jpeg">-->
+
           </div>
         </div>
       </form>

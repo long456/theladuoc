@@ -105,4 +105,10 @@ export class RegisterFormComponent implements OnInit{
       });
     }
   }
+
+  copyCode(data: any) {
+    let code = `onclick="showFormRegister(`+ data.id +`)"`;
+    navigator.clipboard.writeText(code);
+    this.message.success(code + ' đã được copy');
+  }
 }

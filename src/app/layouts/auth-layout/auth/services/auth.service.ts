@@ -47,5 +47,7 @@ export class AuthService {
     return this.http.post('User/update-password', data)
   }
 
-
+  updateAvatar(data: any): Observable<any>{
+    return this.http.post('User/update-avatar', {file: data})
+  }
 }
