@@ -39,6 +39,22 @@
       <table-column header="Điểm danh gần nhất" key="latestAttendance" [width]="'200px'"></table-column>
       <table-column header="Tổng học phí" key="totalPrice" [width]="'200px'"></table-column>
 
+      <table-column header="Tag" key="tagNote" [width]="'220px'">
+        <ng-template appCell let-data>
+          <nz-select style="display: block" nzPlaceHolder="Chọn tag" [ngModel]="data.tagNote"
+                     [nzCustomTemplate]="selectTag" nzBorderless (ngModelChange)="onTagChange($event, data)">
+            <nz-option *ngFor="let tag of listTag" nzCustomContent
+                       [nzValue]="tag.value" [nzLabel]="tag.title" [nzTitle]="tag.color">
+              <nz-tag [nzColor]="tag.color">{{tag.title}}</nz-tag>
+            </nz-option>
+          </nz-select>
+
+          <ng-template #selectTag let-selected>
+            <nz-tag [nzColor]="selected.nzTitle">{{selected.nzLabel}}</nz-tag>
+          </ng-template>
+        </ng-template>
+      </table-column>
+
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
           Chức năng

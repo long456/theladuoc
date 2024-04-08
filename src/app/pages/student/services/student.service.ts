@@ -100,4 +100,8 @@ export class StudentService {
   setPaymentCheck(data: any): Observable<any>{
     return this.http.post('UserAffiliate/update-payment-status', data)
   }
+
+  updateTag(data: any): Observable<any>{
+    return this.http.post('UserAffiliate/update-sale-note', data)
+  }
 }

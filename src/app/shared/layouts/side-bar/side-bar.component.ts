@@ -66,9 +66,9 @@ export class SideBarComponent {
           ]
         },
         {
-          name : 'Nhân viên',
+          name : 'Nhân sự',
           icon: '',
-          link: '',
+          link: 'page/staff',
         },
       ]
     },
