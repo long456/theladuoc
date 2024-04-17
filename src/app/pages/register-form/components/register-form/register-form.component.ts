@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {COL_DATA_TYPE} from "../../../../shared/models/Table";
 import {Router} from "@angular/router";
 import {RegisterFormService} from "../../services/register-form.service";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {NzModalService} from "ng-zorro-antd/modal";
+import {AttachTicketComponent} from "../attach-ticket/attach-ticket.component";
+
 
 @Component({
   selector: 'app-register-form',
@@ -33,7 +35,8 @@ export class RegisterFormComponent implements OnInit{
     private router: Router,
     private registerFormService: RegisterFormService,
     private message: NzMessageService,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private viewContainerRef: ViewContainerRef
   ) {
   }
 
@@ -110,5 +113,18 @@ export class RegisterFormComponent implements OnInit{
     let code = `onclick="showFormRegister(`+ data.id +`)"`;
     navigator.clipboard.writeText(code);
     this.message.success(code + ' đã được copy');
+  }
+
+  attachTicket(data: any) {
+    this.modal.create<AttachTicketComponent>({
+      nzTitle: 'Gắn Vé',
+      nzContent: AttachTicketComponent,
+      nzViewContainerRef: this.viewContainerRef,
+      nzData: {
+        isCreate: true,
+        data: data,
+      },
+      nzFooter: null
+    });
   }
 }

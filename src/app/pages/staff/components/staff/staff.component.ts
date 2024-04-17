@@ -21,7 +21,20 @@ export class StaffComponent implements OnInit{
 
   isExpand = false;
 
-  listOfColumn: filterItem[] = [];
+  listOfColumn: filterItem[] = [
+    {
+      title: 'Tên nhân viên',
+      name: 'fullName',
+    },
+    {
+      title: 'Email',
+      name: 'email',
+    },
+    {
+      title: 'SĐT',
+      name: 'mobile',
+    },
+  ];
 
   staff$ !: Observable<{
     rows: any[],
@@ -56,7 +69,7 @@ export class StaffComponent implements OnInit{
           .pipe(
             map((value) => {
               return {
-                rows: value.data.courseList,
+                rows: value.data.users,
                 page: value.data.paginationInfo.pageCurrent,
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
@@ -78,6 +91,7 @@ export class StaffComponent implements OnInit{
   }
 
   handleFilterForm(event: any) {
+    console.log(event)
     this.filterList$.next(event)
   }
 
@@ -86,10 +100,16 @@ export class StaffComponent implements OnInit{
   }
 
   create() {
-
+    this.router.navigate(['/page/staff/create'])
   }
 
   delete() {}
 
-  edit(data: any) {}
+  edit(data: any) {
+    this.router.navigate(['/page/staff/'+ data.id])
+  }
+
+  log(data: any) {
+    console.log(data)
+  }
 }

@@ -37,6 +37,10 @@ const routes: Routes = [
         path: 'staff',
         loadChildren: () => import('./pages/staff/staff.module').then(m => m.StaffModule),
       },
+      {
+        path: 'payment-auth',
+        loadChildren: () => import('./pages/payment-auth/payment-auth.module').then(m => m.PaymentAuthModule),
+      },
     ]
   },
 ];

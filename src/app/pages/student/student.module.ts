@@ -17,6 +17,7 @@ import { PaymentCheckComponent } from './components/payment-check/payment-check.
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     NzInputNumberModule,
     FormsModule,
     ReactiveFormsModule,
+    NzUploadModule
+
   ]
 })
 export class StudentModule { }

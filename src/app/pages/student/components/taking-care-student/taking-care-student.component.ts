@@ -132,7 +132,7 @@ export class TakingCareStudentComponent implements OnInit{
       name: 'organizationName',
     },
     {
-      title: 'Tag',
+      title: 'thẻ tag',
       name: 'tagNote',
       type: "select",
       data: [
@@ -234,6 +234,15 @@ export class TakingCareStudentComponent implements OnInit{
 
   }
 
+  createFormData(data: any) {
+
+    const formData = new FormData();
+    for ( let key in data ) {
+      formData.append(key, data[key]);
+    }
+    return formData
+  }
+
   paymentCheck(data : any) {
     this.modal.create<PaymentCheckComponent>({
       nzTitle: 'Xác thực thanh toán',
@@ -245,7 +254,8 @@ export class TakingCareStudentComponent implements OnInit{
       nzOnOk: instance => {
         const data = instance.paymentForm.value;
         delete data.name
-        this.studentService.setPaymentCheck(data).subscribe({
+        const value = this.createFormData(data)
+        this.studentService.setPaymentCheck(value).subscribe({
           next: res => {
             if (res.success) {
               this.pageSize$.next(10)

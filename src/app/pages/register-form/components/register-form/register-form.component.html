@@ -21,10 +21,10 @@
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
       <table-column header="Tên form đăng ký" key="title" [width]="'200px'"></table-column>
-      <table-column header="Mã form đăng ký" key="teacherName" [width]="'150px'"></table-column>
+      <table-column header="Tên tổ chức" key="organzinationName" [width]="'200px'"></table-column>
+      <table-column header="Tên diễn giả" key="speakerName" [width]="'200px'"></table-column>
+      <table-column header="Vé khóa học" key="ticketName" [width]="'200px'"></table-column>
       <table-column header="Trạng thái" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Hiển thị</span>
@@ -38,7 +38,6 @@
         </ng-template>
 
         <ng-template appCell let-data>
-<!--          <span class="custom-action" (click)="edit(data)">Sửa</span>-->
           <span class="custom-action" (click)="edit(data)"
                 nz-tooltip nzTooltipTitle="Chỉnh sửa form đăng ký">
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
@@ -47,6 +46,16 @@
           <span class="custom-action" (click)="copyCode(data)"
                 nz-tooltip nzTooltipTitle="Copy code">
             <span nz-icon nzType="copy" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="attachTicket(data)"
+                nz-tooltip nzTooltipTitle="Gắn vé">
+            <span nz-icon nzType="plus-square" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action"
+                nz-tooltip nzTooltipTitle="Gỡ vé">
+            <span nz-icon nzType="close" nzTheme="outline" class="custom-icon"></span>
           </span>
         </ng-template>
       </table-column>

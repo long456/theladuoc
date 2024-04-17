@@ -61,7 +61,6 @@ export class LandingPageComponent implements OnInit{
   }
 
   getItemSelection(e: any) {
-    console.log(e)
     this.itemSelectList = e;
   }
 
@@ -99,5 +98,9 @@ export class LandingPageComponent implements OnInit{
 
   edit(data: any) {
     this.router.navigate(['/page/setting/landing-page/' + data.id])
+  }
+
+  attachClass() {
+
   }
 }

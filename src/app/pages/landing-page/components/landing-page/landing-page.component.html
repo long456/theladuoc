@@ -39,7 +39,20 @@
         </ng-template>
 
         <ng-template appCell let-data>
-          <span class="custom-action" (click)="edit(data)">Sửa</span>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Chỉnh sửa landing page">
+            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action"
+                nz-tooltip nzTooltipTitle="Gắn lớp">
+            <span nz-icon nzType="plus-square" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action"
+                nz-tooltip nzTooltipTitle="Gỡ lớp">
+            <span nz-icon nzType="close" nzTheme="outline" class="custom-icon"></span>
+          </span>
         </ng-template>
       </table-column>
     </app-table>

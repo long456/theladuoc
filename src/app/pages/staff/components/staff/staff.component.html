@@ -13,7 +13,7 @@
 
 
     <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>
+<!--    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>-->
 
     <app-table
       [rows]="staff.rows"
@@ -26,19 +26,25 @@
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
     >
-      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+<!--      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>-->
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="Tên nhân viên" key="fullName" [width]="'200px'"></table-column>
       <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
-      <table-column header="Tên khóa học" key="title" [width]="'200px'"></table-column>
-      <table-column header="Mã khóa học" key="courseCode" [width]="'100%'"></table-column>
-      <table-column header="Trạng thái" key="status" [width]="'180px'">
+      <table-column header="Email" key="email" [width]="'200px'"></table-column>
+      <table-column header="SĐT" key="mobile" [width]="'200px'"></table-column>
+      <table-column header="Nhóm quyền" key="courseCode" [width]="'100%'">
         <ng-template appCell let-data>
-          <span class="text-valid" *ngIf="data.status">Hiển thị</span>
-          <span class="text-invalid" *ngIf="!data.status">Không hiển thị</span>
+          <span *ngFor="let role of data.roles; index as i" (click)="log(data)">
+            <span *ngIf="i <= 2">
+              {{role.roleName}},
+            </span>
+            <span *ngIf="i > 2">
+              và {{data.roles.length - 3}} quyền nữa
+            </span>
+          </span>
         </ng-template>
       </table-column>
+
 
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>

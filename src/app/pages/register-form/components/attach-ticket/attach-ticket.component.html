@@ -1,0 +1,14 @@
+<nz-select
+  [(ngModel)]="selectedTicket"
+  (nzScrollToBottom)="loadMore()"
+  nzPlaceHolder="Chọn vé"
+  nzAllowClear
+  [nzDropdownRender]="renderTemplate"
+>
+
+    <nz-option *ngFor="let op of optionList" [nzValue]="op.id" [nzLabel]="op.name"></nz-option>
+
+</nz-select>
+<ng-template #renderTemplate>
+  <nz-spin *ngIf="loading"></nz-spin>
+</ng-template>

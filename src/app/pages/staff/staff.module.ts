@@ -5,12 +5,15 @@ import { StaffComponent } from './components/staff/staff.component';
 import {SharedModule} from "../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
-
-
+import { CreateStaffComponent } from './components/create-staff/create-staff.component';
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzSwitchModule} from "ng-zorro-antd/switch";
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 
 @NgModule({
   declarations: [
-    StaffComponent
+    StaffComponent,
+    CreateStaffComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +21,10 @@ import {NzCollapseModule} from "ng-zorro-antd/collapse";
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    NzCollapseModule
+    NzCollapseModule,
+    NzSelectModule,
+    NzSwitchModule,
+    NzPopoverModule,
   ]
 })
 export class StaffModule { }

@@ -13,8 +13,8 @@ export class CourseService {
 
   getAllCourse(page?: any, pageSize?: any, filter?: any): Observable<any>{
     let option = {
-      PageIndex: page = 1,
-      pageSize: pageSize = 10,
+      PageIndex: page,
+      pageSize: pageSize,
     }
 
     if (filter) {

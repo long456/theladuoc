@@ -48,8 +48,8 @@ export class FilterFormComponent implements OnInit{
         data['startDate'] = ''
         data['endDate'] = ''
       }
+      delete data[isDateRange[0].name];
     }
-    delete data[isDateRange[0].name];
 
     for (const prop in data) {
       if (data[prop] === '' || data[prop] === null) {

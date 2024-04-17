@@ -66,7 +66,7 @@ export class StudyingStudentComponent implements OnInit{
       name: 'totalPrice',
     },
     {
-      title: 'Tag',
+      title: 'Thẻ tag',
       name: 'tagNote',
       type: "select",
       data: [

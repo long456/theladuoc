@@ -66,6 +66,11 @@ export class SideBarComponent {
           ]
         },
         {
+          name : 'Xác thực thanh toán',
+          icon: '',
+          link: 'page/payment-auth',
+        },
+        {
           name : 'Nhân sự',
           icon: '',
           link: 'page/staff',

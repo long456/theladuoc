@@ -37,11 +37,11 @@
             nz-input formControlName="zaloLink"
             [nzStatus]="(this.builderForm.get('zaloLink')?.invalid && (builderForm.get('zaloLink')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-                *ngIf="(builderForm.get('zaloLink')?.touched || isSubmit)  && builderForm.get('zaloLink')?.hasError('pattern')"
-          >
-            Đường dẫn nhóm zalo không đúng định dạng
-          </span>
+<!--          <span class="text-danger"-->
+<!--                *ngIf="(builderForm.get('zaloLink')?.touched || isSubmit)  && builderForm.get('zaloLink')?.hasError('pattern')"-->
+<!--          >-->
+<!--            Đường dẫn nhóm zalo không đúng định dạng-->
+<!--          </span>-->
         </div>
 
         <div nz-col [nzSpan]="9" *ngIf="!isCreate">
@@ -91,7 +91,7 @@
             Mô tả
           </span>
 
-          <textarea nz-input formControlName="title"></textarea>
+          <textarea nz-input formControlName="description"></textarea>
         </div>
 
         <div nz-col [nzSpan]="18">

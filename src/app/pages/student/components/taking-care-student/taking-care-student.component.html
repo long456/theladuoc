@@ -36,6 +36,21 @@
           <span class="text-valid" *ngIf="data.isPay === 2">Đã thanh toán</span>
         </ng-template>
       </table-column>
+      <table-column header="Thẻ tag" key="tagNote" [width]="'220px'">
+        <ng-template appCell let-data>
+          <nz-select style="display: block" nzPlaceHolder="Chọn thẻ tag" [ngModel]="data.tagNote"
+                     [nzCustomTemplate]="selectTag" nzBorderless (ngModelChange)="onTagChange($event, data)">
+            <nz-option *ngFor="let tag of listTag" nzCustomContent
+                       [nzValue]="tag.value" [nzLabel]="tag.title" [nzTitle]="tag.color">
+              <nz-tag [nzColor]="tag.color">{{tag.title}}</nz-tag>
+            </nz-option>
+          </nz-select>
+
+          <ng-template #selectTag let-selected>
+            <nz-tag [nzColor]="selected.nzTitle">{{selected.nzLabel}}</nz-tag>
+          </ng-template>
+        </ng-template>
+      </table-column>
       <table-column header="Tên học viên" key="name" [width]="'180px'"></table-column>
       <table-column header="Số điện thoại" key="mobile" [width]="'120px'"></table-column>
       <table-column header="Email" key="email" [width]="'200px'"></table-column>
@@ -44,6 +59,7 @@
       <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
       <table-column header="Tên diễn giả" key="lecturerName" [width]="'200px'"></table-column>
       <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="Tên lớp học" key="className" [width]="'200px'"></table-column>
       <table-column header="Tên landing page" key="landingPageName" [width]="'200px'"></table-column>
       <table-column header="Số điểm" key="title" [width]="'200px'"></table-column>
       <table-column header="Nhân viên chăm sóc" key="caregiverName" [width]="'200px'"></table-column>
@@ -60,23 +76,6 @@
           <span class="text-invalid" *ngIf="!data.isAccount">Chưa có tài khoản</span>
         </ng-template>
       </table-column>
-
-      <table-column header="Tag" key="tagNote" [width]="'220px'">
-        <ng-template appCell let-data>
-          <nz-select style="display: block" nzPlaceHolder="Chọn tag" [ngModel]="data.tagNote"
-                     [nzCustomTemplate]="selectTag" nzBorderless (ngModelChange)="onTagChange($event, data)">
-            <nz-option *ngFor="let tag of listTag" nzCustomContent
-                       [nzValue]="tag.value" [nzLabel]="tag.title" [nzTitle]="tag.color">
-              <nz-tag [nzColor]="tag.color">{{tag.title}}</nz-tag>
-            </nz-option>
-          </nz-select>
-
-          <ng-template #selectTag let-selected>
-            <nz-tag [nzColor]="selected.nzTitle">{{selected.nzLabel}}</nz-tag>
-          </ng-template>
-        </ng-template>
-      </table-column>
-
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
           Chức năng

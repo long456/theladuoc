@@ -49,9 +49,10 @@ export class CreateFormComponent implements OnInit{
       hasAddress: [false],
       hasDemand: [false],
       thankYouHtml: [''],
-      zaloLink: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
+      zaloLink: [null],
       redirectLink: [null],
       courseId: [null,[Validators.required]],
+      description: [null],
       status: [1]
     })
 

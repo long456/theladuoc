@@ -27,7 +27,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       url: apiURL + req.url,
       setHeaders: {
         Authorization:  `Bearer ${localStorage.getItem('tokenKey')}`,
-        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/json',
       }
     });
 

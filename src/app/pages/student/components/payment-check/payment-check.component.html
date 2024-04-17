@@ -13,21 +13,7 @@
 
       <div nz-col [nzSpan]="12">
         <span>
-          Trạng thái
-        </span>
-
-        <div>
-          <nz-select class="with-100" formControlName="isPay">
-            <nz-option [nzValue]="0" nzLabel="Chưa thanh toán"></nz-option>
-<!--            <nz-option [nzValue]="1" nzLabel="Thanh toán một phần"></nz-option>-->
-            <nz-option [nzValue]="2" nzLabel="Đã thanh toán"></nz-option>
-          </nz-select>
-        </div>
-      </div>
-
-      <div nz-col [nzSpan]="12">
-        <span>
-          Số tiền
+          Số tiền phải thanh toán
         </span>
 
         <div>
@@ -40,6 +26,49 @@
             [nzParser]="parserVnd"
           ></nz-input-number>
         </div>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <span>
+          Số tiền đã thanh toán
+        </span>
+
+        <div>
+          <nz-input-number
+            class="with-100"
+            formControlName="amountPaid"
+            [nzMin]="0"
+            [nzStep]="1000"
+            [nzFormatter]="formatterVnd"
+            [nzParser]="parserVnd"
+          ></nz-input-number>
+        </div>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <span>
+          Trạng thái
+        </span>
+
+        <div>
+          <nz-select class="with-100" formControlName="isPay">
+            <nz-option [nzValue]="0" nzLabel="Chưa thanh toán"></nz-option>
+            <nz-option [nzValue]="2" nzLabel="Thanh toán một phần"></nz-option>
+            <nz-option [nzValue]="1" nzLabel="Đã thanh toán"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+
+      <div nz-col [nzSpan]="24">
+        <span>Upload ảnh ủy nhiệm chi</span>
+        <label for="file" class="upload">
+          <span nz-icon nzType="upload" nzTheme="outline"></span>
+          Ảnh ủy nhiệm chi
+          <div class="file-name">{{nameFilePreview}}</div>
+        </label>
+        <input type="file" (change)="uploadFile($event)"
+               accept="image/png, image/gif, image/jpeg"
+               class="upload-file" name="file" id="file">
       </div>
     </div>
   </form>
