@@ -156,6 +156,11 @@ export class SideBarComponent {
               link: 'page/setting/register-form',
             },
             {
+              name : 'Email SMTP',
+              icon: '',
+              link: 'page/setting/email-account',
+            },
+            {
               name : 'Email',
               icon: '',
               children: [

@@ -51,7 +51,7 @@ export class ListConfigComponent implements OnInit {
               }
             }),
             catchError(err => {
-              this.message.error('Lỗi load dữ liệu email hệ thống')
+              this.message.error('Lỗi load dữ liệu website')
               return of(err.message)
             })
           )

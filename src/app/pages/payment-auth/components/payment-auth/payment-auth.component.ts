@@ -65,11 +65,11 @@ export class PaymentAuthComponent implements OnInit{
       value: true,
       data: [
         {
-          label: 'Đã thanh toán',
+          label: 'Đã xác thực',
           key: true
         },
         {
-          label: 'Chưa thanh toán',
+          label: 'Chưa xác thực',
           key: false
         }
       ]

@@ -21,11 +21,12 @@
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="speakerName" [width]="'200px'"></table-column>
-      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
-      <table-column header="Tên landing page" key="name" [width]="'200px'"></table-column>
       <table-column header="Mã landing page" key="landingPageCode" [width]="'200px'"></table-column>
+      <table-column header="Tên landing page" key="name" [width]="'200px'"></table-column>
+      <table-column header="Tên lớp học" key="className" [width]="'200px'"></table-column>
+      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="Tên diễn giả" key="speakerName" [width]="'200px'"></table-column>
+      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
       <table-column header="Trạng thái" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Hiển thị</span>
@@ -44,12 +45,12 @@
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
           </span>
 
-          <span class="custom-action"
+          <span class="custom-action" (click)="attachClass(data)" *ngIf="!data.classId"
                 nz-tooltip nzTooltipTitle="Gắn lớp">
-            <span nz-icon nzType="plus-square" nzTheme="outline" class="custom-icon"></span>
+            <span nz-icon nzType="apartment" nzTheme="outline" class="custom-icon"></span>
           </span>
 
-          <span class="custom-action"
+          <span class="custom-action" (click)="removeClass(data)" *ngIf="data.classId"
                 nz-tooltip nzTooltipTitle="Gỡ lớp">
             <span nz-icon nzType="close" nzTheme="outline" class="custom-icon"></span>
           </span>

@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {COL_DATA_TYPE} from "../../../../shared/models/Table";
 import {BehaviorSubject, combineLatest, delay, map, mergeMap, Observable, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {LandingPageService} from "../../services/landing-page.service";
+import {AttachTicketComponent} from "../../../register-form/components/attach-ticket/attach-ticket.component";
+import {AttachClassComponent} from "../attach-class/attach-class.component";
+import {ClassService} from "../../../class/services/class.service";
 
 @Component({
   selector: 'app-landing-page',
@@ -32,7 +35,9 @@ export class LandingPageComponent implements OnInit{
     private router: Router,
     private message: NzMessageService,
     private modal: NzModalService,
-    private landingPageService: LandingPageService
+    private landingPageService: LandingPageService,
+    private viewContainerRef: ViewContainerRef,
+    private classService: ClassService,
   ) {}
 
   ngOnInit() {
@@ -100,7 +105,39 @@ export class LandingPageComponent implements OnInit{
     this.router.navigate(['/page/setting/landing-page/' + data.id])
   }
 
-  attachClass() {
+  attachClass(data: any) {
+    this.modal.create<AttachClassComponent>({
+      nzTitle: 'Gắn Lớp',
+      nzContent: AttachClassComponent,
+      nzViewContainerRef: this.viewContainerRef,
+      nzData: data,
+      nzFooter: null,
+    });
 
+    this.modal.afterAllClose.subscribe({
+      next: value => {
+        this.pageSize$.next(10)
+      }
+    })
   }
+
+  removeClass(data: any) {
+    const landingPageId = {
+      landingPageId : data.id
+    }
+    this.classService.removeLandingPage(landingPageId).subscribe({
+      next: res => {
+        if (res.success) {
+          this.message.success(res.messages);
+          this.pageSize$.next(10)
+        } else {
+          this.message.error(res.errorMessages)
+        }
+      },
+      error: err => {
+        this.message.error(err)
+      }
+    })
+  }
+
 }

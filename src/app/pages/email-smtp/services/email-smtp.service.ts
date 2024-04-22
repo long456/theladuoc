@@ -5,13 +5,13 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class WebConfigService {
+export class EmailSmtpService {
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  getListConfig(page?: any, pageSize?: any, filter?: any): Observable<any>{
+  getListEmailAccount(page?: any, pageSize?: any, filter?: any): Observable<any>{
     let option = {
       PageIndex: page,
       pageSize: pageSize,
@@ -24,14 +24,15 @@ export class WebConfigService {
         pageSize: pageSize,
       }
     }
-    return this.http.get('WebsiteConfig', {params: option});
+
+    return this.http.get('EmailAccount', {params: option})
   }
 
-  updateWebConfig(data: any, id: number): Observable<any>{
-    return this.http.put('Website/' + id, data);
-  }
+  // createEmailAccount(): Observable<any> {
+  //   return this.http.post()
+  // }
 
-  getWebConfigById(id: number): Observable<any>{
-    return this.http.get('Website/' + id)
+  softDeleteEmailAccount(id: number): Observable<any>{
+    return this.http.delete('EmailAccount/' + id)
   }
 }

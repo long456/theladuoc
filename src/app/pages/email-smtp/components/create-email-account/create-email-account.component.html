@@ -1,0 +1,96 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới email smtp' : 'Chỉnh sửa email smtp'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="emailAccountForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Email
+          </span>
+
+          <input
+            nz-input autofocus formControlName="userId"
+          >
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên email
+          </span>
+
+          <input
+            nz-input formControlName="name"
+          >
+        </div>
+
+        <div nz-col [nzSpan]="8" >
+          <div class="text-label">SSL</div>
+          <nz-switch formControlName="ssl">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Địa chỉ email
+          </span>
+
+          <input
+            nz-input formControlName="addressEmail"
+          >
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Host
+          </span>
+
+          <input
+            nz-input formControlName="host"
+          >
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên đăng nhập
+          </span>
+
+          <input
+            nz-input formControlName="userName"
+          >
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Mật khẩu
+          </span>
+
+          <input
+            nz-input formControlName="password"
+          >
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Port</div>
+          <nz-input-number
+            style="width: 100%"
+            [nzMin]="0" [nzStep]="1"
+            formControlName="no"></nz-input-number>
+        </div>
+
+
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+
+<div nz-row [nzGutter]=[16,16]>
+  <div nz-col [nzSpan]="12">
+    <label class="modal-title">Chọn lớp để gắn</label>
+    <nz-select style="display: block"
+      [(ngModel)]="selectedClass"
+      (nzScrollToBottom)="loadMore()"
+      nzPlaceHolder="Chọn lớp"
+      nzAllowClear
+      [nzDropdownRender]="renderTemplate"
+    >
+
+      <nz-option *ngFor="let op of classList" [nzValue]="op.id" [nzLabel]="op.className"></nz-option>
+
+    </nz-select>
+    <ng-template #renderTemplate>
+      <nz-spin *ngIf="loading"></nz-spin>
+    </ng-template>
+  </div>
+
+  <div nz-col [nzSpan]="24" class="btn-group">
+    <button nz-button (click)="closeModal()">
+      Hủy
+    </button>
+    <button nz-button nzType="primary" [nzLoading]="loading" (click)="attachClass()">
+      Xác nhận
+    </button>
+  </div>
+</div>

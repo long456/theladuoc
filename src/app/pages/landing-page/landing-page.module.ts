@@ -9,13 +9,15 @@ import {NzSwitchModule} from "ng-zorro-antd/switch";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {CKEditorModule} from "ckeditor4-angular";
+import { AttachClassComponent } from './components/attach-class/attach-class.component';
 
 
 
 @NgModule({
   declarations: [
     LandingPageComponent,
-    CreateLandingPageComponent
+    CreateLandingPageComponent,
+    AttachClassComponent
   ],
   imports: [
     CommonModule,
