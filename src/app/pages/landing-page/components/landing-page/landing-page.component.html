@@ -24,6 +24,18 @@
       <table-column header="Mã landing page" key="landingPageCode" [width]="'200px'"></table-column>
       <table-column header="Tên landing page" key="name" [width]="'200px'"></table-column>
       <table-column header="Tên lớp học" key="className" [width]="'200px'"></table-column>
+      <table-column header="Tên form" key="formRegisterList" [width]="'200px'">
+        <ng-template appCell let-data>
+          <span *ngFor="let form of data.formRegisterList; index as i">
+            <span *ngIf="i <= 2">
+              {{form.title}},
+            </span>
+            <span *ngIf="i > 2">
+              và {{data.formRegisterList.length - 3}} form nữa
+            </span>
+          </span>
+        </ng-template>
+      </table-column>
       <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
       <table-column header="Tên diễn giả" key="speakerName" [width]="'200px'"></table-column>
       <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
@@ -53,6 +65,11 @@
           <span class="custom-action" (click)="removeClass(data)" *ngIf="data.classId"
                 nz-tooltip nzTooltipTitle="Gỡ lớp">
             <span nz-icon nzType="close" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="attachForm(data)"
+                nz-tooltip nzTooltipTitle="Gắn form">
+            <span nz-icon nzType="form" nzTheme="outline" class="custom-icon"></span>
           </span>
         </ng-template>
       </table-column>

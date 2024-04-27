@@ -8,6 +8,7 @@ import {LandingPageService} from "../../services/landing-page.service";
 import {AttachTicketComponent} from "../../../register-form/components/attach-ticket/attach-ticket.component";
 import {AttachClassComponent} from "../attach-class/attach-class.component";
 import {ClassService} from "../../../class/services/class.service";
+import {AttachFormComponent} from "../attach-form/attach-form.component";
 
 @Component({
   selector: 'app-landing-page',
@@ -136,6 +137,22 @@ export class LandingPageComponent implements OnInit{
       },
       error: err => {
         this.message.error(err)
+      }
+    })
+  }
+
+  attachForm(data: any) {
+    this.modal.create<AttachFormComponent>({
+      nzTitle: 'Gắn Form',
+      nzContent: AttachFormComponent,
+      nzViewContainerRef: this.viewContainerRef,
+      nzData: data,
+      nzFooter: null,
+    });
+
+    this.modal.afterAllClose.subscribe({
+      next: value => {
+        this.pageSize$.next(10)
       }
     })
   }

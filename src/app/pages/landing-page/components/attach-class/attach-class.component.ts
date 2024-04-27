@@ -33,7 +33,9 @@ export class AttachClassComponent implements OnInit{
   getListClass() {
       this.classService.getClassByCourse(this.nzModalData.courseId).subscribe({
         next: res => {
-          this.classList = res
+          if (res) {
+            this.classList = res
+          }
         }
       })
   }

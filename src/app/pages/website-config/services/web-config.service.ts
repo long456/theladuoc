@@ -28,10 +28,10 @@ export class WebConfigService {
   }
 
   updateWebConfig(data: any, id: number): Observable<any>{
-    return this.http.put('Website/' + id, data);
+    return this.http.put('WebsiteConfig/' + id, data);
   }
 
   getWebConfigById(id: number): Observable<any>{
-    return this.http.get('Website/' + id)
+    return this.http.get('WebsiteConfig/' + id)
   }
 }

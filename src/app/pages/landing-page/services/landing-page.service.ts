@@ -34,4 +34,8 @@ export class LandingPageService {
   softDeleteLandingPage(data: any): Observable<any>{
     return this.http.delete('LandingPage/soft-delete' , {body: data})
   }
+
+  attachForm(data: any, landingPageId: number): Observable<any>{
+    return this.http.patch('LandingPage/update-form-register', data, {params: {landingPageId: landingPageId}})
+  }
 }

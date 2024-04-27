@@ -52,7 +52,7 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
       registerPoint: [0],
       directReferralPoint: [0],
       indirectReferralPoint: [0],
-      coursePrice: [0],
+      price: [0],
       referralHtmlTop:  [''],
       referralHtmlBottom: [''],
     })
@@ -63,7 +63,13 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
         this.courseId = id;
         this.courseService.getCourseById(id).subscribe({
           next: res => {
-            this.courseForm.patchValue(res)
+            if (res) {
+              const data = {
+                ...res,
+                price: res.coursePrice,
+              }
+              this.courseForm.patchValue(data)
+            }
           }
         })
       })
@@ -98,7 +104,7 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
         teacherId: parseInt(this.courseForm.get('teacherId')?.value),
         status: this.courseForm.get('status')?.value ? 1 : 0,
       }
-
+      console.log(data)
       if (this.isCreate) {
         this.courseService.createCourse(data).subscribe({
           next: res => {

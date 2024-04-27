@@ -7,6 +7,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     FormsModule,
     ReactiveFormsModule,
     NzSwitchModule,
-    NzInputNumberModule
+    NzInputNumberModule,
+    NzSelectModule
   ]
 })
 export class EmailSmtpModule { }

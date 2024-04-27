@@ -6,32 +6,32 @@ export const Tag = [
   },
   {
     title: 'Không nghe máy lần 2',
-    color: 'red',
+    color: 'volcano',
     value: 2,
   },
   {
     title: 'Sai số điện thoại',
-    color: 'volcano',
+    color: 'gold',
     value: 3,
   },
   {
     title: 'Khách hàng chặn zalo',
-    color: 'orange',
+    color: 'green',
     value: 4,
   },
   {
     title: 'Đã gửi tin nhắn zalo',
-    color: 'lime',
+    color: 'blue',
     value: 5,
   },
   {
     title: 'Không có nhu cầu',
-    color: 'geekblue',
+    color: 'purple',
     value: 6,
   },
   {
     title: 'Hẹn chuyển khoản',
-    color: 'green',
+    color: 'geekblue',
     value: 7,
   },
 ]

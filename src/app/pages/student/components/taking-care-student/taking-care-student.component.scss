@@ -23,7 +23,8 @@
 
 .custom-action{
   cursor: pointer;
-  padding-right: 5px;
+  font-size: 18px;
+  padding-right: 8px;
   &:hover{
     color: #1677ff;
   }
@@ -37,6 +38,21 @@
     width: 100%;
   }
   border-radius: 4px;
+}
+
+.take-note{
+  border: none;
+  resize: none;
+  height: 90%;
+}
+
+.take-note-btn{
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  button{
+    margin-left: 8px;
+  }
 }
 
 

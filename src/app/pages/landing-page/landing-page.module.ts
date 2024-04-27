@@ -10,6 +10,7 @@ import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {CKEditorModule} from "ckeditor4-angular";
 import { AttachClassComponent } from './components/attach-class/attach-class.component';
+import { AttachFormComponent } from './components/attach-form/attach-form.component';
 
 
 
@@ -17,7 +18,8 @@ import { AttachClassComponent } from './components/attach-class/attach-class.com
   declarations: [
     LandingPageComponent,
     CreateLandingPageComponent,
-    AttachClassComponent
+    AttachClassComponent,
+    AttachFormComponent
   ],
   imports: [
     CommonModule,

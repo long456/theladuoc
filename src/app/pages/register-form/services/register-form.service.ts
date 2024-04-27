@@ -19,6 +19,10 @@ export class RegisterFormService {
     return this.http.get('FormRegister', {params: data});
   }
 
+  getAllFormByCourse(courseId: number): Observable<any>{
+    return this.http.get('FormRegister/get-list-form-register-by-course/' + courseId)
+  }
+
   createForm(data: any): Observable<any> {
     return this.http.post('FormRegister', data);
   }
@@ -34,4 +38,13 @@ export class RegisterFormService {
   updateFormDataById(id: number, data: any): Observable<any>{
     return this.http.put('FormRegister/' + id, data)
   }
+
+  attachTicket(data: any): Observable<any>{
+    return this.http.patch('FormRegister/add-ticket', null, {params: data})
+  }
+
+  removeAttachTicket(data: any): Observable<any>{
+    return this.http.patch('FormRegister/remove-ticket', null, {params: data})
+  }
+
 }

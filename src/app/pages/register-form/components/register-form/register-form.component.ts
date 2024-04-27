@@ -126,5 +126,31 @@ export class RegisterFormComponent implements OnInit{
       },
       nzFooter: null
     });
+
+    this.modal.afterAllClose.subscribe({
+      next: value => {
+        this.pageSize$.next(10)
+      }
+    })
+  }
+
+  removeAttachTicket(data: any):void {
+    const formRegisterId = {
+      formRegisterId: data.id
+    }
+
+    this.registerFormService.removeAttachTicket(formRegisterId).subscribe({
+      next: res => {
+        if (res.success) {
+          this.message.success(res.messages);
+          this.pageSize$.next(10)
+        } else {
+          this.message.error(res.errorMessages)
+        }
+      },
+      error: err => {
+        this.message.error(err)
+      }
+    })
   }
 }

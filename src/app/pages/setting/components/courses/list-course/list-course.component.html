@@ -29,10 +29,15 @@
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
       <table-column header="Tên khóa học" key="title" [width]="'200px'"></table-column>
-      <table-column header="Mã khóa học" key="courseCode" [width]="'100%'"></table-column>
+      <table-column header="Giá khóa học" key="coursePrice" [width]="'200px'">
+        <ng-template appCell let-data>
+          {{data.coursePrice + ' VND'}}
+        </ng-template>
+      </table-column>
+      <table-column header="Mã khóa học" key="courseCode" [width]="'300px'"></table-column>
+      <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
+      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
       <table-column header="Trạng thái" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Hiển thị</span>

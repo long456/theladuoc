@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewContainerRef} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {COL_DATA_TYPE, FIX_COLUMN, filterItem} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {NzMessageService} from "ng-zorro-antd/message";
@@ -7,6 +7,7 @@ import {NzModalService} from "ng-zorro-antd/modal";
 import {DetailStudentComponent} from "../detail-student/detail-student.component";
 import {PaymentCheckComponent} from "../payment-check/payment-check.component";
 import {Tag} from "../../models/tag";
+import {NzDrawerRef, NzDrawerService} from "ng-zorro-antd/drawer";
 
 @Component({
   selector: 'app-taking-care-student',
@@ -184,11 +185,19 @@ export class TakingCareStudentComponent implements OnInit{
 
   listTag = Tag;
 
+  note: string = '';
+
+  @ViewChild('drawerTemplate', { static: false }) drawerTemplate?: TemplateRef<{
+    $implicit: { value: string };
+    drawerRef: NzDrawerRef<string>;
+  }>;
+
   constructor(
     private message: NzMessageService,
     private studentService: StudentService,
     private modal: NzModalService,
-    private viewContainerRef: ViewContainerRef
+    private viewContainerRef: ViewContainerRef,
+    private drawerService: NzDrawerService
   ) {
   }
 
@@ -231,7 +240,7 @@ export class TakingCareStudentComponent implements OnInit{
   }
 
   detail(data: any) {
-
+    this.message.error('Chức năng này hiện chưa hoàn thiện, xin vui lòng thử lại sau!')
   }
 
   createFormData(data: any) {
@@ -273,16 +282,49 @@ export class TakingCareStudentComponent implements OnInit{
     const tag = {
       userAffId: data.id,
       tagNote: e,
-      saleNote: "",
+      saleNote: data.saleNote,
     }
     this.studentService.updateTag(tag).subscribe({
       next: res => {
         if (res.success) {
-          this.message.success(res.messages);
+          this.message.success('Cập nhật thẻ tag thành công');
           this.pageSize$.next(10);
         } else {
           this.message.error(res.errorMessages);
         }
+      }
+    })
+  }
+
+  openDrawer(data: any): void {
+    this.note = data.saleNote;
+    const drawerRef = this.drawerService.create({
+      nzTitle: 'Ghi chú',
+      nzContent: this.drawerTemplate,
+      nzContentParams: data
+    });
+
+    drawerRef.afterClose.subscribe(() => {
+      this.note = '';
+    });
+  }
+
+  addNote(data: any) {
+    const note = {
+      userAffId: data.id,
+      tagNote: data.tagNote,
+      saleNote: this.note,
+    }
+
+    this.studentService.updateTag(note).subscribe({
+      next: res => {
+        if (res.success) {
+          this.message.success('Cập nhật ghi chú thành công');
+          this.pageSize$.next(10);
+        } else {
+          this.message.error(res.errorMessages);
+        }
+
       }
     })
   }

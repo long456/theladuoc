@@ -3,6 +3,7 @@ import {NZ_MODAL_DATA, NzModalRef} from "ng-zorro-antd/modal";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {TicketService} from "../../../ticket/services/ticket.service";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
+import {RegisterFormService} from "../../services/register-form.service";
 
 @Component({
   selector: 'app-attach-ticket',
@@ -26,25 +27,68 @@ export class AttachTicketComponent implements OnInit{
   constructor(
     private modal: NzModalRef,
     private message: NzMessageService,
-    private ticketService: TicketService
+    private ticketService: TicketService,
+    private registerFormService: RegisterFormService,
   ) {
   }
 
   ngOnInit() {
-    this.getListTicket(this.page);
+    console.log(this.nzModalData)
+    this.getListTicket()
   }
 
-  getListTicket(page: number) {
-    this.ticketService.getAllTicket(page, this.pageSize).subscribe({
-      next: value => {
-        if (value.success) {
-          this.optionList = value.data.ticketList;
-        }
+  // getListTicket(page: number) {
+  //   this.ticketService.getAllTicket(page, this.pageSize).subscribe({
+  //     next: value => {
+  //       if (value.success) {
+  //         this.optionList = value.data.ticketList;
+  //       }
+  //     }
+  //   })
+  // }
+
+  getListTicket() {
+    this.ticketService.getListAttachTicket(this.nzModalData.data.courseId).subscribe({
+      next: res => {
+        this.optionList = res;
       }
     })
   }
 
   loadMore() {
 
+  }
+
+  closeModal() {
+    this.modal.destroy();
+  }
+
+  attachTicket() {
+    if (!this.selectedTicket) {
+      this.message.error('Lớp không được để trống')
+      return
+    }
+
+    const data = {
+      formRegisterId: this.nzModalData.data.id,
+      ticketId: this.selectedTicket,
+    }
+
+    this.registerFormService.attachTicket(data)
+      .subscribe({
+        next: res => {
+          this.loading = false;
+          if (res.success) {
+            this.message.success(res.messages)
+            this.closeModal();
+          } else {
+            this.message.error(res.errorMessages)
+          }
+        },
+        error: err => {
+          this.message.error(err)
+          this.loading = false;
+        }
+      })
   }
 }

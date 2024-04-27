@@ -48,12 +48,12 @@
             <span nz-icon nzType="copy" nzTheme="outline" class="custom-icon"></span>
           </span>
 
-          <span class="custom-action" (click)="attachTicket(data)"
+          <span class="custom-action" (click)="attachTicket(data)" *ngIf="!data.ticketId"
                 nz-tooltip nzTooltipTitle="Gắn vé">
             <span nz-icon nzType="plus-square" nzTheme="outline" class="custom-icon"></span>
           </span>
 
-          <span class="custom-action"
+          <span class="custom-action" (click)="removeAttachTicket(data)" *ngIf="data.ticketId"
                 nz-tooltip nzTooltipTitle="Gỡ vé">
             <span nz-icon nzType="close" nzTheme="outline" class="custom-icon"></span>
           </span>

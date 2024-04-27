@@ -19,6 +19,10 @@ export class TicketService {
     return this.http.get('Ticket', {params: data});
   }
 
+  getListAttachTicket(courseId: number): Observable<any>{
+    return this.http.get('Ticket/get-list-untagged-ticket-by-course', {params: {courseId: courseId}});
+  }
+
   createTicket(data: any): Observable<any>  {
     return this.http.post('Ticket', data);
   }

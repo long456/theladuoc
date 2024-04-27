@@ -18,6 +18,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,8 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
     NzInputNumberModule,
     FormsModule,
     ReactiveFormsModule,
-    NzUploadModule
-
+    NzUploadModule,
+    NzDrawerModule
   ]
 })
 export class StudentModule { }

@@ -63,16 +63,17 @@ export class CreateLessonComponent implements OnInit{
       this.isLoading = true;
       let data = {
         ...this.lessonForm.value,
-        classId: this.nzModalData.id,
+        classId: this.nzModalData.data.id,
         startTime: this.datePipe.transform(this.lessonForm.value.duration[0], 'yyyy-MM-ddTHH:mm:ss') + 'Z',
         endTime: this.datePipe.transform(this.lessonForm.value.duration[1], 'yyyy-MM-ddTHH:mm:ss') + 'Z',
       }
       delete data.duration
+
       if (this.isCreate) {
         this.lessonService.createLesson(data).subscribe({
           next: value => {
             if(value.success) {
-              this.message.success(value.message);
+              this.message.success(value.messages);
               this.isLoading = false;
               this.closeModal();
             } else {
@@ -90,7 +91,7 @@ export class CreateLessonComponent implements OnInit{
         this.lessonService.updateLesson(this.nzModalData.data.id, data).subscribe({
           next: value => {
             if(value.success) {
-              this.message.success(value.message);
+              this.message.success(value.messages);
               this.isLoading = false;
               this.closeModal();
             } else {
