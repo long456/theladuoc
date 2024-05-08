@@ -3,11 +3,12 @@ import {COL_DATA_TYPE, FIX_COLUMN, filterItem} from "../../../../shared/models/T
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {StudentService} from "../../services/student.service";
-import {NzModalService} from "ng-zorro-antd/modal";
+import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {DetailStudentComponent} from "../detail-student/detail-student.component";
 import {PaymentCheckComponent} from "../payment-check/payment-check.component";
 import {Tag} from "../../models/tag";
 import {NzDrawerRef, NzDrawerService} from "ng-zorro-antd/drawer";
+import {UpgradeCourseComponent} from "../upgrade-course/upgrade-course.component";
 
 @Component({
   selector: 'app-taking-care-student',
@@ -165,6 +166,10 @@ export class TakingCareStudentComponent implements OnInit{
           label: 'Hẹn chuyển khoản',
           key: 7
         },
+        {
+          label: 'Khách hàng chặn cuộc gọi',
+          key: 8
+        },
       ]
     },
   ];
@@ -275,6 +280,55 @@ export class TakingCareStudentComponent implements OnInit{
           }
         })
       }
+    });
+  }
+
+  upgradeCourse(data : any) {
+    const modal: NzModalRef = this.modal.create<UpgradeCourseComponent>({
+      nzTitle: 'Nâng cấp khóa học',
+      nzContent: UpgradeCourseComponent,
+      nzViewContainerRef: this.viewContainerRef,
+      nzData: data,
+      nzFooter: [
+        {
+          label: 'Cancel',
+          onClick: () => modal.destroy()
+        },
+        {
+          label: 'OK',
+          type: 'primary',
+          onClick: (instance) => {
+            if (instance?.upgradeCourseForm.get('courseId')?.invalid) {
+              this.message.error('Khóa học nâng cấp không được để trống');
+              return;
+            }
+
+            if (instance?.upgradeCourseForm.get('classId')?.invalid) {
+              this.message.error('Lớp học không được để trống');
+              return;
+            }
+
+            const data = instance?.upgradeCourseForm.value;
+            delete data.name
+            const value = this.createFormData(data)
+
+            this.studentService.upgradeCourseUser(value).subscribe({
+              next: res => {
+                if (res.success) {
+                  modal.destroy()
+                  this.pageSize$.next(10)
+                  this.message.success(res.messages)
+                } else {
+                  this.message.error(res.errorMessages)
+                }
+              },
+              error: err => {
+                this.message.error('Lỗi nâng cấp khóa học')
+              }
+            })
+          }
+        },
+      ],
     });
   }
 

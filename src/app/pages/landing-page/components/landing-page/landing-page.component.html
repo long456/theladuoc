@@ -24,12 +24,12 @@
       <table-column header="Mã landing page" key="landingPageCode" [width]="'200px'"></table-column>
       <table-column header="Tên landing page" key="name" [width]="'200px'"></table-column>
       <table-column header="Tên lớp học" key="className" [width]="'200px'"></table-column>
-      <table-column header="Tên form" key="formRegisterList" [width]="'200px'">
+      <table-column header="Danh sách form" key="formRegisterList" [width]="'200px'">
         <ng-template appCell let-data>
           <span *ngFor="let form of data.formRegisterList; index as i">
-            <span *ngIf="i <= 2">
+            <div *ngIf="i <= 2">
               {{form.title}},
-            </span>
+            </div>
             <span *ngIf="i > 2">
               và {{data.formRegisterList.length - 3}} form nữa
             </span>

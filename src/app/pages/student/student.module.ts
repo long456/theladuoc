@@ -19,6 +19,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { UpgradeCourseComponent } from './components/upgrade-course/upgrade-course.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
     StudyingStudentComponent,
     NonDividedStudentComponent,
     DetailStudentComponent,
-    PaymentCheckComponent
+    PaymentCheckComponent,
+    UpgradeCourseComponent
   ],
   imports: [
     CommonModule,

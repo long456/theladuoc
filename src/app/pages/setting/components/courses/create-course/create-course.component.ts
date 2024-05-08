@@ -104,7 +104,6 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
         teacherId: parseInt(this.courseForm.get('teacherId')?.value),
         status: this.courseForm.get('status')?.value ? 1 : 0,
       }
-      console.log(data)
       if (this.isCreate) {
         this.courseService.createCourse(data).subscribe({
           next: res => {

@@ -104,4 +104,8 @@ export class StudentService {
   updateTag(data: any): Observable<any>{
     return this.http.post('UserAffiliate/update-sale-note', data)
   }
+
+  upgradeCourseUser(data: any): Observable<any>{
+    return this.http.post('UserAffiliate/upgrade-course-for-user-aff', data)
+  }
 }

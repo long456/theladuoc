@@ -197,8 +197,12 @@ export class WaitingStudentComponent implements OnInit{
     if (this.itemSelectList.length === 0) {
       this.message.error('Chưa có mục nào được chọn')
     } else {
-      let data = JSON.stringify(this.itemSelectList)
-      this.studentService.takeCareStudent(data).subscribe({
+      this.loading = true;
+      let data = JSON.stringify(this.itemSelectList);
+      this.studentService.takeCareStudent(data).pipe(
+        delay(200),
+        tap(() => this.loading = false),
+      ).subscribe({
         next: res => {
           if (res.success) {
             this.pageSize$.next(10);
@@ -215,8 +219,12 @@ export class WaitingStudentComponent implements OnInit{
     if (this.itemSelectList.length === 0) {
       this.message.error('Chưa có mục nào được chọn')
     } else {
+      this.loading = true;
       let data = JSON.stringify(this.itemSelectList)
-      this.studentService.rejectStudent(data).subscribe({
+      this.studentService.rejectStudent(data).pipe(
+        delay(200),
+        tap(() => this.loading = false),
+      ).subscribe({
         next: res => {
           if (res.success) {
             this.pageSize$.next(10);

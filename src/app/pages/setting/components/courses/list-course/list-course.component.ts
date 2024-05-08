@@ -116,7 +116,7 @@ export class ListCourseComponent implements OnInit{
   }
 
   create() {
-    this.router.navigate(['/page/setting/course/create'])
+    this.router.navigate(['/page/setting/course/create']);
   }
 
   edit(data: any) {

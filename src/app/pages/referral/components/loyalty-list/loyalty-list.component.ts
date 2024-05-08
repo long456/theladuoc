@@ -3,6 +3,7 @@ import {COL_DATA_TYPE} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {LoyaltyService} from "../../services/loyalty.service";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-loyalty-list',
@@ -28,6 +29,7 @@ export class LoyaltyListComponent implements OnInit{
   constructor(
     private loyaltyService: LoyaltyService,
     private message: NzMessageService,
+    private router: Router,
   ) {
   }
 
@@ -61,7 +63,7 @@ export class LoyaltyListComponent implements OnInit{
   }
 
   create() {
-
+    this.router.navigate(['/page/setting/referral/loyalty/create']);
   }
 
   edit(data: any) {

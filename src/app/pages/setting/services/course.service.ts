@@ -51,7 +51,14 @@ export class CourseService {
     return this.http.get('User/get-list-option-lecturer')
   }
 
-  getListCourse(): Observable<any>{
-    return this.http.get('Course/get-course-list')
+  getListCourse(type?: number): Observable<any>{
+
+    let params = {};
+    if (type) {
+      params = {
+        type: type
+      }
+    }
+    return this.http.get('Course/get-course-list', {params: params})
   }
 }

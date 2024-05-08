@@ -10,6 +10,11 @@ export const Tag = [
     value: 2,
   },
   {
+    title: 'Khách hàng chặn cuộc gọi',
+    color: 'orange',
+    value: 8,
+  },
+  {
     title: 'Sai số điện thoại',
     color: 'gold',
     value: 3,

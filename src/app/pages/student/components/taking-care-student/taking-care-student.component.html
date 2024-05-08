@@ -86,10 +86,17 @@
                 nz-tooltip nzTooltipTitle="Chi tiết học viên">
             <span nz-icon nzType="search" nzTheme="outline"></span>
           </span>
+
           <span class="custom-action"
                 nz-tooltip nzTooltipTitle="Gọi điện">
             <span nz-icon nzType="phone" nzTheme="outline"></span>
           </span>
+
+          <span class="custom-action" (click)="upgradeCourse(data)"
+                nz-tooltip nzTooltipTitle="Nâng cấp khóa học">
+            <span nz-icon nzType="arrow-up" nzTheme="outline"></span>
+          </span>
+
           <span class="custom-action" (click)="paymentCheck(data)"
                 nz-tooltip nzTooltipTitle="Xác thực thanh toán">
             <span nz-icon nzType="wallet" nzTheme="outline"></span>

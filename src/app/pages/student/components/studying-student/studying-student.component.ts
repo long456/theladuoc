@@ -98,6 +98,10 @@ export class StudyingStudentComponent implements OnInit{
           label: 'Hẹn chuyển khoản',
           key: 7
         },
+        {
+          label: 'Khách hàng chặn cuộc gọi',
+          key: 8
+        },
       ]
     },
   ];
