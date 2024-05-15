@@ -31,15 +31,15 @@
 <!--        </ng-template>-->
 <!--      </table-column>-->
 
-<!--      <table-column [width]="'180px'" fixColumn="right" >-->
-<!--        <ng-template appHeader>-->
-<!--          Chức năng-->
-<!--        </ng-template>-->
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
 
-<!--        <ng-template appCell let-data>-->
-<!--          <span class="custom-action" (click)="edit(data)">Sửa</span>-->
-<!--        </ng-template>-->
-<!--      </table-column>-->
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="copyLink(data)">Copy link</span>
+        </ng-template>
+      </table-column>
     </app-table>
   </ng-container>
 </div>

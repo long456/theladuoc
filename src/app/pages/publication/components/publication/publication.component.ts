@@ -104,4 +104,10 @@ export class PublicationComponent implements OnInit{
   getItemSelection(e: any) {
     this.itemSelectList = e;
   }
+
+  copyLink(data: any) {
+    let link = `https://tikmeta.vn/an-pham/`+ data.slug;
+    navigator.clipboard.writeText(link);
+    this.message.success(link + ' đã được copy');
+  }
 }
