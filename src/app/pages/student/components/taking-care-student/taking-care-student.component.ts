@@ -134,7 +134,31 @@ export class TakingCareStudentComponent implements OnInit{
       name: 'organizationName',
     },
     {
-      title: 'thẻ tag',
+      title: 'Tên lớp',
+      name: 'className',
+    },
+    {
+      title: 'Khu vực',
+      name: 'area',
+      type: "select",
+      value: 1,
+      data: [
+        {
+          label: 'Miền Bắc',
+          key: 1
+        },
+        {
+          label: 'Miền Trung',
+          key: 2
+        },
+        {
+          label: 'Miền Nam',
+          key: 3
+        }
+      ]
+    },
+    {
+      title: 'Thẻ tag',
       name: 'tagNote',
       type: "select",
       data: [

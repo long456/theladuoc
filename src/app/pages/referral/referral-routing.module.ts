@@ -23,6 +23,11 @@ const routes: Routes = [
         data: {isCreate: true},
         component: CreateLoyaltyComponent
       },
+      {
+        path:':code',
+        data: {isCreate: false},
+        component: CreateLoyaltyComponent
+      },
     ]
   },
 ];

@@ -176,6 +176,11 @@ export class SideBarComponent {
                 },
               ]
             },
+            {
+              name : 'Ấn phẩm',
+              icon: '',
+              link: 'page/setting/publication',
+            }
           ]
         },
       ]
@@ -186,8 +191,4 @@ export class SideBarComponent {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  // navigate(link : any) {
-  //   console.log(link)
-  //   this.router.navigateByUrl('page/student/waiting');
-  // }
 }

@@ -18,6 +18,8 @@ export class CreateLoyaltyComponent implements OnInit{
 
   listCourse: any[] = [];
 
+  courseCode!: string;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -41,6 +43,13 @@ export class CreateLoyaltyComponent implements OnInit{
     this.courseService.getListCourse().subscribe(res => {
       this.listCourse = res;
     })
+
+    if (!this.isCreate) {
+      this.route.params.pipe().subscribe(params => {
+        const {code} = params;
+        this.courseCode = code;
+      });
+    }
   }
 
   edit(): void {
@@ -52,21 +61,36 @@ export class CreateLoyaltyComponent implements OnInit{
         dateEnd: this.loyaltyForm.value.date[1],
       }
       delete data.date;
-      this.loyaltyService.createLoyalty(data).subscribe({
-        next: res => {
-          if (res.success) {
-            this.message.success(res.messages);
-            this.navigateBack();
-          } else {
-            this.message.error(res.errorMessages);
-          }
-        },
-        error: err => {
-          this.message.error(err.error);
-        }
-      })
-    } else {
 
+      if (this.isCreate) {
+        this.loyaltyService.createLoyalty(data).subscribe({
+          next: res => {
+            if (res.success) {
+              this.message.success(res.messages);
+              this.navigateBack();
+            } else {
+              this.message.error(res.errorMessages);
+            }
+          },
+          error: err => {
+            this.message.error(err.error);
+          }
+        })
+      } else {
+        this.loyaltyService.updateLoyalty(data, this.courseCode).subscribe({
+          next: res => {
+            if (res.success) {
+              this.message.success(res.messages);
+              this.navigateBack();
+            } else {
+              this.message.error(res.errorMessages);
+            }
+          },
+          error: err => {
+            this.message.error(err.error);
+          }
+        })
+      }
     }
   }
 

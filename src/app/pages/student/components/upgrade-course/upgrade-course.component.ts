@@ -2,7 +2,6 @@ import {Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NZ_MODAL_DATA} from "ng-zorro-antd/modal";
 import {CourseService} from "../../../setting/services/course.service";
-import {ClassService} from "../../../class/services/class.service";
 
 @Component({
   selector: 'app-upgrade-course',

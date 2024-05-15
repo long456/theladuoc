@@ -1,0 +1,136 @@
+<div class="title-page">
+  Tạo mới ấn phẩm
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="14" class="publication">
+    <canvas #canvas class="bg-container" [ngClass]="type" [ngStyle]="{'background-image' : 'url(' + bgImgSrc + ')'}"></canvas>
+
+    <div class="btn-publication">
+      <button class="btn primary" nz-button (click)="edit()">Lưu</button>
+
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+  <div nz-col [nzSpan]="10">
+    <form [formGroup]="publicationForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="13">
+        <span class="text-label">
+          Tên ấn phẩm
+          <span class="text-danger">*</span>
+        </span>
+          <input
+            nz-input autofocus formControlName="Name"
+            [nzStatus]="(publicationForm.get('Name')?.invalid && (publicationForm.get('Name')?.touched ) || isSubmit) ? 'error' : ''">
+
+            <span class="text-danger"
+              *ngIf="(publicationForm.get('Name')?.touched)  && publicationForm.get('Name')?.hasError('required')">
+              Tên ấn phẩm không được để trống
+            </span>
+        </div>
+
+        <div nz-col [nzSpan]="13">
+          <span class="text-label">Chọn khung</span>
+          <nz-select style="display: block"
+                     [(ngModel)]="type" (ngModelChange)="onTypeChange()"
+                     [ngModelOptions]="{standalone: true}">
+            <nz-option nzValue="type1" nzLabel="Kiểu 1 (2896x1448)"></nz-option>
+            <nz-option nzValue="type2" nzLabel="Kiểu 2 (1024x1446)"></nz-option>
+            <nz-option nzValue="type3" nzLabel="Kiểu 3 (1446x1024)"></nz-option>
+          </nz-select>
+        </div>
+
+        <div nz-col [nzSpan]="13">
+          <span class="text-label">Upload ảnh nền</span>
+          <label for="file" class="upload">
+            <span nz-icon nzType="upload" nzTheme="outline"></span>
+            Ảnh ủy nhiệm chi
+            <div class="file-name">{{nameFilePreview}}</div>
+          </label>
+          <input type="file" (change)="uploadFile($event)"
+                 accept="image/png, image/gif, image/jpeg"
+                 class="upload-file" name="file" id="file">
+        </div>
+
+        <div nz-col [nzSpan]="13">
+          <span class="text-label">
+            Giảng viên
+          </span>
+
+          <div>
+            <nz-select formControlName="OwnerId" style="display: block">
+              <nz-option
+                *ngFor="let teacher of listTeacher"
+                [nzValue]="teacher.id"
+                [nzLabel]="teacher.fullName">
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="13">
+          <span class="text-label">
+            Mã ấn phẩm
+          </span>
+          <input nz-input formControlName="Slug">
+        </div>
+      </div>
+    </form>
+
+<!--    <div nz-col [nzSpan]="12">-->
+<!--      <p>Tải ảnh avatar</p>-->
+<!--      <nz-upload [nzFileList]="backgroundImgList">-->
+<!--        <button nz-button>-->
+<!--          <span nz-icon nzType="upload"></span>-->
+<!--          Chọn ảnh-->
+<!--        </button>-->
+<!--      </nz-upload>-->
+<!--    </div>-->
+
+<!--    <div nz-col [nzSpan]="12">-->
+<!--      <p>Căn ngang avatar</p>-->
+<!--      <nz-slider [nzTipFormatter]="formatter"></nz-slider>-->
+<!--    </div>-->
+
+<!--    <div nz-col [nzSpan]="12">-->
+<!--      <p>Căn dọc avatar</p>-->
+<!--      <nz-slider [nzTipFormatter]="formatter"></nz-slider>-->
+<!--    </div>-->
+
+<!--    <div nz-col [nzSpan]="12">-->
+<!--      <p>Thu/phóng avatar</p>-->
+<!--      <nz-slider [nzTipFormatter]="formatter"></nz-slider>-->
+<!--    </div>-->
+
+<!--    <div nz-col [nzSpan]="12">-->
+<!--      <p>Tên khách mời</p>-->
+<!--      <input nz-input placeholder="Nhập tên khách mời"/>-->
+<!--    </div>-->
+
+<!--    <div nz-col [nzSpan]="12">-->
+<!--      <p>Font chữ</p>-->
+<!--      <nz-select style="display: block">-->
+<!--        <nz-option nzValue="caveat" nzLabel="Caveat"></nz-option>-->
+<!--        <nz-option nzValue="dancing" nzLabel="Dancing"></nz-option>-->
+<!--        <nz-option nzValue="lobster" nzLabel="Lobster"></nz-option>-->
+<!--        <nz-option nzValue="pacifico" nzLabel="Pacifico"></nz-option>-->
+<!--      </nz-select>-->
+<!--    </div>-->
+
+<!--    <div nz-col [nzSpan]="12">-->
+<!--      <p>Cỡ chữ</p>-->
+<!--      <nz-slider [nzTipFormatter]="formatterFontSize" [nzMin]="10" [nzMax]="40"></nz-slider>-->
+<!--    </div>-->
+
+<!--    <div nz-col [nzSpan]="9">-->
+<!--      <p>Màu chữ</p>-->
+<!--      <div class="color-picker" (click)="active(textColor)">-->
+<!--        <input #textColor type="color" (change)="onColorChange($event)">-->
+<!--        <span style="padding-left: 8px; font-size: 14px">-->
+<!--              {{textColorValue}}-->
+<!--            </span>-->
+<!--      </div>-->
+<!--    </div>-->
+  </div>
+</div>
