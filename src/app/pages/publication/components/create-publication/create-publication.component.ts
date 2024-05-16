@@ -5,6 +5,7 @@ import {teacher} from "../../../setting/models/course";
 import {CourseService} from "../../../setting/services/course.service";
 import {PublicationService} from "../../services/publication.service";
 import {NzMessageService} from "ng-zorro-antd/message";
+import html2canvas from "html2canvas";
 
 @Component({
   selector: 'app-create-publication',
@@ -14,6 +15,7 @@ import {NzMessageService} from "ng-zorro-antd/message";
 export class CreatePublicationComponent implements OnInit{
 
   @ViewChild('canvas') myCanvas!: ElementRef;
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
   isSubmit: boolean = false;
 
@@ -72,6 +74,8 @@ export class CreatePublicationComponent implements OnInit{
   }
 
   onTypeChange() {
+    this.fileInput.nativeElement.value = "";
+    this.nameFilePreview = '';
     if (this.type === 'type1') {
       this.bgImgSrc = '/assets/img/vip1.png';
       return;
@@ -85,45 +89,43 @@ export class CreatePublicationComponent implements OnInit{
     if (this.type === 'type3') {
       this.bgImgSrc = '/assets/img/vip3.png';
       return;
-
     }
   }
 
-  async uploadFile(e: Event) {
+  uploadFile(e: Event) {
     const target = e.target as HTMLInputElement;
     const files = target.files as FileList;
-    this.bgImgSrc = await this.toBase64(files[0]);
-  }
-
-  toBase64(file: File) {
-    const base64 = new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = reject;
-    })
-    return base64;
+    this.nameFilePreview = files[0].name
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onloadend = () => {
+      this.bgImgSrc = reader.result as string;
+    }
   }
 
   edit() {
     if (this.publicationForm.valid) {
-      this.myCanvas.nativeElement.toBlob((blob: any) => {
-        const formData = new FormData();
-        formData.append('File', blob, this.publicationForm.value.Name + '.png');
-        for ( let key in this.publicationForm.value ) {
-          formData.append(key, this.publicationForm.value[key]);
-        }
+      html2canvas(this.myCanvas.nativeElement).then(
+        canvas => {
+          canvas.toBlob((blob:any) => {
+            const formData = new FormData();
+            formData.append('File', blob, this.publicationForm.value.Name + '.png');
+            for ( let key in this.publicationForm.value ) {
+              formData.append(key, this.publicationForm.value[key]);
+            }
 
-        this.publicationService.createPublication(formData).subscribe({
-          next: res => {
-            this.message.success(res.messages);
-            this.navigateBack();
-          },
-          error: err => {
-            this.message.error(err);
-          }
-        })
-      })
+            this.publicationService.createPublication(formData).subscribe({
+              next: res => {
+                this.message.success(res.messages);
+                this.navigateBack();
+              },
+              error: err => {
+                this.message.error(err);
+              }
+            })
+          })
+        }
+      );
     }
   }
 

@@ -59,7 +59,7 @@ export class PublicationComponent implements OnInit{
               }
             }),
             catchError(err => {
-              this.message.error('Lỗi load dữ liệu khóa học')
+              this.message.error('Lỗi load dữ liệu ấn phẩm')
               return of(err.message)
             })
           )

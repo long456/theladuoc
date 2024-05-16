@@ -45,12 +45,12 @@
           <span class="text-label">Upload ảnh nền</span>
           <label for="file" class="upload">
             <span nz-icon nzType="upload" nzTheme="outline"></span>
-            Ảnh ủy nhiệm chi
+            Ảnh nền
             <div class="file-name">{{nameFilePreview}}</div>
           </label>
-          <input type="file" (change)="uploadFile($event)"
+          <input #fileInput type="file" (change)="uploadFile($event)"
                  accept="image/png, image/gif, image/jpeg"
-                 class="upload-file" name="file" id="file">
+                 class="upload-file" name="file" id="file" >
         </div>
 
         <div nz-col [nzSpan]="13">
