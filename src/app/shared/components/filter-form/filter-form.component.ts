@@ -11,7 +11,9 @@ import {formatDate} from "@angular/common";
 export class FilterFormComponent implements OnInit{
 
   @Input() filterData: filterItem[] = [];
+  @Input() isExportExcel: boolean = false;
   @Output() getFilterData = new EventEmitter<any>();
+  @Output() getExcelData = new EventEmitter<any>();
   filterForm!: FormGroup;
 
   constructor(
@@ -34,6 +36,11 @@ export class FilterFormComponent implements OnInit{
   filter() {
     const data = this.getSubmitData();
     this.getFilterData.emit(data);
+  }
+
+  exportDataExcel() {
+    const data = this.getSubmitData();
+    this.getExcelData.emit(data);
   }
 
   getSubmitData() {

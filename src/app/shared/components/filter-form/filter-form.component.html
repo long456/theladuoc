@@ -25,6 +25,10 @@
 
   <div class="btn-area">
     <button nz-button class="btn-form primary" (click)="filter()">Gửi</button>
+    <button nz-button class="btn-form excel" (click)="exportDataExcel()" *ngIf="isExportExcel">
+      Xuất excel
+      <span nz-icon nzType="file-excel" nzTheme="outline"></span>
+    </button>
     <button nz-button class="btn-form" (click)="clearForm()">Làm mới</button>
   </div>
 </form>

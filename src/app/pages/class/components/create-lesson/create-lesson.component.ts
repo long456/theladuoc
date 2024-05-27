@@ -75,11 +75,11 @@ export class CreateLessonComponent implements OnInit{
             if(value.success) {
               this.message.success(value.messages);
               this.isLoading = false;
+              this.modal.triggerOk().then();
               this.closeModal();
             } else {
               this.message.error(value.errorMessages);
               this.isLoading = false;
-              this.closeModal();
             }
           },
           error: err => {
@@ -93,11 +93,11 @@ export class CreateLessonComponent implements OnInit{
             if(value.success) {
               this.message.success(value.messages);
               this.isLoading = false;
+              this.modal.triggerOk().then();
               this.closeModal();
             } else {
               this.message.error(value.errorMessages);
               this.isLoading = false;
-              this.closeModal();
             }
           },
           error: err => {

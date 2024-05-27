@@ -7,7 +7,8 @@
   <ng-container *ngIf="(nonDivideStudent$ | async) as nonDivideStudent">
     <nz-collapse class="filter-form" [class.expand]="isExpand">
       <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
-        <app-filter-form [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"></app-filter-form>
+        <app-filter-form [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"
+                         [isExportExcel]="true" (getExcelData)="handleExportExcel($event)"></app-filter-form>
       </nz-collapse-panel>
     </nz-collapse>
 

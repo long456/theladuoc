@@ -21,11 +21,11 @@
           <span class="text-danger">*</span>
         </span>
           <input
-            nz-input autofocus formControlName="Name"
-            [nzStatus]="(publicationForm.get('Name')?.invalid && (publicationForm.get('Name')?.touched ) || isSubmit) ? 'error' : ''">
+            nz-input autofocus formControlName="name"
+            [nzStatus]="(publicationForm.get('name')?.invalid && (publicationForm.get('name')?.touched )) ? 'error' : ''">
 
             <span class="text-danger"
-              *ngIf="(publicationForm.get('Name')?.touched)  && publicationForm.get('Name')?.hasError('required')">
+              *ngIf="(publicationForm.get('name')?.touched)  && publicationForm.get('name')?.hasError('required')">
               Tên ấn phẩm không được để trống
             </span>
         </div>
@@ -59,7 +59,7 @@
           </span>
 
           <div>
-            <nz-select formControlName="OwnerId" style="display: block">
+            <nz-select formControlName="ownerId" style="display: block">
               <nz-option
                 *ngFor="let teacher of listTeacher"
                 [nzValue]="teacher.id"
@@ -73,7 +73,7 @@
           <span class="text-label">
             Mã ấn phẩm
           </span>
-          <input nz-input formControlName="Slug">
+          <input nz-input formControlName="slug">
         </div>
       </div>
     </form>

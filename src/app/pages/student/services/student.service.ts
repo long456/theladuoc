@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +8,16 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class StudentService {
 
   private studentData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  private exportStatusSource = new Subject<string>();
+  exportStatus$ = this.exportStatusSource.asObservable();
 
   constructor(
     private http: HttpClient,
   ) { }
+
+  updateExportStatus(status: string) {
+    this.exportStatusSource.next(status);
+  }
 
   setStudentData(data: any) {
     this.studentData.next(data);
@@ -107,5 +113,14 @@ export class StudentService {
 
   upgradeCourseUser(data: any): Observable<any>{
     return this.http.post('UserAffiliate/upgrade-course-for-user-aff', data)
+  }
+
+  exportExcel(data: any): Observable<any>{
+    const dataExport = {
+      ...data,
+      pageIndex: 1,
+      pageSize: 10,
+    }
+    return this.http.get('UserAffiliate/export',{params: dataExport})
   }
 }

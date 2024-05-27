@@ -1,11 +1,30 @@
 <div class="header-side-bar">
 
+  <div class="download-layout" *ngIf="downloadStatus === 'pending'"
+       (click)="createNotification('info', 'Quá trình download file excel đang chạy')">
+    <div class="download-process"></div>
+    <span nz-icon nzType="download" nzTheme="outline"></span>
+  </div>
 
-  <button
-    nz-button nzType="default" nzShape="circle"
-    nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click">
-    <span nz-icon nzType="user"></span>
-  </button>
+
+  <span nz-tooltip [nzTooltipTitle]="titleTemplate" nzTooltipPlacement="left" [nzTooltipColor]="'#3c4043e6'">
+    <button *ngIf="!linkAvatar"
+            nz-button nzType="default" nzShape="circle"
+            nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click">
+      <span nz-icon nzType="user"></span>
+    </button>
+
+    <nz-avatar *ngIf="linkAvatar" nzIcon="user" [nzSrc]="linkAvatar" style="cursor: pointer"
+               nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click"></nz-avatar>
+  </span>
+
+  <ng-template #titleTemplate let-thing>
+    <div>
+      <div>{{userData.fullName}}</div>
+      <div>{{userData.email}}</div>
+    </div>
+  </ng-template>
+
 
   <nz-dropdown-menu #menu="nzDropdownMenu">
     <ul nz-menu>

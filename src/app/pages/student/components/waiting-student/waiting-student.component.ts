@@ -7,6 +7,7 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {StudentService} from "../../services/student.service";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {DetailStudentComponent} from "../detail-student/detail-student.component";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-waiting-student',
@@ -187,6 +188,34 @@ export class WaitingStudentComponent implements OnInit{
 
   handleFilterForm(event: any) {
     this.filterList$.next(event)
+  }
+
+  handleExportExcel(event: any) {
+    if(Object.keys(event).length === 0) {
+      this.message.error('Các trường filter không được để trống');
+      return;
+    }
+    this.studentService.updateExportStatus('pending');
+    const data = {...event}
+    data['process'] = 1;
+    this.studentService.exportExcel(data).subscribe({
+      next: res => {
+        if (res.success) {
+          this.studentService.updateExportStatus('completed');
+          const baseUrl = environment.baseImgUrl
+          const a = document.createElement('a');
+          const url = baseUrl + res.data.filePath;
+          a.href = url;
+          document.body.appendChild(a);
+          a.click();
+          URL.revokeObjectURL(url);
+          a.remove();
+        } else {
+          this.studentService.updateExportStatus('error');
+          this.message.error(res.errorMessages);
+        }
+      }
+    })
   }
 
   setExpand(event: any) {

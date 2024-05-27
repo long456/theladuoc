@@ -106,8 +106,11 @@ export class PublicationComponent implements OnInit{
   }
 
   copyLink(data: any) {
-    let link = `https://tikmeta.vn/an-pham/`+ data.slug;
-    navigator.clipboard.writeText(link);
-    this.message.success(link + ' đã được copy');
+    navigator.clipboard.writeText(data.link);
+    this.message.success(data.link + ' đã được copy');
+  }
+
+  edit(data: any) {
+    this.router.navigate(['/page/setting/publication/' + data.id]);
   }
 }

@@ -79,7 +79,10 @@ export class LessonComponent implements OnInit{
         isCreate: false,
         data: data,
       },
-      nzFooter: null
+      nzFooter: null,
+      nzOnOk: instance => {
+        this.pageSize$.next(10);
+      }
     });
   }
 

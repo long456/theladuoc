@@ -69,6 +69,14 @@
         <input type="file" (change)="uploadFile($event)"
                accept="image/png, image/gif, image/jpeg"
                class="upload-file" name="file" id="file">
+
+        <img
+          style="margin-top: 15px"
+          nz-image
+          [src]="imgPreviewUrl"
+          width="150"
+          alt=""
+        />
       </div>
     </div>
   </form>

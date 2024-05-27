@@ -101,3 +101,41 @@
 input:read-only {
   background: #F5F5F5;
 }
+
+.upload-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.upload{
+  margin-top: 20px;
+  display: block;
+  height: 32px;
+  width: 190px;
+  text-align: center;
+  line-height: 32px;
+  cursor: pointer;
+  padding: 0 15px;
+  position: relative;
+  span{
+    margin-right: 8px;
+  }
+
+  &:hover{
+    border-color: #40a9ff;
+    background: #40a9ff;
+  }
+
+  font-size: 14px;
+  border-radius: 32px;
+
+  color: #fff;
+  border-color: #1890ff;
+  background: #1890ff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}

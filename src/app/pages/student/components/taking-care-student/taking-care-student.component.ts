@@ -9,6 +9,7 @@ import {PaymentCheckComponent} from "../payment-check/payment-check.component";
 import {Tag} from "../../models/tag";
 import {NzDrawerRef, NzDrawerService} from "ng-zorro-antd/drawer";
 import {UpgradeCourseComponent} from "../upgrade-course/upgrade-course.component";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-taking-care-student',
@@ -266,6 +267,34 @@ export class TakingCareStudentComponent implements OnInit{
 
   handleFilterForm(event: any) {
     this.filterList$.next(event)
+  }
+
+  handleExportExcel(event: any) {
+    if(Object.keys(event).length === 0) {
+      this.message.error('Các trường filter không được để trống');
+      return;
+    }
+    this.studentService.updateExportStatus('pending');
+    const data = {...event}
+    data['process'] = 2;
+    this.studentService.exportExcel(data).subscribe({
+      next: res => {
+        if (res.success) {
+          this.studentService.updateExportStatus('completed');
+          const baseUrl = environment.baseImgUrl
+          const a = document.createElement('a');
+          const url = baseUrl + res.data.filePath;
+          a.href = url;
+          document.body.appendChild(a);
+          a.click();
+          URL.revokeObjectURL(url);
+          a.remove();
+        } else {
+          this.studentService.updateExportStatus('error');
+          this.message.error(res.errorMessages);
+        }
+      }
+    })
   }
 
   detail(data: any) {

@@ -35,4 +35,12 @@ export class PublicationService {
   softDeletePublication(data: number[]): Observable<any>{
     return this.http.delete('Publication/soft-delete', {body: data})
   }
+
+  getPublicationById(id: number): Observable<any>{
+    return this.http.get('Publication/' + id);
+  }
+
+  updatePublication(data: any): Observable<any>{
+    return this.http.put('Publication/update-publication', data);
+  }
 }

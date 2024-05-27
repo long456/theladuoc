@@ -39,6 +39,7 @@ export class AuthComponent implements OnInit{
       this.loginService.login(this.loginForm.value.email.trim(), this.loginForm.value.password.trim()).subscribe(res => {
         if (res.success === true) {
           this.addTokenKey(res.token);
+          this.addUserData(JSON.stringify(res.data));
           this.authService.setUserData(res.data);
           this.router.navigate(['page']);
         } else {
@@ -50,6 +51,10 @@ export class AuthComponent implements OnInit{
 
   addTokenKey(token: string) {
     localStorage.setItem('tokenKey', token);
+  }
+
+  addUserData(data: string): void{
+    localStorage.setItem('data', data);
   }
 
   changeActive() {

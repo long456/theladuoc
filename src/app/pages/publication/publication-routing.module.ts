@@ -12,6 +12,11 @@ const routes: Routes = [
     path: 'create',
     data: {isCreate: true},
     component: CreatePublicationComponent
+  },
+  {
+    path: ':id',
+    data: {isCreate: false},
+    component: CreatePublicationComponent
   }
 ];
 

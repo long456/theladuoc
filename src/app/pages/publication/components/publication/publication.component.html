@@ -20,10 +20,10 @@
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Người tạo" key="ownerName" [width]="'200px'"></table-column>
-      <table-column header="Tên ấn phẩm" key="name" [width]="'300px'"></table-column>
-      <table-column header="Link ấn phẩm" key="slug" [width]="'200px'"></table-column>
-      <table-column header="Kích thước" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Người tạo" key="createdName" [width]="'200px'"></table-column>
+      <table-column header="Tên ấn phẩm" key="name" [width]="'200px'"></table-column>
+      <table-column header="Link ấn phẩm" key="link" [width]="'250px'"></table-column>
+      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
 <!--      <table-column header="Trạng thái" key="status" [width]="'180px'">-->
 <!--        <ng-template appCell let-data>-->
 <!--          <span class="text-valid" *ngIf="data.status">Hiển thị</span>-->
@@ -37,7 +37,15 @@
         </ng-template>
 
         <ng-template appCell let-data>
-          <span class="custom-action" (click)="copyLink(data)">Copy link</span>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Chỉnh sửa ấn phẩm">
+            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="copyLink(data)"
+                nz-tooltip nzTooltipTitle="Copy link">
+            <span nz-icon nzType="copy" nzTheme="outline" class="custom-icon"></span>
+          </span>
         </ng-template>
       </table-column>
     </app-table>

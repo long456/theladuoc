@@ -73,7 +73,14 @@ export class SideBarComponent {
         {
           name : 'Nhân sự',
           icon: '',
-          link: 'page/staff',
+          link: '',
+          children: [
+            {
+              name : 'Trao quyền',
+              icon: '',
+              link: 'page/staff',
+            }
+          ],
         },
       ]
     },

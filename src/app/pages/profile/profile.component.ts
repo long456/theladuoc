@@ -22,6 +22,7 @@ import {CommonModule, DatePipe} from "@angular/common";
 import {AuthService} from "../../layouts/auth-layout/auth/services/auth.service";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-profile',
@@ -39,6 +40,8 @@ export class ProfileComponent implements OnInit{
   userForm!: FormGroup;
 
   file: any;
+
+  linkAvatar!: string;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -76,6 +79,8 @@ export class ProfileComponent implements OnInit{
     this.authService.getUserProfile().subscribe({
       next: res => {
         if (res.success) {
+          const baseUrl = environment.baseImgUrl
+          this.linkAvatar = baseUrl + res.data.avatar;
           this.userForm.patchValue(res.data)
         }
       }
@@ -160,9 +165,9 @@ export class ProfileComponent implements OnInit{
       this.authService.updateUserProfile(data).subscribe({
         next: res => {
           if (res.success) {
-            this.message.success('Cập nhật thông tin người dùng thành công')
+            this.message.success('Cập nhật thông tin người dùng thành công');
           } else {
-            this.message.error(res.errorMessages)
+            this.message.error(res.errorMessages);
           }
         }
       })
@@ -176,10 +181,13 @@ export class ProfileComponent implements OnInit{
   handleChange(e: any) {
     let data = new FormData();
     data.append('file', e.target.files[0])
-    console.log(data.getAll('file'))
-    this.authService.updateAvatar(e.target.files[0]).subscribe({
+    this.authService.updateAvatar(data).subscribe({
       next: res =>{
-        console.log(res)
+        if (res.success) {
+          const baseUrl = environment.baseImgUrl
+          this.linkAvatar = baseUrl + res.data.avatar;
+          this.message.success('Cập nhật ảnh đại diện thành công');
+        }
       }
     })
   }
