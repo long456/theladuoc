@@ -14,7 +14,7 @@
           <input
             #courseName
             nz-input autofocus formControlName="title"
-            [nzStatus]="(this.courseForm.get('title')?.invalid && (courseForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
+            [nzStatus]="(courseForm.get('title')?.invalid && (courseForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
                 *ngIf="(courseForm.get('title')?.touched || isSubmit)  && courseForm.get('title')?.hasError('required')"
@@ -22,11 +22,12 @@
             Tên khóa học không được để trống
           </span>
         </div>
+
         <div nz-col [nzSpan]="8">
           <span class="text-label">Mã khóa học</span>
           <input
             nz-input formControlName="courseCode"
-            [nzStatus]="(this.courseForm.get('courseCode')?.invalid && (courseForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''"
+            [nzStatus]="(courseForm.get('courseCode')?.invalid && (courseForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''"
           >
           <span class="text-danger"
                 *ngIf="(courseForm.get('courseCode')?.touched || isSubmit)  && courseForm.get('courseCode')?.hasError('pattern')"
@@ -34,6 +35,7 @@
             Mã khóa học không đúng định dạng
           </span>
         </div>
+
         <div nz-col [nzSpan]="8" >
           <div class="text-label">Trạng thái</div>
           <nz-switch formControlName="status">
@@ -56,7 +58,7 @@
           <div>
             <nz-select
               formControlName="teacherId"
-              [nzStatus]="(this.courseForm.get('teacherId')?.invalid && (courseForm.get('teacherId')?.touched || isSubmit)) ? 'error' : ''"
+              [nzStatus]="(courseForm.get('teacherId')?.invalid && (courseForm.get('teacherId')?.touched || isSubmit)) ? 'error' : ''"
             >
               <nz-option
                 *ngFor="let teacher of listTeacher"
@@ -73,13 +75,111 @@
             Tên giáo viên không được để trống
           </span>
         </div>
+
         <div nz-col [nzSpan]="8">
-          <span class="text-label">Số thứ tự</span>
+          <span class="text-label">
+            Loại khóa học
+          </span>
+
           <div>
-            <nz-input-number
-              class="input-nz-number"
-              [nzMin]="0" [nzStep]="1" formControlName="sort"></nz-input-number>
+            <nz-select
+              formControlName="type"
+            >
+              <nz-option [nzValue]="1" [nzLabel]="'Khóa phễu'"></nz-option>
+              <nz-option [nzValue]="2" [nzLabel]="'Khóa lớn'"></nz-option>
+            </nz-select>
           </div>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <div nz-row [nzGutter]=[16,16]>
+            <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Điểm đăng ký
+            </span>
+
+              <div>
+                <nz-input-number
+                  class="input-nz-number"
+                  formControlName="registerPoint"
+                  [nzMin]="0"
+                  [nzMax]="100"
+                  [nzStep]="1"
+                ></nz-input-number>
+              </div>
+            </div>
+
+            <div nz-col [nzSpan]="6">
+              <span class="text-label">
+                Điểm giới thiệu trực tiếp
+              </span>
+
+              <div>
+                <nz-input-number
+                  class="input-nz-number"
+                  formControlName="directReferralPoint"
+                  [nzMin]="0"
+                  [nzStep]="1"
+                ></nz-input-number>
+              </div>
+            </div>
+
+            <div nz-col [nzSpan]="6">
+              <span class="text-label">
+                Điểm giới thiệu gián tiếp
+              </span>
+
+              <div>
+                <nz-input-number
+                  class="input-nz-number"
+                  formControlName="indirectReferralPoint"
+                  [nzMin]="0"
+                  [nzStep]="1"
+                ></nz-input-number>
+              </div>
+            </div>
+
+            <div nz-col [nzSpan]="6">
+              <span class="text-label">
+                Giá khóa học
+              </span>
+
+              <div>
+                <nz-input-number
+                  class="input-nz-number"
+                  formControlName="price"
+                  [nzMin]="0"
+                  [nzStep]="1000"
+                  [nzFormatter]="formatterVnd"
+                  [nzParser]="parserVnd"
+                ></nz-input-number>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <span class="text-label">
+            Thể lệ chương trình referral 1
+          </span>
+          <ckeditor
+            name="ckeditor_text"
+            formControlName="referralHtmlTop"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
+            [config]="ckEditorConfig"
+          ></ckeditor>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <span class="text-label">
+            Thể lệ chương trình referral 2
+          </span>
+          <ckeditor
+            name="ckeditor_text"
+            formControlName="referralHtmlBottom"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
+            [config]="ckEditorConfig"
+          ></ckeditor>
         </div>
       </div>
     </form>

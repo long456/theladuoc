@@ -1,0 +1,41 @@
+.title-page{
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-bottom: 15px;
+}
+
+.btn-panel{
+  text-align: end;
+  position: sticky;
+  top: 0;
+}
+
+.btn {
+  min-width: 80px;
+  min-height: 36px;
+  margin-left: 8px;
+  border-radius: 4px;
+}
+
+
+.primary {
+  background-color: #40a9ff;
+  color: white;
+}
+
+.text-label{
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.text-danger{
+  color: red;
+  width: 100%;
+}
+
+.width-50{
+  width: 50%;
+}
+

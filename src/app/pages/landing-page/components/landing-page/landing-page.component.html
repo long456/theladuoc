@@ -1,0 +1,78 @@
+<div class="title-page">
+  Danh sách landing page
+</div>
+
+<div class="header-btn">
+
+  <ng-container *ngIf="(landingPage$ | async) as landingPage">
+    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>
+    <app-table
+      [rows]="landingPage.rows"
+      [page]="landingPage.page"
+      [pageSize]="landingPage.pageSize"
+      [pageTotal]="landingPage.rowTotal"
+      (onItemSelection)="getItemSelection($event)"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="Mã landing page" key="landingPageCode" [width]="'200px'"></table-column>
+      <table-column header="Tên landing page" key="name" [width]="'200px'"></table-column>
+      <table-column header="Tên lớp học" key="className" [width]="'200px'"></table-column>
+      <table-column header="Danh sách form" key="formRegisterList" [width]="'200px'">
+        <ng-template appCell let-data>
+          <span *ngFor="let form of data.formRegisterList; index as i">
+            <div *ngIf="i <= 2">
+              {{form.title}},
+            </div>
+            <span *ngIf="i > 2">
+              và {{data.formRegisterList.length - 3}} form nữa
+            </span>
+          </span>
+        </ng-template>
+      </table-column>
+      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="Tên diễn giả" key="speakerName" [width]="'200px'"></table-column>
+      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Trạng thái" key="status" [width]="'180px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.status">Hiển thị</span>
+          <span class="text-invalid" *ngIf="!data.status">Không hiển thị</span>
+        </ng-template>
+      </table-column>
+
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Chỉnh sửa landing page">
+            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="attachClass(data)" *ngIf="!data.classId"
+                nz-tooltip nzTooltipTitle="Gắn lớp">
+            <span nz-icon nzType="apartment" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="removeClass(data)" *ngIf="data.classId"
+                nz-tooltip nzTooltipTitle="Gỡ lớp">
+            <span nz-icon nzType="close" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="attachForm(data)"
+                nz-tooltip nzTooltipTitle="Gắn form">
+            <span nz-icon nzType="form" nzTheme="outline" class="custom-icon"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

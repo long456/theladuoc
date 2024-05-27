@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {WaitingStudentComponent} from "./components/waiting-student/waiting-student.component";
 import {TakingCareStudentComponent} from "./components/taking-care-student/taking-care-student.component";
 import {StudyingStudentComponent} from "./components/studying-student/studying-student.component";
+import {NonDividedStudentComponent} from "./components/non-divided-student/non-divided-student.component";
 
 
 
@@ -11,6 +12,10 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'waiting'
+  },
+  {
+    path: 'none-divide',
+    component: NonDividedStudentComponent
   },
   {
     path: 'waiting',

@@ -1,0 +1,49 @@
+<form [formGroup]="lessonForm">
+  <div nz-row [nzGutter]=[16,16]>
+    <div nz-col [nzSpan]="18">
+      <span class="text-label">
+        Tên buổi học
+        <span class="text-danger">*</span>
+      </span>
+
+      <input
+        nz-input formControlName="name"
+        [nzStatus]="(lessonForm.get('name')?.invalid && (lessonForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+
+      <span class="text-danger"
+        *ngIf="(lessonForm.get('name')?.touched || isSubmit)  && lessonForm.get('name')?.hasError('required')">
+        Tên buổi học không được để trống
+      </span>
+    </div>
+
+    <div nz-col [nzSpan]="18">
+      <span class="text-label">
+        Thời lượng
+        <span class="text-danger">*</span>
+      </span>
+
+      <nz-range-picker
+        [nzStatus]="(lessonForm.get('duration')?.invalid && (lessonForm.get('duration')?.touched || isSubmit)) ? 'error' : ''"
+        formControlName="duration"
+        [nzShowTime]="{ nzFormat: 'HH:mm' }"
+        nzFormat="dd/MM/YYYY HH:mm"
+      ></nz-range-picker>
+
+      <span class="text-danger"
+            *ngIf="(lessonForm.get('duration')?.touched || isSubmit)  && lessonForm.get('duration')?.hasError('required')">
+        Thời lượng không được để trống
+      </span>
+    </div>
+
+    <div nz-col [nzSpan]="24" class="btn-group">
+      <button nz-button (click)="closeModal()">
+        Hủy
+      </button>
+      <button nz-button nzType="primary" [nzLoading]="isLoading" (click)="addLesson()">
+        Tạo
+      </button>
+    </div>
+  </div>
+</form>
+
+

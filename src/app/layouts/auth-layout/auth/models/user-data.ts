@@ -6,3 +6,9 @@ export interface UserData {
   organizationId: number;
   permissions: string[];
 }
+
+export interface UserPasswordData {
+  oldPassword: string,
+  password: string,
+  confirmPassword: string
+}

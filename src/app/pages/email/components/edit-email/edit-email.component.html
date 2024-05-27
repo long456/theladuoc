@@ -1,0 +1,128 @@
+<div class="title-page">
+  <span *ngIf="type === 'system'">Thiết lập email hệ thống</span>
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="emailForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tiêu đề email
+            <span class="text-danger">*</span>
+          </span>
+          <input
+            nz-input autofocus formControlName="emailSubject"
+            [nzStatus]="(emailForm.get('emailSubject')?.invalid && (emailForm.get('emailSubject')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(emailForm.get('emailSubject')?.touched || isSubmit)  && emailForm.get('emailSubject')?.hasError('required')"
+          >
+            Tiêu đề email không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Thứ tự</div>
+          <nz-input-number
+            style="width: 100%"
+            [nzMin]="0" [nzStep]="1"
+            formControlName="no"></nz-input-number>
+        </div>
+
+        <div nz-col [nzSpan]="4" >
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="4" >
+          <div class="text-label">Điểm danh</div>
+          <nz-switch formControlName="isAttendance">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Ngày gửi</div>
+          <nz-date-picker
+            style="width: 100%"
+            formControlName="dateSend"
+            [nzFormat]="'dd/MM/YYYY'"
+            [nzPlaceHolder]="'Chọn ngày'"></nz-date-picker>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Giờ gửi</div>
+
+          <span class="time-range">
+            <nz-time-picker
+              style="flex: 1; margin-right: 8px"
+              [(ngModel)]="timeStart" [ngModelOptions]="{standalone: true}"
+              (ngModelChange)="timeChange()"
+              nzFormat="HH:mm"
+              [nzPlaceHolder]="'Chọn giờ'"></nz-time-picker>
+
+            đến
+
+            <nz-time-picker
+              style="flex: 1; margin-left: 8px"
+              [(ngModel)]="timeEnd" [ngModelOptions]="{standalone: true}"
+              (ngModelChange)="timeChange()"
+              nzFormat="HH:mm"
+              [nzPlaceHolder]="'Chọn giờ'"></nz-time-picker>
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Khóa học
+            <span class="text-danger">*</span>
+          </span>
+
+          <div>
+            <nz-select
+              formControlName="courseId"
+              [nzPlaceHolder]="'Chọn khóa học'"
+              [nzStatus]="(emailForm.get('courseId')?.invalid && (emailForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <nz-option
+                *ngFor="let course of courseList"
+                [nzValue]="course.id"
+                [nzLabel]="course.title + ' - ' + course.courseCode"
+              >
+              </nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(emailForm.get('courseId')?.touched || isSubmit) && emailForm.get('courseId')?.hasError('required')"
+          >
+            Tên khóa học không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <span class="text-label">
+            Nội dung email
+          </span>
+          <ckeditor
+            name="ckeditor_text"
+            formControlName="content"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
+            [config]="ckEditorConfig"
+          ></ckeditor>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

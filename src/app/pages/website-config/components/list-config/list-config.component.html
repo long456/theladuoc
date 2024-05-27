@@ -1,0 +1,34 @@
+<div class="title-page">
+  Danh sách cấu hình website
+</div>
+
+<div>
+  <ng-container *ngIf="(webConfig$ | async) as webConfig">
+    <app-table
+      [rows]="webConfig.rows"
+      [page]="webConfig.page"
+      [pageSize]="webConfig.pageSize"
+      [pageTotal]="webConfig.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Email tổ chức" key="organizationEmail" [width]="'200px'"></table-column>
+      <table-column header="Số điện thoại tổ chức" key="organizationPhoneNumber" [width]="'200px'"></table-column>
+      <table-column header="Người đại diện" key="representativeName" [width]="'200px'"></table-column>
+
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)">Thiết lập</span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

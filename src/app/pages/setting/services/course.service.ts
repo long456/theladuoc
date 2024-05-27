@@ -11,17 +11,17 @@ export class CourseService {
     private http: HttpClient,
   ) { }
 
-  getAllCourse(filter?: any): Observable<any>{
+  getAllCourse(page?: any, pageSize?: any, filter?: any): Observable<any>{
     let option = {
-      pageCurent: 1,
-      pageSize: 10,
+      PageIndex: page,
+      pageSize: pageSize,
     }
 
     if (filter) {
       option = {
         ...filter,
-        pageCurent: 1,
-        pageSize: 10,
+        PageIndex: page,
+        pageSize: pageSize,
       }
     }
     return this.http.get('Course', {params: option})
@@ -39,11 +39,26 @@ export class CourseService {
     return this.http.post('Course', data)
   }
 
-  deleteCourse(id : number): Observable<any>{
+  deleteCourse(id : [number]): Observable<any>{
     return this.http.delete('Course/' + id)
+  }
+
+  softDeleteCourse(data: number[]): Observable<any> {
+    return this.http.delete('Course/soft-delete',{body: data})
   }
 
   getAllTeacher(): Observable<any>{
     return this.http.get('User/get-list-option-lecturer')
+  }
+
+  getListCourse(type?: number): Observable<any>{
+
+    let params = {};
+    if (type) {
+      params = {
+        type: type
+      }
+    }
+    return this.http.get('Course/get-course-list', {params: params})
   }
 }

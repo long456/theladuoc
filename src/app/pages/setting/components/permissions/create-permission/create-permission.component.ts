@@ -55,19 +55,17 @@ export class CreatePermissionComponent implements OnInit{
           this.permissionStatus = item.data.isActive
           this.listPermission = [...item.data.permissions].map(ele => {
             let data:  any[] = []
-            item.children.map((e : any) => {
+            ele.children.map((e : any) => {
               if (e.checked) {
                 data.push(e.id)
               }
             })
             return {
-              ...item,
+              ...ele,
               data: data
             }
           })
-
         })
-
       })
     }
   }
@@ -126,6 +124,7 @@ export class CreatePermissionComponent implements OnInit{
           next: res => {
             if (res.success) {
               this.message.success('Tạo nhóm quyền thành công')
+              this.navigateBack();
             }
           },
           error: (err) => {
@@ -139,8 +138,8 @@ export class CreatePermissionComponent implements OnInit{
           next: res => {
             if (res.success) {
               this.message.success('Chỉnh sửa nhóm quyền thành công')
+              this.navigateBack();
             }
-            this.navigateBack();
           },
           error: err => {
             this.message.error(err)

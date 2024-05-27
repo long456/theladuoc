@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import {NZ_DATE_LOCALE, NZ_I18N, vi_VN} from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
@@ -17,6 +17,7 @@ import {SharedModule} from "./shared/shared.module";
 import {PageComponent} from "./layouts/page-layout/page/page.component";
 import {AuthComponent} from "./layouts/auth-layout/auth/auth.component";
 import {HttpRequestInterceptor} from "./shared/interceptors/http-request.inperceptor";
+import {ProfileComponent} from "./pages/profile/profile.component";
 
 registerLocaleData(en);
 
@@ -26,7 +27,8 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     PageComponent,
-    AuthComponent
+    AuthComponent,
+    // ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,7 @@ registerLocaleData(en);
       useClass: HttpRequestInterceptor,
       multi: true,
     },
+    // { provide: NZ_DATE_LOCALE, useValue: vi_VN }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,83 @@
+<div>
+  <form [formGroup]="paymentForm">
+    <div nz-row [nzGutter]=[16,16]>
+      <div nz-col [nzSpan]="24">
+        <span>
+          Tên học viên
+        </span>
+
+        <div>
+          <input nz-input formControlName="name" readonly/>
+        </div>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <span>
+          Số tiền phải thanh toán
+        </span>
+
+        <div>
+          <nz-input-number
+            class="with-100"
+            formControlName="price"
+            [nzMin]="0"
+            [nzStep]="1000"
+            [nzFormatter]="formatterVnd"
+            [nzParser]="parserVnd"
+          ></nz-input-number>
+        </div>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <span>
+          Số tiền đã thanh toán
+        </span>
+
+        <div>
+          <nz-input-number
+            class="with-100"
+            formControlName="amountPaid"
+            [nzMin]="0"
+            [nzStep]="1000"
+            [nzFormatter]="formatterVnd"
+            [nzParser]="parserVnd"
+          ></nz-input-number>
+        </div>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <span>
+          Trạng thái
+        </span>
+
+        <div>
+          <nz-select class="with-100" formControlName="isPay">
+            <nz-option [nzValue]="0" nzLabel="Chưa thanh toán"></nz-option>
+            <nz-option [nzValue]="2" nzLabel="Thanh toán một phần"></nz-option>
+            <nz-option [nzValue]="1" nzLabel="Đã thanh toán"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+
+      <div nz-col [nzSpan]="24">
+        <span>Upload ảnh ủy nhiệm chi</span>
+        <label for="file" class="upload">
+          <span nz-icon nzType="upload" nzTheme="outline"></span>
+          Ảnh ủy nhiệm chi
+          <div class="file-name">{{nameFilePreview}}</div>
+        </label>
+        <input type="file" (change)="uploadFile($event)"
+               accept="image/png, image/gif, image/jpeg"
+               class="upload-file" name="file" id="file">
+
+        <img
+          style="margin-top: 15px"
+          nz-image
+          [src]="imgPreviewUrl"
+          width="150"
+          alt=""
+        />
+      </div>
+    </div>
+  </form>
+</div>

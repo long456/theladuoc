@@ -1,0 +1,77 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới lớp học' : 'Chỉnh sửa lớp học'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="classForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">
+            Tên lớp học
+            <span class="text-danger">*</span>
+          </span>
+          <input
+            nz-input autofocus formControlName="name"
+            [nzStatus]="(classForm.get('name')?.invalid && (classForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(classForm.get('name')?.touched || isSubmit)  && classForm.get('name')?.hasError('required')"
+          >
+            Tên lớp học không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">
+            Khóa học
+            <span class="text-danger">*</span>
+          </span>
+
+          <div>
+            <nz-select [nzDisabled]="!isCreate"
+                       style="display: block"
+                       formControlName="courseId"
+                       [nzStatus]="(classForm.get('courseId')?.invalid && (classForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <nz-option
+                *ngFor="let course of listCourse"
+                [nzValue]="course.id"
+                [nzLabel]="course.title"
+              ></nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(classForm.get('courseId')?.touched || isSubmit) && classForm.get('courseId')?.hasError('required')"
+          >
+            Tên khóa học không được để trống
+          </span>
+        </div>
+
+<!--        <div nz-col [nzSpan]="24">-->
+<!--          <div style="text-align: right;padding-bottom: 8px">-->
+<!--            <button nz-button nzType="primary" (click)="addLesson()">-->
+<!--              <span nz-icon nzType="plus"></span>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--          <nz-list nzBordered nzHeader="Danh sách buổi học" >-->
+<!--            <nz-list-item-->
+<!--                *ngFor="let lesson of listLesson">-->
+<!--              {{lesson.name}}-->
+<!--            </nz-list-item>-->
+<!--          </nz-list>-->
+<!--        </div>-->
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

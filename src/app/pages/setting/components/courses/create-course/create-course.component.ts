@@ -5,6 +5,7 @@ import {CourseService} from "../../../services/course.service";
 import {teacher} from "../../../models/course";
 import {debounceTime, distinctUntilChanged, fromEvent, map, switchMap} from "rxjs";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {config} from "../../../../../shared/models/ckeditor";
 
 @Component({
   selector: 'app-create-course',
@@ -27,6 +28,8 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
 
   isExpand = false;
 
+  ckEditorConfig: any = config;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -44,8 +47,14 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
       courseCode: ['', Validators.pattern('^[a-zA-Z0-9\\-]+$')],
       description: [''],
       teacherId: [null, [Validators.required]],
-      sort: [1],
-      status: [1]
+      status: [1],
+      type: [1],
+      registerPoint: [0],
+      directReferralPoint: [0],
+      indirectReferralPoint: [0],
+      price: [0],
+      referralHtmlTop:  [''],
+      referralHtmlBottom: [''],
     })
 
     if (!this.isCreate) {
@@ -54,10 +63,12 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
         this.courseId = id;
         this.courseService.getCourseById(id).subscribe({
           next: res => {
-            if (res.success) {
-              this.courseForm.patchValue(res.data)
-            } else {
-              this.message.error(res.errorMessages);
+            if (res) {
+              const data = {
+                ...res,
+                price: res.coursePrice,
+              }
+              this.courseForm.patchValue(data)
             }
           }
         })
@@ -72,16 +83,16 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit() {
-      fromEvent(this.courseNameField.nativeElement, 'keydown')
-      .pipe(
-        debounceTime(250),
-        map((event: any) => event.target.value.trim()),
-        distinctUntilChanged()
-      )
-      .subscribe(inputData => {
-        const slug = this.renderSlug(inputData);
-        this.courseForm.get('courseCode')?.patchValue(slug);
-      });
+    fromEvent(this.courseNameField.nativeElement, 'keydown')
+    .pipe(
+      debounceTime(250),
+      map((event: any) => event.target.value.trim()),
+      distinctUntilChanged()
+    )
+    .subscribe(inputData => {
+      const slug = this.renderSlug(inputData);
+      this.courseForm.get('courseCode')?.patchValue(slug);
+    });
   }
 
   edit(): void {
@@ -93,7 +104,6 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
         teacherId: parseInt(this.courseForm.get('teacherId')?.value),
         status: this.courseForm.get('status')?.value ? 1 : 0,
       }
-
       if (this.isCreate) {
         this.courseService.createCourse(data).subscribe({
           next: res => {
@@ -105,7 +115,7 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
             }
           },
           error: err => {
-
+            this.message.error(err.error);
           }
         })
       } else {
@@ -133,6 +143,14 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
       .replace(/\s+/g, '-') // Replace spaces with hyphens
       .replace(/-+/g, '-') // Remove consecutive hyphens
       .trim(); // Trim leading and trailing spaces
+  }
+
+  formatterVnd(value: number): string {
+    return `${value} VND`
+  }
+
+  parserVnd(value: string): string {
+    return value.replace(' VND', '');
   }
 
   navigateBack() {

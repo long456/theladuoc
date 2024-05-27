@@ -1,0 +1,134 @@
+.title-page{
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-bottom: 15px;
+}
+
+.text-label{
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: inherit;
+}
+
+.text-danger{
+  color: red;
+  width: 100%;
+}
+
+.color-picker{
+  min-width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  border: 1px solid #d9d9d9;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all .2s;
+  padding: 0px 8px;
+  width: fit-content;
+  &:hover{
+    border: 1px solid #1890ff;
+  }
+  input{
+    -webkit-appearance: none;
+    appearance: none;
+    border: 0;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background-color: white;
+    cursor: pointer;
+  }
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: 1px solid rgba(0, 0, 0, .06);
+}
+
+.bg-container{
+  margin-top: 20px;
+  box-shadow: 4px 4px 16px 0 RGB(27 39 51 / 20%);
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: fit-content;
+}
+
+.type1 {
+  width: 700px;
+  aspect-ratio: 2896/1448;
+}
+
+.type2 {
+  width: 400px;
+  aspect-ratio: 1024/1446;
+}
+
+.type3 {
+  width: 700px;
+  aspect-ratio: 1446/1024;
+}
+
+.upload-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.upload{
+  display: block;
+  height: 32px;
+  width: 228px;
+  border: 1px solid #d9d9d9;
+  text-align: center;
+  line-height: 32px;
+  cursor: pointer;
+  padding: 0 15px;
+  position: relative;
+  span{
+    margin-right: 8px;
+  }
+
+  &:hover{
+    border: 1px solid #40a9ff;
+    color: #40a9ff;
+  }
+}
+
+.file-name{
+  position: absolute;
+  left: 240px;
+  color: #001529!important;
+  width: 100%;
+  top: 0;
+  text-align: start;
+}
+
+.publication{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column
+}
+
+.btn-publication{
+  margin-top: 30px;
+}
+
+.btn {
+  min-width: 80px;
+  min-height: 36px;
+  margin-left: 8px;
+  border-radius: 4px;
+}
+
+
+.primary {
+  background-color: #40a9ff;
+  color: white;
+}

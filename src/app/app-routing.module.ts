@@ -28,7 +28,19 @@ const routes: Routes = [
       {
         path: 'organization',
         loadChildren: () => import('./pages/organization/organization.module').then(m => m.OrganizationModule),
-      }
+      },
+      {
+        path: 'profile',
+        loadComponent: () => import('./pages/profile/profile.component').then(c => c.ProfileComponent),
+      },
+      {
+        path: 'staff',
+        loadChildren: () => import('./pages/staff/staff.module').then(m => m.StaffModule),
+      },
+      {
+        path: 'payment-auth',
+        loadChildren: () => import('./pages/payment-auth/payment-auth.module').then(m => m.PaymentAuthModule),
+      },
     ]
   },
 ];

@@ -1,0 +1,119 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới landing page' : 'Chỉnh sửa landing page'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="landingPageForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên landing page
+            <span class="text-danger">*</span>
+          </span>
+          <input
+            #landingPageName
+            nz-input autofocus formControlName="name"
+            [nzStatus]="(landingPageForm.get('name')?.invalid && (landingPageForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(landingPageForm.get('name')?.touched || isSubmit)  && landingPageForm.get('name')?.hasError('required')"
+          >
+            Tên landing page không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">Mã landing page</span>
+          <input
+            nz-input formControlName="landingPageCode"
+            [nzStatus]="(landingPageForm.get('landingPageCode')?.invalid && (landingPageForm.get('landingPageCode')?.touched || isSubmit)) ? 'error' : ''"
+          >
+          <span class="text-danger"
+                *ngIf="(landingPageForm.get('landingPageCode')?.touched || isSubmit)  && landingPageForm.get('landingPageCode')?.hasError('pattern')"
+          >
+            Mã landing page không đúng định dạng
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8" >
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Khóa học
+            <span class="text-danger">*</span>
+          </span>
+
+          <div>
+            <nz-select [nzDisabled]="!isCreate"
+              formControlName="courseId"
+              [nzStatus]="(landingPageForm.get('courseId')?.invalid && (landingPageForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <nz-option
+                *ngFor="let course of listCourse"
+                [nzValue]="course.id"
+                [nzLabel]="course.title"
+              ></nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(landingPageForm.get('courseId')?.touched || isSubmit) && landingPageForm.get('courseId')?.hasError('required')"
+          >
+            Tên khóa học không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <span class="text-label">
+            Trang landing page
+          </span>
+          <ckeditor
+            name="ckeditor_text"
+            formControlName="htmlContent"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
+            [config]="ckEditorConfig"
+          ></ckeditor>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <span class="text-label">
+            PixelCode
+          </span>
+          <ckeditor
+            name="ckeditor_text"
+            formControlName="pixelCode"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
+            [config]="ckEditorConfig"
+          ></ckeditor>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <span class="text-label">
+            Thẻ seo
+          </span>
+          <ckeditor
+            name="ckeditor_text"
+            formControlName="seoOgTag"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
+            [config]="ckEditorConfig"
+          ></ckeditor>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

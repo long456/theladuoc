@@ -1,0 +1,162 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới email smtp' : 'Chỉnh sửa email smtp'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="emailAccountForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên email
+          </span>
+
+          <input
+            nz-input autofocus formControlName="name"
+            [nzStatus]="(emailAccountForm.get('name')?.invalid &&
+                        (emailAccountForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+          <span
+            class="text-danger"
+            *ngIf="(emailAccountForm.get('name')?.touched || isSubmit) &&
+                    emailAccountForm.get('name')?.hasError('required')"
+          >Tên email không được để trống</span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Địa chỉ email
+          </span>
+
+          <input
+            nz-input formControlName="addressEmail"
+            [nzStatus]="(emailAccountForm.get('addressEmail')?.invalid &&
+                        (emailAccountForm.get('addressEmail')?.touched || isSubmit)) ? 'error' : ''"
+          >
+
+          <span
+            class="text-danger"
+            *ngIf="(emailAccountForm.get('addressEmail')?.touched || isSubmit)  &&
+                    emailAccountForm.get('addressEmail')?.hasError('required')"
+          >
+            Địa chỉ email không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8" >
+          <div class="text-label">SSL</div>
+          <nz-switch formControlName="ssl">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên diễn giả
+          </span>
+
+
+          <nz-select
+            formControlName="userId"
+          >
+            <nz-option
+              *ngFor="let op of listOpAccount"
+              [nzValue]="op.id"
+              [nzLabel]="op.fullName"
+            ></nz-option>
+        </nz-select>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Host
+          </span>
+
+          <input
+            nz-input formControlName="host"
+            [nzStatus]="(emailAccountForm.get('host')?.invalid &&
+                        (emailAccountForm.get('host')?.touched || isSubmit)) ? 'error' : ''"
+          >
+
+          <span
+            class="text-danger"
+            *ngIf="(emailAccountForm.get('host')?.touched || isSubmit) &&
+                    emailAccountForm.get('host')?.hasError('required')"
+          >
+            Host không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên đăng nhập
+          </span>
+
+          <input
+            nz-input formControlName="userName"
+            [nzStatus]="(emailAccountForm.get('userName')?.invalid &&
+                        (emailAccountForm.get('userName')?.touched || isSubmit)) ? 'error' : ''"
+          >
+
+          <span
+            class="text-danger"
+            *ngIf="(emailAccountForm.get('userName')?.touched || isSubmit) &&
+                    emailAccountForm.get('userName')?.hasError('required')"
+          >
+            Tên đăng nhập không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Mật khẩu
+          </span>
+
+          <input
+            nz-input formControlName="password"
+            [nzStatus]="(emailAccountForm.get('password')?.invalid &&
+                        (emailAccountForm.get('password')?.touched || isSubmit)) ? 'error' : ''"
+          >
+
+          <span
+            class="text-danger"
+            *ngIf="(emailAccountForm.get('password')?.touched || isSubmit) &&
+                    emailAccountForm.get('password')?.hasError('required')"
+          >
+            Mật khẩu email không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Port</div>
+          <nz-input-number
+            style="width: 100%"
+            formControlName="port"
+            [nzMin]="0" [nzStep]="1"
+            [nzStatus]="(emailAccountForm.get('port')?.invalid &&
+                        (emailAccountForm.get('port')?.touched || isSubmit)) ? 'error' : ''"
+            ></nz-input-number>
+        </div>
+
+        <span
+          class="text-danger"
+          *ngIf="(emailAccountForm.get('port')?.touched || isSubmit) &&
+                  emailAccountForm.get('port')?.hasError('required')"
+        >
+          Port không được để trống
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

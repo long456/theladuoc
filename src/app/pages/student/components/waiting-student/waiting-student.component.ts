@@ -2,8 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {Student} from "../../models/student";
 import {StudentWaitingService} from "../../services/student-waiting.service";
 import {COL_DATA_TYPE, FIX_COLUMN, filterItem} from "../../../../shared/models/Table";
-import {switchMap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, switchMap, tap} from "rxjs";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {StudentService} from "../../services/student.service";
+import {NzModalService} from "ng-zorro-antd/modal";
+import {DetailStudentComponent} from "../detail-student/detail-student.component";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-waiting-student',
@@ -22,22 +26,6 @@ export class WaitingStudentComponent implements OnInit{
     {
       title: 'Loại vé',
       name: 'ticket',
-      type: "select",
-      value: 'vip',
-      data: [
-        {
-          key: 'vip',
-          label: 'VIP'
-        },
-        {
-          key: 'free',
-          label: 'FREE'
-        },
-        {
-          key: 'premium',
-          label: 'PREMIUM'
-        }
-      ]
     },
     {
       title: 'Tên học viên',
@@ -72,6 +60,18 @@ export class WaitingStudentComponent implements OnInit{
       name: '',
     },
     {
+      title: 'Số tiền',
+      name: 'price',
+    },
+    {
+      title: 'Tên landing page',
+      name: 'landingPageName',
+    },
+    {
+      title: 'Nhân viên chăm sóc',
+      name: 'caregiverName',
+    },
+    {
       title: 'Xác thực email',
       name: 'isAuthEmail',
       type: "select",
@@ -94,14 +94,38 @@ export class WaitingStudentComponent implements OnInit{
       value: true,
       data: [
         {
-          label: 'Đã xác thực',
+          label: 'Đã có tài khoản',
           key: true
         },
         {
-          label: 'Chưa xác thực',
+          label: 'Chưa có tài khoản',
           key: false
         }
       ]
+    },
+    {
+      title: 'Thanh toán',
+      name: 'isPay',
+      type: "select",
+      value: true,
+      data: [
+        {
+          label: 'Chưa thanh toán',
+          key: 0
+        },
+        {
+          label: 'Thanh toán một phần',
+          key: 1
+        },
+        {
+          label: 'Đã thanh toán',
+          key: 2
+        }
+      ]
+    },
+    {
+      title: 'Thuộc tổ chức',
+      name: 'organizationName',
     },
   ];
 
@@ -109,22 +133,88 @@ export class WaitingStudentComponent implements OnInit{
 
   isExpand = false;
 
+  waitingStudent$!: Observable<{
+    rows: any[],
+    filter?: any,
+    page: number;
+    pageSize: number;
+    rowTotal: number;
+  }>;
+
+  page$ = new BehaviorSubject(1);
+  pageSize$ = new BehaviorSubject(10);
+  filterList$ = new BehaviorSubject(null);
+
+  loading = false;
+
+  itemSelectList: number[] = [];
+
   constructor(
-    private studentWaitingService: StudentWaitingService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private studentService: StudentService,
+    private modal: NzModalService
   ) {
   }
 
   ngOnInit() {
-    this.studentWaitingService.getWaitingStudent().subscribe(res => {
-      console.log((res as any).data)
-      this.rowData = (res as any).data.users;
-    })
+    this.waitingStudent$ = combineLatest([
+      this.page$,
+      this.pageSize$,
+      this.filterList$
+    ])
+    .pipe(
+      tap(() => this.loading = true),
+      mergeMap(([page, pageSize, filter]) => {
+        return this.studentService.getWaitingStudent(page, pageSize, filter)
+          .pipe(
+            map((value) => {
+              return {
+                rows: value.data.users,
+                page: value.data.paginationInfo.pageCurrent,
+                pageSize: value.data.paginationInfo.pageSize,
+                rowTotal: value.data.paginationInfo.totalItem,
+              }
+            }),
+            catchError(err => {
+              this.message.error('Lỗi load dữ liệu học viên đang chờ')
+              return of(err.message)
+            })
+          )
+      }),
+      delay(200),
+      tap(() => this.loading = false),
+    )
   }
 
   handleFilterForm(event: any) {
-    this.studentWaitingService.getWaitingStudent(event).subscribe(res => {
-      this.rowData = (res as any).data.users;
+    this.filterList$.next(event)
+  }
+
+  handleExportExcel(event: any) {
+    if(Object.keys(event).length === 0) {
+      this.message.error('Các trường filter không được để trống');
+      return;
+    }
+    this.studentService.updateExportStatus('pending');
+    const data = {...event}
+    data['process'] = 1;
+    this.studentService.exportExcel(data).subscribe({
+      next: res => {
+        if (res.success) {
+          this.studentService.updateExportStatus('completed');
+          const baseUrl = environment.baseImgUrl
+          const a = document.createElement('a');
+          const url = baseUrl + res.data.filePath;
+          a.href = url;
+          document.body.appendChild(a);
+          a.click();
+          URL.revokeObjectURL(url);
+          a.remove();
+        } else {
+          this.studentService.updateExportStatus('error');
+          this.message.error(res.errorMessages);
+        }
+      }
     })
   }
 
@@ -132,16 +222,62 @@ export class WaitingStudentComponent implements OnInit{
     this.isExpand = event
   }
 
-  takeCareUser(data: any) {
-    this.studentWaitingService.takeCareStudent(data.id)
-      .pipe(
-        switchMap((res) => {
-            this.message.success((res as any).messages)
-            return this.studentWaitingService.getWaitingStudent()
-        })
-      )
-      .subscribe(res => {
-        this.rowData = (res as any).data.users;
+  takeCareStudent() {
+    if (this.itemSelectList.length === 0) {
+      this.message.error('Chưa có mục nào được chọn')
+    } else {
+      this.loading = true;
+      let data = JSON.stringify(this.itemSelectList);
+      this.studentService.takeCareStudent(data).pipe(
+        delay(200),
+        tap(() => this.loading = false),
+      ).subscribe({
+        next: res => {
+          if (res.success) {
+            this.pageSize$.next(10);
+            this.message.success(res.messages)
+          } else {
+            this.message.error(res.errorMessages)
+          }
+        }
       })
+    }
+  }
+
+  rejectStudent(){
+    if (this.itemSelectList.length === 0) {
+      this.message.error('Chưa có mục nào được chọn')
+    } else {
+      this.loading = true;
+      let data = JSON.stringify(this.itemSelectList)
+      this.studentService.rejectStudent(data).pipe(
+        delay(200),
+        tap(() => this.loading = false),
+      ).subscribe({
+        next: res => {
+          if (res.success) {
+            this.pageSize$.next(10);
+            this.message.success(res.messages)
+          } else {
+            this.message.error(res.errorMessages)
+          }
+        }
+      })
+    }
+  }
+
+  detail(data: any) {
+    this.studentService.setStudentData(data);
+
+    this.modal.create({
+      nzWidth: 'calc(70% - 256px)',
+      nzTitle: 'Chi tiết học viên',
+      nzContent: DetailStudentComponent,
+      nzOnOk: () => console.log('Click ok')
+    });
+  }
+
+  getItemSelection(e: any) {
+    this.itemSelectList = e;
   }
 }

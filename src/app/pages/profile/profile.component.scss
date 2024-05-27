@@ -1,0 +1,141 @@
+.user-title{
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.info-user{
+  padding: 0 24px;
+}
+
+.title-text{
+  font-size: 14px;
+  color: #181B1F;
+}
+
+.user-avatar{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile-content{
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+.change-ava-btn{
+  margin-top: 24px;
+}
+
+.user-profile{
+  min-height: 75vh;
+  position: relative;
+}
+
+.user-btn{
+  width: 97%;
+  text-align: end;
+  margin-top: 15px;
+  button {
+    margin-left: 8px;
+    min-width: 80px;
+    min-height: 40px;
+    border-radius: 4px;
+  }
+}
+
+.password-card {
+  display: flex;
+  justify-content: center;
+}
+
+.password-form{
+  display: flex;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 4px 0 rgba(158, 158, 158, 0), 0 2px 15px 0 rgba(0, 0, 0, 0.06);
+}
+
+.password-form-content{
+  margin-left: 15px ;
+}
+
+.password-btn{
+  text-align: center;
+  padding-top: 15px;
+  button {
+    margin-left: 8px;
+    min-width: 65px;
+    min-height: 30px;
+    border-radius: 4px;
+  }
+}
+
+.password-input{
+  padding-bottom: 15px;
+  width: 350px;
+}
+
+.text-danger{
+  color: #ff4d4f;
+  width: 100%;
+}
+
+.error{
+  color: #ff4d4f;
+}
+
+.success{
+  color: #52c41a;
+}
+
+.valid{
+  color: rgba(0, 0, 0, 0.06);
+  text-decoration: line-through;
+}
+
+input:read-only {
+  background: #F5F5F5;
+}
+
+.upload-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.upload{
+  margin-top: 20px;
+  display: block;
+  height: 32px;
+  width: 190px;
+  text-align: center;
+  line-height: 32px;
+  cursor: pointer;
+  padding: 0 15px;
+  position: relative;
+  span{
+    margin-right: 8px;
+  }
+
+  &:hover{
+    border-color: #40a9ff;
+    background: #40a9ff;
+  }
+
+  font-size: 14px;
+  border-radius: 32px;
+
+  color: #fff;
+  border-color: #1890ff;
+  background: #1890ff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}

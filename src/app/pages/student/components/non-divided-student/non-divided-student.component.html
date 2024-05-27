@@ -1,0 +1,87 @@
+<div class="title-page">
+  Danh sách học viên chưa chia
+</div>
+
+<div class="header-btn">
+
+  <ng-container *ngIf="(nonDivideStudent$ | async) as nonDivideStudent">
+    <nz-collapse class="filter-form" [class.expand]="isExpand">
+      <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
+        <app-filter-form [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"
+                         [isExportExcel]="true" (getExcelData)="handleExportExcel($event)"></app-filter-form>
+      </nz-collapse-panel>
+    </nz-collapse>
+
+
+    <button nz-button class="add-btn primary" (click)="takeCareStudent()">Nhận chăm sóc</button>
+<!--    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>-->
+
+    <app-table
+      [rows]="nonDivideStudent.rows"
+      [page]="nonDivideStudent.page"
+      [pageSize]="nonDivideStudent.pageSize"
+      [pageTotal]="nonDivideStudent.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+      (onItemSelection)="getItemSelection($event)"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Ngày đăng ký" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="Loại vé" key="ticket">
+        <ng-template appCell let-data>
+          <nz-tag [nzColor]="'red'" *ngIf="data.ticket === 'PREMIUM'">{{data.ticket}}</nz-tag>
+          <nz-tag [nzColor]="'blue'" *ngIf="data.ticket === 'FREE'">{{data.ticket}}</nz-tag>
+          <nz-tag [nzColor]="'gold'" *ngIf="data.ticket === 'VIP'">{{data.ticket}}</nz-tag>
+        </ng-template>
+      </table-column>
+      <table-column header="Số tiền" key="price" [width]="'150px'"></table-column>
+      <table-column header="Thanh toán" key="status" [width]="'180px'">
+        <ng-template appCell let-data>
+          <span class="text-invalid" *ngIf="data.isPay === 0">Chưa thanh toán</span>
+          <span class="text-warning" *ngIf="data.isPay === 1">Thanh toán một phần</span>
+          <span class="text-valid" *ngIf="data.isPay === 2">Đã thanh toán</span>
+        </ng-template>
+      </table-column>
+      <table-column header="Tên học viên" key="name" [width]="'180px'"></table-column>
+      <table-column header="Số điện thoại" key="mobile" [width]="'120px'"></table-column>
+      <table-column header="Email" key="email" [width]="'200px'"></table-column>
+      <table-column header="Mã học viên" key="code" [width]="'180px'"></table-column>
+      <table-column header="Loại vé" key="ticket" [width]="'180px'"></table-column>
+      <table-column header="Người giới thiệu" key="userRef" [width]="'180px'"></table-column>
+      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
+      <table-column header="Tên khóa học" key="title" [width]="'200px'"></table-column>
+      <table-column header="Tên lớp học" key="className" [width]="'200px'"></table-column>
+      <table-column header="Tên landing page" key="title" [width]="'200px'"></table-column>
+      <table-column header="Số điểm" key="title" [width]="'200px'"></table-column>
+
+      <table-column header="Xác thực email" key="isAuthEmail" [width]="'180px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.isAuthEmail">Đã xác thực</span>
+          <span class="text-invalid" *ngIf="!data.isAuthEmail">Chưa xác thực</span>
+        </ng-template>
+      </table-column>
+      <table-column header="Trạng thái" key="isAccount" [width]="'180px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.isAccount">Có tài khoản</span>
+          <span class="text-invalid" *ngIf="!data.isAccount">Chưa có tài khoản</span>
+        </ng-template>
+      </table-column>
+
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="detail(data)">Chi tiết</span>
+
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
+

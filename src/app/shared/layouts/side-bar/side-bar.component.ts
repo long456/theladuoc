@@ -39,6 +39,11 @@ export class SideBarComponent {
           link: '',
           children: [
             {
+              name : 'Chưa chia',
+              icon: '',
+              link: 'page/student/none-divide',
+            },
+            {
               name : 'Đang chờ',
               icon: '',
               link: 'page/student/waiting',
@@ -61,9 +66,21 @@ export class SideBarComponent {
           ]
         },
         {
-          name : 'Nhân viên',
+          name : 'Xác thực thanh toán',
+          icon: '',
+          link: 'page/payment-auth',
+        },
+        {
+          name : 'Nhân sự',
           icon: '',
           link: '',
+          children: [
+            {
+              name : 'Trao quyền',
+              icon: '',
+              link: 'page/staff',
+            }
+          ],
         },
       ]
     },
@@ -88,9 +105,20 @@ export class SideBarComponent {
               link: 'page/setting/permission',
             },
             {
-              name : 'Khóa học',
+              name : 'Referral',
               icon: '',
-              link: 'page/setting/course',
+              children: [
+                {
+                  name : 'Cuộc thi tính điểm',
+                  icon: '',
+                  link: 'page/setting/referral/loyalty',
+                },
+                {
+                  name : 'Tri ân học viên',
+                  icon: '',
+                  link: '',
+                },
+              ]
             },
             {
               name : 'Website',
@@ -100,20 +128,66 @@ export class SideBarComponent {
                 {
                   name : 'Header & Footer',
                   icon: '',
-                  link: 'page/setting/website/list-layouts',
+                  link: 'page/setting/website-config/config',
                 },
               ]
             },
             {
+              name : 'Khóa học',
+              icon: '',
+              link: 'page/setting/course',
+            },
+            {
+              name : 'Lớp học',
+              icon: '',
+              link: 'page/setting/class',
+            },
+            {
+              name : 'Buổi học',
+              icon: '',
+              link: 'page/setting/lesson',
+            },
+            {
               name : 'Landing page',
               icon: '',
-              link: '',
+              link: 'page/setting/landing-page',
+            },
+            {
+              name : 'Vé khóa học',
+              icon: '',
+              link: 'page/setting/ticket',
             },
             {
               name : 'Form đăng ký',
               icon: '',
               link: 'page/setting/register-form',
             },
+            {
+              name : 'Email SMTP',
+              icon: '',
+              link: 'page/setting/email-account',
+            },
+            {
+              name : 'Email',
+              icon: '',
+              children: [
+                {
+                  name : 'Email hệ thống',
+                  icon: '',
+                  link: 'page/setting/email/system-email',
+                },
+                {
+                  name : 'Email thông báo',
+                  icon: '',
+                  link: 'page/setting/email/notifications-email',
+                },
+              ]
+            },
+            {
+              name : 'Ấn phẩm',
+              icon: '',
+              link: 'page/setting/publication',
+            }
           ]
         },
       ]
@@ -124,8 +198,4 @@ export class SideBarComponent {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  // navigate(link : any) {
-  //   console.log(link)
-  //   this.router.navigateByUrl('page/student/waiting');
-  // }
 }

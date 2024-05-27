@@ -22,7 +22,6 @@ const routes: Routes = [
       {
         path:'list',
         data: {permission: 'role_list'},
-        canActivate: [AuthGuardService],
         component: ListPermisionComponent
       },
       {
@@ -63,13 +62,45 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'website',
-    loadChildren: () => import('./modules/website/website.module').then(m => m.WebsiteModule),
-  },
-  {
     path: 'register-form',
     loadChildren: () => import('../register-form/register-form.module').then(m => m.RegisterFormModule),
-  }
+  },
+  {
+    path: 'landing-page',
+    loadChildren: () => import('../landing-page/landing-page.module').then(m => m.LandingPageModule),
+  },
+  {
+    path: 'ticket',
+    loadChildren: () => import('../ticket/ticket.module').then(m => m.TicketModule),
+  },
+  {
+    path: 'email-account',
+    loadChildren: () => import('../email-smtp/email-smtp.module').then(m => m.EmailSmtpModule),
+  },
+  {
+    path: 'email',
+    loadChildren: () => import('../email/email.module').then(m => m.EmailModule),
+  },
+  {
+    path: 'referral',
+    loadChildren: () => import('../referral/referral.module').then(m => m.ReferralModule),
+  },
+  {
+    path: 'website-config',
+    loadChildren: () => import('../website-config/website-config.module').then(m => m.WebsiteConfigModule),
+  },
+  {
+    path: 'class',
+    loadChildren: () => import('../class/class.module').then(m => m.ClassModule),
+  },
+  {
+    path: 'lesson',
+    loadChildren: () => import('../lesson/lesson.module').then(m => m.LessonModule),
+  },
+  {
+    path: 'publication',
+    loadChildren: () => import('../publication/publication.module').then(m => m.PublicationModule),
+  },
 ]
 
 @NgModule({

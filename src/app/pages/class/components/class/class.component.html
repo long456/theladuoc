@@ -1,0 +1,48 @@
+<div class="title-page">
+  Danh sách lớp học
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(class$ | async) as class">
+    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>
+
+
+    <app-table
+      [rows]="class.rows"
+      [page]="class.page"
+      [pageSize]="class.pageSize"
+      [pageTotal]="class.rowTotal"
+      (onItemSelection)="getItemSelection($event)"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
+      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="Tên lớp học" key="className" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Chỉnh sửa lớp học">
+            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="addLesson(data)"
+                nz-tooltip nzTooltipTitle="Thêm buổi học">
+            <span nz-icon nzType="plus" nzTheme="outline" class="custom-icon"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
+

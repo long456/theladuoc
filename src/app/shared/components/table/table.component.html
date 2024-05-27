@@ -1,22 +1,39 @@
 <nz-table
   #table
-  [nzData]="rows"
   class="table-width"
   nzOuterBordered
-  [nzScroll]="{ x: '1500px', y: '590px' }"
+  nzShowSizeChanger
+  [nzData]="rows"
+  [nzLoading]="loading"
+  [nzFrontPagination]="clientPagination"
+  [nzPageIndex]="page"
+  [nzPageSize]="pageSize"
+  [nzTotal]="pageTotal"
+  [nzFrontPagination]="clientPagination"
+  (nzPageIndexChange)="pageIndexChange.emit($event)"
+  (nzPageSizeChange)="pageSizeChange.emit($event)"
+  [nzScroll]="{ x: '1500px', y: '550px' }"
 >
   <thead>
     <tr>
-      <th *ngFor="let column of columns" nzAlign="center"
-          [nzWidth]="column.width"
-          [nzLeft]="column.fixColumn === 'left'"
-          [nzRight]="column.fixColumn === 'right'"
+      <th *ngFor="let column of columns"
+        nzAlign="center"
+        [nzWidth]="column.width"
+        [nzLeft]="column.fixColumn === 'left'"
+        [nzRight]="column.fixColumn === 'right'"
       >
         <ng-container *ngIf="column.tplHeader">
           <ng-container *ngTemplateOutlet="column.tplHeader.template"></ng-container>
         </ng-container>
         <ng-container *ngIf="!column.tplHeader">
-          {{ column.header }}
+          <ng-container [ngSwitch]="column.dataType">
+            <ng-container *ngSwitchCase="COL_DATA_TYPE.SELECTION">
+              <input type="checkbox" [checked]="isChecked" (click)="onCheckedAll()">
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              {{ column.header }}
+            </ng-container>
+          </ng-container>
         </ng-container>
       </th>
     </tr>
@@ -35,10 +52,13 @@
         <ng-container *ngIf="!column.tplCell">
           <ng-container [ngSwitch]="column.dataType">
             <ng-container *ngSwitchCase="COL_DATA_TYPE.DATE">
-              {{ data[column.key] | date: 'dd/MM/YYYY' }}
+              {{ data[column.key] | date: 'dd/MM/YYYY HH:mm:ss' }}
             </ng-container>
             <ng-container *ngSwitchCase="COL_DATA_TYPE.INDEX">
               {{i + 1}}
+            </ng-container>
+            <ng-container *ngSwitchCase="COL_DATA_TYPE.SELECTION">
+              <input type="checkbox" (click)="onItemChecked(data)" [checked]="setOfCheckedId.has(data.id)">
             </ng-container>
             <ng-container *ngSwitchDefault>
               {{ data[column.key] }}
@@ -49,3 +69,4 @@
     </tr>
   </tbody>
 </nz-table>
+

@@ -3,30 +3,62 @@
 </div>
 
 <div class="header-btn">
-  <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-  <app-table [rows]="rowData">
-    <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-    <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-    <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
-    <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
-    <table-column header="Tên form đăng ký" key="teacherName" [width]="'200px'"></table-column>
-    <table-column header="Mã form đăng ký" key="teacherName" [width]="'150px'"></table-column>
-    <table-column header="Trạng thái" key="status" [width]="'180px'">
-      <ng-template appCell let-data>
-        <span class="text-valid" *ngIf="data.status">Hiển thị</span>
-        <span class="text-invalid" *ngIf="!data.status">Không hiển thị</span>
-      </ng-template>
-    </table-column>
 
-    <table-column [width]="'180px'" fixColumn="right" >
-      <ng-template appHeader>
-        Chức năng
-      </ng-template>
+  <ng-container *ngIf="(registerForm$ | async) as registerForm">
+    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>
+    <app-table
+      [rows]="registerForm.rows"
+      [page]="registerForm.page"
+      [pageSize]="registerForm.pageSize"
+      [pageTotal]="registerForm.rowTotal"
+      (onItemSelection)="getItemSelection($event)"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="Tên form đăng ký" key="title" [width]="'200px'"></table-column>
+      <table-column header="Tên tổ chức" key="organzinationName" [width]="'200px'"></table-column>
+      <table-column header="Tên diễn giả" key="speakerName" [width]="'200px'"></table-column>
+      <table-column header="Vé khóa học" key="ticketName" [width]="'200px'"></table-column>
+      <table-column header="Trạng thái" key="status" [width]="'180px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.status">Hiển thị</span>
+          <span class="text-invalid" *ngIf="!data.status">Không hiển thị</span>
+        </ng-template>
+      </table-column>
 
-      <ng-template appCell let-data>
-        <span class="custom-action" (click)="edit(data)">Sửa</span>
-        <span class="custom-action" (click)="delete(data)">Xóa</span>
-      </ng-template>
-    </table-column>
-  </app-table>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Chỉnh sửa form đăng ký">
+            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="copyCode(data)"
+                nz-tooltip nzTooltipTitle="Copy code">
+            <span nz-icon nzType="copy" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="attachTicket(data)" *ngIf="!data.ticketId"
+                nz-tooltip nzTooltipTitle="Gắn vé">
+            <span nz-icon nzType="plus-square" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="removeAttachTicket(data)" *ngIf="data.ticketId"
+                nz-tooltip nzTooltipTitle="Gỡ vé">
+            <span nz-icon nzType="close" nzTheme="outline" class="custom-icon"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
 </div>

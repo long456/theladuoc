@@ -1,0 +1,40 @@
+<div class="title-page">
+  Danh sách cuộc thi tính điểm
+</div>
+
+<div class="header-btn">
+  <button nz-button class="add-btn primary" (click)="create()">Tạo mới</button>
+  <ng-container *ngIf="(loyalty$ | async) as loyalty">
+
+    <app-table
+      [rows]="loyalty.rows"
+      [page]="loyalty.page"
+      [pageSize]="loyalty.pageSize"
+      [pageTotal]="loyalty.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Tên chương trình" key="roleName" [width]="'200px'"></table-column>
+      <table-column header="Ngày bắt đầu" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="Ngày kết thúc" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="Tên tổ chức" key="roleName" [width]="'200px'"></table-column>
+      <table-column header="Tên diễn giả" key="roleName" [width]="'200px'"></table-column>
+      <table-column header="Tên khóa học" key="roleName" [width]="'200px'"></table-column>
+      <table-column header="Đối tượng tham gia" key="roleName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)">Thiết lập</span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
+
+

@@ -1,51 +1,70 @@
-<div>
-  <nz-collapse class="filter-form" [class.expand]="isExpand" >
-    <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
-      <app-filter-form [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"></app-filter-form>
-    </nz-collapse-panel>
-  </nz-collapse>
-
-  <app-table [rows]="rowData">
-    <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-    <table-column header="Ngày đăng ký" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-    <table-column header="Tên học viên" key="name" [width]="'180px'"></table-column>
-    <table-column header="Số điện thoại" key="mobile" [width]="'120px'"></table-column>
-    <table-column header="Email" key="email" [width]="'180px'"></table-column>
-    <table-column header="Mã học viên" key="code" [width]="'180px'"></table-column>
-    <table-column header="Người giới thiệu" key="userRef" [width]="'180px'"></table-column>
-    <table-column header="Tên diễn giả" key="lecturerName" [width]="'180px'"></table-column>
-    <table-column header="Nhân viên chăm sóc" key="" [width]="'180px'"></table-column>
-    <table-column header="Khóa học gần nhất" key="" [width]="'180px'"></table-column>
-    <table-column header="Điểm danh gần nhất" key="" [width]="'180px'"></table-column>
-    <table-column header="Tổng học phí" key="" [width]="'150px'"></table-column>
-    <table-column header="Trạng thái" key="isAccount" [width]="'180px'">
-      <ng-template appCell let-data>
-        <span class="text-valid" *ngIf="data.isAccount">Đã xác thực</span>
-        <span class="text-invalid" *ngIf="!data.isAccount">Chưa xác thực</span>
-      </ng-template>
-    </table-column>
-    <table-column header="Nhóm quyền" key="" [width]="'180px'"></table-column>
-
-    <table-column [width]="'180px'" fixColumn="right" >
-      <ng-template appHeader>
-        Chức năng
-      </ng-template>
-
-      <ng-template appCell let-data>
-        <span class="custom-action">Chi tiết</span>
-
-        <span class="custom-action" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
-          Chăm sóc
-          <span nz-icon nzType="down"></span>
-        </span>
-
-        <nz-dropdown-menu #menu="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item>Xem chi tiết</li>
-            <li nz-menu-item>Phân quyền</li>
-          </ul>
-        </nz-dropdown-menu>
-      </ng-template>
-    </table-column>
-  </app-table>
+<div class="title-page">
+  Danh sách học viên đang học
 </div>
+
+<div class="header-btn">
+
+  <ng-container *ngIf="(studyingStudent$ | async) as studyingStudent">
+    <nz-collapse class="filter-form" [class.expand]="isExpand">
+      <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
+        <app-filter-form [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"></app-filter-form>
+      </nz-collapse-panel>
+    </nz-collapse>
+
+
+    <!--    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>-->
+    <!--    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>-->
+
+    <app-table
+      [rows]="studyingStudent.rows"
+      [page]="studyingStudent.page"
+      [pageSize]="studyingStudent.pageSize"
+      [pageTotal]="studyingStudent.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Ngày đăng ký" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="Tên học viên" key="name" [width]="'180px'"></table-column>
+      <table-column header="Khóa học gần nhất" key="latestCourseName" [width]="'200px'"></table-column>
+      <table-column header="Điểm danh gần nhất" key="latestAttendance" [width]="'200px'"></table-column>
+      <table-column header="Tổng học phí" key="totalPrice" [width]="'200px'"></table-column>
+
+      <table-column header="thẻ tag" key="tagNote" [width]="'220px'">
+        <ng-template appCell let-data>
+          <nz-select style="display: block" nzPlaceHolder="Chọn thẻ tag" [ngModel]="data.tagNote"
+                     [nzCustomTemplate]="selectTag" nzBorderless (ngModelChange)="onTagChange($event, data)">
+            <nz-option *ngFor="let tag of listTag" nzCustomContent
+                       [nzValue]="tag.value" [nzLabel]="tag.title" [nzTitle]="tag.color">
+              <nz-tag [nzColor]="tag.color">{{tag.title}}</nz-tag>
+            </nz-option>
+          </nz-select>
+
+          <ng-template #selectTag let-selected>
+            <nz-tag [nzColor]="selected.nzTitle">{{selected.nzLabel}}</nz-tag>
+          </ng-template>
+        </ng-template>
+      </table-column>
+      <table-column header="Số điện thoại" key="mobile" [width]="'120px'"></table-column>
+      <table-column header="Email" key="email" [width]="'200px'"></table-column>
+      <table-column header="Mã học viên" key="code" [width]="'180px'"></table-column>
+      <table-column header="Người giới thiệu" key="userRef" [width]="'180px'"></table-column>
+      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Tên diễn giả" key="lecturerName" [width]="'200px'"></table-column>
+      <table-column header="Nhân viên chăm sóc" key="caregiverName" [width]="'200px'"></table-column>
+
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="detail(data)">Chi tiết</span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
+

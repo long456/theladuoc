@@ -1,7 +1,7 @@
 <form [formGroup]="filterForm">
   <div nz-row [nzGutter]=[8,8]>
-    <div nz-col nzSpan="7" *ngFor="let item of filterData" class="flex-content">
-      <div nz-col nzSpan="6" class="text-align-right">
+    <div nz-col nzSpan="8" *ngFor="let item of filterData" class="flex-content">
+      <div nz-col nzSpan="7" class="text-align-right">
         <span>{{item.title}}</span>
       </div>
 
@@ -25,6 +25,10 @@
 
   <div class="btn-area">
     <button nz-button class="btn-form primary" (click)="filter()">Gửi</button>
+    <button nz-button class="btn-form excel" (click)="exportDataExcel()" *ngIf="isExportExcel">
+      Xuất excel
+      <span nz-icon nzType="file-excel" nzTheme="outline"></span>
+    </button>
     <button nz-button class="btn-form" (click)="clearForm()">Làm mới</button>
   </div>
 </form>

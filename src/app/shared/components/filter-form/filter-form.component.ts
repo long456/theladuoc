@@ -11,7 +11,9 @@ import {formatDate} from "@angular/common";
 export class FilterFormComponent implements OnInit{
 
   @Input() filterData: filterItem[] = [];
+  @Input() isExportExcel: boolean = false;
   @Output() getFilterData = new EventEmitter<any>();
+  @Output() getExcelData = new EventEmitter<any>();
   filterForm!: FormGroup;
 
   constructor(
@@ -36,24 +38,28 @@ export class FilterFormComponent implements OnInit{
     this.getFilterData.emit(data);
   }
 
+  exportDataExcel() {
+    const data = this.getSubmitData();
+    this.getExcelData.emit(data);
+  }
+
   getSubmitData() {
     const isDateRange = this.filterData.filter(item => item.type === "date-range");
-
     const data = {...this.filterForm.value}
 
     if (isDateRange.length > 0) {
-      if (this.filterForm.value[isDateRange[0].name] !== '') {
+      if (this.filterForm.value[isDateRange[0].name] !== '' && this.filterForm.value[isDateRange[0].name] !== null) {
         data['startDate'] = formatDate(this.filterForm.value[isDateRange[0].name][0] ,'dd/MM/YYYY', 'en-US');
-        data['endDate'] = formatDate(this.filterForm.value[isDateRange[0].name][0] ,'dd/MM/YYYY', 'en-US');
+        data['endDate'] = formatDate(this.filterForm.value[isDateRange[0].name][1] ,'dd/MM/YYYY', 'en-US');
       } else {
         data['startDate'] = ''
         data['endDate'] = ''
       }
+      delete data[isDateRange[0].name];
     }
-    delete data[isDateRange[0].name];
 
     for (const prop in data) {
-      if (data[prop] === '') {
+      if (data[prop] === '' || data[prop] === null) {
         delete data[prop]
       }
     }

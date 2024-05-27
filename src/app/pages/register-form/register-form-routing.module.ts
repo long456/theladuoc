@@ -10,6 +10,12 @@ const routes: Routes = [
   },
   {
     path:'create',
+    data: {isCreate: true},
+    component: CreateFormComponent
+  },
+  {
+    path:':id',
+    data: {isCreate: false},
     component: CreateFormComponent
   },
 ];

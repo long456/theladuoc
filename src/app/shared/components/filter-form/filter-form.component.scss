@@ -15,6 +15,7 @@
 
 .select-item{
   width: 100%;
+  text-align: left;
 }
 
 .btn-area{
@@ -31,5 +32,11 @@
 
 .primary {
   background-color: #40a9ff;
+  color: white;
+}
+
+.excel:hover{
+  border: 1px solid #539742;
+  background-color: #539742;
   color: white;
 }
