@@ -1,0 +1,43 @@
+<div class="title-page">
+  Danh sách sản phẩm
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(product$ | async) as product">
+    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>
+
+    <app-table
+      [rows]="product.rows"
+      [page]="product.page"
+      [pageSize]="product.pageSize"
+      [pageTotal]="product.rowTotal"
+      (onItemSelection)="getItemSelection($event)"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Ngày tạo" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Ảnh" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Tên sản phẩm" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Danh mục" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Nhóm sản phẩm" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Loại sản phẩm" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Chỉnh sửa sản phẩm">
+            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

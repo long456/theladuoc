@@ -152,7 +152,7 @@ export class ProfileComponent implements OnInit{
 
   updateUserProfile() {
     if (this.userForm.valid) {
-      const userData = this.userForm.value
+      const userData = this.userForm.value;
       const pipeDate = new DatePipe('en-US');
       const data = {
         fullName: userData.fullName,
@@ -191,4 +191,6 @@ export class ProfileComponent implements OnInit{
       }
     })
   }
+
+
 }

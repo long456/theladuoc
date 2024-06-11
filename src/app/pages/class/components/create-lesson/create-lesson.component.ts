@@ -43,7 +43,7 @@ export class CreateLessonComponent implements OnInit{
     if (!this.isCreate) {
       const time = this.nzModalData.data.timeFrame.split(' - ')
       const data = {
-        name: this.nzModalData.data.className,
+        name: this.nzModalData.data.lessonName,
         duration: [
           new Date(time[0]),
           new Date(time[1])

@@ -25,7 +25,11 @@ export class LoyaltyService {
       }
     }
 
-    return this.http.get('', {params: option})
+    return this.http.get('Loyalty/get-list-loyalty', {params: option})
+  }
+
+  getLoyaltyByCode(code: string): Observable<any>{
+    return this.http.get('Loyalty/get-loyalty-detail/' + code);
   }
 
   createLoyalty(data: any): Observable<any>{

@@ -100,6 +100,50 @@
           </div>
         </div>
 
+        <div nz-col [nzSpan]="5" ></div>
+
+        <div nz-col [nzSpan]="3" >
+          <span class="text-label">
+            Logo
+          </span>
+
+          <div class="select-file">
+            <div class="btn-select-file" (click)="selectFile('logo')" *ngIf="orgForm.get('logo')?.value === ''">
+              <span nz-icon nzType="plus" nzTheme="outline"></span>
+              <div style="margin-top: 8px;">Upload</div>
+            </div>
+            <img class="img-preview" [src]="orgForm.get('logo')?.value" *ngIf="orgForm.get('logo')?.value !== ''">
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="3" >
+          <span class="text-label">
+            Logo1x1
+          </span>
+
+          <div class="select-file">
+            <div class="btn-select-file" (click)="selectFile('logo1x1')" *ngIf="orgForm.get('logo1x1')?.value === ''">
+              <span nz-icon nzType="plus" nzTheme="outline"></span>
+              <div style="margin-top: 8px;">Upload</div>
+            </div>
+            <img class="img-preview" [src]="orgForm.get('logo1x1')?.value" *ngIf="orgForm.get('logo1x1')?.value !== ''">
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="3" >
+          <span class="text-label">
+            favicon
+          </span>
+
+          <div class="select-file">
+            <div class="btn-select-file" (click)="selectFile('favicon')" *ngIf="orgForm.get('favicon')?.value === ''">
+              <span nz-icon nzType="plus" nzTheme="outline"></span>
+              <div style="margin-top: 8px;">Upload</div>
+            </div>
+            <img class="img-preview" [src]="orgForm.get('favicon')?.value" *ngIf="orgForm.get('favicon')?.value !== ''">
+          </div>
+        </div>
+
         <div nz-col [nzSpan]="18">
           <span class="text-label">
             Tên miền trang chủ

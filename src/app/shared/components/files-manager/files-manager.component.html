@@ -1,0 +1,119 @@
+<div class="file-manager-content">
+  <div class="select-owner">
+    <div>
+      <span class="text-label">
+        Chọn diễn giả
+      </span>
+
+      <nz-select style="width: 220px;margin-left: 8px" nzPlaceHolder="Diễn giả"
+                 [ngModel]="selectedOwner" (ngModelChange)="onOwnerSelect($event)">
+        <nz-option *ngFor="let user of listOwner"
+                   [nzValue]="user.id" [nzLabel]="user.fullName"
+        ></nz-option>
+      </nz-select>
+    </div>
+
+    <label for="file" class="upload">
+      <span nz-icon nzType="upload" nzTheme="outline"></span>
+      Upload file
+    </label>
+    <input type="file" (change)="uploadFile($event)"
+           accept="image/png, image/gif, image/jpeg"
+           class="upload-file" name="file" id="file">
+  </div>
+
+  <div class="file-list">
+    <nz-tabset [nzTabPosition]="'left'" class="file-taps" (nzSelectChange)="onTabSelect($event)">
+      <nz-tab [nzTitle]="'Ảnh'" class="tab">
+        <ng-container *ngIf="(listImg$ | async) as img;else spin">
+          <ng-container *ngIf="img.data.length > 0;else noData">
+            <div nz-row [nzGutter]=[8,16]>
+              <ng-container *ngFor="let data of img.data">
+                <div nz-col [nzSpan]=6>
+                  <div class="card-img" [ngClass]="{'active': fileSelected === data.id}" >
+                    <app-card-image (contextmenu)="contextMenu($event, menu, data)"
+                      [dataImg]="data" (click)="onFileSelect(data)"></app-card-image>
+                    <span nz-icon nzType="check" nzTheme="outline" class="checked-img"></span>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </ng-container>
+      </nz-tab>
+
+      <nz-tab [nzTitle]="'File'">
+        <ng-container *ngIf="(listFile$ | async) as file;else spin">
+          <ng-container *ngIf="file.data.length > 0;else noData">
+            <div nz-row [nzGutter]=[8,16]>
+              <ng-container *ngFor="let data of file.data">
+                <div nz-col [nzSpan]=6>
+                  <div class="card-img" [ngClass]="{'active': fileSelected === data.id}" >
+                    <app-card-image (contextmenu)="contextMenu($event, menu, data)"
+                                    [dataImg]="data" (click)="onFileSelect(data)"></app-card-image>
+                    <span nz-icon nzType="check" nzTheme="outline" class="checked-img"></span>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </ng-container>
+        </ng-container>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+
+  <div nz-col [nzSpan]="24" class="btn-group">
+    <button nz-button (click)="closeModal()">
+      Hủy
+    </button>
+    <button nz-button nzType="primary" (click)="onChoseFile()">
+      Chọn
+    </button>
+  </div>
+
+  <div class="change-file-name" [class.active]="isActive">
+    <div class="fake-model">
+      <div class="fake-header">
+        <h1>Đổi tên file</h1>
+      </div>
+      <div class="fake-content">
+        <label for="file-name">Nhập tên file mới</label>
+        <input id="file-name"  nz-input [(ngModel)]="fileNameSelected">
+      </div>
+      <div class="fake-footer">
+        <button nz-button (click)="closeFakeModel()">
+          Hủy
+        </button>
+        <button nz-button nzType="primary" (click)="changeFileName()">
+          Lưu
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<ng-template #noData>
+  <div></div>
+  <nz-empty></nz-empty>
+</ng-template>
+
+<ng-template #spin>
+  <nz-spin nzSimple [nzSize]="'large'" class="spinning-page">
+  </nz-spin>
+</ng-template>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item (click)="openFakeModel()">
+      <span nz-icon nzType="edit" nzTheme="outline"></span>
+      Đổi tên
+    </li>
+    <li nz-menu-item (click)="deleteFile()">
+      <span nz-icon nzType="delete" nzTheme="outline"></span>
+      Xóa
+    </li>
+  </ul>
+</nz-dropdown-menu>
+

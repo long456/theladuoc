@@ -101,6 +101,14 @@ const routes: Routes = [
     path: 'publication',
     loadChildren: () => import('../publication/publication.module').then(m => m.PublicationModule),
   },
+  {
+    path: 'product',
+    loadChildren: () => import('../product/product.module').then(m => m.ProductModule),
+  },
+  {
+    path: 'warehouse',
+    loadChildren: () => import('../warehouse/warehouse.module').then(m => m.WarehouseModule),
+  },
 ]
 
 @NgModule({

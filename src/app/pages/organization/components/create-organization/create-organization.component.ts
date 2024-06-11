@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {OrganizationService} from "../../services/organization.service";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {FileManagerService} from "../../../../shared/services/file-manager.service";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-create-organization',
@@ -33,6 +35,7 @@ export class CreateOrganizationComponent implements OnInit{
     private route: ActivatedRoute,
     private organizationService: OrganizationService,
     private message: NzMessageService,
+    private fileManagerService: FileManagerService,
   ) {
   }
 
@@ -47,6 +50,9 @@ export class CreateOrganizationComponent implements OnInit{
       userId: [null],
       email: ['', [Validators.email]],
       mobile: ['', [Validators.pattern('[0-9]{10,15}')]],
+      logo: [''],
+      logo1x1: [''],
+      favicon: [''],
       status: [true]
     })
 
@@ -123,6 +129,23 @@ export class CreateOrganizationComponent implements OnInit{
         })
       }
     }
+  }
+
+  selectFile(typeImg: string) {
+    this.fileManagerService.selectFile();
+    this.fileManagerService.selectedFile.pipe(take(1)).subscribe((data) => {
+      switch (typeImg) {
+        case ('logo') :
+          this.orgForm.get('logo')?.patchValue(data);
+          break;
+        case ('logo1x1') :
+          this.orgForm.get('logo1x1')?.patchValue(data);
+          break;
+        case ('favicon') :
+          this.orgForm.get('favicon')?.patchValue(data);
+          break;
+      }
+    });
   }
 
   navigateBack() {

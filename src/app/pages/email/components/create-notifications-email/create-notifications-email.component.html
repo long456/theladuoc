@@ -22,15 +22,32 @@
           </span>
         </div>
 
-        <div nz-col [nzSpan]="2" nzOffset="4">
-          <div class="text-label">Trạng thái</div>
-          <nz-switch formControlName="status">
-          </nz-switch>
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Loại email</div>
+          <nz-select
+            formControlName="typeEmail"
+            style="display: block;"
+            [nzPlaceHolder]="'Chọn loại email'"
+            [nzStatus]="(emailNotificationForm.get('typeEmail')?.invalid && (emailNotificationForm.get('typeEmail')?.touched || isSubmit)) ? 'error' : ''"
+          >
+            <nz-option
+              *ngFor="let type of typeEmailList"
+              [nzValue]="type.dataValue"
+              [nzLabel]="type.name "
+            ></nz-option>
+          </nz-select>
+
+          <span
+            class="text-danger"
+            *ngIf="(emailNotificationForm.get('typeEmail')?.touched || isSubmit) &&
+                    emailNotificationForm.get('typeEmail')?.hasError('required')">
+            Loại email không được để trống
+          </span>
         </div>
 
-        <div nz-col [nzSpan]="4" nzOffset="2">
-          <div class="text-label">Điểm danh</div>
-          <nz-switch formControlName="isAttendance">
+        <div nz-col [nzSpan]="2" nzOffset="1">
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
           </nz-switch>
         </div>
 

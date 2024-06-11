@@ -22,6 +22,8 @@ export class CreateNotificationsEmailComponent implements OnInit{
 
   courseList: any = [];
 
+  typeEmailList: any = [];
+
   ckEditorConfig: any = {
     toolbar: [
       ['Source', 'Templates', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat'],
@@ -55,12 +57,23 @@ export class CreateNotificationsEmailComponent implements OnInit{
       courseId: [null, [Validators.required]],
       content: [null],
       status: [true],
-      isAttendance: [true],
+      typeEmail: [null,[Validators.required]],
     });
 
     this.courseService.getListCourse().subscribe({
       next: res => {
         this.courseList = res
+      },
+      error: err => {
+        this.message.error(err.error)
+      }
+    });
+
+    this.emailService.getEmailType().subscribe({
+      next: res => {
+        if (res.success) {
+          this.typeEmailList = res.data;
+        }
       },
       error: err => {
         this.message.error(err.error)

@@ -36,6 +36,12 @@
         </ng-template>
       </table-column>
       <table-column header="Mã khóa học" key="courseCode" [width]="'300px'"></table-column>
+      <table-column header="Loại khóa học" key="type" [width]="'200px'">
+        <ng-template appCell let-data>
+          <span *ngIf="data.type === 1">Khóa phễu</span>
+          <span *ngIf="data.type === 2">Khóa lỡn</span>
+        </ng-template>
+      </table-column>
       <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
       <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
       <table-column header="Trạng thái" key="status" [width]="'180px'">

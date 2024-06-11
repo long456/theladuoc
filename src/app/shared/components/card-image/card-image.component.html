@@ -1,0 +1,18 @@
+<!--<nz-card nzHoverable style="width:150px;" [nzCover]="coverTemplate">-->
+<!--  <nz-card-meta [nzTitle]="dataImg.fileName" nzDescription="www.instagram.com"></nz-card-meta>-->
+<!--</nz-card>-->
+<!--<ng-template #coverTemplate>-->
+<!--  <img alt="example" [src]="dataImg.filePath"/>-->
+<!--</ng-template>-->
+
+<div class="card-file">
+  <img style="width: 150px" [src]="dataImg.filePath"/>
+  <div class="text-card-file">
+    <div class="file-name">{{dataImg.fileName}}</div>
+    <p class="file-detail">
+      {{dataImg.createdDate | date: 'medium'}}
+      <br>
+      {{formatBytes(dataImg.size)}}
+    </p>
+  </div>
+</div>

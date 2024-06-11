@@ -11,7 +11,7 @@ export class ClassService {
     private http: HttpClient,
   ) { }
 
-  getAttendanceList(page?: any, pageSize?: any, filter?: any): Observable<any>{
+  getClassList(page?: any, pageSize?: any, filter?: any): Observable<any>{
     let option = {
       PageIndex: page,
       pageSize: pageSize,
