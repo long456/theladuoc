@@ -16,7 +16,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { SpinComponent } from './components/spin/spin.component';
@@ -30,6 +30,11 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { TreeComponent } from './components/tree/tree.component';
 import { NzTreeViewModule } from 'ng-zorro-antd/tree-view';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { FilesManagerComponent } from './components/files-manager/files-manager.component';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { CardImageComponent } from './components/card-image/card-image.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
 @NgModule({
   declarations: [
     SideBarComponent,
@@ -42,6 +47,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
     SpinComponent,
     HeaderComponent,
     TreeComponent,
+    FilesManagerComponent,
+    CardImageComponent,
   ],
   imports: [
     CommonModule,
@@ -63,7 +70,11 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
     NzPaginationModule,
     NzToolTipModule,
     NzTreeViewModule,
-    NzAvatarModule
+    NzAvatarModule,
+    NzTabsModule,
+    FormsModule,
+    NzCardModule,
+    NzEmptyModule
   ],
     exports: [
         SideBarComponent,

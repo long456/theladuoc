@@ -71,6 +71,11 @@ export class SideBarComponent {
           link: 'page/payment-auth',
         },
         {
+          name : 'Điểm danh',
+          icon: '',
+          link: 'page/attendance',
+        },
+        {
           name : 'Nhân sự',
           icon: '',
           link: '',
@@ -133,34 +138,53 @@ export class SideBarComponent {
               ]
             },
             {
-              name : 'Khóa học',
+              name : 'Phễu khóa học',
               icon: '',
-              link: 'page/setting/course',
+              link: '',
+              children: [
+                {
+                  name : 'Khóa học',
+                  icon: '',
+                  link: 'page/setting/course',
+                },
+                {
+                  name : 'Lớp học',
+                  icon: '',
+                  link: 'page/setting/class',
+                },
+                {
+                  name : 'Buổi học',
+                  icon: '',
+                  link: 'page/setting/lesson',
+                },
+                {
+                  name : 'Landing page',
+                  icon: '',
+                  link: 'page/setting/landing-page',
+                },
+                {
+                  name : 'Vé khóa học',
+                  icon: '',
+                  link: 'page/setting/ticket',
+                },
+                {
+                  name : 'Form đăng ký',
+                  icon: '',
+                  link: 'page/setting/register-form',
+                },
+              ]
             },
             {
-              name : 'Lớp học',
+              name : 'E-learning',
               icon: '',
-              link: 'page/setting/class',
-            },
-            {
-              name : 'Buổi học',
-              icon: '',
-              link: 'page/setting/lesson',
-            },
-            {
-              name : 'Landing page',
-              icon: '',
-              link: 'page/setting/landing-page',
-            },
-            {
-              name : 'Vé khóa học',
-              icon: '',
-              link: 'page/setting/ticket',
-            },
-            {
-              name : 'Form đăng ký',
-              icon: '',
-              link: 'page/setting/register-form',
+              link: '',
+              children: [
+                {
+                  name : 'Danh mục khóa học',
+                  icon: '',
+                  link: 'page/setting/ticket',
+                },
+              ]
             },
             {
               name : 'Email SMTP',
@@ -171,11 +195,11 @@ export class SideBarComponent {
               name : 'Email',
               icon: '',
               children: [
-                {
-                  name : 'Email hệ thống',
-                  icon: '',
-                  link: 'page/setting/email/system-email',
-                },
+                // {
+                //   name : 'Email hệ thống',
+                //   icon: '',
+                //   link: 'page/setting/email/system-email',
+                // },
                 {
                   name : 'Email thông báo',
                   icon: '',
@@ -187,6 +211,23 @@ export class SideBarComponent {
               name : 'Ấn phẩm',
               icon: '',
               link: 'page/setting/publication',
+            },
+            {
+              name : 'Sản phẩm',
+              icon: '',
+              link: '',
+              children: [
+                {
+                  name : 'Danh sách sản phẩm',
+                  icon: '',
+                  link: 'page/setting/product',
+                },
+                {
+                  name : 'Danh sách kho hàng',
+                  icon: '',
+                  link: 'page/setting/warehouse',
+                },
+              ]
             }
           ]
         },

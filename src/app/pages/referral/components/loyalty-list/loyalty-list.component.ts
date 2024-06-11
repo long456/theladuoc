@@ -45,15 +45,20 @@ export class LoyaltyListComponent implements OnInit{
           .pipe(
             map((value) => {
               return {
-                rows: value.data.courseList,
-                page: value.data.paginationInfo.pageCurrent,
-                pageSize: value.data.paginationInfo.pageSize,
-                rowTotal: value.data.paginationInfo.totalItem,
+                rows: value,
+                // page: value.data.paginationInfo.pageCurrent,
+                // pageSize: value.data.paginationInfo.pageSize,
+                // rowTotal: value.data.paginationInfo.totalItem,
               }
             }),
             catchError(err => {
               this.message.error('Lỗi load dữ liệu cuộc thi tính điểm')
-              return of(err.message)
+              return of({
+                rows: [],
+                page: 0,
+                pageSize: 0,
+                rowTotal: 0
+              });
             })
           )
       }),
@@ -67,6 +72,6 @@ export class LoyaltyListComponent implements OnInit{
   }
 
   edit(data: any) {
-
+    this.router.navigate(['/page/setting/referral/loyalty/' + data.loyaltyCode]);
   }
 }

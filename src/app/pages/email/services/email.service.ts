@@ -33,7 +33,6 @@ export class EmailService {
     let option = {
       PageIndex: page,
       pageSize: pageSize,
-      type: 2,
     }
 
     if (filter) {
@@ -48,31 +47,35 @@ export class EmailService {
   }
 
   softDeleteNotificationsEmail(data: number[]): Observable<any> {
-    return this.http.delete('EmailTemplate/soft-delete',{body: data})
+    return this.http.delete('EmailTemplate/soft-delete',{body: data});
   }
 
   getEmailById(id: number): Observable<any> {
-    return this.http.get('EmailTemplate/' + id)
+    return this.http.get('EmailTemplate/' + id);
   }
 
   updateEmail(data: any, id: number): Observable<any>{
-    return this.http.put('EmailTemplate/' + id, data)
+    return this.http.put('EmailTemplate/' + id, data);
   }
 
   createEmail(data: any): Observable<any>{
-    return this.http.post('EmailTemplate', data)
+    return this.http.post('EmailTemplate', data);
   }
 
   getNotificationsEmailById(id: number): Observable<any> {
-    return this.http.get('EmailTemplate/' + id)
+    return this.http.get('EmailTemplate/' + id);
   }
 
   createNotificationsEmail(data: any): Observable<any>{
-    return this.http.post('EmailTemplate', data)
+    return this.http.post('EmailTemplate', data);
   }
 
   updateNotificationsEmail(data: any, id: number): Observable<any>{
-    return this.http.put('EmailTemplate/' + id, data)
+    return this.http.put('EmailTemplate/' + id, data);
+  }
+
+  getEmailType(): Observable<any>{
+    return this.http.get('EmailTemplate/get-email-type');
   }
 
 }

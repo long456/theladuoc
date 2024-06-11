@@ -252,7 +252,12 @@ export class TakingCareStudentComponent implements OnInit{
             }),
             catchError(err => {
               this.message.error('Lỗi load dữ liệu học viên đang chăm')
-              return of(err.message)
+              return of({
+                rows: [],
+                page: 0,
+                pageSize: 0,
+                rowTotal: 0
+              });
             })
           )
       }),

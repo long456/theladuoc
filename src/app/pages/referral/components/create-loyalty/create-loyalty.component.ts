@@ -18,7 +18,7 @@ export class CreateLoyaltyComponent implements OnInit{
 
   listCourse: any[] = [];
 
-  courseCode!: string;
+  loyaltyCode!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,9 +47,25 @@ export class CreateLoyaltyComponent implements OnInit{
     if (!this.isCreate) {
       this.route.params.pipe().subscribe(params => {
         const {code} = params;
-        this.courseCode = code;
+        this.loyaltyCode = code;
+
+        this.pathValueLoyaltyForm(code);
       });
     }
+  }
+
+  pathValueLoyaltyForm(code: string):void {
+    this.loyaltyService.getLoyaltyByCode(code).subscribe({
+      next: res => {
+        if (res) {
+          res.date = [
+            res.dateStart,
+            res.dateEnd
+          ];
+          this.loyaltyForm.patchValue(res);
+        }
+      }
+    })
   }
 
   edit(): void {
@@ -77,7 +93,7 @@ export class CreateLoyaltyComponent implements OnInit{
           }
         })
       } else {
-        this.loyaltyService.updateLoyalty(data, this.courseCode).subscribe({
+        this.loyaltyService.updateLoyalty(data, this.loyaltyCode).subscribe({
           next: res => {
             if (res.success) {
               this.message.success(res.messages);
@@ -94,5 +110,7 @@ export class CreateLoyaltyComponent implements OnInit{
     }
   }
 
-  navigateBack() {}
+  navigateBack() {
+    this.router.navigate(['/page/setting/referral/loyalty']);
+  }
 }

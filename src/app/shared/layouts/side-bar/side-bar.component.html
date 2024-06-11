@@ -9,7 +9,7 @@
       <img class="text-logo" src="assets/img/text-logo.svg">
     </a>
   </div>
-  <ul nz-menu nzMode="inline" nzTheme="dark" [nzInlineCollapsed]="isCollapsed">
+  <ul nz-menu nzMode="inline" nzTheme="dark" [nzInlineCollapsed]="isCollapsed" class="menu-list">
     <ng-container *ngFor="let item of treeMenu">
       <li *ngIf="item.children"
         nz-submenu nzTitle={{item.name}} nzIcon="{{item.icon}}" >

@@ -9,26 +9,26 @@ import {CreateNotificationsEmailComponent} from "./components/create-notificatio
 
 
 const routes: Routes = [
-  {
-    path:'system-email',
-    component: SystemEmailComponent,
-    children: [
-      {
-        path:'',
-        pathMatch: "full",
-        redirectTo: 'list'
-      },
-      {
-        path:'list',
-        component: SystemEmailListComponent
-      },
-      {
-        path:':id',
-        data: {type: 'system', isCreate: false},
-        component: EditEmailComponent
-      },
-    ]
-  },
+  // {
+  //   path:'system-email',
+  //   component: SystemEmailComponent,
+  //   children: [
+  //     {
+  //       path:'',
+  //       pathMatch: "full",
+  //       redirectTo: 'list'
+  //     },
+  //     {
+  //       path:'list',
+  //       component: SystemEmailListComponent
+  //     },
+  //     {
+  //       path:':id',
+  //       data: {type: 'system', isCreate: false},
+  //       component: EditEmailComponent
+  //     },
+  //   ]
+  // },
   {
     path:'notifications-email',
     component: NotificationsEmailComponent,

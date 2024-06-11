@@ -41,6 +41,14 @@ const routes: Routes = [
         path: 'payment-auth',
         loadChildren: () => import('./pages/payment-auth/payment-auth.module').then(m => m.PaymentAuthModule),
       },
+      {
+        path: 'attendance',
+        loadChildren: () => import('./pages/attendance/attendance.module').then(m => m.AttendanceModule),
+      },
+      {
+        path: 'e-category',
+        loadChildren: () => import('./pages/e-learning-category/e-learning-category.module').then(m => m.ELearningCategoryModule),
+      },
     ]
   },
 ];

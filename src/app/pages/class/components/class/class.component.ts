@@ -51,7 +51,7 @@ export class ClassComponent implements OnInit {
     .pipe(
       tap(() => this.loading = true),
       mergeMap(([page, pageSize, filter]) => {
-        return this.classService.getAttendanceList(page, pageSize, filter)
+        return this.classService.getClassList(page, pageSize, filter)
         .pipe(
           map((value) => {
             return {
@@ -63,7 +63,12 @@ export class ClassComponent implements OnInit {
           }),
           catchError(err => {
             this.message.error('Lỗi load dữ liệu lớp học')
-            return of(err.message)
+            return of({
+              rows: [],
+              page: 0,
+              pageSize: 0,
+              rowTotal: 0
+            });
           })
         )
       }),
