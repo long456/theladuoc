@@ -48,3 +48,17 @@
   }
   border-radius: 4px;
 }
+
+.custom-action {
+  cursor: pointer;
+  padding-right: 8px;
+  font-size: 18px;
+
+  &:hover {
+    color: #1677ff;
+  }
+
+  .delete:hover {
+    color: #ff4d4f;
+  }
+}

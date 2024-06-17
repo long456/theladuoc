@@ -68,7 +68,12 @@ export class SideBarComponent {
         {
           name : 'Xác thực thanh toán',
           icon: '',
-          link: 'page/payment-auth',
+          link: 'page/payment/auth',
+        },
+        {
+          name : 'Yêu cầu hoàn tiền',
+          icon: '',
+          link: 'page/payment/refund',
         },
         {
           name : 'Điểm danh',
@@ -180,9 +185,14 @@ export class SideBarComponent {
               link: '',
               children: [
                 {
+                  name : 'Danh sách khóa học',
+                  icon: '',
+                  link: 'page/e-course',
+                },
+                {
                   name : 'Danh mục khóa học',
                   icon: '',
-                  link: 'page/setting/ticket',
+                  link: 'page/e-category',
                 },
               ]
             },

@@ -1,58 +1,58 @@
 import {Component, OnInit} from '@angular/core';
-import {COL_DATA_TYPE} from "../../../../shared/models/Table";
+import {COL_DATA_TYPE, filterItem} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
-import {LoyaltyService} from "../../services/loyalty.service";
-import {NzMessageService} from "ng-zorro-antd/message";
 import {Router} from "@angular/router";
-
+import {NzMessageService} from "ng-zorro-antd/message";
+import {ECourseService} from "../../services/e-course.service";
 @Component({
-  selector: 'app-loyalty-list',
-  templateUrl: './loyalty-list.component.html',
-  styleUrls: ['./loyalty-list.component.scss']
+  selector: 'app-course-list',
+  templateUrl: './course-list.component.html',
+  styleUrls: ['./course-list.component.scss']
 })
-export class LoyaltyListComponent implements OnInit{
+export class CourseListComponent implements OnInit{
 
   COL_DATA_TYPE = COL_DATA_TYPE;
-
-  loyalty$ !: Observable<{
+  course$ !: Observable<{
     rows: any[],
+    filter?: any,
     page: number;
     pageSize: number;
     rowTotal: number;
   }>;
-
   page$ = new BehaviorSubject(1);
   pageSize$ = new BehaviorSubject(10);
+  filterList$ = new BehaviorSubject(null);
 
   loading = false;
+  itemSelectList: number[] = [];
 
   constructor(
-    private loyaltyService: LoyaltyService,
-    private message: NzMessageService,
     private router: Router,
-  ) {
-  }
+    private message: NzMessageService,
+    private eCourseService:ECourseService,
+  ) {}
 
   ngOnInit() {
-    this.loyalty$ = combineLatest([
+    this.course$ = combineLatest([
       this.page$,
       this.pageSize$,
+      this.filterList$
     ])
     .pipe(
       tap(() => this.loading = true),
-      mergeMap(([page, pageSize]) => {
-        return this.loyaltyService.getListLoyalty(page, pageSize)
+      mergeMap(([page, pageSize, filter]) => {
+        return this.eCourseService.getECourseList(page, pageSize, filter)
           .pipe(
             map((value) => {
               return {
-                rows: value,
+                rows: value.data.categories,
                 page: value.data.paginationInfo.pageCurrent,
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
               }
             }),
             catchError(err => {
-              this.message.error('Lỗi load dữ liệu cuộc thi tính điểm')
+              this.message.error('Lỗi load dữ liệu danh mục khóa học')
               return of({
                 rows: [],
                 page: 0,
@@ -67,11 +67,9 @@ export class LoyaltyListComponent implements OnInit{
     )
   }
 
-  create() {
-    this.router.navigate(['/page/setting/referral/loyalty/create']);
-  }
+  create() {}
 
-  edit(data: any) {
-    this.router.navigate(['/page/setting/referral/loyalty/' + data.loyaltyCode]);
-  }
+  delete() {}
+
+  getItemSelection(e: any) {}
 }

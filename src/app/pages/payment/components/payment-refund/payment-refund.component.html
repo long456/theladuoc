@@ -1,0 +1,66 @@
+<div class="title-page">
+  Danh sách yêu cầu hoàn tiền
+</div>
+
+<div class="header-btn">
+  <nz-collapse class="filter-form" [class.expand]="isExpand">
+    <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
+      <app-filter-form [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"></app-filter-form>
+    </nz-collapse-panel>
+  </nz-collapse>
+
+  <ng-container *ngIf="(paymentRefund$ | async) as paymentRefund">
+    <app-table
+      [rows]="paymentRefund.rows"
+      [page]="paymentRefund.page"
+      [pageSize]="paymentRefund.pageSize"
+      [pageTotal]="paymentRefund.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Ngày yêu cầu" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="Tên học viên" key="name" [width]="'200px'"></table-column>
+      <table-column header="SĐT" key="phoneNumber" [width]="'180px'"></table-column>
+      <table-column header="Nhân viên chăm sóc" key="caregiverName" [width]="'200px'"></table-column>
+      <table-column header="Tài khoản hoàn tiền" key="bankAccountNumber" [width]="'200px'"></table-column>
+      <table-column header="Tên chủ tài khoản" key="bankAccountFullName" [width]="'200px'"></table-column>
+      <table-column header="Tên ngân hàng" key="bankName" [width]="'200px'"></table-column>
+      <table-column header="Số tiền" key="price" [width]="'200px'"></table-column>
+      <table-column header="Nội dung ghi chú" key="reasonContent" [width]="'200px'"></table-column>
+      <table-column header="Trạng thái" key="verifyPay" [width]="'180px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.verifyPay">Đã xử lý</span>
+          <span class="text-invalid" *ngIf="!data.verifyPay">Chưa xử lý</span>
+        </ng-template>
+      </table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action">
+            <span
+              nzTooltipTitle="Xem ảnh" nzTooltipPlacement="top" nz-tooltip
+              nz-icon nzType="picture" nzTheme="outline" (click)="showImg(data)">
+            </span>
+          </span>
+
+          <span class="custom-action" *ngIf="!data.verifyPay">
+            <span
+              nzTooltipTitle="Xác nhận" nzTooltipPlacement="top" nz-tooltip
+              nz-icon nzType="check" nzTheme="outline" (click)="verifyPayment(data, tplContent)">
+            </span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
+
+<ng-template #tplContent let-params>
+  abc
+</ng-template>

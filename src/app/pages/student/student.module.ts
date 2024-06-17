@@ -20,6 +20,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { UpgradeCourseComponent } from './components/upgrade-course/upgrade-course.component';
+import { RefundRequestComponent } from './components/refund-request/refund-request.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UpgradeCourseComponent } from './components/upgrade-course/upgrade-cour
     NonDividedStudentComponent,
     DetailStudentComponent,
     PaymentCheckComponent,
-    UpgradeCourseComponent
+    UpgradeCourseComponent,
+    RefundRequestComponent
   ],
   imports: [
     CommonModule,

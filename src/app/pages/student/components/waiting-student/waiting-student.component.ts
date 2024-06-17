@@ -176,8 +176,13 @@ export class WaitingStudentComponent implements OnInit{
               }
             }),
             catchError(err => {
-              this.message.error('Lỗi load dữ liệu học viên đang chờ')
-              return of(err.message)
+              this.message.error('Lỗi load dữ liệu học viên đang chờ');
+              return of({
+                rows: [],
+                page: 0,
+                pageSize: 0,
+                rowTotal: 0
+              });
             })
           )
       }),

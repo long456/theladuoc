@@ -38,8 +38,8 @@ const routes: Routes = [
         loadChildren: () => import('./pages/staff/staff.module').then(m => m.StaffModule),
       },
       {
-        path: 'payment-auth',
-        loadChildren: () => import('./pages/payment-auth/payment-auth.module').then(m => m.PaymentAuthModule),
+        path: 'payment',
+        loadChildren: () => import('./pages/payment/payment.module').then(m => m.PaymentModule),
       },
       {
         path: 'attendance',
@@ -48,6 +48,10 @@ const routes: Routes = [
       {
         path: 'e-category',
         loadChildren: () => import('./pages/e-learning-category/e-learning-category.module').then(m => m.ELearningCategoryModule),
+      },
+      {
+        path: 'e-course',
+        loadChildren: () => import('./pages/e-learning-course/e-learning-course.module').then(m => m.ELearningCourseModule),
       },
     ]
   },
