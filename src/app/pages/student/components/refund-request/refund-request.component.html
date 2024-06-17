@@ -50,7 +50,7 @@
           [nzStep]="1000"
           [nzFormatter]="formatterVnd"
           [nzParser]="parserVnd"
-          [nzStatus]="(refundForm.get('amountPaid')?.invalid && (refundForm.get('amountPaid')?.touched) || isSubmit) ? 'error' : ''"
+          [nzStatus]="(refundForm.invalid && (refundForm.get('amountPaid')?.touched) || isSubmit) ? 'error' : ''"
         ></nz-input-number>
 
         <span

@@ -204,11 +204,11 @@ export class StudyingStudentComponent implements OnInit{
       nzData: data,
       nzFooter: [
         {
-          label: 'Cancel',
+          label: 'Hủy',
           onClick: () => modal.destroy()
         },
         {
-          label: 'OK',
+          label: 'Xác nhận',
           type: 'primary',
           onClick: (instance) => {
             if (!(instance instanceof RefundRequestComponent) || instance.refundForm.valid) {

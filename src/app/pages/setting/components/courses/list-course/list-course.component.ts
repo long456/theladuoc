@@ -98,7 +98,12 @@ export class ListCourseComponent implements OnInit{
             }),
             catchError(err => {
               this.message.error('Lỗi load dữ liệu khóa học')
-              return of(err.message)
+              return of({
+                rows: [],
+                page: 0,
+                pageSize: 0,
+                rowTotal: 0
+              });
             })
           )
       }),
