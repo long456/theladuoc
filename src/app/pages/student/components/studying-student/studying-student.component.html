@@ -61,7 +61,15 @@
         </ng-template>
 
         <ng-template appCell let-data>
-          <span class="custom-action" (click)="detail(data)">Chi tiết</span>
+          <span class="custom-action" (click)="detail(data)"
+                nz-tooltip nzTooltipTitle="Chi tiết học viên">
+            <span nz-icon nzType="search" nzTheme="outline"></span>
+          </span>
+
+          <span class="custom-action" (click)="refundPayment  (data)"
+                nz-tooltip nzTooltipTitle="Hoàn học phí">
+            <span nz-icon nzType="undo" nzTheme="outline"></span>
+          </span>
         </ng-template>
       </table-column>
     </app-table>

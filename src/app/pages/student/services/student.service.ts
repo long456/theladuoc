@@ -123,4 +123,8 @@ export class StudentService {
     }
     return this.http.get('UserAffiliate/export',{params: dataExport})
   }
+
+  createRefundRequest(data: any): Observable<any>{
+    return this.http.post('PaymentRefund/create-payment-refund',data)
+  }
 }

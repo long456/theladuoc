@@ -1,0 +1,77 @@
+<div>
+  <form [formGroup]="refundForm">
+    <div nz-row [nzGutter]=[16,16]>
+      <div nz-col [nzSpan]="12">
+        <span>
+          Tên học viên
+        </span>
+
+        <div>
+          <input nz-input formControlName="name" readonly/>
+        </div>
+      </div>
+
+      <div nz-col [nzSpan]="12">
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <span>
+          Tên tài khoản
+        </span>
+
+        <input nz-input formControlName="bankAccountFullName">
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <span>
+          Số tài khoản
+        </span>
+
+        <input nz-input formControlName="bankAccountNumber">
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <span>
+          Tên ngân hàng
+        </span>
+
+        <input nz-input formControlName="bankName">
+      </div>
+
+      <div nz-col [nzSpan]="12">
+        <span>
+          Số tiền cần hoàn
+        </span>
+
+        <nz-input-number
+          style="width: 100%"
+          formControlName="amountPaid"
+          [nzMin]="0"
+          [nzStep]="1000"
+          [nzFormatter]="formatterVnd"
+          [nzParser]="parserVnd"
+          [nzStatus]="(refundForm.get('amountPaid')?.invalid && (refundForm.get('amountPaid')?.touched) || isSubmit) ? 'error' : ''"
+        ></nz-input-number>
+
+        <span
+          class="text-danger"
+          *ngIf="(refundForm.get('amountPaid')?.touched || isSubmit) &&
+                  refundForm.get('amountPaid')?.hasError('required')">
+            Số tiền cần hoàn không được để trống</span>
+        <span
+          class="text-danger"
+          *ngIf="(refundForm.get('amountPaid')?.touched || isSubmit) &&
+                  refundForm.get('amountPaid')?.hasError('min')">
+            Số tiền cần hoàn không thể nhỏ hơn hoặc bằng 0 VND</span>
+      </div>
+
+      <div nz-col [nzSpan]="24">
+        <span>
+          Ghi chú
+        </span>
+
+        <textarea nz-input  [nzAutosize]="{ minRows: 3 }" formControlName="reasonContent"></textarea>
+      </div>
+    </div>
+  </form>
+</div>

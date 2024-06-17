@@ -97,7 +97,7 @@ export class ClassComponent implements OnInit {
                 this.message.success(value.messages);
                 this.pageSize$.next(10)
               } else {
-                this.message.error(value.errorMessages)
+                this.message.error(value.errorMessages);
               }
             },
             error: err => {
