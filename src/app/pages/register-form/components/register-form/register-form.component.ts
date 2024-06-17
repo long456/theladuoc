@@ -60,7 +60,12 @@ export class RegisterFormComponent implements OnInit{
             }),
             catchError(err => {
               this.message.error('Lỗi load dữ liệu form đăng ký')
-              return of(err.message)
+              return of({
+                rows: [],
+                page: 0,
+                pageSize: 0,
+                rowTotal: 0
+              });
             })
           )
       }),
@@ -135,28 +140,22 @@ export class RegisterFormComponent implements OnInit{
   }
 
   removeAttachTicket(data: any):void {
-    this.modal.confirm({
-      nzTitle: 'Xác nhận gỡ vé',
-      nzContent: 'Bạn có chắc chắn muốn gỡ vé ' + data.ticketName + '?',
-      nzOnOk: () => {
-        const formRegisterId = {
-          formRegisterId: data.id
-        }
+    const formRegisterId = {
+      formRegisterId: data.id
+    }
 
-        this.registerFormService.removeAttachTicket(formRegisterId).subscribe({
-          next: res => {
-            if (res.success) {
-              this.message.success(res.messages);
-              this.pageSize$.next(10)
-            } else {
-              this.message.error(res.errorMessages)
-            }
-          },
-          error: err => {
-            this.message.error(err)
-          }
-        })
+    this.registerFormService.removeAttachTicket(formRegisterId).subscribe({
+      next: res => {
+        if (res.success) {
+          this.message.success(res.messages);
+          this.pageSize$.next(10)
+        } else {
+          this.message.error(res.errorMessages)
+        }
+      },
+      error: err => {
+        this.message.error(err)
       }
-    });
+    })
   }
 }

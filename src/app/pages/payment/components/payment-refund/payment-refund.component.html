@@ -28,7 +28,11 @@
       <table-column header="Tài khoản hoàn tiền" key="bankAccountNumber" [width]="'200px'"></table-column>
       <table-column header="Tên chủ tài khoản" key="bankAccountFullName" [width]="'200px'"></table-column>
       <table-column header="Tên ngân hàng" key="bankName" [width]="'200px'"></table-column>
-      <table-column header="Số tiền" key="price" [width]="'200px'"></table-column>
+      <table-column header="Số tiền" key="price" [width]="'200px'">
+        <ng-template appCell let-data>
+          {{data.price + ' VND'}}
+        </ng-template>
+      </table-column>
       <table-column header="Nội dung ghi chú" key="reasonContent" [width]="'200px'"></table-column>
       <table-column header="Trạng thái" key="verifyPay" [width]="'180px'">
         <ng-template appCell let-data>
@@ -42,7 +46,7 @@
         </ng-template>
 
         <ng-template appCell let-data>
-          <span class="custom-action">
+          <span class="custom-action" *ngIf="data.receiptImage">
             <span
               nzTooltipTitle="Xem ảnh" nzTooltipPlacement="top" nz-tooltip
               nz-icon nzType="picture" nzTheme="outline" (click)="showImg(data)">
@@ -62,5 +66,26 @@
 </div>
 
 <ng-template #tplContent let-params>
-  abc
+  <div nz-row (paste)="onPaste($event)">
+    <div nz-col [nzSpan]="24">
+      <span>Upload ảnh ủy nhiệm chi</span>
+      <label for="file" class="upload">
+        <span nz-icon nzType="upload" nzTheme="outline"></span>
+        Ảnh ủy nhiệm chi
+        <div class="file-name">{{nameFilePreview}}</div>
+      </label>
+      <input type="file" (change)="uploadFile($event)"
+             accept="image/png, image/gif, image/jpeg"
+             class="upload-file" name="file" id="file">
+      <div style="display: flex; justify-content: center; padding-top: 15px">
+        <img
+          style="margin-top: 15px"
+          nz-image
+          [src]="imgPreviewUrl"
+          width="150"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
 </ng-template>

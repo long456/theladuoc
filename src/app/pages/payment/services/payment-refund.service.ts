@@ -26,4 +26,9 @@ export class PaymentRefundService {
     }
     return this.http.get('PaymentRefund', {params: option})
   }
+
+  verifyRefund(data: any): Observable<any> {
+    return this.http.post('PaymentRefund/verify', data);
+  }
+
 }
