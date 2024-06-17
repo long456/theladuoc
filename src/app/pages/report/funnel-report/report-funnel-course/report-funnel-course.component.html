@@ -1,0 +1,70 @@
+<div class="title-page">
+    Báo cáo khóa học phễu
+</div>
+<div class="header-btn">
+    <nz-collapse class="filter-form" [class.expand]="isExpand">
+        <nz-collapse-panel [nzHeader]="'Lọc'" (nzActiveChange)="setExpand($event)">
+            sadsadsa
+        </nz-collapse-panel>
+    </nz-collapse>
+
+    <nz-table #nzTable [nzData]="listOfData" nzTableLayout="fixed" [nzScroll]="{ y: 'auto' }" nzShowPagination="false">
+        <thead>
+            <tr>
+                <th nzWidth="40px" [nzLeft]="true"></th>
+                <th [nzLeft]="true" nzWidth="60px">STT</th>
+                <th nzWidth="120px">Thời gian</th>
+                <th nzWidth="120px">Tên khóa học</th>
+                <th nzWidth="120px">Số vé đăng ký</th>
+                <th nzWidth="120px">Số vé bán ra</th>
+                <th nzWidth="120px">Doanh thu bán vé</th>
+                <th nzWidth="120px">Số người tham gia</th>
+                <th nzWidth="120px">Số người đặt cọc</th>
+                <th nzWidth="120px">Doanh thu khóa học</th>
+                <th nzWidth="120px">Lợi nhuận khóa học</th>
+                <th nzWidth="120px">Tên diễn giả</th>
+                <th nzWidth="120px">Số điện thoại</th>
+                <th nzWidth="120px">Tổ chức</th>
+                <th [nzRight]="true" nzWidth="120px">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let data of nzTable.data;let i = index">
+                <tr>
+                    <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"
+                        [nzLeft]="true"></td>
+                    <td [nzLeft]="true">{{ i + 1 }}</td>
+                    <td>{{ data.age }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.age }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.age }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.age }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.age }}</td>
+                    <td>{{ data.address }}</td>
+                    <td>{{ data.age }}</td>
+                    <td>{{ data.address }}</td>
+                    <td [nzRight]="true"></td>
+                </tr>
+                <tr [nzExpand]="expandSet.has(data.id)">
+                    <span>{{ data.description }}</span>
+                </tr>
+            </ng-container>
+        </tbody>
+    </nz-table>
+    <div class="table-footer paging-table">
+        <!-- <div *ngIf="listOfData.length > 0" class="d-flex table-footer-numberline align-items-center paging-table-left">
+            <div class="d-flex align-items-center info-left-paging">Hiển thị {{(currentPage - 1) * pageSize + 1}} -
+                {{ getLimit() }} của {{totalItem}}&nbsp;</div>
+        </div> -->
+        <div *ngIf="listOfData.length > 0" class="paging-table-right" style="margin-top: 20px;">
+            <!-- <div class="size-description">
+                Số dòng trên 1 trang 
+            </div> -->
+            <nz-pagination class="pagination" [(nzPageSize)]="pageSize" [(nzPageIndex)]="currentPage"
+                [nzTotal]="totalItem" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+        </div>
+    </div>
+</div>

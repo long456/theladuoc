@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SideBarComponent } from './layouts/side-bar/side-bar.component';
-import {NzMenuModule} from "ng-zorro-antd/menu";
-import {NzLayoutModule} from "ng-zorro-antd/layout";
+import { NzMenuModule } from "ng-zorro-antd/menu";
+import { NzLayoutModule } from "ng-zorro-antd/layout";
 import { MenuItemComponent } from './components/menu-item/menu-item.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMessageModule } from 'ng-zorro-antd/message';
@@ -16,7 +16,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { SpinComponent } from './components/spin/spin.component';
@@ -74,25 +74,28 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
     NzTabsModule,
     FormsModule,
     NzCardModule,
-    NzEmptyModule
+    NzEmptyModule,
+    NzPaginationModule
   ],
-    exports: [
-        SideBarComponent,
-        TableComponent,
-        ColumnDirective,
-        CellDirective,
-        HeaderDirective,
-        FilterFormComponent,
-        NzSpinModule,
-        SpinComponent,
-        NzButtonModule,
-        NzInputModule,
-        NzGridModule,
-        NzIconModule,
-        NzModalModule,
-        NzToolTipModule,
-        HeaderComponent,
-        TreeComponent,
-    ]
+  exports: [
+    SideBarComponent,
+    TableComponent,
+    ColumnDirective,
+    CellDirective,
+    HeaderDirective,
+    FilterFormComponent,
+    NzSpinModule,
+    SpinComponent,
+    NzButtonModule,
+    NzInputModule,
+    NzGridModule,
+    NzIconModule,
+    NzModalModule,
+    NzToolTipModule,
+    HeaderComponent,
+    TreeComponent,
+    NzTableModule,
+    NzPaginationModule
+  ]
 })
 export class SharedModule { }
