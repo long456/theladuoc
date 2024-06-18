@@ -17,7 +17,8 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzCollapseModule,
     CKEditorModule,
     NzTableModule,
-    NzIconModule
+    NzIconModule,
+    NzFormModule,
   ]
 })
 export class ReportingModule { }

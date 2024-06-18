@@ -75,7 +75,8 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
     FormsModule,
     NzCardModule,
     NzEmptyModule,
-    NzPaginationModule
+    NzPaginationModule,
+    
   ],
   exports: [
     SideBarComponent,
@@ -95,7 +96,8 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
     HeaderComponent,
     TreeComponent,
     NzTableModule,
-    NzPaginationModule
+    NzPaginationModule,
+    NzDatePickerModule
   ]
 })
 export class SharedModule { }

@@ -1,4 +1,5 @@
 export class ReportFunnelCourse {
+    courseId!: number;
     totalAdsAmount!: number;
     totalNumberOfRegistrations!: number;
     totalCpa!: number;
@@ -20,14 +21,16 @@ export class ReportFunnelCourse {
 }
 
 export class ReportClassResponse {
+    classId!: number;
     funnelClassDate!: string;
     className!: string;
     numberPeopleTransferredEnough!: number;
     numberOfPeopleDepositing!: number;
+    numberOfTicketsSold!: number;
+    numberOfParticipants!: number;
+    numberOfRegistrations!: number;
     adsAmount!: number;
     cpa!: number;
     otherCost!: number;
-    numberOfTicketsSold!: number;
     ticketSalesRevenue!: number;
-    numberOfParticipants!: number;
 }

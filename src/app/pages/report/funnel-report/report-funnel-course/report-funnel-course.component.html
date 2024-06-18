@@ -1,70 +1,144 @@
 <div class="title-page">
     Báo cáo khóa học phễu
 </div>
-<div class="header-btn">
+<div>
     <nz-collapse class="filter-form" [class.expand]="isExpand">
         <nz-collapse-panel [nzHeader]="'Lọc'" (nzActiveChange)="setExpand($event)">
-            sadsadsa
+            <form nz-form [formGroup]="myForm">
+                <div nz-row [nzGutter]="24">
+                    <div nz-col [nzSpan]="8">
+                        <nz-form-item>
+                            <nz-form-label>Thời gian</nz-form-label>
+                            <nz-select nzPlaceHolder="Tìm kiếm theo thời gian" formControlName="dateTimeTypeSearchCtrl"
+                                style="width: 193px;" [nzAllowClear]="true">
+                                <nz-option *ngFor="let option of filterDataSearch" [nzValue]="option.value"
+                                    [nzLabel]="option.label"></nz-option>
+                            </nz-select>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzSpan]="8" *ngIf="ctrl.dateTimeTypeSearchCtrl.value != null">
+                        <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 0">
+                            <nz-form-label>Theo ngày</nz-form-label>
+                            <nz-range-picker formControlName="dateTimeRangeCtrl"></nz-range-picker>
+                        </nz-form-item>
+                        <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 1">
+                            <nz-form-label>Theo tháng</nz-form-label>
+                            <nz-date-picker nzMode="month" formControlName="monthCtrl"></nz-date-picker>
+                        </nz-form-item>
+                        <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 2">
+                            <nz-form-label>Theo quý</nz-form-label>
+                            <nz-select nzPlaceHolder="---Chọn---" formControlName="quarterOfYearCtrl">
+                                <nz-option *ngFor="let option of lstQuarterOfYear" [nzValue]="option.value"
+                                    [nzLabel]="option.label"></nz-option>
+                            </nz-select>
+                        </nz-form-item>
+                        <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 3">
+                            <nz-form-label>Thời năm</nz-form-label>
+                            <nz-date-picker nzMode="year" formControlName="yearCtrl"></nz-date-picker>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col [nzSpan]="8">
+                        <nz-form-item>
+                            <nz-form-label>Tên lớp</nz-form-label>
+                            <nz-form-control>
+                                <input nz-input placeholder="Nhập" formControlName="classNameCtrl" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+                <div nz-row class="header-btn">
+                    <div nz-col [nzSpan]="24" class="search-area">
+                        <button nz-button type="button" [nzType]="'primary'" (click)="onSearch()"
+                            style="margin-right: 10px;">Tìm kiếm</button>
+                        <button nz-button type="button" (click)="resetForm()">Cài đặt lại</button>
+                    </div>
+                </div>
+            </form>
         </nz-collapse-panel>
     </nz-collapse>
 
-    <nz-table #nzTable [nzData]="listOfData" nzTableLayout="fixed" [nzScroll]="{ y: 'auto' }" nzShowPagination="false">
+    <nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed" [nzScroll]="{ y: 'auto' }"
+        nzShowPagination="false">
         <thead>
             <tr>
                 <th nzWidth="40px" [nzLeft]="true"></th>
                 <th [nzLeft]="true" nzWidth="60px">STT</th>
                 <th nzWidth="120px">Thời gian</th>
-                <th nzWidth="120px">Tên khóa học</th>
+                <th nzWidth="180px">Tên khóa học</th>
                 <th nzWidth="120px">Số vé đăng ký</th>
                 <th nzWidth="120px">Số vé bán ra</th>
                 <th nzWidth="120px">Doanh thu bán vé</th>
                 <th nzWidth="120px">Số người tham gia</th>
                 <th nzWidth="120px">Số người đặt cọc</th>
+                <th nzWidth="120px">Số người chuyển đủ</th>
                 <th nzWidth="120px">Doanh thu khóa học</th>
                 <th nzWidth="120px">Lợi nhuận khóa học</th>
-                <th nzWidth="120px">Tên diễn giả</th>
+                <th nzWidth="150px">Tên diễn giả</th>
                 <th nzWidth="120px">Số điện thoại</th>
-                <th nzWidth="120px">Tổ chức</th>
+                <th nzWidth="150px">Tổ chức</th>
                 <th [nzRight]="true" nzWidth="120px">Thao tác</th>
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let data of nzTable.data;let i = index">
+            <ng-container *ngFor="let data of nzTable.data; let i = index">
                 <tr>
-                    <td [nzExpand]="expandSet.has(data.id)" (nzExpandChange)="onExpandChange(data.id, $event)"
-                        [nzLeft]="true"></td>
-                    <td [nzLeft]="true">{{ i + 1 }}</td>
-                    <td>{{ data.age }}</td>
-                    <td>{{ data.address }}</td>
-                    <td>{{ data.age }}</td>
-                    <td>{{ data.address }}</td>
-                    <td>{{ data.age }}</td>
-                    <td>{{ data.address }}</td>
-                    <td>{{ data.age }}</td>
-                    <td>{{ data.address }}</td>
-                    <td>{{ data.age }}</td>
-                    <td>{{ data.address }}</td>
-                    <td>{{ data.age }}</td>
-                    <td>{{ data.address }}</td>
+                    <td [nzExpand]="expandSet.has(data.courseId)" [nzLeft]="true"
+                        (nzExpandChange)="onExpandChange(data.courseId, $event)"></td>
+                    <td [nzLeft]="true">{{i + 1}} </td>
+                    <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td>
+                    <td> {{ data.courseName }} </td>
+                    <td> {{ data.totalRegistrationTicketNumber }} </td>
+                    <td> {{ data.totalNumberOfTicketsSold }}</td>
+                    <td> {{ data.totalTicketSalesRevenue | number }} </td>
+                    <td> {{ data.totalNumberOfParticipants }} </td>
+                    <td> {{ data.totalNumberOfPeopleDepositing }}</td>
+                    <td> {{ data.totalNumberPeopleTransferredEnough }} </td>
+                    <td> {{ data.courseRevenue | number }} </td>
+                    <td> {{ data.courseProfits | number }} </td>
+                    <td> {{ data.speakerName }} </td>
+                    <td> {{ data.phoneNumber }} </td>
+                    <td> {{ data.organizationName }} </td>
                     <td [nzRight]="true"></td>
                 </tr>
-                <tr [nzExpand]="expandSet.has(data.id)">
-                    <span>{{ data.description }}</span>
-                </tr>
-            </ng-container>
+                <tr [nzExpand]="expandSet.has(data.courseId)">
+                    <nz-table [nzData]="data.listReportClassResponse" [nzShowPagination]="false"
+                        [nzShowPagination]="false">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên lớp học</th>
+                                <th>Số tiền Ads</th>
+                                <th>Số lượt đăng ký</th>
+                                <th>CPA</th>
+                                <th>Các chi phí khác</th>
+                            </tr>
+                        </thead>
+        <tbody>
+            <tr *ngFor="let item of data.listReportClassResponse; let i = index">
+                <td> {{ i + 1 }} </td>
+                <td> {{ item.className }} </td>
+                <td> {{ item.adsAmount }} </td>
+                <td> {{ item.numberOfRegistrations }} </td>
+                <td> {{ item.cpa }} </td>
+                <td> {{ item.otherCost }} </td>
+            </tr>
         </tbody>
     </nz-table>
-    <div class="table-footer paging-table">
+    </tr>
+    </ng-container>
+    </tbody>
+    </nz-table>
+    <div class="table-footer paging-table header-btn">
         <!-- <div *ngIf="listOfData.length > 0" class="d-flex table-footer-numberline align-items-center paging-table-left">
             <div class="d-flex align-items-center info-left-paging">Hiển thị {{(currentPage - 1) * pageSize + 1}} -
                 {{ getLimit() }} của {{totalItem}}&nbsp;</div>
         </div> -->
-        <div *ngIf="listOfData.length > 0" class="paging-table-right" style="margin-top: 20px;">
-            <!-- <div class="size-description">
-                Số dòng trên 1 trang 
-            </div> -->
+        <div class="paging-table-right" style="margin-top: 20px;" *ngIf="items.length > 0">
             <nz-pagination class="pagination" [(nzPageSize)]="pageSize" [(nzPageIndex)]="currentPage"
-                [nzTotal]="totalItem" (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+                [nzTotal]="totalItem" (nzPageIndexChange)="onPageChange($event)"
+                (nzPageSizeChange)="nzPageSizeChange($event);" [nzShowTotal]="totalTemplate"
+                nzShowSizeChanger></nz-pagination>
+            <ng-template #totalTemplate let-total>Tổng có {{ totalItem }} khóa học</ng-template>
         </div>
     </div>
 </div>

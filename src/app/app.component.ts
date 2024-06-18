@@ -11,7 +11,7 @@ export class AppComponent {
   isLoading = false
 
   constructor(
-    public router: Router
+    public router: Router,
   ) {
     this.router.events.subscribe(ev => {
       if (ev instanceof NavigationStart) {

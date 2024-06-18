@@ -21,8 +21,6 @@ import {ProfileComponent} from "./pages/profile/profile.component";
 
 registerLocaleData(en);
 
-
-
 @NgModule({
   declarations: [
     AppComponent,

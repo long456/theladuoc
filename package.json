@@ -22,6 +22,7 @@
     "ckeditor4-angular": "^5.1.0",
     "class-transformer": "^0.5.1",
     "html2canvas": "^1.4.1",
+    "moment": "^2.30.1",
     "ng-zorro-antd": "^16.2.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
