@@ -27,54 +27,62 @@ export class SideBarComponent {
           link: '',
         },
         {
-          name: 'Phễu Khóa học',
+          name: 'Hiệu quả khóa học',
           icon: '',
           link: '',
           children: [
             {
-              name: 'Khóa học phễu',
+              name: 'Phễu Khóa học',
               icon: '',
-              link: 'page/report/report-funnel-course',
+              link: '',
+              children: [
+                {
+                  name: 'Khóa học phễu',
+                  icon: '',
+                  link: 'page/report/report-funnel-course',
+                },
+                {
+                  name: 'Khóa học lớn',
+                  icon: '',
+                  link: 'page/report/report-big-course',
+                }
+              ]
             },
             {
-              name: 'Khóa học lớn',
+              name: 'E-learning',
               icon: '',
-              link: 'page/report/report-big-course',
-            }
+              link: '',
+              children: [
+                {
+                  name: 'Khóa học miễn phí',
+                  icon: '',
+                  link: 'page/report/report-free-course',
+                },
+                {
+                  name: 'Khóa học thành viên',
+                  icon: '',
+                  link: 'page/report/report-member-course',
+                },
+                {
+                  name: 'Khóa học trả phí',
+                  icon: '',
+                  link: 'page/report/report-paid-course',
+                },
+                {
+                  name: 'Khóa học cộng tác viên',
+                  icon: '',
+                  link: 'page/report/report-collaborator-course',
+                },
+                {
+                  name: 'Khóa học giảng viên',
+                  icon: '',
+                  link: 'page/report/report-instructor-course',
+                }
+              ]
+            },
           ]
         },
-        {
-          name: 'E-learning',
-          icon: '',
-          link: '',
-          children: [
-            {
-              name: 'Khóa học miễn phí',
-              icon: '',
-              link: 'page/report/report-free-course',
-            },
-            {
-              name: 'Khóa học thành viên',
-              icon: '',
-              link: 'page/report/report-member-course',
-            },
-            {
-              name: 'Khóa học trả phí',
-              icon: '',
-              link: 'page/report/report-paid-course',
-            },
-            {
-              name: 'Khóa học cộng tác viên',
-              icon: '',
-              link: 'page/report/report-collaborator-course',
-            },
-            {
-              name: 'Khóa học giảng viên',
-              icon: '',
-              link: 'page/report/report-instructor-course',
-            }
-          ]
-        },
+
       ]
     },
     {
