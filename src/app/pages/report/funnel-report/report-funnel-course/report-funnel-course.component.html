@@ -19,7 +19,7 @@
                     <div nz-col [nzSpan]="8" *ngIf="ctrl.dateTimeTypeSearchCtrl.value != null">
                         <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 0">
                             <nz-form-label>Theo ngày</nz-form-label>
-                            <nz-range-picker formControlName="dateTimeRangeCtrl"></nz-range-picker>
+                            <nz-range-picker formControlName="dateTimeRangeCtrl" ></nz-range-picker>
                         </nz-form-item>
                         <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 1">
                             <nz-form-label>Theo tháng</nz-form-label>
@@ -58,21 +58,28 @@
     </nz-collapse>
 
     <nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed" [nzScroll]="{ y: 'auto' }"
-        nzShowPagination="false">
+        nzShowPagination="false" (nzQueryParams)="onQueryParamsChange($event)">
         <thead>
             <tr>
                 <th nzWidth="40px" [nzLeft]="true"></th>
                 <th [nzLeft]="true" nzWidth="60px">STT</th>
-                <th nzWidth="120px">Thời gian</th>
+                <!-- <th nzWidth="120px">Thời gian</th> -->
                 <th nzWidth="180px">Tên khóa học</th>
-                <th nzWidth="120px">Số vé đăng ký</th>
-                <th nzWidth="120px">Số vé bán ra</th>
-                <th nzWidth="120px">Doanh thu bán vé</th>
-                <th nzWidth="120px">Số người tham gia</th>
-                <th nzWidth="120px">Số người đặt cọc</th>
-                <th nzWidth="120px">Số người chuyển đủ</th>
-                <th nzWidth="120px">Doanh thu khóa học</th>
-                <th nzWidth="120px">Lợi nhuận khóa học</th>
+
+                <th nzWidth="120px" nzColumnKey="totalAdsAmount" [nzSortFn]="true">Số tiền Ads</th>
+                <th nzWidth="120px" nzColumnKey="totalNumberOfRegistrations" [nzSortFn]="true">Số lượt đăng ký</th>
+                <th nzWidth="80px" nzColumnKey="totalCpa" [nzSortFn]="true">CPA</th>
+                <th nzWidth="120px" nzColumnKey="totalOtherCost" [nzSortFn]="true">Các chi phí khác</th>
+
+                <th nzWidth="120px" nzColumnKey="totalRegistrationTicketNumber" [nzSortFn]="true">Số vé đăng ký</th>
+                <th nzWidth="120px" nzColumnKey="totalNumberOfTicketsSold" [nzSortFn]="true">Số vé bán ra</th>
+                <th nzWidth="120px" nzColumnKey="totalTicketSalesRevenue" [nzSortFn]="true">Doanh thu bán vé</th>
+                <th nzWidth="120px" nzColumnKey="totalNumberOfParticipants" [nzSortFn]="true">Số người tham gia</th>
+                <th nzWidth="120px" nzColumnKey="totalNumberOfPeopleDepositing" [nzSortFn]="true">Số người đặt cọc</th>
+                <th nzWidth="120px" nzColumnKey="totalNumberPeopleTransferredEnough" [nzSortFn]="true">Số người chuyển
+                    đủ</th>
+                <th nzWidth="120px" nzColumnKey="courseRevenue" [nzSortFn]="true">Doanh thu khóa học</th>
+                <th nzWidth="120px" nzColumnKey="courseProfits" [nzSortFn]="true">Lợi nhuận khóa học</th>
                 <th nzWidth="150px">Tên diễn giả</th>
                 <th nzWidth="120px">Số điện thoại</th>
                 <th nzWidth="150px">Tổ chức</th>
@@ -82,11 +89,18 @@
         <tbody>
             <ng-container *ngFor="let data of nzTable.data; let i = index">
                 <tr>
-                    <td [nzExpand]="expandSet.has(data.courseId)" [nzLeft]="true"
-                        (nzExpandChange)="onExpandChange(data.courseId, $event)"></td>
+                    <!-- [nzExpand]="expandSet.has(data.courseId)" (nzExpandChange)="onExpandChange(data.courseId, $event)" -->
+                    <td [nzLeft]="true"></td>
                     <td [nzLeft]="true">{{i + 1}} </td>
-                    <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td>
+                    <!-- <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td> -->
                     <td> {{ data.courseName }} </td>
+
+                    <td> {{ data.totalAdsAmount }} </td>
+                    <td> {{ data.totalNumberOfRegistrations }} </td>
+                    <td> {{ data.totalCpa }} </td>
+                    <td> {{ data.totalOtherCost }} </td>
+
+
                     <td> {{ data.totalRegistrationTicketNumber }} </td>
                     <td> {{ data.totalNumberOfTicketsSold }}</td>
                     <td> {{ data.totalTicketSalesRevenue | number }} </td>
@@ -100,7 +114,7 @@
                     <td> {{ data.organizationName }} </td>
                     <td [nzRight]="true"></td>
                 </tr>
-                <tr [nzExpand]="expandSet.has(data.courseId)">
+                <!-- <tr [nzExpand]="expandSet.has(data.courseId)">
                     <nz-table [nzData]="data.listReportClassResponse" [nzShowPagination]="false"
                         [nzShowPagination]="false">
                         <thead>
@@ -124,9 +138,9 @@
             </tr>
         </tbody>
     </nz-table>
-    </tr>
-    </ng-container>
-    </tbody>
+    </tr> -->
+            </ng-container>
+        </tbody>
     </nz-table>
     <div class="table-footer paging-table header-btn">
         <!-- <div *ngIf="listOfData.length > 0" class="d-flex table-footer-numberline align-items-center paging-table-left">

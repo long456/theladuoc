@@ -5,6 +5,7 @@ import { ReportFunnelService } from '../../service/report-funnel.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DateTimeTypeSearch, QuarterOfYear } from '../../constant/date-time-type-search.const';
 import { DateTimeHelper } from '../../helper/date-time-helper';
+import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 @Component({
   selector: 'app-report-funnel-course',
@@ -13,7 +14,6 @@ import { DateTimeHelper } from '../../helper/date-time-helper';
 })
 export class ReportFunnelCourseComponent implements OnInit {
   items: ReportFunnelCourse[] = [];
-  mode = '';
   isExpand: boolean = false;
   expandSet = new Set<number>();
   currentPage: number = 1;
@@ -68,6 +68,15 @@ export class ReportFunnelCourseComponent implements OnInit {
     this.onSearch();
   }
 
+  onQueryParamsChange(params: NzTableQueryParams): void {
+    console.log(params);
+    const { pageSize, pageIndex, sort, filter } = params;
+    const currentSort = sort.find(item => item.value !== null);
+    const sortField = (currentSort && currentSort.key) || null;
+    const sortOrder = (currentSort && currentSort.value) || null;
+    this.onSearch(sortField, sortOrder);
+  }
+
   getFilterDateTime() {
     let result = {};
     if (this.ctrl.quarterOfYearCtrl.value) {
@@ -89,13 +98,19 @@ export class ReportFunnelCourseComponent implements OnInit {
     return result;
   }
 
-  onSearch() {
+  onSearch(sortField: string | null = null, sortOrder: string | null = null) {
     this.isLoading = true;
     let filter: any = {
       ...this.getFilterDateTime(),
     }
+
     if (this.ctrl.classNameCtrl.value) {
       filter.className = this.ctrl.classNameCtrl.value
+    }
+
+    if (sortField && sortOrder) {
+      filter.sortBy = `${sortField}-${sortOrder}`;
+      console.log(filter.sortBy);
     }
 
     this.reportFunnelService.getReportFunnelCourses(this.currentPage, this.pageSize, filter).subscribe(x => {

@@ -19,6 +19,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
+import customViVn from 'src/app/custom-vi-vn';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
     NzTableModule,
     NzIconModule,
     NzFormModule,
-  ]
+    NzDatePickerModule 
+  ],
 })
 export class ReportingModule { }
