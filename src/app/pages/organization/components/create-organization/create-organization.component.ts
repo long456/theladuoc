@@ -45,6 +45,7 @@ export class CreateOrganizationComponent implements OnInit{
     this.orgForm = this.fb.group({
       name: ['', [Validators.required]],
       websiteCms: ['', [Validators.required]],
+      websiteElearning: [''],
       website: [[], [Validators.required]],
       splitData: [1],
       userId: [null],

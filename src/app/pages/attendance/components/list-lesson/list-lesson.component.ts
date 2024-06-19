@@ -7,14 +7,14 @@ import {AttendanceService} from "../../services/attendance.service";
 import {LessonService} from "../../../lesson/services/lesson.service";
 
 @Component({
-  selector: 'app-attendance',
-  templateUrl: './attendance.component.html',
-  styleUrls: ['./attendance.component.scss']
+  selector: 'app-list-lesson',
+  templateUrl: './list-lesson.component.html',
+  styleUrls: ['./list-lesson.component.scss']
 })
-export class AttendanceComponent implements OnInit{
+export class ListLessonComponent implements OnInit{
   COL_DATA_TYPE = COL_DATA_TYPE;
 
-  attendance$ !: Observable<{
+  listLesson$ !: Observable<{
     rows: any[],
     filter?: any,
     page: number;
@@ -38,38 +38,38 @@ export class AttendanceComponent implements OnInit{
   ) {}
 
   ngOnInit() {
-    this.attendance$ = combineLatest([
+    this.listLesson$ = combineLatest([
       this.page$,
       this.pageSize$,
       this.filterList$
     ])
       .pipe(
-      tap(() => this.loading = true),
-      mergeMap(([page, pageSize, filter]) => {
-        return this.lessonService.getListLesson(page, pageSize, filter)
-          .pipe(
-            map((value) => {
-              return {
-                rows: value.data.lessonList,
-                page: value.data.paginationInfo.pageCurrent,
-                pageSize: value.data.paginationInfo.pageSize,
-                rowTotal: value.data.paginationInfo.totalItem,
-              }
-            }),
-            catchError(err => {
-              this.message.error('Lỗi load dữ liệu lớp học')
-              return of({
-                rows: [],
-                page: 0,
-                pageSize: 0,
-                rowTotal: 0
-              });
-            })
-          )
-      }),
-      delay(200),
-      tap(() => this.loading = false),
-    )
+        tap(() => this.loading = true),
+        mergeMap(([page, pageSize, filter]) => {
+          return this.lessonService.getListLesson(page, pageSize, filter)
+            .pipe(
+              map((value) => {
+                return {
+                  rows: value.data.lessonList,
+                  page: value.data.paginationInfo.pageCurrent,
+                  pageSize: value.data.paginationInfo.pageSize,
+                  rowTotal: value.data.paginationInfo.totalItem,
+                }
+              }),
+              catchError(err => {
+                this.message.error('Lỗi load dữ liệu lớp học')
+                return of({
+                  rows: [],
+                  page: 0,
+                  pageSize: 0,
+                  rowTotal: 0
+                });
+              })
+            )
+        }),
+        delay(200),
+        tap(() => this.loading = false),
+      )
   }
 
   getItemSelection(e: any) {
