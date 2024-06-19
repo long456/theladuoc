@@ -1,0 +1,41 @@
+<div class="title-page">
+  Danh sách buổi học
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(listLesson$ | async) as Lesson">
+    <app-table
+      [rows]="Lesson.rows"
+      [page]="Lesson.page"
+      [pageSize]="Lesson.pageSize"
+      [pageTotal]="Lesson.rowTotal"
+      (onItemSelection)="getItemSelection($event)"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <!--      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>-->
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Link điểm danh" key="attendanceLink" [width]="'200px'"></table-column>
+      <table-column header="Khung giờ điểm danh" key="timeFrame" [width]="'200px'"></table-column>
+      <table-column header="Buổi đang dạy" key="lessonName" [width]="'200px'"></table-column>
+      <table-column header="Lớp đang mở" key="className" [width]="'200px'"></table-column>
+      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
+      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="copyLink(data)">
+           Copy link
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
+

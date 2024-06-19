@@ -106,7 +106,8 @@ export class CreateStaffComponent implements OnInit{
       const data = {
         ...this.userForm.value,
         status: this.userForm.get('status')?.value ? 1 : 0,
-        roleIds: (this.userForm.get('roleIds')?.value && this.userForm.value.roleIds.length !== 0) ? JSON.stringify(this.userForm.get('roleIds')?.value) : null
+        roleIds: (this.userForm.get('roleIds')?.value && this.userForm.value.roleIds.length !== 0) ? JSON.stringify(this.userForm.get('roleIds')?.value) : null,
+        type: [...this.userForm.get('roleIds')?.value].toString(),
       }
       if (this.isCreate) {
 

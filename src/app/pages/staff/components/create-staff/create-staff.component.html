@@ -29,8 +29,7 @@
           </span>
 
           <div>
-            <nz-select
-              formControlName="type"
+            <nz-select formControlName="type" nzMode="multiple"
               [nzStatus]="(userForm.get('type')?.invalid && (userForm.get('type')?.touched || isSubmit)) ? 'error' : ''"
             >
               <nz-option
@@ -75,7 +74,7 @@
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8" *ngIf="userForm.get('type')?.value === 4 || userForm.get('type')?.value === 1">
+        <div nz-col [nzSpan]="8" *ngIf="userForm.get('type')?.value?.includes(4) || userForm.get('type')?.value?.includes(1)">
           <div class="text-label">
             Mã slug
             <span class="text-danger">*</span>

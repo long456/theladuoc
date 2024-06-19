@@ -78,7 +78,19 @@ export class SideBarComponent {
         {
           name : 'Điểm danh',
           icon: '',
-          link: 'page/attendance',
+          link: '',
+          children: [
+            {
+              name : 'Danh sách buổi học',
+              icon: '',
+              link: 'page/attendance/lesson',
+            },
+            {
+              name : 'Danh sách điểm danh',
+              icon: '',
+              link: 'page/attendance/attend',
+            }
+          ]
         },
         {
           name : 'Nhân sự',
