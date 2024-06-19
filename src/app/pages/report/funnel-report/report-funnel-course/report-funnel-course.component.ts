@@ -6,6 +6,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { DateTimeTypeSearch, QuarterOfYear } from '../../constant/date-time-type-search.const';
 import { DateTimeHelper } from '../../helper/date-time-helper';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { FilterFunnelCourseReportComponent } from '../dialog/filter-funnel-course-report/filter-funnel-course-report.component';
+import { CreateLessonComponent } from 'src/app/pages/class/components/create-lesson/create-lesson.component';
 
 @Component({
   selector: 'app-report-funnel-course',
@@ -14,55 +17,24 @@ import { NzTableQueryParams } from 'ng-zorro-antd/table';
 })
 export class ReportFunnelCourseComponent implements OnInit {
   items: ReportFunnelCourse[] = [];
-  isExpand: boolean = false;
   expandSet = new Set<number>();
   currentPage: number = 1;
   pageSize: number = 10;
   totalItem: number = 0;
   isLoading: boolean = false;
-  myForm = new FormGroup({
-    dateTimeTypeSearchCtrl: new FormControl(null),
-    startCtrl: new FormControl(null),
-    endCtrl: new FormControl(null),
-    classIdCtrl: new FormControl(null),
-    quarterOfYearCtrl: new FormControl(null),
-    dateTimeRangeCtrl: new FormControl(null),
-    monthCtrl: new FormControl(null),
-    yearCtrl: new FormControl(null),
-    classNameCtrl: new FormControl(null)
-  });
-  ctrl = this.myForm.controls;
-  filterDataSearch = [
-    { value: DateTimeTypeSearch.SEARCH_BY_DAY, label: 'Theo ngày' },
-    { value: DateTimeTypeSearch.SEARCH_BY_MONTH, label: 'Theo tháng' },
-    { value: DateTimeTypeSearch.SEARCH_BY_QUARTER, label: 'Theo quý' },
-    { value: DateTimeTypeSearch.SEARCH_BY_YEAR, label: 'Theo năm' }
-  ]
-
-  lstQuarterOfYear = [
-    { value: QuarterOfYear.QUY_1, label: 'Quý 1' },
-    { value: QuarterOfYear.QUY_2, label: 'Quý 2' },
-    { value: QuarterOfYear.QUY_3, label: 'Quý 3' },
-    { value: QuarterOfYear.QUY_4, label: 'Quý 4' }
-  ]
-
+  filter: any = {};
   constructor(private reportFunnelService: ReportFunnelService,
     private dateTimeHelper: DateTimeHelper,
+    private modal: NzModalService,
   ) {
   }
 
   ngOnInit(): void {
-    this.ctrl.dateTimeTypeSearchCtrl.valueChanges.subscribe(x => {
-      this.ctrl.dateTimeRangeCtrl.reset();
-      this.ctrl.monthCtrl.reset();
-      this.ctrl.yearCtrl.reset();
-      this.ctrl.quarterOfYearCtrl.reset();
-    })
     this.onSearch();
   }
 
   resetForm() {
-    this.myForm.reset();
+    // this.myForm.reset();
     this.currentPage = 1;
     this.pageSize = 10;
     this.onSearch();
@@ -77,21 +49,42 @@ export class ReportFunnelCourseComponent implements OnInit {
     this.onSearch(sortField, sortOrder);
   }
 
-  getFilterDateTime() {
+  openSearch() {
+    const modal: NzModalRef = this.modal.create<FilterFunnelCourseReportComponent>({
+      nzTitle: 'Tìm kiếm khóa học phễu',
+      nzContent: FilterFunnelCourseReportComponent,
+      nzFooter: null,
+      nzWidth: '30%',
+      nzMaskClosable: false
+    });
+
+    modal.afterClose.subscribe(x => {
+      if (x) {
+        this.filter = { ...x };
+        this.onSearch();
+      }
+    })
+  }
+
+  syncData() {
+    this.reportFunnelService.syncData();
+  }
+
+  getFilterDateTime(quarterOfYearCtrl: any, dateTimeRangeCtrl: any, monthCtrl: any, yearCtrl: any) {
     let result = {};
-    if (this.ctrl.quarterOfYearCtrl.value) {
-      result = this.dateTimeHelper.getQuarterOfYear(this.ctrl.quarterOfYearCtrl.value);
+    if (quarterOfYearCtrl) {
+      result = this.dateTimeHelper.getQuarterOfYear(quarterOfYearCtrl);
     }
 
-    if (this.ctrl.dateTimeRangeCtrl.value) {
-      result = this.dateTimeHelper.getDateTimeByDay(this.ctrl.dateTimeRangeCtrl.value[0], this.ctrl.dateTimeRangeCtrl.value[1]);
+    if (dateTimeRangeCtrl) {
+      result = this.dateTimeHelper.getDateTimeByDay(dateTimeRangeCtrl[0], dateTimeRangeCtrl[1]);
     }
-    if (this.ctrl.monthCtrl.value) {
-      let dateMonth = this.ctrl.monthCtrl.value as Date;
+    if (monthCtrl) {
+      let dateMonth = monthCtrl as Date;
       result = this.dateTimeHelper.getDateTimeByMonth(dateMonth.getMonth(), dateMonth.getFullYear());
     }
-    if (this.ctrl.yearCtrl.value) {
-      let dateYear = this.ctrl.yearCtrl.value as Date;
+    if (yearCtrl) {
+      let dateYear = yearCtrl as Date;
       result = this.dateTimeHelper.getDateTimeByYear(dateYear.getFullYear());
     }
 
@@ -100,20 +93,16 @@ export class ReportFunnelCourseComponent implements OnInit {
 
   onSearch(sortField: string | null = null, sortOrder: string | null = null) {
     this.isLoading = true;
-    let filter: any = {
-      ...this.getFilterDateTime(),
-    }
 
-    if (this.ctrl.classNameCtrl.value) {
-      filter.className = this.ctrl.classNameCtrl.value
-    }
+    // if (this.ctrl.classNameCtrl.value) {
+    //   filter.className = this.ctrl.classNameCtrl.value
+    // }
 
     if (sortField && sortOrder) {
-      filter.sortBy = `${sortField}-${sortOrder}`;
-      console.log(filter.sortBy);
+      this.filter.sortBy = `${sortField}-${sortOrder}`;
     }
 
-    this.reportFunnelService.getReportFunnelCourses(this.currentPage, this.pageSize, filter).subscribe(x => {
+    this.reportFunnelService.getReportFunnelCourses(this.currentPage, this.pageSize, this.filter).subscribe(x => {
       if (x) {
         this.items = x.data.reportFunnelCourses.map((z: any) => plainToClass(ReportFunnelCourse, z));
         this.totalItem = x.data.paginationInfo?.totalItem;
@@ -122,17 +111,13 @@ export class ReportFunnelCourseComponent implements OnInit {
     });
   }
 
-  onExpandChange(id: number, checked: boolean): void {
-    if (checked) {
-      this.expandSet.add(id);
-    } else {
-      this.expandSet.delete(id);
-    }
-  }
-
-  setExpand(event: any) {
-    this.isExpand = event
-  }
+  // onExpandChange(id: number, checked: boolean): void {
+  //   if (checked) {
+  //     this.expandSet.add(id);
+  //   } else {
+  //     this.expandSet.delete(id);
+  //   }
+  // }
 
   onPageChange(page: any) {
     this.currentPage = page;
@@ -140,14 +125,8 @@ export class ReportFunnelCourseComponent implements OnInit {
   }
 
   nzPageSizeChange(pageSize: number) {
-    console.log(pageSize);
+    // console.log(pageSize);
     this.pageSize = pageSize;
     this.onSearch();
   }
-
-  getLimit() {
-
-  }
-
-
 }

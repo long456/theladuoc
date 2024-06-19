@@ -26,4 +26,8 @@ export class ReportFunnelService {
         }
         return this.http.get('report/funnel-course-report', { params: option })
     }
+
+    syncData(): Observable<any> {
+        return this.http.post('report/sync-funnel-course-report', {});
+    }
 }

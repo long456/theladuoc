@@ -8,28 +8,32 @@ export class DateTimeHelper {
     constructor() {
     }
 
-    getQuarterOfYear(quy: number) {
+    getQuarterOfYear(quy: number, year?: number) {
         let result = {
             start: '',
             end: ''
         }
         let current = new Date();
+        let yearCurrent = current.getFullYear();
+        if (year) {
+            yearCurrent = year;
+        }
         switch (quy) {
             case QuarterOfYear.QUY_1:
-                result.start = `01/01/${current.getFullYear()}`;
-                result.end = moment('03/01/2024').endOf('month').format('DD/MM/YYYY');
+                result.start = `01/01/${yearCurrent}`;
+                result.end = moment(`03/01/${yearCurrent}`).endOf('month').format('DD/MM/YYYY');
                 break;
             case QuarterOfYear.QUY_2:
-                result.start = `01/04/${current.getFullYear()}`;
-                result.end = moment('06/01/2024').endOf('month').format('DD/MM/YYYY');
+                result.start = `01/04/${yearCurrent}`;
+                result.end = moment(`06/01/${yearCurrent}`).endOf('month').format('DD/MM/YYYY');
                 break;
             case QuarterOfYear.QUY_3:
-                result.start = `01/07/${current.getFullYear()}`;
-                result.end = moment('09/01/2024').endOf('month').format('DD/MM/YYYY');
+                result.start = `01/07/${yearCurrent}`;
+                result.end = moment(`09/01/${yearCurrent}`).endOf('month').format('DD/MM/YYYY');
                 break;
             case QuarterOfYear.QUY_4:
-                result.start = `01/10/${current.getFullYear()}`;
-                result.end = moment('12/01/2024').endOf('month').format('DD/MM/YYYY');
+                result.start = `01/10/${yearCurrent}`;
+                result.end = moment(`12/01/${yearCurrent}`).endOf('month').format('DD/MM/YYYY');
                 break;
         }
         return result;
