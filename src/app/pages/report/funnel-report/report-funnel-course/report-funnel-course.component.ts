@@ -68,8 +68,8 @@ export class ReportFunnelCourseComponent implements OnInit {
         this.filter = { ...x };
         this.onSearch();
       } else if (x == 0) {
-        this.onSearch();
         this.filter = {};
+        this.onSearch();
       }
     })
   }
