@@ -6,6 +6,7 @@ import { DateTimeHelper } from '../../../helper/date-time-helper';
 import { ReportFunnelService } from '../../../service/report-funnel.service';
 import { ClassModelResponse } from '../../../model/class-model-response';
 import { plainToClass } from 'class-transformer';
+import { CourseModelResponse } from '../../../model/course-model-response';
 
 @Component({
   selector: 'app-filter-funnel-course-report',
@@ -33,6 +34,7 @@ export class FilterFunnelCourseReportComponent {
   });
   ctrl = this.myForm.controls;
   lstClass: ClassModelResponse[] = [];
+  lstCourseModel: CourseModelResponse[] = [];
   filterDataSearch = [
     { value: DateTimeTypeSearch.SEARCH_BY_DAY, label: 'Theo ngày' },
     { value: DateTimeTypeSearch.SEARCH_BY_MONTH, label: 'Theo tháng' },
@@ -83,6 +85,12 @@ export class FilterFunnelCourseReportComponent {
     this.reportFunnelService.lstClassData().subscribe(x => {
       if (x.data && x.data.length > 0) {
         this.lstClass = x.data.map((z: any) => plainToClass(ClassModelResponse, z));
+      }
+    });
+
+    this.reportFunnelService.lstCourseData().subscribe(x => {
+      if (x.data && x.data.length > 0) {
+        this.lstCourseModel = x.data.map((z: any) => plainToClass(CourseModelResponse, z));
       }
     });
   }

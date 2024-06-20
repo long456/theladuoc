@@ -17,6 +17,7 @@ export class ReportFunnelCourse {
     speakerName!: string;
     phoneNumber!: string;
     organizationName!: string;
+    className!: string;
     listReportClassResponse: ReportClassResponse[] = [];
 }
 

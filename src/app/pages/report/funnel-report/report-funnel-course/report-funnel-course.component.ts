@@ -58,7 +58,7 @@ export class ReportFunnelCourseComponent implements OnInit {
       nzTitle: 'Tìm kiếm khóa học phễu',
       nzContent: FilterFunnelCourseReportComponent,
       nzFooter: null,
-      nzWidth: '30%',
+      nzWidth: '35%',
       nzData: this.filter,
       nzMaskClosable: false
     });

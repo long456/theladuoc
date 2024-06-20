@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { CourseConst } from '../constant/report.const';
 
 @Injectable({
     providedIn: 'root'
@@ -32,6 +33,10 @@ export class ReportFunnelService {
     }
 
     lstClassData(): Observable<any> {
-        return this.http.get(`class/list-class-by-course-type`, { params: { courseType: 1 } });
+        return this.http.get(`class/list-class-by-course-type`, { params: { courseType: CourseConst.FUNNEL_COURSE } });
+    }
+
+    lstCourseData(): Observable<any> {
+        return this.http.get(`course/list-course-funnel-type`, { params: { courseType: CourseConst.FUNNEL_COURSE } });
     }
 }

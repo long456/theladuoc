@@ -17,7 +17,8 @@
             </nz-form-item>
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 1">
                 <nz-form-label>Theo tháng</nz-form-label>
-                <nz-date-picker nzMode="month" [nzFormat]="monthFormat" formControlName="monthCtrl" style="width: 193px;"></nz-date-picker>
+                <nz-date-picker nzMode="month" [nzFormat]="monthFormat" formControlName="monthCtrl"
+                    style="width: 193px;"></nz-date-picker>
             </nz-form-item>
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 2">
                 <nz-form-label>Theo quý</nz-form-label>
@@ -40,7 +41,11 @@
         <div nz-col [nzSpan]="12">
             <nz-form-item>
                 <nz-form-label>Tên khóa học</nz-form-label>
-                <input nz-input formControlName="courseNameCtrl" placeholder="Nhập">
+                <nz-select nzPlaceHolder="---Chọn---" formControlName="courseNameCtrl" class="w-100" nzAllowClear
+                    nzShowSearch>
+                    <nz-option *ngFor="let item of lstCourseModel" [nzValue]="item.id"
+                        [nzLabel]="item.name!"></nz-option>
+                </nz-select>
             </nz-form-item>
         </div>
         <div nz-col [nzSpan]="12">
@@ -70,7 +75,7 @@
         <div nz-col [nzSpan]="24">
             <nz-form-item>
                 <nz-form-label>Lớp học</nz-form-label>
-                <nz-select nzPlaceHolder="---Chọn---" formControlName="classCtrl" style="width: 100%;" nzAllowClear
+                <nz-select nzPlaceHolder="---Chọn---" formControlName="classCtrl" class="w-100" nzAllowClear
                     nzShowSearch>
                     <nz-option *ngFor="let item of lstClass" [nzValue]="item.classId"
                         [nzLabel]="item.name!"></nz-option>
