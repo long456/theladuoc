@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { DateTimeTypeSearch, QuarterOfYear } from '../../../constant/date-time-type-search.const';
 import { DateTimeHelper } from '../../../helper/date-time-helper';
 import { ReportFunnelService } from '../../../service/report-funnel.service';
@@ -13,6 +13,8 @@ import { plainToClass } from 'class-transformer';
   styleUrls: ['./filter-funnel-course-report.component.scss']
 })
 export class FilterFunnelCourseReportComponent {
+  dateFormat = 'dd/MM/yyyy';
+  monthFormat = 'MM/yyyy';
   myForm = new FormGroup({
     dateTimeTypeSearchCtrl: new FormControl(null),
     startCtrl: new FormControl(null),
@@ -47,9 +49,28 @@ export class FilterFunnelCourseReportComponent {
 
   constructor(private dateTimeHelper: DateTimeHelper,
     private modal: NzModalRef<FilterFunnelCourseReportComponent>,
-    private reportFunnelService: ReportFunnelService
+    private reportFunnelService: ReportFunnelService,
+    @Inject(NZ_MODAL_DATA) public data: any
   ) {
+    this.setFilter();
+  }
 
+  setFilter() {
+    if (this.data.title) {
+      this.ctrl.courseNameCtrl.setValue(this.data.title);
+    }
+    if (this.data.teacherName) {
+      this.ctrl.speakerNameCtrl.setValue(this.data.teacherName);
+    }
+    if (this.data.organizationName) {
+      this.ctrl.organizationNameCtrl.setValue(this.data.organizationName);
+    }
+    if (this.data.phoneNumber) {
+      this.ctrl.phoneNumberCtrl.setValue(this.data.phoneNumber);
+    }
+    if (this.data.classId) {
+      this.ctrl.classCtrl.setValue(this.data.classId);
+    }
   }
 
   ngOnInit(): void {
@@ -67,6 +88,7 @@ export class FilterFunnelCourseReportComponent {
   }
 
   resetForm() {
+    this.modal.close(0);
   }
 
   onSave() {

@@ -9,6 +9,8 @@ import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { FilterFunnelCourseReportComponent } from '../dialog/filter-funnel-course-report/filter-funnel-course-report.component';
 import { CreateLessonComponent } from 'src/app/pages/class/components/create-lesson/create-lesson.component';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { SpinnerService } from 'src/app/shared/services/spinner-service';
 
 @Component({
   selector: 'app-report-funnel-course',
@@ -16,6 +18,7 @@ import { CreateLessonComponent } from 'src/app/pages/class/components/create-les
   styleUrls: ['./report-funnel-course.component.scss']
 })
 export class ReportFunnelCourseComponent implements OnInit {
+
   items: ReportFunnelCourse[] = [];
   expandSet = new Set<number>();
   currentPage: number = 1;
@@ -26,6 +29,8 @@ export class ReportFunnelCourseComponent implements OnInit {
   constructor(private reportFunnelService: ReportFunnelService,
     private dateTimeHelper: DateTimeHelper,
     private modal: NzModalService,
+    private message: NzMessageService,
+    private spinnerService: SpinnerService
   ) {
   }
 
@@ -34,7 +39,6 @@ export class ReportFunnelCourseComponent implements OnInit {
   }
 
   resetForm() {
-    // this.myForm.reset();
     this.currentPage = 1;
     this.pageSize = 10;
     this.onSearch();
@@ -55,6 +59,7 @@ export class ReportFunnelCourseComponent implements OnInit {
       nzContent: FilterFunnelCourseReportComponent,
       nzFooter: null,
       nzWidth: '30%',
+      nzData: this.filter,
       nzMaskClosable: false
     });
 
@@ -62,41 +67,28 @@ export class ReportFunnelCourseComponent implements OnInit {
       if (x) {
         this.filter = { ...x };
         this.onSearch();
+      } else if (x == 0) {
+        this.onSearch();
+        this.filter = {};
       }
     })
   }
 
   syncData() {
-    this.reportFunnelService.syncData();
-  }
+    this.spinnerService.showLoading();
+    this.reportFunnelService.syncData().subscribe(x => {
+      if (x.success == true) {
+        this.message.success("Đồng bộ dữ liệu thành công");
+      } else {
+        this.message.success("Đồng bộ dữ liệu thất bại");
+      }
 
-  getFilterDateTime(quarterOfYearCtrl: any, dateTimeRangeCtrl: any, monthCtrl: any, yearCtrl: any) {
-    let result = {};
-    if (quarterOfYearCtrl) {
-      result = this.dateTimeHelper.getQuarterOfYear(quarterOfYearCtrl);
-    }
-
-    if (dateTimeRangeCtrl) {
-      result = this.dateTimeHelper.getDateTimeByDay(dateTimeRangeCtrl[0], dateTimeRangeCtrl[1]);
-    }
-    if (monthCtrl) {
-      let dateMonth = monthCtrl as Date;
-      result = this.dateTimeHelper.getDateTimeByMonth(dateMonth.getMonth(), dateMonth.getFullYear());
-    }
-    if (yearCtrl) {
-      let dateYear = yearCtrl as Date;
-      result = this.dateTimeHelper.getDateTimeByYear(dateYear.getFullYear());
-    }
-
-    return result;
+      this.spinnerService.hideLoading();
+    });
   }
 
   onSearch(sortField: string | null = null, sortOrder: string | null = null) {
     this.isLoading = true;
-
-    // if (this.ctrl.classNameCtrl.value) {
-    //   filter.className = this.ctrl.classNameCtrl.value
-    // }
 
     if (sortField && sortOrder) {
       this.filter.sortBy = `${sortField}-${sortOrder}`;
@@ -111,13 +103,13 @@ export class ReportFunnelCourseComponent implements OnInit {
     });
   }
 
-  // onExpandChange(id: number, checked: boolean): void {
-  //   if (checked) {
-  //     this.expandSet.add(id);
-  //   } else {
-  //     this.expandSet.delete(id);
-  //   }
-  // }
+  onSeeProcess() {
+    this.message.error('Chức năng này hiện chưa hoàn thiện, xin vui lòng thử lại sau!')
+  }
+
+  onSeeRanking() {
+    this.message.error('Chức năng này hiện chưa hoàn thiện, xin vui lòng thử lại sau!')
+  }
 
   onPageChange(page: any) {
     this.currentPage = page;
@@ -125,7 +117,6 @@ export class ReportFunnelCourseComponent implements OnInit {
   }
 
   nzPageSizeChange(pageSize: number) {
-    // console.log(pageSize);
     this.pageSize = pageSize;
     this.onSearch();
   }

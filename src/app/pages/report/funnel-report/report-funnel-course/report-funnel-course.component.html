@@ -16,7 +16,6 @@
             <tr>
                 <th nzWidth="40px" [nzLeft]="true"></th>
                 <th [nzLeft]="true" nzWidth="60px">STT</th>
-                <!-- <th nzWidth="120px">Thời gian</th> -->
                 <th nzWidth="180px">Tên khóa học</th>
 
                 <th nzWidth="120px" nzColumnKey="totalAdsAmount" [nzSortFn]="true">Số tiền Ads</th>
@@ -65,41 +64,17 @@
                     <td> {{ data.speakerName }} </td>
                     <td> {{ data.phoneNumber }} </td>
                     <td> {{ data.organizationName }} </td>
-                    <td [nzRight]="true"></td>
+                    <td [nzRight]="true">
+                        <button nz-button nzType="default" nzShape="circle" (click)="onSeeProcess()"><span nz-icon nzType="eye"
+                                nzTheme="outline"></span></button>
+                        <button nz-button nzType="default" nzShape="circle" (click)="onSeeRanking()"> <span nz-icon nzType="rise"
+                                nzTheme="outline"></span></button>
+                    </td>
                 </tr>
-                <!-- <tr [nzExpand]="expandSet.has(data.courseId)">
-                    <nz-table [nzData]="data.listReportClassResponse" [nzShowPagination]="false"
-                        [nzShowPagination]="false">
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Tên lớp học</th>
-                                <th>Số tiền Ads</th>
-                                <th>Số lượt đăng ký</th>
-                                <th>CPA</th>
-                                <th>Các chi phí khác</th>
-                            </tr>
-                        </thead>
-        <tbody>
-            <tr *ngFor="let item of data.listReportClassResponse; let i = index">
-                <td> {{ i + 1 }} </td>
-                <td> {{ item.className }} </td>
-                <td> {{ item.adsAmount }} </td>
-                <td> {{ item.numberOfRegistrations }} </td>
-                <td> {{ item.cpa }} </td>
-                <td> {{ item.otherCost }} </td>
-            </tr>
-        </tbody>
-    </nz-table>
-    </tr> -->
             </ng-container>
         </tbody>
     </nz-table>
     <div class="table-footer paging-table header-btn">
-        <!-- <div *ngIf="listOfData.length > 0" class="d-flex table-footer-numberline align-items-center paging-table-left">
-            <div class="d-flex align-items-center info-left-paging">Hiển thị {{(currentPage - 1) * pageSize + 1}} -
-                {{ getLimit() }} của {{totalItem}}&nbsp;</div>
-        </div> -->
         <div class="paging-table-right" style="margin-top: 20px;" *ngIf="items.length > 0">
             <nz-pagination class="pagination" [(nzPageSize)]="pageSize" [(nzPageIndex)]="currentPage"
                 [nzTotal]="totalItem" (nzPageIndexChange)="onPageChange($event)"

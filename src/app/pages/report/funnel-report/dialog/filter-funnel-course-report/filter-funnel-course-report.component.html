@@ -13,11 +13,11 @@
         <div nz-col [nzSpan]="12" *ngIf="ctrl.dateTimeTypeSearchCtrl.value != null">
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 0">
                 <nz-form-label>Theo ngày</nz-form-label>
-                <nz-range-picker formControlName="dateTimeRangeCtrl"></nz-range-picker>
+                <nz-range-picker formControlName="dateTimeRangeCtrl" [nzFormat]="dateFormat"></nz-range-picker>
             </nz-form-item>
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 1">
                 <nz-form-label>Theo tháng</nz-form-label>
-                <nz-date-picker nzMode="month" formControlName="monthCtrl" style="width: 193px;"></nz-date-picker>
+                <nz-date-picker nzMode="month" [nzFormat]="monthFormat" formControlName="monthCtrl" style="width: 193px;"></nz-date-picker>
             </nz-form-item>
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 2">
                 <nz-form-label>Theo quý</nz-form-label>
@@ -40,13 +40,13 @@
         <div nz-col [nzSpan]="12">
             <nz-form-item>
                 <nz-form-label>Tên khóa học</nz-form-label>
-                <input nz-input formControlName="courseNameCtrl">
+                <input nz-input formControlName="courseNameCtrl" placeholder="Nhập">
             </nz-form-item>
         </div>
         <div nz-col [nzSpan]="12">
             <nz-form-item>
                 <nz-form-label>Tổ chức</nz-form-label>
-                <input nz-input formControlName="organizationNameCtrl">
+                <input nz-input formControlName="organizationNameCtrl" placeholder="Nhập">
             </nz-form-item>
 
         </div>
@@ -55,13 +55,13 @@
         <div nz-col [nzSpan]="12">
             <nz-form-item>
                 <nz-form-label>Tên diễn giả</nz-form-label>
-                <input nz-input formControlName="speakerNameCtrl">
+                <input nz-input formControlName="speakerNameCtrl" placeholder="Nhập">
             </nz-form-item>
         </div>
         <div nz-col [nzSpan]="12">
             <nz-form-item>
                 <nz-form-label>Số điện thoại</nz-form-label>
-                <input nz-input formControlName="phoneNumberCtrl">
+                <input nz-input formControlName="phoneNumberCtrl" placeholder="Nhập">
             </nz-form-item>
         </div>
     </div>
