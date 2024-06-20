@@ -79,6 +79,8 @@ export class ReportFunnelCourseComponent implements OnInit {
     this.reportFunnelService.syncData().subscribe(x => {
       if (x.success == true) {
         this.message.success("Đồng bộ dữ liệu thành công");
+        this.filter = {};
+        this.onSearch();
       } else {
         this.message.success("Đồng bộ dữ liệu thất bại");
       }
