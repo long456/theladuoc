@@ -45,9 +45,10 @@
         </div>
         <div nz-col [nzSpan]="12">
             <nz-form-item>
-                <nz-form-label>Tên lớp học</nz-form-label>
-                <input nz-input formControlName="classNameCtrl">
+                <nz-form-label>Tổ chức</nz-form-label>
+                <input nz-input formControlName="organizationNameCtrl">
             </nz-form-item>
+
         </div>
     </div>
     <div nz-row [nzGutter]="24">
@@ -66,10 +67,14 @@
     </div>
 
     <div nz-row [nzGutter]="24">
-        <div nz-col [nzSpan]="12">
+        <div nz-col [nzSpan]="24">
             <nz-form-item>
-                <nz-form-label>Tổ chức</nz-form-label>
-                <input nz-input formControlName="organizationNameCtrl">
+                <nz-form-label>Lớp học</nz-form-label>
+                <nz-select nzPlaceHolder="---Chọn---" formControlName="classCtrl" style="width: 100%;" nzAllowClear
+                    nzShowSearch>
+                    <nz-option *ngFor="let item of lstClass" [nzValue]="item.classId"
+                        [nzLabel]="item.name!"></nz-option>
+                </nz-select>
             </nz-form-item>
         </div>
     </div>

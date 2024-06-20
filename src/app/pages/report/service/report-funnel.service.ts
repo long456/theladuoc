@@ -30,4 +30,8 @@ export class ReportFunnelService {
     syncData(): Observable<any> {
         return this.http.post('report/sync-funnel-course-report', {});
     }
+
+    lstClassData(): Observable<any> {
+        return this.http.get(`class/list-class-by-course-type`, { params: { courseType: 1 } });
+    }
 }

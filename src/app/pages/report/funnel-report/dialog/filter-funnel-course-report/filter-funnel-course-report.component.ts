@@ -3,6 +3,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { DateTimeTypeSearch, QuarterOfYear } from '../../../constant/date-time-type-search.const';
 import { DateTimeHelper } from '../../../helper/date-time-helper';
+import { ReportFunnelService } from '../../../service/report-funnel.service';
+import { ClassModelResponse } from '../../../model/class-model-response';
+import { plainToClass } from 'class-transformer';
 
 @Component({
   selector: 'app-filter-funnel-course-report',
@@ -19,14 +22,15 @@ export class FilterFunnelCourseReportComponent {
     dateTimeRangeCtrl: new FormControl(null),
     monthCtrl: new FormControl(null),
     yearCtrl: new FormControl(null),
-    classNameCtrl: new FormControl(null),
     quarterYearCtrl: new FormControl(null),
     courseNameCtrl: new FormControl(null),
     speakerNameCtrl: new FormControl(null),
     phoneNumberCtrl: new FormControl(null),
     organizationNameCtrl: new FormControl(null),
+    classCtrl: new FormControl(null),
   });
   ctrl = this.myForm.controls;
+  lstClass: ClassModelResponse[] = [];
   filterDataSearch = [
     { value: DateTimeTypeSearch.SEARCH_BY_DAY, label: 'Theo ngày' },
     { value: DateTimeTypeSearch.SEARCH_BY_MONTH, label: 'Theo tháng' },
@@ -42,7 +46,9 @@ export class FilterFunnelCourseReportComponent {
   ]
 
   constructor(private dateTimeHelper: DateTimeHelper,
-    private modal: NzModalRef<FilterFunnelCourseReportComponent>,) {
+    private modal: NzModalRef<FilterFunnelCourseReportComponent>,
+    private reportFunnelService: ReportFunnelService
+  ) {
 
   }
 
@@ -52,11 +58,15 @@ export class FilterFunnelCourseReportComponent {
       this.ctrl.monthCtrl.reset();
       this.ctrl.yearCtrl.reset();
       this.ctrl.quarterOfYearCtrl.reset();
-    })
+    });
+    this.reportFunnelService.lstClassData().subscribe(x => {
+      if (x.data && x.data.length > 0) {
+        this.lstClass = x.data.map((z: any) => plainToClass(ClassModelResponse, z));
+      }
+    });
   }
 
   resetForm() {
-
   }
 
   onSave() {
@@ -75,6 +85,11 @@ export class FilterFunnelCourseReportComponent {
     if (this.ctrl.phoneNumberCtrl.value) {
       dataFilter.phoneNumber = this.ctrl.phoneNumberCtrl.value;
     }
+
+    if (this.ctrl.classCtrl.value) {
+      dataFilter.classId = this.ctrl.classCtrl.value;
+    }
+
     this.modal.close(dataFilter)
   }
 
