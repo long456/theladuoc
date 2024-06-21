@@ -32,11 +32,7 @@ export class ReportFunnelService {
         return this.http.post('report/sync-funnel-course-report', {});
     }
 
-    lstClassData(): Observable<any> {
-        return this.http.get(`class/list-class-by-course-type`, { params: { courseType: CourseConst.FUNNEL_COURSE } });
-    }
-
-    lstCourseData(): Observable<any> {
-        return this.http.get(`course/list-course-funnel-type`, { params: { courseType: CourseConst.FUNNEL_COURSE } });
+    lstDropData(): Observable<any> {
+        return this.http.get(`course/list-data-drop-funnel-report`, { params: { courseType: CourseConst.FUNNEL_COURSE } });
     }
 }

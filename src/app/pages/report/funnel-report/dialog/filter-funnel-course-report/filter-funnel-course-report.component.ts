@@ -1,12 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
-import { DateTimeTypeSearch, QuarterOfYear } from '../../../constant/date-time-type-search.const';
 import { DateTimeHelper } from '../../../helper/date-time-helper';
 import { ReportFunnelService } from '../../../service/report-funnel.service';
-import { ClassModelResponse } from '../../../model/class-model-response';
 import { plainToClass } from 'class-transformer';
-import { CourseModelResponse } from '../../../model/course-model-response';
+import { DataDropResponse } from '../../../model/data-drop-response';
+import { FILTER_DATA_SEARCH, LST_QUARTER_OF_YEAR } from '../../../constant/report.const';
 
 @Component({
   selector: 'app-filter-funnel-course-report',
@@ -20,7 +19,6 @@ export class FilterFunnelCourseReportComponent {
     dateTimeTypeSearchCtrl: new FormControl(null),
     startCtrl: new FormControl(null),
     endCtrl: new FormControl(null),
-    classIdCtrl: new FormControl(null),
     quarterOfYearCtrl: new FormControl(null),
     dateTimeRangeCtrl: new FormControl(null),
     monthCtrl: new FormControl(null),
@@ -33,21 +31,9 @@ export class FilterFunnelCourseReportComponent {
     classCtrl: new FormControl(null),
   });
   ctrl = this.myForm.controls;
-  lstClass: ClassModelResponse[] = [];
-  lstCourseModel: CourseModelResponse[] = [];
-  filterDataSearch = [
-    { value: DateTimeTypeSearch.SEARCH_BY_DAY, label: 'Theo ngày' },
-    { value: DateTimeTypeSearch.SEARCH_BY_MONTH, label: 'Theo tháng' },
-    { value: DateTimeTypeSearch.SEARCH_BY_QUARTER, label: 'Theo quý' },
-    { value: DateTimeTypeSearch.SEARCH_BY_YEAR, label: 'Theo năm' }
-  ]
-
-  lstQuarterOfYear = [
-    { value: QuarterOfYear.QUY_1, label: 'Quý 1' },
-    { value: QuarterOfYear.QUY_2, label: 'Quý 2' },
-    { value: QuarterOfYear.QUY_3, label: 'Quý 3' },
-    { value: QuarterOfYear.QUY_4, label: 'Quý 4' }
-  ]
+  dropModel: DataDropResponse = new DataDropResponse();
+  filterDataSearch = FILTER_DATA_SEARCH;
+  lstQuarterOfYear = LST_QUARTER_OF_YEAR;
 
   constructor(private dateTimeHelper: DateTimeHelper,
     private modal: NzModalRef<FilterFunnelCourseReportComponent>,
@@ -58,17 +44,17 @@ export class FilterFunnelCourseReportComponent {
   }
 
   setFilter() {
-    if (this.data.title) {
-      this.ctrl.courseNameCtrl.setValue(this.data.title);
+    if (this.data.courseId) {
+      this.ctrl.courseNameCtrl.setValue(this.data.courseId);
     }
-    if (this.data.teacherName) {
-      this.ctrl.speakerNameCtrl.setValue(this.data.teacherName);
+    if (this.data.teacherId) {
+      this.ctrl.speakerNameCtrl.setValue(this.data.teacherId);
     }
-    if (this.data.organizationName) {
-      this.ctrl.organizationNameCtrl.setValue(this.data.organizationName);
+    if (this.data.orgId) {
+      this.ctrl.organizationNameCtrl.setValue(this.data.orgId);
     }
-    if (this.data.phoneNumber) {
-      this.ctrl.phoneNumberCtrl.setValue(this.data.phoneNumber);
+    if (this.data.phoneId) {
+      this.ctrl.phoneNumberCtrl.setValue(this.data.phoneId);
     }
     if (this.data.classId) {
       this.ctrl.classCtrl.setValue(this.data.classId);
@@ -82,15 +68,10 @@ export class FilterFunnelCourseReportComponent {
       this.ctrl.yearCtrl.reset();
       this.ctrl.quarterOfYearCtrl.reset();
     });
-    this.reportFunnelService.lstClassData().subscribe(x => {
-      if (x.data && x.data.length > 0) {
-        this.lstClass = x.data.map((z: any) => plainToClass(ClassModelResponse, z));
-      }
-    });
-
-    this.reportFunnelService.lstCourseData().subscribe(x => {
-      if (x.data && x.data.length > 0) {
-        this.lstCourseModel = x.data.map((z: any) => plainToClass(CourseModelResponse, z));
+    this.reportFunnelService.lstDropData().subscribe(x => {
+      console.log(x);
+      if (x.data) {
+        this.dropModel = plainToClass(DataDropResponse, x.data);
       }
     });
   }
@@ -104,16 +85,16 @@ export class FilterFunnelCourseReportComponent {
       ...this.getFilterDateTime()
     };
     if (this.ctrl.speakerNameCtrl.value) {
-      dataFilter.teacherName = this.ctrl.speakerNameCtrl.value;
+      dataFilter.teacherId = this.ctrl.speakerNameCtrl.value;
     }
     if (this.ctrl.organizationNameCtrl.value) {
-      dataFilter.organizationName = this.ctrl.organizationNameCtrl.value;
+      dataFilter.orgId = this.ctrl.organizationNameCtrl.value;
     }
     if (this.ctrl.courseNameCtrl.value) {
-      dataFilter.title = this.ctrl.courseNameCtrl.value;
+      dataFilter.courseId = this.ctrl.courseNameCtrl.value;
     }
     if (this.ctrl.phoneNumberCtrl.value) {
-      dataFilter.phoneNumber = this.ctrl.phoneNumberCtrl.value;
+      dataFilter.phoneId = this.ctrl.phoneNumberCtrl.value;
     }
 
     if (this.ctrl.classCtrl.value) {

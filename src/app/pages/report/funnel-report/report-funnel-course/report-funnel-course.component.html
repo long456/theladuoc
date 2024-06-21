@@ -2,13 +2,57 @@
     Báo cáo khóa học phễu
 </div>
 <div>
-    <div nz-row style="margin-bottom: 20px;">
+    <div nz-row style="margin-bottom: 20px;" (keyup.enter)="openSearch()">
         <div nz-col [nzSpan]="24" class="search-area d-flex">
-            <div class="d-flex justify-content-start">
-                <button nz-button type="button" [nzType]="'primary'" (click)="openSearch()"
-                    style="margin-right: 10px;">Lọc</button>
+            <div class="d-flex justify-content-start" style="width: 50%;">
+                <form nz-form [formGroup]="myForm" class="w-100">
+                    <div nz-row [nzGutter]="24">
+                        <div nz-col [nzSpan]="6">
+                            <nz-form-item>
+                                <nz-select nzPlaceHolder="Tìm kiếm theo thời gian" class="min-width-194"
+                                    formControlName="dateTimeTypeSearchCtrl" style="width: 100%;" [nzAllowClear]="true">
+                                    <nz-option *ngFor="let option of filterDataSearch" [nzValue]="option.value"
+                                        [nzLabel]="option.label"></nz-option>
+                                </nz-select>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzSpan]="18" style="width: 70%;" class="d-flex">
+                            <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 0" class="mg-r-20">
+                                <nz-range-picker formControlName="dateTimeRangeCtrl"
+                                    [nzFormat]="dateFormat"></nz-range-picker>
+                            </nz-form-item>
+                            <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 1" class="mg-r-20">
+                                <nz-date-picker nzMode="month" [nzFormat]="monthFormat" formControlName="monthCtrl"
+                                    style="width: 150px;"></nz-date-picker>
+                            </nz-form-item>
+                            <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 2" class="mg-r-20">
+                                <div style="width: 80%;display: flex;">
+                                    <nz-date-picker nzMode="year" formControlName="quarterYearCtrl"
+                                        class="min-width-140 mg-r-10"></nz-date-picker>
+                                    <nz-select nzPlaceHolder="---Chọn---" formControlName="quarterOfYearCtrl"
+                                        class="min-width-140">
+                                        <nz-option *ngFor="let option of lstQuarterOfYear" [nzValue]="option.value"
+                                            [nzLabel]="option.label"></nz-option>
+                                    </nz-select>
+                                </div>
+                            </nz-form-item>
+                            <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 3" class="mg-r-20">
+                                <nz-date-picker nzMode="year" formControlName="yearCtrl"
+                                    style="width: 193px;"></nz-date-picker>
+                            </nz-form-item>
+                            <nz-form-item>
+                                <button nz-button type="button" [nzType]="'primary'" (click)="openSearch()"
+                                    class="mg-r-10">Tìm kiếm</button>
+                                <button nz-button type="button" [nzType]="'primary'" nz-tooltip
+                                    nzTooltipTitle="Đồng bộ" (click)="openFilter()"
+                                    class="mg-r-10">Lọc</button>
+                            </nz-form-item>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="d-flex justify-content-end w-100">
+
+            <div class="d-flex justify-content-end" style="width: 50%;">
                 <button nz-button type="button" [nzType]="'primary'" (click)="syncData()">
                     <span nz-icon nzType="sync" nzTheme="outline"></span></button>
             </div>

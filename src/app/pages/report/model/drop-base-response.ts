@@ -1,4 +1,4 @@
-export class CourseModelResponse {
+export class DropBaseResponse {
     name?: string;
     id?: number;
 }

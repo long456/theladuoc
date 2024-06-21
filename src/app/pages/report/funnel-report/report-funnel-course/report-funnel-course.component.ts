@@ -11,6 +11,7 @@ import { FilterFunnelCourseReportComponent } from '../dialog/filter-funnel-cours
 import { CreateLessonComponent } from 'src/app/pages/class/components/create-lesson/create-lesson.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { SpinnerService } from 'src/app/shared/services/spinner-service';
+import { FILTER_DATA_SEARCH, LST_QUARTER_OF_YEAR } from '../../constant/report.const';
 
 @Component({
   selector: 'app-report-funnel-course',
@@ -18,7 +19,8 @@ import { SpinnerService } from 'src/app/shared/services/spinner-service';
   styleUrls: ['./report-funnel-course.component.scss']
 })
 export class ReportFunnelCourseComponent implements OnInit {
-
+  dateFormat = 'dd/MM/yyyy';
+  monthFormat = 'MM/yyyy';
   items: ReportFunnelCourse[] = [];
   expandSet = new Set<number>();
   currentPage: number = 1;
@@ -26,6 +28,23 @@ export class ReportFunnelCourseComponent implements OnInit {
   totalItem: number = 0;
   isLoading: boolean = false;
   filter: any = {};
+
+  myForm = new FormGroup({
+    dateTimeTypeSearchCtrl: new FormControl(null),
+    startCtrl: new FormControl(null),
+    endCtrl: new FormControl(null),
+    quarterOfYearCtrl: new FormControl(null),
+    dateTimeRangeCtrl: new FormControl(null),
+    monthCtrl: new FormControl(null),
+    yearCtrl: new FormControl(null),
+    quarterYearCtrl: new FormControl(null),
+  });
+
+  ctrls = this.myForm.controls;
+
+  filterDataSearch = FILTER_DATA_SEARCH;
+  lstQuarterOfYear = LST_QUARTER_OF_YEAR;
+
   constructor(private reportFunnelService: ReportFunnelService,
     private dateTimeHelper: DateTimeHelper,
     private modal: NzModalService,
@@ -53,7 +72,49 @@ export class ReportFunnelCourseComponent implements OnInit {
     this.onSearch(sortField, sortOrder);
   }
 
+  getFilterDateTime() {
+    let result = {};
+    if (this.ctrls.quarterOfYearCtrl.value) {
+      if (this.ctrls.quarterYearCtrl.value) {
+        let dateQuarterYear = this.ctrls.quarterYearCtrl.value as Date;
+        result = this.dateTimeHelper.getQuarterOfYear(this.ctrls.quarterOfYearCtrl.value, dateQuarterYear.getFullYear());
+      } else {
+        result = this.dateTimeHelper.getQuarterOfYear(this.ctrls.quarterOfYearCtrl.value);
+      }
+    }
+
+    if (this.ctrls.dateTimeRangeCtrl.value) {
+      result = this.dateTimeHelper.getDateTimeByDay(this.ctrls.dateTimeRangeCtrl.value[0], this.ctrls.dateTimeRangeCtrl.value[1]);
+    }
+    if (this.ctrls.monthCtrl.value) {
+      let dateMonth = this.ctrls.monthCtrl.value as Date;
+      result = this.dateTimeHelper.getDateTimeByMonth(dateMonth.getMonth(), dateMonth.getFullYear());
+    }
+    if (this.ctrls.yearCtrl.value) {
+      let dateYear = this.ctrls.yearCtrl.value as Date;
+      result = this.dateTimeHelper.getDateTimeByYear(dateYear.getFullYear());
+    }
+
+    return result;
+  }
+
   openSearch() {
+    this.filter = {};
+    this.filter = {
+      ...this.getFilterDateTime()
+    };
+
+    this.reportFunnelService.getReportFunnelCourses(this.currentPage, this.pageSize, this.filter).subscribe(x => {
+      if (x) {
+        this.items = x.data.reportFunnelCourses.map((z: any) => plainToClass(ReportFunnelCourse, z));
+        this.totalItem = x.data.paginationInfo?.totalItem;
+      }
+      this.isLoading = false;
+    });
+  }
+
+  openFilter() {
+    this.ctrls.dateTimeTypeSearchCtrl.reset();
     const modal: NzModalRef = this.modal.create<FilterFunnelCourseReportComponent>({
       nzTitle: 'Tìm kiếm khóa học phễu',
       nzContent: FilterFunnelCourseReportComponent,
