@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {MenuItem} from "../../models/MenuItem";
-import {Router} from "@angular/router";
+import { Component, Input } from '@angular/core';
+import { MenuItem } from "../../models/MenuItem";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-side-bar',
@@ -17,71 +17,145 @@ export class SideBarComponent {
 
   treeMenu: MenuItem[] = [
     {
-      name : 'Báo cáo',
+      name: 'Báo cáo',
       icon: 'bar-chart',
       link: '',
       children: [
         {
-          name : 'Tăng trưởng',
+          name: 'Tăng trưởng',
           icon: '',
           link: '',
         },
-      ]
-    },
-    {
-      name : 'Vận hành',
-      icon: 'reconciliation',
-      link: '',
-      children: [
         {
-          name : 'Học viên',
+          name: 'Hiệu quả khóa học',
           icon: '',
           link: '',
           children: [
             {
-              name : 'Chưa chia',
+              name: 'Phễu Khóa học',
+              icon: '',
+              link: '',
+              children: [
+                {
+                  name: 'Khóa học phễu',
+                  icon: '',
+                  link: 'page/report/report-funnel-course',
+                },
+                {
+                  name: 'Khóa học lớn',
+                  icon: '',
+                  link: 'page/report/report-big-course',
+                }
+              ]
+            },
+            {
+              name: 'E-learning',
+              icon: '',
+              link: '',
+              children: [
+                {
+                  name: 'Khóa học miễn phí',
+                  icon: '',
+                  link: 'page/report/report-free-course',
+                },
+                {
+                  name: 'Khóa học thành viên',
+                  icon: '',
+                  link: 'page/report/report-member-course',
+                },
+                {
+                  name: 'Khóa học trả phí',
+                  icon: '',
+                  link: 'page/report/report-paid-course',
+                },
+                {
+                  name: 'Khóa học cộng tác viên',
+                  icon: '',
+                  link: 'page/report/report-collaborator-course',
+                },
+                {
+                  name: 'Khóa học giảng viên',
+                  icon: '',
+                  link: 'page/report/report-instructor-course',
+                }
+              ]
+            },
+          ]
+        },
+
+      ]
+    },
+    {
+      name: 'Vận hành',
+      icon: 'reconciliation',
+      link: '',
+      children: [
+        {
+          name: 'Học viên',
+          icon: '',
+          link: '',
+          children: [
+            {
+              name: 'Chưa chia',
               icon: '',
               link: 'page/student/none-divide',
             },
             {
-              name : 'Đang chờ',
+              name: 'Đang chờ',
               icon: '',
               link: 'page/student/waiting',
             },
             {
-              name : 'Đang chăm',
+              name: 'Đang chăm',
               icon: '',
               link: 'page/student/take-care',
             },
             {
-              name : 'Đang học',
+              name: 'Đang học',
               icon: '',
               link: 'page/student/studying',
             },
             {
-              name : 'Referral',
+              name: 'Referral',
               icon: '',
               link: '',
             },
           ]
         },
         {
-          name : 'Xác thực thanh toán',
+          name: 'Xác thực thanh toán',
           icon: '',
-          link: 'page/payment-auth',
+          link: 'page/payment/auth',
         },
         {
-          name : 'Điểm danh',
+          name: 'Yêu cầu hoàn tiền',
           icon: '',
-          link: 'page/attendance',
+          link: 'page/payment/refund',
         },
         {
-          name : 'Nhân sự',
+          name: 'Điểm danh',
           icon: '',
           link: '',
           children: [
             {
-              name : 'Trao quyền',
+              name : 'Danh sách buổi học',
+              icon: '',
+              link: 'page/attendance/lesson',
+            },
+            {
+              name : 'Danh sách điểm danh',
+              icon: '',
+              link: 'page/attendance/attend',
+            }
+          ]
+        },
+        {
+          name: 'Nhân sự',
+          icon: '',
+          link: '',
+          children: [
+            {
+              name: 'Trao quyền',
               icon: '',
               link: 'page/staff',
             }
@@ -90,109 +164,129 @@ export class SideBarComponent {
       ]
     },
     {
-      name : 'Thiết lập',
+      name: 'Thiết lập',
       icon: 'setting',
       link: '',
       children: [
         {
-          name : 'Tổ chức',
+          name: 'Tổ chức',
           icon: '',
           link: 'page/organization',
         },
         {
-          name : 'Tính năng',
+          name: 'Tính năng',
           icon: '',
           link: '',
           children: [
             {
-              name : 'Nhóm quyền',
+              name: 'Nhóm quyền',
               icon: '',
               link: 'page/setting/permission',
             },
             {
-              name : 'Referral',
+              name: 'Referral',
               icon: '',
               children: [
                 {
-                  name : 'Cuộc thi tính điểm',
+                  name: 'Cuộc thi tính điểm',
                   icon: '',
                   link: 'page/setting/referral/loyalty',
                 },
                 {
-                  name : 'Tri ân học viên',
+                  name: 'Tri ân học viên',
                   icon: '',
                   link: '',
                 },
               ]
             },
             {
-              name : 'Website',
+              name: 'Website',
               icon: '',
               link: '',
               children: [
                 {
-                  name : 'Header & Footer',
+                  name: 'Header & Footer',
                   icon: '',
                   link: 'page/setting/website-config/config',
+                },
+                {
+                  name : 'Cấu hình header',
+                  icon: '',
+                  link: 'page/setting/website-config/header',
+                },
+                {
+                  name : 'Cấu hình footer',
+                  icon: '',
+                  link: 'page/setting/website-config/footer',
+                },
+                {
+                  name : 'Danh sách trang',
+                  icon: '',
+                  link: 'page/setting/website-config/page-config',
                 },
               ]
             },
             {
-              name : 'Phễu khóa học',
+              name: 'Phễu khóa học',
               icon: '',
               link: '',
               children: [
                 {
-                  name : 'Khóa học',
+                  name: 'Khóa học',
                   icon: '',
                   link: 'page/setting/course',
                 },
                 {
-                  name : 'Lớp học',
+                  name: 'Lớp học',
                   icon: '',
                   link: 'page/setting/class',
                 },
                 {
-                  name : 'Buổi học',
+                  name: 'Buổi học',
                   icon: '',
                   link: 'page/setting/lesson',
                 },
                 {
-                  name : 'Landing page',
+                  name: 'Landing page',
                   icon: '',
                   link: 'page/setting/landing-page',
                 },
                 {
-                  name : 'Vé khóa học',
+                  name: 'Vé khóa học',
                   icon: '',
                   link: 'page/setting/ticket',
                 },
                 {
-                  name : 'Form đăng ký',
+                  name: 'Form đăng ký',
                   icon: '',
                   link: 'page/setting/register-form',
                 },
               ]
             },
             {
-              name : 'E-learning',
+              name: 'E-learning',
               icon: '',
               link: '',
               children: [
                 {
-                  name : 'Danh mục khóa học',
+                  name: 'Danh sách khóa học',
                   icon: '',
-                  link: 'page/setting/ticket',
+                  link: 'page/e-course',
+                },
+                {
+                  name: 'Danh mục khóa học',
+                  icon: '',
+                  link: 'page/e-category',
                 },
               ]
             },
             {
-              name : 'Email SMTP',
+              name: 'Email SMTP',
               icon: '',
               link: 'page/setting/email-account',
             },
             {
-              name : 'Email',
+              name: 'Email',
               icon: '',
               children: [
                 // {
@@ -201,29 +295,29 @@ export class SideBarComponent {
                 //   link: 'page/setting/email/system-email',
                 // },
                 {
-                  name : 'Email thông báo',
+                  name: 'Email thông báo',
                   icon: '',
                   link: 'page/setting/email/notifications-email',
                 },
               ]
             },
             {
-              name : 'Ấn phẩm',
+              name: 'Ấn phẩm',
               icon: '',
               link: 'page/setting/publication',
             },
             {
-              name : 'Sản phẩm',
+              name: 'Sản phẩm',
               icon: '',
               link: '',
               children: [
                 {
-                  name : 'Danh sách sản phẩm',
+                  name: 'Danh sách sản phẩm',
                   icon: '',
                   link: 'page/setting/product',
                 },
                 {
-                  name : 'Danh sách kho hàng',
+                  name: 'Danh sách kho hàng',
                   icon: '',
                   link: 'page/setting/warehouse',
                 },

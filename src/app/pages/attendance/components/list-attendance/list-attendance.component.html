@@ -1,0 +1,41 @@
+<div class="title-page">
+  Danh sách điểm danh
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(listAttendance$ | async) as attend">
+    <app-table
+      [rows]="attend.rows"
+      [page]="attend.page"
+      [pageSize]="attend.pageSize"
+      [pageTotal]="attend.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <!--      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>-->
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Thời gian" key="attendanceTime" [width]="'200px'"></table-column>
+      <table-column header="Tên học viên" key="studentName" [width]="'200px'"></table-column>
+      <table-column header="Email" key="studentEmail" [width]="'200px'"></table-column>
+      <table-column header="Lớp tham gia" key="className" [width]="'200px'"></table-column>
+      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
+      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="excelExport(data)"
+                nz-tooltip nzTooltipTitle="Xuất excel ">
+            <span nz-icon nzType="file-excel" nzTheme="outline"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
+

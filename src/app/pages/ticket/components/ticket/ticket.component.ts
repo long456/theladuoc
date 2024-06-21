@@ -67,7 +67,12 @@ export class TicketComponent implements OnInit{
             }),
             catchError(err => {
               this.message.error('Lỗi load dữ liệu vé')
-              return of(err.message)
+              return of({
+                rows: [],
+                page: 0,
+                pageSize: 0,
+                rowTotal: 0
+              });
             })
           )
       }),

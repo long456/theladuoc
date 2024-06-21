@@ -5,6 +5,9 @@ import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observ
 import {StudentService} from "../../services/student.service";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Tag} from "../../models/tag";
+import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
+import {RefundRequestComponent} from "../refund-request/refund-request.component";
+import {PaymentCheckComponent} from "../payment-check/payment-check.component";
 
 @Component({
   selector: 'app-studying-student',
@@ -125,6 +128,7 @@ export class StudyingStudentComponent implements OnInit{
   constructor(
     private studentService: StudentService,
     private message: NzMessageService,
+    private modal: NzModalService,
   ) {
   }
 
@@ -148,8 +152,13 @@ export class StudyingStudentComponent implements OnInit{
               }
             }),
             catchError(err => {
-              this.message.error('Lỗi load dữ liệu học viên đang học')
-              return of(err.message)
+              this.message.error('Lỗi load dữ liệu học viên đang học');
+              return of({
+                rows: [],
+                page: 0,
+                pageSize: 0,
+                rowTotal: 0
+              });
             })
           )
       }),
@@ -186,6 +195,47 @@ export class StudyingStudentComponent implements OnInit{
         }
       }
     })
+  }
+
+  refundPayment(data: any) {
+    const modal: NzModalRef = this.modal.create<RefundRequestComponent>({
+      nzTitle: 'Yêu cầu hoàn tiền',
+      nzContent: RefundRequestComponent,
+      nzData: data,
+      nzFooter: [
+        {
+          label: 'Hủy',
+          onClick: () => modal.destroy()
+        },
+        {
+          label: 'Xác nhận',
+          type: 'primary',
+          onClick: (instance) => {
+            if (!(instance instanceof RefundRequestComponent) || instance.refundForm.valid) {
+              modal.triggerOk().then();
+            } else {
+              instance.isSubmit = true
+            }
+          }
+
+        }
+      ],
+      nzOnOk: instance => {
+        const refundData = instance.refundForm.value;
+        delete refundData.name;
+        this.studentService.createRefundRequest(refundData).subscribe({
+          next: res => {
+            if (res.success) {
+              this.pageSize$.next(10)
+              this.message.success(res.messages)
+            } else {
+              this.message.error(res.errorMessages)
+            }
+          },
+          error: err => {}
+        })
+      }
+    });
   }
 
 }

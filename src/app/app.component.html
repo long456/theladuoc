@@ -1,2 +1,4 @@
-<app-spin [isSpinning]="isLoading"></app-spin>
-<router-outlet></router-outlet>
+<div class="spin-wrapper" *ngIf="isLoading | async">
+    <nz-spin [nzSpinning]="true"></nz-spin>
+  </div>
+  <router-outlet></router-outlet>

@@ -1,12 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AttendanceComponent} from "./components/attendance/attendance.component";
+import {ListLessonComponent} from "./components/list-lesson/list-lesson.component";
+import {ListAttendanceComponent} from "./components/list-attendance/list-attendance.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: AttendanceComponent
-  }
+    pathMatch: "full",
+    redirectTo: 'lesson'
+  },
+  {
+    path: 'lesson',
+    component: ListLessonComponent
+  },
+  {
+    path: 'attend',
+    component: ListAttendanceComponent
+  },
 ];
 
 @NgModule({

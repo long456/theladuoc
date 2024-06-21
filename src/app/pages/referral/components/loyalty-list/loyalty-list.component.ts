@@ -46,9 +46,9 @@ export class LoyaltyListComponent implements OnInit{
             map((value) => {
               return {
                 rows: value,
-                // page: value.data.paginationInfo.pageCurrent,
-                // pageSize: value.data.paginationInfo.pageSize,
-                // rowTotal: value.data.paginationInfo.totalItem,
+                page: value.data.paginationInfo.pageCurrent,
+                pageSize: value.data.paginationInfo.pageSize,
+                rowTotal: value.data.paginationInfo.totalItem,
               }
             }),
             catchError(err => {

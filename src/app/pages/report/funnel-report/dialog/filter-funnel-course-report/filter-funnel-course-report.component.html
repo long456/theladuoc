@@ -1,0 +1,104 @@
+<form nz-form [formGroup]="myForm">
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="12">
+            <nz-form-item>
+                <nz-form-label>Thời gian</nz-form-label>
+                <nz-select nzPlaceHolder="Tìm kiếm theo thời gian" formControlName="dateTimeTypeSearchCtrl"
+                    style="width: 100%;" [nzAllowClear]="true">
+                    <nz-option *ngFor="let option of filterDataSearch" [nzValue]="option.value"
+                        [nzLabel]="option.label"></nz-option>
+                </nz-select>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="12" *ngIf="ctrl.dateTimeTypeSearchCtrl.value != null">
+            <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 0">
+                <nz-form-label>Theo ngày</nz-form-label>
+                <nz-range-picker formControlName="dateTimeRangeCtrl" [nzFormat]="dateFormat"></nz-range-picker>
+            </nz-form-item>
+            <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 1">
+                <nz-form-label>Theo tháng</nz-form-label>
+                <nz-date-picker nzMode="month" [nzFormat]="monthFormat" formControlName="monthCtrl"
+                    style="width: 193px;"></nz-date-picker>
+            </nz-form-item>
+            <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 2">
+                <nz-form-label>Theo quý</nz-form-label>
+                <div style="width: 100%;display: flex;">
+                    <nz-date-picker nzMode="year" formControlName="quarterYearCtrl"
+                        style="margin-right: 10px;width: 50%;"></nz-date-picker>
+                    <nz-select nzPlaceHolder="---Chọn---" formControlName="quarterOfYearCtrl" style="width: 50%;">
+                        <nz-option *ngFor="let option of lstQuarterOfYear" [nzValue]="option.value"
+                            [nzLabel]="option.label"></nz-option>
+                    </nz-select>
+                </div>
+            </nz-form-item>
+            <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 3">
+                <nz-form-label>Thời năm</nz-form-label>
+                <nz-date-picker nzMode="year" formControlName="yearCtrl" style="width: 193px;"></nz-date-picker>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="12">
+            <nz-form-item>
+                <nz-form-label>Tên khóa học</nz-form-label>
+                <nz-select nzPlaceHolder="---Chọn---" formControlName="courseNameCtrl" class="w-100" nzAllowClear
+                    nzShowSearch>
+                    <nz-option *ngFor="let item of dropModel.coursesResponse" [nzValue]="item.id"
+                        [nzLabel]="item.name!"></nz-option>
+                </nz-select>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="12">
+            <nz-form-item>
+                <nz-form-label>Tổ chức</nz-form-label>
+                <nz-select nzPlaceHolder="---Chọn---" formControlName="organizationNameCtrl" class="w-100" nzAllowClear
+                    nzShowSearch>
+                    <nz-option *ngFor="let item of dropModel.organizationsResponse" [nzValue]="item.id"
+                        [nzLabel]="item.name!"></nz-option>
+                </nz-select>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="12">
+            <nz-form-item>
+                <nz-form-label>Tên diễn giả</nz-form-label>
+                <nz-select nzPlaceHolder="---Chọn---" formControlName="speakerNameCtrl" class="w-100" nzAllowClear
+                    nzShowSearch>
+                    <nz-option *ngFor="let item of dropModel.speakersResponse" [nzValue]="item.id"
+                        [nzLabel]="item.name!"></nz-option>
+                </nz-select>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="12">
+            <nz-form-item>
+                <nz-form-label>Số điện thoại</nz-form-label>
+                <nz-select nzPlaceHolder="---Chọn---" formControlName="phoneNumberCtrl" class="w-100" nzAllowClear
+                    nzShowSearch>
+                    <nz-option *ngFor="let item of dropModel.phonesResponse" [nzValue]="item.id"
+                        [nzLabel]="item.name!"></nz-option>
+                </nz-select>
+            </nz-form-item>
+        </div>
+    </div>
+
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label>Lớp học</nz-form-label>
+                <nz-select nzPlaceHolder="---Chọn---" formControlName="classCtrl" class="w-100" nzAllowClear
+                    nzShowSearch>
+                    <nz-option *ngFor="let item of dropModel.classesResponse" [nzValue]="item.id"
+                        [nzLabel]="item.name!"></nz-option>
+                </nz-select>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row class="header-btn">
+        <div nz-col [nzSpan]="24" class="search-area">
+            <button nz-button type="button" [nzType]="'primary'" (click)="onSave()" style="margin-right: 10px;">Áp
+                dụng</button>
+            <button nz-button type="button" (click)="resetForm()">Cài đặt lại</button>
+        </div>
+    </div>
+</form>

@@ -325,8 +325,11 @@ export class TakingCareStudentComponent implements OnInit{
       },
       nzOnOk: instance => {
         const data = instance.paymentForm.value;
-        delete data.name
-        const value = this.createFormData(data)
+        delete data.name;
+        const value = this.createFormData(data);
+        value.get('ticketId'); // string 'null'
+        value.delete('ticketId');
+
         this.studentService.setPaymentCheck(value).subscribe({
           next: res => {
             if (res.success) {

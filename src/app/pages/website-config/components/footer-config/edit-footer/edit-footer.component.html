@@ -1,0 +1,93 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới footer navigation' : 'Chỉnh sửa footer navigation'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="footerForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên page
+            <span class="text-danger">*</span>
+          </span>
+          <input
+            nz-input autofocus formControlName="displayName"
+            [nzStatus]="(footerForm.get('displayName')?.invalid && (footerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(footerForm.get('displayName')?.touched || isSubmit)  && footerForm.get('displayName')?.hasError('required')"
+          >
+            Tên footer navigation không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Thứ tự hiển thị</div>
+          <nz-input-number
+            style="width: 100%"
+            [nzMin]="0" [nzStep]="1"
+            formControlName="no"></nz-input-number>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Link đến trang
+          </span>
+
+          <div>
+            <nz-select
+              formControlName="teacherId"
+              [nzStatus]="(footerForm.get('navParentId')?.invalid && (footerForm.get('navParentId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <!--              <nz-option-->
+              <!--                *ngFor="let teacher of listTeacher"-->
+              <!--                [nzValue]="teacher.id"-->
+              <!--                [nzLabel]="teacher.fullName"-->
+              <!--              >-->
+              <!--              </nz-option>-->
+            </nz-select>
+          </div>
+
+          <!--          <span class="text-danger"-->
+          <!--                *ngIf="(headerForm.get('teacherId')?.touched || isSubmit) && headerForm.get('teacherId')?.hasError('required')"-->
+          <!--          >-->
+          <!--            Tên giáo viên không được để trống-->
+          <!--          </span>-->
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Link đến trang
+          </span>
+
+          <div>
+            <nz-select
+              formControlName="columnName"
+              [nzStatus]="(footerForm.get('columnName')?.invalid && (footerForm.get('columnName')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <!--              <nz-option-->
+              <!--                *ngFor="let teacher of listTeacher"-->
+              <!--                [nzValue]="teacher.id"-->
+              <!--                [nzLabel]="teacher.fullName"-->
+              <!--              >-->
+              <!--              </nz-option>-->
+            </nz-select>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

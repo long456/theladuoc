@@ -1,0 +1,41 @@
+<div class="title-page">
+  Danh sách cấu hình header
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(footerConfig$ | async) as config">
+    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+
+    <app-table
+      [rows]="config.rows"
+      [page]="config.page"
+      [pageSize]="config.pageSize"
+      [pageTotal]="config.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Ngày tạo" key="organizationEmail" [width]="'200px'"></table-column>
+      <table-column header="Vị trí" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Tên hiển thị" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Page" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Url" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Parent Page" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)">Thiết lập</span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
+

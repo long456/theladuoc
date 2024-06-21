@@ -98,7 +98,6 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
   edit(): void {
     this.isSubmit = true;
     if (this.courseForm.valid) {
-
       const data = {
         ...this.courseForm.value,
         teacherId: parseInt(this.courseForm.get('teacherId')?.value),
@@ -128,7 +127,7 @@ export class CreateCourseComponent implements OnInit, AfterViewInit{
               this.message.error(res.errorMessages);
             }
           },
-        })
+        });
       }
     }
   }

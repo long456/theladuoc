@@ -86,21 +86,31 @@
           </div>
         </div>
 
-        <div nz-col [nzSpan]="9" *ngIf="!isCreate">
-          <span class="text-label">
+        <div nz-col [nzSpan]="9" >
+          <div style="margin-bottom: 16px">
+            <span class="text-label">
+              Tên miền trang E-leaning
+            </span>
+
+            <input nz-input formControlName="websiteElearning">
+          </div>
+
+          <div *ngIf="!isCreate">
+            <span class="text-label">
             Người đại diện
           </span>
 
-          <div>
-            <nz-select class="width-100" formControlName="userId">
-              <nz-option *ngFor="let user of listDirectors"
-                [nzValue]="user.id" [nzLabel]="user.fullName"
-              ></nz-option>
-            </nz-select>
+            <div>
+              <nz-select class="width-100" formControlName="userId">
+                <nz-option *ngFor="let user of listDirectors"
+                           [nzValue]="user.id" [nzLabel]="user.fullName"
+                ></nz-option>
+              </nz-select>
+            </div>
           </div>
         </div>
 
-        <div nz-col [nzSpan]="5" ></div>
+        <div nz-col [nzSpan]="5" *ngIf="isCreate"></div>
 
         <div nz-col [nzSpan]="3" >
           <span class="text-label">
