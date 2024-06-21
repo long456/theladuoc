@@ -148,9 +148,24 @@ export class SideBarComponent {
               link: '',
               children: [
                 {
-                  name : 'Header & Footer',
+                  name : 'Cấu hình website',
                   icon: '',
                   link: 'page/setting/website-config/config',
+                },
+                {
+                  name : 'Cấu hình header',
+                  icon: '',
+                  link: 'page/setting/website-config/header',
+                },
+                {
+                  name : 'Cấu hình footer',
+                  icon: '',
+                  link: 'page/setting/website-config/footer',
+                },
+                {
+                  name : 'Danh sách trang',
+                  icon: '',
+                  link: 'page/setting/website-config/page-config',
                 },
               ]
             },

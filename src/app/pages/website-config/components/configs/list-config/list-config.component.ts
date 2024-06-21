@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {COL_DATA_TYPE} from "../../../../shared/models/Table";
+import {COL_DATA_TYPE} from "../../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Router} from "@angular/router";
-import {WebConfigService} from "../../services/web-config.service";
+import {WebConfigService} from "../../../services/web-config.service";
 
 @Component({
   selector: 'app-list-config',

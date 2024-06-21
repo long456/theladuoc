@@ -1,0 +1,43 @@
+<div class="title-page">
+  Danh sách trang
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(pageConfig$ | async) as config">
+    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+
+    <app-table
+      [rows]="config.rows"
+      [page]="config.page"
+      [pageSize]="config.pageSize"
+      [pageTotal]="config.rowTotal"
+      [clientPagination]="false"
+      (onItemSelection)="getItemSelection($event)"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Tên trang" key="pageName" [width]="'200px'"></table-column>
+      <table-column header="URL" key="url" [width]="'200px'"></table-column>
+      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Người đại diện" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Email" key="organizationEmail" [width]="'200px'"></table-column>
+      <table-column header="Số điện thoại" key="organizationPhoneNumber" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Chỉnh sửa">
+            <span nz-icon nzType="edit" nzTheme="outline"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

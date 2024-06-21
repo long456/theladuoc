@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {WebConfigService} from "../../services/web-config.service";
+import {WebConfigService} from "../../../services/web-config.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {TreeNode} from "../../../../shared/models/Tree";
+import {TreeNode} from "../../../../../shared/models/Tree";
 
 
 @Component({

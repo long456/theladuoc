@@ -1,0 +1,80 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới website page' : 'Chỉnh sửa website page'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="pageForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên page
+            <span class="text-danger">*</span>
+          </span>
+          <input
+            #pageName
+            nz-input autofocus formControlName="name"
+            [nzStatus]="(pageForm.get('name')?.invalid && (pageForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(pageForm.get('name')?.touched || isSubmit)  && pageForm.get('name')?.hasError('required')"
+          >
+            Tên page không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">Slug</span>
+          <input
+            nz-input formControlName="slug"
+            [nzStatus]="(pageForm.get('slug')?.invalid && (pageForm.get('slug')?.touched || isSubmit)) ? 'error' : ''"
+          >
+          <span class="text-danger"
+                *ngIf="(pageForm.get('slug')?.touched || isSubmit)  && pageForm.get('slug')?.hasError('pattern')"
+          >
+            Mã slug không đúng định dạng
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="16">
+          <div class="text-label">Mô tả</div>
+          <textarea nz-input placeholder="Nhập mô tả" formControlName="description" [nzAutosize]="{ minRows: 3}"></textarea>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <span class="text-label">
+            Nội dung page
+          </span>
+          <ckeditor
+            name="ckeditor_text"
+            formControlName="contentHtml"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
+            [config]="ckEditorConfig"
+          ></ckeditor>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <span class="text-label">
+            Thẻ seo
+          </span>
+          <ckeditor
+            name="ckeditor_text"
+            formControlName="seoImage"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
+            [config]="ckEditorConfig"
+          ></ckeditor>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+
+</div>
