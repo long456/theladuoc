@@ -92,7 +92,7 @@
                 <tr>
                     <!-- [nzExpand]="expandSet.has(data.courseId)" (nzExpandChange)="onExpandChange(data.courseId, $event)" -->
                     <td [nzLeft]="true"></td>
-                    <td [nzLeft]="true">{{i + 1}} </td>
+                    <td [nzLeft]="true">{{i + 1 + ((currentPage - 1) * pageSize)}} </td>
                     <!-- <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td> -->
                     <td> {{ data.courseName }} </td>
                     <td> {{ data.className }} </td>
