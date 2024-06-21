@@ -53,7 +53,11 @@ const routes: Routes = [
         path: 'e-course',
         loadChildren: () => import('./pages/e-learning-course/e-learning-course.module').then(m => m.ELearningCourseModule),
       },
-    ]
+      {
+        path: 'report',
+        loadChildren: () => import('./pages/report/reporting.module').then(m => m.ReportingModule),
+      },
+    ],
   },
 ];
 
