@@ -43,8 +43,7 @@
                             <nz-form-item>
                                 <button nz-button type="button" [nzType]="'primary'" (click)="openSearch()"
                                     class="mg-r-10">Tìm kiếm</button>
-                                <button nz-button type="button" [nzType]="'primary'" nz-tooltip
-                                    nzTooltipTitle="Đồng bộ" (click)="openFilter()"
+                                <button nz-button type="button" [nzType]="'primary'" (click)="openFilter()"
                                     class="mg-r-10">Lọc</button>
                             </nz-form-item>
                         </div>
@@ -53,7 +52,8 @@
             </div>
 
             <div class="d-flex justify-content-end" style="width: 50%;">
-                <button nz-button type="button" [nzType]="'primary'" (click)="syncData()">
+                <button nz-button type="button" [nzType]="'primary'" (click)="syncData()" nz-tooltip
+                    nzTooltipTitle="Đồng bộ">
                     <span nz-icon nzType="sync" nzTheme="outline"></span></button>
             </div>
         </div>
