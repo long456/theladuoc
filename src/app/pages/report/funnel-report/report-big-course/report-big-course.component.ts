@@ -52,6 +52,7 @@ export class ReportBigCourseComponent {
   }
 
   ngOnInit(): void {
+    this.syncData();
     this.onSearch();
   }
 

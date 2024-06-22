@@ -54,6 +54,7 @@ export class ReportFunnelCourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.syncData();
     this.onSearch();
   }
 
