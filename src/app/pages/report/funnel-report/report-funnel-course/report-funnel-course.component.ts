@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { plainToClass } from 'class-transformer';
 import { ReportFunnelCourse } from '../../model/report-funnel-course';
-import { ReportFunnelService } from '../../service/report-funnel.service';
-import { FormControl, FormGroup } from '@angular/forms';
 import { DateTimeTypeSearch, QuarterOfYear } from '../../constant/date-time-type-search.const';
 import { DateTimeHelper } from '../../helper/date-time-helper';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
@@ -11,7 +9,9 @@ import { FilterFunnelCourseReportComponent } from '../dialog/filter-funnel-cours
 import { CreateLessonComponent } from 'src/app/pages/class/components/create-lesson/create-lesson.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { SpinnerService } from 'src/app/shared/services/spinner-service';
-import { FILTER_DATA_SEARCH, LST_QUARTER_OF_YEAR } from '../../constant/report.const';
+import { CourseConst, FILTER_DATA_SEARCH, LST_QUARTER_OF_YEAR } from '../../constant/report.const';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ReportService } from '../../service/report.service';
 
 @Component({
   selector: 'app-report-funnel-course',
@@ -45,7 +45,7 @@ export class ReportFunnelCourseComponent implements OnInit {
   filterDataSearch = FILTER_DATA_SEARCH;
   lstQuarterOfYear = LST_QUARTER_OF_YEAR;
 
-  constructor(private reportFunnelService: ReportFunnelService,
+  constructor(private reportService: ReportService,
     private dateTimeHelper: DateTimeHelper,
     private modal: NzModalService,
     private message: NzMessageService,
@@ -104,7 +104,7 @@ export class ReportFunnelCourseComponent implements OnInit {
       ...this.getFilterDateTime()
     };
 
-    this.reportFunnelService.getReportFunnelCourses(this.currentPage, this.pageSize, this.filter).subscribe(x => {
+    this.reportService.getReportFunnelCourses(this.currentPage, this.pageSize, this.filter).subscribe(x => {
       if (x) {
         this.items = x.data.reportFunnelCourses.map((z: any) => plainToClass(ReportFunnelCourse, z));
         this.totalItem = x.data.paginationInfo?.totalItem;
@@ -120,7 +120,10 @@ export class ReportFunnelCourseComponent implements OnInit {
       nzContent: FilterFunnelCourseReportComponent,
       nzFooter: null,
       nzWidth: '35%',
-      nzData: this.filter,
+      nzData: {
+        filter: this.filter,
+        courseType: CourseConst.FUNNEL_COURSE
+      },
       nzMaskClosable: false
     });
 
@@ -137,7 +140,7 @@ export class ReportFunnelCourseComponent implements OnInit {
 
   syncData() {
     this.spinnerService.showLoading();
-    this.reportFunnelService.syncData().subscribe(x => {
+    this.reportService.syncFunnelCourseData().subscribe(x => {
       if (x.success == true) {
         this.message.success("Đồng bộ dữ liệu thành công");
         this.filter = {};
@@ -157,7 +160,7 @@ export class ReportFunnelCourseComponent implements OnInit {
       this.filter.sortBy = `${sortField}-${sortOrder}`;
     }
 
-    this.reportFunnelService.getReportFunnelCourses(this.currentPage, this.pageSize, this.filter).subscribe(x => {
+    this.reportService.getReportFunnelCourses(this.currentPage, this.pageSize, this.filter).subscribe(x => {
       if (x) {
         this.items = x.data.reportFunnelCourses.map((z: any) => plainToClass(ReportFunnelCourse, z));
         this.totalItem = x.data.paginationInfo?.totalItem;
