@@ -4,6 +4,7 @@ import { plainToClass } from 'class-transformer';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService, NzModalRef } from 'ng-zorro-antd/modal';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
+import { finalize } from 'rxjs';
 import { SpinnerService } from 'src/app/shared/services/spinner-service';
 import { CourseConst, FILTER_DATA_SEARCH, LST_QUARTER_OF_YEAR } from '../../constant/report.const';
 import { DateTimeHelper } from '../../helper/date-time-helper';
@@ -138,16 +139,16 @@ export class ReportBigCourseComponent {
 
   syncData() {
     this.spinnerService.showLoading();
-    this.reportService.syncBigCourseData().subscribe(x => {
+    this.reportService.syncBigCourseData().pipe(finalize(() => {
+      this.spinnerService.hideLoading();
+    })).subscribe(x => {
       if (x.success == true) {
         this.message.success("Đồng bộ dữ liệu thành công");
-       
       } else {
         this.message.success("Đồng bộ dữ liệu thất bại");
       }
       this.filter = {};
       this.onSearch();
-      this.spinnerService.hideLoading();
     });
   }
 

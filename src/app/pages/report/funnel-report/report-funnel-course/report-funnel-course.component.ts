@@ -12,6 +12,7 @@ import { SpinnerService } from 'src/app/shared/services/spinner-service';
 import { CourseConst, FILTER_DATA_SEARCH, LST_QUARTER_OF_YEAR } from '../../constant/report.const';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ReportService } from '../../service/report.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-report-funnel-course',
@@ -140,15 +141,16 @@ export class ReportFunnelCourseComponent implements OnInit {
 
   syncData() {
     this.spinnerService.showLoading();
-    this.reportService.syncFunnelCourseData().subscribe(x => {
+    this.reportService.syncFunnelCourseData().pipe(finalize(() => {
+      this.spinnerService.hideLoading();
+    })).subscribe(x => {
       if (x.success == true) {
         this.message.success("Đồng bộ dữ liệu thành công");
-        this.filter = {};
       } else {
         this.message.success("Đồng bộ dữ liệu thất bại");
       }
+      this.filter = {};
       this.onSearch();
-      this.spinnerService.hideLoading();
     });
   }
 
