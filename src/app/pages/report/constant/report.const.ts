@@ -17,4 +17,12 @@ export const LST_QUARTER_OF_YEAR = [
     { value: QuarterOfYear.QUY_2, label: 'Quý 2' },
     { value: QuarterOfYear.QUY_3, label: 'Quý 3' },
     { value: QuarterOfYear.QUY_4, label: 'Quý 4' }
-  ]
+]
+
+export enum ElearningType {
+    FREE = "FREE",
+    MEMBER = "MEMBER",
+    PAID = "PAID",
+    COLLAB = "COLLAB",
+    LECTURER = "LECTURER",
+}
