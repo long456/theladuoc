@@ -59,19 +59,21 @@
         </div>
     </div>
 
-    <nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed" [nzScroll]="{ y: 'auto' }"
+    <nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed" [nzScroll]="{ x: 'auto' }"
         nzShowPagination="false" (nzQueryParams)="onQueryParamsChange($event)">
-        <thead>
+        <thead style="overflow-y: hidden;">
             <tr>
-                <th [nzLeft]="true" nzWidth="60px" nzAlign="center">STT</th>
-                <th nzWidth="180px" nzAlign="center">Tên khóa học</th>
-                <th nzWidth="180px" nzAlign="center">Tên lớp học</th>
+                <th [nzLeft]="true" nzWidth="50px" nzAlign="center">STT</th>
+                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên khóa học</th>
+                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên lớp học</th>
                 <th nzWidth="180px" nzColumnKey="totalAdsAmount" [nzSortFn]="true" nzAlign="center">Số tiền Ads</th>
                 <th nzWidth="180px" nzColumnKey="totalNumberOfRegistrations" [nzSortFn]="true" nzAlign="center">Số lượt
                     đăng ký</th>
                 <th nzWidth="180px" nzColumnKey="totalCpa" [nzSortFn]="true" nzAlign="center">CPA</th>
-                <th nzWidth="180px" nzColumnKey="totalReferralCommissions" [nzSortFn]="true" nzAlign="center">Hoa hồng referral</th>
-                <th nzWidth="180px" nzColumnKey="totalProductCostPhysical" [nzSortFn]="true" nzAlign="center">Giá vốn sản phẩm vật lý
+                <th nzWidth="180px" nzColumnKey="totalReferralCommissions" [nzSortFn]="true" nzAlign="center">Hoa hồng
+                    referral</th>
+                <th nzWidth="180px" nzColumnKey="totalProductCostPhysical" [nzSortFn]="true" nzAlign="center">Giá vốn
+                    sản phẩm vật lý
                 </th>
                 <th nzWidth="180px" nzColumnKey="totalOtherCost" [nzSortFn]="true" nzAlign="center">Các chi phí khác
                 </th>
@@ -84,7 +86,8 @@
                     bán vé</th>
                 <th nzWidth="180px" nzColumnKey="totalNumberOfParticipants" [nzSortFn]="true" nzAlign="center">Số người
                     tham gia</th>
-                <th nzWidth="180px" nzColumnKey="totalNumberOfRefunds" [nzSortFn]="true" nzAlign="center">Số người hoàn tiền
+                <th nzWidth="180px" nzColumnKey="totalNumberOfRefunds" [nzSortFn]="true" nzAlign="center">Số người hoàn
+                    tiền
                 </th>
                 <th nzWidth="180px" nzColumnKey="totalNumberOfPeopleDepositing" [nzSortFn]="true" nzAlign="center">Số
                     người đặt cọc</th>
@@ -101,14 +104,14 @@
                 <th [nzRight]="true" nzWidth="120px" nzAlign="center">Chức năng</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style="overflow-y: hidden;">
             <ng-container *ngFor="let data of nzTable.data; let i = index">
                 <tr>
                     <!-- [nzExpand]="expandSet.has(data.courseId)" (nzExpandChange)="onExpandChange(data.courseId, $event)" -->
                     <td [nzLeft]="true">{{i + 1 + ((currentPage - 1) * pageSize)}} </td>
                     <!-- <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td> -->
-                    <td nzAlign="center"> {{ data.courseName }} </td>
-                    <td nzAlign="center"> {{ data.className }} </td>
+                    <td nzAlign="center" [nzLeft]="true"> {{ data.courseName }} </td>
+                    <td nzAlign="center" [nzLeft]="true"> {{ data.className }} </td>
                     <td nzAlign="right"> {{ data.totalAdsAmount }} </td>
                     <td nzAlign="right"> {{ data.totalNumberOfRegistrations }} </td>
                     <td nzAlign="right"> {{ data.totalCpa }} </td>

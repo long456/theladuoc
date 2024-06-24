@@ -64,7 +64,7 @@ export class ReportFunnelCourseComponent implements OnInit {
   }
 
   onQueryParamsChange(params: NzTableQueryParams): void {
-    console.log(params);
+    // console.log(params);
     const { pageSize, pageIndex, sort, filter } = params;
     const currentSort = sort.find(item => item.value !== null);
     const sortField = (currentSort && currentSort.key) || null;

@@ -62,7 +62,7 @@ export class ReportBigCourseComponent {
   }
 
   onQueryParamsChange(params: NzTableQueryParams): void {
-    console.log(params);
+    // console.log(params);
     const { pageSize, pageIndex, sort, filter } = params;
     const currentSort = sort.find(item => item.value !== null);
     const sortField = (currentSort && currentSort.key) || null;
@@ -141,10 +141,11 @@ export class ReportBigCourseComponent {
     this.reportService.syncBigCourseData().subscribe(x => {
       if (x.success == true) {
         this.message.success("Đồng bộ dữ liệu thành công");
-        this.filter = {};
+       
       } else {
         this.message.success("Đồng bộ dữ liệu thất bại");
       }
+      this.filter = {};
       this.onSearch();
       this.spinnerService.hideLoading();
     });
