@@ -1,1 +1,158 @@
-<p>report-big-course works!</p>
+<div class="title-page">
+    Báo cáo khóa học lớn
+</div>
+<div>
+    <div nz-row style="margin-bottom: 20px;" (keyup.enter)="openSearch()">
+        <div nz-col [nzSpan]="24" class="search-area d-flex">
+            <div class="d-flex justify-content-start" style="width: 50%;">
+                <form nz-form [formGroup]="myForm" class="w-100">
+                    <div nz-row [nzGutter]="24">
+                        <div nz-col [nzSpan]="6">
+                            <nz-form-item>
+                                <nz-select nzPlaceHolder="Tìm kiếm theo thời gian" class="min-width-194"
+                                    formControlName="dateTimeTypeSearchCtrl" style="width: 100%;" [nzAllowClear]="true">
+                                    <nz-option *ngFor="let option of filterDataSearch" [nzValue]="option.value"
+                                        [nzLabel]="option.label"></nz-option>
+                                </nz-select>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzSpan]="18" style="width: 70%;" class="d-flex">
+                            <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 0" class="mg-r-20">
+                                <nz-range-picker formControlName="dateTimeRangeCtrl"
+                                    [nzFormat]="dateFormat"></nz-range-picker>
+                            </nz-form-item>
+                            <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 1" class="mg-r-20">
+                                <nz-date-picker nzMode="month" [nzFormat]="monthFormat" formControlName="monthCtrl"
+                                    style="width: 150px;"></nz-date-picker>
+                            </nz-form-item>
+                            <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 2" class="mg-r-20">
+                                <div style="width: 80%;display: flex;">
+                                    <nz-date-picker nzMode="year" formControlName="quarterYearCtrl"
+                                        class="min-width-140 mg-r-10"></nz-date-picker>
+                                    <nz-select nzPlaceHolder="---Chọn---" formControlName="quarterOfYearCtrl"
+                                        class="min-width-140">
+                                        <nz-option *ngFor="let option of lstQuarterOfYear" [nzValue]="option.value"
+                                            [nzLabel]="option.label"></nz-option>
+                                    </nz-select>
+                                </div>
+                            </nz-form-item>
+                            <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 3" class="mg-r-20">
+                                <nz-date-picker nzMode="year" formControlName="yearCtrl"
+                                    style="width: 193px;"></nz-date-picker>
+                            </nz-form-item>
+                            <nz-form-item>
+                                <button nz-button type="button" [nzType]="'primary'" (click)="openSearch()"
+                                    class="mg-r-10">Tìm kiếm</button>
+                                <button nz-button type="button" [nzType]="'primary'" (click)="openFilter()"
+                                    class="mg-r-10">Lọc</button>
+                            </nz-form-item>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="d-flex justify-content-end" style="width: 50%;">
+                <button nz-button type="button" [nzType]="'primary'" (click)="syncData()" nz-tooltip
+                    nzTooltipTitle="Đồng bộ">
+                    <span nz-icon nzType="sync" nzTheme="outline"></span></button>
+            </div>
+        </div>
+    </div>
+
+    <nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed" [nzScroll]="{ x: 'auto' }"
+        nzShowPagination="false" (nzQueryParams)="onQueryParamsChange($event)">
+        <thead style="overflow-y: hidden;">
+            <tr>
+                <th [nzLeft]="true" nzWidth="50px" nzAlign="center">STT</th>
+                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên khóa học</th>
+                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên lớp học</th>
+                <th nzWidth="180px" nzColumnKey="totalAdsAmount" [nzSortFn]="true" nzAlign="center">Số tiền Ads</th>
+                <th nzWidth="180px" nzColumnKey="totalNumberOfRegistrations" [nzSortFn]="true" nzAlign="center">Số lượt
+                    đăng ký</th>
+                <th nzWidth="180px" nzColumnKey="totalCpa" [nzSortFn]="true" nzAlign="center">CPA</th>
+                <th nzWidth="180px" nzColumnKey="totalReferralCommissions" [nzSortFn]="true" nzAlign="center">Hoa hồng
+                    referral</th>
+                <th nzWidth="180px" nzColumnKey="totalProductCostPhysical" [nzSortFn]="true" nzAlign="center">Giá vốn
+                    sản phẩm vật lý
+                </th>
+                <th nzWidth="180px" nzColumnKey="totalOtherCost" [nzSortFn]="true" nzAlign="center">Các chi phí khác
+                </th>
+
+                <th nzWidth="180px" nzColumnKey="totalRegistrationTicketNumber" [nzSortFn]="true" nzAlign="center">Số vé
+                    đăng ký</th>
+                <th nzWidth="180px" nzColumnKey="totalNumberOfTicketsSold" [nzSortFn]="true" nzAlign="center">Số vé bán
+                    ra</th>
+                <th nzWidth="180px" nzColumnKey="totalTicketSalesRevenue" [nzSortFn]="true" nzAlign="center">Doanh thu
+                    bán vé</th>
+                <th nzWidth="180px" nzColumnKey="totalNumberOfParticipants" [nzSortFn]="true" nzAlign="center">Số người
+                    tham gia</th>
+                <th nzWidth="180px" nzColumnKey="totalNumberOfRefunds" [nzSortFn]="true" nzAlign="center">Số người hoàn
+                    tiền
+                </th>
+                <th nzWidth="180px" nzColumnKey="totalNumberOfPeopleDepositing" [nzSortFn]="true" nzAlign="center">Số
+                    người đặt cọc</th>
+                <th nzWidth="180px" nzColumnKey="totalNumberPeopleTransferredEnough" [nzSortFn]="true" nzAlign="center">
+                    Số người chuyển
+                    đủ</th>
+                <th nzWidth="180px" nzColumnKey="courseRevenue" [nzSortFn]="true" nzAlign="center">Doanh thu khóa học
+                </th>
+                <th nzWidth="180px" nzColumnKey="courseProfits" [nzSortFn]="true" nzAlign="center">Lợi nhuận khóa học
+                </th>
+                <th nzWidth="180px" nzAlign="center">Tên diễn giả</th>
+                <th nzWidth="180px" nzAlign="center">Số điện thoại</th>
+                <th nzWidth="180px" nzAlign="center">Tổ chức</th>
+                <th [nzRight]="true" nzWidth="120px" nzAlign="center">Chức năng</th>
+            </tr>
+        </thead>
+        <tbody style="overflow-y: hidden;">
+            <ng-container *ngFor="let data of nzTable.data; let i = index">
+                <tr>
+                    <!-- [nzExpand]="expandSet.has(data.courseId)" (nzExpandChange)="onExpandChange(data.courseId, $event)" -->
+                    <td [nzLeft]="true">{{i + 1 + ((currentPage - 1) * pageSize)}} </td>
+                    <!-- <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td> -->
+                    <td nzAlign="center" [nzLeft]="true"> {{ data.courseName }} </td>
+                    <td nzAlign="center" [nzLeft]="true"> {{ data.className }} </td>
+                    <td nzAlign="right"> {{ data.totalAdsAmount }} </td>
+                    <td nzAlign="right"> {{ data.totalNumberOfRegistrations }} </td>
+                    <td nzAlign="right"> {{ data.totalCpa }} </td>
+
+                    <td nzAlign="right"> {{ data.totalReferralCommissions }} </td>
+                    <td nzAlign="right"> {{ data.totalProductCostPhysical }} </td>
+
+                    <td nzAlign="right"> {{ data.totalOtherCost }} </td>
+
+
+                    <td nzAlign="right"> {{ data.totalRegistrationTicketNumber }} </td>
+                    <td nzAlign="right"> {{ data.totalNumberOfTicketsSold }}</td>
+                    <td nzAlign="right"> {{ data.totalTicketSalesRevenue | number }} </td>
+                    <td nzAlign="right"> {{ data.totalNumberOfParticipants }} </td>
+                    <td nzAlign="right"> {{ data.totalNumberOfRefunds }} </td>
+                    <td nzAlign="right"> {{ data.totalNumberOfPeopleDepositing }}</td>
+                    <td nzAlign="right"> {{ data.totalNumberPeopleTransferredEnough }} </td>
+                    <td nzAlign="right"> {{ data.courseRevenue | number }} </td>
+                    <td nzAlign="right"> {{ data.courseProfits | number }} </td>
+                    <td nzAlign="center"> {{ data.speakerName }} </td>
+                    <td nzAlign="center"> {{ data.phoneNumber }} </td>
+                    <td nzAlign="center"> {{ data.organizationName }} </td>
+                    <td [nzRight]="true" nzAlign="center">
+                        <button nz-button nzType="default" nzShape="circle" nz-tooltip
+                            nzTooltipTitle="Xem quá trình hoạt động" (click)="onSeeProcess()"><span nz-icon
+                                nzType="rise" nzTheme="outline"></span></button>
+                        <button nz-button nzType="default" nzShape="circle" nz-tooltip
+                            nzTooltipTitle="Xem bảng xếp hạng" (click)="onSeeRanking()"> <span nz-icon
+                                nzType="ordered-list" nzTheme="outline"></span></button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </nz-table>
+    <div class="table-footer paging-table header-btn">
+        <div class="paging-table-right" style="margin-top: 20px;" *ngIf="items.length > 0">
+            <nz-pagination class="pagination" [(nzPageSize)]="pageSize" [(nzPageIndex)]="currentPage"
+                [nzTotal]="totalItem" (nzPageIndexChange)="onPageChange($event)"
+                (nzPageSizeChange)="nzPageSizeChange($event);" [nzShowTotal]="totalTemplate"
+                nzShowSizeChanger></nz-pagination>
+            <ng-template #totalTemplate let-total>Tổng có {{ totalItem }} khóa học</ng-template>
+        </div>
+    </div>
+</div>

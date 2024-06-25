@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Student} from "../../models/student";
-import {StudentWaitingService} from "../../services/student-waiting.service";
-import {COL_DATA_TYPE, FIX_COLUMN, filterItem} from "../../../../shared/models/Table";
+import {COL_DATA_TYPE, FIX_COLUMN, filterItem, FilterType} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, switchMap, tap} from "rxjs";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {StudentService} from "../../services/student.service";
@@ -18,115 +16,22 @@ export class WaitingStudentComponent implements OnInit{
   COL_DATA_TYPE = COL_DATA_TYPE;
 
   listOfColumn: filterItem[] = [
-    {
-      title: 'Ngày đăng ký',
-      name: 'createdDate',
-      type: "date-range"
-    },
-    {
-      title: 'Loại vé',
-      name: 'ticket',
-    },
-    {
-      title: 'Tên học viên',
-      name: 'name',
-    },
-    {
-      title: 'Số điện thoại',
-      name: 'mobile',
-    },
-    {
-      title: 'Email',
-      name: 'email',
-    },
-    {
-      title: 'Mã học viên',
-      name: 'code',
-    },
-    {
-      title: 'Người giới thiệu',
-      name: 'userRef',
-    },
-    {
-      title: 'Tên diễn giả',
-      name: 'lecturerName',
-    },
-    {
-      title: 'Tên khóa học',
-      name: 'courseName',
-    },
-    {
-      title: 'Số điểm',
-      name: '',
-    },
-    {
-      title: 'Số tiền',
-      name: 'price',
-    },
-    {
-      title: 'Tên landing page',
-      name: 'landingPageName',
-    },
-    {
-      title: 'Nhân viên chăm sóc',
-      name: 'caregiverName',
-    },
-    {
-      title: 'Xác thực email',
-      name: 'isAuthEmail',
-      type: "select",
-      value: true,
-      data: [
-        {
-          label: 'Đã xác thực',
-          key: true
-        },
-        {
-          label: 'Chưa xác thực',
-          key: false
-        }
-      ]
-    },
-    {
-      title: 'Trạng thái',
-      name: 'isAccount',
-      type: "select",
-      value: true,
-      data: [
-        {
-          label: 'Đã có tài khoản',
-          key: true
-        },
-        {
-          label: 'Chưa có tài khoản',
-          key: false
-        }
-      ]
-    },
-    {
-      title: 'Thanh toán',
-      name: 'isPay',
-      type: "select",
-      value: true,
-      data: [
-        {
-          label: 'Chưa thanh toán',
-          key: 0
-        },
-        {
-          label: 'Thanh toán một phần',
-          key: 1
-        },
-        {
-          label: 'Đã thanh toán',
-          key: 2
-        }
-      ]
-    },
-    {
-      title: 'Thuộc tổ chức',
-      name: 'organizationName',
-    },
+    FilterType['createdDate'],
+    FilterType['ticketType'],
+    FilterType['studentName'],
+    FilterType['mobile'],
+    FilterType['email'],
+    FilterType['studentCode'],
+    FilterType['userRef'],
+    FilterType['lecturerName'],
+    FilterType['courseName'],
+    FilterType['price'],
+    FilterType['isPay'],
+    FilterType['landingPageName'],
+    FilterType['caregiverName'],
+    FilterType['isAuthEmail'],
+    FilterType['isAccount'],
+    FilterType['organizationName'],
   ];
 
   rowData: any;
