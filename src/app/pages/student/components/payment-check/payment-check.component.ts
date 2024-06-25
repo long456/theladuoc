@@ -57,10 +57,14 @@ export class PaymentCheckComponent implements OnInit{
       amountPaid: [0],
       receiptImage: [null]
     })
-    if (this.nzModalData.studentData.price === null) {
-      this.nzModalData.studentData.price = 0
+    const paymentFormData = {
+      ...this.nzModalData.studentData
     }
-    this.paymentForm.patchValue(this.nzModalData.studentData)
+    if (paymentFormData.price === null) {
+      paymentFormData.price = 0;
+    }
+    paymentFormData.amountPaid = 0;
+    this.paymentForm.patchValue(paymentFormData);
   }
 
   formatterVnd(value: number): string {
