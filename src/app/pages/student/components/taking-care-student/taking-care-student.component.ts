@@ -1,5 +1,5 @@
 import {Component, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
-import {COL_DATA_TYPE, FIX_COLUMN, filterItem} from "../../../../shared/models/Table";
+import {COL_DATA_TYPE, FIX_COLUMN, filterItem, FilterType} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {StudentService} from "../../services/student.service";
@@ -25,178 +25,25 @@ export class TakingCareStudentComponent implements OnInit{
   isExpand = false;
 
   listOfColumn: filterItem[] = [
-    {
-      title: 'Ngày đăng ký',
-      name: 'createdDate',
-      type: "date-range"
-    },
-    {
-      title: 'Loại vé',
-      name: 'ticket',
-    },
-    {
-      title: 'Tên học viên',
-      name: 'name',
-    },
-    {
-      title: 'Số điện thoại',
-      name: 'mobile',
-    },
-    {
-      title: 'Email',
-      name: 'email',
-    },
-    {
-      title: 'Mã học viên',
-      name: 'code',
-    },
-    {
-      title: 'Người giới thiệu',
-      name: 'userRef',
-    },
-    {
-      title: 'Tên diễn giả',
-      name: 'lecturerName',
-    },
-    {
-      title: 'Tên khóa học',
-      name: 'courseName',
-    },
-    {
-      title: 'Số điểm',
-      name: '',
-    },
-    {
-      title: 'Số tiền',
-      name: 'price',
-    },
-    {
-      title: 'Tên landing page',
-      name: 'landingPageName',
-    },
-    {
-      title: 'Nhân viên chăm sóc',
-      name: 'caregiverName',
-    },
-    {
-      title: 'Xác thực email',
-      name: 'isAuthEmail',
-      type: "select",
-      value: true,
-      data: [
-        {
-          label: 'Đã xác thực',
-          key: true
-        },
-        {
-          label: 'Chưa xác thực',
-          key: false
-        }
-      ]
-    },
-    {
-      title: 'Trạng thái',
-      name: 'isAccount',
-      type: "select",
-      value: true,
-      data: [
-        {
-          label: 'Đã có tài khoản',
-          key: true
-        },
-        {
-          label: 'Chưa có tài khoản',
-          key: false
-        }
-      ]
-    },
-    {
-      title: 'Thanh toán',
-      name: 'isPay',
-      type: "select",
-      value: true,
-      data: [
-        {
-          label: 'Chưa thanh toán',
-          key: 0
-        },
-        {
-          label: 'Thanh toán một phần',
-          key: 1
-        },
-        {
-          label: 'Đã thanh toán',
-          key: 2
-        }
-      ]
-    },
-    {
-      title: 'Thuộc tổ chức',
-      name: 'organizationName',
-    },
-    {
-      title: 'Tên lớp',
-      name: 'className',
-    },
-    {
-      title: 'Khu vực',
-      name: 'area',
-      type: "select",
-      value: 1,
-      data: [
-        {
-          label: 'Miền Bắc',
-          key: 1
-        },
-        {
-          label: 'Miền Trung',
-          key: 2
-        },
-        {
-          label: 'Miền Nam',
-          key: 3
-        }
-      ]
-    },
-    {
-      title: 'Thẻ tag',
-      name: 'tagNote',
-      type: "select",
-      data: [
-        {
-          label: 'Không nghe máy lần 1',
-          key: 1
-        },
-        {
-          label: 'Không nghe máy lần 2',
-          key: 2
-        },
-        {
-          label: 'Sai số điện thoại',
-          key: 3
-        },
-        {
-          label: 'Khách hàng chặn zalo',
-          key: 4
-        },
-        {
-          label: 'Đã gửi tin nhắn zalo',
-          key: 5
-        },
-        {
-          label: 'Không có nhu cầu',
-          key: 6
-        },
-        {
-          label: 'Hẹn chuyển khoản',
-          key: 7
-        },
-        {
-          label: 'Khách hàng chặn cuộc gọi',
-          key: 8
-        },
-      ]
-    },
+    FilterType['createdDate'],
+    FilterType['ticketType'],
+    FilterType['studentName'],
+    FilterType['mobile'],
+    FilterType['email'],
+    FilterType['studentCode'],
+    FilterType['userRef'],
+    FilterType['lecturerName'],
+    FilterType['courseName'],
+    FilterType['price'],
+    FilterType['isPay'],
+    FilterType['landingPageName'],
+    FilterType['caregiverName'],
+    FilterType['isAuthEmail'],
+    FilterType['isAccount'],
+    FilterType['className'],
+    FilterType['area'],
+    FilterType['tag'],
+    FilterType['organizationName'],
   ];
 
   takeCareStudent$!: Observable<{
@@ -316,19 +163,36 @@ export class TakingCareStudentComponent implements OnInit{
   }
 
   paymentCheck(data : any) {
-    this.modal.create<PaymentCheckComponent>({
+    const modal: NzModalRef = this.modal.create<PaymentCheckComponent>({
       nzTitle: 'Xác thực thanh toán',
       nzContent: PaymentCheckComponent,
       nzViewContainerRef: this.viewContainerRef,
       nzData: {
         studentData: data
       },
+      nzFooter: [
+        {
+          label: 'Hủy',
+          onClick: () => modal.destroy()
+        },
+        {
+          label: 'Xác nhận',
+          type: 'primary',
+          onClick: (instance) => {
+            if (!(instance instanceof PaymentCheckComponent) ||
+                 (instance.paymentForm.value.amountPaid > 0 && instance.paymentForm.value.receiptImage === null)) {
+              this.message.error('Chưa upload ảnh ủy nhiệm chi')
+            } else {
+              modal.triggerOk().then();
+            }
+          }
+
+        }
+      ],
       nzOnOk: instance => {
         const data = instance.paymentForm.value;
         delete data.name;
         const value = this.createFormData(data);
-        value.get('ticketId'); // string 'null'
-        value.delete('ticketId');
 
         this.studentService.setPaymentCheck(value).subscribe({
           next: res => {

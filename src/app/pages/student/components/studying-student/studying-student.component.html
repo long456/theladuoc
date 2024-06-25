@@ -35,16 +35,18 @@
       </table-column>
       <table-column header="Thanh toán" key="isPay" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-valid" *ngIf="data.isPay === 0">Chưa thanh toán</span>
-          <span class="text-valid" *ngIf="data.isPay === 1">Đã thanh toán</span>
-          <span class="text-valid" *ngIf="data.isPay === 2">Thanh toán một phần</span>
-          <span class="text-invalid" *ngIf="data.isPay === 3 ">Đã hoàn tiền</span>
+          <span *ngIf="data.isPay === 0">Chưa thanh toán</span>
+          <span *ngIf="data.isPay === 1">Đã thanh toán</span>
+          <span *ngIf="data.isPay === 2">Thanh toán một phần</span>
+          <span *ngIf="data.isPay === 3">Thanh toán thừa</span>
+          <span *ngIf="data.isPay === 4">Thanh toán thừa</span>
+          <span *ngIf="data.isPay === 5">Hoàn tiền thừa</span>
         </ng-template>
       </table-column>
       <table-column header="Xác thực thanh toán" key="isVerifyPay" [width]="'180px'">
         <ng-template appCell let-data>
+          <span class="text-invalid" *ngIf="!data.isVerifyPay">Chưa xác thực</span>
           <span class="text-valid" *ngIf="data.isVerifyPay">Đã xác thực</span>
-          <span class="text-invalid" *ngIf="!data.isVerifyPay">Chưa xử lý</span>
         </ng-template>
       </table-column>
       <table-column header="Lớp tham gia" key="className" [width]="'180px'"></table-column>

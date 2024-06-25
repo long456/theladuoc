@@ -13,7 +13,7 @@
 
       <div nz-col [nzSpan]="12">
         <span>
-          Số tiền phải thanh toán
+          Số tiền khoá học
         </span>
 
         <div>
@@ -30,7 +30,7 @@
 
       <div nz-col [nzSpan]="12">
         <span>
-          Số tiền đã thanh toán
+          Số tiền khách thanh toán
         </span>
 
         <div>
@@ -45,20 +45,6 @@
         </div>
       </div>
 
-      <div nz-col [nzSpan]="12">
-        <span>
-          Trạng thái
-        </span>
-
-        <div>
-          <nz-select class="with-100" formControlName="isPay">
-            <nz-option [nzValue]="0" nzLabel="Chưa thanh toán"></nz-option>
-            <nz-option [nzValue]="2" nzLabel="Thanh toán một phần"></nz-option>
-            <nz-option [nzValue]="1" nzLabel="Đã thanh toán"></nz-option>
-          </nz-select>
-        </div>
-      </div>
-
       <div nz-col [nzSpan]="24">
         <span>Upload ảnh ủy nhiệm chi</span>
         <label for="file" class="upload">
@@ -70,13 +56,15 @@
                accept="image/png, image/gif, image/jpeg"
                class="upload-file" name="file" id="file">
 
-        <img
-          style="margin-top: 15px"
-          nz-image
-          [src]="imgPreviewUrl"
-          width="150"
-          alt=""
-        />
+        <div style="display: flex; justify-content: center; padding-top: 15px">
+          <img
+            style="margin-top: 15px"
+            nz-image
+            [src]="imgPreviewUrl"
+            width="150"
+            alt=""
+          />
+        </div>
       </div>
     </div>
   </form>
