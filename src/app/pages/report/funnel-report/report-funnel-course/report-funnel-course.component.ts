@@ -159,6 +159,8 @@ export class ReportFunnelCourseComponent implements OnInit {
 
     if (sortField && sortOrder) {
       this.filter.sortBy = `${sortField}-${sortOrder}`;
+    } else {
+      delete this.filter.sortBy;
     }
 
     this.reportService.getReportFunnelCourses(this.currentPage, this.pageSize, this.filter).subscribe(x => {

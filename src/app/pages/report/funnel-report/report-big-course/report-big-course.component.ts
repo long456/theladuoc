@@ -157,6 +157,8 @@ export class ReportBigCourseComponent {
 
     if (sortField && sortOrder) {
       this.filter.sortBy = `${sortField}-${sortOrder}`;
+    } else {
+      delete this.filter.sortBy;
     }
 
     this.reportService.getReportBigCourses(this.currentPage, this.pageSize, this.filter).subscribe(x => {

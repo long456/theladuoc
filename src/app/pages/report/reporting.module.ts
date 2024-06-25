@@ -23,6 +23,7 @@ import customViVn from 'src/app/custom-vi-vn';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { FilterFunnelCourseReportComponent } from './funnel-report/dialog/filter-funnel-course-report/filter-funnel-course-report.component';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { FilterElearningCourseReportComponent } from './funnel-report/dialog/filter-elearning-course-report/filter-elearning-course-report.component';
 @NgModule({
   declarations: [
     ReportFunnelCourseComponent,
@@ -32,7 +33,8 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
     ReportPaidCourseComponent,
     ReportCollaboratorCourseComponent,
     ReportInstructorCourseComponent,
-    FilterFunnelCourseReportComponent
+    FilterFunnelCourseReportComponent,
+    FilterElearningCourseReportComponent
   ],
   imports: [
     CommonModule,

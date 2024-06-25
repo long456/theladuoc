@@ -2,7 +2,7 @@ import { DateTimeTypeSearch, QuarterOfYear } from "./date-time-type-search.const
 
 export const CourseConst = {
     FUNNEL_COURSE: 1,
-    BIG_COURSE: 2
+    BIG_COURSE: 2,
 }
 
 export const FILTER_DATA_SEARCH = [
