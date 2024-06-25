@@ -1,6 +1,6 @@
 import {Component, HostListener, inject, Input, OnInit} from '@angular/core';
 import {NZ_MODAL_DATA, NzModalRef} from "ng-zorro-antd/modal";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {NzUploadFile} from "ng-zorro-antd/upload";
 import {NzMessageService} from "ng-zorro-antd/message";
 
@@ -52,9 +52,7 @@ export class PaymentCheckComponent implements OnInit{
   ngOnInit() {
     this.paymentForm = this.fb.group({
       id: [null],
-      ticketId: [null],
       name: [''],
-      isPay: [0],
       price: [0],
       amountPaid: [0],
       receiptImage: [null]

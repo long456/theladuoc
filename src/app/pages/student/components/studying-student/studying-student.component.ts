@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {COL_DATA_TYPE, FIX_COLUMN, filterItem} from "../../../../shared/models/Table";
-import {StudyingStudentService} from "../../services/studying-student.service";
+import {COL_DATA_TYPE, FIX_COLUMN, filterItem, FilterType} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {StudentService} from "../../services/student.service";
 import {NzMessageService} from "ng-zorro-antd/message";
@@ -23,90 +22,17 @@ export class StudyingStudentComponent implements OnInit{
   isExpand = false;
 
   listOfColumn: filterItem[] = [
-    {
-      title: 'Ngày đăng ký',
-      name: 'createdDate',
-      type: "date-range"
-    },
-    {
-      title: 'Tên học viên',
-      name: 'name',
-    },
-    {
-      title: 'Số điện thoại',
-      name: 'mobile',
-    },
-    {
-      title: 'Email',
-      name: 'email',
-    },
-    {
-      title: 'Mã học viên',
-      name: 'code',
-    },
-    {
-      title: 'Người giới thiệu',
-      name: 'userRef',
-    },
-    {
-      title: 'Tên diễn giả',
-      name: 'lecturerName',
-    },
-    {
-      title: 'Thuộc tổ chức',
-      name: 'organizationName',
-    },
-    {
-      title: 'Nhân viên chăm sóc',
-      name: 'caregiverName',
-    },
-    {
-      title: 'Khóa học gần nhất',
-      name: 'latestCourseName',
-    },
-    {
-      title: 'Tổng học phí',
-      name: 'totalPrice',
-    },
-    {
-      title: 'Thẻ tag',
-      name: 'tagNote',
-      type: "select",
-      data: [
-        {
-          label: 'Không nghe máy lần 1',
-          key: 1
-        },
-        {
-          label: 'Không nghe máy lần 2',
-          key: 2
-        },
-        {
-          label: 'Sai số điện thoại',
-          key: 3
-        },
-        {
-          label: 'Khách hàng chặn zalo',
-          key: 4
-        },
-        {
-          label: 'Đã gửi tin nhắn zalo',
-          key: 5
-        },
-        {
-          label: 'Không có nhu cầu',
-          key: 6
-        },
-        {
-          label: 'Hẹn chuyển khoản',
-          key: 7
-        },
-        {
-          label: 'Khách hàng chặn cuộc gọi',
-          key: 8
-        },
-      ]
-    },
+    FilterType['createdDate'],
+    FilterType['studentName'],
+    FilterType['mobile'],
+    FilterType['email'],
+    FilterType['studentCode'],
+    FilterType['userRef'],
+    FilterType['lecturerName'],
+    FilterType['caregiverName'],
+    FilterType['price'],
+    FilterType['isPay'],
+    FilterType['organizationName'],
   ];
 
   studyingStudent$!: Observable<{

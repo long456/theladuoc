@@ -77,6 +77,7 @@ export class CreateStaffComponent implements OnInit{
             let userData = {
               ...value.data,
               roleIds: value.data.roles.map((item : any) => item.id),
+              type: value.data.type.split(',')
             }
             if (value.success) {
               this.userForm.patchValue(userData)
@@ -107,7 +108,7 @@ export class CreateStaffComponent implements OnInit{
         ...this.userForm.value,
         status: this.userForm.get('status')?.value ? 1 : 0,
         roleIds: (this.userForm.get('roleIds')?.value && this.userForm.value.roleIds.length !== 0) ? JSON.stringify(this.userForm.get('roleIds')?.value) : null,
-        type: [...this.userForm.get('roleIds')?.value].toString(),
+        type: [...this.userForm.get('type')?.value].toString(),
       }
       if (this.isCreate) {
 
