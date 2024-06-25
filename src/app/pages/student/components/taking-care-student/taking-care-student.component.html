@@ -30,7 +30,16 @@
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Ngày đăng ký" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
       <table-column header="Loại vé" key="ticket"></table-column>
-      <table-column header="Số tiền" key="price" [width]="'150px'"></table-column>
+      <table-column header="Số tiền" key="price" [width]="'150px'">
+        <ng-template appCell let-data>
+          {{data.price + ' VND'}}
+        </ng-template>
+      </table-column>
+      <table-column header="Số tiền đã thanh toán" key="amountPaid" [width]="'150px'">
+        <ng-template appCell let-data>
+          {{data.amountPaid + ' VND'}}
+        </ng-template>
+      </table-column>
       <table-column header="Thanh toán" key="isPay" [width]="'180px'">
         <ng-template appCell let-data>
           <span *ngIf="data.isPay === 0">Chưa thanh toán</span>
