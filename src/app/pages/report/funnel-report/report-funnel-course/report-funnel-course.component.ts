@@ -115,7 +115,7 @@ export class ReportFunnelCourseComponent implements OnInit {
   }
 
   openFilter() {
-    this.ctrls.dateTimeTypeSearchCtrl.reset();
+    this.resetForm();
     const modal: NzModalRef = this.modal.create<FilterFunnelCourseReportComponent>({
       nzTitle: 'Tìm kiếm khóa học phễu',
       nzContent: FilterFunnelCourseReportComponent,

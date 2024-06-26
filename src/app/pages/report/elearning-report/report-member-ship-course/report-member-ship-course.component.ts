@@ -113,7 +113,7 @@ export class ReportMemberShipCourseComponent {
   }
 
   openFilter() {
-    this.ctrls.dateTimeTypeSearchCtrl.reset();
+    this.resetForm();
     const modal: NzModalRef = this.modal.create<FilterElearningCourseReportComponent>({
       nzTitle: 'Tìm kiếm khóa học thành viên',
       nzContent: FilterElearningCourseReportComponent,
