@@ -31,4 +31,8 @@ export class PaymentRefundService {
     return this.http.post('PaymentRefund/verify', data);
   }
 
+  getListImgRefund(id: number): Observable<any>{
+    return this.http.get('PaymentRefund/get-list-image/' + id);
+  }
+
 }

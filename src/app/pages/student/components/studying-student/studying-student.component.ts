@@ -149,7 +149,8 @@ export class StudyingStudentComponent implements OnInit{
       nzOnOk: instance => {
         const refundData = instance.refundForm.value;
         delete refundData.name;
-        this.studentService.createRefundRequest(refundData).subscribe({
+        const value = this.createFormData(refundData);
+        this.studentService.createRefundRequest(value).subscribe({
           next: res => {
             if (res.success) {
               this.pageSize$.next(10)
@@ -162,6 +163,15 @@ export class StudyingStudentComponent implements OnInit{
         })
       }
     });
+  }
+
+  createFormData(data: any) {
+
+    const formData = new FormData();
+    for ( let key in data ) {
+      formData.append(key, data[key]);
+    }
+    return formData
   }
 
 }
