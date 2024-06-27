@@ -143,13 +143,28 @@ export class PaymentRefundComponent implements OnInit{
   }
 
   showImg(data: any) {
-    const baseUrl = environment.baseImgUrl
-    const img = [
-      {
-        src: baseUrl + data.receiptImage
+    this.paymentRefundService.getListImgRefund(data.id).subscribe({
+      next: res => {
+        if (res.success) {
+          const baseUrl = environment.baseImgUrl;
+          const listImg: any[] = [];
+          res.data.forEach((item: any) => {
+            const img = {
+              src: baseUrl + item
+            }
+            listImg.push(img);
+          });
+          this.nzImageService.preview(listImg, { nzZoom: 1, nzRotate: 0 });
+        } else {
+          this.message.error('Lỗi load dữ liệu ảnh hoàn tiền');
+        }
+      },
+      error: err => {
+
       }
-    ]
-    this.nzImageService.preview(img, { nzZoom: 1, nzRotate: 0 });
+    })
+
+
   }
 
   verifyPayment(data: any, tplContent: TemplateRef<{}>) {

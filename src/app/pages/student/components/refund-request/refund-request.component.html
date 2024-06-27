@@ -1,4 +1,4 @@
-<div>
+<div class="content">
   <form [formGroup]="refundForm">
     <div nz-row [nzGutter]=[16,16]>
       <div nz-col [nzSpan]="12">
@@ -12,6 +12,14 @@
       </div>
 
       <div nz-col [nzSpan]="12">
+        <span class="text-label">
+          Loại yêu cầu hoàn tiền
+        </span>
+
+        <nz-select formControlName="type" style="width: 100%">
+          <nz-option [nzValue]="1" [nzLabel]="'Hoàn tiền'"></nz-option>
+          <nz-option [nzValue]="2" [nzLabel]="'Hoàn tiền thừa'"></nz-option>
+        </nz-select>
       </div>
 
       <div nz-col [nzSpan]="12">
@@ -38,7 +46,7 @@
         <input nz-input formControlName="bankName">
       </div>
 
-      <div nz-col [nzSpan]="12">
+      <div nz-col [nzSpan]="12" *ngIf="refundForm.value.type === 1">
         <span>
           Số tiền cần hoàn
         </span>
@@ -50,19 +58,18 @@
           [nzStep]="1000"
           [nzFormatter]="formatterVnd"
           [nzParser]="parserVnd"
-          [nzStatus]="(refundForm.invalid && (refundForm.get('amountPaid')?.touched) || isSubmit) ? 'error' : ''"
         ></nz-input-number>
 
-        <span
-          class="text-danger"
-          *ngIf="(refundForm.get('amountPaid')?.touched || isSubmit) &&
-                  refundForm.get('amountPaid')?.hasError('required')">
-            Số tiền cần hoàn không được để trống</span>
-        <span
-          class="text-danger"
-          *ngIf="(refundForm.get('amountPaid')?.touched || isSubmit) &&
-                  refundForm.get('amountPaid')?.hasError('min')">
-            Số tiền cần hoàn không thể nhỏ hơn hoặc bằng 0 VND</span>
+<!--        <span-->
+<!--          class="text-danger"-->
+<!--          *ngIf="(refundForm.get('amountPaid')?.touched || isSubmit) &&-->
+<!--                  refundForm.get('amountPaid')?.hasError('required')">-->
+<!--            Số tiền cần hoàn không được để trống</span>-->
+<!--        <span-->
+<!--          class="text-danger"-->
+<!--          *ngIf="(refundForm.get('amountPaid')?.touched || isSubmit) &&-->
+<!--                  refundForm.get('amountPaid')?.hasError('min')">-->
+<!--            Số tiền cần hoàn không thể nhỏ hơn hoặc bằng 0 VND</span>-->
       </div>
 
       <div nz-col [nzSpan]="24">
@@ -71,6 +78,70 @@
         </span>
 
         <textarea nz-input  [nzAutosize]="{ minRows: 3 }" formControlName="reasonContent"></textarea>
+      </div>
+
+      <div nz-col [nzSpan]="24">
+        <span>Ảnh yêu cầu hoàn tiền</span>
+        <label for="refund" class="upload">
+          <span nz-icon nzType="upload" nzTheme="outline"></span>
+          Upload
+          <div class="file-name">{{nameRefundImg}}</div>
+        </label>
+        <input type="file" (change)="uploadFile($event, 'refund')"
+               accept="image/png, image/gif, image/jpeg"
+               class="upload-file" name="file" id="refund">
+
+        <div class="img-paste" (paste)="onPasteImg($event, 'refund')">
+          <span *ngIf="!imgRefundUrl">
+            CLick chuột vào đây để paste hình ảnh (ctrl + V)
+          </span>
+          <img *ngIf="imgRefundUrl"
+            style="margin-top: 15px"
+            nz-image
+            [src]="imgRefundUrl"
+            width="150"
+            alt=""
+          />
+        </div>
+
+        <span
+          class="text-danger"
+          *ngIf="(refundForm.get('requestImage')?.touched || isSubmit) &&
+                  refundForm.get('requestImage')?.hasError('required')">
+            Ảnh yêu cầu hoàn tiền không được để trống</span>
+      </div>
+
+      <div nz-col [nzSpan]="24">
+        <span>Ảnh CCCD học viên</span>
+        <label for="card" class="upload">
+          <span nz-icon nzType="upload" nzTheme="outline"></span>
+          Upload
+          <div class="file-name">{{nameIdCardImg}}</div>
+        </label>
+        <input type="file" (change)="uploadFile($event, 'card')"
+               accept="image/png, image/gif, image/jpeg"
+               class="upload-file" name="file" id="card">
+
+        <div
+          class="img-paste"
+          (paste)="onPasteImg($event, 'card')" >
+          <span *ngIf="!imgIdCardUrl">
+            Click chuột vào đây để paste hình ảnh (ctrl + V)
+          </span>
+          <img *ngIf="imgIdCardUrl"
+            style="margin-top: 15px"
+            nz-image
+            [src]="imgIdCardUrl"
+            width="150"
+            alt=""
+          />
+        </div>
+
+        <span
+          class="text-danger"
+          *ngIf="(refundForm.get('cardImage')?.touched || isSubmit) &&
+                  refundForm.get('cardImage')?.hasError('required')">
+            Ảnh CCCD học viên không được để trống</span>
       </div>
     </div>
   </form>

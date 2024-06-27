@@ -28,6 +28,6 @@ export class PaymentAuthService {
   }
 
   updatePayment(data: any): Observable<any>{
-    return this.http.post('PaymentHistory/update-verify-pay', data)
+    return this.http.post('PaymentHistory/update-verify-pay', data);
   }
 }
