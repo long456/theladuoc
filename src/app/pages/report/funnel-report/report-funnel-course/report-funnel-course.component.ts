@@ -115,7 +115,7 @@ export class ReportFunnelCourseComponent implements OnInit {
   }
 
   openFilter() {
-    this.ctrls.dateTimeTypeSearchCtrl.reset();
+    this.resetForm();
     const modal: NzModalRef = this.modal.create<FilterFunnelCourseReportComponent>({
       nzTitle: 'Tìm kiếm khóa học phễu',
       nzContent: FilterFunnelCourseReportComponent,
@@ -159,6 +159,8 @@ export class ReportFunnelCourseComponent implements OnInit {
 
     if (sortField && sortOrder) {
       this.filter.sortBy = `${sortField}-${sortOrder}`;
+    } else {
+      delete this.filter.sortBy;
     }
 
     this.reportService.getReportFunnelCourses(this.currentPage, this.pageSize, this.filter).subscribe(x => {
