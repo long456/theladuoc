@@ -36,11 +36,15 @@ export class HeaderConfigService {
   }
 
   updateHeader(data: any, id: number): Observable<any>{
-    return this.http.post('HeaderNavigation/'+ id, data);
+    return this.http.put('HeaderNavigation/'+ id, data);
   }
 
   softDeleteHeader(listId: number[]): Observable<any>{
     return this.http.delete('HeaderNavigation/soft-delete', {body: listId});
+  }
+
+  getAllHeader(): Observable<any>{
+    return this.http.get('HeaderNavigation/get-all-header-navigation');
   }
 
 }

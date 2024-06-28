@@ -36,6 +36,7 @@ export class EditPageComponent implements OnInit{
       slug: [null, [Validators.pattern('^[a-zA-Z0-9\\-]+$')]],
       description: [null],
       seoImage: [null],
+      // type: [1],
       websiteConfigId: [],
     });
 
@@ -101,6 +102,9 @@ export class EditPageComponent implements OnInit{
               this.message.error(res.errorMessages);
             }
           },
+          error: err => {
+            this.message.error('Lỗi tạo trang');
+          }
         });
       } else {
         this.pageConfigService.updatePage(pageFormData, this.pageId).subscribe({

@@ -73,7 +73,13 @@ const routes: Routes = [
         component: ListFooterComponent,
       },
       {
+        path:'create',
+        data: {isCreate: true},
+        component: EditFooterComponent,
+      },
+      {
         path:':id',
+        data: {isCreate: false},
         component: EditFooterComponent,
       },
     ]

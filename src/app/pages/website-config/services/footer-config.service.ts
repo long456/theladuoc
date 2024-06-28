@@ -36,7 +36,7 @@ export class FooterConfigService {
   }
 
   updateFooter(data: any, id: number): Observable<any>{
-    return this.http.post('FooterNavigation/'+ id, data);
+    return this.http.put('FooterNavigation/'+ id, data);
   }
 
   softDeleteFooter(listId: number[]): Observable<any>{

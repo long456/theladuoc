@@ -8,7 +8,7 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên page
+            Tên header navigation
             <span class="text-danger">*</span>
           </span>
           <input
@@ -39,41 +39,41 @@
 
           <div>
             <nz-select
-              formControlName="navParentId"
-              [nzStatus]="(headerForm.get('navParentId')?.invalid && (headerForm.get('navParentId')?.touched || isSubmit)) ? 'error' : ''"
+              formControlName="pageId"
+              [nzStatus]="(headerForm.get('pageId')?.invalid && (headerForm.get('pageId')?.touched || isSubmit)) ? 'error' : ''"
             >
-<!--              <nz-option-->
-<!--                *ngFor="let teacher of listTeacher"-->
-<!--                [nzValue]="teacher.id"-->
-<!--                [nzLabel]="teacher.fullName"-->
-<!--              >-->
-<!--              </nz-option>-->
+              <nz-option
+                *ngFor="let page of listAllPage"
+                [nzValue]="page.id"
+                [nzLabel]="page.name"
+              >
+              </nz-option>
             </nz-select>
           </div>
 
-<!--          <span class="text-danger"-->
-<!--                *ngIf="(headerForm.get('teacherId')?.touched || isSubmit) && headerForm.get('teacherId')?.hasError('required')"-->
-<!--          >-->
-<!--            Tên giáo viên không được để trống-->
-<!--          </span>-->
+          <span class="text-danger"
+                *ngIf="(headerForm.get('pageId')?.touched || isSubmit) && headerForm.get('pageId')?.hasError('required')"
+          >
+            Trang được link đến không được để trống
+          </span>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Link đến trang
+            Navigation cha
           </span>
 
           <div>
             <nz-select
-              formControlName="teacherId"
+              formControlName="navParentId"
               [nzStatus]="(headerForm.get('navParentId')?.invalid && (headerForm.get('navParentId')?.touched || isSubmit)) ? 'error' : ''"
             >
-              <!--              <nz-option-->
-              <!--                *ngFor="let teacher of listTeacher"-->
-              <!--                [nzValue]="teacher.id"-->
-              <!--                [nzLabel]="teacher.fullName"-->
-              <!--              >-->
-              <!--              </nz-option>-->
+              <nz-option
+                *ngFor="let header of listAllHeader"
+                [nzValue]="header.id"
+                [nzLabel]="header.displayName"
+              >
+              </nz-option>
             </nz-select>
           </div>
 
