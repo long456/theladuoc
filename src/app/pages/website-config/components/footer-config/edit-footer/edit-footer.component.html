@@ -8,7 +8,7 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên page
+            Tên footer navigation
             <span class="text-danger">*</span>
           </span>
           <input
@@ -30,32 +30,14 @@
             formControlName="no"></nz-input-number>
         </div>
 
-        <div nz-col [nzSpan]="8"></div>
+        <div nz-col [nzSpan]="8">
+
+        </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            Link đến trang
-          </span>
-
-          <div>
-            <nz-select
-              formControlName="teacherId"
-              [nzStatus]="(footerForm.get('navParentId')?.invalid && (footerForm.get('navParentId')?.touched || isSubmit)) ? 'error' : ''"
-            >
-              <!--              <nz-option-->
-              <!--                *ngFor="let teacher of listTeacher"-->
-              <!--                [nzValue]="teacher.id"-->
-              <!--                [nzLabel]="teacher.fullName"-->
-              <!--              >-->
-              <!--              </nz-option>-->
-            </nz-select>
-          </div>
-
-          <!--          <span class="text-danger"-->
-          <!--                *ngIf="(headerForm.get('teacherId')?.touched || isSubmit) && headerForm.get('teacherId')?.hasError('required')"-->
-          <!--          >-->
-          <!--            Tên giáo viên không được để trống-->
-          <!--          </span>-->
+          <div class="text-label">Tên cột</div>
+          <input
+            nz-input formControlName="columnName">
         </div>
 
         <div nz-col [nzSpan]="8">
@@ -65,18 +47,23 @@
 
           <div>
             <nz-select
-              formControlName="columnName"
-              [nzStatus]="(footerForm.get('columnName')?.invalid && (footerForm.get('columnName')?.touched || isSubmit)) ? 'error' : ''"
+              formControlName="pageId"
+              [nzStatus]="(footerForm.get('pageId')?.invalid && (footerForm.get('pageId')?.touched || isSubmit)) ? 'error' : ''"
             >
-              <!--              <nz-option-->
-              <!--                *ngFor="let teacher of listTeacher"-->
-              <!--                [nzValue]="teacher.id"-->
-              <!--                [nzLabel]="teacher.fullName"-->
-              <!--              >-->
-              <!--              </nz-option>-->
+              <nz-option
+                *ngFor="let page of listAllPage"
+                [nzValue]="page.id"
+                [nzLabel]="page.name"
+              >
+              </nz-option>
             </nz-select>
           </div>
 
+          <span class="text-danger"
+                *ngIf="(footerForm.get('pageId')?.touched || isSubmit) && footerForm.get('pageId')?.hasError('required')"
+          >
+            Trang được link đến không được để trống
+          </span>
         </div>
       </div>
     </form>

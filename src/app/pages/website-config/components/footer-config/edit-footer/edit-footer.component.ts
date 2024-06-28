@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {FooterConfigService} from "../../../services/footer-config.service";
+import {PageConfigService} from "../../../services/page-config.service";
 
 
 @Component({
@@ -15,6 +16,7 @@ export class EditFooterComponent implements OnInit{
   isCreate: boolean = false;
   isSubmit: boolean = false;
   footerId!: number;
+  listAllPage: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +24,7 @@ export class EditFooterComponent implements OnInit{
     private fb: FormBuilder,
     private message: NzMessageService,
     private footerConfigService: FooterConfigService,
+    private pageConfigService: PageConfigService,
   ) {}
 
   ngOnInit() {
@@ -29,10 +32,18 @@ export class EditFooterComponent implements OnInit{
 
     this.footerForm = this.fb.group({
       displayName: [null, [Validators.required]],
-      no: [null],
+      no: [0],
       columnName: [null],
       websiteConfigId: [null],
       pageId: [null],
+    });
+
+    this.pageConfigService.getAllPage().subscribe({
+      next: res => {
+        if (res) {
+          this.listAllPage = res;
+        }
+      }
     });
 
     if (!this.isCreate) {
@@ -68,6 +79,9 @@ export class EditFooterComponent implements OnInit{
               this.message.error(res.errorMessages);
             }
           },
+          error: err => {
+            this.message.error(err);
+          }
         });
       } else {
         this.footerConfigService.updateFooter(pageFormData, this.footerId).subscribe({
@@ -79,6 +93,9 @@ export class EditFooterComponent implements OnInit{
               this.message.error(res.errorMessages);
             }
           },
+          error: err => {
+            this.message.error(err);
+          }
         });
       }
     }

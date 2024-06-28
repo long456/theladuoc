@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {HeaderConfigService} from "../../../services/header-config.service";
+import {PageConfigService} from "../../../services/page-config.service";
 
 @Component({
   selector: 'app-edit-header',
@@ -14,13 +15,15 @@ export class EditHeaderComponent implements OnInit{
   isCreate: boolean = false;
   isSubmit: boolean = false;
   headerId!: number;
-
+  listAllPage: any[] = [];
+  listAllHeader: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
     private message: NzMessageService,
     private headerConfigService: HeaderConfigService,
+    private pageConfigService: PageConfigService,
   ) {
   }
 
@@ -29,10 +32,26 @@ export class EditHeaderComponent implements OnInit{
 
     this.headerForm = this.fb.group({
       displayName: [null, [Validators.required]],
-      no: [null],
+      no: [0],
       navParentId: [null],
       websiteConfigId: [null],
       pageId: [null],
+    });
+
+    this.pageConfigService.getAllPage().subscribe({
+      next: res => {
+        if (res) {
+          this.listAllPage = res;
+        }
+      }
+    });
+
+    this.headerConfigService.getAllHeader().subscribe({
+      next: res => {
+        if (res) {
+          this.listAllHeader = res;
+        }
+      }
     });
 
     if (!this.isCreate) {
@@ -49,6 +68,8 @@ export class EditHeaderComponent implements OnInit{
         })
       });
     }
+
+
   }
 
   edit(): void{
@@ -68,6 +89,9 @@ export class EditHeaderComponent implements OnInit{
               this.message.error(res.errorMessages);
             }
           },
+          error: err => {
+            this.message.error(err);
+          }
         });
       } else {
         this.headerConfigService.updateHeader(pageFormData, this.headerId).subscribe({
@@ -79,6 +103,9 @@ export class EditHeaderComponent implements OnInit{
               this.message.error(res.errorMessages);
             }
           },
+          error: err => {
+            this.message.error(err);
+          }
         });
       }
     }

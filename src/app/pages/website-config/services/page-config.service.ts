@@ -42,4 +42,8 @@ export class PageConfigService {
   softDeletePage(listId: number[]): Observable<any>{
     return this.http.delete('Page/soft-delete', {body: listId});
   }
+
+  getAllPage(): Observable<any>{
+    return this.http.get('Page/get-all-page');
+  }
 }
