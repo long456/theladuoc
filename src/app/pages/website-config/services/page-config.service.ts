@@ -36,7 +36,7 @@ export class PageConfigService {
   }
 
   updatePage(data: any, id: number): Observable<any>{
-    return this.http.post('Page/'+ id, data);
+    return this.http.put('Page/'+ id, data);
   }
 
   softDeletePage(listId: number[]): Observable<any>{
