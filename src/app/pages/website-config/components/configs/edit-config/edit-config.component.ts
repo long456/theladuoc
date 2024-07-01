@@ -21,29 +21,6 @@ export class EditConfigComponent implements OnInit{
 
   configId = 0;
 
-  nodes: TreeNode[] = [
-    {
-      name: 'Home',
-      url: '',
-      navCode: '',
-      parentCode: '',
-    },
-    {
-      name: 'About',
-      url: '',
-      navCode: '',
-      parentCode: '',
-      children: [
-        {
-          name: 'Permission',
-          url: '',
-          navCode: '',
-          parentCode: '',
-        }
-      ]
-    }
-  ]
-
   regexUrl = '^((https?|ftp|smtp):\\/\\/)?(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*$';
 
   constructor(
