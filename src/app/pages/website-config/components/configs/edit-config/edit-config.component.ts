@@ -43,6 +43,9 @@ export class EditConfigComponent implements OnInit{
       ]
     }
   ]
+
+  regexUrl = '^((https?|ftp|smtp):\\/\\/)?(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*$';
+
   constructor(
     private fb: FormBuilder,
     private message: NzMessageService,
@@ -60,10 +63,10 @@ export class EditConfigComponent implements OnInit{
       footerBackground: ['#ffffff'],
       copyright: [''],
       footerDescription: [],
-      facebookLink: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
-      youtubeLink: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
-      tiktokLink: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
-      zaloLink: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
+      facebookLink: [null, Validators.pattern(this.regexUrl)],
+      youtubeLink: [null, Validators.pattern(this.regexUrl)],
+      tiktokLink: [null, Validators.pattern(this.regexUrl)],
+      zaloLink: [null, Validators.pattern(this.regexUrl)],
     });
 
     this.route.params.pipe().subscribe(params => {
