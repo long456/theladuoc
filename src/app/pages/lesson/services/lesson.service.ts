@@ -40,7 +40,7 @@ export class LessonService {
     return this.http.put('Lesson/'+ id, data)
   }
 
-  getAllLesson(): Observable<any>{
-    return this.http.get('Lesson/get-all-lesson');
+  getAllLesson(courseId: number): Observable<any>{
+    return this.http.get('Lesson/get-all-lesson?courseId=' + courseId);
   }
 }

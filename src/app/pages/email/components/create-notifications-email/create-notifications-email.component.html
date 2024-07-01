@@ -62,6 +62,8 @@
               formControlName="courseId"
               style="display: block;"
               [nzPlaceHolder]="'Chọn khóa học'"
+              [(ngModel)]="courseId"
+              (ngModelChange)="onCourseSelect($event)"
               [nzStatus]="(emailNotificationForm.get('courseId')?.invalid && (emailNotificationForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
             >
               <nz-option
@@ -77,6 +79,35 @@
           >
             Tên khóa học không được để trống
           </span>
+        </div>
+
+        <div nz-col [nzSpan]="8" *ngIf="emailNotificationForm.value?.typeEmail === 5 || emailNotificationForm.value?.typeEmail === 6">
+          <span class="text-label">
+            Buổi học
+            <span class="text-danger">*</span>
+          </span>
+
+          <div>
+            <nz-select
+              formControlName="lessonId"
+              style="display: block;"
+              [nzPlaceHolder]="'Chọn buổi học'"
+              [nzStatus]="(emailNotificationForm.hasError('lessonRequired') && (emailNotificationForm.get('lessonId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <nz-option
+                *ngFor="let lesson of lessonList"
+                [nzValue]="lesson.id"
+                [nzLabel]="lesson.name"
+              ></nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(emailNotificationForm.get('lessonId')?.touched || isSubmit) && emailNotificationForm.hasError('lessonRequired')"
+          >
+            Tên buổi học không được để trống
+          </span>
+
         </div>
 
         <div nz-col [nzSpan]="18">
