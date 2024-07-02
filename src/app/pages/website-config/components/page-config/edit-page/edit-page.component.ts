@@ -51,6 +51,7 @@ export class EditPageComponent implements OnInit{
               const dataPage = {
                 ...res,
                 name: res.pageName,
+                type: res.pageType
               }
               this.pageForm.patchValue(dataPage);
             }

@@ -43,6 +43,7 @@
           <div>
             <nz-select
               formControlName="pageId"
+              nzAllowClear
               [nzStatus]="(headerForm.get('pageId')?.invalid && (headerForm.get('pageId')?.touched || isSubmit)) ? 'error' : ''"
             >
               <nz-option

@@ -103,6 +103,7 @@ export class CreateNotificationsEmailComponent implements OnInit{
         const data = {
           ...res,
           status: !!res.status,
+          typeEmail: res.notiEmailTemplateType
         };
         this.emailNotificationForm.patchValue(data);
       }
