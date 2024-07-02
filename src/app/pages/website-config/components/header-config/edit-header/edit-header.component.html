@@ -1,5 +1,5 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới header navigation' : 'Chỉnh sửa header navigation'}}
+  {{isCreate? 'Tạo mới đường dẫn trên thanh menu' : 'Chỉnh sửa đường dẫn trên thanh menu'}}
 </div>
 
 <div nz-row>
@@ -8,7 +8,7 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên header navigation
+            Tên hiển thị
             <span class="text-danger">*</span>
           </span>
           <input
@@ -18,19 +18,22 @@
           <span class="text-danger"
                 *ngIf="(headerForm.get('displayName')?.touched || isSubmit)  && headerForm.get('displayName')?.hasError('required')"
           >
-            Tên header navigation không được để trống
+            Tên hiển thị không được để trống
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">Thứ tự hiển thị</div>
+          <div class="text-label">Thứ tự hiển thị trên thanh menu</div>
           <nz-input-number
             style="width: 100%"
             [nzMin]="0" [nzStep]="1"
             formControlName="no"></nz-input-number>
         </div>
 
-        <div nz-col [nzSpan]="8"></div>
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status"></nz-switch>
+        </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
@@ -60,12 +63,13 @@
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Navigation cha
+            nằm trong đường dẫn
           </span>
 
           <div>
             <nz-select
               formControlName="navParentId"
+              nzAllowClear
               [nzStatus]="(headerForm.get('navParentId')?.invalid && (headerForm.get('navParentId')?.touched || isSubmit)) ? 'error' : ''"
             >
               <nz-option
@@ -76,7 +80,11 @@
               </nz-option>
             </nz-select>
           </div>
+        </div>
 
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">chứa đường dẫn</div>
+          <nz-switch formControlName="isDropdown"></nz-switch>
         </div>
       </div>
     </form>

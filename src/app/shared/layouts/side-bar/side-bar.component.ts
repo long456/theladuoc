@@ -215,12 +215,12 @@ export class SideBarComponent {
                   link: 'page/setting/website-config/page-config',
                 },
                 {
-                  name : 'Cấu hình header',
+                  name : 'Cấu hình thanh menu',
                   icon: '',
                   link: 'page/setting/website-config/header',
                 },
                 {
-                  name : 'Cấu hình footer',
+                  name : 'Cấu hình chân trang',
                   icon: '',
                   link: 'page/setting/website-config/footer',
                 },

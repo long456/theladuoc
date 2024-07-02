@@ -1,5 +1,5 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới footer navigation' : 'Chỉnh sửa footer navigation'}}
+  {{isCreate? 'Tạo mới đường dẫn chân trang' : 'Chỉnh sửa đường dẫn chân trang'}}
 </div>
 
 <div nz-row>
@@ -8,7 +8,7 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên footer navigation
+            Tên hiển thị
             <span class="text-danger">*</span>
           </span>
           <input
@@ -18,12 +18,12 @@
           <span class="text-danger"
                 *ngIf="(footerForm.get('displayName')?.touched || isSubmit)  && footerForm.get('displayName')?.hasError('required')"
           >
-            Tên footer navigation không được để trống
+            Tên hiển thị không được để trống
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">Thứ tự hiển thị</div>
+          <div class="text-label">Thứ tự hiển thị trong cột</div>
           <nz-input-number
             style="width: 100%"
             [nzMin]="0" [nzStep]="1"

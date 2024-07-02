@@ -36,6 +36,8 @@ export class EditHeaderComponent implements OnInit{
       navParentId: [null],
       websiteConfigId: [null],
       pageId: [null],
+      status: [true],
+      isDropdown: [true],
     });
 
     this.pageConfigService.getAllPage().subscribe({

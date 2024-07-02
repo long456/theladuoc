@@ -36,7 +36,7 @@ export class EditPageComponent implements OnInit{
       slug: [null, [Validators.pattern('^[a-zA-Z0-9\\-]+$')]],
       description: [null],
       seoImage: [null],
-      // type: [1],
+      type: [1],
       websiteConfigId: [],
     });
 

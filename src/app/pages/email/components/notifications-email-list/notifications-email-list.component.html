@@ -6,7 +6,7 @@
   <ng-container *ngIf="(notificationsEmail$ | async) as notificationsEmail">
 
     <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>
+    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
 
     <app-table
       [rows]="notificationsEmail.rows"

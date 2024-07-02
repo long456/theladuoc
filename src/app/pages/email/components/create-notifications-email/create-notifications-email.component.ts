@@ -69,7 +69,7 @@ export class CreateNotificationsEmailComponent implements OnInit{
 
     this.courseService.getListCourse().subscribe({
       next: res => {
-        this.courseList = res
+        this.courseList = res;
       },
       error: err => {
         this.message.error(err)
@@ -79,7 +79,7 @@ export class CreateNotificationsEmailComponent implements OnInit{
     this.emailService.getEmailType().subscribe({
       next: res => {
         if (res.success) {
-          this.typeEmailList = res.data;
+          this.typeEmailList = res.data.filter((item : any) => (item.dataValue !== 1 && item.dataValue !== 2));
         }
       },
       error: err => {
