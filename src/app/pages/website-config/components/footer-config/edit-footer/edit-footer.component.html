@@ -40,31 +40,38 @@
             nz-input formControlName="columnName">
         </div>
 
-        <div nz-col [nzSpan]="8">
+        <div nz-col [nzSpan]="11">
           <span class="text-label">
-            Link đến trang
+            Đường dẫn
           </span>
 
-          <div>
+          <div class="select-group">
             <nz-select
-              formControlName="pageId"
-              [nzStatus]="(footerForm.get('pageId')?.invalid && (footerForm.get('pageId')?.touched || isSubmit)) ? 'error' : ''"
+              class="link-to"
+              [(ngModel)]="external"
+              [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectExternal($event)"
             >
-              <nz-option
-                *ngFor="let page of listAllPage"
-                [nzValue]="page.id"
-                [nzLabel]="page.name"
-              >
-              </nz-option>
+              <nz-option [nzValue]="false" [nzLabel]="'Trong hệ thống'"></nz-option>
+              <nz-option [nzValue]="true" [nzLabel]="'Bên ngoài'"></nz-option>
             </nz-select>
-          </div>
 
-          <span class="text-danger"
-                *ngIf="(footerForm.get('pageId')?.touched || isSubmit) && footerForm.get('pageId')?.hasError('required')"
-          >
-            Trang được link đến không được để trống
-          </span>
+            <div class="link-place">
+              <nz-select
+                *ngIf="!external"
+                formControlName="pageId"
+                nzAllowClear>
+                <nz-option
+                  *ngFor="let page of listAllPage"
+                  [nzValue]="page.id"
+                  [nzLabel]="page.name">
+                </nz-option>
+              </nz-select>
+
+              <input *ngIf="external" nz-input formControlName="externalLink">
+            </div>
+          </div>
         </div>
+
       </div>
     </form>
   </div>

@@ -17,6 +17,8 @@ export class EditHeaderComponent implements OnInit{
   headerId!: number;
   listAllPage: any[] = [];
   listAllHeader: any[] = [];
+  external: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -38,6 +40,7 @@ export class EditHeaderComponent implements OnInit{
       pageId: [null],
       status: [true],
       isDropdown: [true],
+      externalLink: [null]
     });
 
     this.pageConfigService.getAllPage().subscribe({
@@ -113,7 +116,16 @@ export class EditHeaderComponent implements OnInit{
     }
   }
 
+  onSelectExternal(e: any) {
+    if(!e) {
+      this.headerForm.get('externalLink')?.patchValue(null);
+    } else {
+      this.headerForm.get('pageId')?.patchValue(null);
+    }
+  }
+
   navigateBack() {
     this.router.navigate(['/page/setting/website-config/header']);
   }
+
 }

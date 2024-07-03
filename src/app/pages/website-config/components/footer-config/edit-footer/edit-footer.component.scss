@@ -46,3 +46,13 @@
 nz-select{
   display: block;
 }
+
+.select-group{
+  display: flex;
+  .link-to{
+    width: 200px;
+  }
+  .link-place{
+    flex: 1;
+  }
+}

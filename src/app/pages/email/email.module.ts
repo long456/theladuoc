@@ -15,6 +15,7 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import {NzSelectModule} from "ng-zorro-antd/select";
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { CreateNotificationsEmailComponent } from './components/create-notifications-email/create-notifications-email.component';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CreateNotificationsEmailComponent } from './components/create-notificat
     NzDatePickerModule,
     NzTimePickerModule,
     NzSelectModule,
-    NzInputNumberModule
+    NzInputNumberModule,
+    NzRadioModule
   ]
 })
 export class EmailModule { }
