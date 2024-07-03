@@ -67,6 +67,13 @@ export class EditHeaderComponent implements OnInit{
         this.headerConfigService.getHeaderById(id).subscribe({
           next: res => {
             if (res) {
+              if (res.pageId) {
+                this.external = false;
+              }
+
+              if (res.externalLink) {
+                this.external = true;
+              }
               this.headerForm.patchValue(res);
             }
           }

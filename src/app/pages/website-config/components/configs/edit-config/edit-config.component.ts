@@ -4,6 +4,8 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {WebConfigService} from "../../../services/web-config.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TreeNode} from "../../../../../shared/models/Tree";
+import {FileManagerService} from "../../../../../shared/services/file-manager.service";
+import {take} from "rxjs";
 
 
 @Component({
@@ -21,7 +23,15 @@ export class EditConfigComponent implements OnInit{
 
   configId = 0;
 
-  regexUrl = '^((https?|ftp|smtp):\\/\\/)?(www.)?[a-z0-9]+\\.[a-z]+(\\/[a-zA-Z0-9#]+\\/?)*$';
+  regexUrl = new RegExp(
+    '^(https?:\\/\\/)?' + // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+    '(\\#[-a-z\\d_]*)?$', // fragment locator
+    'i'
+  );
 
   constructor(
     private fb: FormBuilder,
@@ -29,6 +39,7 @@ export class EditConfigComponent implements OnInit{
     private webConfigService: WebConfigService,
     private route: ActivatedRoute,
     private router: Router,
+    private fileManagerService: FileManagerService,
   ) {}
 
   ngOnInit() {
@@ -99,7 +110,17 @@ export class EditConfigComponent implements OnInit{
     }
   }
 
-  editNavigation() {
-
+  onSelectFile(type: 'header' | 'footer') {
+    this.fileManagerService.selectFile();
+    this.fileManagerService.selectedFile.pipe(take(1)).subscribe((data) => {
+      switch (type) {
+        case ('header') :
+          this.configForm.get('headerLogo')?.patchValue(data);
+          break;
+        case ('footer') :
+          this.configForm.get('footerLogo')?.patchValue(data);
+          break;
+      }
+    });
   }
 }

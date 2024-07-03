@@ -56,6 +56,13 @@ export class EditFooterComponent implements OnInit{
         this.footerConfigService.getFooterById(id).subscribe({
           next: res => {
             if (res) {
+              if (res.pageId) {
+                this.external = false;
+              }
+
+              if (res.externalLink) {
+                this.external = true;
+              }
               this.footerForm.patchValue(res);
             }
           }
