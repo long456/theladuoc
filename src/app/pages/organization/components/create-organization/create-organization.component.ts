@@ -5,6 +5,7 @@ import {OrganizationService} from "../../services/organization.service";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {FileManagerService} from "../../../../shared/services/file-manager.service";
 import {take} from "rxjs";
+import {config} from "../../../../shared/models/ckeditor";
 
 @Component({
   selector: 'app-create-organization',
@@ -13,20 +14,14 @@ import {take} from "rxjs";
 })
 export class CreateOrganizationComponent implements OnInit{
 
-  @ViewChild('inputWebsite') getInputElement!: ElementRef;
+  // @ViewChild('inputWebsite') getInputElement!: ElementRef;
 
   isCreate = false;
-
   orgForm!: FormGroup;
-
   isSubmit = false;
-
   isActive = false;
-
   webData: string = '';
-
   organizationId!: number
-
   listDirectors: any[] = [];
 
   constructor(
@@ -46,15 +41,17 @@ export class CreateOrganizationComponent implements OnInit{
       name: ['', [Validators.required]],
       websiteCms: ['', [Validators.required]],
       websiteElearning: [''],
-      website: [[], [Validators.required]],
+      website: [null, [Validators.required]],
       splitData: [1],
       userId: [null],
       email: ['', [Validators.email]],
       mobile: ['', [Validators.pattern('[0-9]{10,15}')]],
-      logo: [''],
-      logo1x1: [''],
-      favicon: [''],
-      status: [true]
+      logo: [null],
+      logo1x1: [null],
+      favicon: [null],
+      status: [true],
+      address: [null],
+      map: [null]
     })
 
     if (!this.isCreate) {
@@ -82,7 +79,7 @@ export class CreateOrganizationComponent implements OnInit{
       data.push(this.webData)
       this.orgForm.get('website')?.patchValue(data);
       this.webData = '';
-      this.getInputElement.nativeElement.focus();
+      // this.getInputElement.nativeElement.focus();
     }
   }
 
@@ -97,7 +94,6 @@ export class CreateOrganizationComponent implements OnInit{
     if (this.orgForm.valid) {
       const data = {
         ...this.orgForm.value,
-        website: JSON.stringify(this.orgForm.get('website')?.value),
         status: this.orgForm.get('status')?.value ? 1 : 0,
       }
       if (this.isCreate) {
@@ -147,6 +143,20 @@ export class CreateOrganizationComponent implements OnInit{
           break;
       }
     });
+  }
+
+  deleteImg(type: 'logo' | 'logo1x1' | 'favicon'): void {
+    switch (type) {
+      case ('logo') :
+        this.orgForm.get('logo')?.patchValue('');
+        break;
+      case ('logo1x1') :
+        this.orgForm.get('logo1x1')?.patchValue('');
+        break;
+      case ('favicon') :
+        this.orgForm.get('favicon')?.patchValue('');
+        break;
+    }
   }
 
   navigateBack() {

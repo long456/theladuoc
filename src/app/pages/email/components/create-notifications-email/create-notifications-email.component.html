@@ -25,6 +25,9 @@
         <div nz-col [nzSpan]="8">
           <div class="text-label">Loại email</div>
           <nz-select
+            [nzDisabled]="!isCreate &&
+                          emailNotificationForm.value?.typeEmail === 1 ||
+                          emailNotificationForm.value?.typeEmail === 2"
             formControlName="typeEmail"
             style="display: block;"
             [nzPlaceHolder]="'Chọn loại email'"
@@ -33,7 +36,8 @@
             <nz-option
               *ngFor="let type of typeEmailList"
               [nzValue]="type.dataValue"
-              [nzLabel]="type.name "
+              [nzLabel]="type.name"
+              [nzDisabled]="type.disabled"
             ></nz-option>
           </nz-select>
 
@@ -107,7 +111,34 @@
           >
             Tên buổi học không được để trống
           </span>
+        </div>
 
+        <div nz-col [nzSpan]="8" *ngIf="emailNotificationForm.value?.typeEmail === 7">
+          <span class="text-label">
+            Lớp học
+            <span class="text-danger">*</span>
+          </span>
+
+          <div>
+            <nz-select
+              formControlName="classId"
+              style="display: block;"
+              [nzPlaceHolder]="'Chọn lớp học'"
+              [nzStatus]="(emailNotificationForm.hasError('classRequired') && (emailNotificationForm.get('classId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <nz-option
+                *ngFor="let class of classList"
+                [nzValue]="class.id"
+                [nzLabel]="class.className"
+              ></nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(emailNotificationForm.get('classId')?.touched || isSubmit) && emailNotificationForm.hasError('classRequired')"
+          >
+            Tên lớp học không được để trống
+          </span>
         </div>
 
         <div nz-col [nzSpan]="18">

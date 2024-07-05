@@ -5,6 +5,9 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {EmailService} from "../../services/email.service";
 import {CourseService} from "../../../setting/services/course.service";
 import {LessonService} from "../../../lesson/services/lesson.service";
+import {compareNumbers} from "@angular/compiler-cli/src/version_helpers";
+import {linearGradient} from "html2canvas/dist/types/css/types/functions/linear-gradient";
+import {ClassService} from "../../../class/services/class.service";
 
 @Component({
   selector: 'app-create-notifications-email',
@@ -29,6 +32,8 @@ export class CreateNotificationsEmailComponent implements OnInit{
 
   lessonList: any = [];
 
+  classList: any = [];
+
   ckEditorConfig: any = {
     toolbar: [
       ['Source', 'Templates', 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat'],
@@ -52,6 +57,7 @@ export class CreateNotificationsEmailComponent implements OnInit{
     private emailService: EmailService,
     private courseService: CourseService,
     private lessonService: LessonService,
+    private classService: ClassService,
   ) {
   }
 
@@ -62,10 +68,11 @@ export class CreateNotificationsEmailComponent implements OnInit{
       emailSubject: [null, [Validators.required]],
       courseId: [null, [Validators.required]],
       lessonId: [null],
+      classId: [null],
       content: [null],
       status: [true],
       typeEmail: [null,[Validators.required]],
-    },{ validators: this.validLesson() });
+    },{ validators: [this.validLesson(), this.validClass()] });
 
     this.courseService.getListCourse().subscribe({
       next: res => {
@@ -79,7 +86,13 @@ export class CreateNotificationsEmailComponent implements OnInit{
     this.emailService.getEmailType().subscribe({
       next: res => {
         if (res.success) {
-          this.typeEmailList = res.data.filter((item : any) => (item.dataValue !== 1 && item.dataValue !== 2));
+          const emailTypeData = [...res.data];
+          emailTypeData.forEach(item => {
+            if (item.dataValue === 2 || item.dataValue === 1) {
+              item.disabled = true;
+            }
+          });
+          this.typeEmailList = emailTypeData
         }
       },
       error: err => {
@@ -122,9 +135,23 @@ export class CreateNotificationsEmailComponent implements OnInit{
     }
   }
 
+  validClass(): ValidatorFn {
+    return () : ValidationErrors | null => {
+      const typeEmail = this.emailNotificationForm?.get('typeEmail')?.value;
+      const classId = this.emailNotificationForm?.get('classId')?.value;
+
+      if ((typeEmail === 7) && !classId) {
+        return { classRequired: true };
+      }
+      return null;
+    }
+  }
+
   onCourseSelect(e: any) {
     this.emailNotificationForm.get('lessonId')?.patchValue(null);
-    if (e) {
+    this.emailNotificationForm.get('classId')?.patchValue(null);
+
+    if (e && (this.emailNotificationForm.value?.typeEmail === 5 || this.emailNotificationForm.value?.typeEmail === 6)) {
       this.lessonService.getAllLesson(e).subscribe({
         next: res => {
           if (res) {
@@ -132,7 +159,20 @@ export class CreateNotificationsEmailComponent implements OnInit{
           }
         },
         error: err => {
-          this.message.error(err)
+          this.message.error(err);
+        }
+      })
+    }
+
+    if (e && this.emailNotificationForm.value?.typeEmail === 7) {
+      this.classService.getClassByCourse(e).subscribe({
+        next: res => {
+          if (res) {
+            this.classList = res;
+          }
+        },
+        error: err => {
+          this.message.error(err);
         }
       })
     }

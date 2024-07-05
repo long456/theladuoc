@@ -6,7 +6,7 @@
   <div nz-col [nzSpan]="20">
     <form [formGroup]="classForm">
       <div nz-row [nzGutter]=[16,16]>
-        <div nz-col [nzSpan]="9">
+        <div nz-col [nzSpan]="8">
           <span class="text-label">
             Tên lớp học
             <span class="text-danger">*</span>
@@ -22,7 +22,7 @@
           </span>
         </div>
 
-        <div nz-col [nzSpan]="9">
+        <div nz-col [nzSpan]="8">
           <span class="text-label">
             Khóa học
             <span class="text-danger">*</span>
@@ -49,19 +49,16 @@
           </span>
         </div>
 
-<!--        <div nz-col [nzSpan]="24">-->
-<!--          <div style="text-align: right;padding-bottom: 8px">-->
-<!--            <button nz-button nzType="primary" (click)="addLesson()">-->
-<!--              <span nz-icon nzType="plus"></span>-->
-<!--            </button>-->
-<!--          </div>-->
-<!--          <nz-list nzBordered nzHeader="Danh sách buổi học" >-->
-<!--            <nz-list-item-->
-<!--                *ngFor="let lesson of listLesson">-->
-<!--              {{lesson.name}}-->
-<!--            </nz-list-item>-->
-<!--          </nz-list>-->
-<!--        </div>-->
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Số buổi nghỉ tối đa
+          </span>
+          <nz-input-number
+            style="width: 100%"
+            [nzMin]="0" [nzStep]="1"
+            formControlName="maximumLessonWithoutAttendance"></nz-input-number>
+        </div>
+
       </div>
     </form>
   </div>

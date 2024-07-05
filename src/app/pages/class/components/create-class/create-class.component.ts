@@ -21,19 +21,6 @@ export class CreateClassComponent implements OnInit {
 
   classForm!: FormGroup;
 
-  listLesson = [
-    {
-      name: 'lesson A',
-      startTime: '2024-03-28 12:00:00.000000'
-    },
-    {
-      name: 'lesson B'
-    },
-    {
-      name: 'lesson C'
-    },
-  ]
-
   listCourse: any[] = [];
 
   classId!: number;
@@ -54,6 +41,7 @@ export class CreateClassComponent implements OnInit {
     this.classForm = this.fb.group({
       name: [null, [Validators.required]],
       courseId: [],
+      maximumLessonWithoutAttendance: [0]
     });
 
     this.courseService.getListCourse().subscribe(res => {

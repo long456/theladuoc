@@ -29,9 +29,9 @@
 <!--      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>-->
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Tên nhân viên" key="fullName" [width]="'200px'"></table-column>
-      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
       <table-column header="Email" key="email" [width]="'200px'"></table-column>
       <table-column header="SĐT" key="mobile" [width]="'200px'"></table-column>
+      <table-column header="Vai trò" key="type" [width]="'200px'"></table-column>
       <table-column header="Nhóm quyền" key="courseCode" [width]="'100%'">
         <ng-template appCell let-data>
           <span *ngFor="let role of data.roles; index as i" (click)="log(data)">
@@ -44,8 +44,7 @@
           </span>
         </ng-template>
       </table-column>
-
-
+      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
           Chức năng
