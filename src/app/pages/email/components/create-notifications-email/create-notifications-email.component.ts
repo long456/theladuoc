@@ -28,7 +28,7 @@ export class CreateNotificationsEmailComponent implements OnInit{
 
   courseId!: number;
 
-  typeEmailList: any = [];
+  notiEmailTemplateTypeList: any = [];
 
   lessonList: any = [];
 
@@ -71,7 +71,7 @@ export class CreateNotificationsEmailComponent implements OnInit{
       classId: [null],
       content: [null],
       status: [true],
-      typeEmail: [null,[Validators.required]],
+      notiEmailTemplateType: [null,[Validators.required]],
     },{ validators: [this.validLesson(), this.validClass()] });
 
     this.courseService.getListCourse().subscribe({
@@ -92,7 +92,7 @@ export class CreateNotificationsEmailComponent implements OnInit{
               item.disabled = true;
             }
           });
-          this.typeEmailList = emailTypeData
+          this.notiEmailTemplateTypeList = emailTypeData
         }
       },
       error: err => {
@@ -116,7 +116,6 @@ export class CreateNotificationsEmailComponent implements OnInit{
         const data = {
           ...res,
           status: !!res.status,
-          typeEmail: res.notiEmailTemplateType
         };
         this.emailNotificationForm.patchValue(data);
       }
@@ -125,10 +124,10 @@ export class CreateNotificationsEmailComponent implements OnInit{
 
   validLesson(): ValidatorFn {
     return () : ValidationErrors | null => {
-      const typeEmail = this.emailNotificationForm?.get('typeEmail')?.value;
+      const notiEmailTemplateType = this.emailNotificationForm?.get('notiEmailTemplateType')?.value;
       const lessonId = this.emailNotificationForm?.get('lessonId')?.value;
 
-      if ((typeEmail === 5 || typeEmail === 6) && !lessonId) {
+      if ((notiEmailTemplateType === 5 || notiEmailTemplateType === 6) && !lessonId) {
         return { lessonRequired: true };
       }
       return null;
@@ -137,10 +136,10 @@ export class CreateNotificationsEmailComponent implements OnInit{
 
   validClass(): ValidatorFn {
     return () : ValidationErrors | null => {
-      const typeEmail = this.emailNotificationForm?.get('typeEmail')?.value;
+      const notiEmailTemplateType = this.emailNotificationForm?.get('notiEmailTemplateType')?.value;
       const classId = this.emailNotificationForm?.get('classId')?.value;
 
-      if ((typeEmail === 7) && !classId) {
+      if ((notiEmailTemplateType === 7) && !classId) {
         return { classRequired: true };
       }
       return null;
@@ -151,7 +150,7 @@ export class CreateNotificationsEmailComponent implements OnInit{
     this.emailNotificationForm.get('lessonId')?.patchValue(null);
     this.emailNotificationForm.get('classId')?.patchValue(null);
 
-    if (e && (this.emailNotificationForm.value?.typeEmail === 5 || this.emailNotificationForm.value?.typeEmail === 6)) {
+    if (e && (this.emailNotificationForm.value?.notiEmailTemplateType === 5 || this.emailNotificationForm.value?.notiEmailTemplateType === 6)) {
       this.lessonService.getAllLesson(e).subscribe({
         next: res => {
           if (res) {
@@ -164,7 +163,7 @@ export class CreateNotificationsEmailComponent implements OnInit{
       })
     }
 
-    if (e && this.emailNotificationForm.value?.typeEmail === 7) {
+    if (e && this.emailNotificationForm.value?.notiEmailTemplateType === 7) {
       this.classService.getClassByCourse(e).subscribe({
         next: res => {
           if (res) {

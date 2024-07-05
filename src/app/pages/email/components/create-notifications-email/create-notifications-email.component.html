@@ -26,15 +26,15 @@
           <div class="text-label">Loại email</div>
           <nz-select
             [nzDisabled]="!isCreate &&
-                          emailNotificationForm.value?.typeEmail === 1 ||
-                          emailNotificationForm.value?.typeEmail === 2"
-            formControlName="typeEmail"
+                          emailNotificationForm.value?.notiEmailTemplateType === 1 ||
+                          emailNotificationForm.value?.notiEmailTemplateType === 2"
+            formControlName="notiEmailTemplateType"
             style="display: block;"
             [nzPlaceHolder]="'Chọn loại email'"
-            [nzStatus]="(emailNotificationForm.get('typeEmail')?.invalid && (emailNotificationForm.get('typeEmail')?.touched || isSubmit)) ? 'error' : ''"
+            [nzStatus]="(emailNotificationForm.get('notiEmailTemplateType')?.invalid && (emailNotificationForm.get('notiEmailTemplateType')?.touched || isSubmit)) ? 'error' : ''"
           >
             <nz-option
-              *ngFor="let type of typeEmailList"
+              *ngFor="let type of notiEmailTemplateTypeList"
               [nzValue]="type.dataValue"
               [nzLabel]="type.name"
               [nzDisabled]="type.disabled"
@@ -43,8 +43,8 @@
 
           <span
             class="text-danger"
-            *ngIf="(emailNotificationForm.get('typeEmail')?.touched || isSubmit) &&
-                    emailNotificationForm.get('typeEmail')?.hasError('required')">
+            *ngIf="(emailNotificationForm.get('notiEmailTemplateType')?.touched || isSubmit) &&
+                    emailNotificationForm.get('notiEmailTemplateType')?.hasError('required')">
             Loại email không được để trống
           </span>
         </div>
@@ -85,7 +85,7 @@
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8" *ngIf="emailNotificationForm.value?.typeEmail === 5 || emailNotificationForm.value?.typeEmail === 6">
+        <div nz-col [nzSpan]="8" *ngIf="emailNotificationForm.value?.notiEmailTemplateType === 5 || emailNotificationForm.value?.notiEmailTemplateType === 6">
           <span class="text-label">
             Buổi học
             <span class="text-danger">*</span>
@@ -113,7 +113,7 @@
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8" *ngIf="emailNotificationForm.value?.typeEmail === 7">
+        <div nz-col [nzSpan]="8" *ngIf="emailNotificationForm.value?.notiEmailTemplateType === 7">
           <span class="text-label">
             Lớp học
             <span class="text-danger">*</span>
