@@ -82,7 +82,23 @@ export class SideBarComponent {
             },
           ]
         },
-
+        {
+          name: 'Hiệu quả nhân sự',
+          icon: '',
+          link: '',
+          children: [
+            {
+              name: 'Diễn giả',
+              icon: '',
+              link: 'page/report/report-speaker',
+            },
+            {
+              name: 'Nhân viên sales',
+              icon: '',
+              link: 'page/report/report-sales-staff',
+            }
+          ]
+        }
       ]
     },
     {
