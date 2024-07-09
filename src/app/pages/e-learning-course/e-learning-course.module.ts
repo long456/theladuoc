@@ -4,12 +4,16 @@ import { CourseListComponent } from './components/course-list/course-list.compon
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import {ELearningCourseRoutingModule} from "./e-learning-course-routing.module";
+import { ChapterListComponent } from './components/chapter/chapter-list/chapter-list.component';
+import { ChapterRouterOutletComponent } from './components/chapter/chapter-router-outlet/chapter-router-outlet.component';
 
 
 
 @NgModule({
   declarations: [
-    CourseListComponent
+    CourseListComponent,
+    ChapterListComponent,
+    ChapterRouterOutletComponent
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {CourseListComponent} from "./components/course-list/course-list.component";
+import {ChapterRouterOutletComponent} from "./components/chapter/chapter-router-outlet/chapter-router-outlet.component";
+import {ChapterListComponent} from "./components/chapter/chapter-list/chapter-list.component";
 
 const routes: Routes = [
   {
@@ -11,6 +13,21 @@ const routes: Routes = [
   {
     path: 'e-course-list',
     component: CourseListComponent
+  },
+  {
+    path: 'chapter',
+    component: ChapterRouterOutletComponent,
+    children: [
+      {
+        path:'',
+        pathMatch: 'full',
+        redirectTo: 'list',
+      },
+      {
+        path:':courseId/list',
+        component: ChapterListComponent
+      }
+    ],
   }
 ];
 

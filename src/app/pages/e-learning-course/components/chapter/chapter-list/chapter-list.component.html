@@ -1,17 +1,17 @@
 <div class="title-page">
-  Danh sách khóa học E-learning
+  Danh sách học phần E-learning
 </div>
 
 <div class="header-btn">
-  <ng-container *ngIf="(course$ | async) as course">
+  <ng-container *ngIf="(chapterPage$ | async) as chapter">
     <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
     <button nz-button class="add-btn" (click)="delete()">Xóa</button>
 
     <app-table
-      [rows]="course.rows"
-      [page]="course.page"
-      [pageSize]="course.pageSize"
-      [pageTotal]="course.rowTotal"
+      [rows]="chapter.rows"
+      [page]="chapter.page"
+      [pageSize]="chapter.pageSize"
+      [pageTotal]="chapter.rowTotal"
       (onItemSelection)="getItemSelection($event)"
       [clientPagination]="false"
       (pageIndexChange)="page$.next($event)"
@@ -37,6 +37,5 @@
         </ng-template>
       </table-column>
     </app-table>
-
   </ng-container>
 </div>

@@ -183,6 +183,7 @@ export class FilesManagerComponent implements OnInit{
   }
 
   onOwnerSelect(e: number) {
+    this.selectedOwner = e;
     this.ownerId$.next(e);
   }
 
