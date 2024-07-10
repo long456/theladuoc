@@ -216,7 +216,6 @@ export class FilesManagerComponent implements OnInit{
         }
       },
       error: err => {
-        console.log(err);
         this.message.error('Có lỗi khi upload file.');
       }
     })
@@ -281,5 +280,9 @@ export class FilesManagerComponent implements OnInit{
         }
       })
     }
+  }
+
+  onScroll(e: any) {
+    console.log(e)
   }
 }

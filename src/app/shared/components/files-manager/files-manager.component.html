@@ -27,7 +27,7 @@
       <nz-tab [nzTitle]="'Ảnh'" class="tab">
         <ng-container *ngIf="(listImg$ | async) as img;else spin">
           <ng-container *ngIf="img.data.length > 0;else noData">
-            <div nz-row [nzGutter]=[8,16]>
+            <div class="card-list" nz-row [nzGutter]=[8,16] (scroll)="onScroll($event)">
               <ng-container *ngFor="let data of img.data">
                 <div nz-col [nzSpan]=6>
                   <div class="card-img" [ngClass]="{'active': fileSelected === data.id}" >

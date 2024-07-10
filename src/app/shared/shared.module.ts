@@ -35,6 +35,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { CardImageComponent } from './components/card-image/card-image.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { ScrollNearBottomDirective } from './directives/table/scroll-near-bottom.directive';
 @NgModule({
   declarations: [
     SideBarComponent,
@@ -49,6 +50,7 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
     TreeComponent,
     FilesManagerComponent,
     CardImageComponent,
+    ScrollNearBottomDirective,
   ],
   imports: [
     CommonModule,
