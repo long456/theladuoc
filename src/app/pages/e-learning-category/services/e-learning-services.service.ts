@@ -43,4 +43,8 @@ export class ELearningServicesService {
   softDeleteCategory(list: number[]): Observable<any>{
     return this.http.delete('CategoryElearning/soft-delete', {body: list});
   }
+
+  getListOprionCategory(): Observable<any>{
+    return this.http.get('CategoryElearning/get-list-category-course-elearning');
+  }
 }

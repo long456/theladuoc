@@ -25,7 +25,6 @@ export class CourseListComponent implements OnInit{
 
   loading = false;
   itemSelectList: number[] = [];
-
   constructor(
     private router: Router,
     private message: NzMessageService,
@@ -67,7 +66,9 @@ export class CourseListComponent implements OnInit{
     )
   }
 
-  create() {}
+  create() {
+    this.router.navigate(['/page/e-course/create']);
+  }
 
   delete() {}
 

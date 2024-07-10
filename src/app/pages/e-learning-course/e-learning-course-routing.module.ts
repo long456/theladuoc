@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {CourseListComponent} from "./components/course-list/course-list.component";
+import { CreateECourseComponent } from './components/create-e-course/create-e-course.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,16 @@ const routes: Routes = [
   {
     path: 'e-course-list',
     component: CourseListComponent
+  },
+  {
+    path: 'create',
+    data: {isCreate: true},
+    component: CreateECourseComponent
+  },
+  {
+    path: ':id',
+    data: {isCreate: false},
+    component: CreateECourseComponent
   }
 ];
 
