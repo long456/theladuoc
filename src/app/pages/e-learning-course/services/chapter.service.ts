@@ -27,4 +27,24 @@ export class ChapterService {
 
     return this.http.get('Chapter/' + courseId, {params: option});
   }
+
+  getChapterById(id: number): Observable<any>{
+    return this.http.get('Chapter/detail/' + id);
+  }
+
+  getChapterByCourse(courseId: number): Observable<any>{
+    return this.http.get('Chapter/get-list-chapter-by-elearning/' + courseId);
+  }
+
+  createChapter(data: any): Observable<any>{
+    return this.http.post('Chapter/create', data);
+  }
+
+  updateChapter(data: any): Observable<any>{
+    return this.http.post('Chapter/update', data);
+  }
+
+  softDeleteChapter(listId: number[]): Observable<any>{
+    return this.http.delete('Chapter/soft-delete', {body: listId})
+  }
 }

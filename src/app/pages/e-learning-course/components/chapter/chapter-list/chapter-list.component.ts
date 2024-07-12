@@ -4,6 +4,7 @@ import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observ
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {ChapterService} from "../../../services/chapter.service";
+import {NzModalService} from "ng-zorro-antd/modal";
 
 @Component({
   selector: 'app-chapter-list',
@@ -33,6 +34,7 @@ export class ChapterListComponent implements OnInit{
     private message: NzMessageService,
     private chapterService: ChapterService,
     private route: ActivatedRoute,
+    private modal :NzModalService,
   ) {
   }
 
@@ -76,9 +78,59 @@ export class ChapterListComponent implements OnInit{
     )
   }
 
-  getItemSelection(e: any) {}
+  getItemSelection(e: any) {
+    this.itemSelectList = e;
+  }
 
-  create() {}
+  backToCourse() {
+    if (this.eCourseId) {
+      this.router.navigate(['page/e-course/e-course-list']);
+    }
+  }
 
-  delete() {}
+  navigationToVideo() {
+    if (this.eCourseId) {
+      this.router.navigate(['page/e-course/video/'+ this.eCourseId + '/list']);
+    }
+  }
+
+  create() {
+    if (this.eCourseId) {
+      this.router.navigate(['page/e-course/chapter/'+ this.eCourseId + '/create']);
+    }
+  }
+
+  edit(data: any) {
+    if (this.eCourseId) {
+      this.router.navigate(['page/e-course/chapter/'+ this.eCourseId + '/' + data.id]);
+    }
+  }
+
+  delete() {
+    if (this.itemSelectList.length === 0) {
+      this.message.error('Chưa có mục nào được chọn')
+    } else {
+      this.modal.confirm({
+        nzTitle: 'Xác nhận xóa',
+        nzContent: 'Bạn có chắc chắn muốn xóa những mục đã chọn ?',
+        nzOnOk: () => {
+          this.chapterService.softDeleteChapter(this.itemSelectList)
+            .pipe(
+            ).subscribe({
+            next: value => {
+              if (value.success) {
+                this.message.success(value.messages);
+                this.pageSize$.next(10);
+              } else {
+                this.message.error(value.errorMessages);
+              }
+            },
+            error: err => {
+              this.message.error(err.error);
+            }
+          })
+        }
+      });
+    }
+  }
 }

@@ -1,27 +1,26 @@
 <div class="title-page">
-  Danh sách học phần E-learning
+  Danh sách video E-learning
   <button
     class="navigation-btn"
-    nz-button nzType="primary" (click)="navigationToVideo()">
-    <span class="navigation-title">Danh sách video</span>
+    nz-button nzType="primary" (click)="navigationToChapter()">
+    <span class="navigation-title">Danh sách học phần</span>
     <span nz-icon nzType="right"></span>
   </button>
 </div>
 
 <div class="header-btn">
-  <ng-container *ngIf="(chapterPage$ | async) as chapter">
+  <ng-container *ngIf="(videoPage$ | async) as video">
     <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
     <button nz-button class="add-btn" (click)="delete()">Xóa</button>
     <button nz-button class="add-btn" (click)="backToCourse()"
             nz-tooltip nzTooltipTitle="Quay lại danh sách khóa học">
       <span nz-icon nzType="rollback" nzTheme="outline"></span>
     </button>
-
     <app-table
-      [rows]="chapter.rows"
-      [page]="chapter.page"
-      [pageSize]="chapter.pageSize"
-      [pageTotal]="chapter.rowTotal"
+      [rows]="video.rows"
+      [page]="video.page"
+      [pageSize]="video.pageSize"
+      [pageTotal]="video.rowTotal"
       (onItemSelection)="getItemSelection($event)"
       [clientPagination]="false"
       (pageIndexChange)="page$.next($event)"
@@ -30,8 +29,10 @@
     >
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Tên học phần" key="title" [width]="'200px'"></table-column>
-      <table-column header="Thứ tự" key="title" [width]="'200px'"></table-column>
+      <table-column header="Tiêu đề" key="title" [width]="'200px'"></table-column>
+      <table-column header="Đường dẫn" key="mediaPath" [width]="'200px'"></table-column>
+      <table-column header="Học phần" key="chapterName" [width]="'200px'"></table-column>
+      <table-column header="Thứ tự" key="priority" [width]="'200px'"></table-column>
       <table-column header="Trạng thái" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
@@ -45,7 +46,7 @@
 
         <ng-template appCell let-data>
           <span class="custom-action" (click)="edit(data)"
-                nz-tooltip nzTooltipTitle="Chỉnh sửa học phần">
+                nz-tooltip nzTooltipTitle="Chỉnh sửa video">
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
           </span>
         </ng-template>
