@@ -1,0 +1,254 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới khóa học Elearning' : 'Chỉnh sửa khóa học Elearning'}}
+</div>
+
+<form nz-form [formGroup]="courseForm">
+  <div nz-row [nzGutter]=[16,16]>
+    <div nz-col [nzXs]="24" [nzLg]="14" [nzXl]="18">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzXs]="24" [nzSm]="24" [nzXl]="16">
+          <!-- Tên khoá học -->
+          <div style="margin-bottom: 16px;">
+            <span class="text-label">
+              {{controlNames.name}}
+              <span class="text-danger">*</span>
+              <span class="text-danger message-error" *ngIf="courseForm.get('name')?.invalid && courseForm.get('name')?.touched">
+                {{ getErrorMessage('name') }}
+              </span>
+            </span>
+            <input nz-input autofocus formControlName="name"
+              [nzStatus]="(courseForm.get('name')?.invalid && (courseForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+          </div>
+          <!-- Giới thiệu ngắn -->
+          <div>
+            <span class="text-label">
+              {{controlNames.description}}
+              <span class="text-danger">*</span>
+              <span class="text-danger message-error" *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched">
+                {{ getErrorMessage('description') }}
+              </span>
+            </span>
+            <textarea nz-input autofocus formControlName="description"
+              [nzStatus]="(courseForm.get('description')?.invalid && (courseForm.get('description')?.touched || isSubmit)) ? 'error' : ''">
+            </textarea>
+          </div>
+        </div>
+        <!-- Giá -->
+        <div nz-col [nzXs]="24" [nzSm]="24" [nzXl]="8">
+          <div nz-row [nzGutter]=[16,16]>
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.price}}
+                <nz-input-number class="input-nz-number" formControlName="price" [nzMin]="0"
+                  [nzStep]="1"></nz-input-number>
+              </span>
+            </div>
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.oldPrice}}
+                <nz-input-number class="input-nz-number" formControlName="oldPrice" [nzMin]="0"
+                  [nzStep]="1"></nz-input-number>
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Ảnh đại diện -->
+        <div nz-col [nzXs]="24" [nzSm]="12">
+          <span class="text-label">
+            {{controlNames.thumbImg}}
+            <span class="text-danger message-error" *ngIf="courseForm.get('thumbImg')?.invalid && courseForm.get('thumbImg')?.touched">
+              {{ getErrorMessage('thumbImg') }}
+            </span>
+            <span class="text-danger">*</span>
+          </span>
+
+          <div class="select-file">
+            <div class="btn-select-file" (click)="selectFile('thumbImg')" *ngIf="!courseForm.get('thumbImg')?.value">
+              <span nz-icon nzType="plus" nzTheme="outline"></span>
+              <div style="margin-top: 8px;">Upload</div>
+            </div>
+            <img class="img-preview" [src]="courseForm.get('thumbImg')?.value"
+              *ngIf="courseForm.get('thumbImg')?.value">
+
+            <div class="overlay" *ngIf="courseForm.get('thumbImg')?.value">
+              <div class="btn-file">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="Upload ảnh mới" (click)="selectFile('thumbImg')">
+                  <span nz-icon nzType="upload"></span>
+                </a>
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="Xóa" (click)="deleteImg('thumbImg')">
+                  <span nz-icon nzType="delete"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Ảnh banner -->
+        <div nz-col [nzXs]="24" [nzSm]="12">
+          <span class="text-label">{{controlNames.imgBanner}}</span>
+          <div class="select-file">
+            <div class="btn-select-file" (click)="selectFile('imgBanner')" *ngIf="!courseForm.get('imgBanner')?.value">
+              <span nz-icon nzType="plus" nzTheme="outline"></span>
+              <div style="margin-top: 8px;">Upload</div>
+            </div>
+            <img class="img-preview" [src]="courseForm.get('imgBanner')?.value"
+              *ngIf="courseForm.get('imgBanner')?.value">
+
+            <div class="overlay" *ngIf="courseForm.get('imgBanner')?.value">
+              <div class="btn-file">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="Upload ảnh mới" (click)="selectFile('imgBanner')">
+                  <span nz-icon nzType="upload"></span>
+                </a>
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="Xóa" (click)="deleteImg('imgBanner')">
+                  <span nz-icon nzType="delete"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Link video giới thiệu -->
+        <div nz-col [nzSpan]="24">
+          <div nz-row>
+            <div nz-col [nzXs]="24" [nzSm]="24" [nzXl]="16">
+              <span class="text-label">
+                {{controlNames.introVideo}}
+                <span class="text-danger message-error" *ngIf="courseForm.get('introVideo')?.invalid && courseForm.get('introVideo')?.touched">
+                  {{ getErrorMessage('introVideo') }}
+                </span>
+              </span>
+              <input nz-input autofocus formControlName="introVideo"
+                [nzStatus]="(courseForm.get('introVideo')?.invalid && (courseForm.get('introVideo')?.touched || isSubmit)) ? 'error' : ''">
+            </div>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <span class="text-label">
+            {{controlNames.overviewDescription}}
+            <span class="text-danger">*</span>
+            <span class="text-danger message-error" *ngIf="courseForm.get('overviewDescription')?.invalid && courseForm.get('overviewDescription')?.touched">
+              {{ getErrorMessage('overviewDescription') }}
+            </span>
+          </span>
+          <ckeditor name="ckeditor_text" formControlName="overviewDescription"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right -->
+    <div nz-col [nzXs]="24" [nzLg]="10" [nzXl]="6">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzXs]="24" [nzSm]="24">
+          <span class="text-label">
+            {{controlNames.teacherId}}
+            <span class="text-danger">*</span>
+            <span class="text-danger message-error" *ngIf="courseForm.get('teacherId')?.invalid && courseForm.get('teacherId')?.touched">
+              {{ getErrorMessage('teacherId') }}
+            </span>
+          </span>
+          <div>
+            <nz-select formControlName="teacherId">
+              <nz-option *ngFor="let teacher of listTeacher" [nzValue]="teacher.id" [nzLabel]="teacher.fullName">
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+
+        <div nz-col [nzXs]="24" [nzSm]="24">
+          <span class="text-label">
+            {{controlNames.categoryId}}
+            <span class="text-danger">*</span>
+            <span class="text-danger message-error" *ngIf="courseForm.get('categoryId')?.invalid && courseForm.get('categoryId')?.touched">
+              {{ getErrorMessage('categoryId') }}
+            </span>
+          </span>
+          <div>
+            <nz-select formControlName="categoryId">
+              <nz-option *ngFor="let category of listCategory" [nzValue]="category.id" [nzLabel]="category.title">
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+
+        <div nz-col [nzXs]="24" [nzSm]="24">
+          <span class="text-label">
+            {{controlNames.type}}
+            <span class="text-danger">*</span>
+            <span class="text-danger message-error" *ngIf="courseForm.get('type')?.invalid && courseForm.get('type')?.touched">
+              {{ getErrorMessage('type') }}
+            </span>
+          </span>
+          <div>
+            <nz-select formControlName="type">
+              <nz-option [nzValue]="1" [nzLabel]="'Miễn phí'"></nz-option>
+              <nz-option [nzValue]="2" [nzLabel]="'Thành viên'"></nz-option>
+              <nz-option [nzValue]="3" [nzLabel]="'Đặc biệt'"></nz-option>
+              <nz-option [nzValue]="4" [nzLabel]="'Cộng tác viên'"></nz-option>
+              <nz-option [nzValue]="5" [nzLabel]="'Giảng viên'"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+
+        <div nz-col [nzXs]="24" [nzSm]="24">
+          <span class="text-label">
+            {{controlNames.level}}
+            <span class="text-danger">*</span>
+            <span class="text-danger message-error" *ngIf="courseForm.get('level')?.invalid && courseForm.get('level')?.touched">
+              {{ getErrorMessage('level') }}
+            </span>
+          </span>
+          <div>
+            <nz-select formControlName="level">
+              <nz-option [nzValue]="1" [nzLabel]="'Sở cấp'"></nz-option>
+              <nz-option [nzValue]="2" [nzLabel]="'Trung cấp'"></nz-option>
+              <nz-option [nzValue]="3" [nzLabel]="'Cao cấp'"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+
+        <div nz-col [nzXs]="24" [nzSm]="24">
+          <span class="text-label">
+            {{controlNames.language}}
+            <span class="text-danger">*</span>
+            <span class="text-danger message-error" *ngIf="courseForm.get('language')?.invalid && courseForm.get('language')?.touched">
+              {{ getErrorMessage('language') }}
+            </span>
+          </span>
+          <div>
+            <nz-select formControlName="language">
+              <nz-option [nzValue]="1" [nzLabel]="'Tiếng Việt'"></nz-option>
+              <nz-option [nzValue]="2" [nzLabel]="'Tiếng Anh'"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+
+        <div nz-col [nzXs]="24" [nzSm]="12">
+          <div class="text-label">{{controlNames.isCertificate}}</div>
+          <nz-switch formControlName="isCertificate">
+          </nz-switch>
+        </div>
+
+        <div nz-col class="mb-30" [nzXs]="24" [nzSm]="12">
+          <div class="text-label">
+            {{controlNames.status}}
+            <span class="text-danger message-error" *ngIf="courseForm.get('status')?.invalid && courseForm.get('status')?.touched">
+              {{ getErrorMessage('status') }}
+            </span>
+          </div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <div class="btn-panel">
+            <button class="btn primary" nz-button (click)="edit()">
+              {{isCreate? 'Tạo mới' : 'Lưu'}}
+            </button>
+            <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

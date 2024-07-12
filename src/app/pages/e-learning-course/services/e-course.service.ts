@@ -27,4 +27,24 @@ export class ECourseService {
 
     return this.http.get('CourseElearning', {params: option});
   }
+
+  getCourseById(id: number): Observable<any>{
+    return this.http.get('CourseElearning/detail/' + id)
+  }
+
+  updateCourse(data: any): Observable<any>{
+    return this.http.post('CourseElearning/update', data)
+  }
+
+  createCourse(data: any): Observable<any> {
+    return this.http.post('CourseElearning/create', data)
+  }
+
+  deleteCourse(id : [number]): Observable<any>{
+    return this.http.delete('CourseElearning/' + id)
+  }
+
+  softDeleteCourse(data: number[]): Observable<any> {
+    return this.http.delete('CourseElearning/soft-delete',{body: data})
+  }
 }

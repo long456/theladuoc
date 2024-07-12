@@ -1,40 +1,50 @@
 import {Component, OnInit} from '@angular/core';
-import {COL_DATA_TYPE, filterItem} from "../../../../shared/models/Table";
+import {COL_DATA_TYPE, filterItem} from "../../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {ECourseService} from "../../services/e-course.service";
+import {ChapterService} from "../../../services/chapter.service";
 import {NzModalService} from "ng-zorro-antd/modal";
+
 @Component({
-  selector: 'app-course-list',
-  templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.scss']
+  selector: 'app-chapter-list',
+  templateUrl: './chapter-list.component.html',
+  styleUrls: ['./chapter-list.component.scss']
 })
-export class CourseListComponent implements OnInit{
+export class ChapterListComponent implements OnInit{
 
   COL_DATA_TYPE = COL_DATA_TYPE;
-  course$ !: Observable<{
+  itemSelectList: number[] = [];
+  loading = false;
+  eCourseId!: number;
+
+  chapterPage$ !: Observable<{
     rows: any[],
     filter?: any,
     page: number;
     pageSize: number;
     rowTotal: number;
   }>;
+
   page$ = new BehaviorSubject(1);
   pageSize$ = new BehaviorSubject(10);
   filterList$ = new BehaviorSubject(null);
-
-  loading = false;
-  itemSelectList: number[] = [];
   constructor(
     private router: Router,
     private message: NzMessageService,
-    private eCourseService:ECourseService,
+    private chapterService: ChapterService,
+    private route: ActivatedRoute,
     private modal :NzModalService,
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
-    this.course$ = combineLatest([
+    this.route.params.pipe().subscribe(params => {
+      const {courseId} = params;
+      this.eCourseId = courseId;
+    });
+
+    this.chapterPage$ = combineLatest([
       this.page$,
       this.pageSize$,
       this.filterList$
@@ -42,7 +52,7 @@ export class CourseListComponent implements OnInit{
     .pipe(
       tap(() => this.loading = true),
       mergeMap(([page, pageSize, filter]) => {
-        return this.eCourseService.getECourseList(page, pageSize, filter)
+        return this.chapterService.getChapterList(this.eCourseId, page, pageSize, filter)
           .pipe(
             map((value) => {
               return {
@@ -53,7 +63,7 @@ export class CourseListComponent implements OnInit{
               }
             }),
             catchError(err => {
-              this.message.error('Lỗi load dữ liệu danh mục khóa học');
+              this.message.error('Lỗi load dữ liệu học phần')
               return of({
                 rows: [],
                 page: 0,
@@ -68,27 +78,43 @@ export class CourseListComponent implements OnInit{
     )
   }
 
+  getItemSelection(e: any) {
+    this.itemSelectList = e;
+  }
+
+  backToCourse() {
+    if (this.eCourseId) {
+      this.router.navigate(['page/e-course/e-course-list']);
+    }
+  }
+
+  navigationToVideo() {
+    if (this.eCourseId) {
+      this.router.navigate(['page/e-course/video/'+ this.eCourseId + '/list']);
+    }
+  }
+
   create() {
-    this.router.navigate(['/page/e-course/create']);
+    if (this.eCourseId) {
+      this.router.navigate(['page/e-course/chapter/'+ this.eCourseId + '/create']);
+    }
   }
 
   edit(data: any) {
-    this.router.navigate(['/page/e-course/' + data.id])
-  }
-
-  navigateToChapter(data: any) {
-    this.router.navigate(['/page/e-course/chapter/' + data.id + '/list'])
+    if (this.eCourseId) {
+      this.router.navigate(['page/e-course/chapter/'+ this.eCourseId + '/' + data.id]);
+    }
   }
 
   delete() {
     if (this.itemSelectList.length === 0) {
-      this.message.error('Chưa có mục nào được chọn');
+      this.message.error('Chưa có mục nào được chọn')
     } else {
       this.modal.confirm({
         nzTitle: 'Xác nhận xóa',
         nzContent: 'Bạn có chắc chắn muốn xóa những mục đã chọn ?',
         nzOnOk: () => {
-          this.eCourseService.softDeleteCourse(this.itemSelectList)
+          this.chapterService.softDeleteChapter(this.itemSelectList)
             .pipe(
             ).subscribe({
             next: value => {
@@ -106,9 +132,5 @@ export class CourseListComponent implements OnInit{
         }
       });
     }
-  }
-
-  getItemSelection(e: any) {
-    this.itemSelectList = e;
   }
 }
