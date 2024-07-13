@@ -1,16 +1,23 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {NzMessageService} from "ng-zorro-antd/message";
-import {VideoService} from "../../../services/video.service";
-import {ChapterService} from "../../../services/chapter.service";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { NzMessageService } from "ng-zorro-antd/message";
+import { VideoService } from "../../../services/video.service";
+import { ChapterService } from "../../../services/chapter.service";
+
+declare global {
+  interface Window {
+    imsPluginMedia: any;
+  }
+}
+declare var IMSWidgetMedia: any;
 
 @Component({
   selector: 'app-create-video',
   templateUrl: './create-video.component.html',
   styleUrls: ['./create-video.component.scss']
 })
-export class CreateVideoComponent implements OnInit{
+export class CreateVideoComponent implements OnInit {
   isCreate: boolean = false;
   eCourseId!: number;
   videoForm!: FormGroup;
@@ -24,7 +31,7 @@ export class CreateVideoComponent implements OnInit{
     private message: NzMessageService,
     private videoService: VideoService,
     private chapterService: ChapterService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.isCreate = this.route.snapshot.data['isCreate'];
@@ -33,7 +40,7 @@ export class CreateVideoComponent implements OnInit{
     this.videoForm = this.fb.group({
       title: ['', [Validators.required]],
       chapterId: [null, [Validators.required]],
-      mediaPath: [null],
+      mediaPath: [null, [Validators.required]],
       duration: [0, [Validators.min(1)]],
       priority: [0],
       status: [1],
@@ -41,7 +48,7 @@ export class CreateVideoComponent implements OnInit{
 
     if (!this.isCreate) {
       this.route.params.pipe().subscribe(params => {
-        const {id} = params;
+        const { id } = params;
         this.videoId = id;
         this.videoService.getVideoById(this.videoId).subscribe({
           next: res => {
@@ -58,6 +65,11 @@ export class CreateVideoComponent implements OnInit{
         this.chapterList = res.data;
       }
     })
+
+    // Sử dụng API của thư viện đã import từ CDN
+    if (window.imsPluginMedia) {
+      window.imsPluginMedia.initialize();
+    }
   }
 
   edit() {
@@ -98,7 +110,44 @@ export class CreateVideoComponent implements OnInit{
     }
   }
 
+  onSelectFile() {
+    this.showPlugin();
+  }
+
+  private getTokenFunction(callback: (error: any, token: string | null) => void): void {
+    this.videoService.getTokenPlugVod().subscribe(
+      (token) => callback(null, token),  // Gọi callback với token khi thành công
+      (error) => callback(error, null)   // Gọi callback với lỗi khi có lỗi
+    );
+  }
+
+  private showPlugin(): void {
+    if (typeof IMSWidgetMedia !== 'undefined') {
+      IMSWidgetMedia.init({
+        locale: 'vi',
+        plugins: {
+          name: 'media',
+          options: {
+            getTokenFunction: this.getTokenFunction.bind(this)
+          },
+          methods: {
+            name: 'mediaManager',
+            options: {
+              callback: (arrMedia: any[]) => {
+                  arrMedia.forEach((media) => {
+                    this.videoForm.get('mediaPath')?.patchValue(media.src);
+                  });
+              }
+            }
+          }
+        }
+      });
+    } else {
+      console.error('IMSWidgetMedia is not defined. Make sure the script is loaded.');
+    }
+  }
+
   navigateBack() {
-    this.router.navigate(['page/e-course/video/' + this.eCourseId +'/list']);
+    this.router.navigate(['page/e-course/video/' + this.eCourseId + '/list']);
   }
 }
