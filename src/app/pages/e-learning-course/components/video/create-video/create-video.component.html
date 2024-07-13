@@ -11,13 +11,11 @@
             Tiêu đề video
             <span class="text-danger">*</span>
           </span>
-          <input
-            nz-input autofocus formControlName="title"
+          <input nz-input autofocus formControlName="title"
             [nzStatus]="(videoForm.get('title')?.invalid && (videoForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(videoForm.get('title')?.touched || isSubmit)  && videoForm.get('title')?.hasError('required')"
-          >
+            *ngIf="(videoForm.get('title')?.touched || isSubmit)  && videoForm.get('title')?.hasError('required')">
             Tiêu đề video không được để trống!
           </span>
         </div>
@@ -29,27 +27,20 @@
           </span>
 
           <div>
-            <nz-select
-              formControlName="chapterId"
-              [nzStatus]="(videoForm.get('chapterId')?.invalid && (videoForm.get('chapterId')?.touched || isSubmit)) ? 'error' : ''"
-            >
-              <nz-option
-                *ngFor="let chapter of chapterList"
-                [nzValue]="chapter.id"
-                [nzLabel]="chapter.title"
-              >
+            <nz-select formControlName="chapterId"
+              [nzStatus]="(videoForm.get('chapterId')?.invalid && (videoForm.get('chapterId')?.touched || isSubmit)) ? 'error' : ''">
+              <nz-option *ngFor="let chapter of chapterList" [nzValue]="chapter.id" [nzLabel]="chapter.title">
               </nz-option>
             </nz-select>
           </div>
 
-          <span class="text-danger"
-                *ngIf="(videoForm.get('chapterId')?.touched || isSubmit) &&
+          <span class="text-danger" *ngIf="(videoForm.get('chapterId')?.touched || isSubmit) &&
                         videoForm.get('chapterId')?.hasError('required')">
             Tên học phần không được để trống
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8" >
+        <div nz-col [nzSpan]="8">
           <div class="text-label">Trạng thái</div>
           <nz-switch formControlName="status">
           </nz-switch>
@@ -59,12 +50,9 @@
           <span class="text-label">
             Thời lượng (giây)
           </span>
-          <nz-input-number formControlName="duration"
-            class="input-nz-number"  [nzMin]="0" [nzStep]="1"
-            [nzStatus]="(videoForm.get('duration')?.invalid &&
+          <nz-input-number formControlName="duration" class="input-nz-number" [nzMin]="0" [nzStep]="1" [nzStatus]="(videoForm.get('duration')?.invalid &&
                         (videoForm.get('duration')?.touched || isSubmit)) ? 'error' : ''"></nz-input-number>
-          <span class="text-danger"
-                *ngIf="(videoForm.get('duration')?.touched || isSubmit) &&
+          <span class="text-danger" *ngIf="(videoForm.get('duration')?.touched || isSubmit) &&
                         videoForm.get('duration')?.hasError('min')">
             Thời lượng video không thể bằng 0
           </span>
@@ -74,17 +62,31 @@
           <span class="text-label">
             Thứ tự
           </span>
-          <nz-input-number class="input-nz-number" formControlName="priority" [nzMin]="0" [nzStep]="1"></nz-input-number>
+          <nz-input-number class="input-nz-number" formControlName="priority" [nzMin]="0"
+            [nzStep]="1"></nz-input-number>
         </div>
 
         <div nz-col [nzSpan]="8"></div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Link học phần
+            Link video
+            <span class="text-danger">*</span>
           </span>
+          <div>
+            <div style="display: flex">
+              <input nz-input formControlName="mediaPath" [nzStatus]="(videoForm.get('mediaPath')?.invalid &&
+              (videoForm.get('mediaPath')?.touched || isSubmit)) ? 'error' : ''">
+              <button nz-button nzType="primary" (click)="onSelectFile()">
+                <span nz-icon nzType="upload"></span>
+              </button>
+            </div>
 
-          <input nz-input formControlName="mediaPath">
+            <span class="text-danger"
+              *ngIf="(videoForm.get('mediaPath')?.touched || isSubmit)  && videoForm.get('mediaPath')?.hasError('required')">
+              Link video không được để trống!
+            </span>
+          </div>
         </div>
       </div>
     </form>

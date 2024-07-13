@@ -43,4 +43,9 @@ export class VideoService {
   softDeleteVideo(listId: number[]): Observable<any>{
     return this.http.delete('Video/soft-delete', {body: listId})
   }
+
+  getTokenPlugVod(): Observable<any>{
+    return this.http.get('Video/plugin-vod-token');
+  }
+
 }
