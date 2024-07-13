@@ -31,7 +31,7 @@
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Tên học phần" key="title" [width]="'200px'"></table-column>
-      <table-column header="Thứ tự" key="title" [width]="'200px'"></table-column>
+      <table-column header="Thứ tự" key="priority" [width]="'200px'"></table-column>
       <table-column header="Trạng thái" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
