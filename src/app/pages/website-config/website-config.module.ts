@@ -19,6 +19,7 @@ import { EditPageComponent } from './components/page-config/edit-page/edit-page.
 import {CKEditorModule} from "ckeditor4-angular";
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzSwitchModule} from "ng-zorro-antd/switch";
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {NzSelectModule} from "ng-zorro-antd/select";
     CKEditorModule,
     NzInputNumberModule,
     NzSelectModule,
+    NzSwitchModule,
   ]
 })
 export class WebsiteConfigModule { }

@@ -31,13 +31,13 @@ export class AttachClassComponent implements OnInit{
   }
 
   getListClass() {
-      this.classService.getClassByCourse(this.nzModalData.courseId).subscribe({
-        next: res => {
-          if (res) {
-            this.classList = res
-          }
+    this.classService.getClassByCourse(this.nzModalData.courseId).subscribe({
+      next: res => {
+        if (res) {
+          this.classList = res
         }
-      })
+      }
+    })
   }
 
   loadMore() {

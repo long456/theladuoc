@@ -2,161 +2,144 @@
   <span>Thiết lập cấu hình website</span>
 </div>
 
-<nz-tabset>
-<!--  Header & Footer-->
-  <nz-tab nzTitle="Header & Footer">
-    <div nz-row>
-      <div nz-col [nzSpan]="20">
-        <form [formGroup]="configForm">
-          <div nz-row [nzGutter]=[16,16]>
-            <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            Tên website
-            <span class="text-danger">*</span>
-          </span>
-              <input
-                nz-input autofocus formControlName="name"
-                [nzStatus]="(configForm.get('name')?.invalid && (configForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="configForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="9">
+      <span class="text-label">
+        Tên website
+        <span class="text-danger">*</span>
+      </span>
+          <input
+            nz-input autofocus formControlName="name"
+            [nzStatus]="(configForm.get('name')?.invalid && (configForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
-              <span class="text-danger"
-                    *ngIf="(configForm.get('name')?.touched || isSubmit)  && configForm.get('name')?.hasError('required')"
-              >
-            Tên website không được để trống
-          </span>
-            </div>
-
-            <div nz-col [nzSpan]="9">
-              <span class="text-label">copy right(Tuyên bố bản quyền)</span>
-              <input nz-input formControlName="copyright">
-            </div>
-
-            <div nz-col [nzSpan]="9">
-              <span class="text-label">Logo header</span>
-              <input nz-input formControlName="headerLogo">
-            </div>
-
-            <div nz-col [nzSpan]="9">
-              <span class="text-label">Background header</span>
-              <div class="color-picker" (click)="active(bgHeader)">
-                <input #bgHeader formControlName="headerBackground" type="color" (change)="onColorChange($event, 1)">
-                <span style="padding-left: 8px; font-size: 14px">
-              {{bgHeaderValue}}
-            </span>
-              </div>
-            </div>
-
-            <div nz-col [nzSpan]="9">
-              <span class="text-label">Logo footer</span>
-              <input nz-input formControlName="footerLogo">
-            </div>
-
-            <div nz-col [nzSpan]="9">
-              <span class="text-label">Background footer</span>
-              <div class="color-picker" (click)="active(bgFooter)">
-                <input #bgFooter formControlName="footerBackground" type="color" (change)="onColorChange($event, 0)">
-                <span style="padding-left: 8px; font-size: 14px">
-              {{bgFooterValue}}
-            </span>
-              </div>
-            </div>
-
-            <div nz-col [nzSpan]="9">
-              <span class="text-label">Link facebook</span>
-              <input
-                nz-input formControlName="facebookLink"
-                [nzStatus]="(configForm.get('facebookLink')?.invalid &&
-                        (configForm.get('facebookLink')?.touched || isSubmit)) ? 'error' : ''">
-              <span class="text-danger"
-                    *ngIf="(configForm.get('facebookLink')?.touched || isSubmit)  &&
-                        configForm.get('facebookLink')?.hasError('pattern')">
-            Link facebook không đúng định dạng
-          </span>
-            </div>
-
-            <div nz-col [nzSpan]="9">
-              <span class="text-label">Link youtube</span>
-              <input
-                nz-input formControlName="youtubeLink"
-                [nzStatus]="(configForm.get('youtubeLink')?.invalid &&
-                        (configForm.get('youtubeLink')?.touched || isSubmit)) ? 'error' : ''">
-              <span class="text-danger"
-                    *ngIf="(configForm.get('youtubeLink')?.touched || isSubmit)  &&
-                        configForm.get('youtubeLink')?.hasError('pattern')">
-            Link youtube không đúng định dạng
-          </span>
-            </div>
-
-            <div nz-col [nzSpan]="9">
-              <span class="text-label">Link tiktok</span>
-              <input
-                nz-input formControlName="tiktokLink"
-                [nzStatus]="(configForm.get('tiktokLink')?.invalid &&
-                        (configForm.get('tiktokLink')?.touched || isSubmit)) ? 'error' : ''">
-              <span class="text-danger"
-                    *ngIf="(configForm.get('tiktokLink')?.touched || isSubmit)  &&
-                        configForm.get('tiktokLink')?.hasError('pattern')">
-            Link tiktok không đúng định dạng
-          </span>
-            </div>
-
-            <div nz-col [nzSpan]="9">
-              <span class="text-label">Link zalo</span>
-              <input
-                nz-input formControlName="zaloLink"
-                [nzStatus]="(configForm.get('zaloLink')?.invalid &&
-                        (configForm.get('zaloLink')?.touched || isSubmit)) ? 'error' : ''">
-              <span class="text-danger"
-                    *ngIf="(configForm.get('zaloLink')?.touched || isSubmit)  &&
-                        configForm.get('zaloLink')?.hasError('pattern')">
-            Link zalo không đúng định dạng
-          </span>
-            </div>
-
-            <div nz-col [nzSpan]="18">
-              <span class="text-label">Mô tả</span>
-              <textarea nz-input [nzAutosize]="{ minRows: 3}" formControlName="footerDescription"></textarea>
-            </div>
-
-          </div>
-        </form>
-      </div>
-
-      <div nz-col [nzSpan]="4">
-        <div class="btn-panel">
-          <button class="btn primary" nz-button (click)="edit()">
-            Lưu
-          </button>
-
-          <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+          <span class="text-danger"
+                *ngIf="(configForm.get('name')?.touched || isSubmit)  && configForm.get('name')?.hasError('required')"
+          >
+        Tên website không được để trống
+      </span>
         </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">copy right(Tuyên bố bản quyền)</span>
+          <input nz-input formControlName="copyright">
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">Logo header</span>
+
+          <div style="display: flex">
+            <input nz-input formControlName="headerLogo">
+            <button nz-button nzType="primary" (click)="onSelectFile('header')">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">Background header</span>
+          <div class="color-picker" (click)="active(bgHeader)">
+            <input #bgHeader formControlName="headerBackground" type="color" (change)="onColorChange($event, 1)">
+            <span style="padding-left: 8px; font-size: 14px">
+          {{bgHeaderValue}}
+        </span>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">Logo footer</span>
+
+          <div style="display: flex">
+            <input nz-input formControlName="footerLogo">
+            <button nz-button nzType="primary" (click)="onSelectFile('footer')">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">Background footer</span>
+          <div class="color-picker" (click)="active(bgFooter)">
+            <input #bgFooter formControlName="footerBackground" type="color" (change)="onColorChange($event, 0)">
+            <span style="padding-left: 8px; font-size: 14px">
+          {{bgFooterValue}}
+        </span>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">Link facebook</span>
+          <input
+            nz-input formControlName="facebookLink"
+            [nzStatus]="(configForm.get('facebookLink')?.invalid &&
+                    (configForm.get('facebookLink')?.touched || isSubmit)) ? 'error' : ''">
+          <span class="text-danger"
+                *ngIf="(configForm.get('facebookLink')?.touched || isSubmit)  &&
+                    configForm.get('facebookLink')?.hasError('pattern')">
+        Link facebook không đúng định dạng
+      </span>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">Link youtube</span>
+          <input
+            nz-input formControlName="youtubeLink"
+            [nzStatus]="(configForm.get('youtubeLink')?.invalid &&
+                    (configForm.get('youtubeLink')?.touched || isSubmit)) ? 'error' : ''">
+          <span class="text-danger"
+                *ngIf="(configForm.get('youtubeLink')?.touched || isSubmit)  &&
+                    configForm.get('youtubeLink')?.hasError('pattern')">
+        Link youtube không đúng định dạng
+      </span>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">Link tiktok</span>
+          <input
+            nz-input formControlName="tiktokLink"
+            [nzStatus]="(configForm.get('tiktokLink')?.invalid &&
+                    (configForm.get('tiktokLink')?.touched || isSubmit)) ? 'error' : ''">
+          <span class="text-danger"
+                *ngIf="(configForm.get('tiktokLink')?.touched || isSubmit)  &&
+                    configForm.get('tiktokLink')?.hasError('pattern')">
+        Link tiktok không đúng định dạng
+      </span>
+        </div>
+
+        <div nz-col [nzSpan]="9">
+          <span class="text-label">Link zalo</span>
+          <input
+            nz-input formControlName="zaloLink"
+            [nzStatus]="(configForm.get('zaloLink')?.invalid &&
+                    (configForm.get('zaloLink')?.touched || isSubmit)) ? 'error' : ''">
+          <span class="text-danger"
+                *ngIf="(configForm.get('zaloLink')?.touched || isSubmit)  &&
+                    configForm.get('zaloLink')?.hasError('pattern')">
+        Link zalo không đúng định dạng
+      </span>
+        </div>
+
+        <div nz-col [nzSpan]="18">
+          <span class="text-label">Mô tả</span>
+          <textarea nz-input [nzAutosize]="{ minRows: 3}" formControlName="footerDescription"></textarea>
+        </div>
+
       </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        Lưu
+      </button>
+
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
     </div>
-  </nz-tab>
-<!--  NAVIGATION-->
-  <nz-tab nzTitle="Navigation">
-    <div nz-row>
-      <div nz-col [nzSpan]="20">
-        <div nz-row>
-          <div nz-col [nzSpan]="12" >
-            <app-tree [treeData]="nodes"></app-tree>
-          </div>
-          <div nz-col [nzSpan]="12" >
-            abc
-          </div>
-        </div>
-      </div>
+  </div>
+</div>
 
-      <div nz-col [nzSpan]="4">
-        <div class="btn-panel">
-          <button class="btn primary" nz-button (click)="editNavigation()">
-            Lưu
-          </button>
-
-          <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
-        </div>
-      </div>
-    </div>
-  </nz-tab>
-</nz-tabset>
 
 

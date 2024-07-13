@@ -17,6 +17,7 @@ export class EditFooterComponent implements OnInit{
   isSubmit: boolean = false;
   footerId!: number;
   listAllPage: any[] = [];
+  external: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +37,7 @@ export class EditFooterComponent implements OnInit{
       columnName: [null],
       websiteConfigId: [null],
       pageId: [null],
+      externalLink: [null]
     });
 
     this.pageConfigService.getAllPage().subscribe({
@@ -54,6 +56,13 @@ export class EditFooterComponent implements OnInit{
         this.footerConfigService.getFooterById(id).subscribe({
           next: res => {
             if (res) {
+              if (res.pageId) {
+                this.external = false;
+              }
+
+              if (res.externalLink) {
+                this.external = true;
+              }
               this.footerForm.patchValue(res);
             }
           }
@@ -98,6 +107,14 @@ export class EditFooterComponent implements OnInit{
           }
         });
       }
+    }
+  }
+
+  onSelectExternal(e: any) {
+    if(!e) {
+      this.footerForm.get('externalLink')?.patchValue(null);
+    } else {
+      this.footerForm.get('pageId')?.patchValue(null);
     }
   }
 

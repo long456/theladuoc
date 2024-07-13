@@ -29,6 +29,8 @@ export class NotificationsEmailListComponent implements OnInit{
 
   loading = false;
 
+  typeEmailList$: Observable<any> = this.emailService.getEmailType();
+
   constructor(
     private emailService: EmailService,
     private message: NzMessageService,
@@ -41,22 +43,33 @@ export class NotificationsEmailListComponent implements OnInit{
     this.notificationsEmail$ = combineLatest([
       this.page$,
       this.pageSize$,
+      this.typeEmailList$,
     ])
     .pipe(
       tap(() => this.loading = true),
-      mergeMap(([page, pageSize]) => {
+      mergeMap(([page, pageSize, type]) => {
         return this.emailService.getListNotificationsEmail(page, pageSize)
           .pipe(
             map((value) => {
-              return {
+              const resData = {
                 rows: value.data.emailTemplateList,
                 page: value.data.paginationInfo.pageCurrent,
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
-              }
+              };
+
+              resData.rows.map((item : any) => {
+                for (const ele of type.data) {
+                 if (item.notiEmailTemplateType === ele.dataValue) {
+                   item['typeName'] = ele.name;
+                 }
+                }
+              });
+
+              return resData;
             }),
             catchError(err => {
-              this.message.error('Lỗi load dữ liệu email thông báo')
+              this.message.error('Lỗi load dữ liệu email thông báo');
               return of({
                 rows: [],
                 page: 0,
@@ -68,7 +81,7 @@ export class NotificationsEmailListComponent implements OnInit{
       }),
       delay(200),
       tap(() => this.loading = false),
-    )
+    );
   }
 
   getItemSelection(e: any) {
@@ -85,30 +98,31 @@ export class NotificationsEmailListComponent implements OnInit{
 
   delete() {
     if (this.itemSelectList.length === 0) {
-      this.message.error('Chưa có mục nào được chọn')
-    } else {
-      this.modal.confirm({
-        nzTitle: 'Xác nhận xóa',
-        nzContent: 'Bạn có chắc chắn muốn xóa những mục đã chọn ?',
-        nzOnOk: () => {
-          this.emailService.softDeleteNotificationsEmail(this.itemSelectList)
-            .pipe(
-            ).subscribe({
-            next: value => {
-              if (value.success) {
-                this.message.success(value.messages);
-                this.pageSize$.next(10)
-              } else {
-                this.message.error(value.errorMessages)
-              }
-            },
-            error: err => {
-              this.message.error(err.error);
-            }
-          })
-        }
-      });
+      this.message.error('Chưa có mục nào được chọn');
+      return;
     }
+
+    this.modal.confirm({
+      nzTitle: 'Xác nhận xóa',
+      nzContent: 'Bạn có chắc chắn muốn xóa những mục đã chọn ?',
+      nzOnOk: () => {
+        this.emailService.softDeleteNotificationsEmail(this.itemSelectList)
+          .pipe(
+          ).subscribe({
+          next: value => {
+            if (value.success) {
+              this.message.success(value.messages);
+              this.pageSize$.next(10)
+            } else {
+              this.message.error(value.errorMessages)
+            }
+          },
+          error: err => {
+            this.message.error(err.error);
+          }
+        })
+      }
+    });
   }
 
 }

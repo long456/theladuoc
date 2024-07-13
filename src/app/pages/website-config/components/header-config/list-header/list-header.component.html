@@ -1,5 +1,5 @@
 <div class="title-page">
-  Danh sách cấu hình header
+  Danh sách đường dẫn thanh menu
 </div>
 
 <div class="header-btn">
@@ -23,10 +23,16 @@
       <table-column header="Ngày tạo" key="createdDate" [width]="'200px'"></table-column>
       <table-column header="Vị trí" key="no" [width]="'200px'"></table-column>
       <table-column header="Tên hiển thị" key="displayName" [width]="'200px'"></table-column>
-      <table-column header="Page" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Url" key="url" [width]="'200px'"></table-column>
-      <table-column header="Parent Page" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Tên trang" key="pageName" [width]="'200px'"></table-column>
+      <table-column header="Đường dẫn" key="url" [width]="'200px'"></table-column>
+      <table-column header="Thuộc đường dẫn" key="parentPageName" [width]="'200px'"></table-column>
       <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Trạng thái" key="status" [width]="'180px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.status">Hiển thị</span>
+          <span class="text-invalid" *ngIf="!data.status">Không hiển thị</span>
+        </ng-template>
+      </table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
           Chức năng

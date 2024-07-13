@@ -39,4 +39,8 @@ export class LessonService {
   updateLesson(id: number, data: any): Observable<any>{
     return this.http.put('Lesson/'+ id, data)
   }
+
+  getAllLesson(courseId: number): Observable<any>{
+    return this.http.get('Lesson/get-all-lesson?courseId=' + courseId);
+  }
 }

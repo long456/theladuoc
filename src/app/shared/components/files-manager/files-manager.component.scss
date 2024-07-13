@@ -10,7 +10,11 @@
   }
 }
 
-::ng-deep .ant-tabs-content-holder{
+.card-list {
+  height: 40vh;
+}
+
+::ng-deep .card-list{
   overflow-y: scroll;
   overflow-x: hidden;
   &::-webkit-scrollbar{

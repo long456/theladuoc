@@ -9,6 +9,7 @@ import {NzSwitchModule} from "ng-zorro-antd/switch";
 import { PermissionOrganizationComponent } from './components/permission-organization/permission-organization.component';
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import {CKEditorModule} from "ckeditor4-angular";
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     ReactiveFormsModule,
     NzSwitchModule,
     NzCheckboxModule,
-    NzSelectModule
+    NzSelectModule,
   ]
 })
 export class OrganizationModule { }

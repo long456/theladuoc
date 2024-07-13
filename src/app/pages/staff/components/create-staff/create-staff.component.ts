@@ -74,12 +74,12 @@ export class CreateStaffComponent implements OnInit{
 
         this.staffService.getDetailStaff(this.staffId).subscribe({
           next: value => {
-            let userData = {
-              ...value.data,
-              roleIds: value.data.roles.map((item : any) => item.id),
-              type: value.data.type.split(',')
-            }
             if (value.success) {
+              let userData = {
+                ...value.data,
+                roleIds: value.data.roles.map((item : any) => item.id),
+                type: value.data.type.split(',').map((item : any) => +item)
+              }
               this.userForm.patchValue(userData)
             }
           }

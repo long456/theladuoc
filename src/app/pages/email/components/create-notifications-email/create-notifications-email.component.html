@@ -1,5 +1,5 @@
 <div class="title-page">
-  <span>Thiết lập email thông báo</span>
+  {{isCreate? 'Tạo email thông báo' : 'Thiết lập email thông báo'}}
 </div>
 
 <div nz-row>
@@ -25,22 +25,26 @@
         <div nz-col [nzSpan]="8">
           <div class="text-label">Loại email</div>
           <nz-select
-            formControlName="typeEmail"
+            [nzDisabled]="!isCreate &&
+                          emailNotificationForm.value?.notiEmailTemplateType === 1 ||
+                          emailNotificationForm.value?.notiEmailTemplateType === 2"
+            formControlName="notiEmailTemplateType"
             style="display: block;"
             [nzPlaceHolder]="'Chọn loại email'"
-            [nzStatus]="(emailNotificationForm.get('typeEmail')?.invalid && (emailNotificationForm.get('typeEmail')?.touched || isSubmit)) ? 'error' : ''"
+            [nzStatus]="(emailNotificationForm.get('notiEmailTemplateType')?.invalid && (emailNotificationForm.get('notiEmailTemplateType')?.touched || isSubmit)) ? 'error' : ''"
           >
             <nz-option
-              *ngFor="let type of typeEmailList"
+              *ngFor="let type of notiEmailTemplateTypeList"
               [nzValue]="type.dataValue"
-              [nzLabel]="type.name "
+              [nzLabel]="type.name"
+              [nzDisabled]="type.disabled"
             ></nz-option>
           </nz-select>
 
           <span
             class="text-danger"
-            *ngIf="(emailNotificationForm.get('typeEmail')?.touched || isSubmit) &&
-                    emailNotificationForm.get('typeEmail')?.hasError('required')">
+            *ngIf="(emailNotificationForm.get('notiEmailTemplateType')?.touched || isSubmit) &&
+                    emailNotificationForm.get('notiEmailTemplateType')?.hasError('required')">
             Loại email không được để trống
           </span>
         </div>
@@ -62,6 +66,8 @@
               formControlName="courseId"
               style="display: block;"
               [nzPlaceHolder]="'Chọn khóa học'"
+              [(ngModel)]="courseId"
+              (ngModelChange)="onCourseSelect($event)"
               [nzStatus]="(emailNotificationForm.get('courseId')?.invalid && (emailNotificationForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
             >
               <nz-option
@@ -76,6 +82,62 @@
                 *ngIf="(emailNotificationForm.get('courseId')?.touched || isSubmit) && emailNotificationForm.get('courseId')?.hasError('required')"
           >
             Tên khóa học không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8" *ngIf="emailNotificationForm.value?.notiEmailTemplateType === 5 || emailNotificationForm.value?.notiEmailTemplateType === 6">
+          <span class="text-label">
+            Buổi học
+            <span class="text-danger">*</span>
+          </span>
+
+          <div>
+            <nz-select
+              formControlName="lessonId"
+              style="display: block;"
+              [nzPlaceHolder]="'Chọn buổi học'"
+              [nzStatus]="(emailNotificationForm.hasError('lessonRequired') && (emailNotificationForm.get('lessonId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <nz-option
+                *ngFor="let lesson of lessonList"
+                [nzValue]="lesson.id"
+                [nzLabel]="lesson.name"
+              ></nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(emailNotificationForm.get('lessonId')?.touched || isSubmit) && emailNotificationForm.hasError('lessonRequired')"
+          >
+            Tên buổi học không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8" *ngIf="emailNotificationForm.value?.notiEmailTemplateType === 7">
+          <span class="text-label">
+            Lớp học
+            <span class="text-danger">*</span>
+          </span>
+
+          <div>
+            <nz-select
+              formControlName="classId"
+              style="display: block;"
+              [nzPlaceHolder]="'Chọn lớp học'"
+              [nzStatus]="(emailNotificationForm.hasError('classRequired') && (emailNotificationForm.get('classId')?.touched || isSubmit)) ? 'error' : ''"
+            >
+              <nz-option
+                *ngFor="let class of classList"
+                [nzValue]="class.id"
+                [nzLabel]="class.className"
+              ></nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(emailNotificationForm.get('classId')?.touched || isSubmit) && emailNotificationForm.hasError('classRequired')"
+          >
+            Tên lớp học không được để trống
           </span>
         </div>
 
