@@ -19,6 +19,10 @@ export class OrganizationService {
     return this.http.get('Organization/' + id)
   }
 
+  getInfoOrganization(): Observable<any> {
+    return this.http.get('Organization/info-organization')
+  }
+
   createOrganization(data: any): Observable<any> {
     return this.http.post('Organization' , data)
   }
@@ -34,4 +38,6 @@ export class OrganizationService {
   updatePermissionOrganization(data: any): Observable<any>{
     return  this.http.post('Organization/update-permission', data)
   }
+
+
 }

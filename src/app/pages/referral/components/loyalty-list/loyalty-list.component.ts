@@ -45,14 +45,14 @@ export class LoyaltyListComponent implements OnInit{
           .pipe(
             map((value) => {
               return {
-                rows: value,
+                rows: value.data.loyaltyList,
                 page: value.data.paginationInfo.pageCurrent,
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
               }
             }),
             catchError(err => {
-              this.message.error('Lỗi load dữ liệu cuộc thi tính điểm')
+              this.message.error('Lỗi load dữ liệu cuộc thi tính điểm');
               return of({
                 rows: [],
                 page: 0,

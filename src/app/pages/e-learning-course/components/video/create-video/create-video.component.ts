@@ -110,15 +110,31 @@ export class CreateVideoComponent implements OnInit {
     }
   }
 
-  onSelectFile() {
+  onSelectFile(): void {
     this.showPlugin();
   }
 
-  private getTokenFunction(callback: (error: any, token: string | null) => void): void {
-    this.videoService.getTokenPlugVod().subscribe(
-      (token) => callback(null, token),  // Gọi callback với token khi thành công
-      (error) => callback(error, null)   // Gọi callback với lỗi khi có lỗi
-    );
+  // private getTokenFunction(callback: (error: any, token: string | null) => void): void {
+  //   this.videoService.getTokenPlugVod().subscribe(
+  //     (token) => callback(null, token),  // Gọi callback với token khi thành công
+  //     (error) => callback(error, null)   // Gọi callback với lỗi khi có lỗi
+  //   );
+  // }
+
+  getTokenFunction() {
+    this.videoService.getTokenPlugVod().subscribe({
+      next: res => {
+        if (res) {
+          return res;
+        } else {
+          return  null;
+        }
+      },
+      error: err => {
+        this.message.error('Lỗi lấy token user');
+        return  null;
+      }
+    })
   }
 
   private showPlugin(): void {
@@ -128,7 +144,7 @@ export class CreateVideoComponent implements OnInit {
         plugins: {
           name: 'media',
           options: {
-            getTokenFunction: this.getTokenFunction.bind(this)
+            getTokenFunction: this.getTokenFunction()
           },
           methods: {
             name: 'mediaManager',

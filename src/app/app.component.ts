@@ -4,6 +4,7 @@ import { NzI18nService, en_US, vi_VN, NzI18nInterface } from 'ng-zorro-antd/i18n
 import customViVn from './custom-vi-vn';
 import { SpinnerService } from './shared/services/spinner-service';
 import { Observable } from 'rxjs';
+import {OrganizationService} from "./pages/organization/services/organization.service";
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
   constructor(
     public router: Router,
     private i18n: NzI18nService,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private organizationService: OrganizationService
   ) {
     this.router.events.subscribe(ev => {
       if (ev instanceof NavigationStart) {
@@ -31,5 +33,16 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
     this.i18n.setLocale(customViVn);
+    this.organizationService.getInfoOrganization().subscribe({
+      next: res => {
+        if (res.success) {
+          this.cacheOrgData(res.data);
+        }
+      }
+    });
+  }
+
+  cacheOrgData(data: any): void{
+    localStorage.setItem('org', data);
   }
 }
