@@ -11,6 +11,7 @@ declare global {
   }
 }
 declare var IMSWidgetMedia: any;
+type CallbackFunction = (error: Error | null, response: string | null) => void;
 
 @Component({
   selector: 'app-create-video',
@@ -114,27 +115,16 @@ export class CreateVideoComponent implements OnInit {
     this.showPlugin();
   }
 
-  // private getTokenFunction(callback: (error: any, token: string | null) => void): void {
-  //   this.videoService.getTokenPlugVod().subscribe(
-  //     (token) => callback(null, token),  // Gọi callback với token khi thành công
-  //     (error) => callback(error, null)   // Gọi callback với lỗi khi có lỗi
-  //   );
-  // }
-
-  getTokenFunction() {
+  getTokenFunction(callback: CallbackFunction): void {
     this.videoService.getTokenPlugVod().subscribe({
-      next: res => {
-        if (res) {
-          return res;
-        } else {
-          return  null;
-        }
+      next: (response) => {
+        callback(null, response);
       },
-      error: err => {
-        this.message.error('Lỗi lấy token user');
-        return  null;
+      error: (error) => {
+        console.log(error);
+        callback(new Error("Lỗi lấy danh sách lưu trữ video!"), null);
       }
-    })
+    });
   }
 
   private showPlugin(): void {
