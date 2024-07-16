@@ -134,7 +134,7 @@ export class CreateVideoComponent implements OnInit {
         plugins: {
           name: 'media',
           options: {
-            getTokenFunction: this.getTokenFunction()
+            getTokenFunction: this.getTokenFunction.bind(this)
           },
           methods: {
             name: 'mediaManager',
