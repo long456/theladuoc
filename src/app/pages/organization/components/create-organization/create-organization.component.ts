@@ -117,7 +117,8 @@ export class CreateOrganizationComponent implements OnInit{
         this.organizationService.updateOrganization(orgData).subscribe({
           next: res => {
             if (res.success) {
-              this.message.success('Cập nhật thông tin tổ chức thành công')
+              this.message.success('Cập nhật thông tin tổ chức thành công');
+              localStorage.setItem('org', JSON.stringify(res.data));
               this.navigateBack();
             } else {
               this.message.error(res.errorMessages)
@@ -127,6 +128,16 @@ export class CreateOrganizationComponent implements OnInit{
       }
     }
   }
+
+  // handleDataOrgUpdate():void {
+  //   this.organizationService.getInfoOrganization().subscribe({
+  //     next: res => {
+  //       if (res.success) {
+  //         localStorage.setItem('org', JSON.stringify(res.data));
+  //       }
+  //     }
+  //   });
+  // }
 
   selectFile(typeImg: string) {
     this.fileManagerService.selectFile();
@@ -160,6 +171,8 @@ export class CreateOrganizationComponent implements OnInit{
   }
 
   navigateBack() {
-    this.router.navigate(['/page/organization/'])
+    this.router.navigate(['/page/organization/']).then(() => {
+      location.reload();
+    })
   }
 }

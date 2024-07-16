@@ -4,9 +4,15 @@
           nzBreakpoint="md"
           [(nzCollapsed)]="isCollapsed">
   <div class="sidebar-logo">
-    <a href="https://ng.ant.design/" target="_blank">
-      <img src="assets/img/black-logo.png" alt="logo">
-      <img class="text-logo" src="assets/img/text-logo.svg">
+    <a href="/">
+      <ng-container *ngIf="dataOrg && dataOrg.logo1x1;else logo1x1Default">
+        <img [style.opacity]="!isCollapsed? 0 : 1" [src]="dataOrg.logo1x1" alt="logo" >
+      </ng-container>
+
+      <ng-container *ngIf="dataOrg && dataOrg.logo;else logoDefault">
+        <img [style.opacity]="isCollapsed? 0 : 1" [src]="dataOrg.logo" alt="logo" >
+      </ng-container>
+
     </a>
   </div>
   <ul nz-menu nzMode="inline" nzTheme="dark" [nzInlineCollapsed]="isCollapsed" class="menu-list">
@@ -24,5 +30,13 @@
     </li>
   </ul>
 </nz-sider>
+
+<ng-template #logo1x1Default>
+  <img [style.opacity]="!isCollapsed? 0 : 1" src="assets/img/black-logo.png" alt="logo">
+</ng-template>
+
+<ng-template #logoDefault>
+  <img [style.opacity]="isCollapsed? 0 : 1" class="text-logo" src="assets/img/text-logo.svg">
+</ng-template>
 
 

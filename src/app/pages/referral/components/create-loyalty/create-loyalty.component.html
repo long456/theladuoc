@@ -63,9 +63,10 @@
 
           <nz-range-picker
             style="width: 100%"
+            [nzShowTime]="true"
             [nzStatus]="(loyaltyForm.get('date')?.invalid && (loyaltyForm.get('date')?.touched || isSubmit)) ? 'error' : ''"
             formControlName="date"
-            nzFormat="dd/MM/YYYY"
+            nzFormat="dd/MM/YYYY HH:mm:ss"
           ></nz-range-picker>
 
           <span class="text-danger"
