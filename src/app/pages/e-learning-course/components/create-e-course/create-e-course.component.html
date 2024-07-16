@@ -55,7 +55,7 @@
         <!-- Ảnh đại diện -->
         <div nz-col [nzXs]="24" [nzSm]="12">
           <span class="text-label">
-            {{controlNames.thumbImg}}
+            {{controlNames.thumbImg}} (370 x 270)
             <span class="text-danger message-error" *ngIf="courseForm.get('thumbImg')?.invalid && courseForm.get('thumbImg')?.touched">
               {{ getErrorMessage('thumbImg') }}
             </span>
@@ -72,7 +72,7 @@
 
             <div class="overlay" *ngIf="courseForm.get('thumbImg')?.value">
               <div class="btn-file">
-                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="Upload ảnh mới" (click)="selectFile('thumbImg')">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="Tải ảnh mới" (click)="selectFile('thumbImg')">
                   <span nz-icon nzType="upload"></span>
                 </a>
                 <a nz-button nzType="link" nz-tooltip nzTooltipTitle="Xóa" (click)="deleteImg('thumbImg')">
@@ -84,7 +84,7 @@
         </div>
         <!-- Ảnh banner -->
         <div nz-col [nzXs]="24" [nzSm]="12">
-          <span class="text-label">{{controlNames.imgBanner}}</span>
+          <span class="text-label">{{controlNames.imgBanner}} (1300 x 700)</span>
           <div class="select-file">
             <div class="btn-select-file" (click)="selectFile('imgBanner')" *ngIf="!courseForm.get('imgBanner')?.value">
               <span nz-icon nzType="plus" nzTheme="outline"></span>
@@ -95,7 +95,7 @@
 
             <div class="overlay" *ngIf="courseForm.get('imgBanner')?.value">
               <div class="btn-file">
-                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="Upload ảnh mới" (click)="selectFile('imgBanner')">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="Tải ảnh mới" (click)="selectFile('imgBanner')">
                   <span nz-icon nzType="upload"></span>
                 </a>
                 <a nz-button nzType="link" nz-tooltip nzTooltipTitle="Xóa" (click)="deleteImg('imgBanner')">
@@ -200,7 +200,7 @@
           </span>
           <div>
             <nz-select formControlName="level">
-              <nz-option [nzValue]="1" [nzLabel]="'Sở cấp'"></nz-option>
+              <nz-option [nzValue]="1" [nzLabel]="'Sơ cấp'"></nz-option>
               <nz-option [nzValue]="2" [nzLabel]="'Trung cấp'"></nz-option>
               <nz-option [nzValue]="3" [nzLabel]="'Cao cấp'"></nz-option>
             </nz-select>
