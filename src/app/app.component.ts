@@ -14,6 +14,8 @@ import {OrganizationService} from "./pages/organization/services/organization.se
 export class AppComponent implements OnInit {
 
   isLoading : Observable<boolean>;
+  favIcon: HTMLLinkElement | null = document.querySelector('#favIcon');
+  titleCms: InnerHTML | null = document.querySelector("title");
 
   constructor(
     public router: Router,
@@ -37,12 +39,19 @@ export class AppComponent implements OnInit {
       next: res => {
         if (res.success) {
           this.cacheOrgData(res.data);
+          if (this.favIcon) {
+            this.favIcon.href = res.data.favicon;
+          }
+
+          if (this.titleCms) {
+            this.titleCms.innerHTML = res.data.name;
+          }
         }
       }
     });
   }
 
   cacheOrgData(data: any): void{
-    localStorage.setItem('org', data);
+    localStorage.setItem('org', JSON.stringify(data));
   }
 }
