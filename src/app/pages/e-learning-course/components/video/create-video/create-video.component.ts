@@ -45,6 +45,7 @@ export class CreateVideoComponent implements OnInit {
       duration: [0, [Validators.min(1)]],
       priority: [0],
       status: [1],
+      isFreeWatch: [false]
     });
 
     if (!this.isCreate) {
