@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { MenuItem } from "../../models/MenuItem";
 import { Router } from "@angular/router";
 
@@ -7,13 +7,15 @@ import { Router } from "@angular/router";
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss']
 })
-export class SideBarComponent {
+export class SideBarComponent implements OnInit{
 
   constructor(
     private router: Router,
-  ) {
-  }
+  ) {}
+
   isCollapsed: boolean = false;
+
+  dataOrg!: any;
 
   treeMenu: MenuItem[] = [
     {
@@ -343,7 +345,13 @@ export class SideBarComponent {
         },
       ]
     },
-  ]
+  ];
+
+  ngOnInit() {
+    if (localStorage.getItem('org') != null) {
+      this.dataOrg = JSON.parse(<string>localStorage.getItem('org'));
+    }
+  }
 
   toggleCollapsed() {
     this.isCollapsed = !this.isCollapsed;

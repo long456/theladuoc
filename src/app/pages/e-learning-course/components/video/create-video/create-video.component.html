@@ -1,0 +1,109 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới video' : 'Chỉnh sửa video'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="videoForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tiêu đề video
+            <span class="text-danger">*</span>
+          </span>
+          <input nz-input autofocus formControlName="title"
+            [nzStatus]="(videoForm.get('title')?.invalid && (videoForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+            *ngIf="(videoForm.get('title')?.touched || isSubmit)  && videoForm.get('title')?.hasError('required')">
+            Tiêu đề video không được để trống!
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Học phần
+            <span class="text-danger">*</span>
+          </span>
+
+          <div>
+            <nz-select formControlName="chapterId"
+              [nzStatus]="(videoForm.get('chapterId')?.invalid && (videoForm.get('chapterId')?.touched || isSubmit)) ? 'error' : ''">
+              <nz-option *ngFor="let chapter of chapterList" [nzValue]="chapter.id" [nzLabel]="chapter.title">
+              </nz-option>
+            </nz-select>
+          </div>
+
+          <span class="text-danger" *ngIf="(videoForm.get('chapterId')?.touched || isSubmit) &&
+                        videoForm.get('chapterId')?.hasError('required')">
+            Tên học phần không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+          <div class="text-label">Video học thử</div>
+          <nz-switch formControlName="isFreeWatch">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Thời lượng (giây)
+          </span>
+          <nz-input-number formControlName="duration" class="input-nz-number" [nzMin]="0" [nzStep]="1" [nzStatus]="(videoForm.get('duration')?.invalid &&
+                        (videoForm.get('duration')?.touched || isSubmit)) ? 'error' : ''"></nz-input-number>
+          <span class="text-danger" *ngIf="(videoForm.get('duration')?.touched || isSubmit) &&
+                        videoForm.get('duration')?.hasError('min')">
+            Thời lượng video không thể bằng 0
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Thứ tự
+          </span>
+          <nz-input-number class="input-nz-number" formControlName="priority" [nzMin]="0"
+            [nzStep]="1"></nz-input-number>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Link video
+            <span class="text-danger">*</span>
+          </span>
+          <div>
+            <div style="display: flex">
+              <input nz-input formControlName="mediaPath" [nzStatus]="(videoForm.get('mediaPath')?.invalid &&
+              (videoForm.get('mediaPath')?.touched || isSubmit)) ? 'error' : ''">
+              <button nz-button nzType="primary" (click)="onSelectFile()">
+                <span nz-icon nzType="upload"></span>
+              </button>
+            </div>
+
+            <span class="text-danger"
+              *ngIf="(videoForm.get('mediaPath')?.touched || isSubmit)  && videoForm.get('mediaPath')?.hasError('required')">
+              Link video không được để trống!
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

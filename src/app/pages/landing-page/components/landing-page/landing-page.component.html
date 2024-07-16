@@ -23,6 +23,11 @@
       <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
       <table-column header="Mã landing page" key="landingPageCode" [width]="'200px'"></table-column>
       <table-column header="Tên landing page" key="name" [width]="'200px'"></table-column>
+      <table-column header="Đường dẫn" key="url" [width]="'200px'">
+        <ng-template appCell let-data>
+          <div class="url-landing-page">{{data.url}}</div>
+        </ng-template>
+      </table-column>
       <table-column header="Tên lớp học" key="className" [width]="'200px'"></table-column>
       <table-column header="Danh sách form" key="formRegisterList" [width]="'200px'">
         <ng-template appCell let-data>

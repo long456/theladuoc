@@ -17,6 +17,8 @@ export class AuthComponent implements OnInit{
 
   isSubmit = false;
 
+  titleCms!: string;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -27,6 +29,12 @@ export class AuthComponent implements OnInit{
   }
 
   ngOnInit() {
+    const dataOrg = localStorage.getItem('org');
+    if (dataOrg) {
+      const title = JSON.parse(dataOrg).name;
+      this.titleCms = title;
+    }
+
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]

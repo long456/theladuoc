@@ -7,20 +7,20 @@
     <form [formGroup]="courseForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            Tên khóa học
-            <span class="text-danger">*</span>
-          </span>
-          <input
-            #courseName
-            nz-input autofocus formControlName="title"
-            [nzStatus]="(courseForm.get('title')?.invalid && (courseForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
+  `          <span class="text-label">
+              Tên khóa học
+              <span class="text-danger">*</span>
+            </span>
+            <input
+              #courseName
+              nz-input autofocus formControlName="title"
+              [nzStatus]="(courseForm.get('title')?.invalid && (courseForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-                *ngIf="(courseForm.get('title')?.touched || isSubmit)  && courseForm.get('title')?.hasError('required')"
-          >
-            Tên khóa học không được để trống
-          </span>
+            <span class="text-danger"
+                  *ngIf="(courseForm.get('title')?.touched || isSubmit)  && courseForm.get('title')?.hasError('required')"
+            >
+              Tên khóa học không được để trống
+            </span>`
         </div>
 
         <div nz-col [nzSpan]="8">

@@ -56,9 +56,10 @@
           <button class="hidden" id="login" (click)="changeActive()">Đăng nhập</button>
         </div>
         <div class="toggle-panel toggle-right">
-          <h1>Thế là được</h1>
-          <p>Register with your personal details to use all of site features</p>
-          <button class="hidden" id="register" (click)="changeActive()">Đăng ký</button>
+          <h1 *ngIf="!titleCms">Thế là được</h1>
+          <h1 *ngIf="titleCms" class="title-web">{{titleCms}}</h1>
+
+<!--          <button class="hidden" id="register" (click)="changeActive()">Đăng ký</button>-->
         </div>
       </div>
     </div>
