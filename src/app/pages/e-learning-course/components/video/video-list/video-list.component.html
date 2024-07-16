@@ -33,6 +33,16 @@
       <table-column header="Đường dẫn" key="mediaPath" [width]="'200px'"></table-column>
       <table-column header="Học phần" key="chapterName" [width]="'200px'"></table-column>
       <table-column header="Thứ tự" key="priority" [width]="'200px'"></table-column>
+      <table-column header="Video học thử" key="isFreeWatch" [width]="'180px'">
+        <ng-template appCell let-data>
+          <span class="icon-check-success text-valid" *ngIf="data.isFreeWatch">
+            <span nz-icon nzType="check" nzTheme="outline"></span>
+          </span>
+          <span class="icon-check-error text-invalid" *ngIf="!data.isFreeWatch">
+            <span nz-icon nzType="close" nzTheme="outline"></span>
+          </span>
+        </ng-template>
+      </table-column>
       <table-column header="Trạng thái" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
