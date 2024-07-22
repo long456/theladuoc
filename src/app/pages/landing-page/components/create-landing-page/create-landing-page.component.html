@@ -80,6 +80,46 @@
           ></ckeditor>
         </div>
 
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tiêu đề seo
+          </span>
+
+          <input nz-input formControlName="seoTitle">
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Từ khóa seo
+          </span>
+
+          <input nz-input formControlName="seoKeyWords">
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Ảnh seo
+          </span>
+
+          <div class="select-seo-img">
+            <input nz-input [value]="landingPageForm.get('seoImage')?.value" formControlName="seoImage">
+
+            <button nz-button nzType="primary" (click)="selectFile()">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="16">
+          <span class="text-label">
+            Mô tả seo
+          </span>
+
+          <textarea
+            nz-input [nzAutosize]="{ minRows: 3}" formControlName="description"
+          ></textarea>
+        </div>
+
         <div nz-col [nzSpan]="24">
           <span class="text-label">
             PixelCode
@@ -91,19 +131,6 @@
             [config]="ckEditorConfig"
           ></ckeditor>
         </div>
-
-        <div nz-col [nzSpan]="24">
-          <span class="text-label">
-            Thẻ seo
-          </span>
-          <ckeditor
-            name="ckeditor_text"
-            formControlName="seoOgTag"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
-            [config]="ckEditorConfig"
-          ></ckeditor>
-        </div>
-
       </div>
     </form>
   </div>
