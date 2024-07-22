@@ -2,10 +2,11 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {debounceTime, distinctUntilChanged, fromEvent, map} from "rxjs";
+import {debounceTime, distinctUntilChanged, fromEvent, map, take} from "rxjs";
 import {LandingPageService} from "../../services/landing-page.service";
 import {CourseService} from "../../../setting/services/course.service";
 import {config} from "../../../../shared/models/ckeditor";
+import {FileManagerService} from "../../../../shared/services/file-manager.service";
 
 @Component({
   selector: 'app-create-landing-page',
@@ -34,7 +35,8 @@ export class CreateLandingPageComponent implements OnInit, AfterViewInit{
     private fb: FormBuilder,
     private message: NzMessageService,
     private landingPageService: LandingPageService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private fileManagerService: FileManagerService,
   ) {}
 
   ngOnInit() {
@@ -47,7 +49,10 @@ export class CreateLandingPageComponent implements OnInit, AfterViewInit{
       landingPageCode: [null, Validators.pattern('^[a-zA-Z0-9\\-]+$')],
       htmlContent: [],
       pixelCode: [],
-      seoOgTag: [],
+      seoTitle: [],
+      seoImage : [],
+      seoKeyWords : [],
+      description : [],
     })
 
     if (!this.isCreate) {
@@ -128,6 +133,13 @@ export class CreateLandingPageComponent implements OnInit, AfterViewInit{
         })
       }
     }
+  }
+
+  selectFile() {
+    this.fileManagerService.selectFile();
+    this.fileManagerService.selectedFile.pipe(take(1)).subscribe((data) => {
+      this.landingPageForm.get('seoImage')?.patchValue(data);
+    });
   }
 
   navigateBack() {
