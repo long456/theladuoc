@@ -312,6 +312,11 @@ export class SideBarComponent implements OnInit{
                   icon: '',
                   link: 'page/e-category',
                 },
+                {
+                  name: 'Chính sách cộng tác viên',
+                  icon: '',
+                  link: 'page/collaborator-policy',
+                },
               ]
             },
             {
