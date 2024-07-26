@@ -84,6 +84,7 @@ export class CategoryListComponent implements OnInit{
     if (this.itemSelectList.length === 0) {
       this.message.error('Chưa có mục nào được chọn')
     } else {
+      console.log(this.itemSelectList)
       this.modal.confirm({
         nzTitle: 'Xác nhận xóa',
         nzContent: 'Bạn có chắc chắn muốn xóa những mục đã chọn ?',
