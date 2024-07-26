@@ -11,11 +11,19 @@ export class RegisterFormService {
     private http: HttpClient,
   ) { }
 
-  getAllForm(page? : any, pageSize? : any): Observable<any>{
-    const data = {
+  getAllForm(page? : any, pageSize? : any, filter?: any): Observable<any>{
+    let data = {
       PageIndex: page,
       PageSize: pageSize
     }
+    if (filter) {
+      data = {
+        ...filter,
+        PageIndex: page,
+        pageSize: pageSize,
+      }
+    }
+
     return this.http.get('FormRegister', {params: data});
   }
 

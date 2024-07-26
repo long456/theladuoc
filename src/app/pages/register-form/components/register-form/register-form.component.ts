@@ -1,11 +1,12 @@
 import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {COL_DATA_TYPE} from "../../../../shared/models/Table";
+import {COL_DATA_TYPE, filterItem, FilterType} from "../../../../shared/models/Table";
 import {Router} from "@angular/router";
 import {RegisterFormService} from "../../services/register-form.service";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, take, tap} from "rxjs";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {AttachTicketComponent} from "../attach-ticket/attach-ticket.component";
+import {FilterModalService} from "../../../../shared/services/filter-modal.service";
 
 
 @Component({
@@ -14,29 +15,30 @@ import {AttachTicketComponent} from "../attach-ticket/attach-ticket.component";
   styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent implements OnInit{
-
   COL_DATA_TYPE = COL_DATA_TYPE;
-
   itemSelectList = [];
-
   loading = false;
-
   page$ = new BehaviorSubject(1);
   pageSize$ = new BehaviorSubject(10);
+  filterList$ = new BehaviorSubject<any>(null);
 
   registerForm$ !: Observable<{
     rows: any[],
+    filter?: any,
     page: number;
     pageSize: number;
     rowTotal: number;
   }>;
+
+  currentFilter: any = {}
 
   constructor(
     private router: Router,
     private registerFormService: RegisterFormService,
     private message: NzMessageService,
     private modal: NzModalService,
-    private viewContainerRef: ViewContainerRef
+    private viewContainerRef: ViewContainerRef,
+    private filterModalService: FilterModalService,
   ) {
   }
 
@@ -44,11 +46,12 @@ export class RegisterFormComponent implements OnInit{
     this.registerForm$ = combineLatest([
       this.page$,
       this.pageSize$,
+      this.filterList$
     ])
     .pipe(
       tap(() => this.loading = true),
-      mergeMap(([page, pageSize]) => {
-        return this.registerFormService.getAllForm(page, pageSize)
+      mergeMap(([page, pageSize, filter]) => {
+        return this.registerFormService.getAllForm(page, pageSize, filter)
           .pipe(
             map((value) => {
               return {
@@ -140,22 +143,48 @@ export class RegisterFormComponent implements OnInit{
   }
 
   removeAttachTicket(data: any):void {
-    const formRegisterId = {
-      formRegisterId: data.id
-    }
-
-    this.registerFormService.removeAttachTicket(formRegisterId).subscribe({
-      next: res => {
-        if (res.success) {
-          this.message.success(res.messages);
-          this.pageSize$.next(10)
-        } else {
-          this.message.error(res.errorMessages)
+    this.modal.confirm({
+      nzTitle: 'Xác nhận gỡ vé',
+      nzContent: 'Bạn có chắc muốn gỡ vé ' + data.ticketName + ' ra khỏi form ?',
+      nzOnOk: () => {
+        const formRegisterId = {
+          formRegisterId: data.id
         }
-      },
-      error: err => {
-        this.message.error(err)
+
+        this.registerFormService.removeAttachTicket(formRegisterId).subscribe({
+          next: res => {
+            if (res.success) {
+              this.message.success(res.messages);
+              this.pageSize$.next(10)
+            } else {
+              this.message.error(res.errorMessages)
+            }
+          },
+          error: err => {
+            this.message.error(err)
+          }
+        })
       }
-    })
+    });
+  }
+
+  filter() {
+    const data = {
+      filterData: [
+        FilterType['createdDate'],
+        FilterType['nameForm'],
+        FilterType['organizationName'],
+      ],
+      currentFilter: this.currentFilter,
+    };
+    this.filterModalService.getFilter(data);
+    this.filterModalService.filter
+      .pipe(
+        take(1),
+      )
+      .subscribe((value ) => {
+        this.currentFilter = value;
+        this.filterList$.next(value);
+      })
   }
 }

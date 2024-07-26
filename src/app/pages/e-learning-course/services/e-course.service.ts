@@ -47,8 +47,4 @@ export class ECourseService {
   softDeleteCourse(data: number[]): Observable<any> {
     return this.http.delete('CourseElearning/soft-delete',{body: data})
   }
-
-  getListMemberPolicyLevelOption(): Observable<any>{
-    return this.http.get('MemberPolicyLevel/get-list-member-policy')
-  }
 }
