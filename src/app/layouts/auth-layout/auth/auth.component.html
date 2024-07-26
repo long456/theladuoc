@@ -12,7 +12,7 @@
       <span class="input-icon" nz-icon nzType="mail" nzTheme="outline"></span>
 
       <span class="text-danger"
-        *ngIf="(loginForm.get('email')?.touched || isSubmit) &&
+            *ngIf="(loginForm.get('email')?.touched || isSubmit) &&
                 loginForm.get('email')?.hasError('required')">
               Email không được để trống!
       </span>
@@ -48,6 +48,10 @@
     <p class="forgot-password" (click)="forgotPassword">Quên mật khẩu?</p>
   </form>
 </div>
+
+<ng-template #logoDefault>
+  <img class="text-logo" src="assets/img/text-logo.svg">
+</ng-template>
 
 <ng-template #logoDefault>
   <img class="text-logo" src="assets/img/text-logo.svg">
