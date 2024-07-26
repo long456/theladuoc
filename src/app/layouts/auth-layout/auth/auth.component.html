@@ -1,106 +1,67 @@
-<!--<div class="content">-->
-<!--  <div class="container" id="container" [class.active] = "active === true">-->
-<!--    <div class="form-container sign-up">-->
-<!--      <form>-->
-<!--        <h1>Đăng ký</h1>-->
-<!--        <input type="text" placeholder="Name">-->
-<!--        <input type="email" placeholder="Email">-->
-<!--        <input type="password" placeholder="Password">-->
-<!--        <button>Đăng ký</button>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--    <div class="form-container sign-in">-->
-<!--      <form [formGroup]="loginForm">-->
-<!--        <h1>Đăng nhập</h1>-->
-<!--        <div></div>-->
-<!--        <input type="email" placeholder="Email" formControlName="email">-->
-<!--        <span class="text-danger"-->
-<!--              *ngIf="loginForm.touched  && this.loginForm.get('email')?.hasError('required') && isSubmit"-->
-<!--        >-->
-<!--              Email không được để trống-->
-<!--        </span>-->
-<!--        <span class="text-danger"-->
-<!--              *ngIf="loginForm.touched  && this.loginForm.get('email')?.hasError('email') && isSubmit"-->
-<!--        >-->
-<!--              email không đúng định dạng-->
-<!--        </span>-->
-<!--        <input type="password" placeholder="Password" formControlName="password">-->
-<!--        <span class="text-danger"-->
-<!--              *ngIf="loginForm.touched  && this.loginForm.get('password')?.hasError('required') && isSubmit"-->
-<!--        >-->
-<!--              Password không được để trống-->
-<!--        </span>-->
-<!--        <a href="#">Quên mật khẩu?</a>-->
-<!--        <button (click)="login()">Đăng nhập</button>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--    <div class="toggle-container">-->
-<!--      <div class="toggle">-->
-<!--        <div class="toggle-panel toggle-left">-->
-<!--          <h1>Welcome Back!</h1>-->
-<!--          <p>Enter your personal details to use all of site features</p>-->
-<!--          <button class="hidden" id="login" (click)="changeActive()">Đăng nhập</button>-->
+<div class="content">
+  <div class="container" id="container" [class.active] = "active === true">
+    <div class="form-container sign-up">
+      <form>
+        <h1>Đăng ký</h1>
+<!--        <div class="social-icons">-->
+<!--          <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>-->
+<!--          <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>-->
+<!--          <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>-->
+<!--          <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>-->
 <!--        </div>-->
-<!--        <div class="toggle-panel toggle-right">-->
-<!--          <h1 *ngIf="!titleCms">Thế là được</h1>-->
-<!--          <h1 *ngIf="titleCms" class="title-web">{{titleCms}}</h1>-->
+<!--        <span>or use your email for registeration</span>-->
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button>Đăng ký</button>
+      </form>
+    </div>
+    <div class="form-container sign-in">
+      <form [formGroup]="loginForm">
+        <h1>Đăng nhập</h1>
+<!--        <div class="social-icons">-->
+<!--          <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>-->
+<!--          <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>-->
+<!--          <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>-->
+<!--          <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>-->
 <!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<div class="login">
-  <img src="assets/img/login-bg.png" alt="image" class="login__bg">
-  <form class="login__form" [formGroup]="loginForm">
-    <div class="logo-domain">
-      <ng-container *ngIf="logoDomain;else logoDefault">
-        <img class="text-logo" [src]="logoDomain" alt="logo" >
-      </ng-container>
+        <div></div>
+<!--        <span>or use your email password</span>-->
+        <input type="email" placeholder="Email" formControlName="email">
+        <span class="text-danger"
+              *ngIf="loginForm.touched  && this.loginForm.get('email')?.hasError('required') && isSubmit"
+        >
+              Email không được để trống
+        </span>
+        <span class="text-danger"
+              *ngIf="loginForm.touched  && this.loginForm.get('email')?.hasError('email') && isSubmit"
+        >
+              email không đúng định dạng
+        </span>
+        <input type="password" placeholder="Password" formControlName="password">
+        <span class="text-danger"
+              *ngIf="loginForm.touched  && this.loginForm.get('password')?.hasError('required') && isSubmit"
+        >
+              Password không được để trống
+        </span>
+        <a href="#">Quên mật khẩu?</a>
+        <button (click)="login()">Đăng nhập</button>
+      </form>
     </div>
+    <div class="toggle-container">
+      <div class="toggle">
+        <div class="toggle-panel toggle-left">
+          <h1>Welcome Back!</h1>
+          <p>Enter your personal details to use all of site features</p>
+          <button class="hidden" id="login" (click)="changeActive()">Đăng nhập</button>
+        </div>
+        <div class="toggle-panel toggle-right">
+          <h1 *ngIf="!titleCms">Thế là được</h1>
+          <h1 *ngIf="titleCms" class="title-web">{{titleCms}}</h1>
 
-    <div class="login-input">
-      <label for="user" class="form__label" [class.active]="loginForm.value?.email">Email</label>
-      <span class="input-icon" nz-icon nzType="mail" nzTheme="outline"></span>
-
-      <span class="text-danger"
-        *ngIf="(loginForm.get('email')?.touched || isSubmit) &&
-                loginForm.get('email')?.hasError('required')">
-              Email không được để trống!
-      </span>
-      <span class="text-danger"
-            *ngIf="(loginForm.get('email')?.touched || isSubmit) &&
-                loginForm.get('email')?.hasError('email')">
-            Email không đúng định dạng!
-      </span>
-
-      <input id="user" nz-input placeholder="Email"
-             [class.active]="loginForm.value?.email"
-             formControlName="email" autofocus
-             [nzStatus]="(loginForm.get('email')?.invalid &&
-                         (loginForm.get('email')?.touched || isSubmit)) ? 'error' : ''">
+<!--          <button class="hidden" id="register" (click)="changeActive()">Đăng ký</button>-->
+        </div>
+      </div>
     </div>
-
-    <div class="login-input">
-      <label for="password" class="form__label" [class.active]="loginForm.value?.password">Mật khẩu</label>
-      <span class="input-icon" nz-icon (click)="changPasswordVisible()" style="cursor: pointer; z-index: 1"
-            [nzType]="isPasswordVisible? 'eye' : 'eye-invisible'" nzTheme="outline"></span>
-
-      <span class="text-danger"
-            *ngIf="(loginForm.get('password')?.touched || isSubmit) &&
-                    loginForm.get('password')?.hasError('required')">
-            Mật khẩu không được để trống!
-      </span>
-      <input id="password" nz-input placeholder="Mật khẩu"
-             formControlName="password" [type]="isPasswordVisible? 'text' : 'password'"
-             [class.active]="loginForm.value?.password">
-    </div>
-
-    <button class="form-btn" (click)="login()">Đăng nhập</button>
-    <p class="forgot-password">Quên mật khẩu?</p>
-  </form>
+  </div>
 </div>
-
-<ng-template #logoDefault>
-  <img class="text-logo" src="assets/img/text-logo.svg">
-</ng-template>

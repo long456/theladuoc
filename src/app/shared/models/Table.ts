@@ -118,7 +118,7 @@ export const FilterType: {[key: string]: filterItem} = {
         key: 2
       },
       {
-        label: 'Thanh toán thừa',
+        label: 'Thanh toán một phần',
         key: 3
       },
       {
@@ -197,15 +197,7 @@ export const FilterType: {[key: string]: filterItem} = {
         key: 8
       },
     ]
-  },
-  speakerName:{
-    title: 'Tên diễn giả',
-    name: 'speakerName',
-  },
-  nameForm:{
-    title: 'Tên form',
-    name: 'title',
-  },
+  }
 }
 
 

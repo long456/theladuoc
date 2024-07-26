@@ -5,9 +5,8 @@
 <div class="header-btn">
 
   <ng-container *ngIf="(registerForm$ | async) as registerForm">
-    <button nz-button class="add-btn primary" (click)="filter()">Lọc</button>
     <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>
     <app-table
       [rows]="registerForm.rows"
       [page]="registerForm.page"
