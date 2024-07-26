@@ -152,6 +152,38 @@ export class SideBarComponent implements OnInit{
           ]
         },
         {
+          name: 'E-learning',
+          icon: '',
+          link: '',
+          children: [
+            {
+              name: 'Chưa chia',
+              icon: '',
+              link: 'page/e-learning-student/none-divide',
+            },
+            {
+              name: 'Đang chờ',
+              icon: '',
+              link: 'page/e-learning-student/waiting',
+            },
+            {
+              name: 'Đang chăm',
+              icon: '',
+              link: 'page/e-learning-student/take-care',
+            },
+            {
+              name: 'Đang học',
+              icon: '',
+              link: 'page/e-learning-student/studying',
+            },
+            {
+              name: 'Đăng ký khóa học',
+              icon: '',
+              link: 'page/e-learning-student/register',
+            },
+          ]
+        },
+        {
           name: 'Nhân sự',
           icon: '',
           link: '',
@@ -279,6 +311,11 @@ export class SideBarComponent implements OnInit{
                   name: 'Danh mục khóa học',
                   icon: '',
                   link: 'page/e-category',
+                },
+                {
+                  name: 'Chính sách cộng tác viên',
+                  icon: '',
+                  link: 'page/collaborator-policy',
                 },
               ]
             },

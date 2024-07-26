@@ -190,22 +190,6 @@
           </div>
         </div>
 
-        <div *ngIf="showMemberPolicyLevel" nz-col [nzXs]="24" [nzSm]="24">
-          <span class="text-label">
-            {{controlNames.memberPolicyLevelId}}
-            <span class="text-danger">*</span>
-            <span class="text-danger message-error" *ngIf="courseForm.get('memberPolicyLevelId')?.invalid && courseForm.get('memberPolicyLevelId')?.touched">
-              {{ getErrorMessage('memberPolicyLevelId') }}
-            </span>
-          </span>
-          <div>
-            <nz-select formControlName="memberPolicyLevelId">
-              <nz-option *ngFor="let policy of listMemberPolicyLevel" [nzValue]="policy.id" [nzLabel]="policy.name">
-              </nz-option>
-            </nz-select>
-          </div>
-        </div>
-
         <div nz-col [nzXs]="24" [nzSm]="24">
           <span class="text-label">
             {{controlNames.level}}
