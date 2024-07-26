@@ -68,4 +68,8 @@ export class AuthComponent implements OnInit{
   changeActive() {
     this.active = !this.active;
   }
+
+  forgotPassword() {
+
+  }
 }
