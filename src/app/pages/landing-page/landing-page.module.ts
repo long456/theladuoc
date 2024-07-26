@@ -11,7 +11,7 @@ import {NzCollapseModule} from "ng-zorro-antd/collapse";
 import {CKEditorModule} from "ckeditor4-angular";
 import { AttachClassComponent } from './components/attach-class/attach-class.component';
 import { AttachFormComponent } from './components/attach-form/attach-form.component';
-import { NzTabsModule } from 'ng-zorro-antd/tabs';
+
 
 
 @NgModule({
@@ -30,8 +30,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
     NzSwitchModule,
     NzSelectModule,
     NzCollapseModule,
-    CKEditorModule,
-    NzTabsModule
+    CKEditorModule
   ]
 })
 export class LandingPageModule { }

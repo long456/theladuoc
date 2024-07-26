@@ -57,10 +57,6 @@ const routes: Routes = [
         path: 'report',
         loadChildren: () => import('./pages/report/reporting.module').then(m => m.ReportingModule),
       },
-      {
-        path: 'e-learning-student',
-        loadChildren: () => import('./pages/e-learning-student/e-learning-student.module').then(m => m.ELearningStudentModule),
-      }
     ],
   },
 ];
