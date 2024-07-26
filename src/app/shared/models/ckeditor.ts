@@ -11,6 +11,6 @@ export const config = {
     [ 'Maximize', 'ShowBlocks' ]
   ],
   allowedContent: true,
-  extraAllowedContent: 'style meta script section svg;link[!href,target];a[!href,target]',
+  extraAllowedContent: 'style meta script section svg li i;link[!href,target];a[!href,target]',
   showCharCount: true,
 };

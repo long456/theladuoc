@@ -1,7 +1,8 @@
-import {Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter, inject} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {filterItem} from "../../models/Table";
 import {formatDate} from "@angular/common";
+import {NZ_MODAL_DATA, NzModalRef} from "ng-zorro-antd/modal";
 
 @Component({
   selector: 'app-filter-form',
@@ -9,7 +10,7 @@ import {formatDate} from "@angular/common";
   styleUrls: ['./filter-form.component.scss']
 })
 export class FilterFormComponent implements OnInit{
-
+  readonly nzModalData= inject(NZ_MODAL_DATA);
   @Input() filterData: filterItem[] = [];
   @Input() isExportExcel: boolean = false;
   @Output() getFilterData = new EventEmitter<any>();
@@ -18,10 +19,18 @@ export class FilterFormComponent implements OnInit{
 
   constructor(
     private fb: FormBuilder,
+    private modal: NzModalRef,
   ) {}
 
   ngOnInit() {
-    this.filterForm = this.fb.group(this.getFormControl(this.filterData))
+    if (this.nzModalData.filterData) {
+      this.filterData = this.nzModalData.filterData;
+    }
+    this.filterForm = this.fb.group(this.getFormControl(this.filterData));
+
+    if (this.nzModalData.currentFilter) {
+      this.filterForm.patchValue(this.nzModalData.currentFilter);
+    }
   }
 
   getFormControl(data: filterItem[]) {
@@ -60,16 +69,20 @@ export class FilterFormComponent implements OnInit{
 
     for (const prop in data) {
       if (data[prop] === '' || data[prop] === null) {
-        delete data[prop]
+        delete data[prop];
       }
     }
 
-    return data
+    if(this.nzModalData) {
+      this.modal.triggerOk().then();
+    }
+
+    return data;
   }
 
   clearForm() {
     this.filterForm.reset();
-    this.getFilterData.emit(null);
+    this.filter();
   }
 
 }

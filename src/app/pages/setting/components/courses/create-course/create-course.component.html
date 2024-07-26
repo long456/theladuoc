@@ -20,7 +20,7 @@
                   *ngIf="(courseForm.get('title')?.touched || isSubmit)  && courseForm.get('title')?.hasError('required')"
             >
               Tên khóa học không được để trống
-            </span>`
+            </span>
         </div>
 
         <div nz-col [nzSpan]="8">
@@ -120,6 +120,8 @@
                   formControlName="directReferralPoint"
                   [nzMin]="0"
                   [nzStep]="1"
+                  [nzFormatter]="formatterVnd"
+                  [nzParser]="parserVnd"
                 ></nz-input-number>
               </div>
             </div>
