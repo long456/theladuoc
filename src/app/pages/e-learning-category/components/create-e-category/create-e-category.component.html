@@ -54,7 +54,7 @@
           </span>
 
           <div class="select-icon">
-            <input nz-input [value]="categoryForm.get('iconPath')?.value">
+            <input nz-input [value]="categoryForm.get('seoImage')?.value">
 
             <button nz-button nzType="primary" (click)="selectFile()">
               <span nz-icon nzType="file"></span>
@@ -73,7 +73,7 @@
     </form>
   </div>
 
-  <div nz-col [nzSpan]="3">
+  <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
         {{isCreate? 'Tạo mới' : 'Lưu'}}

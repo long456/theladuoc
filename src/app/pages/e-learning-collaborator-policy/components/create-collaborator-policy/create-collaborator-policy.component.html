@@ -1,0 +1,189 @@
+<div class="title-page">
+  {{isCreate? 'Tạo chính sách cộng tác viên' : 'Chỉnh sửa chính sách cộng tác viên'}}
+</div>
+
+
+<form [formGroup]="collaboratorPolicyForm">
+  <div nz-row [nzGutter]=[24,24]>
+    <div nz-col [nzSpan]="14">
+      <div nz-row [nzGutter]=[8,24]>
+        <div nz-col [nzSpan]="24">
+          <div class="content-block" nz-row [nzGutter]=[16,8]>
+            <!--Cấu hình gói-->
+            <div nz-col [nzSpan]="24" class="content-block-title">Cấu hình gói</div>
+            <nz-divider class="mt-10"></nz-divider>
+            <div nz-col [nzSpan]="20">
+              <span class="text-label">Tên gói thành viên <span class="text-danger">*</span></span>
+              <span
+                class="text-danger error-message"
+                *ngIf="(collaboratorPolicyForm.get('name')?.touched || isSubmit) &&
+                      collaboratorPolicyForm.get('name')?.hasError('required')">
+                Tên gói không được để trống!
+            </span>
+              <input
+                nz-input autofocus formControlName="name"
+                [nzStatus]="(collaboratorPolicyForm.get('name')?.invalid &&
+                            (collaboratorPolicyForm.get('name')?.touched || isSubmit)) ?
+                            'error' : ''">
+            </div>
+
+            <div nz-col [nzSpan]="4">
+              <div class="text-label">Trạng thái</div>
+              <nz-switch formControlName="status"></nz-switch>
+            </div>
+
+            <div nz-col [nzSpan]="20">
+              <span class="text-label">Cấp độ</span>
+              <nz-input-number
+                style="width: 100%"
+                formControlName="level"
+                [nzMin]="1"
+                [nzStep]="1"
+              ></nz-input-number>
+            </div>
+
+            <div nz-col [nzSpan]="4">
+              <div class="text-label">Phổ biến</div>
+              <nz-switch formControlName="isPopular"></nz-switch>
+            </div>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <div class="content-block" nz-row [nzGutter]=[16,8]>
+            <div nz-col [nzSpan]="24" class="content-block-title">Nội dung gói</div>
+            <nz-divider class="mt-10"></nz-divider>
+
+            <div nz-col [nzSpan]="24">
+              <span class="text-label">
+                Thêm nội dung
+              </span>
+
+              <span class="input-content">
+                <input
+                  #inputContent
+                  nz-input
+                  [class.inactive]="!isActive"
+                  [(ngModel)]="webData"
+                  [ngModelOptions]="{standalone: true}"
+                >
+                <button nz-button nzType="primary" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="changeActive()">
+                  <span nz-icon nzType="plus" *ngIf="!isActive"></span>
+                  <span nz-icon nzType="check" *ngIf="isActive"></span>
+                </button>
+              </span>
+
+              <div class="content-list">
+                <div class="content-item" *ngFor="let item of collaboratorPolicyForm.get('content')?.value">
+                  {{item}}
+                  <button nz-button nzType="text" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="deleteContent(item)">
+                    <span nz-icon nzType="delete" class="color-dagger"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div nz-col [nzSpan]="10">
+      <div nz-row [nzGutter]=[8,24]>
+        <div nz-col [nzSpan]="24">
+          <div class="content-block" nz-row [nzGutter]=[16,8]>
+            <div nz-col [nzSpan]="24" class="content-block-title">Chính sách giá</div>
+            <nz-divider class="mt-10"></nz-divider>
+
+            <div nz-col [nzSpan]="12">
+              <div class="text-label">1 tháng</div>
+              <nz-input-number-group nzSuffix="VND" style="width: 100%">
+                <nz-input-number
+                  formControlName="priceMonth"
+                  [nzMin]="0"
+                  [nzStep]="1000"
+                  [nzFormatter]="formatterCurrency">
+                </nz-input-number>
+              </nz-input-number-group>
+            </div>
+
+            <div nz-col [nzSpan]="12">
+              <div class="text-label">3 tháng</div>
+              <nz-input-number-group nzSuffix="VND" style="width: 100%">
+                <nz-input-number
+                  formControlName="price3Month"
+                  [nzMin]="0"
+                  [nzStep]="1000"
+                  [nzFormatter]="formatterCurrency">
+                </nz-input-number>
+              </nz-input-number-group>
+            </div>
+
+            <div nz-col [nzSpan]="12">
+              <div class="text-label">1 năm</div>
+              <nz-input-number-group nzSuffix="VND" style="width: 100%">
+                <nz-input-number
+                  formControlName="priceYear"
+                  [nzMin]="0"
+                  [nzStep]="1000"
+                  [nzFormatter]="formatterCurrency">
+                </nz-input-number>
+              </nz-input-number-group>
+            </div>
+
+            <div nz-col [nzSpan]="12">
+              <div class="text-label">Vĩnh viễn</div>
+              <nz-input-number-group nzSuffix="VND" style="width: 100%">
+                <nz-input-number
+                  formControlName="priceForever"
+                  [nzMin]="0"
+                  [nzStep]="1000"
+                  [nzFormatter]="formatterCurrency">
+                </nz-input-number>
+              </nz-input-number-group>
+            </div>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <div class="content-block" nz-row [nzGutter]=[8,8]>
+            <div nz-col [nzSpan]="24" class="content-block-title" >Chính sách hoa hồng</div>
+            <nz-divider class="mt-10"></nz-divider>
+
+            <div nz-col [nzSpan]="12">
+              <div class="text-label">Giới thiệu tầng 1</div>
+              <nz-input-number-group nzSuffix="%" style="width: 100%">
+                <nz-input-number
+                  formControlName="referrerReward"
+                  [nzMin]="0"
+                  [nzStep]="1000">
+                </nz-input-number>
+              </nz-input-number-group>
+            </div>
+
+            <div nz-col [nzSpan]="12">
+              <div class="text-label">Giới thiệu tầng 2</div>
+              <nz-input-number-group nzSuffix="%" style="width: 100%">
+                <nz-input-number
+                  formControlName="referrerReward2"
+                  [nzMin]="0"
+                  [nzStep]="1000">
+                </nz-input-number>
+              </nz-input-number-group>
+            </div>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <div class="btn-panel">
+            <button class="btn primary" nz-button (click)="edit()">
+              {{isCreate? 'Tạo mới' : 'Lưu'}}
+            </button>
+            <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+

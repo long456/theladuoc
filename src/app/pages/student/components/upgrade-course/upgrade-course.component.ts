@@ -1,7 +1,8 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, HostListener, inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NZ_MODAL_DATA} from "ng-zorro-antd/modal";
 import {CourseService} from "../../../setting/services/course.service";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-upgrade-course',
@@ -9,6 +10,25 @@ import {CourseService} from "../../../setting/services/course.service";
   styleUrls: ['./upgrade-course.component.scss']
 })
 export class UpgradeCourseComponent implements OnInit{
+
+  @HostListener('paste', ['$event']) onPaste(e: any) {
+    const items = e.clipboardData.items;
+    let blob = null;
+
+    for (const item of items) {
+      if (item.type.indexOf('image') === 0) {
+        blob = item.getAsFile();
+      }
+    }
+    if (blob !== null) {
+      this.upgradeCourseForm.patchValue({ receiptImage: blob });
+      this.upgradeCourseForm.get('file')?.updateValueAndValidity();
+      this.nameFilePreview = blob.name;
+      this.blobToDataUrl(blob);
+    } else {
+      this.message.error('Chưa có file nào được copy hoặc định dạng file copy không hợp lệ')
+    }
+  }
 
   readonly nzModalData= inject(NZ_MODAL_DATA);
 
@@ -24,9 +44,12 @@ export class UpgradeCourseComponent implements OnInit{
 
   isSubmit: boolean = false;
 
+  imgPreviewUrl!: string | ArrayBuffer | null | undefined;
+
   constructor(
     private fb: FormBuilder,
     private courseService: CourseService,
+    private message: NzMessageService,
   ) {}
 
   ngOnInit() {
@@ -35,7 +58,6 @@ export class UpgradeCourseComponent implements OnInit{
       courseId: [null,[Validators.required]],
       classId: [null,[Validators.required]],
       name: [''],
-      isPay: [1],
       price: [0],
       amountPaid: [0],
       receiptImage: [null]
@@ -61,8 +83,17 @@ export class UpgradeCourseComponent implements OnInit{
     const target = e.target as HTMLInputElement;
     const files = target.files as FileList;
     this.nameFilePreview = files[0].name
+    this.blobToDataUrl(files[0]);
     this.upgradeCourseForm.patchValue({ receiptImage: files[0] });
     this.upgradeCourseForm.get('file')?.updateValueAndValidity();
+  }
+
+  blobToDataUrl(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.imgPreviewUrl = e.target?.result;
+    }
+    reader.readAsDataURL(file)
   }
 
   onCourseSelect() {
