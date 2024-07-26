@@ -12,10 +12,12 @@ import {AuthService} from "./services/auth.service";
 })
 export class AuthComponent implements OnInit{
   active = false;
+
   loginForm!: FormGroup;
+
   isSubmit = false;
-  logoDomain!: string;
-  isPasswordVisible: boolean  = false;
+
+  titleCms!: string;
 
   constructor(
     private router: Router,
@@ -29,8 +31,8 @@ export class AuthComponent implements OnInit{
   ngOnInit() {
     const dataOrg = localStorage.getItem('org');
     if (dataOrg) {
-      const title = JSON.parse(dataOrg).logo;
-      this.logoDomain = title;
+      const title = JSON.parse(dataOrg).name;
+      this.titleCms = title;
     }
 
     this.loginForm = this.fb.group({
@@ -53,10 +55,6 @@ export class AuthComponent implements OnInit{
         }
       })
     }
-  }
-
-  changPasswordVisible(): void {
-    this.isPasswordVisible = !this.isPasswordVisible;
   }
 
   addTokenKey(token: string) {

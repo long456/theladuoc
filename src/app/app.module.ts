@@ -17,7 +17,7 @@ import { SharedModule } from "./shared/shared.module";
 import { PageComponent } from "./layouts/page-layout/page/page.component";
 import { AuthComponent } from "./layouts/auth-layout/auth/auth.component";
 import { HttpRequestInterceptor } from "./shared/interceptors/http-request.inperceptor";
-import { NzInputModule } from 'ng-zorro-antd/input';
+import { ProfileComponent } from "./pages/profile/profile.component";
 import customViVn from './custom-vi-vn';
 
 registerLocaleData(vi);
@@ -41,7 +41,7 @@ registerLocaleData(vi);
     SharedModule,
     ReactiveFormsModule,
     NzI18nModule,
-    NzInputModule,
+    
   ],
   providers: [
     { provide: NZ_I18N, useValue: customViVn },
