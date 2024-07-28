@@ -6,6 +6,7 @@ import { DateTimeHelper } from '../../../helper/date-time-helper';
 import { ReportService } from '../../../service/report.service';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { plainToClass } from 'class-transformer';
+import { DateTimeTypeSearch } from '../../../constant/date-time-type-search.const';
 
 @Component({
   selector: 'app-filter-elearning-course-report',
@@ -16,14 +17,14 @@ export class FilterElearningCourseReportComponent {
   dateFormat = 'dd/MM/yyyy';
   monthFormat = 'MM/yyyy';
   myForm = new FormGroup({
-    dateTimeTypeSearchCtrl: new FormControl(null),
+    dateTimeTypeSearchCtrl: new FormControl([] as any),
     startCtrl: new FormControl(null),
     endCtrl: new FormControl(null),
     quarterOfYearCtrl: new FormControl(null),
-    dateTimeRangeCtrl: new FormControl(null),
-    monthCtrl: new FormControl(null),
-    yearCtrl: new FormControl(null),
-    quarterYearCtrl: new FormControl(null),
+    dateTimeRangeCtrl: new FormControl([] as any),
+    monthCtrl: new FormControl(null as any),
+    yearCtrl: new FormControl(null as any),
+    quarterYearCtrl: new FormControl(null as any),
     courseNameCtrl: new FormControl(null),
     speakerNameCtrl: new FormControl(null),
     phoneNumberCtrl: new FormControl(null),
@@ -56,6 +57,36 @@ export class FilterElearningCourseReportComponent {
       this.ctrl.phoneNumberCtrl.setValue(this.data.filter.phoneId);
     }
 
+    if (this.data.dateTimeTypeSearch != null && this.data.dateTimeTypeSearch != undefined) {
+      this.ctrl.dateTimeTypeSearchCtrl.setValue(this.data.dateTimeTypeSearch);
+      if (this.ctrl.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_DAY) {
+        if (this.data.filter.start || this.data.filter.end) {
+          let [dayStart, monthStart, yearStart] = this.data.filter.start.split('/');
+          let [dayEnd, monthEnd, yearEnd] = this.data.filter.end.split('/');
+          this.ctrl.dateTimeRangeCtrl.setValue([new Date(`${yearStart}-${monthStart}-${dayStart}`), new Date(`${yearEnd}-${monthEnd}-${dayEnd}`)]);
+        }
+      } else if (this.ctrl.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_MONTH) {
+        if (this.data.filter.start) {
+          let [dayStart, monthStart, yearStart] = this.data.filter.start.split('/');
+          this.ctrl.monthCtrl.setValue(new Date(`${yearStart}-${monthStart}-${dayStart}`));
+        }
+      } else if (this.ctrl.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_QUARTER) {
+        if (this.data.filter.start) {
+          let [dayStart, monthStart, yearStart] = this.data.filter.start.split('/');
+          console.log([dayStart, monthStart, yearStart]);
+          this.ctrl.quarterYearCtrl.setValue(new Date(`${yearStart}-${monthStart}-${dayStart}`));
+        }
+
+        if (this.data.quarterOfYear) {
+          this.ctrl.quarterOfYearCtrl.setValue(this.data.quarterOfYear);
+        }
+      } else if (this.ctrl.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_YEAR) {
+        if (this.data.filter.start) {
+          let [dayStart, monthStart, yearStart] = this.data.filter.start.split('/');
+          this.ctrl.yearCtrl.setValue(new Date(`${yearStart}-${monthStart}-${dayStart}`));
+        }
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -93,7 +124,7 @@ export class FilterElearningCourseReportComponent {
       dataFilter.phoneId = this.ctrl.phoneNumberCtrl.value;
     }
 
-    this.modal.close(dataFilter)
+    this.modal.close({ dataFilter: dataFilter, dateTimeTypeSearch: this.ctrl.dateTimeTypeSearchCtrl.value, quarterOfYear: this.ctrl.quarterOfYearCtrl.value })
   }
 
   getFilterDateTime() {

@@ -80,7 +80,6 @@ export class DateTimeHelper {
         if (to) {
             result.end = moment(to).format('DD/MM/YYYY');
         }
-        console.log(result);
         return result;
     }
 }
