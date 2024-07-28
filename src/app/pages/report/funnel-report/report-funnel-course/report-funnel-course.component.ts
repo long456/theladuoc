@@ -61,7 +61,7 @@ export class ReportFunnelCourseComponent implements OnInit {
       this.ctrls.yearCtrl.reset();
       this.ctrls.quarterOfYearCtrl.reset();
     });
-    // this.syncData();
+    this.syncData();
   }
 
   resetForm() {
