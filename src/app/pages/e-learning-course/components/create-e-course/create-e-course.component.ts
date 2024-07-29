@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ECourseService } from '../../services/e-course.service';
 import { FileManagerService } from "../../../../shared/services/file-manager.service";
@@ -11,6 +11,7 @@ import { CourseService } from 'src/app/pages/setting/services/course.service';
 import { ELearningServicesService } from 'src/app/pages/e-learning-category/services/e-learning-services.service';
 import { eCategoryOption } from 'src/app/pages/e-learning-category/models/e-category-option';
 import { allowedValuesValidator } from '../../custom-validators/allowed-values-validator';
+import { memberPolicyLevelOption } from '../../models/member-policy-level-option';
 
 @Component({
   selector: 'app-create-e-course',
@@ -24,7 +25,9 @@ export class CreateECourseComponent implements OnInit {
   ckEditorConfig: any = config;
   listTeacher: teacher[] = [];
   listCategory: eCategoryOption[] = [];
+  listMemberPolicyLevel: memberPolicyLevelOption[] = [];
   courseElearningId!: number;
+  showMemberPolicyLevel: boolean = false;
 
   controlNames = {
     name: 'Tên khoá học',
@@ -36,6 +39,7 @@ export class CreateECourseComponent implements OnInit {
     price: 'Giá mới',
     oldPrice: 'Giá cũ',
     type: 'Loại khoá học',
+    memberPolicyLevelId: 'Gói thành viên áp dụng tối thiểu',
     level: 'Cấp độ',
     language: 'Ngôn ngữ',
     introVideo: 'Link video giới thiệu',
@@ -76,6 +80,7 @@ export class CreateECourseComponent implements OnInit {
       price: [0],
       oldPrice: [0],
       type: [1, [Validators.required, allowedValuesValidator([1, 2, 3, 4, 5])]],
+      memberPolicyLevelId: [null],
       level: [1, [allowedValuesValidator([1, 2, 3])]],
       language: [1, [allowedValuesValidator([1, 2])]],
       introVideo: [null, [Validators.maxLength(this.maxlengthConfig.introVideo)]],
@@ -83,6 +88,13 @@ export class CreateECourseComponent implements OnInit {
       isCertificate: [false],
       status: [1, [allowedValuesValidator([1, 2])]],
     })
+
+    const typeControl = this.courseForm.get('type');
+    if (typeControl) {
+      typeControl.valueChanges.subscribe(value => {
+        this.onTypeChange(value);
+      });
+    }
 
     this.courseService.getAllTeacher().subscribe(res => {
       if (res.success) {
@@ -96,9 +108,15 @@ export class CreateECourseComponent implements OnInit {
       }
     })
 
+    this.eCourseService.getListMemberPolicyLevelOption().subscribe(res => {
+      if (res.success) {
+        this.listMemberPolicyLevel = res.data;
+      }
+    })
+
     if (!this.isCreate) {
       this.route.params.pipe().subscribe(params => {
-        const {id} = params;
+        const { id } = params;
         this.courseElearningId = id;
         this.eCourseService.getCourseById(id).subscribe({
           next: res => {
@@ -113,7 +131,6 @@ export class CreateECourseComponent implements OnInit {
 
   getErrorMessage(controlKey: string): string {
     const control = this.courseForm.get(controlKey);
-
     if (control?.hasError('required')) {
       return `${this.controlNames[controlKey as keyof typeof this.controlNames]} không được để trống!`;
     }
@@ -124,7 +141,6 @@ export class CreateECourseComponent implements OnInit {
       const maxLength = this.maxlengthConfig[controlKey as keyof typeof this.maxlengthConfig];
       return `${this.controlNames[controlKey as keyof typeof this.controlNames]} có độ dài tối đa ${maxLength} ký tự!`;
     }
-
     return '';
   }
 
@@ -166,6 +182,10 @@ export class CreateECourseComponent implements OnInit {
         });
       }
     }
+  }
+
+  onTypeChange(value: number): void {
+    this.showMemberPolicyLevel = value == 2;
   }
 
   selectFile(typeImg: string) {
