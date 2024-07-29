@@ -3,17 +3,17 @@ import {COL_DATA_TYPE, filterItem} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {CollaboratorPolicyService} from "../../services/collaborator-policy.service";
 import {NzModalService} from "ng-zorro-antd/modal";
+import {MembershipService} from "../../services/membership.service";
 
 @Component({
-  selector: 'app-collaborator-policy',
-  templateUrl: './collaborator-policy.component.html',
-  styleUrls: ['./collaborator-policy.component.scss']
+  selector: 'app-membership-list',
+  templateUrl: './membership-list.component.html',
+  styleUrls: ['./membership-list.component.scss']
 })
-export class CollaboratorPolicyComponent implements OnInit{
+export class MembershipListComponent implements OnInit{
   COL_DATA_TYPE = COL_DATA_TYPE;
-  collaboratorPolicy$ !: Observable<{
+  membership$ !: Observable<{
     rows: any[],
     filter?: any,
     page: number;
@@ -25,15 +25,16 @@ export class CollaboratorPolicyComponent implements OnInit{
   filterList$ = new BehaviorSubject(null);
   loading = false;
   itemSelectList: number[] = [];
+
   constructor(
     private router: Router,
     private message: NzMessageService,
-    private collaboratorPolicyService: CollaboratorPolicyService,
+    private membershipService: MembershipService,
     private modal :NzModalService,
   ) {}
 
   ngOnInit() {
-    this.collaboratorPolicy$ = combineLatest([
+    this.membership$ = combineLatest([
       this.page$,
       this.pageSize$,
       this.filterList$
@@ -41,7 +42,7 @@ export class CollaboratorPolicyComponent implements OnInit{
     .pipe(
       tap(() => this.loading = true),
       mergeMap(([page, pageSize, filter]) => {
-        return this.collaboratorPolicyService.getCollaboratorPolicyList(page, pageSize, filter)
+        return this.membershipService.getMembershipList(page, pageSize, filter)
           .pipe(
             map((value) => {
               return {
@@ -52,7 +53,7 @@ export class CollaboratorPolicyComponent implements OnInit{
               }
             }),
             catchError(err => {
-              this.message.error('Lỗi load dữ liệu danh sách chính sách cộng tác viên')
+              this.message.error('Lỗi load dữ liệu danh sách hạng thành viên');
               return of({
                 rows: [],
                 page: 0,
@@ -68,15 +69,15 @@ export class CollaboratorPolicyComponent implements OnInit{
   }
 
   create():void{
-    this.router.navigate(['page/collaborator-policy/create']);
+    this.router.navigate(['page/membership-policy/create']);
   }
 
   delete(data: any):void{
     this.modal.confirm({
       nzTitle: 'Xác nhận xóa',
-      nzContent: 'Bạn có chắc chắn muốn xóa chính sách này?',
+      nzContent: 'Bạn có chắc chắn muốn xóa hạng thành viên này?',
       nzOnOk: () => {
-        this.collaboratorPolicyService.softDeleteCollaboratorPolicy(data.id)
+        this.membershipService.softDeleteMembership(data.id)
           .pipe(
           ).subscribe({
           next: value => {
@@ -96,6 +97,6 @@ export class CollaboratorPolicyComponent implements OnInit{
   }
 
   edit(data: any):void{
-    this.router.navigate(['page/collaborator-policy/' + data.id]);
+    this.router.navigate(['page/membership-policy/' + data.id]).then();
   }
 }

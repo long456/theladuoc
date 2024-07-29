@@ -6,6 +6,7 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {LessonService} from "../../services/lesson.service";
 import {NzModalService} from "ng-zorro-antd/modal";
 import {CreateLessonComponent} from "../../../class/components/create-lesson/create-lesson.component";
+import {AttachZoomLinkComponent} from "../attach-zoom-link/attach-zoom-link.component";
 
 @Component({
   selector: 'app-lesson',
@@ -117,6 +118,19 @@ export class LessonComponent implements OnInit{
         }
       });
     }
+  }
+
+  attachLinkZoom(data: any):void {
+    this.modal.create<AttachZoomLinkComponent>({
+      nzTitle: 'Gắn link zoom',
+      nzContent: AttachZoomLinkComponent,
+      nzViewContainerRef: this.viewContainerRef,
+      nzData: data,
+      nzFooter: null,
+      nzOnOk: instance => {
+        this.pageSize$.next(10);
+      }
+    });
   }
 
   getItemSelection(e: any) {

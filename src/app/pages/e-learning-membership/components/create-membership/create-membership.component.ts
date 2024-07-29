@@ -2,19 +2,21 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {CollaboratorPolicyService} from "../../services/collaborator-policy.service";
+import {MembershipService} from "../../services/membership.service";
+import {take} from "rxjs";
+import {FileManagerService} from "../../../../shared/services/file-manager.service";
 
 @Component({
-  selector: 'app-create-collaborator-policy',
-  templateUrl: './create-collaborator-policy.component.html',
-  styleUrls: ['./create-collaborator-policy.component.scss']
+  selector: 'app-create-membership',
+  templateUrl: './create-membership.component.html',
+  styleUrls: ['./create-membership.component.scss']
 })
-export class CreateCollaboratorPolicyComponent implements OnInit{
+export class CreateMembershipComponent implements OnInit{
   @ViewChild('inputContent') getInputElement!: ElementRef;
   isCreate: boolean = false;
   isSubmit: boolean = false;
-  collaboratorPolicyForm!: FormGroup;
-  collaboratorPolicyId!: number;
+  membershipForm!: FormGroup;
+  membershipPolicyId!: number;
 
   isActive = false;
   webData: string = '';
@@ -23,12 +25,13 @@ export class CreateCollaboratorPolicyComponent implements OnInit{
     private router: Router,
     private fb: FormBuilder,
     private message: NzMessageService,
-    private collaboratorPolicyService: CollaboratorPolicyService
+    private membershipService: MembershipService,
+    private fileManagerService: FileManagerService,
   ) {}
 
   ngOnInit() {
     this.isCreate = this.route.snapshot.data['isCreate'];
-    this.collaboratorPolicyForm = this.fb.group({
+    this.membershipForm = this.fb.group({
       name: [null, [Validators.required]],
       level: [1],
       priceMonth: [0],
@@ -39,21 +42,22 @@ export class CreateCollaboratorPolicyComponent implements OnInit{
       referrerReward2: [0],
       isPopular: [true],
       content: [[]],
+      icon: [null, [Validators.required]],
       status: [1],
     });
 
     if (!this.isCreate) {
       this.route.params.pipe().subscribe(params => {
         const {id} = params;
-        this.collaboratorPolicyId = id;
-        this.collaboratorPolicyService.getCollaboratorPolicyById(this.collaboratorPolicyId).subscribe({
+        this.membershipPolicyId = id;
+        this.membershipService.getMembershipById(this.membershipPolicyId).subscribe({
           next: res => {
             if (res.success) {
               const data = {
                 ...res.data,
                 content: JSON.parse(res.data.content)
               }
-              this.collaboratorPolicyForm.patchValue(data);
+              this.membershipForm.patchValue(data);
             }
           }
         })
@@ -64,18 +68,18 @@ export class CreateCollaboratorPolicyComponent implements OnInit{
   changeActive(): void {
     this.isActive = true;
     if (this.isActive && this.webData.trim() !== '') {
-      let data = [...this.collaboratorPolicyForm.get('content')?.value]
+      let data = [...this.membershipForm.get('content')?.value]
       data.push(this.webData)
-      this.collaboratorPolicyForm.get('content')?.patchValue(data);
+      this.membershipForm.get('content')?.patchValue(data);
       this.webData = '';
       // this.getInputElement.nativeElement.focus();
     }
   }
 
   deleteContent(slug : string): void {
-    let data = [...this.collaboratorPolicyForm.get('content')?.value];
+    let data = [...this.membershipForm.get('content')?.value];
     data = data.filter(item => item !== slug);
-    this.collaboratorPolicyForm.get('content')?.patchValue(data);
+    this.membershipForm.get('content')?.patchValue(data);
   }
 
   formatterCurrency(value: number): string {
@@ -92,17 +96,17 @@ export class CreateCollaboratorPolicyComponent implements OnInit{
 
   edit() {
     this.isSubmit  = true;
-    if (this.collaboratorPolicyForm.valid) {
+    if (this.membershipForm.valid) {
       const data = {
-        ...this.collaboratorPolicyForm.value,
+        ...this.membershipForm.value,
       }
 
       if (this.isCreate) {
-        this.collaboratorPolicyService.createCollaboratorPolicy(data).subscribe(
+        this.membershipService.createMembership(data).subscribe(
           {
             next: res => {
               if (res.success) {
-                this.message.success('Tạo gói chính sách thành công');
+                this.message.success('Tạo hạng thành viên thành công');
                 this.navigateBack();
               } else {
                 this.message.error(res.errorMessages)
@@ -113,26 +117,33 @@ export class CreateCollaboratorPolicyComponent implements OnInit{
       } else {
         const policyData = {
           ...data,
-          id: this.collaboratorPolicyId,
+          id: this.membershipPolicyId,
         }
 
-        this.collaboratorPolicyService.updateCollaboratorPolicy(policyData).subscribe(
+        this.membershipService.updateMembership(policyData).subscribe(
           {
             next: res => {
               if (res.success) {
-                this.message.success('Cập nhật gói chính sách thành công');
+                this.message.success('Cập nhật hạng thành viên thành công');
                 this.navigateBack();
               } else {
                 this.message.error(res.errorMessages)
               }
             },
             error: err => {}
-        })
+          })
       }
     }
   }
 
+  selectFile() {
+    this.fileManagerService.selectFile();
+    this.fileManagerService.selectedFile.pipe(take(1)).subscribe((data) => {
+      this.membershipForm.get('icon')?.patchValue(data);
+    });
+  }
+
   navigateBack():void {
-    this.router.navigate(['/page/collaborator-policy']);
+    this.router.navigate(['/page/membership-policy']);
   }
 }
