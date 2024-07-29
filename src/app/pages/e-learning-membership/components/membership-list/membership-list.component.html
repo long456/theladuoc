@@ -1,9 +1,9 @@
 <div class="title-page">
-  Danh sách chính sách cộng tác viên
+  Danh sách hạng thành viên
 </div>
 
 <div class="header-btn">
-  <ng-container *ngIf="(collaboratorPolicy$ | async) as policy">
+  <ng-container *ngIf="(membership$ | async) as policy">
     <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
 
     <app-table
@@ -17,9 +17,9 @@
       [loading]="loading"
     >
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Tên chính sách" key="name" [width]="'200px'"></table-column>
-      <table-column header="Cấp độ" key="level" [width]="'200px'"></table-column>
+      <table-column header="Huy hiệu" key="name" [width]="'200px'"></table-column>
+      <table-column header="Tên hạng" key="name" [width]="'200px'"></table-column>
+      <table-column header="Thứ hạng" key="level" [width]="'200px'"></table-column>
       <table-column header="Giá một tháng" key="priceMonth" [width]="'200px'">
         <ng-template appCell let-data>
           {{data.priceMonth | currency: 'VND'}}
@@ -40,12 +40,12 @@
           {{data.priceForever | currency: 'VND'}}
         </ng-template>
       </table-column>
-      <table-column header="Hoa hồng tầng 1" key="referrerReward" [width]="'200px'">
+      <table-column header="Hoa hồng trực tiếp" key="referrerReward" [width]="'200px'">
         <ng-template appCell let-data>
           {{data.referrerReward + ' %'}}
         </ng-template>
       </table-column>
-      <table-column header="Hoa hồng tầng 2" key="referrerReward2" [width]="'200px'">
+      <table-column header="Hoa hồng gián tiếp" key="referrerReward2" [width]="'200px'">
         <ng-template appCell let-data>
           {{data.referrerReward2 + ' %'}}
         </ng-template>
@@ -56,6 +56,7 @@
           <span class="text-invalid" *ngIf="!data.status">Tạm dừng</span>
         </ng-template>
       </table-column>
+      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'150px'"></table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
           Chức năng
@@ -76,3 +77,4 @@
     </app-table>
   </ng-container>
 </div>
+

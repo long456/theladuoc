@@ -4,12 +4,15 @@ import {LessonRoutingModule} from "./lesson-routing.module";
 import { LessonComponent } from './components/lesson/lesson.component';
 import {SharedModule} from "../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NzDropDownModule} from "ng-zorro-antd/dropdown";
+import { AttachZoomLinkComponent } from './components/attach-zoom-link/attach-zoom-link.component';
 
 
 
 @NgModule({
   declarations: [
-    LessonComponent
+    LessonComponent,
+    AttachZoomLinkComponent
   ],
   imports: [
     CommonModule,
@@ -17,6 +20,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    NzDropDownModule
   ]
 })
 export class LessonModule { }

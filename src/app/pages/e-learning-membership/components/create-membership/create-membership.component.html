@@ -1,9 +1,9 @@
 <div class="title-page">
-  {{isCreate? 'Tạo chính sách cộng tác viên' : 'Chỉnh sửa chính sách cộng tác viên'}}
+  {{isCreate? 'Tạo hạng thành viên' : 'Chỉnh sửa hạng thành viên'}}
 </div>
 
 
-<form [formGroup]="collaboratorPolicyForm">
+<form [formGroup]="membershipForm">
   <div nz-row [nzGutter]=[24,24]>
     <div nz-col [nzSpan]="14">
       <div nz-row [nzGutter]=[8,24]>
@@ -13,17 +13,17 @@
             <div nz-col [nzSpan]="24" class="content-block-title">Cấu hình gói</div>
             <nz-divider class="mt-10"></nz-divider>
             <div nz-col [nzSpan]="20">
-              <span class="text-label">Tên gói thành viên <span class="text-danger">*</span></span>
+              <span class="text-label">Tên hạng thành viên <span class="text-danger">*</span></span>
               <span
                 class="text-danger error-message"
-                *ngIf="(collaboratorPolicyForm.get('name')?.touched || isSubmit) &&
-                      collaboratorPolicyForm.get('name')?.hasError('required')">
-                Tên gói không được để trống!
-            </span>
+                *ngIf="(membershipForm.get('name')?.touched || isSubmit) &&
+                      membershipForm.get('name')?.hasError('required')">
+                Tên hạng không được để trống!
+              </span>
               <input
                 nz-input autofocus formControlName="name"
-                [nzStatus]="(collaboratorPolicyForm.get('name')?.invalid &&
-                            (collaboratorPolicyForm.get('name')?.touched || isSubmit)) ?
+                [nzStatus]="(membershipForm.get('name')?.invalid &&
+                            (membershipForm.get('name')?.touched || isSubmit)) ?
                             'error' : ''">
             </div>
 
@@ -32,14 +32,34 @@
               <nz-switch formControlName="status"></nz-switch>
             </div>
 
-            <div nz-col [nzSpan]="20">
-              <span class="text-label">Cấp độ</span>
+            <div nz-col [nzSpan]="10">
+              <span class="text-label">Thứ hạng</span>
               <nz-input-number
                 style="width: 100%"
                 formControlName="level"
                 [nzMin]="1"
                 [nzStep]="1"
               ></nz-input-number>
+            </div>
+
+            <div nz-col [nzSpan]="10">
+              <span class="text-label">Huy hiệu</span>
+              <span
+                class="text-danger error-message"
+                *ngIf="(membershipForm.get('icon')?.touched || isSubmit) &&
+                        membershipForm.get('icon')?.hasError('required')">
+                        Huy hiệu không được để trống!
+              </span>
+              <div class="select-icon">
+                <input nz-input [value]="membershipForm.get('icon')?.value" formControlName="icon"
+                       [nzStatus]="(membershipForm.get('icon')?.invalid &&
+                                   (membershipForm.get('icon')?.touched || isSubmit)) ?
+                                   'error' : ''">
+
+                <button nz-button nzType="primary" (click)="selectFile()">
+                  <span nz-icon nzType="upload"></span>
+                </button>
+              </div>
             </div>
 
             <div nz-col [nzSpan]="4">
@@ -74,7 +94,7 @@
               </span>
 
               <div class="content-list">
-                <div class="content-item" *ngFor="let item of collaboratorPolicyForm.get('content')?.value">
+                <div class="content-item" *ngFor="let item of membershipForm.get('content')?.value">
                   {{item}}
                   <button nz-button nzType="text" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="deleteContent(item)">
                     <span nz-icon nzType="delete" class="color-dagger"></span>
@@ -90,7 +110,7 @@
     <div nz-col [nzSpan]="10">
       <div nz-row [nzGutter]=[8,24]>
         <div nz-col [nzSpan]="24">
-          <div class="content-block" nz-row [nzGutter]=[16,8]>
+          <div class="content-block" nz-row [nzGutter]=[8,8]>
             <div nz-col [nzSpan]="24" class="content-block-title">Chính sách giá</div>
             <nz-divider class="mt-10"></nz-divider>
 
@@ -150,7 +170,7 @@
             <nz-divider class="mt-10"></nz-divider>
 
             <div nz-col [nzSpan]="12">
-              <div class="text-label">Giới thiệu tầng 1</div>
+              <div class="text-label">Giới thiệu trực tiếp</div>
               <nz-input-number-group nzSuffix="%" style="width: 100%">
                 <nz-input-number
                   formControlName="referrerReward"
@@ -161,7 +181,7 @@
             </div>
 
             <div nz-col [nzSpan]="12">
-              <div class="text-label">Giới thiệu tầng 2</div>
+              <div class="text-label">Giới thiệu gián tiếp</div>
               <nz-input-number-group nzSuffix="%" style="width: 100%">
                 <nz-input-number
                   formControlName="referrerReward2"
@@ -185,5 +205,6 @@
     </div>
   </div>
 </form>
+
 
 

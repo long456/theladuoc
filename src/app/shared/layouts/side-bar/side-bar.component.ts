@@ -333,10 +333,17 @@ export class SideBarComponent implements OnInit {
                   icon: '',
                   link: 'page/e-category',
                 },
+              ]
+            },
+            {
+              name: 'Tư cách thành viên',
+              icon: '',
+              link: '',
+              children: [
                 {
-                  name: 'Chính sách cộng tác viên',
+                  name: 'Hạng thành viên',
                   icon: '',
-                  link: 'page/collaborator-policy',
+                  link: 'page/membership-policy',
                 },
               ]
             },

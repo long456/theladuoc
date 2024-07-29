@@ -62,8 +62,8 @@ const routes: Routes = [
         loadChildren: () => import('./pages/e-learning-student/e-learning-student.module').then(m => m.ELearningStudentModule),
       },
       {
-        path: 'collaborator-policy',
-        loadChildren: () => import('./pages/e-learning-collaborator-policy/e-learning-collaborator-policy.module').then(m => m.ELearningCollaboratorPolicyModule),
+        path: 'membership-policy',
+        loadChildren: () => import('./pages/e-learning-membership/e-learning-membership.module').then(m => m.ELearningMembershipModule),
       },
       {
         path: 'transaction-history',
