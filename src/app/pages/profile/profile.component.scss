@@ -30,7 +30,7 @@
 }
 
 .user-profile{
-  min-height: 75vh;
+  min-height: 70vh;
   position: relative;
 }
 
@@ -83,6 +83,13 @@
 .text-danger{
   color: #ff4d4f;
   width: 100%;
+}
+
+.italic{
+  font-style: italic;
+  position: absolute;
+  width: fit-content;
+  right: 15px;
 }
 
 .error{
@@ -138,4 +145,45 @@ input:read-only {
   background: #1890ff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+
+.skill-title{
+  text-align: center;
+  font-weight: 450;
+  font-size: 16px;
+}
+
+.skill-content{
+  cursor: pointer;
+  position: relative;
+  border: 1px solid transparent;
+  padding: 5px 5px 15px 5px;
+  margin-bottom: 15px;
+  transition: all 0.25s;
+  &:hover, &.active{
+    border-color: #1890ff;
+    .skill-btn{
+      display: flex;
+    }
+  }
+  input{
+    border: 1px dashed transparent;
+  }
+  input:hover, input:focus{
+    border-color: #40a9ff;
+  }
+  .skill-rate{
+    padding: 0 10px;
+  }
+  .skill-btn{
+    display: none;
+    position: absolute;
+    bottom: 16px;
+    width: 100%;
+    height: 0;
+    justify-content: center;
+    button{
+      margin:0 5px;
+    }
+  }
 }

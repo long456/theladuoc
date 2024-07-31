@@ -389,6 +389,18 @@ export class SideBarComponent implements OnInit {
                   link: 'page/setting/warehouse',
                 },
               ]
+            },
+            {
+              name: 'Dịch vụ khách hàng',
+              icon: '',
+              link: '',
+              children: [
+                {
+                  name: 'Danh sách khách hàng',
+                  icon: '',
+                  link: 'page/customer',
+                },
+              ]
             }
           ]
         },
