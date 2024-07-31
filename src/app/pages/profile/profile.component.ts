@@ -13,6 +13,7 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   ValidationErrors,
   ValidatorFn,
@@ -23,25 +24,27 @@ import {AuthService} from "../../layouts/auth-layout/auth/services/auth.service"
 import {NzMessageService} from "ng-zorro-antd/message";
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
+import { NzSliderModule } from 'ng-zorro-antd/slider';
+import {skill} from "./models/skill";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  imports: [NzTabsModule, NzGridModule, NzDividerModule, NzInputModule, ReactiveFormsModule, CommonModule,
-    NzSelectModule, NzAvatarModule, NzButtonModule, NzDatePickerModule, NzIconModule, NzUploadModule],
+  imports: [NzTabsModule, NzGridModule, NzDividerModule, NzInputModule, ReactiveFormsModule, CommonModule, FormsModule,
+    NzSelectModule, NzAvatarModule, NzButtonModule, NzDatePickerModule, NzIconModule, NzUploadModule, NzSliderModule],
   standalone: true
 })
 export class ProfileComponent implements OnInit{
   passwordVisible = false;
-
   forgetPasswordForm!: FormGroup;
-
   userForm!: FormGroup;
-
   file: any;
-
   linkAvatar!: string;
+  teacherInfoForm!: FormGroup;
+  skillList: skill[] = [];
+  activeSkill: number | null = null;
+  userType!:string;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -74,11 +77,23 @@ export class ProfileComponent implements OnInit{
       birthday: [null],
       email: [null],
       code: [null],
-    })
+    });
+
+    this.teacherInfoForm = this.fb.group({
+      slugTeacher: [null,[Validators.required,]],
+      positionName: [null],
+      description: [null],
+      phoneNumber: [null],
+      linkFacebook: [null],
+      linkTiktok: [null],
+      linkYoutube: [null],
+      linkWebsite: [null],
+    });
 
     this.authService.getUserProfile().subscribe({
       next: res => {
         if (res.success) {
+          this.userType = res.data.type;
           const baseUrl = environment.baseImgUrl
           this.linkAvatar = baseUrl + res.data.avatar;
           this.userForm.patchValue(res.data)
@@ -170,7 +185,7 @@ export class ProfileComponent implements OnInit{
             this.message.error(res.errorMessages);
           }
         }
-      })
+      });
     }
   }
 
@@ -192,5 +207,55 @@ export class ProfileComponent implements OnInit{
     })
   }
 
+  setActiveSkill(index: number):void {
+    this.activeSkill = index;
+  }
 
+  addSkill() {
+    const skillObj: skill = {
+      progress: 0,
+      skillName: ''
+    }
+    this.skillList.push(skillObj);
+  }
+
+  removeSkill(index: number):void {
+    this.skillList.splice(index, 1);
+  }
+
+  skillNameValidator():boolean {
+    let errorCount = 0;
+    if (this.skillList.length > 0) {
+      this.skillList.forEach((item) => {
+        if (item.skillName === '') {
+          errorCount++;
+        }
+      });
+    }
+
+    if (errorCount > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  updateInfoTeacher():void {
+    if (this.skillNameValidator() && this.teacherInfoForm.valid) {
+      const data = {
+        ...this.teacherInfoForm.value,
+        skills: this.skillList
+      }
+      this.authService.updateProfileTeacher(data).subscribe({
+        next: res => {
+          if (res.success) {
+            this.message.success('Cập nhật thông tin giảng viên thành công');
+          } else {
+            this.message.error(res.errorMessages);
+          }
+        }
+      });
+    } else {
+      this.message.error('Tên kỹ năng không được để trống');
+    }
+  }
 }

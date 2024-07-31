@@ -68,6 +68,10 @@ const routes: Routes = [
       {
         path: 'transaction-history',
         loadChildren: () => import('./pages/transaction/transaction-history.module').then(m => m.TransactionHistoryModule),
+      },
+      {
+        path: 'customer',
+        loadChildren: () => import('./pages/customer/customer.module').then(m => m.CustomerModule),
       }
     ],
   },

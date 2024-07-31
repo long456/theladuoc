@@ -42,10 +42,17 @@
         </div>
 
         <div nz-col [nzSpan]="11">
-          <div class="text-label">Mô tả</div>
+          <div class="text-label">Mô tả (Tối đa 200 ký tự)</div>
           <textarea
             nz-input placeholder="Mô tả ngắn"
-            [nzAutosize]="{ minRows: 3}" formControlName="description"></textarea>
+            [nzAutosize]="{ minRows: 3}" formControlName="description"
+            [nzStatus]="(categoryForm.get('description')?.invalid &&
+                        (categoryForm.get('description')?.touched || isSubmit)) ? 'error' : ''"></textarea>
+          <span class="text-danger"
+                *ngIf="(categoryForm.get('description')?.touched || isSubmit) &&
+                        categoryForm.get('description')?.hasError('maxlength')">
+            Mô tả không thể vượt quá 200 ký tự
+          </span>
         </div>
 
         <div nz-col [nzSpan]="7" >
