@@ -200,6 +200,11 @@ export class SideBarComponent implements OnInit {
           ]
         },
         {
+          name: 'Yêu cầu liên hệ',
+          icon: '',
+          link: 'page/guests',
+        },
+        {
           name: 'Lịch sử thanh toán',
           icon: '',
           link: 'page/transaction-history',
