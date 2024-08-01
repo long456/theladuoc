@@ -60,7 +60,7 @@ export class ReportCollaboratorCourseComponent {
       this.ctrls.yearCtrl.reset();
       this.ctrls.quarterOfYearCtrl.reset();
     });
-    this.syncData();
+    // this.syncData();
   }
 
   resetForm() {

@@ -61,7 +61,7 @@ export class ReportFunnelCourseComponent implements OnInit {
       this.ctrls.yearCtrl.reset();
       this.ctrls.quarterOfYearCtrl.reset();
     });
-    this.syncData();
+    // this.syncData();
   }
 
   resetForm() {
@@ -110,7 +110,7 @@ export class ReportFunnelCourseComponent implements OnInit {
     this.filter = {
       ...this.getFilterDateTime()
     };
-
+    this.isLoading = true;
     this.reportService.getReportFunnelCourses(this.currentPage, this.pageSize, this.filter).subscribe(x => {
       if (x) {
         this.items = x.data.reportFunnelCourses.map((z: any) => plainToClass(ReportFunnelCourse, z));
