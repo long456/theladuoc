@@ -5,13 +5,13 @@ import {Observable} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class CollaboratorPolicyService {
+export class MembershipService {
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  getCollaboratorPolicyList(page?: any, pageSize?: any, filter?: any): Observable<any>{
+  getMembershipList(page?: any, pageSize?: any, filter?: any): Observable<any>{
     let option = {
       PageIndex: page,
       pageSize: pageSize,
@@ -28,19 +28,19 @@ export class CollaboratorPolicyService {
     return this.http.get('MemberPolicyLevel', {params: option});
   }
 
-  getCollaboratorPolicyById(id: number): Observable<any>{
+  getMembershipById(id: number): Observable<any>{
     return this.http.get('MemberPolicyLevel/' + id);
   }
 
-  createCollaboratorPolicy(data: any): Observable<any> {
+  createMembership(data: any): Observable<any> {
     return this.http.post('MemberPolicyLevel/create', data)
   }
 
-  updateCollaboratorPolicy(data: any): Observable<any> {
+  updateMembership(data: any): Observable<any> {
     return this.http.post('MemberPolicyLevel/update', data)
   }
 
-  softDeleteCollaboratorPolicy(id: number): Observable<any>{
+  softDeleteMembership(id: number): Observable<any>{
     return this.http.delete('MemberPolicyLevel/soft-delete/' + id);
   }
 }

@@ -1,0 +1,40 @@
+<div class="title-page">
+  Danh sách yêu cầu liên hệ
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(guests$ | async) as guests">
+    <app-table
+      [rows]="guests.rows"
+      [page]="guests.page"
+      [pageSize]="guests.pageSize"
+      [pageTotal]="guests.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Ngày đăng ký" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="Họ và tên" key="fullName" [width]="'200px'"></table-column>
+      <table-column header="Số điện thoại" key="phoneNumber" [width]="'120px'"></table-column>
+      <table-column header="Email" key="email" [width]="'200px'"></table-column>
+      <table-column header="Nội dung yêu cầu" key="demand" [width]="'200px'"></table-column>
+      <table-column header="Người liên hệ" key="" [width]="'180px'"></table-column>
+      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+<!--          <span class="custom-action" (click)="edit(data)"-->
+<!--                nz-tooltip nzTooltipTitle="Chỉnh sửa thông tin khách hàng">-->
+<!--            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>-->
+<!--          </span>-->
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
+
