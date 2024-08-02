@@ -33,11 +33,12 @@
         <thead style="overflow-y: hidden;">
             <tr>
                 <th [nzLeft]="true" nzWidth="50px" nzAlign="center">STT</th>
-                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên khách hàng</th>
                 <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Ngày thanh toán</th>
-                <th nzWidth="180px" nzColumnKey="price" [nzSortFn]="true" nzAlign="center">Giá sản phẩm</th>
-                <th nzWidth="180px" nzAlign="center">Loại sản
-                    phẩm</th>
+                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên thành viên</th>
+
+                <th nzWidth="180px" nzColumnKey="price" [nzSortFn]="true" nzAlign="center">Số tiền</th>
+                <th nzWidth="180px" nzAlign="center">Gói thành viên</th>
+                <th nzWidth="180px" nzAlign="center">Hạng thành viên</th>
                 <th nzWidth="180px" nzAlign="center">Phương thức thanh toán
                 </th>
                 <th nzWidth="180px" nzAlign="center">Trạng thái thanh
@@ -54,10 +55,11 @@
                     <!-- [nzExpand]="expandSet.has(data.courseId)" (nzExpandChange)="onExpandChange(data.courseId, $event)" -->
                     <td [nzLeft]="true">{{i + 1 + ((currentPage - 1) * pageSize)}} </td>
                     <!-- <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td> -->
-                    <td nzAlign="center" [nzLeft]="true"> {{ data.customerName }} </td>
                     <td nzAlign="center" [nzLeft]="true"> {{ data.paymentDate | date: 'dd/MM/YYYY HH:mm:ss'}} </td>
+                    <td nzAlign="center" [nzLeft]="true"> {{ data.customerName }} </td>
                     <td nzAlign="right"> {{ data.price | number }} </td>
                     <td nzAlign="center"> {{ data.priceMemberPolicyTypeName }} </td>
+                    <td nzAlign="center"> {{ data.memberPolicyLevelName}} </td>
                     <td nzAlign="center"> {{ data.paymentMethodName }} </td>
                     <td nzAlign="center"> {{ data.paymentStatusName }} </td>
                     <td nzAlign="center"> {{ data.organizationName }} </td>

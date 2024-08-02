@@ -35,4 +35,6 @@ export class TransactionHistoryResponse {
     priceMemberPolicyTypeName?: string;
 
     paymentMethodName?: string;
+
+    memberPolicyLevelName? : string;
 }

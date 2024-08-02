@@ -200,7 +200,7 @@ export class SideBarComponent implements OnInit {
           ]
         },
         {
-          name: 'Lịch sử thanh toán',
+          name: 'Tư cách thành viên',
           icon: '',
           link: '',
           children: [
