@@ -111,7 +111,6 @@ export class CreateStaffComponent implements OnInit{
         type: [...this.userForm.get('type')?.value].toString(),
       }
       if (this.isCreate) {
-
         this.staffService.createUser(data).subscribe({
           next: res => {
             if (res.success) {

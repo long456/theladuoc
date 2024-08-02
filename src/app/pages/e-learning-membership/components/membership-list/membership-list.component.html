@@ -17,7 +17,11 @@
       [loading]="loading"
     >
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Huy hiệu" key="name" [width]="'200px'"></table-column>
+      <table-column header="Huy hiệu" key="icon" [width]="'200px'">
+        <ng-template appCell let-data>
+          <img class="icon-membership" [src]="data.icon">
+        </ng-template>
+      </table-column>
       <table-column header="Tên hạng" key="name" [width]="'200px'"></table-column>
       <table-column header="Thứ hạng" key="level" [width]="'200px'"></table-column>
       <table-column header="Giá một tháng" key="priceMonth" [width]="'200px'">
