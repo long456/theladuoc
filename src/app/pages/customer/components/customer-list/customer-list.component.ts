@@ -69,7 +69,7 @@ export class CustomerListComponent implements OnInit{
   }
 
   create(): void{
-
+    this.router.navigate(['/page/customer/create']);
   }
 
   edit(data: any): void{

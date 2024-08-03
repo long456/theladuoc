@@ -26,6 +26,18 @@ export class CustomerService {
       }
     }
 
-    return this.http.get('Customer', {params: option})
+    return this.http.get('Customer', {params: option});
+  }
+
+  createCustomer(data: any): Observable<any>{
+    return this.http.post('Customer/create-new-customer', data);
+  }
+
+  getCustomerByCode(code: string): Observable<any>{
+    return this.http.get('Customer/' + code);
+  }
+
+  updateCustomer(data: any, code: string): Observable<any>{
+    return this.http.put('Customer',{data}, {params: {customerCode: code}});
   }
 }

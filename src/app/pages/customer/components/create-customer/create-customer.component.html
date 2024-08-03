@@ -1,0 +1,82 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới khách hàng' : 'Chỉnh sửa thông tin khách hàng'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="customerForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên khách hàng
+            <span class="text-danger">*</span>
+          </span>
+          <input
+            nz-input autofocus formControlName="name"
+            [nzStatus]="(customerForm.get('name')?.invalid &&
+                        (customerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(customerForm.get('name')?.touched || isSubmit) &&
+                        customerForm.get('name')?.hasError('required')">
+            Tên khách hàng không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Email
+            <span class="text-danger">*</span>
+          </span>
+          <input
+            nz-input autofocus formControlName="email" [readonly]="!isCreate"
+            [nzStatus]="(customerForm.get('email')?.invalid &&
+                        (customerForm.get('email')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(customerForm.get('email')?.touched || isSubmit) &&
+                        customerForm.get('email')?.hasError('required')">
+            Email khách hàng không được để trống
+          </span>
+
+          <span class="text-danger"
+                *ngIf="(customerForm.get('email')?.touched || isSubmit) &&
+                        customerForm.get('email')?.hasError('email')">
+            Email khách hàng không đúng định dạng
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Số điện thoại
+          </span>
+          <input nz-input formControlName="phoneNumber"
+                 [nzStatus]="(customerForm.get('phoneNumber')?.invalid &&
+                             (customerForm.get('phoneNumber')?.touched || isSubmit)) ? 'error' : ''">
+          <span class="text-danger"
+                *ngIf="(customerForm.get('phoneNumber')?.touched || isSubmit) &&
+                        customerForm.get('phoneNumber')?.hasError('email')">
+            Số điện thoại không đúng định dạng
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Địa chỉ
+          </span>
+          <input nz-input formControlName="address">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>
