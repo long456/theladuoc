@@ -38,6 +38,6 @@ export class CustomerService {
   }
 
   updateCustomer(data: any, code: string): Observable<any>{
-    return this.http.put('Customer',{data}, {params: {customerCode: code}});
+    return this.http.put('Customer/update-customer',{data}, {params: {customerCode: code}});
   }
 }
