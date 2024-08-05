@@ -6,6 +6,7 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {PaymentAuthService} from "../../services/payment-auth.service";
 import {environment} from "../../../../../environments/environment";
 import {NzImageService} from "ng-zorro-antd/image";
+import {NzModalService} from "ng-zorro-antd/modal";
 
 @Component({
   selector: 'app-payment-auth',
@@ -80,7 +81,8 @@ export class PaymentAuthComponent implements OnInit{
     private router: Router,
     private message: NzMessageService,
     private paymentAuthService: PaymentAuthService,
-    private nzImageService: NzImageService
+    private nzImageService: NzImageService,
+    private modal :NzModalService,
   ) {}
 
   ngOnInit() {
@@ -128,29 +130,23 @@ export class PaymentAuthComponent implements OnInit{
     this.nzImageService.preview(img, { nzZoom: 1, nzRotate: 0 });
   }
 
-  handleVerify(data: any, status: boolean) {
-    const param = {
-      id: data.id,
-      verifyPay: status
-    }
-    this.paymentAuthService.updatePayment(param).subscribe({
-      next: res => {
-        if (res.success) {
-          this.message.success(res.messages);
-          this.pageSize$.next(10);
-        } else {
-          this.message.error(res.errorMessages)
-        }
-      }
-    })
-  }
-
   verifyPayment(data: any) {
-    this.handleVerify(data, true);
-  }
-
-  unVerifyPayment(data: any) {
-    this.handleVerify(data, false);
+    this.modal.confirm({
+      nzTitle: 'Xác nhận thanh toán',
+      nzContent: 'Bạn có muốn xác thực cho thanh toán này?',
+      nzOnOk: () => {
+        this.paymentAuthService.updatePayment(data.id).subscribe({
+          next: res => {
+            if (res.success) {
+              this.message.success(res.messages);
+              this.pageSize$.next(10);
+            } else {
+              this.message.error(res.errorMessages);
+            }
+          }
+        })
+      }
+    });
   }
 
   setExpand(event: any) {

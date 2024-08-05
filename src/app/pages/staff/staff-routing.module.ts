@@ -14,7 +14,7 @@ const routes: Routes = [
     component: CreateStaffComponent
   },
   {
-    path:':code',
+    path:':id',
     data: {isCreate: false},
     component: CreateStaffComponent
   },
