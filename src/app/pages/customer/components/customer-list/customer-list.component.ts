@@ -46,7 +46,7 @@ export class CustomerListComponent implements OnInit{
           .pipe(
             map((value) => {
               return {
-                rows: value.data.classList,
+                rows: value.data.customerList,
                 page: value.data.paginationInfo.pageCurrent,
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
@@ -73,6 +73,6 @@ export class CustomerListComponent implements OnInit{
   }
 
   edit(data: any): void{
-
+    this.router.navigate(['/page/customer/' + data.id]);
   }
 }
