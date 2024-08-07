@@ -11,6 +11,7 @@ import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { plainToClass } from 'class-transformer';
 import { FilterElearningCourseReportComponent } from '../../funnel-report/dialog/filter-elearning-course-report/filter-elearning-course-report.component';
 import { finalize } from 'rxjs';
+import { DateTimeTypeSearch } from '../../constant/date-time-type-search.const';
 
 @Component({
   selector: 'app-report-paid-course',
@@ -33,10 +34,10 @@ export class ReportPaidCourseComponent {
     startCtrl: new FormControl(null),
     endCtrl: new FormControl(null),
     quarterOfYearCtrl: new FormControl(null),
-    dateTimeRangeCtrl: new FormControl(null),
-    monthCtrl: new FormControl(null),
-    yearCtrl: new FormControl(null),
-    quarterYearCtrl: new FormControl(null),
+    dateTimeRangeCtrl: new FormControl([] as any),
+    monthCtrl: new FormControl(null as any),
+    yearCtrl: new FormControl(null as any),
+    quarterYearCtrl: new FormControl(null as any),
   });
 
   ctrls = this.myForm.controls;
@@ -53,7 +54,13 @@ export class ReportPaidCourseComponent {
   }
 
   ngOnInit(): void {
-    this.syncData();
+    this.ctrls.dateTimeTypeSearchCtrl.valueChanges.subscribe(x => {
+      this.ctrls.dateTimeRangeCtrl.reset();
+      this.ctrls.monthCtrl.reset();
+      this.ctrls.yearCtrl.reset();
+      this.ctrls.quarterOfYearCtrl.reset();
+    });
+    // this.syncData();
   }
 
   resetForm() {
@@ -74,7 +81,7 @@ export class ReportPaidCourseComponent {
   getFilterDateTime() {
     let result = {};
     if (this.ctrls.quarterOfYearCtrl.value) {
-      if (this.ctrls.quarterYearCtrl.value) {
+      if (this.ctrls.quarterYearCtrl.value != null && this.ctrls.quarterYearCtrl.value != undefined) {
         let dateQuarterYear = this.ctrls.quarterYearCtrl.value as Date;
         result = this.dateTimeHelper.getQuarterOfYear(this.ctrls.quarterOfYearCtrl.value, dateQuarterYear.getFullYear());
       } else {
@@ -113,7 +120,11 @@ export class ReportPaidCourseComponent {
   }
 
   openFilter() {
-    this.resetForm();
+    // this.resetForm();
+    this.filter = {
+      ...this.filter,
+      ...this.getFilterDateTime()
+    };
     const modal: NzModalRef = this.modal.create<FilterElearningCourseReportComponent>({
       nzTitle: 'Tìm kiếm khóa học trả phí',
       nzContent: FilterElearningCourseReportComponent,
@@ -121,14 +132,46 @@ export class ReportPaidCourseComponent {
       nzWidth: '35%',
       nzData: {
         filter: this.filter,
-        courseType: ElearningType.PAID
+        courseType: ElearningType.PAID,
+        dateTimeTypeSearch: this.ctrls.dateTimeTypeSearchCtrl.value,
+        quarterOfYear: this.ctrls.quarterOfYearCtrl.value
       },
       nzMaskClosable: false
     });
 
     modal.afterClose.subscribe(x => {
       if (x) {
-        this.filter = { ...x };
+        this.filter = { ...x.dataFilter };
+        this.ctrls.dateTimeTypeSearchCtrl.setValue(x.dateTimeTypeSearch);
+        if (this.ctrls.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_DAY) {
+          if (x.dataFilter.start || x.dataFilter.end) {
+            let [dayStart, monthStart, yearStart] = x.dataFilter.start.split('/');
+            let [dayEnd, monthEnd, yearEnd] = x.dataFilter.end.split('/');
+            this.ctrls.dateTimeRangeCtrl.setValue([new Date(`${yearStart}-${monthStart}-${dayStart}`), new Date(`${yearEnd}-${monthEnd}-${dayEnd}`)]);
+          }
+        } else if (this.ctrls.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_MONTH) {
+          if (x.dataFilter.start) {
+            let [dayStart, monthStart, yearStart] = x.dataFilter.start.split('/');
+            this.ctrls.monthCtrl.setValue(new Date(`${yearStart}-${monthStart}-${dayStart}`));
+          }
+        } else if (this.ctrls.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_QUARTER) {
+          if (x.dataFilter.start) {
+            let [dayStart, monthStart, yearStart] = x.dataFilter.start.split('/');
+            this.ctrls.quarterYearCtrl.setValue(new Date(`${yearStart}-${monthStart}-${dayStart}`));
+          }
+
+          if (x.quarterOfYear) {
+            this.ctrls.quarterOfYearCtrl.setValue(x.quarterOfYear);
+          }
+        } else if (this.ctrls.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_YEAR) {
+          if (x.dataFilter.start) {
+            let [dayStart, monthStart, yearStart] = x.dataFilter.start.split('/');
+            this.ctrls.yearCtrl.setValue(new Date(`${yearStart}-${monthStart}-${dayStart}`));
+          }
+        }
+
+        this.filter = { ...x.dataFilter, ...this.getFilterDateTime() };
+        this.onSearch();
       } else if (x == 0) {
         this.filter = {};
       }

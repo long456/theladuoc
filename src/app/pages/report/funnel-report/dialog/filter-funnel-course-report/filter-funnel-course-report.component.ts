@@ -6,6 +6,7 @@ import { ReportService } from '../../../service/report.service';
 import { plainToClass } from 'class-transformer';
 import { DataDropResponse } from '../../../model/data-drop-response';
 import { FILTER_DATA_SEARCH, LST_QUARTER_OF_YEAR } from '../../../constant/report.const';
+import { DateTimeTypeSearch } from '../../../constant/date-time-type-search.const';
 
 @Component({
   selector: 'app-filter-funnel-course-report',
@@ -20,10 +21,10 @@ export class FilterFunnelCourseReportComponent {
     startCtrl: new FormControl(null),
     endCtrl: new FormControl(null),
     quarterOfYearCtrl: new FormControl(null),
-    dateTimeRangeCtrl: new FormControl(null),
-    monthCtrl: new FormControl(null),
-    yearCtrl: new FormControl(null),
-    quarterYearCtrl: new FormControl(null),
+    dateTimeRangeCtrl: new FormControl([] as any),
+    monthCtrl: new FormControl(null as any),
+    yearCtrl: new FormControl(null as any),
+    quarterYearCtrl: new FormControl(null as any),
     courseNameCtrl: new FormControl(null),
     speakerNameCtrl: new FormControl(null),
     phoneNumberCtrl: new FormControl(null),
@@ -40,7 +41,6 @@ export class FilterFunnelCourseReportComponent {
     private reportService: ReportService,
     @Inject(NZ_MODAL_DATA) public data: any
   ) {
-    console.log(data);
     this.setFilter();
   }
 
@@ -59,6 +59,39 @@ export class FilterFunnelCourseReportComponent {
     }
     if (this.data.filter.classId) {
       this.ctrl.classCtrl.setValue(this.data.filter.classId);
+    }
+
+    console.log(this.data);
+    if (this.data.dateTimeTypeSearch != null && this.data.dateTimeTypeSearch != undefined) {
+      this.ctrl.dateTimeTypeSearchCtrl.setValue(this.data.dateTimeTypeSearch);
+      if (this.ctrl.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_DAY) {
+        if (this.data.filter.start || this.data.filter.end) {
+          let [dayStart, monthStart, yearStart] = this.data.filter.start.split('/');
+          let [dayEnd, monthEnd, yearEnd] = this.data.filter.end.split('/');
+          this.ctrl.dateTimeRangeCtrl.setValue([new Date(`${yearStart}-${monthStart}-${dayStart}`), new Date(`${yearEnd}-${monthEnd}-${dayEnd}`)]);
+        }
+      } else if (this.ctrl.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_MONTH) {
+        if (this.data.filter.start) {
+          let [dayStart, monthStart, yearStart] = this.data.filter.start.split('/');
+          this.ctrl.monthCtrl.setValue(new Date(`${yearStart}-${monthStart}-${dayStart}`));
+        }
+      } else if (this.ctrl.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_QUARTER) {
+        console.log(this.data.filter.start);
+        if (this.data.filter.start) {
+          let [dayStart, monthStart, yearStart] = this.data.filter.start.split('/');
+          console.log([dayStart, monthStart, yearStart]);
+          this.ctrl.quarterYearCtrl.setValue(new Date(`${yearStart}-${monthStart}-${dayStart}`));
+        }
+
+        if (this.data.quarterOfYear) {
+          this.ctrl.quarterOfYearCtrl.setValue(this.data.quarterOfYear);
+        }
+      } else if (this.ctrl.dateTimeTypeSearchCtrl.value == DateTimeTypeSearch.SEARCH_BY_YEAR) {
+        if (this.data.filter.start) {
+          let [dayStart, monthStart, yearStart] = this.data.filter.start.split('/');
+          this.ctrl.yearCtrl.setValue(new Date(`${yearStart}-${monthStart}-${dayStart}`));
+        }
+      }
     }
   }
 
@@ -101,7 +134,7 @@ export class FilterFunnelCourseReportComponent {
       dataFilter.classId = this.ctrl.classCtrl.value;
     }
 
-    this.modal.close(dataFilter)
+    this.modal.close({ dataFilter: dataFilter, dateTimeTypeSearch: this.ctrl.dateTimeTypeSearchCtrl.value, quarterOfYear: this.ctrl.quarterOfYearCtrl.value })
   }
 
   getFilterDateTime() {

@@ -96,7 +96,6 @@ export class StaffComponent implements OnInit{
   }
 
   handleFilterForm(event: any) {
-    console.log(event)
     this.filterList$.next(event)
   }
 

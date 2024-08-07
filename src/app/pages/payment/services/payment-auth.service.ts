@@ -27,7 +27,7 @@ export class PaymentAuthService {
     return this.http.get('PaymentHistory/get-list', {params: option})
   }
 
-  updatePayment(data: any): Observable<any>{
-    return this.http.post('PaymentHistory/update-verify-pay', data);
+  updatePayment(id: number): Observable<any>{
+    return this.http.get('PaymentHistory/update-verify-pay/' + id);
   }
 }

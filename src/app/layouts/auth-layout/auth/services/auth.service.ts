@@ -36,11 +36,11 @@ export class AuthService {
   }
 
   getUserProfile(): Observable<any> {
-    return this.http.get('User/profile')
+    return this.http.get('User/profile');
   }
 
   updateUserProfile(data: any): Observable<any> {
-    return this.http.post('User/update-profile', data)
+    return this.http.post('User/update-profile', data);
   }
 
   updateUserPassword(data: UserPasswordData): Observable<any> {
@@ -48,6 +48,10 @@ export class AuthService {
   }
 
   updateAvatar(data: any): Observable<any>{
-    return this.http.post('User/update-avatar', data)
+    return this.http.post('User/update-avatar', data);
+  }
+
+  updateProfileTeacher(data: any): Observable<any>{
+    return this.http.post('User/update-profile-teacher', data);
   }
 }

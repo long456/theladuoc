@@ -13,19 +13,21 @@
         <div nz-col [nzSpan]="12" *ngIf="ctrl.dateTimeTypeSearchCtrl.value != null">
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 0">
                 <nz-form-label>Theo ngày</nz-form-label>
-                <nz-range-picker formControlName="dateTimeRangeCtrl" [nzFormat]="dateFormat"></nz-range-picker>
+                <nz-range-picker formControlName="dateTimeRangeCtrl" [nzFormat]="dateFormat"
+                    [nzAllowClear]="true"></nz-range-picker>
             </nz-form-item>
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 1">
                 <nz-form-label>Theo tháng</nz-form-label>
                 <nz-date-picker nzMode="month" [nzFormat]="monthFormat" formControlName="monthCtrl"
-                    style="width: 193px;"></nz-date-picker>
+                    [nzAllowClear]="true" style="width: 100%;display: flex;"></nz-date-picker>
             </nz-form-item>
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 2">
                 <nz-form-label>Theo quý</nz-form-label>
                 <div style="width: 100%;display: flex;">
-                    <nz-date-picker nzMode="year" formControlName="quarterYearCtrl"
+                    <nz-date-picker nzMode="year" formControlName="quarterYearCtrl" [nzAllowClear]="true"
                         style="margin-right: 10px;width: 50%;"></nz-date-picker>
-                    <nz-select nzPlaceHolder="---Chọn---" formControlName="quarterOfYearCtrl" style="width: 50%;">
+                    <nz-select nzPlaceHolder="---Chọn---" formControlName="quarterOfYearCtrl" style="width: 50%;"
+                        [nzAllowClear]="true">
                         <nz-option *ngFor="let option of lstQuarterOfYear" [nzValue]="option.value"
                             [nzLabel]="option.label"></nz-option>
                     </nz-select>
@@ -33,7 +35,8 @@
             </nz-form-item>
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 3">
                 <nz-form-label>Thời năm</nz-form-label>
-                <nz-date-picker nzMode="year" formControlName="yearCtrl" style="width: 193px;"></nz-date-picker>
+                <nz-date-picker nzMode="year" formControlName="yearCtrl"
+                    style="width: 100%;display: flex;"></nz-date-picker>
             </nz-form-item>
         </div>
     </div>

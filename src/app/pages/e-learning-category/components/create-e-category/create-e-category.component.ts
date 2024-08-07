@@ -30,7 +30,7 @@ export class CreateECategoryComponent implements OnInit{
 
     this.categoryForm = this.fb.group({
       title: [null, [Validators.required]],
-      description: [null],
+      description: [null, [Validators.maxLength(200)]],
       iconPath: [''],
       status: [1],
       priority: [0],
@@ -102,6 +102,7 @@ export class CreateECategoryComponent implements OnInit{
   }
 
   navigateBack() {
-    this.router.navigate(['/page/e-category'])
+    // this.router.navigate(['/page/e-category']);
+    console.log(this.categoryForm)
   }
 }

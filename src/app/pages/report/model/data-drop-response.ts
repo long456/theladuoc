@@ -6,4 +6,5 @@ export class DataDropResponse {
     speakersResponse: DropBaseResponse[]= [];
     phonesResponse: DropBaseResponse[]= [];
     coursesResponse: DropBaseResponse[]= [];
+    usersStudent: DropBaseResponse[]= [];
 }

@@ -18,27 +18,27 @@
                         </div>
                         <div nz-col [nzSpan]="18" style="width: 70%;" class="d-flex">
                             <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 0" class="mg-r-20">
-                                <nz-range-picker formControlName="dateTimeRangeCtrl"
+                                <nz-range-picker formControlName="dateTimeRangeCtrl" [nzAllowClear]="true"
                                     [nzFormat]="dateFormat"></nz-range-picker>
                             </nz-form-item>
                             <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 1" class="mg-r-20">
                                 <nz-date-picker nzMode="month" [nzFormat]="monthFormat" formControlName="monthCtrl"
-                                    style="width: 150px;"></nz-date-picker>
+                                    [nzAllowClear]="true" style="width: 150px;"></nz-date-picker>
                             </nz-form-item>
                             <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 2" class="mg-r-20">
                                 <div style="width: 80%;display: flex;">
                                     <nz-date-picker nzMode="year" formControlName="quarterYearCtrl"
-                                        class="min-width-140 mg-r-10"></nz-date-picker>
+                                        [nzAllowClear]="true" class="min-width-140 mg-r-10"></nz-date-picker>
                                     <nz-select nzPlaceHolder="---Chọn---" formControlName="quarterOfYearCtrl"
-                                        class="min-width-140">
+                                        [nzAllowClear]="true" class="min-width-140">
                                         <nz-option *ngFor="let option of lstQuarterOfYear" [nzValue]="option.value"
                                             [nzLabel]="option.label"></nz-option>
                                     </nz-select>
                                 </div>
                             </nz-form-item>
                             <nz-form-item *ngIf="ctrls.dateTimeTypeSearchCtrl.value == 3" class="mg-r-20">
-                                <nz-date-picker nzMode="year" formControlName="yearCtrl"
-                                    style="width: 193px;"></nz-date-picker>
+                                <nz-date-picker nzMode="year" formControlName="yearCtrl" [nzAllowClear]="true"
+                                    style="width: 100%;display: flex;"></nz-date-picker>
                             </nz-form-item>
                             <nz-form-item>
                                 <button nz-button type="button" [nzType]="'primary'" (click)="openSearch()"
@@ -67,13 +67,19 @@
                 <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên khóa học</th>
                 <th nzWidth="180px" nzColumnKey="mumberOfRegistrations" [nzSortFn]="true" nzAlign="center">Số người
                     đăng ký</th>
-                <th nzWidth="180px" nzColumnKey="numberOfLearners5Percent" [nzSortFn]="true" nzAlign="center">Số người học 5%</th>
-                <th nzWidth="180px" nzColumnKey="numberOfLearners25Percent" [nzSortFn]="true" nzAlign="center">Số người học 25%
+                <th nzWidth="180px" nzColumnKey="numberOfLearners5Percent" [nzSortFn]="true" nzAlign="center">Số người
+                    học 5%</th>
+                <th nzWidth="180px" nzColumnKey="numberOfLearners25Percent" [nzSortFn]="true" nzAlign="center">Số người
+                    học 25%
                 </th>
-                <th nzWidth="180px" nzColumnKey="numberOfLearners50Percent" [nzSortFn]="true" nzAlign="center">Số người học 50%</th>
-                <th nzWidth="180px" nzColumnKey="numberOfLearners75Percent" [nzSortFn]="true" nzAlign="center">Số người học 75%</th>
-                <th nzWidth="180px" nzColumnKey="numberOfLearners90Percent" [nzSortFn]="true" nzAlign="center">Số người học 90%</th>
-                <th nzWidth="180px" nzColumnKey="numberOfLearners100Percent" [nzSortFn]="true" nzAlign="center">Số người học 100%</th>
+                <th nzWidth="180px" nzColumnKey="numberOfLearners50Percent" [nzSortFn]="true" nzAlign="center">Số người
+                    học 50%</th>
+                <th nzWidth="180px" nzColumnKey="numberOfLearners75Percent" [nzSortFn]="true" nzAlign="center">Số người
+                    học 75%</th>
+                <th nzWidth="180px" nzColumnKey="numberOfLearners90Percent" [nzSortFn]="true" nzAlign="center">Số người
+                    học 90%</th>
+                <th nzWidth="180px" nzColumnKey="numberOfLearners100Percent" [nzSortFn]="true" nzAlign="center">Số người
+                    học 100%</th>
                 <th nzWidth="180px" nzAlign="center">Tên diễn giả</th>
                 <th nzWidth="180px" nzAlign="center">Số điện thoại</th>
                 <th nzWidth="180px" nzAlign="center">Tổ chức</th>
@@ -92,7 +98,7 @@
                     <td nzAlign="right"> {{ data.numberOfLearners25Percent }} </td>
                     <td nzAlign="right"> {{ data.numberOfLearners50Percent }} </td>
                     <td nzAlign="right"> {{ data.numberOfLearners75Percent }}</td>
-                    <td nzAlign="right"> {{ data.numberOfLearners90Percent  }} </td>
+                    <td nzAlign="right"> {{ data.numberOfLearners90Percent }} </td>
                     <td nzAlign="right"> {{ data.numberOfLearners100Percent }} </td>
                     <td nzAlign="center"> {{ data.speakerName }} </td>
                     <td nzAlign="center"> {{ data.phoneNumber }} </td>

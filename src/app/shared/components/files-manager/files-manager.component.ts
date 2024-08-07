@@ -282,6 +282,11 @@ export class FilesManagerComponent implements OnInit{
     }
   }
 
+  copyFilePatch():void {
+    navigator.clipboard.writeText(this.dataFileSelected.filePath);
+    this.message.success(this.dataFileSelected.filePath + ' đã được copy');
+  }
+
   onScroll(e: any) {
     console.log(e)
   }

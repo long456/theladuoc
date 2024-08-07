@@ -43,4 +43,8 @@ export class LessonService {
   getAllLesson(courseId: number): Observable<any>{
     return this.http.get('Lesson/get-all-lesson?courseId=' + courseId);
   }
+
+  attachLinkZoom(data: any, id: number): Observable<any>{
+    return this.http.put('Lesson/add-zoom/' + id, data);
+  }
 }

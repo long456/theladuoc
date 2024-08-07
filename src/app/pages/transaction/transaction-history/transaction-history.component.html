@@ -1,0 +1,87 @@
+<div class="title-page">
+    Lịch sử thanh toán
+</div>
+<div>
+    <div nz-row style="margin-bottom: 20px;" (keyup.enter)="onSearch()">
+        <div nz-col [nzSpan]="24" class="search-area d-flex">
+            <div class="d-flex justify-content-start" style="width: 50%;">
+                <form nz-form [formGroup]="myForm" class="w-100">
+                    <div nz-row [nzGutter]="24">
+                        <div nz-col [nzSpan]="6">
+
+                            <nz-form-item>
+                                <!-- <button nz-button type="button" [nzType]="'primary'" (click)="onSearch()"
+                                    class="mg-r-10">Tìm kiếm</button> -->
+                                <button nz-button type="button" [nzType]="'primary'" (click)="openFilter()"
+                                    class="mg-r-10">Lọc</button>
+                            </nz-form-item>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="d-flex justify-content-end" style="width: 50%;">
+                <!-- <button nz-button type="button" [nzType]="'primary'" (click)="syncData()" nz-tooltip
+                    nzTooltipTitle="Đồng bộ">
+                    <span nz-icon nzType="sync" nzTheme="outline"></span></button> -->
+            </div>
+        </div>
+    </div>
+
+    <nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed" [nzScroll]="{ x: 'auto' }"
+        nzShowPagination="false" (nzQueryParams)="onQueryParamsChange($event)">
+        <thead style="overflow-y: hidden;">
+            <tr>
+                <th [nzLeft]="true" nzWidth="50px" nzAlign="center">STT</th>
+                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Ngày thanh toán</th>
+                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên thành viên</th>
+
+                <th nzWidth="180px" nzColumnKey="price" [nzSortFn]="true" nzAlign="center">Số tiền</th>
+                <th nzWidth="180px" nzAlign="center">Gói thành viên</th>
+                <th nzWidth="180px" nzAlign="center">Hạng thành viên</th>
+                <th nzWidth="180px" nzAlign="center">Phương thức thanh toán
+                </th>
+                <th nzWidth="180px" nzAlign="center">Trạng thái thanh
+                    toán
+                </th>
+                <th nzWidth="180px" nzAlign="center">Tổ
+                    chức</th>
+                <th [nzRight]="true" nzWidth="120px" nzAlign="center">Chức năng</th>
+            </tr>
+        </thead>
+        <tbody style="overflow-y: hidden;">
+            <ng-container *ngFor="let data of nzTable.data; let i = index">
+                <tr>
+                    <!-- [nzExpand]="expandSet.has(data.courseId)" (nzExpandChange)="onExpandChange(data.courseId, $event)" -->
+                    <td [nzLeft]="true">{{i + 1 + ((currentPage - 1) * pageSize)}} </td>
+                    <!-- <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td> -->
+                    <td nzAlign="center" [nzLeft]="true"> {{ data.paymentDate | date: 'dd/MM/YYYY HH:mm:ss'}} </td>
+                    <td nzAlign="center" [nzLeft]="true"> {{ data.customerName }} </td>
+                    <td nzAlign="right"> {{ data.price | number }} </td>
+                    <td nzAlign="center"> {{ data.priceMemberPolicyTypeName }} </td>
+                    <td nzAlign="center"> {{ data.memberPolicyLevelName}} </td>
+                    <td nzAlign="center"> {{ data.paymentMethodName }} </td>
+                    <td nzAlign="center"> {{ data.paymentStatusName }} </td>
+                    <td nzAlign="center"> {{ data.organizationName }} </td>
+                    <td [nzRight]="true" nzAlign="center">
+                        <!-- <button nz-button nzType="default" nzShape="circle" nz-tooltip
+                            nzTooltipTitle="Xem quá trình hoạt động" (click)="onSeeProcess()"><span nz-icon
+                                nzType="rise" nzTheme="outline"></span></button>
+                        <button nz-button nzType="default" nzShape="circle" nz-tooltip
+                            nzTooltipTitle="Xem bảng xếp hạng" (click)="onSeeRanking()"> <span nz-icon
+                                nzType="ordered-list" nzTheme="outline"></span></button> -->
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </nz-table>
+    <div class="table-footer paging-table header-btn">
+        <div class="paging-table-right" style="margin-top: 20px;" *ngIf="items.length > 0">
+            <nz-pagination class="pagination" [(nzPageSize)]="pageSize" [(nzPageIndex)]="currentPage"
+                [nzTotal]="totalItem" (nzPageIndexChange)="onPageChange($event)"
+                (nzPageSizeChange)="nzPageSizeChange($event);" [nzShowTotal]="totalTemplate"
+                nzShowSizeChanger></nz-pagination>
+            <ng-template #totalTemplate let-total>Tổng có {{ totalItem }} bản ghi</ng-template>
+        </div>
+    </div>
+</div>

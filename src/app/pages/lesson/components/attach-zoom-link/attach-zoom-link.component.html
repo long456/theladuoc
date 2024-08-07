@@ -1,0 +1,36 @@
+<form [formGroup]="infoZoomForm">
+  <div nz-row [nzGutter]=[16,16]>
+    <div nz-col [nzSpan]="24">
+      <span class="text-label">
+        Link phòng zoom
+      </span>
+
+      <input nz-input formControlName="linkZoom">
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <span class="text-label">
+        ID phòng zoom
+      </span>
+
+      <input nz-input formControlName="zoomId">
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <span class="text-label">
+        Mật khẩu phòng zoom
+      </span>
+
+      <input nz-input formControlName="zoomPassword">
+    </div>
+
+    <div nz-col [nzSpan]="24" class="btn-group">
+      <button nz-button (click)="closeModal()">
+        Hủy
+      </button>
+      <button nz-button nzType="primary" [nzLoading]="isLoading" (click)="attach()">
+        Tạo
+      </button>
+    </div>
+  </div>
+</form>

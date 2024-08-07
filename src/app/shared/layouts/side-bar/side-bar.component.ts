@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from "../../models/MenuItem";
 import { Router } from "@angular/router";
 
@@ -7,11 +7,11 @@ import { Router } from "@angular/router";
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss']
 })
-export class SideBarComponent implements OnInit{
+export class SideBarComponent implements OnInit {
 
   constructor(
     private router: Router,
-  ) {}
+  ) { }
 
   isCollapsed: boolean = false;
 
@@ -84,7 +84,23 @@ export class SideBarComponent implements OnInit{
             },
           ]
         },
-
+        {
+          name: 'Hiệu quả nhân sự',
+          icon: '',
+          link: '',
+          children: [
+            {
+              name: 'Diễn giả',
+              icon: '',
+              link: 'page/report/report-speaker',
+            },
+            {
+              name: 'Nhân viên sales',
+              icon: '',
+              link: 'page/report/report-sales-staff',
+            }
+          ]
+        }
       ]
     },
     {
@@ -140,12 +156,12 @@ export class SideBarComponent implements OnInit{
           link: '',
           children: [
             {
-              name : 'Danh sách buổi học',
+              name: 'Danh sách buổi học',
               icon: '',
               link: 'page/attendance/lesson',
             },
             {
-              name : 'Danh sách điểm danh',
+              name: 'Danh sách điểm danh',
               icon: '',
               link: 'page/attendance/attend',
             }
@@ -182,6 +198,28 @@ export class SideBarComponent implements OnInit{
               link: 'page/e-learning-student/register',
             },
           ]
+        },
+        {
+          name: 'Tư cách thành viên',
+          icon: '',
+          link: '',
+          children: [
+            {
+              name: 'Yêu cầu nâng hạng',
+              icon: '',
+              link: 'page/membership-policy/request-upgrade',
+            },
+            {
+              name: 'Lịch sử thanh toán',
+              icon: '',
+              link: 'page/transaction-history',
+            },
+          ],
+        },
+        {
+          name: 'Yêu cầu liên hệ',
+          icon: '',
+          link: 'page/guests',
         },
         {
           name: 'Nhân sự',
@@ -244,17 +282,17 @@ export class SideBarComponent implements OnInit{
                   link: 'page/setting/website-config/config',
                 },
                 {
-                  name : 'Danh sách trang',
+                  name: 'Danh sách trang',
                   icon: '',
                   link: 'page/setting/website-config/page-config',
                 },
                 {
-                  name : 'Cấu hình thanh menu',
+                  name: 'Cấu hình thanh menu',
                   icon: '',
                   link: 'page/setting/website-config/header',
                 },
                 {
-                  name : 'Cấu hình chân trang',
+                  name: 'Cấu hình chân trang',
                   icon: '',
                   link: 'page/setting/website-config/footer',
                 },
@@ -312,10 +350,22 @@ export class SideBarComponent implements OnInit{
                   icon: '',
                   link: 'page/e-category',
                 },
+              ]
+            },
+            {
+              name: 'Tư cách thành viên',
+              icon: '',
+              link: '',
+              children: [
                 {
-                  name: 'Chính sách cộng tác viên',
+                  name: 'Hạng thành viên',
                   icon: '',
-                  link: 'page/collaborator-policy',
+                  link: 'page/membership-policy',
+                },
+                {
+                  name: 'Cấu hình chung',
+                  icon: '',
+                  link: 'page/membership-policy/config',
                 },
               ]
             },
@@ -359,6 +409,18 @@ export class SideBarComponent implements OnInit{
                   name: 'Danh sách kho hàng',
                   icon: '',
                   link: 'page/setting/warehouse',
+                },
+              ]
+            },
+            {
+              name: 'Dịch vụ khách hàng',
+              icon: '',
+              link: '',
+              children: [
+                {
+                  name: 'Danh sách khách hàng',
+                  icon: '',
+                  link: 'page/customer',
                 },
               ]
             }

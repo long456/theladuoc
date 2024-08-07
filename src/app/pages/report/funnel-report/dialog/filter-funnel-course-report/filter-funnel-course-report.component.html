@@ -18,7 +18,7 @@
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 1">
                 <nz-form-label>Theo tháng</nz-form-label>
                 <nz-date-picker nzMode="month" [nzFormat]="monthFormat" formControlName="monthCtrl"
-                    style="width: 193px;"></nz-date-picker>
+                    style="width: 100%;display: flex;"></nz-date-picker>
             </nz-form-item>
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 2">
                 <nz-form-label>Theo quý</nz-form-label>
@@ -33,7 +33,8 @@
             </nz-form-item>
             <nz-form-item *ngIf="ctrl.dateTimeTypeSearchCtrl.value == 3">
                 <nz-form-label>Thời năm</nz-form-label>
-                <nz-date-picker nzMode="year" formControlName="yearCtrl" style="width: 193px;"></nz-date-picker>
+                <nz-date-picker nzMode="year" formControlName="yearCtrl"
+                    style="width: 100%;display: flex;"></nz-date-picker>
             </nz-form-item>
         </div>
     </div>

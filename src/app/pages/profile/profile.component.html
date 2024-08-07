@@ -264,8 +264,7 @@
               <button
                 nz-button nzType="primary"
                 [disabled]="forgetPasswordForm.invalid"
-                (click)="changePassword()"
-              >
+                (click)="changePassword()">
                 Lưu
               </button>
               <button nz-button (click)="navigateBack()">Quay lại</button>
@@ -273,6 +272,133 @@
           </div>
         </form>
       </div>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="'Giới thiệu'" *ngIf="userType && userType.includes('4')">
+      <div class="user-title">
+        Thông tin giảng viên
+      </div>
+      <nz-divider></nz-divider>
+      <form [formGroup]="teacherInfoForm">
+        <div nz-row class="user-profile">
+          <div nz-col nzSpan="16" class="profile-content">
+            <div nz-row [nzGutter]=[24,16] class="info-user">
+              <div nz-col [nzSpan]="12" style="position: relative">
+                <span class="title-text">
+                  Slug giảng viên
+                </span>
+                <span class="text-danger italic"
+                      *ngIf="(teacherInfoForm.get('slugTeacher')?.touched) &&
+                              teacherInfoForm.get('slugTeacher')?.hasError('required')">
+                      Slug giảng viên không được để trống!
+                </span>
+                <input nz-input autofocus formControlName="slugTeacher"
+                       [nzStatus]="(teacherInfoForm.get('slugTeacher')?.invalid &&
+                                   (teacherInfoForm.get('slugTeacher')?.touched)) ? 'error' : ''">
+              </div>
+
+              <div nz-col [nzSpan]="12">
+                <span class="title-text">
+                  Tên vị trí
+                </span>
+                <input nz-input formControlName="positionName">
+              </div>
+
+              <div nz-col [nzSpan]="12">
+                <span class="title-text">
+                  Số điện thoại
+                </span>
+                <input nz-input formControlName="phoneNumber">
+              </div>
+
+              <div nz-col [nzSpan]="12"></div>
+
+              <div nz-col [nzSpan]="12">
+                <span class="title-text">
+                  Link Facebook
+                </span>
+                <input nz-input formControlName="linkFacebook">
+              </div>
+
+              <div nz-col [nzSpan]="12">
+                <span class="title-text">
+                  Link Tiktok
+                </span>
+                <input nz-input formControlName="linkTiktok">
+              </div>
+
+              <div nz-col [nzSpan]="12">
+                <span class="title-text">
+                  Link Youtube
+                </span>
+                <input nz-input formControlName="linkYoutube">
+              </div>
+
+              <div nz-col [nzSpan]="12">
+                <span class="title-text">
+                  Link Website
+                </span>
+                <input nz-input formControlName="linkWebsite">
+              </div>
+
+              <div nz-col [nzSpan]="24">
+                <span class="title-text">
+                  Giới thiệu ngắn
+                </span>
+                <textarea nz-input [nzAutosize]="{ minRows: 3}" formControlName="description"></textarea>
+              </div>
+
+              <div nz-col [nzSpan]="24">
+                <div class="password-btn">
+                  <button
+                    nz-button nzType="primary"
+                    [disabled]="teacherInfoForm.invalid"
+                    (click)="updateInfoTeacher()">
+                    Lưu
+                  </button>
+                  <button nz-button (click)="navigateBack()">Quay lại</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div nz-col nzSpan="8">
+            <div nz-row>
+              <div nz-col nzSpan="24">
+                <p class="skill-title">Danh sách kỹ năng</p>
+                <nz-divider></nz-divider>
+              </div>
+
+              <div nz-col nzSpan="24" style="text-align: center">
+                <button nz-button nzType="primary" (click)="addSkill()" *ngIf="skillList.length === 0">
+                  <span nz-icon nzType="plus"></span>
+                </button>
+              </div>
+
+              <ng-container *ngFor="let skill of skillList; let i = index">
+                <div nz-col nzSpan="24" class="skill-content"
+                     [class.active]="activeSkill === i" (click)="setActiveSkill(i)">
+                  <input nz-input placeholder="Tên kỹ năng" nzBorderless
+                         [(ngModel)]="skill.skillName" [ngModelOptions]="{standalone: true}">
+                  <div class="skill-rate">
+                    <nz-slider [(ngModel)]="skill.progress" [ngModelOptions]="{standalone: true}"></nz-slider>
+                  </div>
+
+                  <div class="skill-btn" *ngIf="activeSkill === i">
+                    <button nz-button nzType="primary" (click)="addSkill()">
+                      <span nz-icon nzType="plus"></span>
+                    </button>
+
+                    <button nz-button nzDanger (click)="removeSkill(i)">
+                      <span nz-icon nzType="delete"></span>
+                    </button>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </form>
     </nz-tab>
   </nz-tabset>
 </div>

@@ -7,6 +7,8 @@ import { ReportMemberShipCourseComponent } from './elearning-report/report-membe
 import { ReportPaidCourseComponent } from './elearning-report/report-paid-course/report-paid-course.component';
 import { ReportBigCourseComponent } from './funnel-report/report-big-course/report-big-course.component';
 import { ReportFunnelCourseComponent } from './funnel-report/report-funnel-course/report-funnel-course.component';
+import { SpeakerReportComponent } from './speaker-report/speaker-report.component';
+import { StaffSalesReportComponent } from './staff-sales-report/staff-sales-report.component';
 
 
 const routes: Routes = [
@@ -21,7 +23,9 @@ const routes: Routes = [
   { path: 'report-member-course', component: ReportMemberShipCourseComponent, },
   { path: 'report-instructor-course', component: ReportInstructorCourseComponent, },
   { path: 'report-free-course', component: ReportFreeCourseComponent, },
-  { path: 'report-collaborator-course', component: ReportCollaboratorCourseComponent, }
+  { path: 'report-collaborator-course', component: ReportCollaboratorCourseComponent, },
+  { path: 'report-speaker', component: SpeakerReportComponent, },
+  { path: 'report-sales-staff', component: StaffSalesReportComponent, }
 ];
 
 @NgModule({
