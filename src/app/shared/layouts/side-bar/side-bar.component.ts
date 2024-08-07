@@ -205,6 +205,11 @@ export class SideBarComponent implements OnInit {
           link: '',
           children: [
             {
+              name: 'Yêu cầu nâng hạng',
+              icon: '',
+              link: 'page/membership-policy/request-upgrade',
+            },
+            {
               name: 'Lịch sử thanh toán',
               icon: '',
               link: 'page/transaction-history',
@@ -356,6 +361,11 @@ export class SideBarComponent implements OnInit {
                   name: 'Hạng thành viên',
                   icon: '',
                   link: 'page/membership-policy',
+                },
+                {
+                  name: 'Cấu hình chung',
+                  icon: '',
+                  link: 'page/membership-policy/config',
                 },
               ]
             },

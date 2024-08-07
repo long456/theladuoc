@@ -8,6 +8,10 @@ import {ELearningMembershipRoutingModule} from "./e-learning-membership-routing.
 import {NzSwitchModule} from "ng-zorro-antd/switch";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {NzDividerModule} from "ng-zorro-antd/divider";
+import { RequestUpgradeComponent } from './components/request-upgrade/request-upgrade.component';
+import { MembershipConfigComponent } from './components/config/membership-config/membership-config.component';
+import { ConfigRouterOutletComponent } from './components/config/config-router-outlet/config-router-outlet.component';
+import { ConfigDetailComponent } from './components/config/config-detail/config-detail.component';
 
 
 
@@ -15,7 +19,11 @@ import {NzDividerModule} from "ng-zorro-antd/divider";
 @NgModule({
   declarations: [
     MembershipListComponent,
-    CreateMembershipComponent
+    CreateMembershipComponent,
+    RequestUpgradeComponent,
+    MembershipConfigComponent,
+    ConfigRouterOutletComponent,
+    ConfigDetailComponent
   ],
   imports: [
     CommonModule,

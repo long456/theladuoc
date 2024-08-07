@@ -106,6 +106,10 @@
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <ul nz-menu>
+    <li nz-menu-item (click)="copyFilePatch()">
+      <span nz-icon nzType="copy" nzTheme="outline"></span>
+      Copy đường dẫn file
+    </li>
     <li nz-menu-item (click)="openFakeModel()">
       <span nz-icon nzType="edit" nzTheme="outline"></span>
       Đổi tên
