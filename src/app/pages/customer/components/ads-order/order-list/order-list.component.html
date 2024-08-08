@@ -1,0 +1,69 @@
+<div class="title-page">
+  Danh sách đơn hàng
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(order$ | async) as order">
+    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+
+    <app-table
+      [rows]="order.rows"
+      [page]="order.page"
+      [pageSize]="order.pageSize"
+      [pageTotal]="order.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Ngày hoạt động" key="id" [dataType]="COL_DATA_TYPE.DATE" [width]="'180px'"></table-column>
+      <table-column header="Tên/mã chiến dịch" key="name"  [width]="'180px'"></table-column>
+      <table-column header="Tổng ngân sách" key="totalBudget"  [width]="'180px'">
+        <ng-template appCell let-data>
+          {{data.totalBudget | currency: 'VND'}}
+        </ng-template>
+      </table-column>
+      <table-column header="Mục tiêu" key="targetDisplay"  [width]="'180px'"></table-column>
+      <table-column header="Ngưỡng CPA" key="cpaThreshold"  [width]="'180px'"></table-column>
+      <table-column header="Sản phẩm/khóa học" key="productName"  [width]="'180px'"></table-column>
+      <table-column header="Đích chuyển đổi" key="conversionDestination"  [width]="'180px'"></table-column>
+      <table-column header="Link content chạy Ads" key="linkContent"  [width]="'180px'"></table-column>
+      <table-column header="Nền tảng chạy" key="platforms"  [width]="'180px'"></table-column>
+      <table-column header="Tên khách hàng" key="customerName"  [width]="'180px'"></table-column>
+      <table-column header="Số điện thoại khách hàng" key="customerPhoneNumber"  [width]="'180px'"></table-column>
+      <table-column header="Nhân viên thực thi" key="staffName"  [width]="'180px'"></table-column>
+      <table-column header="Số điện thoại nhân viên" key="staffPhoneNumber"  [width]="'180px'"></table-column>
+      <table-column header="Trạng thái đơn hàng" key="offerStatus"  [width]="'180px'"></table-column>
+      <table-column header="Trạng thái thanh toán" key="adsPaymentStatusDisplay"  [width]="'180px'"></table-column>
+      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'150px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Thiết lập">
+            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Giao việc">
+            <span nz-icon nzType="send" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Duyệt đơn hàng">
+            <span nz-icon nzType="check" nzTheme="outline" class="custom-icon"></span>
+          </span>
+
+          <span class="custom-action delete" (click)="delete(data)"
+                nz-tooltip nzTooltipTitle="Hủy đơn hàng">
+            <span nz-icon nzType="delete" nzTheme="outline" class="custom-icon"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

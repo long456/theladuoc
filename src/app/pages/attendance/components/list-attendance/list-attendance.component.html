@@ -4,6 +4,14 @@
 
 <div class="header-btn">
   <ng-container *ngIf="(listAttendance$ | async) as attend">
+    <nz-collapse class="filter-form" [class.expand]="isExpand">
+      <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
+        <app-filter-form
+          [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"
+          [isExportExcel]="true" (getExcelData)="handleExportExcel($event)"></app-filter-form>
+      </nz-collapse-panel>
+    </nz-collapse>
+
     <app-table
       [rows]="attend.rows"
       [page]="attend.page"
@@ -18,23 +26,12 @@
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Thời gian" key="attendanceTime" [width]="'200px'"></table-column>
       <table-column header="Tên học viên" key="studentName" [width]="'200px'"></table-column>
+      <table-column header="Nhân viên chăm sóc" key="userCareName" [width]="'200px'"></table-column>
       <table-column header="Email" key="studentEmail" [width]="'200px'"></table-column>
       <table-column header="Lớp tham gia" key="className" [width]="'200px'"></table-column>
       <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
       <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
       <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column [width]="'180px'" fixColumn="right" >
-        <ng-template appHeader>
-          Chức năng
-        </ng-template>
-
-        <ng-template appCell let-data>
-          <span class="custom-action" (click)="excelExport(data)"
-                nz-tooltip nzTooltipTitle="Xuất excel ">
-            <span nz-icon nzType="file-excel" nzTheme="outline"></span>
-          </span>
-        </ng-template>
-      </table-column>
     </app-table>
   </ng-container>
 </div>

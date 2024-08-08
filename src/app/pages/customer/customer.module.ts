@@ -5,13 +5,18 @@ import {CustomerRoutingModule} from "./customer-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CreateCustomerComponent } from './components/create-customer/create-customer.component';
-
+import {OrderRouterOutletComponent} from "./components/ads-order/order-router-outlet/order-router-outlet.component";
+import {OrderListComponent} from "./components/ads-order/order-list/order-list.component";
+import {CreateOrderComponent} from "./components/ads-order/create-order/create-order.component";
 
 
 @NgModule({
   declarations: [
     CustomerListComponent,
-    CreateCustomerComponent
+    CreateCustomerComponent,
+    OrderRouterOutletComponent,
+    OrderListComponent,
+    CreateOrderComponent,
   ],
   imports: [
     CommonModule,

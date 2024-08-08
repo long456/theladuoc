@@ -422,6 +422,11 @@ export class SideBarComponent implements OnInit {
                   icon: '',
                   link: 'page/customer',
                 },
+                {
+                  name: 'Đơn chạy Ads',
+                  icon: '',
+                  link: 'page/customer/ads',
+                },
               ]
             }
           ]
