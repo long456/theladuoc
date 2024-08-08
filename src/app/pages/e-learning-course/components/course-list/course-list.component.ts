@@ -53,7 +53,7 @@ export class CourseListComponent implements OnInit{
               }
             }),
             catchError(err => {
-              this.message.error('Lỗi load dữ liệu danh mục khóa học');
+              this.message.error('Lỗi load dữ liệu danh sách khóa học E-learning');
               return of({
                 rows: [],
                 page: 0,

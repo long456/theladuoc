@@ -5,6 +5,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ListLessonComponent } from './components/list-lesson/list-lesson.component';
 import { ListAttendanceComponent } from './components/list-attendance/list-attendance.component';
+import {NzCollapseModule} from "ng-zorro-antd/collapse";
 
 
 
@@ -19,6 +20,7 @@ import { ListAttendanceComponent } from './components/list-attendance/list-atten
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    NzCollapseModule
   ]
 })
 export class AttendanceModule { }

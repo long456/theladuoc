@@ -34,7 +34,7 @@
       <table-column header="Vai trò" key="type" [width]="'200px'"></table-column>
       <table-column header="Nhóm quyền" key="courseCode" [width]="'100%'">
         <ng-template appCell let-data>
-          <span *ngFor="let role of data.roles; index as i" (click)="log(data)">
+          <span *ngFor="let role of data.roles; index as i">
             <span *ngIf="i <= 2">
               {{role.roleName}},
             </span>

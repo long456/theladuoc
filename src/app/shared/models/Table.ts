@@ -206,6 +206,10 @@ export const FilterType: {[key: string]: filterItem} = {
     title: 'Tên form',
     name: 'title',
   },
+  lessonName: {
+    title: 'Tên buổi học',
+    name: 'lessonName',
+  }
 }
 
 
