@@ -102,7 +102,6 @@ export class CreateECategoryComponent implements OnInit{
   }
 
   navigateBack() {
-    // this.router.navigate(['/page/e-category']);
-    console.log(this.categoryForm)
+    this.router.navigate(['/page/e-category']);
   }
 }

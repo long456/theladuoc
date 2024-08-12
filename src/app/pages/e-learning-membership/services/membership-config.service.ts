@@ -25,6 +25,14 @@ export class MembershipConfigService {
       }
     }
 
-    return this.http.get('MemberPolicyLevel', {params: option});
+    return this.http.get('MemberPolicyLevel/list-config-member-policy', {params: option});
+  }
+
+  getDetailMembershipConfig(): Observable<any>{
+    return this.http.get('MemberPolicyLevel/detail-config-member-policy');
+  }
+
+  updateMembershipConfig(data: any): Observable<any>{
+    return this.http.post('MemberPolicyLevel/config-member-policy', data);
   }
 }

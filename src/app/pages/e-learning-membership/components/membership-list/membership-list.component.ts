@@ -99,4 +99,8 @@ export class MembershipListComponent implements OnInit{
   edit(data: any):void{
     this.router.navigate(['page/membership-policy/' + data.id]).then();
   }
+
+  editOptionalCourse(data: any):void {
+    this.router.navigate(['page/membership-policy/optional-courses/' + data.id]).then();
+  }
 }
