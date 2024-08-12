@@ -12,7 +12,9 @@ import { RequestUpgradeComponent } from './components/request-upgrade/request-up
 import { MembershipConfigComponent } from './components/config/membership-config/membership-config.component';
 import { ConfigRouterOutletComponent } from './components/config/config-router-outlet/config-router-outlet.component';
 import { ConfigDetailComponent } from './components/config/config-detail/config-detail.component';
-
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { OptionalCoursesComponent } from './components/optional-courses/optional-courses.component';
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 
 
@@ -23,7 +25,8 @@ import { ConfigDetailComponent } from './components/config/config-detail/config-
     RequestUpgradeComponent,
     MembershipConfigComponent,
     ConfigRouterOutletComponent,
-    ConfigDetailComponent
+    ConfigDetailComponent,
+    OptionalCoursesComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +36,9 @@ import { ConfigDetailComponent } from './components/config/config-detail/config-
     SharedModule,
     NzSwitchModule,
     NzInputNumberModule,
-    NzDividerModule
+    NzDividerModule,
+    NzCheckboxModule,
+    NzSelectModule
   ]
 })
 export class ELearningMembershipModule { }

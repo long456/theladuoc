@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {COL_DATA_TYPE, filterItem, FilterType} from "../../../../shared/models/Table";
-import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
+import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, switchMap, tap} from "rxjs";
 import {AttendanceService} from "../../services/attendance.service";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
@@ -27,9 +27,12 @@ export class ListAttendanceComponent implements OnInit{
 
   isExpand = false;
   listOfColumn: filterItem[] = [
+    FilterType['studentNameAttendance'],
+    FilterType['studentPhoneNumber'],
+    FilterType['studentEmail'],
+    FilterType['caregiverName'],
     FilterType['courseName'],
     FilterType['className'],
-    FilterType['studentName'],
     FilterType['lessonName'],
     FilterType['speakerName'],
   ];
@@ -51,7 +54,7 @@ export class ListAttendanceComponent implements OnInit{
     ])
     .pipe(
       tap(() => this.loading = true),
-      mergeMap(([page, pageSize, filter]) => {
+      switchMap(([page, pageSize, filter]) => {
         return this.attendanceService.getAttendanceList(page, pageSize, filter)
           .pipe(
             map((value) => {

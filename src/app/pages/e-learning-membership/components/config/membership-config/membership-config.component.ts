@@ -42,7 +42,7 @@ export class MembershipConfigComponent implements OnInit{
           .pipe(
             map((value) => {
               return {
-                rows: value.data.listPolicy,
+                rows: value.data.configMemberPolicy,
                 page: value.data.paginationInfo.pageCurrent,
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
@@ -64,5 +64,7 @@ export class MembershipConfigComponent implements OnInit{
     )
   }
 
-  edit(data: any) {}
+  edit() {
+    this.router.navigate(['page/membership-policy/config/edit']).then();
+  }
 }

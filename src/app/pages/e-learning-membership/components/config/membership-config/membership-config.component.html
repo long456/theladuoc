@@ -4,6 +4,8 @@
 
 <div class="header-btn">
   <ng-container *ngIf="(membershipConfig$ | async) as config">
+    <button nz-button class="add-btn primary" (click)="edit()" >Chỉnh sửa</button>
+
     <app-table
       [rows]="config.rows"
       [page]="config.page"
@@ -17,48 +19,43 @@
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Tổ chức" key="organizationName" [width]="'180px'"></table-column>
       <table-column header="Chính sách hạ cấp" key="description" [width]="'180px'"></table-column>
-      <table-column header="Thời hạn hạ cấp (Ngày)" key="NumberDaysInactivity" [width]="'180px'"></table-column>
-      <table-column header="Gói một tháng" key="IsShowPriceMonth" [width]="'180px'">
+      <table-column header="Thời hạn hạ cấp (Ngày)" key="numberDaysInactivity" [width]="'180px'"></table-column>
+      <table-column header="Gói một tháng" key="isShowPriceMonth" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-invalid" *ngIf="!data.IsShowPriceMonth">Ẩn</span>
-          <span class="text-valid" *ngIf="data.IsShowPriceMonth">Kích hoạt</span>
+          <span class="text-invalid" *ngIf="!data.isShowPriceMonth">Ẩn</span>
+          <span class="text-valid" *ngIf="data.isShowPriceMonth">Kích hoạt</span>
         </ng-template>
       </table-column>
-      <table-column header="Gói 3 tháng" key="IsShowPrice3Month" [width]="'180px'">
+      <table-column header="Gói 3 tháng" key="isShowPrice3Month" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-invalid" *ngIf="!data.IsShowPrice3Month">Ẩn</span>
-          <span class="text-valid" *ngIf="data.IsShowPrice3Month">Kích hoạt</span>
+          <span class="text-invalid" *ngIf="!data.isShowPrice3Month">Ẩn</span>
+          <span class="text-valid" *ngIf="data.isShowPrice3Month">Kích hoạt</span>
         </ng-template>
       </table-column>
-      <table-column header="Gói một năm" key="IsShowPriceYear" [width]="'180px'">
+      <table-column header="Gói một năm" key="isShowPriceYear" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-invalid" *ngIf="!data.IsShowPriceYear">Ẩn</span>
-          <span class="text-valid" *ngIf="data.IsShowPriceYear">Kích hoạt</span>
+          <span class="text-invalid" *ngIf="!data.isShowPriceYear">Ẩn</span>
+          <span class="text-valid" *ngIf="data.isShowPriceYear">Kích hoạt</span>
         </ng-template>
       </table-column>
-      <table-column header="Gói vĩnh viễn" key="IsShowPriceForever" [width]="'180px'">
+      <table-column header="Gói vĩnh viễn" key="isShowPriceForever" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-invalid" *ngIf="!data.IsShowPriceForever">Ẩn</span>
-          <span class="text-valid" *ngIf="data.IsShowPriceForever">Kích hoạt</span>
+          <span class="text-invalid" *ngIf="!data.isShowPriceForever">Ẩn</span>
+          <span class="text-valid" *ngIf="data.isShowPriceForever">Kích hoạt</span>
         </ng-template>
       </table-column>
-      <table-column [width]="'180px'" fixColumn="right" >
-        <ng-template appHeader>
-          Chức năng
-        </ng-template>
+<!--      <table-column [width]="'180px'" fixColumn="right" >-->
+<!--        <ng-template appHeader>-->
+<!--          Chức năng-->
+<!--        </ng-template>-->
 
-                <ng-template appCell let-data>
-                  <span class="custom-action" (click)="edit(data)"
-                        nz-tooltip nzTooltipTitle="Chỉnh sửa cấu hình">
-                    <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
-                  </span>
-
-        <!--          <span class="custom-action delete" (click)="delete(data)"-->
-        <!--                nz-tooltip nzTooltipTitle="Xoá chính sách">-->
-        <!--            <span nz-icon nzType="delete" nzTheme="outline" class="custom-icon"></span>-->
-        <!--          </span>-->
-        </ng-template>
-      </table-column>
+<!--        <ng-template appCell let-data>-->
+<!--          <span class="custom-action" (click)="edit(data)"-->
+<!--                nz-tooltip nzTooltipTitle="Chỉnh sửa cấu hình">-->
+<!--            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>-->
+<!--          </span>-->
+<!--        </ng-template>-->
+<!--      </table-column>-->
     </app-table>
   </ng-container>
 </div>

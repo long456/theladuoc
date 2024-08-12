@@ -32,6 +32,14 @@ export class MembershipService {
     return this.http.get('MemberPolicyLevel/' + id);
   }
 
+  getOpCourseByMemId(id: number): Observable<any>{
+    return this.http.get('MemberPolicyLevel/get-detail-member-policy-group-elearning/' + id);
+  }
+
+  updateOpCourseByMemId(data: any): Observable<any>{
+    return this.http.post('MemberPolicyLevel/update-member-policy-group-elearning', data);
+  }
+
   createMembership(data: any): Observable<any> {
     return this.http.post('MemberPolicyLevel/create', data)
   }

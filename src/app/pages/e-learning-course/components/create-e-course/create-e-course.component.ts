@@ -120,9 +120,7 @@ export class CreateECourseComponent implements OnInit {
         this.courseElearningId = id;
         this.eCourseService.getCourseById(id).subscribe({
           next: res => {
-            this.courseForm.patchValue(res.data)
-            console.log(res)
-            console.log(this.courseForm.value)
+            this.courseForm.patchValue(res.data);
           }
         })
       })
