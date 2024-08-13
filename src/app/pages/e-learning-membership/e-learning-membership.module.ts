@@ -26,7 +26,7 @@ import {NzSelectModule} from "ng-zorro-antd/select";
     MembershipConfigComponent,
     ConfigRouterOutletComponent,
     ConfigDetailComponent,
-    OptionalCoursesComponent
+    OptionalCoursesComponent,
   ],
   imports: [
     CommonModule,

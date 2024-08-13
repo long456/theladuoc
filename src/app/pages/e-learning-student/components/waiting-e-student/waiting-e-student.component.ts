@@ -4,6 +4,7 @@ import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observ
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {ELearningStudentService} from "../../services/e-learning-student.service";
+import {HandleEStudentService} from "../../services/handle-e-student.service";
 
 @Component({
   selector: 'app-waiting-e-student',
@@ -23,11 +24,13 @@ export class WaitingEStudentComponent implements OnInit{
   pageSize$ = new BehaviorSubject(10);
   filterList$ = new BehaviorSubject(null);
   loading = false;
+  itemSelectList: number[] = [];
 
   constructor(
     private router: Router,
     private message: NzMessageService,
     private eLearningStudentService: ELearningStudentService,
+    private handleEStudentService: HandleEStudentService
   ) {}
 
   ngOnInit() {
@@ -63,6 +66,32 @@ export class WaitingEStudentComponent implements OnInit{
       delay(200),
       tap(() => this.loading = false),
     );
+  }
+
+  getItemSelection(e: any) {
+    this.itemSelectList = e;
+  }
+
+  takeCareStudent() {
+    this.handleEStudentService.takeCareStudent(this.itemSelectList);
+    this.handleEStudentService.status$.subscribe({
+      next: value => {
+        if (value) {
+          this.pageSize$.next(this.pageSize$.getValue());
+        }
+      }
+    });
+  }
+
+  refuseCare() {
+    this.handleEStudentService.refuseCareStudent(this.itemSelectList);
+    this.handleEStudentService.status$.subscribe({
+      next: value => {
+        if (value) {
+          this.pageSize$.next(this.pageSize$.getValue());
+        }
+      }
+    });
   }
 
 }

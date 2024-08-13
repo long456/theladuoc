@@ -3,6 +3,8 @@
 </div>
 
 <div class="header-btn">
+  <button nz-button class="add-btn primary" (click)="takeCareStudent()">Nhận chăm sóc</button>
+  <button nz-button class="add-btn" (click)="refuseCare()">Từ chối</button>
   <ng-container *ngIf="(waitingEStudent$ | async) as student">
     <app-table
       [rows]="student.rows"
@@ -13,7 +15,9 @@
       (pageIndexChange)="page$.next($event)"
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
+      (onItemSelection)="getItemSelection($event)"
     >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Ngày đăng ký" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
       <table-column header="Tên học viên" key="fullName" [width]="'180px'"></table-column>
@@ -44,8 +48,6 @@
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu>
               <li nz-menu-item>Xem chi tiết</li>
-              <li nz-menu-item>Nhận chăm sóc</li>
-              <li nz-menu-item>Từ chối chăm sóc</li>
             </ul>
           </nz-dropdown-menu>
         </ng-template>

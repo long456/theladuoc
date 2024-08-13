@@ -181,7 +181,7 @@ export class TakingCareStudentComponent implements OnInit{
           onClick: (instance) => {
             if (!(instance instanceof PaymentCheckComponent) ||
                  (instance.paymentForm.value.amountPaid > 0 && instance.paymentForm.value.receiptImage === null)) {
-              this.message.error('Chưa upload ảnh ủy nhiệm chi')
+              this.message.error('Chưa upload ảnh ủy nhiệm chi');
             } else {
               modal.triggerOk().then();
             }
