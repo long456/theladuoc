@@ -200,14 +200,19 @@ export class SideBarComponent implements OnInit {
           ]
         },
         {
-          name: 'Tư cách thành viên',
+          name: 'Nghiệp vụ kế toán',
           icon: '',
           link: '',
           children: [
             {
-              name: 'Yêu cầu nâng hạng',
+              name: 'Xác thực thanh toán',
               icon: '',
-              link: 'page/membership-policy/request-upgrade',
+              link: '/',
+            },
+            {
+              name: 'Yêu cầu hoàn tiền',
+              icon: '',
+              link: '/',
             },
             {
               name: 'Lịch sử thanh toán',
@@ -357,6 +362,11 @@ export class SideBarComponent implements OnInit {
               icon: '',
               link: '',
               children: [
+                {
+                  name: 'Yêu cầu nâng hạng',
+                  icon: '',
+                  link: 'page/membership-policy/request-upgrade',
+                },
                 {
                   name: 'Hạng thành viên',
                   icon: '',
