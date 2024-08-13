@@ -141,16 +141,6 @@ export class SideBarComponent implements OnInit {
           ]
         },
         {
-          name: 'Xác thực thanh toán',
-          icon: '',
-          link: 'page/payment/auth',
-        },
-        {
-          name: 'Yêu cầu hoàn tiền',
-          icon: '',
-          link: 'page/payment/refund',
-        },
-        {
           name: 'Điểm danh',
           icon: '',
           link: '',
@@ -200,14 +190,19 @@ export class SideBarComponent implements OnInit {
           ]
         },
         {
-          name: 'Tư cách thành viên',
+          name: 'Nghiệp vụ kế toán',
           icon: '',
           link: '',
           children: [
             {
-              name: 'Yêu cầu nâng hạng',
+              name: 'Xác thực thanh toán',
               icon: '',
-              link: 'page/membership-policy/request-upgrade',
+              link: 'page/payment/auth',
+            },
+            {
+              name: 'Yêu cầu hoàn tiền',
+              icon: '',
+              link: 'page/payment/refund',
             },
             {
               name: 'Lịch sử thanh toán',
@@ -358,6 +353,11 @@ export class SideBarComponent implements OnInit {
               link: '',
               children: [
                 {
+                  name: 'Yêu cầu nâng hạng',
+                  icon: '',
+                  link: 'page/membership-policy/request-upgrade',
+                },
+                {
                   name: 'Hạng thành viên',
                   icon: '',
                   link: 'page/membership-policy',
@@ -421,6 +421,11 @@ export class SideBarComponent implements OnInit {
                   name: 'Danh sách khách hàng',
                   icon: '',
                   link: 'page/customer',
+                },
+                {
+                  name: 'Đơn chạy Ads',
+                  icon: '',
+                  link: 'page/customer/ads',
                 },
               ]
             }

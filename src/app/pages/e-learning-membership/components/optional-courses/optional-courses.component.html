@@ -1,0 +1,42 @@
+<div class="title-page">
+  Thiết lập khóa học tùy chọn
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="optionalCourseForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="6">
+          <span class="text-label">
+            Số khoá kích hoạt tối đa
+          </span>
+
+          <nz-input-number formControlName="maxSelectElearning" [nzMin]="0" [nzStep]="1"></nz-input-number>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <span class="text-label" *ngIf="listCourseELearning.length > 0">
+            Danh sách khóa học
+          </span>
+
+          <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="onSelectCourse($event)">
+            <div nz-row>
+              <div nz-col [nzSpan]="4" *ngFor="let course of listCourseELearning">
+                <label nz-checkbox [nzValue]="course.id" [nzChecked]="course.isSelected">{{course.elearningName}}</label>
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        Lưu
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

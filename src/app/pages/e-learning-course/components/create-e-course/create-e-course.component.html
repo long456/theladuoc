@@ -193,7 +193,6 @@
         <div *ngIf="showMemberPolicyLevel" nz-col [nzXs]="24" [nzSm]="24">
           <span class="text-label">
             {{controlNames.memberPolicyLevelId}}
-            <span class="text-danger">*</span>
             <span class="text-danger message-error" *ngIf="courseForm.get('memberPolicyLevelId')?.invalid && courseForm.get('memberPolicyLevelId')?.touched">
               {{ getErrorMessage('memberPolicyLevelId') }}
             </span>

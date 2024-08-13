@@ -1,0 +1,26 @@
+<form [formGroup]="upgradeCourseForm">
+  <div nz-row [nzGutter]=[16,16]>
+    <div nz-col [nzSpan]="24">
+      <span>
+        Tên học viên
+      </span>
+
+      <div>
+        <input nz-input formControlName="name" readonly/>
+      </div>
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <span>
+        Khóa học
+      </span>
+
+      <nz-select style="display: block" formControlName="elearningId">
+        <nz-option
+          *ngFor="let course of listELearningCourse"
+          [nzValue]="course.id"
+          [nzLabel]="course.elearningName"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+</form>

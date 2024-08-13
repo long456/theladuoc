@@ -75,4 +75,8 @@ export class CustomerListComponent implements OnInit{
   edit(data: any): void{
     this.router.navigate(['/page/customer/' + data.customerCode]);
   }
+
+  assignRole(data: any): void {
+
+  }
 }

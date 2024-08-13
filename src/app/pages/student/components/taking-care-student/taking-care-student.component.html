@@ -32,12 +32,12 @@
       <table-column header="Loại vé" key="ticket"></table-column>
       <table-column header="Số tiền" key="price" [width]="'150px'">
         <ng-template appCell let-data>
-          {{data.price + ' VND'}}
+          {{data.price | currency: 'VND'}}
         </ng-template>
       </table-column>
       <table-column header="Số tiền đã thanh toán" key="amountPaid" [width]="'150px'">
         <ng-template appCell let-data>
-          {{data.amountPaid + ' VND'}}
+          {{data.amountPaid | currency: 'VND'}}
         </ng-template>
       </table-column>
       <table-column header="Trạng thái thanh toán" key="isPay" [width]="'180px'">

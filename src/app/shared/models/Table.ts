@@ -31,6 +31,10 @@ export const FilterType: {[key: string]: filterItem} = {
     title: 'Tên học viên',
     name: 'name',
   },
+  studentNameAttendance: {
+    title: 'Tên học viên',
+    name: 'studentName',
+  },
   mobile: {
     title: 'Số điện thoại',
     name: 'mobile',
@@ -205,6 +209,18 @@ export const FilterType: {[key: string]: filterItem} = {
   nameForm:{
     title: 'Tên form',
     name: 'title',
+  },
+  lessonName: {
+    title: 'Tên buổi học',
+    name: 'lessonName',
+  },
+  studentPhoneNumber: {
+    title: 'Số điện thoại',
+    name: 'studentPhoneNumber',
+  },
+  studentEmail: {
+    title: 'Email',
+    name: 'studentEmail',
   },
 }
 

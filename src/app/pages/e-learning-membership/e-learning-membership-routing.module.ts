@@ -6,6 +6,7 @@ import {RequestUpgradeComponent} from "./components/request-upgrade/request-upgr
 import {ConfigRouterOutletComponent} from "./components/config/config-router-outlet/config-router-outlet.component";
 import {MembershipConfigComponent} from "./components/config/membership-config/membership-config.component";
 import {ConfigDetailComponent} from "./components/config/config-detail/config-detail.component";
+import {OptionalCoursesComponent} from "./components/optional-courses/optional-courses.component";
 
 
 
@@ -32,8 +33,17 @@ const routes: Routes = [
         component: MembershipConfigComponent
       },
       {
-        path: ':id',
+        path: 'edit',
         component: ConfigDetailComponent
+      }
+    ]
+  },
+  {
+    path:'optional-courses',
+    children: [
+      {
+        path:':id',
+        component: OptionalCoursesComponent,
       }
     ]
   },
@@ -46,7 +56,7 @@ const routes: Routes = [
     path:':id',
     data: {isCreate: false},
     component: CreateMembershipComponent,
-  }
+  },
 ];
 
 @NgModule({

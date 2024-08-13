@@ -2,7 +2,7 @@
   <img src="assets/img/login-bg.png" alt="image" class="login__bg">
   <form class="login__form" [formGroup]="loginForm">
     <div class="logo-domain">
-      <ng-container *ngIf="logoDomain;else logoDefault">
+      <ng-container *ngIf="logoDomain">
         <img class="text-logo" [src]="logoDomain" alt="logo" >
       </ng-container>
     </div>
@@ -49,10 +49,7 @@
   </form>
 </div>
 
-<ng-template #logoDefault>
-  <img class="text-logo" src="assets/img/text-logo.svg">
-</ng-template>
+<!--<ng-template #logoDefault>-->
+<!--  <img class="text-logo" src="assets/img/text-logo.svg">-->
+<!--</ng-template>-->
 
-<ng-template #logoDefault>
-  <img class="text-logo" src="assets/img/text-logo.svg">
-</ng-template>

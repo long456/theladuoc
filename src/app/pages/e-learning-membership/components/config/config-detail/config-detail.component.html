@@ -1,1 +1,55 @@
-<p>config-detail works!</p>
+<div class="title-page">
+  Chỉnh sửa cấu hình tư cách thành viên
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="membershipConfigForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="4">
+          <label nz-checkbox formControlName="isShowPriceMonth">Hiển thị giá 1 tháng</label>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+          <label nz-checkbox formControlName="isShowPrice3Month">Hiển thị giá 3 tháng</label>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+          <label nz-checkbox formControlName="isShowPriceYear">Hiển thị giá 1 năm</label>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+          <label nz-checkbox formControlName="isShowPriceForever">Hiển thị giá vĩnh viễn</label>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Số ngày không hoạt động tối đa
+          </span>
+
+          <nz-input-number formControlName="numberDaysInactivity" [nzMin]="0" [nzStep]="1"></nz-input-number>
+        </div>
+
+        <div nz-col [nzSpan]="16"></div>
+
+        <div nz-col [nzSpan]="16">
+          <span class="text-label">
+            Mô tả chính sách
+          </span>
+
+          <textarea formControlName="description" nz-input [nzAutosize]="{ minRows: 3 }"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        Lưu
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

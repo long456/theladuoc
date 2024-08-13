@@ -7,7 +7,7 @@ import { GuestsListComponent } from './components/guests-list/guests-list.compon
 
 @NgModule({
   declarations: [
-    GuestsListComponent
+    GuestsListComponent,
   ],
   imports: [
     CommonModule,

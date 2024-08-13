@@ -4,6 +4,9 @@ import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observ
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {ELearningStudentService} from "../../services/e-learning-student.service";
+import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
+import {ActiveCourseComponent} from "../active-course/active-course.component";
+import {ActiveCourseService} from "../../services/active-course.service";
 
 @Component({
   selector: 'app-taking-care-e-student',
@@ -28,6 +31,8 @@ export class TakingCareEStudentComponent implements OnInit{
     private router: Router,
     private message: NzMessageService,
     private eLearningStudentService: ELearningStudentService,
+    private modal: NzModalService,
+    private activeCourseService: ActiveCourseService
   ) {}
 
   ngOnInit() {
@@ -63,5 +68,9 @@ export class TakingCareEStudentComponent implements OnInit{
       delay(200),
       tap(() => this.loading = false),
     );
+  }
+
+  activeCourse(data: any) {
+    this.activeCourseService.activeCourse(data);
   }
 }
