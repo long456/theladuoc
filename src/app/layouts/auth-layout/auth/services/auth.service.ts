@@ -54,4 +54,8 @@ export class AuthService {
   updateProfileTeacher(data: any): Observable<any>{
     return this.http.post('User/update-profile-teacher', data);
   }
+
+  getProfileTeacher(): Observable<any>{
+    return this.http.get('User/get-detail-profile-teacher');
+  }
 }

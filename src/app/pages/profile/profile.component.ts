@@ -96,10 +96,25 @@ export class ProfileComponent implements OnInit{
           this.userType = res.data.type;
           const baseUrl = environment.baseImgUrl
           this.linkAvatar = baseUrl + res.data.avatar;
-          this.userForm.patchValue(res.data)
+          this.userForm.patchValue(res.data);
+
+          if (this.userType && this.userType.includes('4')) {
+            this.getInfoTeacher();
+          }
         }
       }
-    })
+    });
+  }
+
+  getInfoTeacher() {
+    this.authService.getProfileTeacher().subscribe({
+      next: res => {
+        if (res.success) {
+          this.teacherInfoForm.patchValue(res.data);
+          this.skillList = JSON.parse(res.data.skills);
+        }
+      }
+    });
   }
 
   minLengthValidator(length: number): ValidatorFn{

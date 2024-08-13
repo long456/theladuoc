@@ -96,7 +96,19 @@ export class ELearningStudentService {
     return this.http.get('User/waiting', {params: option})
   }
 
-  receiveCareUser(userId: number): Observable<any>{
-    return this.http.post('User/receive-care-user-waiting', {id: userId})
+  receiveCareUser(idList: string): Observable<any>{
+    return this.http.post('User/receive-care-user-waiting', {userIds: idList});
+  }
+
+  refuseCareUser(idList: string): Observable<any>{
+    return this.http.post('User/not-receive-care-user-waiting', {userIds: idList});
+  }
+
+  getECourseToActive(): Observable<any>{
+    return this.http.get('CourseElearning/get-list-option-elearning-to-active');
+  }
+
+  activeECourse(data: any): Observable<any>{
+    return this.http.post('CourseElearning/active-elearning-to-student', data);
   }
 }

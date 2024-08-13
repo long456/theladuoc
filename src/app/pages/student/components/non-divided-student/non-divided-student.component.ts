@@ -130,9 +130,9 @@ export class NonDividedStudentComponent implements OnInit{
 
   takeCareStudent() {
     if (this.itemSelectList.length === 0) {
-      this.message.error('Chưa có mục nào được chọn')
+      this.message.error('Chưa có mục nào được chọn');
     } else {
-      let data = JSON.stringify(this.itemSelectList)
+      let data = JSON.stringify(this.itemSelectList);
       this.studentService.takeCareStudent(data).subscribe({
         next: res => {
           if (res.success) {
