@@ -141,16 +141,6 @@ export class SideBarComponent implements OnInit {
           ]
         },
         {
-          name: 'Xác thực thanh toán',
-          icon: '',
-          link: 'page/payment/auth',
-        },
-        {
-          name: 'Yêu cầu hoàn tiền',
-          icon: '',
-          link: 'page/payment/refund',
-        },
-        {
           name: 'Điểm danh',
           icon: '',
           link: '',
@@ -207,12 +197,12 @@ export class SideBarComponent implements OnInit {
             {
               name: 'Xác thực thanh toán',
               icon: '',
-              link: '/',
+              link: 'page/payment/auth',
             },
             {
               name: 'Yêu cầu hoàn tiền',
               icon: '',
-              link: '/',
+              link: 'page/payment/refund',
             },
             {
               name: 'Lịch sử thanh toán',
