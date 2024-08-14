@@ -4,6 +4,14 @@
 
 <div class="header-btn">
   <ng-container *ngIf="(takingCareEStudent$ | async) as student">
+    <nz-collapse class="filter-form" [class.expand]="isExpand">
+      <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
+        <app-filter-form
+          [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"
+        ></app-filter-form>
+      </nz-collapse-panel>
+    </nz-collapse>
+
     <app-table
       [rows]="student.rows"
       [page]="student.page"

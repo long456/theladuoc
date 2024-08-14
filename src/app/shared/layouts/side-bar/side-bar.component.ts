@@ -178,14 +178,14 @@ export class SideBarComponent implements OnInit {
               link: 'page/e-learning-student/take-care',
             },
             {
-              name: 'Đang học',
-              icon: '',
-              link: 'page/e-learning-student/studying',
-            },
-            {
               name: 'Đăng ký khóa học',
               icon: '',
               link: 'page/e-learning-student/register',
+            },
+            {
+              name: 'Đang học',
+              icon: '',
+              link: 'page/e-learning-student/studying',
             },
           ]
         },
@@ -344,6 +344,11 @@ export class SideBarComponent implements OnInit {
                   name: 'Danh mục khóa học',
                   icon: '',
                   link: 'page/e-category',
+                },
+                {
+                  name: 'Lời chứng thực',
+                  icon: '',
+                  link: 'page/testimonials',
                 },
               ]
             },

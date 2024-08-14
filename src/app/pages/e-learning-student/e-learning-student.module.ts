@@ -11,6 +11,7 @@ import { RegisteringEStudentComponent } from './components/registering-e-student
 import { ActiveCourseComponent } from './components/active-course/active-course.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NzCollapseModule} from "ng-zorro-antd/collapse";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     ReactiveFormsModule,
     NzDropDownModule,
-    NzSelectModule
+    NzSelectModule,
+    NzCollapseModule,
   ]
 })
 export class ELearningStudentModule { }
