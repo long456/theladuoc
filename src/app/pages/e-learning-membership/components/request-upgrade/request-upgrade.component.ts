@@ -43,7 +43,7 @@ export class RequestUpgradeComponent implements OnInit{
           .pipe(
             map((value) => {
               return {
-                rows: value.data,
+                rows: value.data.orders,
                 page: value.data.paginationInfo.pageCurrent,
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
