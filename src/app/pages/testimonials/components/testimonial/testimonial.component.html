@@ -1,0 +1,40 @@
+<div class="title-page">
+  Danh sách lời chứng thực
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(testimonialList$ | async) as testimonial">
+    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+
+    <app-table
+      [rows]="testimonial.rows"
+      [page]="testimonial.page"
+      [pageSize]="testimonial.pageSize"
+      [pageTotal]="testimonial.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+      (onItemSelection)="getItemSelection($event)"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Thể loại" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Người chứng thực" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Thiết lập">
+            <span nz-icon nzType="edit" nzTheme="outline"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

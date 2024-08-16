@@ -76,6 +76,10 @@ const routes: Routes = [
       {
         path: 'guests',
         loadChildren: () => import('./pages/guests/guests.module').then(m => m.GuestsModule),
+      },
+      {
+        path: 'testimonials',
+        loadChildren: () => import('./pages/testimonials/testimonials.module').then(m => m.TestimonialsModule),
       }
     ],
   },

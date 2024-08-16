@@ -178,14 +178,14 @@ export class SideBarComponent implements OnInit {
               link: 'page/e-learning-student/take-care',
             },
             {
-              name: 'Đang học',
-              icon: '',
-              link: 'page/e-learning-student/studying',
-            },
-            {
               name: 'Đăng ký khóa học',
               icon: '',
               link: 'page/e-learning-student/register',
+            },
+            {
+              name: 'Đang học',
+              icon: '',
+              link: 'page/e-learning-student/studying',
             },
           ]
         },
@@ -210,6 +210,18 @@ export class SideBarComponent implements OnInit {
               link: 'page/transaction-history',
             },
           ],
+        },
+        {
+          name: 'Tư cách thành viên',
+          icon: '',
+          link: '',
+          children: [
+            {
+              name: 'Yêu cầu nâng hạng',
+              icon: '',
+              link: 'page/membership-policy/request-upgrade',
+            },
+          ]
         },
         {
           name: 'Yêu cầu liên hệ',
@@ -345,6 +357,11 @@ export class SideBarComponent implements OnInit {
                   icon: '',
                   link: 'page/e-category',
                 },
+                {
+                  name: 'Lời chứng thực',
+                  icon: '',
+                  link: 'page/testimonials',
+                },
               ]
             },
             {
@@ -352,11 +369,6 @@ export class SideBarComponent implements OnInit {
               icon: '',
               link: '',
               children: [
-                {
-                  name: 'Yêu cầu nâng hạng',
-                  icon: '',
-                  link: 'page/membership-policy/request-upgrade',
-                },
                 {
                   name: 'Hạng thành viên',
                   icon: '',

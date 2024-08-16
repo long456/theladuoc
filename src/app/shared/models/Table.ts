@@ -31,6 +31,10 @@ export const FilterType: {[key: string]: filterItem} = {
     title: 'Tên học viên',
     name: 'name',
   },
+  fullName: {
+    title: 'Tên học viên',
+    name: 'fullName',
+  },
   studentNameAttendance: {
     title: 'Tên học viên',
     name: 'studentName',
@@ -58,6 +62,10 @@ export const FilterType: {[key: string]: filterItem} = {
   caregiverName:    {
     title: 'Nhân viên chăm sóc',
     name: 'caregiverName',
+  },
+  userRefName: {
+    title: 'Nhân viên chăm sóc',
+    name: 'userRefName',
   },
   courseName:{
     title: 'Tên khóa học',

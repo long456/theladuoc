@@ -1,0 +1,103 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới lời chứng thực' : 'Chỉnh sửa lời chứng thực'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="testimonialForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Họ và tên
+            <span class="text-danger">*</span>
+          </span>
+
+          <input
+            nz-input autofocus formControlName="fullName"
+            [nzStatus]="(testimonialForm.get('fullName')?.invalid &&
+                        (testimonialForm.get('fullName')?.touched || isSubmit)) ? 'error' : ''">
+          <span
+            class="text-danger"
+            *ngIf="(testimonialForm.get('fullName')?.touched || isSubmit)  &&
+                    testimonialForm.get('fullName')?.hasError('required')">
+              Họ và tên không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Chức danh
+            <span class="text-danger">*</span>
+          </span>
+
+          <input
+            nz-input formControlName="position"
+            [nzStatus]="(testimonialForm.get('position')?.invalid &&
+                        (testimonialForm.get('position')?.touched || isSubmit)) ? 'error' : ''">
+          <span
+            class="text-danger"
+            *ngIf="(testimonialForm.get('position')?.touched || isSubmit)  &&
+                    testimonialForm.get('position')?.hasError('required')">
+              Chức danh không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Phân loại
+          </span>
+
+          <nz-select formControlName="type">
+            <nz-option [nzValue]="1" [nzLabel]="'Học viên'"></nz-option>
+            <nz-option [nzValue]="2" [nzLabel]="'Giảng viên'"></nz-option>
+            <nz-option [nzValue]="3" [nzLabel]="'Đối tác'"></nz-option>
+          </nz-select>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Ảnh đại diện
+          </span>
+
+          <div class="avatar">
+            <input nz-input [value]="testimonialForm.get('avatarImgPath')?.value" formControlName="avatarImgPath">
+
+            <button nz-button nzType="primary" (click)="selectFile()">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đánh giá
+          </span>
+
+          <nz-rate style="display: block" formControlName="starRate"></nz-rate>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="16">
+          <span class="text-label">
+            Nội dung
+          </span>
+
+          <textarea
+            nz-input formControlName="content"
+            [nzAutosize]="{ minRows: 3 }"
+          ></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

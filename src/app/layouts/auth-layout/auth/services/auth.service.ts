@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {UserData, UserPasswordData} from "../models/user-data";
 import {HttpClient} from "@angular/common/http";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    private message: NzMessageService,
+    private router: Router,
   ) { }
 
   setUserData(data: UserData) :void {
@@ -27,7 +31,11 @@ export class AuthService {
   }
 
   isAuthor(permission: string): boolean {
-    const userDataPermission = this.getUserData().permissions;
+    const userDataPermission = this.getUserData()?.permissions;
+    if (!userDataPermission || userDataPermission.length === 0) {
+      this.router.navigate(['auth']).then();
+      return false;
+    }
 
     if (userDataPermission.includes(permission)) {
       return true;

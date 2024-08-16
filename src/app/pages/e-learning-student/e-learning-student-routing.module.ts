@@ -5,6 +5,7 @@ import {WaitingEStudentComponent} from "./components/waiting-e-student/waiting-e
 import {TakingCareEStudentComponent} from "./components/taking-care-e-student/taking-care-e-student.component";
 import {StudyingEStudentComponent} from "./components/studying-e-student/studying-e-student.component";
 import {RegisteringEStudentComponent} from "./components/registering-e-student/registering-e-student.component";
+import {PermissionGuardService} from "../../shared/router-guard/permission-guard.service";
 
 const routes: Routes = [
   {
@@ -22,7 +23,9 @@ const routes: Routes = [
   },
   {
     path: 'take-care',
-    component: TakingCareEStudentComponent
+    component: TakingCareEStudentComponent,
+    canActivate: [PermissionGuardService],
+    data: { requiredPermission: 'student_care_list' }
   },
   {
     path: 'studying',

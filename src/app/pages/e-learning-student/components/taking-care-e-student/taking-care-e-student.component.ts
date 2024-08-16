@@ -7,6 +7,7 @@ import {ELearningStudentService} from "../../services/e-learning-student.service
 import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {ActiveCourseComponent} from "../active-course/active-course.component";
 import {ActiveCourseService} from "../../services/active-course.service";
+import {AuthService} from "../../../../layouts/auth-layout/auth/services/auth.service";
 
 @Component({
   selector: 'app-taking-care-e-student',
@@ -27,12 +28,22 @@ export class TakingCareEStudentComponent implements OnInit{
   filterList$ = new BehaviorSubject(null);
   loading = false;
 
+  isExpand = false;
+  listOfColumn: filterItem[] = [
+    FilterType['fullName'],
+    FilterType['mobile'],
+    FilterType['email'],
+    FilterType['studentCode'],
+    FilterType['caregiverName'],
+    FilterType['userRefName'],
+  ];
   constructor(
     private router: Router,
     private message: NzMessageService,
     private eLearningStudentService: ELearningStudentService,
     private modal: NzModalService,
-    private activeCourseService: ActiveCourseService
+    private activeCourseService: ActiveCourseService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -70,7 +81,15 @@ export class TakingCareEStudentComponent implements OnInit{
     );
   }
 
-  activeCourse(data: any) {
+  activeCourse(data: any): void{
     this.activeCourseService.activeCourse(data);
+  }
+
+  setExpand(event: any) {
+    this.isExpand = event
+  }
+
+  handleFilterForm(event: any) {
+    this.filterList$.next(event)
   }
 }
