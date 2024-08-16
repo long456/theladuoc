@@ -60,11 +60,12 @@ export class ConfigDetailComponent implements OnInit{
 
   addBenefit(data: any, index: number): void {
     const benefit = {
-      id: data.length +1,
+      id: data.length + 1 + '.' + index,
       title: '',
       memberPolicyIds: [],
     };
     this.benefitList[index].benefits.push(benefit);
+    console.log(this.benefitList)
   }
 
   removeBenefit(i: number, ib: number): void{
