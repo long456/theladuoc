@@ -80,6 +80,14 @@ const routes: Routes = [
       {
         path: 'testimonials',
         loadChildren: () => import('./pages/testimonials/testimonials.module').then(m => m.TestimonialsModule),
+      },
+      {
+        path: 'news-category',
+        loadChildren: () => import('./pages/news-category/news-category.module').then(m => m.NewsCategoryModule),
+      },
+      {
+        path: 'news',
+        loadChildren: () => import('./pages/news/news.module').then(m => m.NewsModule),
       }
     ],
   },

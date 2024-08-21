@@ -41,6 +41,7 @@ export class CreateOrganizationComponent implements OnInit{
       name: ['', [Validators.required]],
       websiteCms: ['', [Validators.required]],
       websiteElearning: [''],
+      websiteForum: [''],
       website: [null, [Validators.required]],
       splitData: [1],
       userId: [null],

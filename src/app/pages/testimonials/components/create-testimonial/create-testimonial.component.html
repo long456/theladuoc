@@ -2,11 +2,11 @@
   {{isCreate? 'Tạo mới lời chứng thực' : 'Chỉnh sửa lời chứng thực'}}
 </div>
 
-<div nz-row>
-  <div nz-col [nzSpan]="20">
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="20" [nzLg]="20">
     <form [formGroup]="testimonialForm">
-      <div nz-row [nzGutter]=[16,16]>
-        <div nz-col [nzSpan]="8">
+      <div nz-row [nzGutter]="[16, 16]">
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
             Họ và tên
             <span class="text-danger">*</span>
@@ -24,7 +24,7 @@
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8">
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
             Chức danh
             <span class="text-danger">*</span>
@@ -42,19 +42,19 @@
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8">
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
             Phân loại
           </span>
 
-          <nz-select formControlName="type">
+          <nz-select formControlName="type" >
             <nz-option [nzValue]="1" [nzLabel]="'Học viên'"></nz-option>
             <nz-option [nzValue]="2" [nzLabel]="'Giảng viên'"></nz-option>
             <nz-option [nzValue]="3" [nzLabel]="'Đối tác'"></nz-option>
           </nz-select>
         </div>
 
-        <div nz-col [nzSpan]="8">
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
             Ảnh đại diện
           </span>
@@ -68,7 +68,7 @@
           </div>
         </div>
 
-        <div nz-col [nzSpan]="8">
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
             Đánh giá
           </span>
@@ -76,9 +76,7 @@
           <nz-rate style="display: block" formControlName="starRate"></nz-rate>
         </div>
 
-        <div nz-col [nzSpan]="8"></div>
-
-        <div nz-col [nzSpan]="16">
+        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="16">
           <span class="text-label">
             Nội dung
           </span>
@@ -92,7 +90,7 @@
     </form>
   </div>
 
-  <div nz-col [nzSpan]="4">
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="4" [nzLg]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
         {{isCreate? 'Tạo mới' : 'Lưu'}}
