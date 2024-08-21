@@ -25,16 +25,36 @@
           {{data.price | currency: 'VND'}}
         </ng-template>
       </table-column>
-      <table-column header="Thời hạn gói" key="priceMemberPolicyType" [width]="'180px'"></table-column>
+      <table-column header="Thời hạn gói" key="priceMemberPolicyType" [width]="'180px'">
+        <ng-template appCell let-data>
+          <span *ngIf="data.paymentMethod === 0">Gói một tháng</span>
+          <span *ngIf="data.paymentMethod === 1">Gói 3 tháng</span>
+          <span *ngIf="data.paymentMethod === 2">Gói 3 tháng</span>
+          <span *ngIf="data.paymentMethod === 3">Gói vĩnh viễn</span>
+        </ng-template>
+      </table-column>
       <table-column header="Hạng thành viên" key="memberPolicyLevelName" [width]="'180px'"></table-column>
-      <table-column header="Phương thức thanh toán" key="paymentMethod" [width]="'180px'"></table-column>
-      <table-column header="Trạng thái thanh toán" key="paymentStatus" [width]="'180px'"></table-column>
+      <table-column header="Phương thức thanh toán" key="paymentMethod" [width]="'200px'">
+        <ng-template appCell let-data>
+          <span *ngIf="data.paymentMethod === 1">Thanh toán điểm</span>
+          <span *ngIf="data.paymentMethod === 2">Thanh toán VnPay</span>
+          <span *ngIf="data.paymentMethod === 3">Chuyển khoản</span>
+        </ng-template>
+      </table-column>
+      <table-column header="Trạng thái thanh toán" key="paymentStatus" [width]="'180px'">
+        <ng-template appCell let-data>
+          <span *ngIf="data.paymentStatus === 0">Chưa thanh toán</span>
+          <span *ngIf="data.paymentStatus === 1">Đã thanh toán</span>
+          <span *ngIf="data.paymentStatus === 2">Lỗi thanh toán</span>
+          <span *ngIf="data.paymentStatus === 3">Huỷ thanh toán</span>
+        </ng-template>
+      </table-column>
       <table-column header="Nhân viên chăm sóc" key="caregiverName" [width]="'180px'"></table-column>
       <table-column header="Tổ chức" key="organizationName" [width]="'180px'"></table-column>
-      <table-column [width]="'180px'" fixColumn="right" >
-        <ng-template appHeader>
-          Chức năng
-        </ng-template>
+<!--      <table-column [width]="'180px'" fixColumn="right" >-->
+<!--        <ng-template appHeader>-->
+<!--          Chức năng-->
+<!--        </ng-template>-->
 
 <!--        <ng-template appCell let-data>-->
 <!--          <span class="custom-action" (click)="edit(data)"-->
@@ -47,7 +67,7 @@
 <!--            <span nz-icon nzType="delete" nzTheme="outline" class="custom-icon"></span>-->
 <!--          </span>-->
 <!--        </ng-template>-->
-      </table-column>
+<!--      </table-column>-->
     </app-table>
   </ng-container>
 </div>

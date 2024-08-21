@@ -306,6 +306,23 @@ export class SideBarComponent implements OnInit {
               ]
             },
             {
+              name: 'Tin tức hoạt động',
+              icon: '',
+              link: '',
+              children: [
+                {
+                  name: 'Danh mục tin tức',
+                  icon: '',
+                  link: 'page/news-category',
+                },
+                {
+                  name: 'Danh sách tin tức',
+                  icon: '',
+                  link: 'page/news',
+                }
+              ],
+            },
+            {
               name: 'Phễu khóa học',
               icon: '',
               link: '',

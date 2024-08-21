@@ -1,0 +1,46 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới danh mục tin tức' : 'Chỉnh sửa danh mục tin tức'}}
+</div>
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="20" [nzLg]="20">
+    <form [formGroup]="newsCategoryForm">
+      <div nz-row [nzGutter]="[16, 16]">
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+          <span class="text-label">
+            Tên danh mục
+            <span class="text-danger">*</span>
+          </span>
+
+          <input
+            nz-input autofocus formControlName="title"
+            [nzStatus]="(newsCategoryForm.get('title')?.invalid &&
+                        (newsCategoryForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
+          <span
+            class="text-danger"
+            *ngIf="(newsCategoryForm.get('title')?.touched || isSubmit)  &&
+                    newsCategoryForm.get('title')?.hasError('required')">
+              Tên danh mục không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+          <span class="text-label">
+            Trạng thái
+          </span>
+
+          <nz-switch formControlName="status" style="display: block"></nz-switch>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="4" [nzLg]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>
+

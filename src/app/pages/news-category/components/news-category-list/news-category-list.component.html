@@ -1,17 +1,17 @@
 <div class="title-page">
-  Danh sách lời chứng thực
+  Danh mục tin tức
 </div>
 
 <div class="header-btn">
-  <ng-container *ngIf="(testimonialList$ | async) as testimonial">
+  <ng-container *ngIf="(categoryList$ | async) as category">
     <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
     <button nz-button class="add-btn" (click)="delete()">Xóa</button>
 
     <app-table
-      [rows]="testimonial.rows"
-      [page]="testimonial.page"
-      [pageSize]="testimonial.pageSize"
-      [pageTotal]="testimonial.rowTotal"
+      [rows]="category.rows"
+      [page]="category.page"
+      [pageSize]="category.pageSize"
+      [pageTotal]="category.rowTotal"
       [clientPagination]="false"
       (pageIndexChange)="page$.next($event)"
       (pageSizeChange)="pageSize$.next($event)"
@@ -20,8 +20,7 @@
     >
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Thể loại" key="typeDisplay" [width]="'200px'"></table-column>
-      <table-column header="Người chứng thực" key="fullName" [width]="'200px'"></table-column>
+      <table-column header="Tên danh mục" key="title" [width]="'200px'"></table-column>
       <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
@@ -38,3 +37,4 @@
     </app-table>
   </ng-container>
 </div>
+
