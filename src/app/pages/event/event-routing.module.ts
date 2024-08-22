@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {NewsListComponent} from "./components/news-list/news-list.component";
-import {CreateNewsComponent} from "./components/create-news/create-news.component";
+import {EventListComponent} from "./components/event-list/event-list.component";
+import {CreateEventComponent} from "./components/create-event/create-event.component";
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: NewsListComponent
+    component: EventListComponent
   },
   {
     path: 'create',
     data: {isCreate: true},
-    component: CreateNewsComponent
+    component: CreateEventComponent
   },
   {
     path: ':id',
     data: {isCreate: false},
-    component: CreateNewsComponent
+    component: CreateEventComponent
   },
 ];
 
@@ -26,4 +26,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class NewsRoutingModule {}
+export class EventRoutingModule {}

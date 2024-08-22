@@ -13,6 +13,7 @@
 .menu-list{
   height: 93vh;
   overflow-y: scroll;
+  background: whitesmoke;
 }
 
 .menu-sidebar {
@@ -31,7 +32,8 @@
   padding-left: 24px;
   overflow: hidden;
   line-height: 64px;
-  background: #001529;
+  //background: #001529;
+  background: whitesmoke;
   transition: all .3s;
 }
 

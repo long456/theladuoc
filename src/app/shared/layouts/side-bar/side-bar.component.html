@@ -4,7 +4,7 @@
           nzBreakpoint="md"
           [(nzCollapsed)]="isCollapsed">
   <div class="sidebar-logo">
-    <a href="/">
+    <a href="/page">
       <ng-container *ngIf="dataOrg && dataOrg.logo1x1">
         <img [style.opacity]="!isCollapsed? 0 : 1" [src]="dataOrg.logo1x1" alt="logo" >
       </ng-container>
@@ -15,7 +15,7 @@
 
     </a>
   </div>
-  <ul nz-menu nzMode="inline" nzTheme="dark" [nzInlineCollapsed]="isCollapsed" class="menu-list">
+  <ul nz-menu nzMode="inline" theme [nzInlineCollapsed]="isCollapsed" class="menu-list">
     <ng-container *ngFor="let item of treeMenu">
       <li *ngIf="item.children"
         nz-submenu nzTitle={{item.name}} nzIcon="{{item.icon}}" >

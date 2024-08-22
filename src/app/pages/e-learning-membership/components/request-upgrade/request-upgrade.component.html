@@ -27,10 +27,10 @@
       </table-column>
       <table-column header="Thời hạn gói" key="priceMemberPolicyType" [width]="'180px'">
         <ng-template appCell let-data>
-          <span *ngIf="data.paymentMethod === 0">Gói một tháng</span>
-          <span *ngIf="data.paymentMethod === 1">Gói 3 tháng</span>
+          <span *ngIf="data.paymentMethod === 1">Gói một tháng</span>
           <span *ngIf="data.paymentMethod === 2">Gói 3 tháng</span>
-          <span *ngIf="data.paymentMethod === 3">Gói vĩnh viễn</span>
+          <span *ngIf="data.paymentMethod === 3">Gói 1 năm</span>
+          <span *ngIf="data.paymentMethod === 4">Gói vĩnh viễn</span>
         </ng-template>
       </table-column>
       <table-column header="Hạng thành viên" key="memberPolicyLevelName" [width]="'180px'"></table-column>
