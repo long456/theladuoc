@@ -19,14 +19,14 @@ export class FilesManagerComponent implements OnInit{
 
   listImg$!: Observable<{
     data: any[],
-    ownerId: number,
+    ownerId?: number,
     page: number;
     pageSize: number;
   }>;
 
   listFile$!: Observable<{
     data: any[],
-    ownerId: number,
+    ownerId?: number,
     page: number;
     pageSize: number;
   }>;
@@ -79,41 +79,39 @@ export class FilesManagerComponent implements OnInit{
         this.cdr.detectChanges();
       }),
       mergeMap(([id, page, pageSize, tabName]) => {
-        if (tabName === 'Ảnh') {
-          if (id !== 0) {
-            return this.fileManagerService.getImgByOwner(id, page, pageSize)
-              .pipe(
-                map((value) => {
-                  return {
-                    data: value.data.medias,
-                    page: value.data.paginationInfo.pageCurrent,
-                    pageSize: value.data.paginationInfo.pageSize,
-                  }
-                }),
-                catchError(err => {
-                  this.message.error('Lỗi load dữ liệu danh sách file');
-                  return of(err.message)
-                })
-              )
-          } else {
-            return this.fileManagerService.getImgOrganization(id, page, pageSize)
-              .pipe(
-                map((value) => {
-                  return {
-                    data: value.data.medias,
-                    page: value.data.paginationInfo.pageCurrent,
-                    pageSize: value.data.paginationInfo.pageSize,
-                  }
-                }),
-                catchError(err => {
-                  this.message.error('Lỗi load dữ liệu danh sách file');
-                  return of(err.message)
-                })
-              )
-          }
-        } else {
-          return of(null);
+        if (tabName !== 'Ảnh') {
+          return of({
+            data: [],
+            page: 0,
+            pageSize: 0,
+          });
         }
+
+        const service = id !== 0
+          ? this.fileManagerService.getImgByOwner(id, page, pageSize)
+          : this.fileManagerService.getImgOrganization(id, page, pageSize);
+
+        return service.pipe(
+          map((value) =>
+          {
+            if (!value.success) {
+              throw new Error(value.errorMessages);
+            }
+            return {
+              data: value.data.medias,
+              page: value.data.paginationInfo.pageCurrent,
+              pageSize: value.data.paginationInfo.pageSize,
+            }
+          }),
+          catchError(err => {
+            this.message.error(err.message? err.message : 'Lỗi load dữ liệu danh sách file');
+            return of({
+              data: [],
+              page: 0,
+              pageSize: 0,
+            });
+          })
+        );
       }),
       delay(200),
       tap(() => {
@@ -134,41 +132,38 @@ export class FilesManagerComponent implements OnInit{
         this.cdr.detectChanges();
       }),
       mergeMap(([id, page, pageSize, tabName]) => {
-        if (tabName === 'File') {
-          if (id !== 0) {
-            return this.fileManagerService.getFileByOwner(id, page, pageSize)
-              .pipe(
-                map((value) => {
-                  return {
-                    data: value.data.medias,
-                    page: value.data.paginationInfo.pageCurrent,
-                    pageSize: value.data.paginationInfo.pageSize,
-                  }
-                }),
-                catchError(err => {
-                  this.message.error('Lỗi load dữ liệu danh sách file');
-                  return of(err.message)
-                })
-              )
-          } else {
-            return this.fileManagerService.getFileOrganization(id, page, pageSize)
-              .pipe(
-                map((value) => {
-                  return {
-                    data: value.data.medias,
-                    page: value.data.paginationInfo.pageCurrent,
-                    pageSize: value.data.paginationInfo.pageSize,
-                  }
-                }),
-                catchError(err => {
-                  this.message.error('Lỗi load dữ liệu danh sách file');
-                  return of(err.message)
-                })
-              )
-          }
-        } else {
-          return of(null);
+        if (tabName !== 'File') {
+          return of({
+            data: [],
+            page: 0,
+            pageSize: 0,
+          });
         }
+
+        const service = id !== 0
+          ? this.fileManagerService.getFileByOwner(id, page, pageSize)
+          : this.fileManagerService.getFileOrganization(id, page, pageSize);
+
+        return service.pipe(
+          map((value) => {
+            if (!value.success) {
+              throw new Error(value.errorMessages);
+            }
+            return {
+              data: value.data.medias,
+              page: value.data.paginationInfo.pageCurrent,
+              pageSize: value.data.paginationInfo.pageSize,
+            }
+          }),
+          catchError(err => {
+            this.message.error(err.message? err.message : 'Lỗi load dữ liệu danh sách file');
+            return of({
+              data: [],
+              page: 0,
+              pageSize: 0,
+            });
+          })
+        );
       }),
       delay(200),
       tap(() => {
