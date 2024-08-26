@@ -110,7 +110,7 @@ export class CreateECourseComponent implements OnInit {
 
     this.eCourseService.getListMemberPolicyLevelOption().subscribe(res => {
       if (res.success) {
-        this.listMemberPolicyLevel = res.data;
+        this.listMemberPolicyLevel = res.data.memberPolicies;
       }
     })
 

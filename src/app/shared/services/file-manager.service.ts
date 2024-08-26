@@ -37,7 +37,7 @@ export class FileManagerService {
     return this.http.get('Media/list-popup-image/' + id, {params: option});
   }
 
-  getImgOrganization(id: number, page?: any, pageSize?: any,): Observable<any> {
+  getImgOrganization(id: number, page?: any, pageSize?: any): Observable<any> {
     let option = {
       PageIndex: page,
       pageSize: pageSize,
@@ -46,7 +46,7 @@ export class FileManagerService {
     return this.http.get('Media/list-popup-image-org', {params: option});
   }
 
-  getFileByOwner(id: number, page?: any, pageSize?: any,): Observable<any> {
+  getFileByOwner(id: number, page?: any, pageSize?: any): Observable<any> {
     let option = {
       PageIndex: page,
       pageSize: pageSize,
