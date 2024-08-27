@@ -51,11 +51,11 @@
                 </form>
             </div>
 
-            <div class="d-flex justify-content-end" style="width: 50%;">
+            <!-- <div class="d-flex justify-content-end" style="width: 50%;">
                 <button nz-button type="button" [nzType]="'primary'" (click)="syncData()" nz-tooltip
                     nzTooltipTitle="Đồng bộ">
                     <span nz-icon nzType="sync" nzTheme="outline"></span></button>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -64,10 +64,10 @@
         <thead style="overflow-y: hidden;">
             <tr>
                 <th [nzLeft]="true" nzWidth="50px" nzAlign="center">STT</th>
-                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên khóa học</th>
+                <th nzWidth="260px" [nzLeft]="true" nzAlign="center">Tên khóa học</th>
                 <th nzWidth="180px" nzColumnKey="adsAmount" [nzSortFn]="true" nzAlign="center">Số tiền Ads</th>
                 <th nzWidth="180px" nzColumnKey="adsAmount" [nzSortFn]="true" nzAlign="center">Hoa hồng referral</th>
-                <th nzWidth="180px" nzColumnKey="mumberOfRegistrations" [nzSortFn]="true" nzAlign="center">Số người
+                <th nzWidth="180px" nzColumnKey="numberOfRegistrations" [nzSortFn]="true" nzAlign="center">Số người
                     đăng ký</th>
                 <th nzWidth="180px" nzColumnKey="adsAmount" [nzSortFn]="true" nzAlign="center">Doanh thu khóa học</th>
 
@@ -99,7 +99,7 @@
                     <td nzAlign="center" [nzLeft]="true"> {{ data.courseElearningName }} </td>
                     <td nzAlign="right"> {{ data.adsAmount }} </td>
                     <td nzAlign="right"> {{ data.referralCommissions }} </td>
-                    <td nzAlign="right"> {{ data.mumberOfRegistrations }} </td>
+                    <td nzAlign="right"> {{ data.numberOfRegistrations }} </td>
                     <td nzAlign="right"> {{ data.courseRevenue }} </td>
                     <td nzAlign="right"> {{ data.numberOfLearners5Percent }} </td>
                     <td nzAlign="right"> {{ data.numberOfLearners25Percent }} </td>

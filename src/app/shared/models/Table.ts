@@ -51,9 +51,9 @@ export const FilterType: {[key: string]: filterItem} = {
     title: 'Mã học viên',
     name: 'code',
   },
-  userRef:{
+  emailRef:{
     title: 'Người giới thiệu',
-    name: 'userRef',
+    name: 'emailRef',
   },
   lecturerName:{
     title: 'Tên diễn giả',
@@ -64,7 +64,7 @@ export const FilterType: {[key: string]: filterItem} = {
     name: 'caregiverName',
   },
   userRefName: {
-    title: 'Nhân viên chăm sóc',
+    title: 'Người giới thiệu',
     name: 'userRefName',
   },
   courseName:{

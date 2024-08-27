@@ -16,7 +16,7 @@ class ELearningBaseModelResponse {
     /// <summary>
     /// Số lượt đăng ký
     /// </summary>
-    mumberOfRegistrations?: number;
+    numberOfRegistrations?: number;
 
     /// <summary>
     /// 5%

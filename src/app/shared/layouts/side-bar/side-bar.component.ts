@@ -375,6 +375,11 @@ export class SideBarComponent implements OnInit {
                   link: 'page/e-category',
                 },
                 {
+                  name: 'Sự kiện giáo dục',
+                  icon: '',
+                  link: 'page/event',
+                },
+                {
                   name: 'Lời chứng thực',
                   icon: '',
                   link: 'page/testimonials',

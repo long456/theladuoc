@@ -6,6 +6,8 @@ export class TransactionHistoryResponse {
 
     customerName?: string;
 
+    customerCode?: string;
+
     paymentDate?: Date;
 
     paymentMethod?: number;

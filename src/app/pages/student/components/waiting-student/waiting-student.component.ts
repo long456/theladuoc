@@ -22,7 +22,7 @@ export class WaitingStudentComponent implements OnInit{
     FilterType['mobile'],
     FilterType['email'],
     FilterType['studentCode'],
-    FilterType['userRef'],
+    FilterType['emailRef'],
     FilterType['lecturerName'],
     FilterType['courseName'],
     FilterType['price'],
