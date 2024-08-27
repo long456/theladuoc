@@ -1,1 +1,41 @@
-<p>event-list works!</p>
+<div class="title-page">
+  Danh sách sự kiện
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(eventList$ | async) as event">
+    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+
+    <app-table
+      [rows]="event.rows"
+      [page]="event.page"
+      [pageSize]="event.pageSize"
+      [pageTotal]="event.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+      (onItemSelection)="getItemSelection($event)"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Tên sự kiện" key="title" [width]="'200px'"></table-column>
+      <table-column header="Thời gian tổ chức" key="dateOfEvent" [width]="'200px'"></table-column>
+      <table-column header="Địa điểm" key="local" [width]="'200px'"></table-column>
+      <table-column header="Đường dẫn đăng ký" key="link" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Thiết lập">
+            <span nz-icon nzType="edit" nzTheme="outline"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

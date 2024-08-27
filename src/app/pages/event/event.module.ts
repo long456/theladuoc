@@ -5,6 +5,8 @@ import { CreateEventComponent } from './components/create-event/create-event.com
 import {EventRoutingModule} from "./event-routing.module";
 import {SharedModule} from "../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import {NzSwitchModule} from "ng-zorro-antd/switch";
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    NzDatePickerModule,
+    NzSwitchModule,
   ]
 })
 export class EventModule { }

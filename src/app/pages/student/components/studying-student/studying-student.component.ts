@@ -27,7 +27,7 @@ export class StudyingStudentComponent implements OnInit{
     FilterType['mobile'],
     FilterType['email'],
     FilterType['studentCode'],
-    FilterType['userRef'],
+    FilterType['emailRef'],
     FilterType['lecturerName'],
     FilterType['caregiverName'],
     FilterType['price'],
