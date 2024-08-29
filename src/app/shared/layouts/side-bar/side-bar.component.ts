@@ -253,6 +253,11 @@ export class SideBarComponent implements OnInit {
           link: 'page/organization',
         },
         {
+          name: 'Phương thức thanh toán',
+          icon: '',
+          link: 'page/payment/method',
+        },
+        {
           name: 'Tính năng',
           icon: '',
           link: '',
