@@ -8,6 +8,8 @@ export class TransactionHistoryResponse {
 
     customerCode?: string;
 
+    customerEmail? : string;
+
     paymentDate?: Date;
 
     paymentMethod?: number;

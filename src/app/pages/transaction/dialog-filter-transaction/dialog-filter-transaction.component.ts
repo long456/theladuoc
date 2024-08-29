@@ -41,8 +41,8 @@ export class DialogFilterTransactionComponent {
   }
 
   setFilter() {
-    if (this.data.filter.customerIdCtrl != null && this.data.filter.customerIdCtrl != undefined) {
-      this.ctrl.customerIdCtrl.setValue(this.data.filter.customerIdCtrl);
+    if (this.data.filter.customerId != null && this.data.filter.customerId != undefined) {
+      this.ctrl.customerIdCtrl.setValue(this.data.filter.customerId);
     }
     if (this.data.filter.paymentMethod != null && this.data.filter.paymentMethod != undefined) {
       this.ctrl.paymentMethodCtrl.setValue(this.data.filter.paymentMethod);

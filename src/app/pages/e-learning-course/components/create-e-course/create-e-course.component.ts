@@ -86,7 +86,7 @@ export class CreateECourseComponent implements OnInit {
       introVideo: [null, [Validators.maxLength(this.maxlengthConfig.introVideo)]],
       imgBanner: [null],
       isCertificate: [false],
-      status: [1, [allowedValuesValidator([1, 2])]],
+      status: [1],
     })
 
     const typeControl = this.courseForm.get('type');

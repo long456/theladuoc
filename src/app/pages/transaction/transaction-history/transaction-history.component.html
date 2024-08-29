@@ -36,6 +36,7 @@
                 <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Ngày thanh toán</th>
                 <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên thành viên</th>
                 <th nzWidth="160px" nzAlign="center">Mã thành viên</th>
+                <th nzWidth="160px" nzAlign="center">Email</th>
                 <th nzWidth="180px" nzColumnKey="price" [nzSortFn]="true" nzAlign="center">Số tiền</th>
                 <th nzWidth="180px" nzAlign="center">Gói thành viên</th>
                 <th nzWidth="180px" nzAlign="center">Hạng thành viên</th>
@@ -58,6 +59,7 @@
                     <td nzAlign="center" [nzLeft]="true"> {{ data.paymentDate | date: 'dd/MM/YYYY HH:mm:ss'}} </td>
                     <td nzAlign="center" [nzLeft]="true"> {{ data.customerName }} </td>
                     <td nzAlign="center"> {{ data.customerCode }} </td>
+                    <td nzAlign="center"> {{ data.customerEmail }} </td>
                     <td nzAlign="right"> {{ data.price | number }} </td>
                     <td nzAlign="center"> {{ data.priceMemberPolicyTypeName }} </td>
                     <td nzAlign="center"> {{ data.memberPolicyLevelName}} </td>

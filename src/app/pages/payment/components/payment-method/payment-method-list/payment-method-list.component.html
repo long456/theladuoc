@@ -1,0 +1,47 @@
+<div class="title-page">
+  Danh sách phương thức thanh toán
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(methodList$ | async) as method">
+    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+
+    <app-table
+      [rows]="method.rows"
+      [page]="method.page"
+      [pageSize]="method.pageSize"
+      [pageTotal]="method.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+      (onItemSelection)="getItemSelection($event)"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Phương thức thanh toán" key="type" [width]="'200px'">
+        <ng-template appCell let-data>
+          <span *ngIf="data.type === 1">Chuyển khoản</span>
+          <span *ngIf="data.type === 2">VnPay</span>
+        </ng-template>
+      </table-column>
+      <table-column header="Tên ngân hàng" key="bankName" [width]="'200px'"></table-column>
+      <table-column header="Số tài khoản" key="bankNumber" [width]="'200px'"></table-column>
+      <table-column header="Tên chủ tài khoản" key="bankUserName" [width]="'200px'"></table-column>
+      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Thiết lập">
+            <span nz-icon nzType="edit" nzTheme="outline"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
