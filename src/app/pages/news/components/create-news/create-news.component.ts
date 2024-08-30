@@ -34,7 +34,7 @@ export class CreateNewsComponent implements OnInit{
     this.isCreate = this.route.snapshot.data['isCreate'];
     this.newsForm = this.fb.group({
       title: [null,[Validators.required]],
-      description: [null,[Validators.required]],
+      description: [null,[Validators.required,Validators.maxLength(500)]],
       content: [null,[Validators.required]],
       keyWords: [null],
       avatarImagePath: [null],
@@ -101,7 +101,7 @@ export class CreateNewsComponent implements OnInit{
           ...dataNews,
           id: this.newsId,
         }
-        this.newsCategoryService.updateNewsCategory(updateNewsData).subscribe({
+        this.newsService.updateNews(updateNewsData).subscribe({
           next: res => {
             if (res.success) {
               this.message.success(res.messages);

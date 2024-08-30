@@ -96,6 +96,12 @@
             *ngIf="(newsForm.get('description')?.touched || isSubmit)  &&
                     newsForm.get('description')?.hasError('required')"
           >Mô tả không được để trống</span>
+
+          <span
+            class="text-danger"
+            *ngIf="(newsForm.get('description')?.touched || isSubmit)  &&
+                    newsForm.get('description')?.hasError('maxlength')"
+          >Mô tả không thể nhiều hơn 500 ký tự</span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24">
