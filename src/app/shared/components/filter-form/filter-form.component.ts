@@ -37,7 +37,6 @@ export class FilterFormComponent implements OnInit{
 
   getFormControl(data: filterItem[]) {
     const control: { [key: string]: any; } = {}
-    console.log(data)
     data.forEach(item => {
       control[item.name] = ['']
     })
