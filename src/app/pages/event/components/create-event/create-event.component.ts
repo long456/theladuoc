@@ -37,6 +37,19 @@ export class CreateEventComponent implements OnInit{
       link: [null,[Validators.required]],
       status: [1],
     });
+
+    if (!this.isCreate) {
+      this.route.params.pipe().subscribe(params => {
+        const {id} = params;
+        this.eventId = id;
+        this.eventService.getEventById(this.eventId).subscribe({
+          next: res => {
+            if (res.success)
+              this.eventForm.patchValue(res.data);
+          }
+        })
+      })
+    }
   }
 
   onSelectFile():void {
