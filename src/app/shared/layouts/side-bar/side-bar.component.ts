@@ -324,7 +324,17 @@ export class SideBarComponent implements OnInit {
                   name: 'Danh sách tin tức',
                   icon: '',
                   link: 'page/news',
-                }
+                },
+                {
+                  name: 'Sự kiện giáo dục',
+                  icon: '',
+                  link: 'page/event',
+                },
+                {
+                  name: 'Lời chứng thực',
+                  icon: '',
+                  link: 'page/testimonials',
+                },
               ],
             },
             {
@@ -378,16 +388,6 @@ export class SideBarComponent implements OnInit {
                   name: 'Danh mục khóa học',
                   icon: '',
                   link: 'page/e-category',
-                },
-                {
-                  name: 'Sự kiện giáo dục',
-                  icon: '',
-                  link: 'page/event',
-                },
-                {
-                  name: 'Lời chứng thực',
-                  icon: '',
-                  link: 'page/testimonials',
                 },
               ]
             },

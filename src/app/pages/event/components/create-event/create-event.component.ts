@@ -95,6 +95,9 @@ export class CreateEventComponent implements OnInit{
               this.message.error(res.errorMessages);
             }
           },
+          error: err => {
+            this.message.error(err);
+          }
         });
       }
     }
