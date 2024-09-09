@@ -92,11 +92,13 @@ export class CreateOrganizationComponent implements OnInit{
 
   editOrg() {
     this.isSubmit  = true;
+    console.log(this.orgForm)
     if (this.orgForm.valid) {
       const data = {
         ...this.orgForm.value,
         status: this.orgForm.get('status')?.value ? 1 : 0,
       }
+      console.log(data)
       if (this.isCreate) {
         this.organizationService.createOrganization(data).subscribe(
           {

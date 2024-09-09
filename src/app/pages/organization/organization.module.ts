@@ -10,13 +10,15 @@ import { PermissionOrganizationComponent } from './components/permission-organiz
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import {CKEditorModule} from "ckeditor4-angular";
-
+import { WithdrawConfigComponent } from './components/withdraw-config/withdraw-config.component';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
 @NgModule({
   declarations: [
     OrganizationComponent,
     CreateOrganizationComponent,
-    PermissionOrganizationComponent
+    PermissionOrganizationComponent,
+    WithdrawConfigComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import {CKEditorModule} from "ckeditor4-angular";
     NzSwitchModule,
     NzCheckboxModule,
     NzSelectModule,
+    NzInputNumberModule
   ]
 })
 export class OrganizationModule { }

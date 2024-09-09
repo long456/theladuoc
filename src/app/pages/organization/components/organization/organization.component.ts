@@ -37,14 +37,18 @@ export class OrganizationComponent implements OnInit {
   }
 
   createOrg(): void {
-    this.router.navigate(['/page/organization/create'])
+    this.router.navigate(['/page/organization/create']);
   }
 
   edit(data: any): void {
-    this.router.navigate(['/page/organization/' + data.id])
+    this.router.navigate(['/page/organization/' + data.id]);
   }
 
   updatePermission(data: any): void {
-    this.router.navigate(['/page/organization/permission/' + data.id])
+    this.router.navigate(['/page/organization/permission/' + data.id]);
+  }
+
+  withdrawConfig(): void {
+    this.router.navigate(['/page/organization/withdraw-config']);
   }
 }

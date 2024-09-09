@@ -37,6 +37,19 @@ export class CreateEventComponent implements OnInit{
       link: [null,[Validators.required]],
       status: [1],
     });
+
+    if (!this.isCreate) {
+      this.route.params.pipe().subscribe(params => {
+        const {id} = params;
+        this.eventId = id;
+        this.eventService.getEventById(this.eventId).subscribe({
+          next: res => {
+            if (res.success)
+              this.eventForm.patchValue(res.data);
+          }
+        })
+      })
+    }
   }
 
   onSelectFile():void {
@@ -82,6 +95,9 @@ export class CreateEventComponent implements OnInit{
               this.message.error(res.errorMessages);
             }
           },
+          error: err => {
+            this.message.error(err);
+          }
         });
       }
     }
