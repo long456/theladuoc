@@ -94,9 +94,10 @@
             <input nz-input formControlName="websiteElearning">
           </div>
 
-          <div *ngIf="!isCreate">
+          <div>
             <span class="text-label">
               Tên miền trang quản trị
+              <span class="text-danger">*</span>
             </span>
 
             <input
@@ -216,6 +217,7 @@
         <div nz-col [nzSpan]="9" >
           <span class="text-label">
             Tên miền trang chủ
+            <span class="text-danger">*</span>
           </span>
 
           <input

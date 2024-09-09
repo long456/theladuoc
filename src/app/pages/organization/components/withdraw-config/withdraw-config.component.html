@@ -1,0 +1,99 @@
+<div class="title-page">
+  Cấu hình rút tiền
+</div>
+
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="20" [nzLg]="20">
+    <form [formGroup]="withdrawForm">
+      <div nz-row [nzGutter]="[16, 16]">
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+          <span class="text-label">
+            Khoảng thời gian rút tiền định kỳ
+          </span>
+
+          <nz-select formControlName="withdrawMoneyType" style="display: block">
+            <nz-option [nzValue]="1" [nzLabel]="'Hàng tuần'"></nz-option>
+            <nz-option [nzValue]="2" [nzLabel]="'Hàng tháng'"></nz-option>
+          </nz-select>
+        </div>
+
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" *ngIf="withdrawForm.get('withdrawMoneyType')?.value === 1">
+          <span class="text-label">
+            Chọn thứ trong tuần
+          </span>
+
+          <nz-select formControlName="dayOfWeek" style="display: block">
+            <nz-option [nzValue]="1" [nzLabel]="'Chủ nhật'"></nz-option>
+            <nz-option [nzValue]="2" [nzLabel]="'Thứ 2'"></nz-option>
+            <nz-option [nzValue]="3" [nzLabel]="'Thứ 3'"></nz-option>
+            <nz-option [nzValue]="4" [nzLabel]="'Thứ 4'"></nz-option>
+            <nz-option [nzValue]="5" [nzLabel]="'Thứ 5'"></nz-option>
+            <nz-option [nzValue]="6" [nzLabel]="'Thứ 6'"></nz-option>
+            <nz-option [nzValue]="7" [nzLabel]="'Thứ 7'"></nz-option>
+          </nz-select>
+        </div>
+
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" *ngIf="withdrawForm.get('withdrawMoneyType')?.value === 2">
+          <span class="text-label">
+            Chọn ngày trong tháng
+          </span>
+
+          <nz-input-number formControlName="dayOfMonth" [nzMin]="1" [nzMax]="31" [nzStep]="1"></nz-input-number>
+        </div>
+
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+          <span class="text-label">
+            Hạn mức rút tiền
+          </span>
+
+          <nz-input-number-group nzSuffix="VND" style="width: 100%"
+                                 [nzStatus]="(withdrawForm.get('minimumWithdrawLimit')?.invalid &&
+                                             (withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit)) ?
+                                             'error' : ''">
+            <nz-input-number
+              formControlName="minimumWithdrawLimit"
+              [nzMin]="0"
+              [nzStep]="1000"
+              [nzFormatter]="formatterCurrency">
+            </nz-input-number>
+          </nz-input-number-group>
+
+<!--          <span-->
+<!--            class="text-danger error-message"-->
+<!--            *ngIf="(withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit) &&-->
+<!--                    withdrawForm.get('minimumWithdrawLimit')?.hasError('required')">-->
+<!--                Hạn mức rút tiền không được để trống!-->
+<!--          </span>-->
+
+          <span
+            class="text-danger error-message"
+            *ngIf="(withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit) &&
+                    withdrawForm.get('minimumWithdrawLimit')?.hasError('min')">
+                Hạn mức rút tiền không thể nhỏ hơn hoặc bằng 0 vnđ!
+          </span>
+        </div>
+
+        <div nz-col [nzXs]="24" [nzSm]="16" [nzMd]="16">
+          <span class="text-label">
+            Mô tả
+          </span>
+
+          <textarea
+            nz-input formControlName="withdrawMoneyDesc"
+            placeholder="Mô tả ngắn"
+            [nzAutosize]="{ minRows: 3}">
+          </textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="4" [nzLg]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        Lưu
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

@@ -12,7 +12,7 @@
           <label nz-checkbox [(ngModel)]="permission.checked" (ngModelChange)="updateAllChecked($event,permission)">{{permission.name}}</label>
         </div>
         <div nz-col [nzSpan]="20" class="permission-border">
-          <div *ngIf="permission.children.length > 0" class="permission-area">
+          <div *ngIf="permission.children && permission.children.length > 0" class="permission-area">
             <nz-checkbox-wrapper (nzOnChange)="valueChange($event, permission)" class="wd-100">
               <div nz-row>
                 <ng-container *ngFor="let item of permission.children">

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {OrganizationService} from "../../services/organization.service";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {catchError, map} from "rxjs";
+import {Permission} from "../../models/Permission";
 
 
 @Component({
@@ -11,7 +13,7 @@ import {NzMessageService} from "ng-zorro-antd/message";
 })
 export class PermissionOrganizationComponent implements OnInit{
 
-  listPermission = <any>[];
+  listPermission: Permission[] = [];
 
   organizationId!: number
 
@@ -80,11 +82,16 @@ export class PermissionOrganizationComponent implements OnInit{
   }
 
   edit() {
-    const listPermission = [...this.listPermission].map(item => item.data).reduce((a, b) => a.concat(b))
+    const listPermission = [...this.listPermission]
+      .map(item => item.data || [])  // Nếu data không tồn tại, sử dụng mảng rỗng
+      .filter((data): data is number[] => data !== undefined)  // Loại bỏ các undefined
+      .reduce((a, b) => a.concat(b), [] as number[]);
+
     const data = {
       id: this.organizationId,
       permissionIds: JSON.stringify(listPermission)
     }
+
     this.organizationService.updatePermissionOrganization(data).subscribe({
       next: res => {
         if (res.success) {

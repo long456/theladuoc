@@ -23,7 +23,7 @@ import {CKEditorModule} from "ckeditor4-angular";
     ReactiveFormsModule,
     NzSwitchModule,
     NzSelectModule,
-    CKEditorModule
+    CKEditorModule,
   ]
 })
 export class NewsModule { }

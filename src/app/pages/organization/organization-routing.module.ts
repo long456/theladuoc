@@ -3,11 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import {OrganizationComponent} from "./components/organization/organization.component";
 import {CreateOrganizationComponent} from "./components/create-organization/create-organization.component";
 import {PermissionOrganizationComponent} from "./components/permission-organization/permission-organization.component";
+import {WithdrawConfigComponent} from "./components/withdraw-config/withdraw-config.component";
 
 const routes: Routes = [
   {
     path: '',
     component: OrganizationComponent
+  },
+  {
+    path: 'withdraw-config',
+    component: WithdrawConfigComponent
   },
   {
     path: 'create',

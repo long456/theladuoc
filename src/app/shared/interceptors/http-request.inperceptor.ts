@@ -9,12 +9,14 @@ import {catchError, Observable, throwError} from 'rxjs';
 import {environment} from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {LoginService} from "../../layouts/auth-layout/auth/services/login.service";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
     private loginService: LoginService,
+    private message: NzMessageService,
   ) {}
 
   intercept(
@@ -37,6 +39,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
           this.loginService.logOut()
           this.router.navigate(['auth']);
           return throwError(() => new Error('Unauthorized'));
+        }
+        if(error.status === 403) {
+          this.message.error('Bạn chưa có quyền để sử dụng chức năng này!');
         }
         console.log(error)
         return throwError(() => error.error);
