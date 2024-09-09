@@ -30,4 +30,8 @@ export class TransactionHistoryService {
     lstDropData(): Observable<any> {
         return this.http.get(`transactionHistory/list-common-drop`);
     }
+
+    exportExcel(filter?: any): Observable<any> {
+        return this.http.get('transactionHistory/export-transaction-history', { params: filter })
+    }
 }
