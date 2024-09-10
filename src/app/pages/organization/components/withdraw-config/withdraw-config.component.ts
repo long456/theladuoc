@@ -29,6 +29,14 @@ export class WithdrawConfigComponent implements OnInit{
       withdrawMoneyDesc: [null],
       minimumWithdrawLimit: [0,[Validators.min(1)]],
     });
+
+    this.withdrawService.getWithdrawConfig().subscribe({
+      next: res => {
+        if (res.success) {
+          this.withdrawForm.patchValue(res.data);
+        }
+      },
+    })
   }
 
   formatterCurrency(value: number): string {

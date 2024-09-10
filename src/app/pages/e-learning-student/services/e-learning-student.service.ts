@@ -111,4 +111,8 @@ export class ELearningStudentService {
   activeECourse(data: any): Observable<any>{
     return this.http.post('CourseElearning/active-elearning-to-student', data);
   }
+
+  activeMembership(data: any): Observable<any>{
+    return this.http.post('User/gift-membership', data);
+  }
 }
