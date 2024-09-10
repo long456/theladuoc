@@ -9,6 +9,7 @@ import { TransactionHistoryService } from '../service/transaction-history.servic
 import * as XLSX from 'xlsx';
 import { finalize } from 'rxjs';
 import { DateTimeHelper } from '../../report/helper/date-time-helper';
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-transaction-history',
   templateUrl: './transaction-history.component.html',
@@ -29,7 +30,8 @@ export class TransactionHistoryComponent implements OnInit {
 
   constructor(private transactionHistoryService: TransactionHistoryService,
     private modal: NzModalService,
-    private dateTimeHelper: DateTimeHelper) {
+    private dateTimeHelper: DateTimeHelper,
+    private message: NzMessageService) {
 
   }
 
@@ -115,6 +117,9 @@ export class TransactionHistoryComponent implements OnInit {
         };
 
         XLSX.writeFile(wb, 'Lich_Su_Thanh_Toan.xlsx');
+        this.filter = {};
+      } else {
+        this.message.warning("Điều kiện bạn lọc không có dữ liệu xuất file excel, mời bạn lọc lại điều kiện phù hợp !")
       }
 
       this.isLoading = false;
@@ -171,12 +176,18 @@ export class TransactionHistoryComponent implements OnInit {
     });
 
     modal.afterClose.subscribe(x => {
-      if (x) {
-        this.filter = { ...x };
-        this.onSearch();
-      } else if (x == false) {
-        this.filter = {};
-        this.onSearch();
+      console.log(x);
+      if (x.isExportExcel) {
+        this.filter = { ...x.dataFilter };
+        this.exportExcel();
+      } else {
+        if (x.dataFilter) {
+          this.filter = { ...x.dataFilter };
+          this.onSearch();
+        } else if (x == false) {
+          this.filter = {};
+          this.onSearch();
+        }
       }
     })
   }

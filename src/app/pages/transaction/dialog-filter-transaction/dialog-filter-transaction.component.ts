@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { plainToClass } from 'class-transformer';
 import * as moment from 'moment';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NZ_MODAL_DATA } from 'ng-zorro-antd/modal';
 import { DateTimeHelper } from '../../report/helper/date-time-helper';
 import { DataDropResponse } from '../../report/model/data-drop-response';
@@ -35,7 +36,8 @@ export class DialogFilterTransactionComponent {
   constructor(@Inject(NZ_MODAL_DATA) public data: any,
     private modal: NzModalRef<DialogFilterTransactionComponent>,
     private dateTimeHelper: DateTimeHelper,
-    private transactionHistoryService: TransactionHistoryService,) {
+    private transactionHistoryService: TransactionHistoryService,
+    private message: NzMessageService) {
     console.log(this.data);
     this.setFilter();
   }
@@ -76,7 +78,7 @@ export class DialogFilterTransactionComponent {
     this.modal.close(false);
   }
 
-  onSave() {
+  onSave(isExportExcel: boolean = false) {
     let dataFilter: any = {
       ...this.getFilterDateTime()
     };
@@ -97,7 +99,14 @@ export class DialogFilterTransactionComponent {
       dataFilter.paymentStatus = this.ctrl.paymentStatusCtrl.value;
     }
 
-    this.modal.close(dataFilter)
+
+    const isDataFilterEmpty = Object.values(dataFilter).every(value => value == null || value === '');
+    if (isExportExcel && isDataFilterEmpty) {
+      this.message.warning("Bạn cần phải chọn ít nhất 1 điều kiện lọc để có thể xuất file excel !")
+      return;
+    }
+
+    this.modal.close({ dataFilter: dataFilter, isExportExcel: isExportExcel });
   }
 
   getFilterDateTime() {
