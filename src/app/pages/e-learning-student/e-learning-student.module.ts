@@ -12,6 +12,7 @@ import { ActiveCourseComponent } from './components/active-course/active-course.
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzCollapseModule} from "ng-zorro-antd/collapse";
+import { ActiveMembershipComponent } from './components/active-membership/active-membership.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {NzCollapseModule} from "ng-zorro-antd/collapse";
     TakingCareEStudentComponent,
     WaitingEStudentComponent,
     RegisteringEStudentComponent,
-    ActiveCourseComponent
+    ActiveCourseComponent,
+    ActiveMembershipComponent
   ],
   imports: [
     CommonModule,

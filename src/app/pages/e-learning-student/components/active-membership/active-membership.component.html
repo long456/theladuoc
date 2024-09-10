@@ -1,0 +1,39 @@
+<form [formGroup]="giftMembershipForm">
+  <div nz-row [nzGutter]=[16,16]>
+    <div nz-col [nzSpan]="24">
+      <span>
+        Tên học viên
+      </span>
+
+      <div>
+        <input nz-input formControlName="name" readonly/>
+      </div>
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <span>
+        Gói thành viên
+      </span>
+
+      <nz-select style="display: block" formControlName="memberPolicyLevelId">
+        <nz-option
+          *ngFor="let membership of listMembership"
+          [nzValue]="membership.id"
+          [nzLabel]="membership.name"></nz-option>
+      </nz-select>
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <span>
+        Thời hạn
+      </span>
+
+      <nz-select style="display: block" formControlName="memberPriceType">
+        <nz-option [nzValue]="1" [nzLabel]="'1 tháng'"></nz-option>
+        <nz-option [nzValue]="2" [nzLabel]="'3 tháng'"></nz-option>
+        <nz-option [nzValue]="3" [nzLabel]="'1 năm'"></nz-option>
+        <nz-option [nzValue]="4" [nzLabel]="'Vĩnh viễn'"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+</form>

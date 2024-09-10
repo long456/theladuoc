@@ -51,4 +51,8 @@ export class MembershipService {
   softDeleteMembership(id: number): Observable<any>{
     return this.http.delete('MemberPolicyLevel/soft-delete/' + id);
   }
+
+  getMemberPolicyOption(): Observable<any>{
+    return this.http.get('MemberPolicyLevel/list-member-policy-option');
+  }
 }

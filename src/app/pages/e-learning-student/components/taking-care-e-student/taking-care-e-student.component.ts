@@ -8,6 +8,7 @@ import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 import {ActiveCourseComponent} from "../active-course/active-course.component";
 import {ActiveCourseService} from "../../services/active-course.service";
 import {AuthService} from "../../../../layouts/auth-layout/auth/services/auth.service";
+import {ActiveMembershipService} from "../../services/active-membership.service";
 
 @Component({
   selector: 'app-taking-care-e-student',
@@ -44,6 +45,7 @@ export class TakingCareEStudentComponent implements OnInit{
     private modal: NzModalService,
     private activeCourseService: ActiveCourseService,
     private authService: AuthService,
+    private activeMembershipService: ActiveMembershipService,
   ) {}
 
   ngOnInit() {
@@ -83,6 +85,10 @@ export class TakingCareEStudentComponent implements OnInit{
 
   activeCourse(data: any): void{
     this.activeCourseService.activeCourse(data);
+  }
+
+  activeMembership(data: any): void{
+    this.activeMembershipService.giftMembership(data);
   }
 
   setExpand(event: any) {
