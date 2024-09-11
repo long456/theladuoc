@@ -209,6 +209,11 @@ export class SideBarComponent implements OnInit {
               icon: '',
               link: 'page/transaction-history',
             },
+            {
+              name: 'Yêu cầu rút tiền',
+              icon: '',
+              link: 'page/payment/withdraw',
+            },
           ],
         },
         {
