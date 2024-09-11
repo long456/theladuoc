@@ -11,6 +11,7 @@ import { PaymentMethodCreateComponent } from './components/payment-method/paymen
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
+import { WithdrawRequestComponent } from './components/withdraw-request/withdraw-request.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import {NzSwitchModule} from "ng-zorro-antd/switch";
     PaymentRefundComponent,
     PaymentMethodListComponent,
     PaymentMethodCreateComponent,
+    WithdrawRequestComponent,
   ],
   imports: [
     CommonModule,

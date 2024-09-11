@@ -4,6 +4,7 @@ import {PaymentAuthComponent} from "./components/payment-auth/payment-auth.compo
 import {PaymentRefundComponent} from "./components/payment-refund/payment-refund.component";
 import {PaymentMethodListComponent} from "./components/payment-method/payment-method-list/payment-method-list.component";
 import {PaymentMethodCreateComponent} from "./components/payment-method/payment-method-create/payment-method-create.component";
+import {WithdrawRequestComponent} from "./components/withdraw-request/withdraw-request.component";
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'refund',
     component: PaymentRefundComponent,
+  },
+  {
+    path: 'withdraw',
+    component: WithdrawRequestComponent,
   },
   {
     path:'method',
