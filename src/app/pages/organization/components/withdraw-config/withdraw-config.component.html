@@ -41,6 +41,8 @@
           <nz-input-number formControlName="dayOfMonth" [nzMin]="1" [nzMax]="31" [nzStep]="1"></nz-input-number>
         </div>
 
+        <div nz-col [nzMd]="8"></div>
+
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
             Hạn mức rút tiền
@@ -58,19 +60,27 @@
             </nz-input-number>
           </nz-input-number-group>
 
-<!--          <span-->
-<!--            class="text-danger error-message"-->
-<!--            *ngIf="(withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit) &&-->
-<!--                    withdrawForm.get('minimumWithdrawLimit')?.hasError('required')">-->
-<!--                Hạn mức rút tiền không được để trống!-->
-<!--          </span>-->
-
           <span
             class="text-danger error-message"
             *ngIf="(withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit) &&
                     withdrawForm.get('minimumWithdrawLimit')?.hasError('min')">
                 Hạn mức rút tiền không thể nhỏ hơn hoặc bằng 0 vnđ!
           </span>
+        </div>
+
+        <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
+          <span class="text-label">
+            Hạn mức ứng tiền
+          </span>
+
+          <nz-input-number-group nzSuffix="%" style="width: 100%">
+            <nz-input-number
+              formControlName="maximumAdvanceLimit"
+              [nzMin]="0"
+              [nzMax]="100"
+              [nzStep]="1">
+            </nz-input-number>
+          </nz-input-number-group>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="16" [nzMd]="16">

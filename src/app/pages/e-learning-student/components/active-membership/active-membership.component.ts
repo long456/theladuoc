@@ -39,7 +39,7 @@ export class ActiveMembershipComponent implements OnInit{
       error: err => {
         this.message.error(err);
       }
-    })
+    });
   }
 
   pathDataForm() {

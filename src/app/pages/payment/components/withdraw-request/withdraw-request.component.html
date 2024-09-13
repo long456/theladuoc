@@ -29,6 +29,12 @@
       <table-column header="Tên chủ tài khoản" key="bankUserName" [width]="'180px'"></table-column>
       <table-column header="Tên ngân hàng" key="bankName" [width]="'180px'"></table-column>
       <table-column header="Nhân viên chăm sóc" key="caregiverName" [width]="'180px'"></table-column>
+      <table-column header="Loại yêu cầu" key="referalHistoryType" [width]="'180px'">
+        <ng-template appCell let-data>
+          <span *ngIf="data.referalHistoryType === 4">rút tiền</span>
+          <span *ngIf="data.referalHistoryType === 5">ứng tiền</span>
+        </ng-template>
+      </table-column>
       <table-column header="Trạng thái" key="withdrawStatus" [width]="'180px'">
         <ng-template appCell let-data>
           <span *ngIf="data.withdrawStatus === 0">Chờ xử lý</span>
@@ -49,7 +55,7 @@
             </span>
           </span>
 
-          <span class="custom-action" (click)="cancelWithdraw(data)">
+          <span class="custom-action delete" (click)="cancelWithdraw(data)">
             <span
               nzTooltipTitle="Hủy yêu cầu" nzTooltipPlacement="top" nz-tooltip
               nz-icon nzType="close" nzTheme="outline">

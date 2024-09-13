@@ -36,7 +36,8 @@
               <span class="text-label">Thứ hạng</span>
               <nz-input-number
                 style="width: 100%"
-                formControlName="level"
+                [(ngModel)]="membershipLevel" [ngModelOptions]="{standalone: true}"
+                (ngModelChange)="pathLevelValue($event)"
                 [nzMin]="1"
                 [nzStep]="1"
               ></nz-input-number>
@@ -102,6 +103,27 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="24" *ngIf="membershipLevel > lowestMemLv">
+          <div class="content-block" nz-row [nzGutter]=[16,8]>
+            <div nz-col [nzSpan]="24" class="content-block-title">Chiết khấu khi nâng gói</div>
+            <nz-divider class="mt-10"></nz-divider>
+
+            <ng-container *ngFor="let op of membershipOpList">
+              <div nz-col [nzSpan]="12" *ngIf="op.level < membershipLevel">
+                <div class="text-label">{{op.name}} (hạng {{op.level}})</div>
+                <nz-input-number-group nzSuffix="%" style="width: 100%">
+                  <nz-input-number
+                    [(ngModel)]="op.discount" [ngModelOptions]="{standalone: true}"
+                    [nzMin]="0"
+                    [nzMax]="100"
+                    [nzStep]="1">
+                  </nz-input-number>
+                </nz-input-number-group>
+              </div>
+            </ng-container>
           </div>
         </div>
       </div>
@@ -205,6 +227,5 @@
     </div>
   </div>
 </form>
-
 
 

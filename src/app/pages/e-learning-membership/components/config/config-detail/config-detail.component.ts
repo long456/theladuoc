@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MembershipConfigService} from "../../../services/membership-config.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 
@@ -10,6 +10,7 @@ import {NzMessageService} from "ng-zorro-antd/message";
   styleUrls: ['./config-detail.component.scss']
 })
 export class ConfigDetailComponent implements OnInit{
+  isSubmit: boolean = false;
   membershipConfigForm!: FormGroup;
   policyList: any[] = [];
   benefitList: any[] = [];
@@ -29,6 +30,8 @@ export class ConfigDetailComponent implements OnInit{
       isShowPrice3Month: [true],
       isShowPriceYear: [true],
       isShowPriceForever: [true],
+      referralPointType: [null,[Validators.required]],
+      discountUpgradeType: [null,[Validators.required]]
     });
     this.membershipConfigService.getDetailMembershipConfig().subscribe({
       next: res => {
@@ -65,7 +68,6 @@ export class ConfigDetailComponent implements OnInit{
       memberPolicyIds: [],
     };
     this.benefitList[index].benefits.push(benefit);
-    console.log(this.benefitList)
   }
 
   removeBenefit(i: number, ib: number): void{
@@ -118,9 +120,14 @@ export class ConfigDetailComponent implements OnInit{
   }
 
   edit() {
+    this.isSubmit = true;
     const validGroupBenefit = this.validGroupBenefit();
     if (!validGroupBenefit) {
       this.message.error('Tên nhóm quyền lợi và tên quyền lợi không được để trống!');
+      return;
+    }
+
+    if (this.membershipConfigForm.invalid) {
       return;
     }
 
