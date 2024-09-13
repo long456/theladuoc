@@ -4,6 +4,7 @@ import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observ
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {WithdrawRequestService} from "../../services/withdraw-request.service";
+import {NzModalService} from "ng-zorro-antd/modal";
 
 @Component({
   selector: 'app-withdraw-request',
@@ -28,6 +29,7 @@ export class WithdrawRequestComponent implements OnInit{
     private router: Router,
     private message: NzMessageService,
     private withdrawRequestService: WithdrawRequestService,
+    private modal :NzModalService,
   ) {}
 
   ngOnInit() {
@@ -66,25 +68,39 @@ export class WithdrawRequestComponent implements OnInit{
   }
 
   activeWithdraw(data: any): void {
-    this.withdrawRequestService.activeWithdraw(data.id).subscribe({
-      next: res => {
-        if (res.success) {
-          this.message.success(res.messages);
-        } else {
-          this.message.error(res.errorMessages);
-        }
+    this.modal.confirm({
+      nzTitle: 'Xác thực rút tiền',
+      nzContent: 'Bạn muốn xác thực cho yêu cầu này?',
+      nzOnOk: () => {
+        this.withdrawRequestService.activeWithdraw(data.id).subscribe({
+          next: res => {
+            if (res.success) {
+              this.message.success(res.messages);
+              this.pageSize$.next(10);
+            } else {
+              this.message.error(res.errorMessages);
+            }
+          }
+        })
       }
     });
   }
 
   cancelWithdraw(data: any): void {
-    this.withdrawRequestService.cancelWithdraw(data.id).subscribe({
-      next: res => {
-        if (res.success) {
-          this.message.success(res.messages);
-        } else {
-          this.message.error(res.errorMessages);
-        }
+    this.modal.confirm({
+      nzTitle: 'Hủy yêu cầu rút tiền',
+      nzContent: 'Bạn có chắc muốn hủy yêu cầu rút tiền này?',
+      nzOnOk: () => {
+        this.withdrawRequestService.cancelWithdraw(data.id).subscribe({
+          next: res => {
+            if (res.success) {
+              this.message.success(res.messages);
+              this.pageSize$.next(10);
+            } else {
+              this.message.error(res.errorMessages);
+            }
+          }
+        })
       }
     });
   }

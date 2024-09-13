@@ -42,6 +42,52 @@
           <textarea formControlName="description" nz-input [nzAutosize]="{ minRows: 3 }"></textarea>
         </div>
 
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Phương thức tính hoa hồng
+            <span class="text-danger">*</span>
+          </span>
+
+          <nz-select style="display: block;" formControlName="referralPointType"
+                     [nzStatus]="(membershipConfigForm.get('referralPointType')?.invalid &&
+                                 (membershipConfigForm.get('referralPointType')?.touched || isSubmit)) ?
+                                 'error' : ''">
+            <nz-option [nzValue]="1" [nzLabel]="'Hoa hồng theo người giới thiệu'"></nz-option>
+            <nz-option [nzValue]="2" [nzLabel]="'Hoa hồng theo người được giới thiệu'"></nz-option>
+          </nz-select>
+
+          <span
+            class="text-danger"
+            *ngIf="(membershipConfigForm.get('referralPointTypeL')?.touched || isSubmit) &&
+                    membershipConfigForm.get('referralPointTypeL')?.hasError('required')">
+            Phương thức tính hoa hồng không được để trống
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Chiết khấu nâng cấp gói
+            <span class="text-danger">*</span>
+          </span>
+
+          <nz-select style="display: block;" formControlName="discountUpgradeType"
+                     [nzStatus]="(membershipConfigForm.get('discountUpgradeType')?.invalid &&
+                                 (membershipConfigForm.get('discountUpgradeType')?.touched || isSubmit)) ?
+                                 'error' : ''">
+            <nz-option [nzValue]="1" [nzLabel]="'Không chiết khấu'"></nz-option>
+            <nz-option [nzValue]="2" [nzLabel]="'Có chiết khấu'"></nz-option>
+          </nz-select>
+
+          <span
+            class="text-danger"
+            *ngIf="(membershipConfigForm.get('discountUpgradeType')?.touched || isSubmit) &&
+                    membershipConfigForm.get('discountUpgradeType')?.hasError('required')">
+            Chiết khấu nâng cấp gói không được để trống
+          </span>
+        </div>
+
         <div nz-col [nzSpan]="24">
           <div class="text-label">
             Quyền lợi

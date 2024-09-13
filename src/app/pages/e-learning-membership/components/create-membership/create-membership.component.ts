@@ -5,6 +5,7 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {MembershipService} from "../../services/membership.service";
 import {take} from "rxjs";
 import {FileManagerService} from "../../../../shared/services/file-manager.service";
+import {MembershipOption} from "../../models/MembershipOption";
 
 @Component({
   selector: 'app-create-membership',
@@ -17,9 +18,11 @@ export class CreateMembershipComponent implements OnInit{
   isSubmit: boolean = false;
   membershipForm!: FormGroup;
   membershipPolicyId!: number;
-
   isActive = false;
   webData: string = '';
+  membershipOpList: MembershipOption[] = [];
+  membershipLevel: number = 0;
+  lowestMemLv: number = 0;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -46,6 +49,8 @@ export class CreateMembershipComponent implements OnInit{
       status: [1],
     });
 
+    this.getDataMemOp();
+
     if (!this.isCreate) {
       this.route.params.pipe().subscribe(params => {
         const {id} = params;
@@ -53,16 +58,71 @@ export class CreateMembershipComponent implements OnInit{
         this.membershipService.getMembershipById(this.membershipPolicyId).subscribe({
           next: res => {
             if (res.success) {
+              this.membershipLevel = res.data.level;
               const data = {
                 ...res.data,
                 content: JSON.parse(res.data.content)
               }
+
+              if (res.data.policyMapDiscount && res.data.policyMapDiscount.length > 0) {
+                this.pathDiscountValue(res.data.policyMapDiscount);
+              }
+
               this.membershipForm.patchValue(data);
+            } else {
+              this.message.error(res.errorMessages);
             }
+          },
+          error: err => {
+            this.message.error(err);
           }
         })
       });
     }
+  }
+
+  getLowestLevel() {
+    if (this.membershipOpList.length > 0) {
+      const lowest = this.membershipOpList.reduce((previous, current) => {
+        return current.level < previous.level ? current : previous;
+      });
+      return lowest.level;
+    }
+    return 0;
+  }
+
+  getDataMemOp():void {
+    this.membershipService.getMemberPolicyOption().subscribe({
+      next: res => {
+        if (res.success) {
+          this.membershipOpList = res.data.map((item: MembershipOption) => {
+            return {
+              ...item,
+              discount: 0
+            }
+          });
+          this.lowestMemLv = this.getLowestLevel();
+        } else {
+          this.message.error(res.errorMessages);
+        }
+      },
+      error: err => {
+        this.message.error(err);
+      }
+    });
+  }
+
+  pathDiscountValue(arrDiscount: any[]): void {
+    const arrMemOp = this.membershipOpList.map(item1 => {
+      const item2 = arrDiscount.find(item2 => item2.memberPolicyLevelId === item1.id);
+      return { ...item1, discount: item2.discount };
+    });
+
+    this.membershipOpList =  arrMemOp
+  }
+
+  pathLevelValue(e: InputEvent) {
+    this.membershipForm.get('level')?.patchValue(e);
   }
 
   changeActive(): void {
@@ -99,6 +159,12 @@ export class CreateMembershipComponent implements OnInit{
     if (this.membershipForm.valid) {
       const data = {
         ...this.membershipForm.value,
+        listDiscount: this.membershipOpList.map((item) => {
+          return {
+            memberPolicyLevelId: item.id,
+            discount: item.discount
+          }
+        })
       }
 
       if (this.isCreate) {

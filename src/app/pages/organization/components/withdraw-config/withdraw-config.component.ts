@@ -27,6 +27,7 @@ export class WithdrawConfigComponent implements OnInit{
       dayOfWeek: [2],
       dayOfMonth: [1],
       withdrawMoneyDesc: [null],
+      maximumAdvanceLimit: [0],
       minimumWithdrawLimit: [0,[Validators.min(1)]],
     });
 
