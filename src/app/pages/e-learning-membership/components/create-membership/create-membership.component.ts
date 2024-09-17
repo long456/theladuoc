@@ -159,6 +159,7 @@ export class CreateMembershipComponent implements OnInit{
     if (this.membershipForm.valid) {
       const data = {
         ...this.membershipForm.value,
+        status: this.membershipForm.value.status? 1 : 0,
         listDiscount: this.membershipOpList.map((item) => {
           return {
             memberPolicyLevelId: item.id,

@@ -6,6 +6,7 @@ import {NotificationsEmailComponent} from "./components/notifications-email/noti
 import {NotificationsEmailListComponent} from "./components/notifications-email-list/notifications-email-list.component";
 import {EditEmailComponent} from "./components/edit-email/edit-email.component";
 import {CreateNotificationsEmailComponent} from "./components/create-notifications-email/create-notifications-email.component";
+import {EmailQueueComponent} from "./components/email-queue/email-queue.component";
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
   //     },
   //   ]
   // },
+  {
+    path: 'queue',
+    component: EmailQueueComponent,
+  },
   {
     path:'notifications-email',
     component: NotificationsEmailComponent,

@@ -16,6 +16,7 @@ import {NzSelectModule} from "ng-zorro-antd/select";
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { CreateNotificationsEmailComponent } from './components/create-notifications-email/create-notifications-email.component';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { EmailQueueComponent } from './components/email-queue/email-queue.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     NotificationsEmailComponent,
     NotificationsEmailListComponent,
     EditEmailComponent,
-    CreateNotificationsEmailComponent
+    CreateNotificationsEmailComponent,
+    EmailQueueComponent
   ],
   imports: [
     CommonModule,

@@ -37,45 +37,27 @@
         </ng-template>
       </table-column>
       <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column [width]="'180px'" fixColumn="right" >
+      <table-column [width]="'100px'" fixColumn="right" >
         <ng-template appHeader>
           Chức năng
         </ng-template>
 
         <ng-template appCell let-data>
-<!--          <button-->
-<!--            nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu"-->
-<!--            nz-button nzShape="circle">-->
-<!--            <span nz-icon nzType="bars"></span>-->
-<!--          </button>-->
+          <button
+            nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu"
+            nz-button nzShape="circle" [nzPlacement]="'bottomRight'">
+            <span nz-icon nzType="bars"></span>
+          </button>
 
-<!--          <nz-dropdown-menu #menu="nzDropdownMenu">-->
-<!--            <ul nz-menu>-->
-<!--              <li nz-menu-item>Xem chi tiết</li>-->
-<!--              <li nz-menu-item>Gọi điện</li>-->
-<!--              <li nz-menu-item>Nâng gói thành viên</li>-->
-<!--              <li nz-menu-item (click)="activeCourse(data)">Kích hoạt khóa học</li>-->
-<!--            </ul>-->
-<!--          </nz-dropdown-menu>-->
-          <span class="custom-action"
-                nz-tooltip nzTooltipTitle="Chi tiết học viên">
-            <span nz-icon nzType="search" nzTheme="outline"></span>
-          </span>
-
-          <span class="custom-action"
-                nz-tooltip nzTooltipTitle="Gọi điện">
-            <span nz-icon nzType="phone" nzTheme="outline"></span>
-          </span>
-
-          <span class="custom-action" (click)="activeMembership(data)"
-                nz-tooltip nzTooltipTitle="Tặng gói thành viên">
-            <span nz-icon nzType="arrow-up" nzTheme="outline"></span>
-          </span>
-
-          <span class="custom-action" (click)="activeCourse(data)"
-                nz-tooltip nzTooltipTitle="Tặng khóa học">
-            <span nz-icon nzType="gift" nzTheme="outline"></span>
-          </span>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item>Xem chi tiết</li>
+              <li nz-menu-item>Gọi điện</li>
+              <li nz-menu-item (click)="activeMembership(data)">Tặng gói thành viên</li>
+              <li nz-menu-item (click)="activeCourse(data)">Tặng khóa học</li>
+              <li nz-menu-item>Thay đổi vai trò</li>
+            </ul>
+          </nz-dropdown-menu>
         </ng-template>
       </table-column>
     </app-table>

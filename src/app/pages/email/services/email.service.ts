@@ -78,4 +78,20 @@ export class EmailService {
     return this.http.get('EmailTemplate/get-email-type');
   }
 
+  getEmailQueue(page?: any, pageSize?: any, filter?: any): Observable<any>{
+    let option = {
+      PageIndex: page,
+      pageSize: pageSize,
+    }
+
+    if (filter) {
+      option = {
+        ...filter,
+        PageIndex: page,
+        pageSize: pageSize,
+      }
+    }
+
+    return this.http.get('', {params: option})
+  }
 }
