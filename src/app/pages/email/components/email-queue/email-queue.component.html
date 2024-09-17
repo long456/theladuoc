@@ -1,0 +1,39 @@
+<div class="title-page">
+  Nhật ký gửi mail
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(emailQueue$ | async) as email">
+    <app-table
+      [rows]="email.rows"
+      [page]="email.page"
+      [pageSize]="email.pageSize"
+      [pageTotal]="email.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Thời gian" key="" [width]="'200px'"></table-column>
+      <table-column header="Tổ chức" key="" [width]="'200px'"></table-column>
+      <table-column header="Loại email" key="" [width]="'200px'"></table-column>
+      <table-column header="Người gửi" key="" [width]="'200px'"></table-column>
+      <table-column header="Người nhận" key="" [width]="'200px'"></table-column>
+      <table-column header="Số lần gửi" key="" [width]="'200px'"></table-column>
+      <table-column header="Trạng thái" key="" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action"
+                nz-tooltip nzTooltipTitle="Xem nội dung email">
+            <span nz-icon nzType="profile" nzTheme="outline"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

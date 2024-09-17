@@ -234,6 +234,11 @@ export class SideBarComponent implements OnInit {
           link: 'page/guests',
         },
         {
+          name: 'Nhật ký gửi mail',
+          icon: '',
+          link: 'page/setting/email/queue',
+        },
+        {
           name: 'Nhân sự',
           icon: '',
           link: '',

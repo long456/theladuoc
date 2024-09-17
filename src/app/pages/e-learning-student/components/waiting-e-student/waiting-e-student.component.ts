@@ -5,6 +5,8 @@ import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {ELearningStudentService} from "../../services/e-learning-student.service";
 import {HandleEStudentService} from "../../services/handle-e-student.service";
+import {ActiveMembershipService} from "../../services/active-membership.service";
+import {ActiveCourseService} from "../../services/active-course.service";
 
 @Component({
   selector: 'app-waiting-e-student',
@@ -30,7 +32,9 @@ export class WaitingEStudentComponent implements OnInit{
     private router: Router,
     private message: NzMessageService,
     private eLearningStudentService: ELearningStudentService,
-    private handleEStudentService: HandleEStudentService
+    private handleEStudentService: HandleEStudentService,
+    private activeMembershipService: ActiveMembershipService,
+    private activeCourseService: ActiveCourseService,
   ) {}
 
   ngOnInit() {
@@ -94,4 +98,11 @@ export class WaitingEStudentComponent implements OnInit{
     });
   }
 
+  activeCourse(data: any): void{
+    this.activeCourseService.activeCourse(data);
+  }
+
+  activeMembership(data: any): void{
+    this.activeMembershipService.giftMembership(data);
+  }
 }
