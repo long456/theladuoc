@@ -12,7 +12,7 @@ export type FIX_COLUMN = 'left' | 'right' | 'none'
 export type filterItem = {
   title : string
   name: string
-  type?: 'number' | 'date' | 'date-range' | 'text' | 'phone-number' | 'select'
+  type?: 'number' | 'date' | 'date-range' | 'text' | 'phone-number' | 'select' | 'email-date'
   data?: any
   value?: any
 }
@@ -229,6 +229,23 @@ export const FilterType: {[key: string]: filterItem} = {
   studentEmail: {
     title: 'Email',
     name: 'studentEmail',
+  },
+  emailSendBy: {
+    title: 'Người gửi',
+    name: 'emailSendBy',
+  },
+  emailReceiveBy: {
+    title: 'Người nhận',
+    name: 'emailReceiveBy',
+  },
+  subject: {
+    title: 'Loại email',
+    name: 'subject',
+  },
+  emailDate: {
+    title: 'Ngày gửi',
+    name: 'emailDate',
+    type: 'email-date'
   },
 }
 

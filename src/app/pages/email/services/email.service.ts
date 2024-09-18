@@ -92,6 +92,14 @@ export class EmailService {
       }
     }
 
-    return this.http.get('', {params: option})
+    return this.http.get('EmailQueue', {params: option})
+  }
+
+  getDetailEmailQueue(id: number): Observable<any>{
+    return this.http.get('EmailQueue/' + id);
+  }
+
+  resendEmail(id: number): Observable<any>{
+    return this.http.put('EmailQueue/send-mail-again/' + id, null);
   }
 }
