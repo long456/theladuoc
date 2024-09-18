@@ -48,6 +48,8 @@
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu>
               <li nz-menu-item>Xem chi tiết</li>
+              <li nz-menu-item (click)="activeMembership(data)">Tặng gói thành viên</li>
+              <li nz-menu-item (click)="activeCourse(data)">Tặng khóa học</li>
             </ul>
           </nz-dropdown-menu>
         </ng-template>
