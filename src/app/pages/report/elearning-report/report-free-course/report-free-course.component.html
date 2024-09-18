@@ -88,7 +88,7 @@
             </tr>
         </thead>
         <tbody style="overflow-y: hidden;">
-            <ng-container *ngFor="let data of nzTable.data; let i = index">
+            <ng-container *ngFor="let data of items; let i = index">
                 <tr>
                     <!-- [nzExpand]="expandSet.has(data.courseId)" (nzExpandChange)="onExpandChange(data.courseId, $event)" -->
                     <td [nzLeft]="true">{{i + 1 + ((currentPage - 1) * pageSize)}} </td>

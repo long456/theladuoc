@@ -1,6 +1,7 @@
 export const PaymentMethod = [
     { value: 1, label: 'Thanh toán bằng điểm' },
     { value: 2, label: 'Thanh toán VnPay' },
+    { value: 3, label: 'Thanh toán ngân hàng' },
 ]
 
 export const OrderPaymentStatus =
@@ -16,6 +17,6 @@ export const MemberPriceType =
         { value: 1, label: 'Gói 1 tháng' },
         { value: 2, label: 'Gói 3 tháng' },
         { value: 3, label: 'Gói 1 năm' },
-        { value: 3, label: 'Gói vĩnh viễn' },
+        { value: 4, label: 'Gói trọn đời' },
     ]
 

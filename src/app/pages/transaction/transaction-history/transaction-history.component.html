@@ -22,15 +22,16 @@
         </div>
     </div>
 
-    <nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed" [nzScroll]="{ x: 'auto' }"
-        nzShowPagination="false" (nzQueryParams)="onQueryParamsChange($event)">
-        <thead style="overflow-y: hidden;">
+    <nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed"
+        [nzScroll]="{ x: 'auto', y: '530px' } " nzShowSizeChanger [nzFrontPagination]="false" [nzTotal]="totalItem" [nzShowTotal]="totalTemplate"
+        [nzPageSize]="pageSize" [nzPageIndex]="currentPage" (nzQueryParams)="onQueryParamsChange($event)">
+        <thead>
             <tr>
                 <th [nzLeft]="true" nzWidth="50px" nzAlign="center">STT</th>
                 <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Ngày thanh toán</th>
                 <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên thành viên</th>
-                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Số điện thoại</th>
-                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Người giới thiệu</th>
+                <th nzWidth="160px" nzAlign="center">Số điện thoại</th>
+                <th nzWidth="160px" nzAlign="center">Người giới thiệu</th>
                 <th nzWidth="160px" nzAlign="center">Mã thành viên</th>
                 <th nzWidth="160px" nzAlign="center">Email</th>
                 <th nzWidth="180px" nzColumnKey="price" [nzSortFn]="true" nzAlign="center">Số tiền</th>
@@ -46,16 +47,16 @@
                 <th [nzRight]="true" nzWidth="120px" nzAlign="center">Chức năng</th>
             </tr>
         </thead>
-        <tbody style="overflow-y: hidden;">
-            <ng-container *ngFor="let data of nzTable.data; let i = index">
+        <tbody>
+            <ng-container *ngFor="let data of items; let i = index">
                 <tr>
                     <!-- [nzExpand]="expandSet.has(data.courseId)" (nzExpandChange)="onExpandChange(data.courseId, $event)" -->
                     <td [nzLeft]="true">{{i + 1 + ((currentPage - 1) * pageSize)}} </td>
                     <!-- <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td> -->
                     <td nzAlign="center" [nzLeft]="true"> {{ data.paymentDate | date: 'dd/MM/YYYY HH:mm:ss'}} </td>
                     <td nzAlign="center" [nzLeft]="true"> {{ data.customerName }} </td>
-                    <td nzAlign="center" [nzLeft]="true"> {{ data.customerPhone }} </td>
-                    <td nzAlign="center" [nzLeft]="true"> {{ data.userReferralName }} </td>
+                    <td nzAlign="center"> {{ data.customerPhone }} </td>
+                    <td nzAlign="center"> {{ data.userReferralName }} </td>
                     <td nzAlign="center"> {{ data.customerCode }} </td>
                     <td nzAlign="center"> {{ data.customerEmail }} </td>
                     <td nzAlign="right"> {{ data.price | number }} </td>
@@ -76,13 +77,5 @@
             </ng-container>
         </tbody>
     </nz-table>
-    <div class="table-footer paging-table header-btn">
-        <div class="paging-table-right" style="margin-top: 20px;" *ngIf="items.length > 0">
-            <nz-pagination class="pagination" [(nzPageSize)]="pageSize" [(nzPageIndex)]="currentPage"
-                [nzTotal]="totalItem" (nzPageIndexChange)="onPageChange($event)"
-                (nzPageSizeChange)="nzPageSizeChange($event);" [nzShowTotal]="totalTemplate"
-                nzShowSizeChanger></nz-pagination>
-            <ng-template #totalTemplate let-total>Tổng có {{ totalItem }} bản ghi</ng-template>
-        </div>
-    </div>
+    <ng-template #totalTemplate let-total>Tổng có {{ totalItem }} bản ghi</ng-template>
 </div>
