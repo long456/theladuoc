@@ -10,7 +10,7 @@
           <input nz-input [formControlName]="item.name">
         </ng-container>
 
-        <ng-container *ngIf="item.type === 'date-range'">
+        <ng-container *ngIf="item.type === 'date-range' || item.type === 'email-date'">
           <nz-range-picker nzFormat='dd/MM/YYYY' [formControlName]="item.name"></nz-range-picker>
         </ng-container>
 

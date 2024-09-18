@@ -44,5 +44,15 @@
   color: #ff4d4f;
 }
 
+.filter-form{
+  margin-bottom: 15px;
+  width: 10%;
+  transition: 0.25s;
+  &.expand {
+    width: 100%;
+  }
+  border-radius: 4px;
+}
+
 
 

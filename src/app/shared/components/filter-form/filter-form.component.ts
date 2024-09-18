@@ -56,6 +56,7 @@ export class FilterFormComponent implements OnInit{
 
   getSubmitData() {
     const isDateRange = this.filterData.filter(item => item.type === "date-range");
+    const isEmailDate = this.filterData.filter(item => item.type === "email-date");
     const data = {...this.filterForm.value}
 
     if (isDateRange.length > 0) {
@@ -67,6 +68,17 @@ export class FilterFormComponent implements OnInit{
         data['endDate'] = ''
       }
       delete data[isDateRange[0].name];
+    }
+
+    if (isEmailDate.length > 0) {
+      if (this.filterForm.value[isEmailDate[0].name] !== '' && this.filterForm.value[isEmailDate[0].name] !== null) {
+        data['start'] = formatDate(this.filterForm.value[isEmailDate[0].name][0] ,'dd/MM/YYYY', 'en-US');
+        data['end'] = formatDate(this.filterForm.value[isEmailDate[0].name][1] ,'dd/MM/YYYY', 'en-US');
+      } else {
+        data['start'] = ''
+        data['end'] = ''
+      }
+      delete data[isEmailDate[0].name];
     }
 
     for (const prop in data) {
