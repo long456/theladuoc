@@ -8,6 +8,8 @@ import {CreateChapterComponent} from "./components/chapter/create-chapter/create
 import {VideoRouterOutletComponent} from "./components/video/video-router-outlet/video-router-outlet.component";
 import {VideoListComponent} from "./components/video/video-list/video-list.component";
 import {CreateVideoComponent} from "./components/video/create-video/create-video.component";
+import {ResourcesListComponent} from "./components/resources/resources-list/resources-list.component";
+import {CreateResourcesComponent} from "./components/resources/create-resources/create-resources.component";
 
 const routes: Routes = [
   {
@@ -68,6 +70,25 @@ const routes: Routes = [
         component: CreateVideoComponent
       }
     ],
+  },
+  {
+    path: 'resources',
+    children: [
+      {
+        path: ':courseId/list',
+        component: ResourcesListComponent,
+      },
+      {
+        path: ':courseId/create',
+        data: {isCreate: true},
+        component: CreateResourcesComponent,
+      },
+      {
+        path: ':courseId/:id',
+        data: {isCreate: false},
+        component: CreateResourcesComponent,
+      }
+    ]
   }
 ];
 

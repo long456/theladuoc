@@ -80,6 +80,10 @@ export class CourseListComponent implements OnInit{
     this.router.navigate(['/page/e-course/chapter/' + data.id + '/list'])
   }
 
+  navigateToResources(data: any) {
+    this.router.navigate(['/page/e-course/resources/' + data.id + '/list'])
+  }
+
   delete() {
     if (this.itemSelectList.length === 0) {
       this.message.error('Chưa có mục nào được chọn');

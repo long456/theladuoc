@@ -1,0 +1,65 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới tài nguyên' : 'Chỉnh sửa tài nguyên'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="resourcesForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên tài nguyên
+            <span class="text-danger">*</span>
+          </span>
+          <input nz-input autofocus formControlName="name"
+                 [nzStatus]="(resourcesForm.get('name')?.invalid &&
+                             (resourcesForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(resourcesForm.get('name')?.touched || isSubmit)  &&
+                        resourcesForm.get('name')?.hasError('required')">
+            Tên tài nguyên không được để trống!
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đường dẫn file tài nguyên
+            <span class="text-danger">*</span>
+          </span>
+
+          <div class="select-url">
+            <input nz-input [value]="resourcesForm.get('fullPath')?.value" formControlName="fullPath"
+                   [nzStatus]="(resourcesForm.get('fullPath')?.invalid &&
+                               (resourcesForm.get('fullPath')?.touched || isSubmit)) ?
+                               'error' : ''">
+
+            <button nz-button nzType="primary" (click)="selectFile()">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(resourcesForm.get('fullPath')?.touched || isSubmit)  &&
+                        resourcesForm.get('fullPath')?.hasError('required')">
+            Đường dẫn file tài nguyên không được để trống!
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status"></nz-switch>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{isCreate? 'Tạo mới' : 'Lưu'}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

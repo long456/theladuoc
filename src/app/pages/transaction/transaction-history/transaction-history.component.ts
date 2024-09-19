@@ -36,7 +36,7 @@ export class TransactionHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onSearch();
+    this.onSearch(this.currentPage, this.pageSize);
   }
 
   exportExcel() {
@@ -48,6 +48,7 @@ export class TransactionHistoryComponent implements OnInit {
           'Tên thành viên',
           'Số điện thoại',
           'Mã thành viên',
+          'Người giới thiệu',
           'Email',
           'Số tiền',
           'Gói thành viên',
@@ -81,6 +82,7 @@ export class TransactionHistoryComponent implements OnInit {
             customerName: z.customerName,
             customerPhone: z.customerPhone,
             customerCode: z.customerCode,
+            userReferralName: z.userReferralName,
             customerEmail: z.customerEmail,
             price: z.price,
             priceMemberPolicyTypeName: z.priceMemberPolicyTypeName,
@@ -132,10 +134,12 @@ export class TransactionHistoryComponent implements OnInit {
     const currentSort = sort.find(item => item.value !== null);
     const sortField = (currentSort && currentSort.key) || null;
     const sortOrder = (currentSort && currentSort.value) || null;
-    this.onSearch(sortField, sortOrder);
+    this.onSearch(pageIndex, pageSize, sortField, sortOrder);
   }
 
-  onSearch(sortField: string | null = null, sortOrder: string | null = null) {
+  onSearch(pageIndex: number = 1, pageSize: number = 10, sortField: string | null = null, sortOrder: string | null = null) {
+    this.currentPage = pageIndex;
+    this.pageSize = pageSize;
     this.isLoading = true;
 
     if (sortField && sortOrder) {
@@ -143,24 +147,24 @@ export class TransactionHistoryComponent implements OnInit {
     } else {
       delete this.filter.sortBy;
     }
-    this.transactionHistoryService.getTransactionHistory(this.currentPage, this.pageSize, this.filter).subscribe(x => {
-      if (x) {
-        this.items = x.data.transactionHistories.map((z: any) => plainToClass(TransactionHistoryResponse, z));
-        this.totalItem = x.data.paginationInfo?.totalItem;
-      }
+
+    this.transactionHistoryService.getTransactionHistory(pageIndex, pageSize, this.filter).subscribe(x => {
+      this.items = x.data.transactionHistories.map((z: any) => plainToClass(TransactionHistoryResponse, z));
+      this.totalItem = x.data.paginationInfo?.totalItem;
       this.isLoading = false;
     });
   }
 
-  onPageChange(page: any) {
-    this.currentPage = page;
-    this.onSearch();
-  }
+  // onPageChange(page: any) {
+  //   this.currentPage = page;
+  //   this.onSearch();
+  // }
 
-  nzPageSizeChange(pageSize: number) {
-    this.pageSize = pageSize;
-    this.onSearch();
-  }
+  // nzPageSizeChange(pageSize: number) {
+  //   this.pageSize = pageSize;
+  //   this.currentPage = 1;
+  //   this.onPageChange(this.currentPage);
+  // }
 
   openFilter() {
     // this.resetForm();
