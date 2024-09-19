@@ -15,6 +15,8 @@ import { CreateChapterComponent } from './components/chapter/create-chapter/crea
 import { VideoListComponent } from './components/video/video-list/video-list.component';
 import { VideoRouterOutletComponent } from './components/video/video-router-outlet/video-router-outlet.component';
 import { CreateVideoComponent } from './components/video/create-video/create-video.component';
+import { ResourcesListComponent } from './components/resources/resources-list/resources-list.component';
+import { CreateResourcesComponent } from './components/resources/create-resources/create-resources.component';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { CreateVideoComponent } from './components/video/create-video/create-vid
     VideoListComponent,
     VideoRouterOutletComponent,
     CreateVideoComponent,
+    ResourcesListComponent,
+    CreateResourcesComponent,
   ],
   imports: [
     CommonModule,
