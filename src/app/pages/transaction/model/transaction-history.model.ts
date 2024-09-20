@@ -43,4 +43,20 @@ export class TransactionHistoryResponse {
     paymentMethodName?: string;
 
     memberPolicyLevelName? : string;
+
+    userCareName? : string;
+
+    agencyName? : string;
+
+    userReferralBankName? : string;
+
+    userReferralBankBranchName? : string;
+
+    userReferralPhone? : string;
+
+    userReferralMail? : string;
+
+    userReferralAccountNumber? : string;
+
+    userReferralMemberPolicyLevelName? : string;
 }

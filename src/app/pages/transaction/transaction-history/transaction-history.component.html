@@ -23,47 +23,58 @@
     </div>
 
     <nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed"
-        [nzScroll]="{ x: 'auto', y: '530px' } " nzShowSizeChanger [nzFrontPagination]="false" [nzTotal]="totalItem" [nzShowTotal]="totalTemplate"
-        [nzPageSize]="pageSize" [nzPageIndex]="currentPage" (nzQueryParams)="onQueryParamsChange($event)">
+        [nzScroll]="{ x: 'auto', y: '530px' } " nzShowSizeChanger [nzFrontPagination]="false" [nzTotal]="totalItem"
+        [nzShowTotal]="totalTemplate" [nzPageSize]="pageSize" [nzPageIndex]="currentPage"
+        (nzQueryParams)="onQueryParamsChange($event)">
         <thead>
             <tr>
                 <th [nzLeft]="true" nzWidth="50px" nzAlign="center">STT</th>
                 <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Ngày thanh toán</th>
+                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Mã thành viên</th>
                 <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên thành viên</th>
-                <th nzWidth="160px" nzAlign="center">Số điện thoại</th>
-                <th nzWidth="160px" nzAlign="center">Người giới thiệu</th>
-                <th nzWidth="160px" nzAlign="center">Mã thành viên</th>
-                <th nzWidth="160px" nzAlign="center">Email</th>
-                <th nzWidth="180px" nzColumnKey="price" [nzSortFn]="true" nzAlign="center">Số tiền</th>
+                <th nzWidth="200px" nzAlign="center">Số điện thoại thành viên</th>
+                <th nzWidth="220px" nzAlign="center">Email thành viên</th>
+                <th nzWidth="220px" nzAlign="center">Hạng thành viên</th>
                 <th nzWidth="180px" nzAlign="center">Gói thành viên</th>
-                <th nzWidth="180px" nzAlign="center">Hạng thành viên</th>
-                <th nzWidth="180px" nzAlign="center">Phương thức thanh toán
-                </th>
-                <th nzWidth="180px" nzAlign="center">Trạng thái thanh
-                    toán
-                </th>
-                <th nzWidth="180px" nzAlign="center">Tổ
-                    chức</th>
+                <th nzWidth="200px" nzColumnKey="price" [nzSortFn]="true" nzAlign="center">Số tiền đã thanh toán</th>
+                <th nzWidth="180px" nzAlign="center">Thuộc đại lý</th>
+                <th nzWidth="160px" nzAlign="center">Tên người giới thiệu</th>
+                <th nzWidth="240px" nzAlign="center">Số điện thoại người giới thiệu</th>
+                <th nzWidth="180px" nzAlign="center">Email người giới thiệu</th>
+                <th nzWidth="260px" nzAlign="center">Hạng thành viên người giới thiệu</th>
+                <th nzWidth="260px" nzAlign="center">Số tài khoản người giới thiệu</th>
+                <th nzWidth="260px" nzAlign="center">Ngân hàng người giới thiệu</th>
+                <th nzWidth="280px" nzAlign="center">Chi nhánh ngân hàng người giới thiệu</th>
+                <th nzWidth="200px" nzAlign="center">Phương thức thanh toán</th>
+                <th nzWidth="180px" nzAlign="center">Trạng thái thanh toán</th>
+                <th nzWidth="160px" nzAlign="center">Nhân viên chăm sóc</th>
+                <th nzWidth="180px" nzAlign="center">Tổ chức</th>
                 <th [nzRight]="true" nzWidth="120px" nzAlign="center">Chức năng</th>
             </tr>
         </thead>
         <tbody>
             <ng-container *ngFor="let data of items; let i = index">
                 <tr>
-                    <!-- [nzExpand]="expandSet.has(data.courseId)" (nzExpandChange)="onExpandChange(data.courseId, $event)" -->
                     <td [nzLeft]="true">{{i + 1 + ((currentPage - 1) * pageSize)}} </td>
-                    <!-- <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td> -->
                     <td nzAlign="center" [nzLeft]="true"> {{ data.paymentDate | date: 'dd/MM/YYYY HH:mm:ss'}} </td>
+                    <td nzAlign="center" [nzLeft]="true"> {{ data.customerCode }} </td>
                     <td nzAlign="center" [nzLeft]="true"> {{ data.customerName }} </td>
                     <td nzAlign="center"> {{ data.customerPhone }} </td>
-                    <td nzAlign="center"> {{ data.userReferralName }} </td>
-                    <td nzAlign="center"> {{ data.customerCode }} </td>
                     <td nzAlign="center"> {{ data.customerEmail }} </td>
-                    <td nzAlign="right"> {{ data.price | number }} </td>
-                    <td nzAlign="center"> {{ data.priceMemberPolicyTypeName }} </td>
                     <td nzAlign="center"> {{ data.memberPolicyLevelName}} </td>
+                    <td nzAlign="center"> {{ data.priceMemberPolicyTypeName }} </td>
+                    <td nzAlign="right"> {{ data.price | number }} </td>
+                    <td nzAlign="center">{{ data.agencyName }}</td>
+                    <td nzAlign="center"> {{ data.userReferralName }} </td>
+                    <td nzAlign="center">{{ data.userReferralPhone }}</td>
+                    <td nzAlign="center">{{ data.userReferralMail }}</td>
+                    <td nzAlign="center">{{ data.userReferralMemberPolicyLevelName }}</td>
+                    <td nzAlign="center">{{ data.userReferralAccountNumber }}</td>
+                    <td nzAlign="center">{{ data.userReferralBankName }}</td>
+                    <td nzAlign="center">{{ data.userReferralBankBranchName }}</td>
                     <td nzAlign="center"> {{ data.paymentMethodName }} </td>
                     <td nzAlign="center"> {{ data.paymentStatusName }} </td>
+                    <td nzAlign="center">{{ data.userCareName }}</td>
                     <td nzAlign="center"> {{ data.organizationName }} </td>
                     <td [nzRight]="true" nzAlign="center">
                         <!-- <button nz-button nzType="default" nzShape="circle" nz-tooltip
