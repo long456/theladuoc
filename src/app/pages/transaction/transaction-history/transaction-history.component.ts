@@ -36,7 +36,7 @@ export class TransactionHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onSearch(this.currentPage, this.pageSize);
+    // this.onSearch(this.currentPage, this.pageSize);
   }
 
   exportExcel() {
