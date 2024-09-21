@@ -1,0 +1,35 @@
+<div class="title-page">
+  Danh sách video giới thiệu
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(introVideoPage$ | async) as video">
+    <app-table
+      [rows]="video.rows"
+      [page]="video.page"
+      [pageSize]="video.pageSize"
+      [pageTotal]="video.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Ảnh bìa video" key="bannerVideoIntroElearning" [width]="'200px'"></table-column>
+      <table-column header="Đường dẫn video" key="videoIntroElearning" [width]="'200px'"></table-column>
+      <table-column header="Tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Chỉnh sửa video giới thiệu">
+            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

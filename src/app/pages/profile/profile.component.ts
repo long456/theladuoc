@@ -111,7 +111,9 @@ export class ProfileComponent implements OnInit{
       next: res => {
         if (res.success) {
           this.teacherInfoForm.patchValue(res.data);
-          this.skillList = JSON.parse(res.data.skills);
+          if (res.data.skills) {
+            this.skillList = JSON.parse(res.data.skills);
+          }
         }
       }
     });
