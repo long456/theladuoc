@@ -92,6 +92,10 @@ const routes: Routes = [
       {
         path: 'event',
         loadChildren: () => import('./pages/event/event.module').then(m => m.EventModule),
+      },
+      {
+        path: 'e-learning-config',
+        loadChildren: () => import('./pages/e-learning-config/e-learning-config.module').then(m => m.ELearningConfigModule),
       }
     ],
   },

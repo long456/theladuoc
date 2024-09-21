@@ -36,7 +36,7 @@ export class TransactionHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onSearch(this.currentPage, this.pageSize);
+    // this.onSearch(this.currentPage, this.pageSize);
   }
 
   exportExcel() {
@@ -45,22 +45,40 @@ export class TransactionHistoryComponent implements OnInit {
       if (x.data.length > 0) {
         let heading = [[
           'Ngày thanh toán',
-          'Tên thành viên',
-          'Số điện thoại',
           'Mã thành viên',
-          'Người giới thiệu',
-          'Email',
-          'Số tiền',
-          'Gói thành viên',
+          'Tên thành viên',
+          'Số điện thoại thành viên',
+          'Email thành viên',
           'Hạng thành viên',
+          'Gói thành viên',
+          'Số tiền đã thanh toán',
+          'Thuộc đại lý',
+          'Tên người giới thiệu',
+          'Số điện thoại người giới thiệu',
+          'Email người giới thiệu',
+          'Hạng thành viên người giới thiệu',
+          'Số tài khoản người giới thiệu',
+          'Ngân hàng người giới thiệu',
+          'Chi nhánh ngân hàng người giới thiệu',
           'Phương thức thanh toán',
           'Trạng thái thanh toán',
-          'Tổ chức']];
+          'Nhân viên chăm sóc',
+          'Tổ chức'
+        ]];
         //Had to create a new workbook and then add the header
         const wb = XLSX.utils.book_new();
         const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet([]);
 
         var wscols = [
+          { width: 20 },
+          { width: 20 },
+          { width: 20 },
+          { width: 20 },
+          { width: 20 },
+          { width: 20 },
+          { width: 20 },
+          { width: 20 },
+          { width: 20 },
           { width: 20 },
           { width: 20 },
           { width: 20 },
@@ -79,16 +97,24 @@ export class TransactionHistoryComponent implements OnInit {
         XLSX.utils.sheet_add_json(ws, x.data.map((z: any) => {
           return {
             paymentDate: this.dateTimeHelper.formatDateTime(z.paymentDate),
+            customerCode: z.customerCode,
             customerName: z.customerName,
             customerPhone: z.customerPhone,
-            customerCode: z.customerCode,
-            userReferralName: z.userReferralName,
             customerEmail: z.customerEmail,
-            price: z.price,
-            priceMemberPolicyTypeName: z.priceMemberPolicyTypeName,
             memberPolicyLevelName: z.memberPolicyLevelName,
+            priceMemberPolicyTypeName: z.priceMemberPolicyTypeName,
+            price: z.price,
+            agencyName: z.agencyName,
+            userReferralName: z.userReferralName,
+            userReferralPhone: z.userReferralPhone,
+            userReferralMail: z.userReferralMail,
+            userReferralMemberPolicyLevelName: z.userReferralMemberPolicyLevelName,
+            userReferralAccountNumber: z.userReferralAccountNumber,
+            userReferralBankName: z.userReferralBankName,
+            userReferralBankBranchName: z.userReferralBankBranchName,
             paymentMethodName: z.paymentMethodName,
             paymentStatusName: z.paymentStatusName,
+            userCareName: z.userCareName,
             organizationName: z.organizationName
           };
         }), { origin: 'A2', skipHeader: true });
