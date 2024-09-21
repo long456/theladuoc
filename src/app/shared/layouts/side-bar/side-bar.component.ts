@@ -399,6 +399,11 @@ export class SideBarComponent implements OnInit {
                   icon: '',
                   link: 'page/e-category',
                 },
+                {
+                  name: 'Video giới thiệu',
+                  icon: '',
+                  link: 'page/e-learning-config/intro-video/list',
+                },
               ]
             },
             {

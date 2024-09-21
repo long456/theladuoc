@@ -1,0 +1,50 @@
+<div class="title-page">
+  Cấu hình video giới thiệu
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="introVideoForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đường dẫn ảnh banner
+          </span>
+
+          <div class="select-url">
+            <input nz-input [value]="introVideoForm.get('bannerVideoIntroElearning')?.value"
+                   formControlName="bannerVideoIntroElearning">
+
+            <button nz-button nzType="primary" (click)="selectFile()">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đường dẫn video
+          </span>
+
+          <div class="select-url">
+            <input nz-input [value]="introVideoForm.get('videoIntroElearning')?.value"
+                   formControlName="videoIntroElearning">
+
+            <button nz-button nzType="primary" (click)="selectVideoUrl()">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        Lưu
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>
