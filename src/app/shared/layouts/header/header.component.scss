@@ -7,7 +7,8 @@
 .header-side-bar{
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
+  align-items: center;
   padding: 0 24px;
 }
 
@@ -37,4 +38,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.switch-language{
+  padding-right: 8px;
 }

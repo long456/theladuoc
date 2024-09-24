@@ -45,8 +45,8 @@ export class TransactionHistoryComponent implements OnInit {
       if (x.data.length > 0) {
         let heading = [[
           'Ngày thanh toán',
-          'Mã thành viên',
           'Tên thành viên',
+          'Mã thành viên',
           'Số điện thoại thành viên',
           'Email thành viên',
           'Hạng thành viên',
@@ -97,8 +97,8 @@ export class TransactionHistoryComponent implements OnInit {
         XLSX.utils.sheet_add_json(ws, x.data.map((z: any) => {
           return {
             paymentDate: this.dateTimeHelper.formatDateTime(z.paymentDate),
-            customerCode: z.customerCode,
             customerName: z.customerName,
+            customerCode: z.customerCode,
             customerPhone: z.customerPhone,
             customerEmail: z.customerEmail,
             memberPolicyLevelName: z.memberPolicyLevelName,

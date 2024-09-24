@@ -7,7 +7,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './icons-provider.module';
@@ -19,6 +19,8 @@ import { AuthComponent } from "./layouts/auth-layout/auth/auth.component";
 import { HttpRequestInterceptor } from "./shared/interceptors/http-request.inperceptor";
 import { NzInputModule } from 'ng-zorro-antd/input';
 import customViVn from './custom-vi-vn';
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 registerLocaleData(vi);
 
@@ -42,6 +44,15 @@ registerLocaleData(vi);
     ReactiveFormsModule,
     NzI18nModule,
     NzInputModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpBackend) => {
+          return new TranslateHttpLoader(new HttpClient(http));
+        },
+        deps: [HttpBackend]
+      }
+    })
   ],
   providers: [
     { provide: NZ_I18N, useValue: customViVn },

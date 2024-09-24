@@ -6,6 +6,7 @@ import {AuthService} from "../../../layouts/auth-layout/auth/services/auth.servi
 import {NzNotificationService} from "ng-zorro-antd/notification";
 import {StudentService} from "../../../pages/student/services/student.service";
 import {Subscription} from "rxjs";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-header',
@@ -17,6 +18,7 @@ export class HeaderComponent implements OnInit{
   linkAvatar!: string;
   userData!: any;
   downloadStatus!: string;
+  lang:string ='';
 
   constructor(
     private router: Router,
@@ -24,6 +26,7 @@ export class HeaderComponent implements OnInit{
     private authService: AuthService,
     private notification: NzNotificationService,
     private studentService: StudentService,
+    private translateService: TranslateService,
   ) {
     this.subscription = new Subscription();
   }
@@ -50,12 +53,13 @@ export class HeaderComponent implements OnInit{
     this.subscription = this.studentService.exportStatus$.subscribe((status) => {
       this.showMessage(status);
     });
+
+    this.lang = localStorage.getItem('lang') || 'vi';
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 
   showMessage(status: string) {
     switch (status) {
@@ -91,5 +95,10 @@ export class HeaderComponent implements OnInit{
       'Export file excel',
       content
     );
+  }
+
+  changeLang(e: any): void {
+    localStorage.setItem('lang',e);
+    this.translateService.use(e);
   }
 }

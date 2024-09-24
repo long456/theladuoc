@@ -3,6 +3,7 @@ import {MembershipConfigService} from "../../../services/membership-config.servi
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'app-config-detail',
@@ -15,6 +16,7 @@ export class ConfigDetailComponent implements OnInit{
   policyList: any[] = [];
   benefitList: any[] = [];
   editId: string | null = null;
+  loading = false;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -49,7 +51,7 @@ export class ConfigDetailComponent implements OnInit{
 
   addId(): void {
     let count = 0;
-    let data = [...this.benefitList].map(item => {
+    this.benefitList = [...this.benefitList].map(item => {
       item.benefits.map((ele: any) => {
         ele['id'] = count;
         count++;
@@ -57,8 +59,6 @@ export class ConfigDetailComponent implements OnInit{
       });
       return item
     });
-
-    this.benefitList = data;
   }
 
   addBenefit(data: any, index: number): void {
@@ -113,16 +113,14 @@ export class ConfigDetailComponent implements OnInit{
       return item.benefits.every((ele : any)  => ele.title.trim() !== '');
     });
 
-    if (!validGroup || !validBenefit ) {
-      return false;
-    }
-    return true;
+    return !(!validGroup || !validBenefit);
+
   }
 
   edit() {
     this.isSubmit = true;
-    const validGroupBenefit = this.validGroupBenefit();
-    if (!validGroupBenefit) {
+
+    if (!this.validGroupBenefit()) {
       this.message.error('Tên nhóm quyền lợi và tên quyền lợi không được để trống!');
       return;
     }
@@ -135,8 +133,12 @@ export class ConfigDetailComponent implements OnInit{
       ...this.membershipConfigForm.value,
       objectBenefit: this.benefitList
     };
-    this.membershipConfigService.updateMembershipConfig(configData).subscribe({
-      next: res => {
+
+    this.loading = true;
+    this.membershipConfigService.updateMembershipConfig(configData).pipe(
+      finalize(() => this.loading = false)
+    ).subscribe({
+      next: (res) => {
         if (res.success) {
           this.message.success(res.messages);
           this.navigateBack();
@@ -144,10 +146,13 @@ export class ConfigDetailComponent implements OnInit{
           this.message.error(res.errorMessages);
         }
       },
+      error: (err) => {
+        this.message.error(err);
+      }
     });
   }
 
   navigateBack() {
-    this.router.navigate(['/page/membership-policy/config/list']);
+    this.router.navigate(['/page/membership-policy/config/list']).then();
   }
 }
