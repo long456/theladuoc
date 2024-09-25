@@ -157,15 +157,16 @@ export class CreateMembershipComponent implements OnInit{
   edit() {
     this.isSubmit  = true;
     if (this.membershipForm.valid) {
+      const discount = this.membershipOpList.map((item) => {
+        return {
+          memberPolicyLevelId: item.id,
+          discount: item.discount
+        }
+      });
       const data = {
         ...this.membershipForm.value,
         status: this.membershipForm.value.status? 1 : 0,
-        listDiscount: this.membershipOpList.map((item) => {
-          return {
-            memberPolicyLevelId: item.id,
-            discount: item.discount
-          }
-        })
+        listDiscount: discount.length > 0 ? discount : null,
       }
 
       if (this.isCreate) {

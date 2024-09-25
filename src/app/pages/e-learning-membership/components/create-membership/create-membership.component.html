@@ -106,7 +106,7 @@
           </div>
         </div>
 
-        <div nz-col [nzSpan]="24" *ngIf="membershipLevel > lowestMemLv">
+        <div nz-col [nzSpan]="24" *ngIf="membershipLevel > lowestMemLv && membershipOpList.length > 0">
           <div class="content-block" nz-row [nzGutter]=[16,8]>
             <div nz-col [nzSpan]="24" class="content-block-title">Chiết khấu khi nâng gói</div>
             <nz-divider class="mt-10"></nz-divider>
@@ -197,7 +197,7 @@
                 <nz-input-number
                   formControlName="referrerReward"
                   [nzMin]="0"
-                  [nzStep]="1000">
+                  [nzStep]="1">
                 </nz-input-number>
               </nz-input-number-group>
             </div>
@@ -208,7 +208,7 @@
                 <nz-input-number
                   formControlName="referrerReward2"
                   [nzMin]="0"
-                  [nzStep]="1000">
+                  [nzStep]="1">
                 </nz-input-number>
               </nz-input-number-group>
             </div>
