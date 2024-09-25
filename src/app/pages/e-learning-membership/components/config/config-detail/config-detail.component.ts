@@ -38,13 +38,23 @@ export class ConfigDetailComponent implements OnInit{
     this.membershipConfigService.getDetailMembershipConfig().subscribe({
       next: res => {
         if (res.success) {
-          this.membershipConfigForm.patchValue(res.data.configPolicy);
+          const dataConfig = {
+            ...res.data.configPolicy,
+            isShowPriceMonth: !!res.data.configPolicy.isShowPriceMonth,
+            isShowPrice3Month: !!res.data.configPolicy.isShowPrice3Month,
+            isShowPriceYear: !!res.data.configPolicy.isShowPriceYear,
+            isShowPriceForever: !!res.data.configPolicy.isShowPriceForever,
+          };
+          this.membershipConfigForm.patchValue(dataConfig);
           this.policyList = [...res.data.memberPolicies];
           this.benefitList = [...res.data.configPolicy.objectBenefit];
           if (this.benefitList.length > 0 ) {
             this.addId();
           }
         }
+      },
+      error: err => {
+        this.message.error(err);
       }
     });
   }
