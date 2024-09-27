@@ -424,6 +424,28 @@ export class SideBarComponent implements OnInit {
               ]
             },
             {
+              name: 'Diễn đàn cộng đồng',
+              icon: '',
+              link: '',
+              children: [
+                {
+                  name: 'Cấu hình chung',
+                  icon: '',
+                  link: 'page/forum',
+                },
+                {
+                  name: 'Danh mục cộng đồng',
+                  icon: '',
+                  link: 'page/forum/category',
+                },
+                {
+                  name: 'Danh sách cộng đồng',
+                  icon: '',
+                  link: 'page/forum/sub-forum',
+                }
+              ]
+            },
+            {
               name: 'Email SMTP',
               icon: '',
               link: 'page/setting/email-account',

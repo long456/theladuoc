@@ -1,0 +1,50 @@
+<div class="title-page">
+  Cấu hình trang diễn đàn
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(forumConfigPage$ | async) as config">
+    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+    <app-table
+      [rows]="config.rows"
+      [page]="config.page"
+      [pageSize]="config.pageSize"
+      [pageTotal]="config.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      (onItemSelection)="getItemSelection($event)"
+      [loading]="loading"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Tên diễn đàn" key="name" [width]="'200px'"></table-column>
+      <table-column header="Đăng bài viết" key="" [width]="'200px'"></table-column>
+      <table-column header="Đánh giá sao khóa học" key="" [width]="'200px'"></table-column>
+      <table-column header="Trả lời người khác" key="" [width]="'200px'"></table-column>
+      <table-column header="Người khác trả lời" key="" [width]="'200px'"></table-column>
+      <table-column header="Thả tim bình luận" key="" [width]="'200px'"></table-column>
+      <table-column header="Bình luận được thả tim" key="" [width]="'200px'"></table-column>
+      <table-column header="Tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="Trạng thái" key="status" [width]="'200px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
+          <span class="text-invalid" *ngIf="!data.status">Tạm dừng</span>
+        </ng-template>
+      </table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="Chỉnh sửa video giới thiệu">
+            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
