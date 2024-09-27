@@ -53,7 +53,7 @@ export class IntroVideoListComponent implements OnInit{
               }
             }),
             catchError(err => {
-              this.message.error(err.message? err.message : 'Lỗi load dữ danh sách video giới thiệu');
+              this.message.error(err.message? err.message : 'Lỗi load dữ liệu danh sách video giới thiệu');
               return of({
                 rows: [],
                 page: 0,
