@@ -1,0 +1,128 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới cộng đồng' : 'Chỉnh sửa cộng đồng'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="subForumForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên cộng đồng
+            <span class="text-danger">*</span>
+          </span>
+          <input nz-input autofocus formControlName="name"
+                 [nzStatus]="(subForumForm.get('name')?.invalid &&
+                             (subForumForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(subForumForm.get('name')?.touched || isSubmit)  &&
+                        subForumForm.get('name')?.hasError('required')">
+            Tên cộng đồng không được để trống!
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đường dẫn ảnh banner
+            <span class="text-danger">*</span>
+          </span>
+
+          <div class="select-url">
+            <input nz-input [value]="subForumForm.get('banner')?.value" formControlName="banner"
+                   [nzStatus]="(subForumForm.get('banner')?.invalid &&
+                               (subForumForm.get('banner')?.touched || isSubmit)) ?
+                               'error' : ''">
+
+            <button nz-button nzType="primary" (click)="onSelectFile()">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(subForumForm.get('banner')?.touched || isSubmit)  &&
+                        subForumForm.get('banner')?.hasError('required')"
+          >Đường dẫn ảnh banner không được để trống!</span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Danh mục
+            <span class="text-danger">*</span>
+          </span>
+
+          <nz-select class="width-100" formControlName="communityCategoryId"
+                     [nzStatus]="(subForumForm.get('communityCategoryId')?.invalid &&
+                                 (subForumForm.get('communityCategoryId')?.touched || isSubmit)) ?
+                                 'error' : ''">
+            <nz-option *ngFor="let category of categoryData"
+                       [nzValue]="category.id"
+                       [nzLabel]="category.name"
+            ></nz-option>
+          </nz-select>
+
+          <span class="text-danger"
+                *ngIf="(subForumForm.get('communityCategoryId')?.touched || isSubmit)  &&
+                        subForumForm.get('communityCategoryId')?.hasError('required')"
+          >Danh mục không được để trống!</span>
+        </div>
+
+        <div nz-col [nzSpan]="16">
+          <div class="text-label">Mô tả</div>
+          <textarea
+            nz-input placeholder="Mô tả ngắn"
+            [nzAutosize]="{ minRows: 3}" formControlName="description"
+            [nzStatus]="(subForumForm.get('description')?.invalid &&
+                        (subForumForm.get('description')?.touched || isSubmit)) ? 'error' : ''"
+          ></textarea>
+          <span class="text-danger"
+                *ngIf="(subForumForm.get('description')?.touched || isSubmit) &&
+                        subForumForm.get('description')?.hasError('required')"
+          >Mô tả không được để trống!</span>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Link facebook</div>
+          <input nz-input formControlName="facebookLink">
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Link instagram</div>
+          <input nz-input formControlName="instagramLink">
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Link zalo</div>
+          <input nz-input formControlName="zaloLink">
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Link twitter</div>
+          <input nz-input formControlName="twitterLink">
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
+        Lưu
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>

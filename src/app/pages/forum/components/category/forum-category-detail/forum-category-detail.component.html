@@ -1,0 +1,67 @@
+<div class="title-page">
+  {{isCreate? 'Tạo mới danh mục cộng đồng' : 'Chỉnh sửa danh mục cộng đồng'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="forumCategoryForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên danh mục
+            <span class="text-danger">*</span>
+          </span>
+          <input nz-input autofocus formControlName="name"
+                 [nzStatus]="(forumCategoryForm.get('name')?.invalid &&
+                             (forumCategoryForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(forumCategoryForm.get('name')?.touched || isSubmit)  &&
+                        forumCategoryForm.get('name')?.hasError('required')">
+            Tên danh mục không được để trống!
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đường dẫn ảnh banner
+            <span class="text-danger">*</span>
+          </span>
+
+          <div class="select-url">
+            <input nz-input [value]="forumCategoryForm.get('banner')?.value" formControlName="banner"
+                   [nzStatus]="(forumCategoryForm.get('banner')?.invalid &&
+                               (forumCategoryForm.get('banner')?.touched || isSubmit)) ?
+                               'error' : ''">
+
+            <button nz-button nzType="primary" (click)="onSelectFile()">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(forumCategoryForm.get('banner')?.touched || isSubmit)  &&
+                        forumCategoryForm.get('banner')?.hasError('required')">
+            Đường dẫn ảnh banner không được để trống!
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8" >
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
+        Lưu
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>
+

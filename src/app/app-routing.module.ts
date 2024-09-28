@@ -96,7 +96,11 @@ const routes: Routes = [
       {
         path: 'e-learning-config',
         loadChildren: () => import('./pages/e-learning-config/e-learning-config.module').then(m => m.ELearningConfigModule),
-      }
+      },
+      {
+        path: 'forum',
+        loadChildren: () => import('./pages/forum/forum.module').then(m => m.ForumModule),
+      },
     ],
   },
 ];

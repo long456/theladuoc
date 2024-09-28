@@ -1,0 +1,92 @@
+<div class="title-page">
+  Cấu hình diễn đàn cộng đồng
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="forumConfigForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Tên diễn đàn
+            <span class="text-danger">*</span>
+          </span>
+          <input nz-input autofocus formControlName="name"
+                 [nzStatus]="(forumConfigForm.get('name')?.invalid &&
+                             (forumConfigForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(forumConfigForm.get('name')?.touched || isSubmit)  &&
+                        forumConfigForm.get('name')?.hasError('required')">
+            Tên diễn đàn không được để trống!
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8" >
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="8" ></div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đường dẫn ảnh logo
+            <span class="text-danger">*</span>
+          </span>
+
+          <div class="select-url">
+            <input nz-input [value]="forumConfigForm.get('logo')?.value" formControlName="logo"
+                   [nzStatus]="(forumConfigForm.get('logo')?.invalid &&
+                               (forumConfigForm.get('logo')?.touched || isSubmit)) ?
+                               'error' : ''">
+
+            <button nz-button nzType="primary" (click)="onSelectFile('logo')">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(forumConfigForm.get('logo')?.touched || isSubmit)  &&
+                        forumConfigForm.get('logo')?.hasError('required')">
+            Đường dẫn ảnh logo không được để trống!
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đường dẫn ảnh banner
+            <span class="text-danger">*</span>
+          </span>
+
+          <div class="select-url">
+            <input nz-input [value]="forumConfigForm.get('banner')?.value" formControlName="banner"
+                   [nzStatus]="(forumConfigForm.get('banner')?.invalid &&
+                               (forumConfigForm.get('banner')?.touched || isSubmit)) ?
+                               'error' : ''">
+
+            <button nz-button nzType="primary" (click)="onSelectFile('banner')">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(forumConfigForm.get('banner')?.touched || isSubmit)  &&
+                        forumConfigForm.get('banner')?.hasError('required')">
+            Đường dẫn ảnh banner không được để trống!
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
+        Lưu
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+    </div>
+  </div>
+</div>
