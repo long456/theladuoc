@@ -1,6 +1,7 @@
 {
-  "Báo cáo": "Reports",
-  "Tăng trưởng": "Growth levels",
+  "header_userInfo": "User information",
+  "userInfo_title": "User information",
+  "userInfo_fullName": "Full name",
   "Hiệu quả khóa học": "Course outcomes",
   "Phễu khóa học": "Funnel course",
   "Khóa học phễu": "Tiered courses",

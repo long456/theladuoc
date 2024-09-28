@@ -1,4 +1,5 @@
 {
-  "welcome": "Xin chào",
-  "greeting": "Chào mừng bạn đến với ứng dụng của chúng tôi"
+  "header_userInfo": "Thông tin người dùng",
+  "userInfo_title": "Thông tin người dùng",
+  "userInfo_fullName": "Họ và tên"
 }
