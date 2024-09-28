@@ -102,7 +102,8 @@ import {TranslateModule} from "@ngx-translate/core";
     TreeComponent,
     NzTableModule,
     NzPaginationModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    TranslateModule
   ]
 })
 export class SharedModule { }

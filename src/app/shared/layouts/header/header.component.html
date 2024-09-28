@@ -1,28 +1,27 @@
 <div class="header-side-bar">
 
   <div class="download-layout" *ngIf="downloadStatus === 'pending'"
-       (click)="createNotification('info', 'Quá trình download file excel đang chạy')">
+    (click)="createNotification('info', 'Quá trình download file excel đang chạy')">
     <div class="download-process"></div>
     <span nz-icon nzType="download" nzTheme="outline"></span>
   </div>
 
-<!--  <span>{{'greeting'| translate}}</span>-->
-<!--  <div class="switch-language">-->
-<!--    <nz-select [(ngModel)]="lang" (ngModelChange)="changeLang($event)">-->
-<!--      <nz-option nzValue="vi" nzLabel="Tiếng việt"></nz-option>-->
-<!--      <nz-option nzValue="en" nzLabel="English"></nz-option>-->
-<!--    </nz-select>-->
-<!--  </div>-->
+  <!--  <span>{{'greeting'| translate}}</span>-->
+  <div class="switch-language">
+    <nz-select [(ngModel)]="lang" (ngModelChange)="changeLang($event)">
+      <nz-option nzValue="vi" nzLabel="Tiếng việt"></nz-option>
+      <nz-option nzValue="en" nzLabel="English"></nz-option>
+    </nz-select>
+  </div>
 
   <span nz-tooltip [nzTooltipTitle]="titleTemplate" nzTooltipPlacement="left" [nzTooltipColor]="'#3c4043e6'">
-    <button *ngIf="!linkAvatar"
-            nz-button nzType="default" nzShape="circle"
-            nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click">
+    <button *ngIf="!linkAvatar" nz-button nzType="default" nzShape="circle" nz-dropdown [nzDropdownMenu]="menu"
+      nzTrigger="click">
       <span nz-icon nzType="user"></span>
     </button>
 
-    <nz-avatar *ngIf="linkAvatar" nzIcon="user" [nzSrc]="linkAvatar" style="cursor: pointer"
-               nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click"></nz-avatar>
+    <nz-avatar *ngIf="linkAvatar" nzIcon="user" [nzSrc]="linkAvatar" style="cursor: pointer" nz-dropdown
+      [nzDropdownMenu]="menu" nzTrigger="click"></nz-avatar>
   </span>
 
   <ng-template #titleTemplate let-thing>
@@ -38,7 +37,7 @@
       <li nz-menu-item>
         <button nz-button nzType="text" (click)="editProfile()">
           <span nz-icon nzType="user" nzTheme="outline"></span>
-          Thông tin user
+          {{'Thông tin user' | translate}}
         </button>
       </li>
 
@@ -47,7 +46,7 @@
       <li nz-menu-item>
         <button nz-button nzType="text" (click)="signOut()">
           <span nz-icon nzType="logout" nzTheme="outline"></span>
-          Đăng xuất
+          {{'Đăng xuất' | translate}}
         </button>
       </li>
     </ul>

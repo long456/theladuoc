@@ -20,7 +20,7 @@
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Tên danh mục" key="name" [width]="'200px'"></table-column>
-      <table-column header="Thứ tự hiển thị" key="" [width]="'200px'"></table-column>
+      <table-column header="Thứ tự hiển thị" key="number" [width]="'200px'"></table-column>
       <table-column header="Trạng thái" key="status" [width]="'200px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
@@ -35,7 +35,7 @@
 
         <ng-template appCell let-data>
           <span class="custom-action" (click)="edit(data)"
-                nz-tooltip nzTooltipTitle="Chỉnh sửa video giới thiệu">
+                nz-tooltip nzTooltipTitle="Chỉnh sửa danh mục">
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
           </span>
         </ng-template>
