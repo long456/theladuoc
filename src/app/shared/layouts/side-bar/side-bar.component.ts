@@ -34,7 +34,7 @@ export class SideBarComponent implements OnInit {
           link: '',
           children: [
             {
-              name: 'Phễu Khóa học',
+              name: 'Phễu khóa học',
               icon: '',
               link: '',
               children: [
