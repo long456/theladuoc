@@ -1,31 +1,27 @@
-<nz-sider class="menu-sidebar"
-          nzCollapsible
-          nzWidth="256px"
-          nzBreakpoint="md"
-          [(nzCollapsed)]="isCollapsed">
+<nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed">
   <div class="sidebar-logo">
     <a href="/page">
       <ng-container *ngIf="dataOrg && dataOrg.logo1x1">
-        <img [style.opacity]="!isCollapsed? 0 : 1" [src]="dataOrg.logo1x1" alt="logo" >
+        <img [style.opacity]="!isCollapsed? 0 : 1" [src]="dataOrg.logo1x1" alt="logo">
       </ng-container>
 
       <ng-container *ngIf="dataOrg && dataOrg.logo">
-        <img [style.opacity]="isCollapsed? 0 : 1" [src]="dataOrg.logo" alt="logo" >
+        <img [style.opacity]="isCollapsed? 0 : 1" [src]="dataOrg.logo" alt="logo">
       </ng-container>
 
     </a>
   </div>
   <ul nz-menu nzMode="inline" theme [nzInlineCollapsed]="isCollapsed" class="menu-list">
     <ng-container *ngFor="let item of treeMenu">
-      <li *ngIf="item.children"
-        nz-submenu nzTitle={{item.name}} nzIcon="{{item.icon}}" >
-        <app-menu-item [menuData]="item.children" ></app-menu-item>
+      <li *ngIf="item.children" nz-submenu [nzTitle]="item.name | translate" nzIcon="{{item.icon}}">
+        <app-menu-item [menuData]="item.children"></app-menu-item>
       </li>
-      <li *ngIf="!item.children" nz-menu-item >
-        {{item.name}}
+      <li *ngIf="!item.children" nz-menu-item>
+        {{item.name | translate}}
+        <!-- {{item.name}} -->
       </li>
     </ng-container>
-    <li nz-menu-item >
+    <li nz-menu-item>
 
     </li>
   </ul>
@@ -34,5 +30,3 @@
 <!--<ng-template #logo1x1Default>-->
 <!--  <img [style.opacity]="!isCollapsed? 0 : 1" src="assets/img/black-logo.png" alt="logo">-->
 <!--</ng-template>-->
-
-
