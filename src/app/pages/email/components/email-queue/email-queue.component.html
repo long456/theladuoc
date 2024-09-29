@@ -1,11 +1,11 @@
 <div class="title-page">
-  Nhật ký gửi mail
+  {{'email_logs' | translate}}
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(emailQueue$ | async) as email">
     <nz-collapse class="filter-form" [class.expand]="isExpand">
-      <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
+      <nz-collapse-panel [nzHeader]="'filter' | translate"  (nzActiveChange)="setExpand($event)">
         <app-filter-form
           [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"></app-filter-form>
       </nz-collapse-panel>
@@ -21,14 +21,14 @@
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
     >
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Thời gian" key="sendTime" [dataType]="COL_DATA_TYPE.DATE" [width]="'200px'"></table-column>
-      <table-column header="Tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Loại email" key="subject" [width]="'200px'"></table-column>
-      <table-column header="Người gửi" key="emailSendBy" [width]="'200px'"></table-column>
-      <table-column header="Người nhận" key="emailReceiveBy" [width]="'200px'"></table-column>
-      <table-column header="Số lần gửi" key="number" [width]="'200px'"></table-column>
-      <table-column header="Trạng thái" key="isSend" [width]="'200px'">
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'time' | translate }}" key="sendTime" [dataType]="COL_DATA_TYPE.DATE" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'email_type' | translate }}" key="subject" [width]="'200px'"></table-column>
+      <table-column header="{{ 'sender' | translate }}" key="emailSendBy" [width]="'200px'"></table-column>
+      <table-column header="{{ 'receiver' | translate }}" key="emailReceiveBy" [width]="'200px'"></table-column>
+      <table-column header="{{ 'sent_count' | translate }}" key="number" [width]="'200px'"></table-column>
+      <table-column header="{{ 'status' | translate }}" key="isSend" [width]="'200px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.isSend">Đã gửi</span>
           <span class="text-invalid" *ngIf="!data.isSend">Chưa gửi</span>
@@ -36,7 +36,7 @@
       </table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
@@ -46,7 +46,7 @@
           </span>
 
           <span class="custom-action" (click)="resendEmail(data)"
-                nz-tooltip nzTooltipTitle="Gửi lại">
+                nz-tooltip nzTooltipTitle="{{ 'send' | translate }} lại">
             <span nz-icon nzType="rollback" nzTheme="outline"></span>
           </span>
         </ng-template>

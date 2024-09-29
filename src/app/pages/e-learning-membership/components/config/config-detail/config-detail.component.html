@@ -54,8 +54,8 @@
                      [nzStatus]="(membershipConfigForm.get('referralPointType')?.invalid &&
                                  (membershipConfigForm.get('referralPointType')?.touched || isSubmit)) ?
                                  'error' : ''">
-            <nz-option [nzValue]="1" [nzLabel]="'Hoa hồng theo người giới thiệu'"></nz-option>
-            <nz-option [nzValue]="2" [nzLabel]="'Hoa hồng theo người được giới thiệu'"></nz-option>
+            <nz-option [nzValue]="1" [nzLabel]="'by_referrer' | translate "></nz-option>
+            <nz-option [nzValue]="2" [nzLabel]="'by_referred_person' | translate"></nz-option>
           </nz-select>
 
           <span
@@ -110,7 +110,7 @@
             <ng-container *ngFor="let benefitObj of benefitList; index as i">
               <tr style="background: #E6E4ED">
                 <td>
-                  <input nz-input class="group-name" placeholder="Tên nhóm quyền lợi"
+                  <input nz-input class="group-name" placeholder="{{ 'permission_group_name' | translate }} lợi"
                          [(ngModel)]="benefitObj.name" [ngModelOptions]="{standalone: true}">
                 </td>
                 <td nzAlign="center" *ngFor="let policy of policyList"></td>
@@ -121,7 +121,7 @@
                           style="margin-right: 5px">
                     <span nz-icon nzType="plus"></span>
                   </button>
-                  <button nz-button nz-tooltip nzTooltipTitle="Xóa nhóm quyền lợi"
+                  <button nz-button nz-tooltip nzTooltipTitle="{{ 'remove' | translate }} nhóm quyền lợi"
                           (click)="removeGroupBenefit(i)"
                           style="margin-left: 5px" class="delete-btn">
                     <span nz-icon nzType="delete"></span>
@@ -147,7 +147,7 @@
                 </td>
 
                 <td nzAlign="center">
-                  <button nz-button nz-tooltip nzTooltipTitle="Xóa quyền lợi"
+                  <button nz-button nz-tooltip nzTooltipTitle="{{ 'remove' | translate }} quyền lợi"
                           (click)="removeBenefit(i, iB)" class="delete-btn">
                     <span nz-icon nzType="delete"></span>
                   </button>

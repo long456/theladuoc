@@ -1,5 +1,5 @@
 <div class="title-page">
-  Danh sách video giới thiệu
+  {{ 'introduction_videos' | translate }}
 </div>
 
 <div class="header-btn">
@@ -14,13 +14,13 @@
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
     >
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ảnh bìa video" key="bannerVideoIntroElearning" [width]="'200px'"></table-column>
-      <table-column header="Đường dẫn video" key="videoIntroElearning" [width]="'200px'"></table-column>
-      <table-column header="Tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'video_thumbnail' | translate }}" key="bannerVideoIntroElearning" [width]="'200px'"></table-column>
+      <table-column header="{{ 'video_link' | translate }}" key="videoIntroElearning" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>

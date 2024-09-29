@@ -1,22 +1,22 @@
 <div class="title-page">
-  Danh sách nhóm quyền
+  {{ 'permission_groups' | translate }}
 </div>
 
 <div class="header-btn">
-  <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+  <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
   <app-table [rows]="rowData">
-    <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-    <table-column header="Tên nhóm quyền " key="roleName" [width]="'200px'"></table-column>
-    <table-column header="Mô tả" key="note" [width]="'100%'"></table-column>
+    <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+    <table-column header="{{ 'permission_group_name' | translate }} " key="roleName" [width]="'200px'"></table-column>
+    <table-column header="{{ 'description' | translate }}" key="note" [width]="'100%'"></table-column>
 
     <table-column [width]="'180px'" fixColumn="right" >
       <ng-template appHeader>
-        Chức năng
+        {{ 'actions' | translate }}
       </ng-template>
 
       <ng-template appCell let-data>
-        <span class="custom-action" (click)="edit(data)">Sửa</span>
-        <span class="custom-action" (click)="delete(data)">Xóa</span>
+        <span class="custom-action" (click)="edit(data)">{{ 'edit' | translate }}</span>
+        <span class="custom-action" (click)="delete(data)">{{ 'remove' | translate }}</span>
       </ng-template>
     </table-column>
   </app-table>

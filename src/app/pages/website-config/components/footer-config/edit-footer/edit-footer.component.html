@@ -8,7 +8,7 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên hiển thị
+            {{ 'display_name' | translate }}
             <span class="text-danger">*</span>
           </span>
           <input
@@ -18,12 +18,12 @@
           <span class="text-danger"
                 *ngIf="(footerForm.get('displayName')?.touched || isSubmit)  && footerForm.get('displayName')?.hasError('required')"
           >
-            Tên hiển thị không được để trống
+            {{ 'display_name' | translate }} không được để trống
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">Thứ tự hiển thị trong cột</div>
+          <div class="text-label">{{ 'order' | translate }} trong cột</div>
           <nz-input-number
             style="width: 100%"
             [nzMin]="0" [nzStep]="1"
@@ -35,7 +35,7 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">Tên cột</div>
+          <div class="text-label">{{ 'column_name' | translate }}</div>
           <input
             nz-input formControlName="columnName">
         </div>

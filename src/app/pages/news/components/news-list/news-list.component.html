@@ -1,11 +1,11 @@
 <div class="title-page">
-  Danh sách tin tức
+  {{ 'posts' | translate }}
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(newsList$ | async) as news">
-    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+    <button nz-button class="add-btn" (click)="delete()">{{ 'remove' | translate }}</button>
 
     <app-table
       [rows]="news.rows"
@@ -19,19 +19,19 @@
       (onItemSelection)="getItemSelection($event)"
     >
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Tiêu đề" key="title" [width]="'200px'"></table-column>
-      <table-column header="Danh mục" key="categoryTitles" [width]="'200px'"></table-column>
-      <table-column header="Trang hiển thị" key="showByNames" [width]="'200px'"></table-column>
-      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'title' | translate }}" key="title" [width]="'200px'"></table-column>
+      <table-column header="{{ 'category' | translate }}" key="categoryTitles" [width]="'200px'"></table-column>
+      <table-column header="{{ 'display_page' | translate }}" key="showByNames" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
           <span class="custom-action" (click)="edit(data)"
-                nz-tooltip nzTooltipTitle="Thiết lập">
+                nz-tooltip nzTooltipTitle="{{ 'settings' | translate }}">
             <span nz-icon nzType="edit" nzTheme="outline"></span>
           </span>
         </ng-template>

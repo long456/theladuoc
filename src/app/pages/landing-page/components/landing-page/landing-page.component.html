@@ -1,12 +1,12 @@
 <div class="title-page">
-  Danh sách landing page
+  {{ 'landing_pages' | translate }}
 </div>
 
 <div class="header-btn">
 
   <ng-container *ngIf="(landingPage$ | async) as landingPage">
-    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+    <button nz-button class="add-btn primary" (click)="delete()">{{ 'remove' | translate }}</button>
     <app-table
       [rows]="landingPage.rows"
       [page]="landingPage.page"
@@ -19,17 +19,17 @@
       [loading]="loading"
     >
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Mã landing page" key="landingPageCode" [width]="'200px'"></table-column>
-      <table-column header="Tên landing page" key="name" [width]="'200px'"></table-column>
-      <table-column header="Đường dẫn" key="url" [width]="'200px'">
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'created_at' | translate }}" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="{{ 'landing_page_code' | translate }}" key="landingPageCode" [width]="'200px'"></table-column>
+      <table-column header="{{ 'landing_page_name' | translate }}" key="name" [width]="'200px'"></table-column>
+      <table-column header="{{ 'link' | translate }}" key="url" [width]="'200px'">
         <ng-template appCell let-data>
           <div class="url-landing-page">{{data.url}}</div>
         </ng-template>
       </table-column>
-      <table-column header="Tên lớp học" key="className" [width]="'200px'"></table-column>
-      <table-column header="Danh sách form" key="formRegisterList" [width]="'200px'">
+      <table-column header="{{ 'class_name' | translate }}" key="className" [width]="'200px'"></table-column>
+      <table-column header="{{ 'registration_form' | translate }}" key="formRegisterList" [width]="'200px'">
         <ng-template appCell let-data>
           <span *ngFor="let form of data.formRegisterList; index as i">
             <div *ngIf="i <= 2">
@@ -41,10 +41,10 @@
           </span>
         </ng-template>
       </table-column>
-      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="speakerName" [width]="'200px'"></table-column>
-      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Trạng thái" key="status" [width]="'180px'">
+      <table-column header="{{ 'course_name' | translate }}" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'teacher_name' | translate }}" key="speakerName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'status' | translate }}" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Hiển thị</span>
           <span class="text-invalid" *ngIf="!data.status">Không hiển thị</span>
@@ -53,7 +53,7 @@
 
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>

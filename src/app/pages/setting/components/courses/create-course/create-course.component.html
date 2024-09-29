@@ -24,7 +24,7 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">Mã khóa học</span>
+          <span class="text-label">{{ 'course_code' | translate }}</span>
           <input
             nz-input formControlName="courseCode"
             [nzStatus]="(courseForm.get('courseCode')?.invalid && (courseForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''"
@@ -32,12 +32,12 @@
           <span class="text-danger"
                 *ngIf="(courseForm.get('courseCode')?.touched || isSubmit)  && courseForm.get('courseCode')?.hasError('pattern')"
           >
-            Mã khóa học không đúng định dạng
+            {{ 'course_code' | translate }} không đúng định dạng
           </span>
         </div>
 
         <div nz-col [nzSpan]="8" >
-          <div class="text-label">Trạng thái</div>
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
@@ -78,7 +78,7 @@
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Loại khóa học
+            {{ 'course_type' | translate }}
           </span>
 
           <div>
@@ -95,7 +95,7 @@
           <div nz-row [nzGutter]=[16,16]>
             <div nz-col [nzSpan]="6">
             <span class="text-label">
-              Điểm đăng ký
+              {{ 'registration_point' | translate }}
             </span>
 
               <div>
@@ -111,7 +111,7 @@
 
             <div nz-col [nzSpan]="6">
               <span class="text-label">
-                Điểm giới thiệu trực tiếp
+                {{ 'direct_referral_points' | translate }}
               </span>
 
               <div>
@@ -126,7 +126,7 @@
 
             <div nz-col [nzSpan]="6">
               <span class="text-label">
-                Điểm giới thiệu gián tiếp
+                {{ 'indirect_referral_points' | translate }}
               </span>
 
               <div>
@@ -141,7 +141,7 @@
 
             <div nz-col [nzSpan]="6">
               <span class="text-label">
-                Giá khóa học
+                {{ 'price' | translate }}
               </span>
 
               <div>

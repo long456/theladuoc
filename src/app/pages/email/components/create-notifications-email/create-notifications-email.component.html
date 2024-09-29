@@ -23,7 +23,7 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">Loại email</div>
+          <div class="text-label">{{ 'email_type' | translate }}</div>
           <nz-select
             [nzDisabled]="!isCreate &&
                           emailNotificationForm.value?.notiEmailTemplateType === 1 ||
@@ -45,19 +45,19 @@
             class="text-danger"
             *ngIf="(emailNotificationForm.get('notiEmailTemplateType')?.touched || isSubmit) &&
                     emailNotificationForm.get('notiEmailTemplateType')?.hasError('required')">
-            Loại email không được để trống
+            {{ 'email_type' | translate }} không được để trống
           </span>
         </div>
 
         <div nz-col [nzSpan]="2" nzOffset="1">
-          <div class="text-label">Trạng thái</div>
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Khóa học
+            {{ 'course' | translate }}
             <span class="text-danger">*</span>
           </span>
 
@@ -115,7 +115,7 @@
 
         <div nz-col [nzSpan]="8" *ngIf="emailNotificationForm.value?.notiEmailTemplateType === 7">
           <span class="text-label">
-            Lớp học
+            {{ 'class' | translate }} học
             <span class="text-danger">*</span>
           </span>
 

@@ -24,7 +24,7 @@
 
         <div nz-col [nzSpan]=5>
           <span class="text-label">
-            Trạng thái
+            {{ 'status' | translate }}
           </span>
 
           <nz-select style="width: 100%"  formControlName="status">
@@ -34,7 +34,7 @@
         </div>
 
         <div nz-col [nzSpan]="5">
-          <div class="text-label">Thứ tự hiển thị</div>
+          <div class="text-label">{{ 'order' | translate }}</div>
           <nz-input-number
             style="width: 100%"
             [nzMin]="0" [nzStep]="1"

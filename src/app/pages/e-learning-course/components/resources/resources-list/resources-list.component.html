@@ -4,8 +4,8 @@
 
 <div class="header-btn">
   <ng-container *ngIf="(resourcesPage$ | async) as resources">
-    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+    <button nz-button class="add-btn" (click)="delete()">{{ 'remove' | translate }}</button>
     <button nz-button class="add-btn" (click)="backToCourse()"
             nz-tooltip nzTooltipTitle="Quay lại danh sách khóa học">
       <span nz-icon nzType="rollback" nzTheme="outline"></span>
@@ -23,19 +23,19 @@
       [loading]="loading"
     >
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Tên tài nguyên" key="name" [width]="'200px'"></table-column>
       <table-column header="Tên khoá học" key="elearningName" [width]="'200px'"></table-column>
-      <table-column header="Trạng thái" key="status" [width]="'200px'">
+      <table-column header="{{ 'status' | translate }}" key="status" [width]="'200px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
           <span class="text-invalid" *ngIf="!data.status">Tạm dừng</span>
         </ng-template>
       </table-column>
-      <table-column header="Tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>

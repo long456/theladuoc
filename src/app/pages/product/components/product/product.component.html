@@ -1,11 +1,11 @@
 <div class="title-page">
-  Danh sách sản phẩm
+  {{ 'products' | translate }}
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(product$ | async) as product">
-    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+    <button nz-button class="add-btn primary" (click)="delete()">{{ 'remove' | translate }}</button>
 
     <app-table
       [rows]="product.rows"
@@ -19,21 +19,21 @@
       [loading]="loading"
     >
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ngày tạo" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Ảnh" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Tên sản phẩm" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Danh mục" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Nhóm sản phẩm" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Loại sản phẩm" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'created_at' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'image' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'product_name' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'category' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'product_group' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'product_type' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
           <span class="custom-action" (click)="edit(data)"
-                nz-tooltip nzTooltipTitle="Chỉnh sửa sản phẩm">
+                nz-tooltip nzTooltipTitle="{{'edit' | translate}}">
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
           </span>
         </ng-template>

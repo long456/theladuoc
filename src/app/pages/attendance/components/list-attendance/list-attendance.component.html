@@ -1,11 +1,11 @@
 <div class="title-page">
-  Danh sách điểm danh
+  {{'check_in_list' | translate}}
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(listAttendance$ | async) as attend">
     <nz-collapse class="filter-form" [class.expand]="isExpand">
-      <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
+      <nz-collapse-panel [nzHeader]="'filter' | translate"  (nzActiveChange)="setExpand($event)">
         <app-filter-form
           [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"
           [isExportExcel]="true" (getExcelData)="handleExportExcel($event)"></app-filter-form>
@@ -23,18 +23,18 @@
       [loading]="loading"
     >
       <!--      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>-->
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Thời gian" key="attendanceTime" [width]="'200px'"></table-column>
-      <table-column header="Tên học viên" key="studentName" [width]="'200px'"></table-column>
-      <table-column header="Nhân viên chăm sóc" key="caregiverName" [width]="'200px'"></table-column>
-      <table-column header="Số điện thoại" key="studentPhoneNumber" [width]="'200px'"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'time' | translate }}" key="attendanceTime" [width]="'200px'"></table-column>
+      <table-column header="{{ 'learner_name' | translate }}" key="studentName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'caring_by' | translate }}" key="caregiverName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'phone_number' | translate }}" key="studentPhoneNumber" [width]="'200px'"></table-column>
       <table-column header="Email" key="studentEmail" [width]="'200px'"></table-column>
-      <table-column header="Số lần điểm danh" key="numOfAttendance" [width]="'200px'"></table-column>
-      <table-column header="Lớp tham gia" key="className" [width]="'200px'"></table-column>
-      <table-column header="Tên buổi học" key="lessonName" [width]="'200px'"></table-column>
-      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
-      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'phone_number' | translate }}" key="numOfAttendance" [width]="'200px'"></table-column>
+      <table-column header="{{ 'class' | translate }}" key="className" [width]="'200px'"></table-column>
+      <table-column header="{{ 'session_name' | translate }}" key="lessonName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'course_name' | translate }}" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'teacher_name' | translate }}" key="teacherName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
     </app-table>
   </ng-container>
 </div>

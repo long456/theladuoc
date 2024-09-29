@@ -8,7 +8,7 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên landing page
+            {{ 'landing_page_name' | translate }}
             <span class="text-danger">*</span>
           </span>
           <input
@@ -19,12 +19,12 @@
           <span class="text-danger"
                 *ngIf="(landingPageForm.get('name')?.touched || isSubmit)  && landingPageForm.get('name')?.hasError('required')"
           >
-            Tên landing page không được để trống
+            {{ 'landing_page_name' | translate }} không được để trống
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">Mã landing page</span>
+          <span class="text-label">{{ 'landing_page_code' | translate }}</span>
           <input
             nz-input formControlName="landingPageCode"
             [nzStatus]="(landingPageForm.get('landingPageCode')?.invalid && (landingPageForm.get('landingPageCode')?.touched || isSubmit)) ? 'error' : ''"
@@ -32,19 +32,19 @@
           <span class="text-danger"
                 *ngIf="(landingPageForm.get('landingPageCode')?.touched || isSubmit)  && landingPageForm.get('landingPageCode')?.hasError('pattern')"
           >
-            Mã landing page không đúng định dạng
+            {{ 'landing_page_code' | translate }} không đúng định dạng
           </span>
         </div>
 
         <div nz-col [nzSpan]="8" >
-          <div class="text-label">Trạng thái</div>
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Khóa học
+            {{ 'course' | translate }}
             <span class="text-danger">*</span>
           </span>
 

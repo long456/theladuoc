@@ -8,7 +8,7 @@
       <div nz-row [nzGutter]="[16, 16]">
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Tên sự kiện
+            {{ 'event_name' | translate }}
             <span class="text-danger">*</span>
           </span>
 
@@ -20,13 +20,13 @@
             class="text-danger"
             *ngIf="(eventForm.get('title')?.touched || isSubmit)  &&
                     eventForm.get('title')?.hasError('required')">
-              Tên sự kiện không được để trống
+              {{ 'event_name' | translate }} không được để trống
           </span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Thời gian tổ chức
+            {{ 'started_at' | translate }}
             <span class="text-danger">*</span>
           </span>
 
@@ -39,13 +39,13 @@
             class="text-danger"
             *ngIf="(eventForm.get('dateOfEvent')?.touched || isSubmit)  &&
                     eventForm.get('dateOfEvent')?.hasError('required')">
-              Địa điểm không được để trống
+              {{ 'location' | translate }} không được để trống
           </span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Trạng thái
+            {{ 'status' | translate }}
           </span>
 
           <nz-switch formControlName="status" style="display: block"></nz-switch>
@@ -77,7 +77,7 @@
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Địa điểm
+            {{ 'location' | translate }}
             <span class="text-danger">*</span>
           </span>
 
@@ -88,7 +88,7 @@
             class="text-danger"
             *ngIf="(eventForm.get('local')?.touched || isSubmit)  &&
                     eventForm.get('local')?.hasError('required')">
-              Địa điểm không được để trống
+              {{ 'location' | translate }} không được để trống
           </span>
         </div>
 

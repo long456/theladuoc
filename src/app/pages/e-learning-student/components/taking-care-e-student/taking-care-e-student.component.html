@@ -1,11 +1,11 @@
 <div class="title-page">
-  Danh sách học viên E-learning đang chăm
+  {{ 'caring_e_learners' | translate }}
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(takingCareEStudent$ | async) as student">
     <nz-collapse class="filter-form" [class.expand]="isExpand">
-      <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
+      <nz-collapse-panel [nzHeader]="'filter' | translate"  (nzActiveChange)="setExpand($event)">
         <app-filter-form
           [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"
         ></app-filter-form>
@@ -22,24 +22,24 @@
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
     >
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ngày đăng ký" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Tên học viên" key="fullName" [width]="'180px'"></table-column>
-      <table-column header="Số điện thoại" key="mobile" [width]="'120px'"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'created_at' | translate }}" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="{{ 'learner_name' | translate }}" key="fullName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'phone_number' | translate }}" key="mobile" [width]="'120px'"></table-column>
       <table-column header="Email" key="email" [width]="'200px'"></table-column>
-      <table-column header="Mã học viên" key="code" [width]="'180px'"></table-column>
-      <table-column header="Người giới thiệu" key="userRefName" [width]="'180px'"></table-column>
-      <table-column header="Nhân viên chăm sóc" key="caregiverName" [width]="'180px'"></table-column>
-      <table-column header="Trạng thái" key="status" [width]="'180px'">
+      <table-column header="{{ 'learner_code' | translate }}" key="code" [width]="'180px'"></table-column>
+      <table-column header="{{ 'referrer' | translate }}" key="userRefName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'caring_by' | translate }}" key="caregiverName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'status' | translate }}" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
           <span class="text-invalid" *ngIf="!data.status">Chưa kích hoạt</span>
         </ng-template>
       </table-column>
-      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column [width]="'100px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
@@ -51,11 +51,11 @@
 
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu>
-              <li nz-menu-item>Xem chi tiết</li>
-              <li nz-menu-item>Gọi điện</li>
-              <li nz-menu-item (click)="activeMembership(data)">Tặng gói thành viên</li>
-              <li nz-menu-item (click)="activeCourse(data)">Tặng khóa học</li>
-              <li nz-menu-item>Thay đổi vai trò</li>
+              <li nz-menu-item>{{ 'details' | translate }}</li>
+              <li nz-menu-item>{{ 'make_a_call' | translate }}</li>
+              <li nz-menu-item (click)="activeMembership(data)">{{ 'gift_membership' | translate }}</li>
+              <li nz-menu-item (click)="activeCourse(data)">{{ 'gift_course' | translate }}</li>
+              <li nz-menu-item>{{ 'change_role' | translate }}</li>
             </ul>
           </nz-dropdown-menu>
         </ng-template>

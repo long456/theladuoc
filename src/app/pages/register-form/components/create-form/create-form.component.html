@@ -23,7 +23,7 @@
         </div>
 
         <div nz-col [nzSpan]="9" class="text-right">
-          <div class="text-label">Trạng thái</div>
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
@@ -62,7 +62,7 @@
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Khóa học
+            {{ 'course' | translate }}
             <span class="text-danger">*</span>
           </span>
 

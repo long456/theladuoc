@@ -1,61 +1,54 @@
 <div class="title-page">
-  Danh sách form đăng ký
+  {{ 'registration_forms' | translate }}
 </div>
 
 <div class="header-btn">
 
   <ng-container *ngIf="(registerForm$ | async) as registerForm">
-<!--    <button nz-button class="add-btn primary" (click)="filter()">Lọc</button>-->
-    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
-    <app-table
-      [rows]="registerForm.rows"
-      [page]="registerForm.page"
-      [pageSize]="registerForm.pageSize"
-      [pageTotal]="registerForm.rowTotal"
-      (onItemSelection)="getItemSelection($event)"
-      [clientPagination]="false"
-      (pageIndexChange)="page$.next($event)"
-      (pageSizeChange)="pageSize$.next($event)"
-      [loading]="loading"
-    >
+    <!--    <button nz-button class="add-btn primary" (click)="filter()">Lọc</button>-->
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+    <button nz-button class="add-btn" (click)="delete()">{{ 'remove' | translate }}</button>
+    <app-table [rows]="registerForm.rows" [page]="registerForm.page" [pageSize]="registerForm.pageSize"
+      [pageTotal]="registerForm.rowTotal" (onItemSelection)="getItemSelection($event)" [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)" (pageSizeChange)="pageSize$.next($event)" [loading]="loading">
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Tên form đăng ký" key="title" [width]="'200px'"></table-column>
-      <table-column header="Tên tổ chức" key="organzinationName" [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="speakerName" [width]="'200px'"></table-column>
-      <table-column header="Vé khóa học" key="ticketName" [width]="'200px'"></table-column>
-      <table-column header="Trạng thái" key="status" [width]="'180px'">
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'"
+        fixColumn="left"></table-column>
+      <table-column header="{{ 'created_at' | translate }}" key="createdDate" [dataType]="COL_DATA_TYPE.DATE"
+        [width]="'150px'"></table-column>
+      <table-column header="{{ 'form_name' | translate }}" key="title" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organzinationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'teacher_name' | translate }}" key="speakerName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'learning_ticket' | translate }}" key="ticketName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'status' | translate }}" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Hiển thị</span>
           <span class="text-invalid" *ngIf="!data.status">Không hiển thị</span>
         </ng-template>
       </table-column>
 
-      <table-column [width]="'180px'" fixColumn="right" >
+      <table-column [width]="'180px'" fixColumn="right">
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
-          <span class="custom-action" (click)="edit(data)"
-                nz-tooltip nzTooltipTitle="Chỉnh sửa form đăng ký">
+          <span class="custom-action" (click)="edit(data)" nz-tooltip
+            nzTooltipTitle="{{ 'edit' | translate }}">
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
           </span>
 
-          <span class="custom-action" (click)="copyCode(data)"
-                nz-tooltip nzTooltipTitle="Copy code">
+          <span class="custom-action" (click)="copyCode(data)" nz-tooltip nzTooltipTitle="Copy code">
             <span nz-icon nzType="copy" nzTheme="outline" class="custom-icon"></span>
           </span>
 
-          <span class="custom-action" (click)="attachTicket(data)" *ngIf="!data.ticketId"
-                nz-tooltip nzTooltipTitle="Gắn vé">
+          <span class="custom-action" (click)="attachTicket(data)" *ngIf="!data.ticketId" nz-tooltip
+            nzTooltipTitle="{{'assign_learning_ticket' | translate}}">
             <span nz-icon nzType="plus-square" nzTheme="outline" class="custom-icon"></span>
           </span>
 
-          <span class="custom-action" (click)="removeAttachTicket(data)" *ngIf="data.ticketId"
-                nz-tooltip nzTooltipTitle="Gỡ vé">
+          <span class="custom-action" (click)="removeAttachTicket(data)" *ngIf="data.ticketId" nz-tooltip
+            nzTooltipTitle="{{'unassign_ticket' | translate}}">
             <span nz-icon nzType="close" nzTheme="outline" class="custom-icon"></span>
           </span>
         </ng-template>

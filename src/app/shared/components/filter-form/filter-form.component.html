@@ -24,12 +24,12 @@
   </div>
 
   <div class="btn-area">
-    <button nz-button class="btn-form primary" (click)="filter()">Gửi</button>
+    <button nz-button class="btn-form primary" (click)="filter()">{{ 'send' | translate }}</button>
     <button nz-button class="btn-form excel" (click)="exportDataExcel()" *ngIf="isExportExcel">
-      Xuất excel
+      {{ 'export_to_excel' | translate }}
       <span nz-icon nzType="file-excel" nzTheme="outline"></span>
     </button>
-    <button nz-button class="btn-form" (click)="clearForm()">Làm mới</button>
+    <button nz-button class="btn-form" (click)="clearForm()">{{ 'reset' | translate }}</button>
   </div>
 </form>
 

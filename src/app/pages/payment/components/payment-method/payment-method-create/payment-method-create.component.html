@@ -19,7 +19,7 @@
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
           <span class="text-label">
-            Trạng thái
+            {{ 'status' | translate }}
           </span>
 
           <nz-switch formControlName="status" style="display: block"></nz-switch>
@@ -44,7 +44,7 @@
 
           <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
           <span class="text-label">
-            Số tài khoản
+            {{ 'account_number' | translate }}
             <span class="text-danger">*</span>
           </span>
 
@@ -54,13 +54,13 @@
             <span class="text-danger"
                   *ngIf="(paymentMethodForm.get('bankNumber')?.touched || isSubmit)  &&
                           paymentMethodForm.get('bankNumber')?.hasError('requireValue')">
-              Số tài khoản không được để trống
+              {{ 'account_number' | translate }} không được để trống
             </span>
           </div>
 
           <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
           <span class="text-label">
-            Tên chủ tài khoản
+            {{ 'account_holder' | translate }}
             <span class="text-danger">*</span>
           </span>
 
@@ -70,7 +70,7 @@
             <span class="text-danger"
                   *ngIf="(paymentMethodForm.get('bankUserName')?.touched || isSubmit)  &&
                           paymentMethodForm.get('bankUserName')?.hasError('requireValue')">
-              Tên chủ tài khoản không được để trống
+              {{ 'account_holder' | translate }} không được để trống
             </span>
           </div>
 

@@ -24,7 +24,7 @@
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Mã khóa học
+            {{ 'course_code' | translate }}
             <span class="text-danger">*</span>
           </span>
 
@@ -45,12 +45,12 @@
           <span class="text-danger"
                 *ngIf="(loyaltyForm.get('courseCode')?.touched || isSubmit) && loyaltyForm.get('courseCode')?.hasError('required')"
           >
-            Mã khóa học không được để trống
+            {{ 'course_code' | translate }} không được để trống
           </span>
         </div>
 
         <div nz-col [nzSpan]="8" >
-          <div class="text-label">Trạng thái</div>
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="isActive">
           </nz-switch>
         </div>

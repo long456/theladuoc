@@ -1,5 +1,5 @@
 <div class="title-page">
-    Lịch sử thanh toán
+    {{ 'payment_history' | translate }}
 </div>
 <div>
     <div nz-row style="margin-bottom: 20px;" (keyup.enter)="onSearch()">
@@ -13,7 +13,9 @@
                                 <!-- <button nz-button type="button" [nzType]="'primary'" (click)="onSearch()"
                                     class="mg-r-10">Tìm kiếm</button> -->
                                 <button nz-button type="button" [nzType]="'primary'" (click)="openFilter()"
-                                    class="mg-r-10">Lọc</button>
+                                    class="mg-r-10">
+                                {{ 'filter' | translate }}
+                                </button>
                             </nz-form-item>
                         </div>
                     </div>
@@ -28,28 +30,28 @@
         (nzQueryParams)="onQueryParamsChange($event)">
         <thead>
             <tr>
-                <th [nzLeft]="true" nzWidth="50px" nzAlign="center">STT</th>
-                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Ngày thanh toán</th>
-                <th nzWidth="200px" [nzLeft]="true" nzAlign="center">Tên thành viên</th>
-                <th nzWidth="160px" nzAlign="center">Mã thành viên</th>
-                <th nzWidth="200px" nzAlign="center">Số điện thoại thành viên</th>
-                <th nzWidth="220px" nzAlign="center">Email thành viên</th>
-                <th nzWidth="220px" nzAlign="center">Hạng thành viên</th>
-                <th nzWidth="180px" nzAlign="center">Gói thành viên</th>
-                <th nzWidth="200px" nzColumnKey="price" [nzSortFn]="true" nzAlign="center">Số tiền đã thanh toán</th>
-                <th nzWidth="180px" nzAlign="center">Thuộc đại lý</th>
-                <th nzWidth="220px" nzAlign="center">Tên người giới thiệu</th>
-                <th nzWidth="240px" nzAlign="center">Số điện thoại người giới thiệu</th>
-                <th nzWidth="230px" nzAlign="center">Email người giới thiệu</th>
-                <th nzWidth="260px" nzAlign="center">Hạng thành viên người giới thiệu</th>
-                <th nzWidth="260px" nzAlign="center">Số tài khoản người giới thiệu</th>
-                <th nzWidth="260px" nzAlign="center">Ngân hàng người giới thiệu</th>
-                <th nzWidth="280px" nzAlign="center">Chi nhánh ngân hàng người giới thiệu</th>
-                <th nzWidth="200px" nzAlign="center">Phương thức thanh toán</th>
-                <th nzWidth="180px" nzAlign="center">Trạng thái thanh toán</th>
-                <th nzWidth="200px" nzAlign="center">Nhân viên chăm sóc</th>
-                <th nzWidth="180px" nzAlign="center">Tổ chức</th>
-                <th [nzRight]="true" nzWidth="120px" nzAlign="center">Chức năng</th>
+                <th [nzLeft]="true" nzWidth="50px" nzAlign="center">{{ 'no' | translate }}</th>
+                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">{{ 'paid_at' | translate }}</th>
+                <th nzWidth="200px" [nzLeft]="true" nzAlign="center">{{ 'member_name' | translate }}</th>
+                <th nzWidth="160px" nzAlign="center">{{ 'member_code' | translate }}</th>
+                <th nzWidth="200px" nzAlign="center">{{ 'member_phone' | translate }}</th>
+                <th nzWidth="220px" nzAlign="center">{{ 'member_email' | translate }}</th>
+                <th nzWidth="220px" nzAlign="center">{{ 'membership_tier' | translate }}</th>
+                <th nzWidth="180px" nzAlign="center">{{ 'member_package' | translate }}</th>
+                <th nzWidth="200px" nzColumnKey="price" [nzSortFn]="true" nzAlign="center">{{ 'paid_amount' | translate }}</th>
+                <th nzWidth="180px" nzAlign="center">{{ 'agent' | translate }}</th>
+                <th nzWidth="220px" nzAlign="center">{{ 'referrer' | translate }}</th>
+                <th nzWidth="240px" nzAlign="center">{{ 'referral_phone' | translate }}</th>
+                <th nzWidth="230px" nzAlign="center">{{ 'referral_email' | translate }}</th>
+                <th nzWidth="260px" nzAlign="center">{{ 'referral_membership_tier' | translate }}</th>
+                <th nzWidth="260px" nzAlign="center">{{ 'refferal_account_number' | translate }}</th>
+                <th nzWidth="260px" nzAlign="center">{{ 'referral_bank' | translate }}</th>
+                <th nzWidth="280px" nzAlign="center">{{ 'referral_bank_agent' | translate }}</th>
+                <th nzWidth="200px" nzAlign="center">{{ 'payment_method' | translate }}</th>
+                <th nzWidth="180px" nzAlign="center">{{ 'payment_status' | translate }}</th>
+                <th nzWidth="200px" nzAlign="center">{{ 'caring_staff' | translate }}</th>
+                <th nzWidth="180px" nzAlign="center">{{ 'organization' | translate }}</th>
+                <th [nzRight]="true" nzWidth="120px" nzAlign="center">{{ 'actions' | translate }}</th>
             </tr>
         </thead>
         <tbody>

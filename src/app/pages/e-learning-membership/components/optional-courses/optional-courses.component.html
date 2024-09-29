@@ -16,7 +16,7 @@
 
         <div nz-col [nzSpan]="24">
           <span class="text-label" *ngIf="listCourseELearning.length > 0">
-            Danh sách khóa học
+            {{ 'course_list' | translate }}
           </span>
 
           <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="onSelectCourse($event)">

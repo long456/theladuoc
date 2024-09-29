@@ -1,41 +1,33 @@
 <div class="title-page">
-  Danh sách buổi học
+  {{'sessions' | translate}}
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(listLesson$ | async) as Lesson">
-    <app-table
-      [rows]="Lesson.rows"
-      [page]="Lesson.page"
-      [pageSize]="Lesson.pageSize"
-      [pageTotal]="Lesson.rowTotal"
-      (onItemSelection)="getItemSelection($event)"
-      [clientPagination]="false"
-      (pageIndexChange)="page$.next($event)"
-      (pageSizeChange)="pageSize$.next($event)"
-      [loading]="loading"
-    >
+    <app-table [rows]="Lesson.rows" [page]="Lesson.page" [pageSize]="Lesson.pageSize" [pageTotal]="Lesson.rowTotal"
+      (onItemSelection)="getItemSelection($event)" [clientPagination]="false" (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)" [loading]="loading">
       <!--      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>-->
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Link điểm danh" key="attendanceLink" [width]="'200px'"></table-column>
-      <table-column header="Khung giờ điểm danh" key="timeFrame" [width]="'200px'"></table-column>
-      <table-column header="Buổi đang dạy" key="lessonName" [width]="'200px'"></table-column>
-      <table-column header="Lớp đang mở" key="className" [width]="'200px'"></table-column>
-      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
-      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column [width]="'180px'" fixColumn="right" >
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'"
+        fixColumn="left"></table-column>
+      <table-column header="{{ 'check_in_url' | translate }}" key="attendanceLink" [width]="'200px'"></table-column>
+      <table-column header="{{ 'check_in_time' | translate }}" key="timeFrame" [width]="'200px'"></table-column>
+      <table-column header="{{ 'ongoing_session' | translate }}" key="lessonName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'opening_class' | translate }}" key="className" [width]="'200px'"></table-column>
+      <table-column header="{{ 'course_name' | translate }}" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'teacher_name' | translate }}" key="teacherName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right">
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
           <span class="custom-action" (click)="copyLink(data)">
-           Copy link
+            Copy link
           </span>
         </ng-template>
       </table-column>
     </app-table>
   </ng-container>
 </div>
-

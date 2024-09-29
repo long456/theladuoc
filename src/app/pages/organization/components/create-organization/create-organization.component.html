@@ -23,7 +23,7 @@
         </div>
 
         <div nz-col [nzSpan]="9" class="text-right">
-          <div class="text-label">Trạng thái</div>
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
@@ -60,7 +60,7 @@
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Người đại diện
+            {{ 'organization_representative' | translate }}
           </span>
 
           <div>
@@ -134,7 +134,7 @@
                 </a>
                 <a
                   nz-button nzType="link"
-                  nz-tooltip nzTooltipTitle="Xóa"
+                  nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
                   (click)="deleteImg('logo')">
                   <span nz-icon nzType="delete"></span>
                 </a>
@@ -165,7 +165,7 @@
                 </a>
                 <a
                   nz-button nzType="link"
-                  nz-tooltip nzTooltipTitle="Xóa"
+                  nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
                   (click)="deleteImg('logo1x1')">
                   <span nz-icon nzType="delete"></span>
                 </a>
@@ -197,7 +197,7 @@
                 </a>
                 <a
                   nz-button nzType="link"
-                  nz-tooltip nzTooltipTitle="Xóa"
+                  nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
                   (click)="deleteImg('favicon')">
                   <span nz-icon nzType="delete"></span>
                 </a>

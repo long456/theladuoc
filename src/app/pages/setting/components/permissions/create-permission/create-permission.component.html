@@ -7,12 +7,12 @@
 
     <div nz-col [nzSpan]="20" class="block-content">
       <div nz-col [nzSpan]="6">
-        <span class="text-label">Tên nhóm quyền</span>
+        <span class="text-label">{{ 'permission_group_name' | translate }}</span>
         <input nz-input [(ngModel)]="roleName" autofocus>
       </div>
 
       <div class="permission-status">
-        <div class="text-label">Trạng thái</div>
+        <div class="text-label">{{ 'status' | translate }}</div>
         <nz-switch [(ngModel)]="permissionStatus"></nz-switch>
       </div>
     </div>
