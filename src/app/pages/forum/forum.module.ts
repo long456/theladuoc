@@ -11,6 +11,7 @@ import { ForumCategoryDetailComponent } from './components/category/forum-catego
 import { SubForumListComponent } from './components/sub-forum/sub-forum-list/sub-forum-list.component';
 import { SubForumDetailComponent } from './components/sub-forum/sub-forum-detail/sub-forum-detail.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 
 
 
@@ -29,7 +30,8 @@ import {NzSelectModule} from "ng-zorro-antd/select";
         SharedModule,
         ReactiveFormsModule,
         NzSwitchModule,
-        NzSelectModule
+        NzSelectModule,
+        NzInputNumberModule
     ]
 })
 export class ForumModule { }
