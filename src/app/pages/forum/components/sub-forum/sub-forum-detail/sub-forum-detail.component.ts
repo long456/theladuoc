@@ -5,7 +5,6 @@ import {NzMessageService} from "ng-zorro-antd/message";
 import {FileManagerService} from "../../../../../shared/services/file-manager.service";
 import {SubForumService} from "../../../services/sub-forum.service";
 import {finalize, take} from "rxjs";
-import {ForumConfig} from "../../../models/ForumConfig";
 import {SubForum} from "../../../models/SubForum";
 import {ForumCategoryService} from "../../../services/forum-category.service";
 import {ForumCategory} from "../../../models/ForumCategory";
@@ -39,12 +38,15 @@ export class SubForumDetailComponent implements OnInit{
     this.subForumForm = this.fb.group({
       name: [null, [Validators.required]],
       banner: [null, [Validators.required]],
-      description: [null, [Validators.required]],
+      avatar: [null, [Validators.required]],
+      description: [null],
       facebookLink: [null],
       instagramLink: [null],
       zaloLink: [null],
       twitterLink: [null],
       communityCategoryId: [null, [Validators.required]],
+      pined: [false],
+      isFeature: [false],
       status: [1],
     });
 
@@ -85,10 +87,10 @@ export class SubForumDetailComponent implements OnInit{
     });
   }
 
-  onSelectFile():void{
+  onSelectFile(type: 'banner' | 'avatar'):void{
     this.fileManagerService.selectFile();
     this.fileManagerService.selectedFile.pipe(take(1)).subscribe((data) => {
-      this.subForumForm.get('banner')?.patchValue(data);
+      this.subForumForm.get(type)?.patchValue(data);
     });
   }
 

@@ -23,37 +23,6 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">Trạng thái</div>
-          <nz-switch formControlName="status">
-          </nz-switch>
-        </div>
-
-        <div nz-col [nzSpan]="8"></div>
-
-        <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            Đường dẫn ảnh banner
-            <span class="text-danger">*</span>
-          </span>
-
-          <div class="select-url">
-            <input nz-input [value]="subForumForm.get('banner')?.value" formControlName="banner"
-                   [nzStatus]="(subForumForm.get('banner')?.invalid &&
-                               (subForumForm.get('banner')?.touched || isSubmit)) ?
-                               'error' : ''">
-
-            <button nz-button nzType="primary" (click)="onSelectFile()">
-              <span nz-icon nzType="upload"></span>
-            </button>
-          </div>
-
-          <span class="text-danger"
-                *ngIf="(subForumForm.get('banner')?.touched || isSubmit)  &&
-                        subForumForm.get('banner')?.hasError('required')"
-          >Đường dẫn ảnh banner không được để trống!</span>
-        </div>
-
-        <div nz-col [nzSpan]="8">
           <span class="text-label">
             Danh mục
             <span class="text-danger">*</span>
@@ -75,18 +44,74 @@
           >Danh mục không được để trống!</span>
         </div>
 
+        <div nz-col [nzSpan]="2">
+          <div class="text-label">Trạng thái</div>
+          <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="2">
+          <div class="text-label">Ghim</div>
+          <nz-switch formControlName="pined">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="2">
+          <div class="text-label">Nổi bật</div>
+          <nz-switch formControlName="isFeature">
+          </nz-switch>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đường dẫn ảnh banner
+          </span>
+
+          <div class="select-url">
+            <input nz-input [value]="subForumForm.get('banner')?.value" formControlName="banner"
+                   [nzStatus]="(subForumForm.get('banner')?.invalid &&
+                               (subForumForm.get('banner')?.touched || isSubmit)) ?
+                               'error' : ''">
+
+            <button nz-button nzType="primary" (click)="onSelectFile('banner')">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(subForumForm.get('banner')?.touched || isSubmit)  &&
+                        subForumForm.get('banner')?.hasError('required')"
+          >Đường dẫn ảnh banner không được để trống!</span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đường dẫn ảnh avatar
+          </span>
+
+          <div class="select-url">
+            <input nz-input [value]="subForumForm.get('avatar')?.value" formControlName="avatar"
+                   [nzStatus]="(subForumForm.get('avatar')?.invalid &&
+                               (subForumForm.get('avatar')?.touched || isSubmit)) ?
+                               'error' : ''">
+
+            <button nz-button nzType="primary" (click)="onSelectFile('avatar')">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+
+          <span class="text-danger"
+                *ngIf="(subForumForm.get('avatar')?.touched || isSubmit)  &&
+                        subForumForm.get('avatar')?.hasError('required')"
+          >Đường dẫn ảnh avatar không được để trống!</span>
+        </div>
+
         <div nz-col [nzSpan]="16">
           <div class="text-label">Mô tả</div>
           <textarea
             nz-input placeholder="Mô tả ngắn"
             [nzAutosize]="{ minRows: 3}" formControlName="description"
-            [nzStatus]="(subForumForm.get('description')?.invalid &&
-                        (subForumForm.get('description')?.touched || isSubmit)) ? 'error' : ''"
           ></textarea>
-          <span class="text-danger"
-                *ngIf="(subForumForm.get('description')?.touched || isSubmit) &&
-                        subForumForm.get('description')?.hasError('required')"
-          >Mô tả không được để trống!</span>
         </div>
 
         <div nz-col [nzSpan]="8"></div>

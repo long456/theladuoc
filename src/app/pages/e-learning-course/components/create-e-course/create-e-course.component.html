@@ -35,19 +35,145 @@
         </div>
         <!-- Giá -->
         <div nz-col [nzXs]="24" [nzSm]="24" [nzXl]="8">
+<!--          <div nz-row [nzGutter]=[16,16]>-->
+<!--            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">-->
+<!--              <span class="text-label">-->
+<!--                {{controlNames.price}}-->
+<!--                <nz-input-number class="input-nz-number" formControlName="price" [nzMin]="0"-->
+<!--                  [nzStep]="1"></nz-input-number>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">-->
+<!--              <span class="text-label">-->
+<!--                {{controlNames.oldPrice}}-->
+<!--                <nz-input-number class="input-nz-number" formControlName="oldPrice" [nzMin]="0"-->
+<!--                  [nzStep]="1"></nz-input-number>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--          </div>-->
+        </div>
+        <!-- Giá mới-->
+        <div nz-col [nzXs]="24" [nzSm]="24" [nzXl]="8" *ngIf="isSpecialCourse">
           <div nz-row [nzGutter]=[16,16]>
+            <!--30 day-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.price}}
-                <nz-input-number class="input-nz-number" formControlName="price" [nzMin]="0"
-                  [nzStep]="1"></nz-input-number>
+                {{controlNames.price30Day}}
+                <nz-input-number class="input-nz-number"
+                                 formControlName="price30Day" [nzMin]="0" [nzStep]="1"
+                                 [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
+                                             (courseForm.get('price30Day')?.touched || isSubmit)) ? 'error' : ''"
+                ></nz-input-number>
+                <span class="text-danger message-error"
+                      *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price30Day')?.touched"
+                >Khóa học đặc biệt phải có tối thiểu 1 loại giá mới khả dụng!</span>
               </span>
             </div>
+            <!--90 day-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.oldPrice}}
-                <nz-input-number class="input-nz-number" formControlName="oldPrice" [nzMin]="0"
-                  [nzStep]="1"></nz-input-number>
+                {{controlNames.price90Day}}
+                <nz-input-number class="input-nz-number"
+                                 formControlName="price90Day" [nzMin]="0" [nzStep]="1"
+                                 [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
+                                             (courseForm.get('price90Day')?.touched || isSubmit)) ? 'error' : ''"
+                ></nz-input-number>
+                <span class="text-danger message-error"
+                      *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price90Day')?.touched"
+                >Khóa học đặc biệt phải có tối thiểu 1 loại giá mới khả dụng!</span>
+              </span>
+            </div>
+            <!--180 day-->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.price180Day}}
+                <nz-input-number class="input-nz-number"
+                                 formControlName="price180Day" [nzMin]="0" [nzStep]="1"
+                                 [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
+                                             (courseForm.get('price180Day')?.touched || isSubmit)) ? 'error' : ''"
+                ></nz-input-number>
+                <span class="text-danger message-error"
+                      *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price180Day')?.touched"
+                >Khóa học đặc biệt phải có tối thiểu 1 loại giá mới khả dụng!</span>
+              </span>
+            </div>
+            <!--360 day-->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.price365Day}}
+                <nz-input-number class="input-nz-number"
+                                 formControlName="price365Day" [nzMin]="0" [nzStep]="1"
+                                 [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
+                                             (courseForm.get('price365Day')?.touched || isSubmit)) ? 'error' : ''"
+                ></nz-input-number>
+                <span class="text-danger message-error"
+                      *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price365Day')?.touched"
+                >Khóa học đặc biệt phải có tối thiểu 1 loại giá mới khả dụng!</span>
+              </span>
+            </div>
+            <!--Forever-->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.priceForever}}
+                <nz-input-number class="input-nz-number"
+                                 formControlName="priceForever" [nzMin]="0" [nzStep]="1"
+                                 [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
+                                             (courseForm.get('priceForever')?.touched || isSubmit)) ? 'error' : ''"
+                ></nz-input-number>
+                <span class="text-danger message-error"
+                      *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('priceForever')?.touched"
+                >Khóa học đặc biệt phải có tối thiểu 1 loại giá mới khả dụng!</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Giá cũ-->
+        <div nz-col [nzXs]="24" [nzSm]="24" [nzXl]="8" *ngIf="isSpecialCourse">
+          <div nz-row [nzGutter]=[16,16]>
+            <!--30 day-->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.price30DayOld}}
+                <nz-input-number class="input-nz-number"
+                                 formControlName="price30DayOld" [nzMin]="0"
+                                 [nzStep]="1"></nz-input-number>
+              </span>
+            </div>
+            <!--90 day-->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.price90DayOld}}
+                <nz-input-number class="input-nz-number"
+                                 formControlName="price90DayOld" [nzMin]="0"
+                                 [nzStep]="1"></nz-input-number>
+              </span>
+            </div>
+            <!--180 day-->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.price180DayOld}}
+                <nz-input-number class="input-nz-number"
+                                 formControlName="price180DayOld" [nzMin]="0"
+                                 [nzStep]="1"></nz-input-number>
+              </span>
+            </div>
+            <!--360 day-->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.price365DayOld}}
+                <nz-input-number class="input-nz-number"
+                                 formControlName="price365DayOld" [nzMin]="0"
+                                 [nzStep]="1"></nz-input-number>
+              </span>
+            </div>
+            <!--Forever-->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.priceForeverOld}}
+                <nz-input-number class="input-nz-number"
+                                 formControlName="priceForeverOld" [nzMin]="0"
+                                 [nzStep]="1"></nz-input-number>
               </span>
             </div>
           </div>
@@ -203,6 +329,16 @@
               </nz-option>
             </nz-select>
           </div>
+        </div>
+
+        <div *ngIf="showMemberPolicyLevel" nz-col [nzXs]="24" [nzSm]="24">
+          <span class="text-label">
+            {{controlNames.completedPoint}}
+          </span>
+
+          <nz-input-number class="input-nz-number"
+                           formControlName="completedPoint" [nzMin]="0"
+                           [nzStep]="1"></nz-input-number>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="24">
