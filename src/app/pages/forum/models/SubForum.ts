@@ -1,12 +1,15 @@
 export type SubForum = {
   id?: number;
   name: string;
-  description: string;
-  banner: string;
+  description?: string;
+  avatar?: string;
+  banner?: string;
   status: number;
   facebookLink?: string;
   instagramLink?: string;
   zaloLink?: string;
   twitterLink?: string;
   communityCategoryId: number;
+  pined: boolean;
+  isFeature: boolean;
 }

@@ -36,6 +36,8 @@ export class ForumCategoryDetailComponent implements OnInit {
       name: [null, [Validators.required]],
       banner: [null, [Validators.required]],
       status: [1],
+      number: [0],
+      shortDescription: [null],
     });
 
     if (!this.isCreate) {

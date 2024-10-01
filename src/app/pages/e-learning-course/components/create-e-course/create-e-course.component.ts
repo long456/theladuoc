@@ -28,7 +28,7 @@ export class CreateECourseComponent implements OnInit {
   listMemberPolicyLevel: memberPolicyLevelOption[] = [];
   courseElearningId!: number;
   showMemberPolicyLevel: boolean = false;
-
+  isSpecialCourse: boolean = false;
   controlNames = {
     name: 'Tên khoá học',
     thumbImg: 'Ảnh đại diện',
@@ -36,8 +36,17 @@ export class CreateECourseComponent implements OnInit {
     overviewDescription: 'Tổng quan khoá học',
     categoryId: 'Danh mục',
     teacherId: 'Giảng viên',
-    price: 'Giá mới',
-    oldPrice: 'Giá cũ',
+    price30Day: 'Giá thời hạn 30 ngày',
+    price30DayOld: 'Giá cũ thời hạn 30 ngày',
+    price90Day: 'Giá thời hạn 90 ngày',
+    price90DayOld: 'Giá cũ thời hạn 90 ngày',
+    price180Day: 'Giá thời hạn 180 ngày',
+    price180DayOld: 'Giá cũ thời hạn 180 ngày',
+    price365Day: 'Giá thời hạn 365 ngày',
+    price365DayOld: 'Giá cũ thời hạn 365 ngày',
+    priceForever: 'Giá thời hạn vĩnh viễn',
+    priceForeverOld: 'Giá cũ thời hạn vĩnh viễn',
+    completedPoint: 'Điểm tích luỹ',
     type: 'Loại khoá học',
     memberPolicyLevelId: 'Gói thành viên áp dụng tối thiểu',
     level: 'Cấp độ',
@@ -77,8 +86,17 @@ export class CreateECourseComponent implements OnInit {
       overviewDescription: [null, [Validators.required]],
       categoryId: [null, [Validators.required]],
       teacherId: [null, [Validators.required]],
-      price: [0],
-      oldPrice: [0],
+      price30Day: [0],
+      price30DayOld: [0],
+      price90Day: [0],
+      price90DayOld: [0],
+      price180Day: [0],
+      price180DayOld: [0],
+      price365Day: [0],
+      price365DayOld: [0],
+      priceForever: [0],
+      priceForeverOld: [0],
+      completedPoint: [null],
       type: [1, [Validators.required, allowedValuesValidator([1, 2, 3, 4, 5])]],
       memberPolicyLevelId: [null],
       level: [1, [allowedValuesValidator([1, 2, 3])]],
@@ -87,7 +105,7 @@ export class CreateECourseComponent implements OnInit {
       imgBanner: [null],
       isCertificate: [false],
       status: [1],
-    })
+    },{validators: [this.validPriceCourse()]})
 
     const typeControl = this.courseForm.get('type');
     if (typeControl) {
@@ -184,6 +202,7 @@ export class CreateECourseComponent implements OnInit {
 
   onTypeChange(value: number): void {
     this.showMemberPolicyLevel = value == 2;
+    this.isSpecialCourse = value == 3;
   }
 
   selectFile(typeImg: string) {
@@ -208,6 +227,21 @@ export class CreateECourseComponent implements OnInit {
       case ('imgBanner'):
         this.courseForm.get('imgBanner')?.patchValue('');
         break;
+    }
+  }
+
+  validPriceCourse(): ValidatorFn {
+    return () : ValidationErrors | null => {
+      const courseType = this.courseForm?.get('type')?.value;
+      if (courseType && courseType === 3) {
+        const prices = ['price30Day', 'price90Day', 'price180Day', 'price365Day'];
+        const hasInvalidPrice = prices.every(price => {
+          const value = this.courseForm?.get(price)?.value;
+          return value == null || value === 0;
+        });
+        return hasInvalidPrice ? { invalidPrice: true } : null;
+      }
+      return null;
     }
   }
 

@@ -51,6 +51,19 @@
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">Thứ tự</div>
+          <nz-input-number style="width: 100%" formControlName="number" [nzMin]="0" [nzStep]="1">
+          </nz-input-number>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="16">
+          <div class="text-label">Mô tả ngắn</div>
+          <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="shortDescription"></textarea>
+        </div>
       </div>
     </form>
   </div>
