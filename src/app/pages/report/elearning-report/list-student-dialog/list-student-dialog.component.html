@@ -1,0 +1,43 @@
+<nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed" [nzScroll]="{ x: 'auto', y : '550px' }"
+    nzShowPagination="false" (nzQueryParams)="onQueryParamsChange($event)">
+    <thead style="overflow-y: hidden;">
+        <tr>
+            <th nzWidth="50px" nzAlign="center">STT</th>
+            <th nzWidth="260px" nzAlign="center">Ngày kích hoạt</th>
+            <th nzWidth="180px" nzAlign="center">Tên học viên</th>
+            <th nzWidth="180px" nzAlign="center">Số điện thoại</th>
+            <th nzWidth="180px" nzAlign="center">Email</th>
+            <th nzWidth="180px" nzAlign="center">Mã học viên</th>
+        </tr>
+    </thead>
+    <tbody style="overflow-y: hidden;">
+        <ng-container *ngFor="let data of items; let i = index">
+            <tr>
+                <!-- [nzExpand]="expandSet.has(data.courseId)" (nzExpandChange)="onExpandChange(data.courseId, $event)" -->
+                <td nzAlign="center">{{i + 1 + ((currentPage - 1) * pageSize)}} </td>
+                <!-- <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td> -->
+                <td nzAlign="center"> {{ data.activeDate | date: 'dd/MM/yyyy HH:mm'}} </td>
+                <td nzAlign="center"> {{ data.studentName }} </td>
+                <td nzAlign="center"> {{ data.studentPhone }} </td>
+                <td nzAlign="center">{{ data.studentEmail }} </td>
+                <td nzAlign="center"> {{ data.studentCode }} </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</nz-table>
+<div class="table-footer paging-table header-btn">
+    <div class="paging-table-right" style="margin-top: 20px;" *ngIf="items.length > 0">
+        <nz-pagination class="pagination" [(nzPageSize)]="pageSize" [(nzPageIndex)]="currentPage" [nzTotal]="totalItem"
+            (nzPageIndexChange)="onPageChange($event)" (nzPageSizeChange)="nzPageSizeChange($event);"
+            [nzShowTotal]="totalTemplate" nzShowSizeChanger></nz-pagination>
+        <ng-template #totalTemplate let-total>Tổng có {{ totalItem }} học viên</ng-template>
+    </div>
+</div>
+
+<div nz-row class="header-btn">
+    <div nz-col [nzSpan]="24" class="search-area">
+        <button nz-button type="button" [nzType]="'primary'" (click)="exportExcel()" style="margin-right: 10px;">Xuất
+            Excel</button>
+        <button nz-button type="button" (click)="onClose()">Đóng</button>
+    </div>
+</div>

@@ -12,6 +12,7 @@ import { plainToClass } from 'class-transformer';
 import { FilterElearningCourseReportComponent } from '../../funnel-report/dialog/filter-elearning-course-report/filter-elearning-course-report.component';
 import { finalize } from 'rxjs';
 import { DateTimeTypeSearch } from '../../constant/date-time-type-search.const';
+import { ListStudentDialogComponent } from '../list-student-dialog/list-student-dialog.component';
 
 @Component({
   selector: 'app-report-paid-course',
@@ -22,7 +23,6 @@ export class ReportPaidCourseComponent {
   dateFormat = 'dd/MM/yyyy';
   monthFormat = 'MM/yyyy';
   items: PaidCourseModelResponse[] = [];
-  expandSet = new Set<number>();
   currentPage: number = 1;
   pageSize: number = 10;
   totalItem: number = 0;
@@ -102,6 +102,56 @@ export class ReportPaidCourseComponent {
     }
 
     return result;
+  }
+
+  openListStudentsDialog(countStudents?: number, courseElearningId?: number,
+    numberOfLearners100Percent: boolean = false,
+    numberOfLearners90Percent: boolean = false,
+    numberOfLearners75Percent: boolean = false,
+    numberOfLearners50Percent: boolean = false,
+    numberOfLearners25Percent: boolean = false,
+    numberOfLearners5Percent: boolean = false) {
+
+    if (countStudents == 0) {
+      this.message.warning("Không có học viên hợp lệ.");
+      return;
+    }
+
+    let title = "Số người đăng ký khóa học"
+    if (numberOfLearners100Percent == true) {
+      title = "Số học viên hoàn thành khóa học 100%"
+    } else if (numberOfLearners90Percent == true) {
+      title = "Số học viên hoàn thành khóa học 90%"
+    }
+    else if (numberOfLearners75Percent == true) {
+      title = "Số học viên hoàn thành khóa học 75%"
+    }
+    else if (numberOfLearners50Percent == true) {
+      title = "Số học viên hoàn thành khóa học 50%"
+    }
+    else if (numberOfLearners25Percent == true) {
+      title = "Số học viên hoàn thành khóa học 25%"
+    }
+    else if (numberOfLearners5Percent == true) {
+      title = "Số học viên hoàn thành khóa học 5%"
+    }
+
+    const modal: NzModalRef = this.modal.create<ListStudentDialogComponent>({
+      nzTitle: title,
+      nzContent: ListStudentDialogComponent,
+      nzFooter: null,
+      nzWidth: '60%',
+      nzData: {
+        courseElearningId: courseElearningId,
+        numberOfLearners100Percent: numberOfLearners100Percent,
+        numberOfLearners90Percent: numberOfLearners90Percent,
+        numberOfLearners75Percent: numberOfLearners75Percent,
+        numberOfLearners50Percent: numberOfLearners50Percent,
+        numberOfLearners25Percent: numberOfLearners25Percent,
+        numberOfLearners5Percent: numberOfLearners5Percent,
+      },
+      nzMaskClosable: false
+    });
   }
 
   openSearch() {
