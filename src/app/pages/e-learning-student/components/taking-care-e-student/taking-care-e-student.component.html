@@ -56,6 +56,9 @@
               <li nz-menu-item (click)="activeMembership(data)">{{ 'gift_membership' | translate }}</li>
               <li nz-menu-item (click)="activeCourse(data)">{{ 'gift_course' | translate }}</li>
               <li nz-menu-item>{{ 'change_role' | translate }}</li>
+              <li nz-menu-item (click)="addAgency(data)">
+                {{'add_agency' | translate}}
+              </li>
             </ul>
           </nz-dropdown-menu>
         </ng-template>
