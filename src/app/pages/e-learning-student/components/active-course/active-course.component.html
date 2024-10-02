@@ -15,11 +15,25 @@
         {{ 'course' | translate }}
       </span>
 
-      <nz-select style="display: block" formControlName="elearningId">
+      <nz-select style="display: block" formControlName="elearningId" >
         <nz-option
           *ngFor="let course of listELearningCourse"
           [nzValue]="course.id"
           [nzLabel]="course.elearningName"></nz-option>
+      </nz-select>
+    </div>
+
+    <div nz-col [nzSpan]="24" *ngIf="isActive">
+      <span>
+        Thời hạn khoá học
+      </span>
+
+      <nz-select style="display: block" formControlName="courseElearningPriceType">
+        <nz-option [nzValue]="1" [nzLabel]="'30 ngày'"></nz-option>
+        <nz-option [nzValue]="2" [nzLabel]="'90 ngày'"></nz-option>
+        <nz-option [nzValue]="3" [nzLabel]="'1800 ngày'"></nz-option>
+        <nz-option [nzValue]="4" [nzLabel]="'365 ngày'"></nz-option>
+        <nz-option [nzValue]="5" [nzLabel]="'Vĩnh viễn'"></nz-option>
       </nz-select>
     </div>
   </div>

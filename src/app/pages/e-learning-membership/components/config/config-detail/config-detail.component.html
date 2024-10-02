@@ -81,14 +81,62 @@
           <nz-select style="display: block;" formControlName="discountUpgradeType" [nzStatus]="(membershipConfigForm.get('discountUpgradeType')?.invalid &&
                                  (membershipConfigForm.get('discountUpgradeType')?.touched || isSubmit)) ?
                                  'error' : ''">
-            <nz-option [nzValue]="1" [nzLabel]="'Không chiết khấu'"></nz-option>
-            <nz-option [nzValue]="2" [nzLabel]="'Có chiết khấu'"></nz-option>
+            <nz-option [nzValue]="1" [nzLabel]="'undiscount' | translate"></nz-option>
+            <nz-option [nzValue]="2" [nzLabel]="'has_discount' | translate"></nz-option>
           </nz-select>
 
           <span class="text-danger" *ngIf="(membershipConfigForm.get('discountUpgradeType')?.touched || isSubmit) &&
                     membershipConfigForm.get('discountUpgradeType')?.hasError('required')">
             {{'upgrade_package_discount' | translate}} {{'cannot_blank' | translate}}
           </span>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <div class="text-label">
+            KPI & {{'commissions' | translate}}
+          </div>
+
+          <button nz-button nzType="primary" nz-tooltip nzTooltipTitle="Thêm mức" style="margin-right: 5px"
+            class="add-gb-btn" (click)="addBonus()">
+            <span nz-icon nzType="plus"></span>
+          </button>
+
+          <nz-table class="benefit-table" [nzData]="listBonus" [nzFrontPagination]="false"
+            [nzTemplateMode]="listBonus.length > 0">
+            <thead>
+              <tr>
+                <th nzAlign="center" nzWidth="10%">
+                  {{'level' | translate}} <!-- Mức -->
+                </th>
+                <th nzWidth="30%">
+                  {{'order_count' | translate}}
+                </th>
+                <th nzWidth="30%">% {{'commission_rate' | translate}}</th>
+                <th nzWidth="10%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let bonus of listBonus; index as i">
+                <tr>
+                  <td nzAlign="center">{{'level' | translate}} {{i+1}}</td>
+                  <td nzAlign="center">
+                    <nz-input-number [nzMin]="1" [nzStep]="1" nzBorderless [(ngModel)]="bonus.commissionPercentage"
+                      [ngModelOptions]="{standalone: true}"></nz-input-number>
+                  </td>
+                  <td nzAlign="center">
+                    <nz-input-number [nzMin]="1" [nzStep]="1" nzBorderless [(ngModel)]="bonus.countTransaction"
+                      [ngModelOptions]="{standalone: true}"></nz-input-number>
+                  </td>
+                  <td nzAlign="center">
+                    <button nz-button nz-tooltip nzTooltipTitle="{{'remove' | translate}}" class="delete-btn"
+                      (click)="removeBonus(i)">
+                      <span nz-icon nzType="delete"></span>
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </nz-table>
         </div>
 
         <div nz-col [nzSpan]="24">
@@ -164,7 +212,7 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
-        Lưu
+        {{'save'|translate}}
       </button>
       <button class="btn" nz-button (click)="navigateBack()">
         {{'cancel'|translate}}
