@@ -1,5 +1,5 @@
 <div class="title-page">
-  Thiết lập khóa học tùy chọn
+  {{'optional_course_settings' | translate}}
 </div>
 
 <div nz-row>
@@ -8,7 +8,7 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="6">
           <span class="text-label">
-            Số khoá kích hoạt tối đa
+            {{'max_activated_courses' | translate}}
           </span>
 
           <nz-input-number formControlName="maxSelectElearning" [nzMin]="0" [nzStep]="1"></nz-input-number>
@@ -22,7 +22,8 @@
           <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="onSelectCourse($event)">
             <div nz-row>
               <div nz-col [nzSpan]="4" *ngFor="let course of listCourseELearning">
-                <label nz-checkbox [nzValue]="course.id" [nzChecked]="course.isSelected">{{course.elearningName}}</label>
+                <label nz-checkbox [nzValue]="course.id"
+                  [nzChecked]="course.isSelected">{{course.elearningName}}</label>
               </div>
             </div>
           </nz-checkbox-wrapper>
@@ -34,9 +35,11 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        Lưu
+        {{'save'|translate}}
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

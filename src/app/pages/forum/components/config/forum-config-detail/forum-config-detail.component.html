@@ -18,7 +18,7 @@
           <span class="text-danger"
                 *ngIf="(forumConfigForm.get('name')?.touched || isSubmit)  &&
                         forumConfigForm.get('name')?.hasError('required')">
-            Tên diễn đàn không được để trống!
+            Tên diễn đàn {{'cannot_blank' | translate}}!
           </span>
         </div>
 
@@ -50,7 +50,7 @@
           <span class="text-danger"
                 *ngIf="(forumConfigForm.get('logo')?.touched || isSubmit)  &&
                         forumConfigForm.get('logo')?.hasError('required')">
-            Đường dẫn ảnh logo không được để trống!
+            Đường dẫn ảnh logo {{'cannot_blank' | translate}}!
           </span>
         </div>
 
@@ -74,7 +74,7 @@
           <span class="text-danger"
                 *ngIf="(forumConfigForm.get('banner')?.touched || isSubmit)  &&
                         forumConfigForm.get('banner')?.hasError('required')">
-            Đường dẫn ảnh banner không được để trống!
+            Đường dẫn ảnh banner {{'cannot_blank' | translate}}!
           </span>
         </div>
       </div>
@@ -86,7 +86,9 @@
       <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
         Lưu
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+</button>
     </div>
   </div>
 </div>

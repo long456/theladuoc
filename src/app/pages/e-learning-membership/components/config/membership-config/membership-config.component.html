@@ -4,7 +4,9 @@
 
 <div class="header-btn">
   <ng-container *ngIf="(membershipConfig$ | async) as config">
-    <button nz-button class="add-btn primary" (click)="edit()" >Chỉnh sửa</button>
+    <button nz-button class="add-btn primary" (click)="edit()" >
+      {{'edit' | translate}}
+    </button>
 
     <app-table
       [rows]="config.rows"

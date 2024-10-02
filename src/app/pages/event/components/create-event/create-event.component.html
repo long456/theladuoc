@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới sự kiện' : 'Chỉnh sửa sự kiện'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'event' | translate}}
+  </span>
 </div>
 
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
@@ -12,15 +20,11 @@
             <span class="text-danger">*</span>
           </span>
 
-          <input
-            nz-input autofocus formControlName="title"
-            [nzStatus]="(eventForm.get('title')?.invalid &&
+          <input nz-input autofocus formControlName="title" [nzStatus]="(eventForm.get('title')?.invalid &&
                         (eventForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
-          <span
-            class="text-danger"
-            *ngIf="(eventForm.get('title')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(eventForm.get('title')?.touched || isSubmit)  &&
                     eventForm.get('title')?.hasError('required')">
-              {{ 'event_name' | translate }} không được để trống
+            {{ 'event_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
@@ -30,16 +34,13 @@
             <span class="text-danger">*</span>
           </span>
 
-          <nz-date-picker nzShowTime formControlName="dateOfEvent"
-                          [nzStatus]="(eventForm.get('dateOfEvent')?.invalid &&
+          <nz-date-picker nzShowTime formControlName="dateOfEvent" [nzStatus]="(eventForm.get('dateOfEvent')?.invalid &&
                                       (eventForm.get('dateOfEvent')?.touched || isSubmit)) ? 'error' : ''">
           </nz-date-picker>
 
-          <span
-            class="text-danger"
-            *ngIf="(eventForm.get('dateOfEvent')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(eventForm.get('dateOfEvent')?.touched || isSubmit)  &&
                     eventForm.get('dateOfEvent')?.hasError('required')">
-              {{ 'location' | translate }} không được để trống
+            {{ 'location' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
@@ -53,24 +54,21 @@
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Ảnh đại diện
+            {{'avatar' | translate}}
             <span class="text-danger">*</span>
           </span>
 
           <div style="display: flex">
-            <input nz-input formControlName="imagePath"
-                   [nzStatus]="(eventForm.get('imagePath')?.invalid &&
+            <input nz-input formControlName="imagePath" [nzStatus]="(eventForm.get('imagePath')?.invalid &&
                                (eventForm.get('imagePath')?.touched || isSubmit)) ? 'error' : ''">
             <button nz-button nzType="primary" (click)="onSelectFile()">
               <span nz-icon nzType="upload"></span>
             </button>
           </div>
 
-          <span
-            class="text-danger"
-            *ngIf="(eventForm.get('imagePath')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(eventForm.get('imagePath')?.touched || isSubmit)  &&
                     eventForm.get('imagePath')?.hasError('required')">
-              Ảnh đại diện không được để trống
+            Ảnh đại diện {{'cannot_blank' | translate}}
           </span>
         </div>
 
@@ -81,31 +79,25 @@
             <span class="text-danger">*</span>
           </span>
 
-          <input nz-input formControlName="local"
-                 [nzStatus]="(eventForm.get('local')?.invalid &&
+          <input nz-input formControlName="local" [nzStatus]="(eventForm.get('local')?.invalid &&
                              (eventForm.get('local')?.touched || isSubmit)) ? 'error' : ''">
-          <span
-            class="text-danger"
-            *ngIf="(eventForm.get('local')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(eventForm.get('local')?.touched || isSubmit)  &&
                     eventForm.get('local')?.hasError('required')">
-              {{ 'location' | translate }} không được để trống
+            {{ 'location' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Link sự kiện
+            {{'event_link' | translate}}
             <span class="text-danger">*</span>
           </span>
 
-          <input nz-input formControlName="link"
-                 [nzStatus]="(eventForm.get('link')?.invalid &&
+          <input nz-input formControlName="link" [nzStatus]="(eventForm.get('link')?.invalid &&
                              (eventForm.get('link')?.touched || isSubmit)) ? 'error' : ''">
-          <span
-            class="text-danger"
-            *ngIf="(eventForm.get('link')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(eventForm.get('link')?.touched || isSubmit)  &&
                     eventForm.get('link')?.hasError('required')">
-              Link sự kiện không được để trống
+            {{'event_link' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
       </div>
@@ -115,9 +107,16 @@
   <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="4" [nzLg]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

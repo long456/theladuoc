@@ -18,7 +18,7 @@
           <span class="text-danger"
                 *ngIf="(resourcesForm.get('name')?.touched || isSubmit)  &&
                         resourcesForm.get('name')?.hasError('required')">
-            Tên tài nguyên không được để trống!
+            Tên tài nguyên {{'cannot_blank' | translate}}!
           </span>
         </div>
 
@@ -42,7 +42,7 @@
           <span class="text-danger"
                 *ngIf="(resourcesForm.get('fullPath')?.touched || isSubmit)  &&
                         resourcesForm.get('fullPath')?.hasError('required')">
-            Đường dẫn file tài nguyên không được để trống!
+            Đường dẫn file tài nguyên {{'cannot_blank' | translate}}!
           </span>
         </div>
 
@@ -57,9 +57,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+</button>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {MenuItem} from "../../models/MenuItem";
+import {type MenuItem} from "../../models/MenuItem";
 import {Router} from "@angular/router";
 
 @Component({

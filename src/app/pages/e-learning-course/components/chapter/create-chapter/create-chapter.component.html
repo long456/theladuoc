@@ -18,7 +18,7 @@
           <span class="text-danger"
                 *ngIf="(chapterForm.get('title')?.touched || isSubmit)  && chapterForm.get('title')?.hasError('required')"
           >
-            Tên học phần không được để trống!
+            Tên học phần {{'cannot_blank' | translate}}!
           </span>
         </div>
 
@@ -41,9 +41,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+</button>
     </div>
   </div>
 </div>

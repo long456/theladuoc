@@ -8,7 +8,7 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên danh mục
+            {{'category_name' | translate }}
             <span class="text-danger">*</span>
           </span>
           <input nz-input autofocus formControlName="name"
@@ -18,7 +18,7 @@
           <span class="text-danger"
                 *ngIf="(forumCategoryForm.get('name')?.touched || isSubmit)  &&
                         forumCategoryForm.get('name')?.hasError('required')">
-            Tên danh mục không được để trống!
+            {{'category_name' | translate }} {{'cannot_blank' | translate}}!
           </span>
         </div>
 
@@ -42,7 +42,7 @@
           <span class="text-danger"
                 *ngIf="(forumCategoryForm.get('banner')?.touched || isSubmit)  &&
                         forumCategoryForm.get('banner')?.hasError('required')">
-            Đường dẫn ảnh banner không được để trống!
+            Đường dẫn ảnh banner {{'cannot_blank' | translate}}!
           </span>
         </div>
 
@@ -73,7 +73,9 @@
       <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
         Lưu
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+</button>
     </div>
   </div>
 </div>

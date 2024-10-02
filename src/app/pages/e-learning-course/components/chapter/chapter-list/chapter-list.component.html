@@ -1,8 +1,6 @@
 <div class="title-page">
   Danh sách học phần E-learning
-  <button
-    class="navigation-btn"
-    nz-button nzType="primary" (click)="navigationToVideo()">
+  <button class="navigation-btn" nz-button nzType="primary" (click)="navigationToVideo()">
     <span class="navigation-title">Danh sách video</span>
     <span nz-icon nzType="right"></span>
   </button>
@@ -12,24 +10,17 @@
   <ng-container *ngIf="(chapterPage$ | async) as chapter">
     <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
     <button nz-button class="add-btn" (click)="delete()">{{ 'remove' | translate }}</button>
-    <button nz-button class="add-btn" (click)="backToCourse()"
-            nz-tooltip nzTooltipTitle="Quay lại danh sách khóa học">
+    <button nz-button class="add-btn" (click)="backToCourse()" nz-tooltip
+      nzTooltipTitle="{{ 'back' | translate }} {{'course_list' | translate}}">
       <span nz-icon nzType="rollback" nzTheme="outline"></span>
     </button>
 
-    <app-table
-      [rows]="chapter.rows"
-      [page]="chapter.page"
-      [pageSize]="chapter.pageSize"
-      [pageTotal]="chapter.rowTotal"
-      (onItemSelection)="getItemSelection($event)"
-      [clientPagination]="false"
-      (pageIndexChange)="page$.next($event)"
-      (pageSizeChange)="pageSize$.next($event)"
-      [loading]="loading"
-    >
+    <app-table [rows]="chapter.rows" [page]="chapter.page" [pageSize]="chapter.pageSize" [pageTotal]="chapter.rowTotal"
+      (onItemSelection)="getItemSelection($event)" [clientPagination]="false" (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)" [loading]="loading">
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
-      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'"
+        fixColumn="left"></table-column>
       <table-column header="Tên học phần" key="title" [width]="'200px'"></table-column>
       <table-column header="{{ 'order' | translate }}" key="priority" [width]="'200px'"></table-column>
       <table-column header="{{ 'status' | translate }}" key="status" [width]="'180px'">
@@ -38,14 +29,13 @@
           <span class="text-invalid" *ngIf="!data.status">Tạm dừng</span>
         </ng-template>
       </table-column>
-      <table-column [width]="'180px'" fixColumn="right" >
+      <table-column [width]="'180px'" fixColumn="right">
         <ng-template appHeader>
           {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
-          <span class="custom-action" (click)="edit(data)"
-                nz-tooltip nzTooltipTitle="Chỉnh sửa học phần">
+          <span class="custom-action" (click)="edit(data)" nz-tooltip nzTooltipTitle="Chỉnh sửa học phần">
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
           </span>
         </ng-template>

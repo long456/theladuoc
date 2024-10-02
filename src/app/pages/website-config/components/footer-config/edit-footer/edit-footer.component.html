@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới đường dẫn chân trang' : 'Chỉnh sửa đường dẫn chân trang'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'footer'|translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -11,23 +19,18 @@
             {{ 'display_name' | translate }}
             <span class="text-danger">*</span>
           </span>
-          <input
-            nz-input autofocus formControlName="displayName"
+          <input nz-input autofocus formControlName="displayName"
             [nzStatus]="(footerForm.get('displayName')?.invalid && (footerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(footerForm.get('displayName')?.touched || isSubmit)  && footerForm.get('displayName')?.hasError('required')"
-          >
-            {{ 'display_name' | translate }} không được để trống
+            *ngIf="(footerForm.get('displayName')?.touched || isSubmit)  && footerForm.get('displayName')?.hasError('required')">
+            {{ 'display_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">{{ 'order' | translate }} trong cột</div>
-          <nz-input-number
-            style="width: 100%"
-            [nzMin]="0" [nzStep]="1"
-            formControlName="no"></nz-input-number>
+          <div class="text-label">{{ 'position' | translate }}</div>
+          <nz-input-number style="width: 100%" [nzMin]="0" [nzStep]="1" formControlName="no"></nz-input-number>
         </div>
 
         <div nz-col [nzSpan]="8">
@@ -36,34 +39,24 @@
 
         <div nz-col [nzSpan]="8">
           <div class="text-label">{{ 'column_name' | translate }}</div>
-          <input
-            nz-input formControlName="columnName">
+          <input nz-input formControlName="columnName">
         </div>
 
         <div nz-col [nzSpan]="11">
           <span class="text-label">
-            Đường dẫn
+            {{'page_url' | translate}}
           </span>
 
           <div class="select-group">
-            <nz-select
-              class="link-to"
-              [(ngModel)]="external"
-              [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectExternal($event)"
-            >
-              <nz-option [nzValue]="false" [nzLabel]="'Trong hệ thống'"></nz-option>
-              <nz-option [nzValue]="true" [nzLabel]="'Bên ngoài'"></nz-option>
+            <nz-select class="link-to" [(ngModel)]="external" [ngModelOptions]="{standalone: true}"
+              (ngModelChange)="onSelectExternal($event)">
+              <nz-option [nzValue]="false" [nzLabel]="'internal' | translate"></nz-option>
+              <nz-option [nzValue]="true" [nzLabel]="'external' | translate"></nz-option>
             </nz-select>
 
             <div class="link-place">
-              <nz-select
-                *ngIf="!external"
-                formControlName="pageId"
-                nzAllowClear>
-                <nz-option
-                  *ngFor="let page of listAllPage"
-                  [nzValue]="page.id"
-                  [nzLabel]="page.name">
+              <nz-select *ngIf="!external" formControlName="pageId" nzAllowClear>
+                <nz-option *ngFor="let page of listAllPage" [nzValue]="page.id" [nzLabel]="page.name">
                 </nz-option>
               </nz-select>
 
@@ -79,9 +72,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

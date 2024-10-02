@@ -1,5 +1,7 @@
 <div class="title-page">
-  <span>Thiết lập cấu hình website</span>
+  <span>
+    {{'website_settings' | translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -7,23 +9,23 @@
     <form [formGroup]="configForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="9">
-      <span class="text-label">
-        Tên website
-        <span class="text-danger">*</span>
-      </span>
-          <input
-            nz-input autofocus formControlName="name"
+          <span class="text-label">
+            {{'website_name' | translate}}
+            <span class="text-danger">*</span>
+          </span>
+          <input nz-input autofocus formControlName="name"
             [nzStatus]="(configForm.get('name')?.invalid && (configForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(configForm.get('name')?.touched || isSubmit)  && configForm.get('name')?.hasError('required')"
-          >
-        Tên website không được để trống
-      </span>
+            *ngIf="(configForm.get('name')?.touched || isSubmit)  && configForm.get('name')?.hasError('required')">
+            {{'website_name' | translate}} {{'cannot_blank' | translate}}
+          </span>
         </div>
 
         <div nz-col [nzSpan]="9">
-          <span class="text-label">copy right(Tuyên bố bản quyền)</span>
+          <span class="text-label">
+            {{'copyright_text' | translate}}
+          </span>
           <input nz-input formControlName="copyright">
         </div>
 
@@ -43,8 +45,8 @@
           <div class="color-picker" (click)="active(bgHeader)">
             <input #bgHeader formControlName="headerBackground" type="color" (change)="onColorChange($event, 1)">
             <span style="padding-left: 8px; font-size: 14px">
-          {{bgHeaderValue}}
-        </span>
+              {{bgHeaderValue}}
+            </span>
           </div>
         </div>
 
@@ -64,65 +66,55 @@
           <div class="color-picker" (click)="active(bgFooter)">
             <input #bgFooter formControlName="footerBackground" type="color" (change)="onColorChange($event, 0)">
             <span style="padding-left: 8px; font-size: 14px">
-          {{bgFooterValue}}
-        </span>
+              {{bgFooterValue}}
+            </span>
           </div>
         </div>
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">Link facebook</span>
-          <input
-            nz-input formControlName="facebookLink"
-            [nzStatus]="(configForm.get('facebookLink')?.invalid &&
+          <input nz-input formControlName="facebookLink" [nzStatus]="(configForm.get('facebookLink')?.invalid &&
                     (configForm.get('facebookLink')?.touched || isSubmit)) ? 'error' : ''">
-          <span class="text-danger"
-                *ngIf="(configForm.get('facebookLink')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(configForm.get('facebookLink')?.touched || isSubmit)  &&
                     configForm.get('facebookLink')?.hasError('pattern')">
-        Link facebook không đúng định dạng
-      </span>
+            Link facebook {{'invalid_format' | translate}}
+          </span>
         </div>
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">Link youtube</span>
-          <input
-            nz-input formControlName="youtubeLink"
-            [nzStatus]="(configForm.get('youtubeLink')?.invalid &&
+          <input nz-input formControlName="youtubeLink" [nzStatus]="(configForm.get('youtubeLink')?.invalid &&
                     (configForm.get('youtubeLink')?.touched || isSubmit)) ? 'error' : ''">
-          <span class="text-danger"
-                *ngIf="(configForm.get('youtubeLink')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(configForm.get('youtubeLink')?.touched || isSubmit)  &&
                     configForm.get('youtubeLink')?.hasError('pattern')">
-        Link youtube không đúng định dạng
-      </span>
+            Link youtube {{'invalid_format' | translate}}
+          </span>
         </div>
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">Link tiktok</span>
-          <input
-            nz-input formControlName="tiktokLink"
-            [nzStatus]="(configForm.get('tiktokLink')?.invalid &&
+          <input nz-input formControlName="tiktokLink" [nzStatus]="(configForm.get('tiktokLink')?.invalid &&
                     (configForm.get('tiktokLink')?.touched || isSubmit)) ? 'error' : ''">
-          <span class="text-danger"
-                *ngIf="(configForm.get('tiktokLink')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(configForm.get('tiktokLink')?.touched || isSubmit)  &&
                     configForm.get('tiktokLink')?.hasError('pattern')">
-        Link tiktok không đúng định dạng
-      </span>
+            Link tiktok {{'invalid_format' | translate}}
+          </span>
         </div>
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">Link zalo</span>
-          <input
-            nz-input formControlName="zaloLink"
-            [nzStatus]="(configForm.get('zaloLink')?.invalid &&
+          <input nz-input formControlName="zaloLink" [nzStatus]="(configForm.get('zaloLink')?.invalid &&
                     (configForm.get('zaloLink')?.touched || isSubmit)) ? 'error' : ''">
-          <span class="text-danger"
-                *ngIf="(configForm.get('zaloLink')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(configForm.get('zaloLink')?.touched || isSubmit)  &&
                     configForm.get('zaloLink')?.hasError('pattern')">
-        Link zalo không đúng định dạng
-      </span>
+            Link zalo {{'invalid_format' | translate}}
+          </span>
         </div>
 
         <div nz-col [nzSpan]="18">
-          <span class="text-label">Mô tả</span>
+          <span class="text-label">
+            {{'description' | translate}}
+          </span>
           <textarea nz-input [nzAutosize]="{ minRows: 3}" formControlName="footerDescription"></textarea>
         </div>
 
@@ -133,13 +125,12 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        Lưu
+        {{'save'|translate}}
       </button>
 
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>
-
-
-

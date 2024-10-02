@@ -6,7 +6,6 @@
     <span nz-icon nzType="download" nzTheme="outline"></span>
   </div>
 
-  <!--  <span>{{'greeting'| translate}}</span>-->
   <div class="switch-language">
     <nz-select [(ngModel)]="lang" (ngModelChange)="changeLang($event)">
       <nz-option nzValue="vi" nzLabel="Tiếng việt"></nz-option>
@@ -37,7 +36,7 @@
       <li nz-menu-item>
         <button nz-button nzType="text" (click)="editProfile()">
           <span nz-icon nzType="user" nzTheme="outline"></span>
-          {{'header_userInfo' | translate}}
+          {{'user_info' | translate}}
         </button>
       </li>
 
@@ -46,7 +45,7 @@
       <li nz-menu-item>
         <button nz-button nzType="text" (click)="signOut()">
           <span nz-icon nzType="logout" nzTheme="outline"></span>
-          {{'Đăng xuất' | translate}}
+          {{'logout' | translate}}
         </button>
       </li>
     </ul>

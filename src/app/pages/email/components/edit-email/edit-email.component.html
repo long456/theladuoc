@@ -18,7 +18,7 @@
           <span class="text-danger"
                 *ngIf="(emailForm.get('emailSubject')?.touched || isSubmit)  && emailForm.get('emailSubject')?.hasError('required')"
           >
-            {{ 'title' | translate }}" email không được để trống
+            {{ 'title' | translate }}" email {{'cannot_blank' | translate}}
           </span>
         </div>
 
@@ -97,7 +97,7 @@
           <span class="text-danger"
                 *ngIf="(emailForm.get('courseId')?.touched || isSubmit) && emailForm.get('courseId')?.hasError('required')"
           >
-            Tên khóa học không được để trống
+            {{ 'course_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
@@ -119,10 +119,17 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
 
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+</button>
     </div>
   </div>
 </div>

@@ -2,7 +2,9 @@
   <div nz-row [nzGutter]=[8,8]>
     <div nz-col nzSpan="8" *ngFor="let item of filterData" class="flex-content">
       <div nz-col nzSpan="7" class="text-align-right">
-        <span>{{item.title}}</span>
+        <span>
+          {{ item.name | translate }}
+        </span>
       </div>
 
       <div class="min-width">

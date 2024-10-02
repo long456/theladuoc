@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo form đăng ký' : 'Chỉnh sửa form đăng ký'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'registration_form' | translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -8,17 +16,15 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Tiêu đề
+            {{'title' | translate}}
           </span>
 
-          <input
-            nz-input formControlName="title" autofocus
+          <input nz-input formControlName="title" autofocus
             [nzStatus]="(this.builderForm.get('title')?.invalid && (builderForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(builderForm.get('title')?.touched || isSubmit)  && builderForm.get('title')?.hasError('required')"
-          >
-            Tiêu đề không được để trống
+            *ngIf="(builderForm.get('title')?.touched || isSubmit)  && builderForm.get('title')?.hasError('required')">
+            {{'title' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
@@ -30,33 +36,30 @@
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Đường dẫn nhóm zalo
+            {{'zalo_group_link' | translate}}
           </span>
 
-          <input
-            nz-input formControlName="zaloLink"
+          <input nz-input formControlName="zaloLink"
             [nzStatus]="(this.builderForm.get('zaloLink')?.invalid && (builderForm.get('zaloLink')?.touched || isSubmit)) ? 'error' : ''">
 
-<!--          <span class="text-danger"-->
-<!--                *ngIf="(builderForm.get('zaloLink')?.touched || isSubmit)  && builderForm.get('zaloLink')?.hasError('pattern')"-->
-<!--          >-->
-<!--            Đường dẫn nhóm zalo không đúng định dạng-->
-<!--          </span>-->
+          <!--          <span class="text-danger"-->
+          <!--                *ngIf="(builderForm.get('zaloLink')?.touched || isSubmit)  && builderForm.get('zaloLink')?.hasError('pattern')"-->
+          <!--          >-->
+          <!--            Đường dẫn nhóm zalo {{'invalid_format' | translate}}-->
+          <!--          </span>-->
         </div>
 
         <div nz-col [nzSpan]="9" *ngIf="!isCreate">
           <span class="text-label">
-            Đường dẫn trang chuyển hướng
+            {{'redirect_link' | translate}}
           </span>
 
-          <input [readonly]="!isCreate"
-            nz-input formControlName="redirectLink"
+          <input [readonly]="!isCreate" nz-input formControlName="redirectLink"
             [nzStatus]="(builderForm.get('redirectLink')?.invalid && (builderForm.get('redirectLink')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(builderForm.get('redirectLink')?.touched || isSubmit)  && builderForm.get('redirectLink')?.hasError('pattern')"
-          >
-            Đường dẫn trang chuyển hướng không đúng định dạng
+            *ngIf="(builderForm.get('redirectLink')?.touched || isSubmit)  && builderForm.get('redirectLink')?.hasError('pattern')">
+            {{'redirect_link' | translate}} {{'invalid_format' | translate}}
           </span>
         </div>
 
@@ -67,28 +70,21 @@
           </span>
 
           <div>
-            <nz-select [nzDisabled]="!isCreate"
-                       formControlName="courseId"
-                       [nzStatus]="(builderForm.get('courseId')?.invalid && (builderForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
-            >
-              <nz-option
-                *ngFor="let course of listCourse"
-                [nzValue]="course.id"
-                [nzLabel]="course.title"
-              ></nz-option>
+            <nz-select [nzDisabled]="!isCreate" formControlName="courseId"
+              [nzStatus]="(builderForm.get('courseId')?.invalid && (builderForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''">
+              <nz-option *ngFor="let course of listCourse" [nzValue]="course.id" [nzLabel]="course.title"></nz-option>
             </nz-select>
           </div>
 
           <span class="text-danger"
-                *ngIf="(builderForm.get('courseId')?.touched || isSubmit) && builderForm.get('courseId')?.hasError('required')"
-          >
-            Tên khóa học không được để trống
+            *ngIf="(builderForm.get('courseId')?.touched || isSubmit) && builderForm.get('courseId')?.hasError('required')">
+            {{ 'course_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="18">
           <span class="text-label">
-            Mô tả
+            {{'description' | translate}}
           </span>
 
           <textarea nz-input formControlName="description"></textarea>
@@ -96,49 +92,60 @@
 
         <div nz-col [nzSpan]="18">
           <span class="text-label">
-            Nội dung trang thank you
+            {{'thank_you_page_content' | translate}}
           </span>
-          <ckeditor
-            name="ckeditor_text"
-            formControlName="thankYouHtml"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
-            [config]="ckEditorConfig"
-            (ready)="onCkEditorReady($event)"
-          ></ckeditor>
+          <ckeditor name="ckeditor_text" formControlName="thankYouHtml"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"
+            (ready)="onCkEditorReady($event)"></ckeditor>
         </div>
 
         <div nz-col [nzSpan]="18">
           <span class="text-label">
-            Các thông tin cần thu thập
+            {{'collected_information' | translate}}
           </span>
 
           <div nz-row [nzGutter]=[8,8] class="form-selection">
             <div nz-col nzSpan="8">
-              <label nz-checkbox [nzDisabled]="true" formControlName="hasFullName">Họ & tên (Bắt buộc)</label>
+              <label nz-checkbox [nzDisabled]="true" formControlName="hasFullName">
+                {{'full_name' | translate}} ({{'required' | translate}})
+              </label>
             </div>
             <div nz-col nzSpan="8">
-              <label nz-checkbox [nzDisabled]="true" formControlName="hasEmail">Email (Bắt buộc)</label>
+              <label nz-checkbox [nzDisabled]="true" formControlName="hasEmail">
+                Email ({{'required' | translate}})
+              </label>
             </div>
             <div nz-col nzSpan="8">
-              <label nz-checkbox [nzDisabled]="true" formControlName="hasPhoneNumber">Số điện thoại (Bắt buộc)</label>
+              <label nz-checkbox [nzDisabled]="true" formControlName="hasPhoneNumber">
+                {{'phone_number' | translate}} ({{'required' | translate}})
+              </label>
             </div>
             <div nz-col nzSpan="8">
-              <label nz-checkbox formControlName="hasAddress">Địa chỉ</label>
+              <label nz-checkbox formControlName="hasAddress">
+                {{'address' | translate}}
+              </label>
             </div>
             <div nz-col nzSpan="8">
-              <label nz-checkbox formControlName="hasGender">Giới tính</label>
+              <label nz-checkbox formControlName="hasGender">
+                {{'gender' | translate}}
+              </label>
             </div>
             <div nz-col nzSpan="8">
-              <label nz-checkbox formControlName="hasDob">Ngày sinh</label>
+              <label nz-checkbox formControlName="hasDob">
+                {{'date_of_birth' | translate}}
+              </label>
             </div>
             <div nz-col nzSpan="8">
-              <label nz-checkbox formControlName="hasArea">Khu vực địa lý</label>
+              <label nz-checkbox formControlName="hasArea">
+                {{'area' | translate}}
+              </label>
             </div>
             <div nz-col nzSpan="8">
-              <label nz-checkbox formControlName="hasDemand">Nhu cầu</label>
+              <label nz-checkbox formControlName="hasDemand">
+                {{'demand' | translate}}
+              </label>
             </div>
           </div>
-
         </div>
       </div>
     </form>
@@ -148,9 +155,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="editForm()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>
