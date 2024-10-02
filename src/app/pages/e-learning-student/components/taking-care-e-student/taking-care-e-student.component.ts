@@ -9,6 +9,7 @@ import {ActiveCourseComponent} from "../active-course/active-course.component";
 import {ActiveCourseService} from "../../services/active-course.service";
 import {AuthService} from "../../../../layouts/auth-layout/auth/services/auth.service";
 import {ActiveMembershipService} from "../../services/active-membership.service";
+import {AddAgencyService} from "../../services/add-agency.service";
 
 @Component({
   selector: 'app-taking-care-e-student',
@@ -46,6 +47,7 @@ export class TakingCareEStudentComponent implements OnInit{
     private activeCourseService: ActiveCourseService,
     private authService: AuthService,
     private activeMembershipService: ActiveMembershipService,
+    private addAgencyService: AddAgencyService
   ) {}
 
   ngOnInit() {
@@ -89,6 +91,10 @@ export class TakingCareEStudentComponent implements OnInit{
 
   activeMembership(data: any): void{
     this.activeMembershipService.giftMembership(data);
+  }
+
+  addAgency(data: any): void{
+    this.addAgencyService.addAgency(data);
   }
 
   setExpand(event: any) {

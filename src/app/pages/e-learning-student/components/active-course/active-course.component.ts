@@ -22,6 +22,7 @@ export class ActiveCourseComponent implements OnInit{
       name: [null],
       studentId: [null],
       elearningId: [null],
+      courseElearningPriceType: [null]
     });
     this.pathDataForm();
     this.eLearningStudentService.getECourseToActive().subscribe({

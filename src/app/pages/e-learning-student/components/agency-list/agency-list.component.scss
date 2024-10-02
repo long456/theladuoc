@@ -1,11 +1,11 @@
-.title-page {
+.title-page{
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
   padding-bottom: 15px;
 }
 
-.header-btn {
+.header-btn{
   text-align: right;
 }
 
@@ -23,12 +23,15 @@
   color: white;
 }
 
-.custom-action {
+.custom-action{
   cursor: pointer;
   padding-right: 8px;
-
-  &:hover {
+  &:hover{
     color: #1677ff;
+  }
+
+  &.delete:hover {
+    color: #ff4d4f;
   }
 }
 
@@ -40,32 +43,39 @@
   color: #ff4d4f;
 }
 
-.filter-form {
+.icon-check-success {
+  padding: 1px 3px;
+  border-radius: 50%;
+  border: 1px solid #52c41a;
+}
+
+.icon-check-error {
+  padding: 1px 3px;;
+  border-radius: 50%;
+  border: 1px solid #ff4d4f;
+}
+
+.filter-form{
   margin-bottom: 15px;
   width: 10%;
   transition: 0.25s;
-
   &.expand {
     width: 100%;
   }
-
   border-radius: 4px;
 }
 
-.custom-action {
-  cursor: pointer;
-  padding-right: 8px;
-  font-size: 18px;
-
-  &:hover {
-    color: #1677ff;
+.navigation-btn{
+  .navigation-title{
+    transition: all 0.5s;
+    width: 0;
+    opacity: 0;
   }
-
-  .delete:hover {
-    color: #ff4d4f;
+  &:hover{
+    .navigation-title{
+      width: 120px;
+      opacity: 1;
+    }
   }
 }
 
-[nz-button] {
-  margin-right: 8px;
-}

@@ -6,6 +6,7 @@ import {TakingCareEStudentComponent} from "./components/taking-care-e-student/ta
 import {StudyingEStudentComponent} from "./components/studying-e-student/studying-e-student.component";
 import {RegisteringEStudentComponent} from "./components/registering-e-student/registering-e-student.component";
 import {PermissionGuardService} from "../../shared/router-guard/permission-guard.service";
+import {AgencyListComponent} from "./components/agency-list/agency-list.component";
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisteringEStudentComponent
+  },
+  {
+    path: 'agency',
+    component: AgencyListComponent
   }
 ];
 
