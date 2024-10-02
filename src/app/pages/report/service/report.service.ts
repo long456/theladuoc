@@ -115,7 +115,7 @@ export class ReportService {
         return this.http.get('report/paid-course-report', { params: option })
     }
 
-      // báo cáo khóa học cộng tác viên
+    // báo cáo khóa học cộng tác viên
     getReportCollaboratorCourses(page?: any, pageSize?: any, filter?: any): Observable<any> {
         let option = {
             PageIndex: page,
@@ -147,5 +147,26 @@ export class ReportService {
             }
         }
         return this.http.get('report/instructor-course-report', { params: option })
+    }
+
+    // Get list student by course
+    getStudentsByCourse(page?: any, pageSize?: any, filter?: any): Observable<any> {
+        let option = {
+            PageIndex: page,
+            pageSize: pageSize,
+        }
+
+        if (filter) {
+            option = {
+                ...filter,
+                PageIndex: page,
+                pageSize: pageSize,
+            }
+        }
+        return this.http.get('report/students-course-report', { params: option })
+    }
+
+    exportExcel(filter?: any): Observable<any> {
+        return this.http.get('report/export-students', { params: filter })
     }
 }

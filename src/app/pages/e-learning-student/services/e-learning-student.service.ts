@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {AgencyListComponent} from "../components/agency-list/agency-list.component";
 
 @Injectable({
   providedIn: 'root'
@@ -96,6 +97,23 @@ export class ELearningStudentService {
     return this.http.get('User/waiting', {params: option})
   }
 
+  getAgencyList(page?: any, pageSize?: any, filter?: any): Observable<any>{
+    let option = {
+      PageIndex: page,
+      pageSize: pageSize,
+    }
+
+    if (filter) {
+      option = {
+        ...filter,
+        PageIndex: page,
+        pageSize: pageSize,
+      }
+    }
+
+    return this.http.get('User/list-agent-membership', {params: option})
+  }
+
   receiveCareUser(idList: string): Observable<any>{
     return this.http.post('User/receive-care-user-waiting', {userIds: idList});
   }
@@ -114,5 +132,13 @@ export class ELearningStudentService {
 
   activeMembership(data: any): Observable<any>{
     return this.http.post('User/gift-membership', data);
+  }
+
+  addAgency(data: any): Observable<any>{
+    return this.http.post('User/add-agent-membership', data);
+  }
+
+  disableAgency(id: number): Observable<any>{
+    return this.http.get('User/disable-agent-membership');
   }
 }

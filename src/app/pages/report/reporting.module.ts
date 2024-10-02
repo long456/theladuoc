@@ -26,6 +26,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { FilterElearningCourseReportComponent } from './funnel-report/dialog/filter-elearning-course-report/filter-elearning-course-report.component';
 import { SpeakerReportComponent } from './speaker-report/speaker-report.component';
 import { StaffSalesReportComponent } from './staff-sales-report/staff-sales-report.component';
+import { ListStudentDialogComponent } from './elearning-report/list-student-dialog/list-student-dialog.component';
 @NgModule({
   declarations: [
     ReportFunnelCourseComponent,
@@ -38,7 +39,8 @@ import { StaffSalesReportComponent } from './staff-sales-report/staff-sales-repo
     FilterFunnelCourseReportComponent,
     FilterElearningCourseReportComponent,
     SpeakerReportComponent,
-    StaffSalesReportComponent
+    StaffSalesReportComponent,
+    ListStudentDialogComponent
   ],
   imports: [
     CommonModule,

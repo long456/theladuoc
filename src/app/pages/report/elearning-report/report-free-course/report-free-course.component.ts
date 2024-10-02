@@ -8,7 +8,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { SpinnerService } from 'src/app/shared/services/spinner-service';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { plainToClass } from 'class-transformer';
-import { FilterFunnelCourseReportComponent } from '../../funnel-report/dialog/filter-funnel-course-report/filter-funnel-course-report.component';
 import { FreeCourseModelResponse } from '../../model/course-elearning-reponse';
 import { finalize } from 'rxjs';
 import { FilterElearningCourseReportComponent } from '../../funnel-report/dialog/filter-elearning-course-report/filter-elearning-course-report.component';

@@ -7,12 +7,12 @@
   </div>
 
   <!--  <span>{{'greeting'| translate}}</span>-->
-  <div class="switch-language">
-    <nz-select [(ngModel)]="lang" (ngModelChange)="changeLang($event)">
-      <nz-option nzValue="vi" nzLabel="Tiếng việt"></nz-option>
-      <nz-option nzValue="en" nzLabel="English"></nz-option>
-    </nz-select>
-  </div>
+<!--  <div class="switch-language">-->
+<!--    <nz-select [(ngModel)]="lang" (ngModelChange)="changeLang($event)">-->
+<!--      <nz-option nzValue="vi" nzLabel="Tiếng việt"></nz-option>-->
+<!--      <nz-option nzValue="en" nzLabel="English"></nz-option>-->
+<!--    </nz-select>-->
+<!--  </div>-->
 
   <span nz-tooltip [nzTooltipTitle]="titleTemplate" nzTooltipPlacement="left" [nzTooltipColor]="'#3c4043e6'">
     <button *ngIf="!linkAvatar" nz-button nzType="default" nzShape="circle" nz-dropdown [nzDropdownMenu]="menu"

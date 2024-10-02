@@ -169,6 +169,11 @@ export class CreateECourseComponent implements OnInit {
         teacherId: parseInt(this.courseForm.get('teacherId')?.value),
         categoryId: parseInt(this.courseForm.get('categoryId')?.value),
         status: this.courseForm.get('status')?.value ? 1 : 0,
+        price30Day: this.courseForm.get('price30Day')?.value === '' ? null : this.courseForm.get('price30Day'),
+        price90Day: this.courseForm.get('price90Day')?.value === '' ? null : this.courseForm.get('price90Day'),
+        price180Day: this.courseForm.get('price180Day')?.value === '' ? null : this.courseForm.get('price180Day'),
+        price365Day: this.courseForm.get('price365Day')?.value === '' ? null : this.courseForm.get('price365Day'),
+        priceForever: this.courseForm.get('priceForever')?.value === '' ? null : this.courseForm.get('priceForever'),
       }
       if (this.isCreate) {
 
@@ -237,7 +242,7 @@ export class CreateECourseComponent implements OnInit {
         const prices = ['price30Day', 'price90Day', 'price180Day', 'price365Day'];
         const hasInvalidPrice = prices.every(price => {
           const value = this.courseForm?.get(price)?.value;
-          return value == null || value === 0;
+          return value == null || value === 0 || value === '';
         });
         return hasInvalidPrice ? { invalidPrice: true } : null;
       }
