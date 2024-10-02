@@ -90,6 +90,57 @@
 
         <div nz-col [nzSpan]="24">
           <div class="text-label">
+            KPI & hoa hồng
+          </div>
+
+          <button nz-button nzType="primary"
+                  nz-tooltip nzTooltipTitle="Thêm mức"
+                  style="margin-right: 5px"
+                  class="add-gb-btn"
+                  (click)="addBonus()">
+            <span nz-icon nzType="plus"></span>
+          </button>
+
+          <nz-table class="benefit-table"
+                    [nzData]="listBonus" [nzFrontPagination]="false"
+                    [nzTemplateMode]="listBonus.length > 0"
+          >
+            <thead>
+              <tr>
+                <th nzAlign="center" nzWidth="10%">Mức</th>
+                <th  nzWidth="30%">Số giao dịch</th>
+                <th  nzWidth="30%">% Hoa hồng</th>
+                <th nzWidth="10%"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let bonus of listBonus; index as i">
+                <tr>
+                  <td nzAlign="center">Mức {{i+1}}</td>
+                  <td nzAlign="center">
+                    <nz-input-number [nzMin]="1" [nzStep]="1" nzBorderless
+                                     [(ngModel)]="bonus.commissionPercentage"
+                                     [ngModelOptions]="{standalone: true}"></nz-input-number>
+                  </td>
+                  <td nzAlign="center">
+                    <nz-input-number [nzMin]="1" [nzStep]="1" nzBorderless
+                                     [(ngModel)]="bonus.countTransaction"
+                                     [ngModelOptions]="{standalone: true}"></nz-input-number>
+                  </td>
+                  <td nzAlign="center">
+                    <button nz-button nz-tooltip nzTooltipTitle="Xóa"
+                            class="delete-btn" (click)="removeBonus(i)">
+                      <span nz-icon nzType="delete"></span>
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </nz-table>
+        </div>
+
+        <div nz-col [nzSpan]="24">
+          <div class="text-label">
             Quyền lợi
           </div>
 

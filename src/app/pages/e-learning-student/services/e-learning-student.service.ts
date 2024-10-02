@@ -94,7 +94,7 @@ export class ELearningStudentService {
       }
     }
 
-    return this.http.get('User/waiting', {params: option})
+    return this.http.get('Order/list-order-course-elearning', {params: option})
   }
 
   getAgencyList(page?: any, pageSize?: any, filter?: any): Observable<any>{

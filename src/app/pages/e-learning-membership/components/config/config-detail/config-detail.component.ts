@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {finalize} from "rxjs";
+import {Bonus} from "../../../models/Bonus";
 
 @Component({
   selector: 'app-config-detail',
@@ -15,6 +16,7 @@ export class ConfigDetailComponent implements OnInit{
   membershipConfigForm!: FormGroup;
   policyList: any[] = [];
   benefitList: any[] = [];
+  listBonus: Bonus[] = [];
   editId: string | null = null;
   loading = false;
   constructor(
@@ -48,6 +50,7 @@ export class ConfigDetailComponent implements OnInit{
           this.membershipConfigForm.patchValue(dataConfig);
           this.policyList = [...res.data.memberPolicies];
           this.benefitList = [...res.data.configPolicy.objectBenefit];
+          this.listBonus = [...res.data.configPolicy.objectAgentMembership];
           if (this.benefitList.length > 0 ) {
             this.addId();
           }
@@ -141,7 +144,8 @@ export class ConfigDetailComponent implements OnInit{
 
     const configData = {
       ...this.membershipConfigForm.value,
-      objectBenefit: this.benefitList
+      objectBenefit: this.benefitList,
+      objectAgentMembership: this.listBonus.length === 0? null : this.listBonus,
     };
 
     this.loading = true;
@@ -164,5 +168,18 @@ export class ConfigDetailComponent implements OnInit{
 
   navigateBack() {
     this.router.navigate(['/page/membership-policy/config/list']).then();
+  }
+
+  addBonus(): void {
+    const bonus: Bonus = {
+      countTransaction: 1,
+      commissionPercentage: 1,
+    }
+
+    this.listBonus.push(bonus);
+  }
+
+  removeBonus(index: number): void {
+    this.listBonus.splice(index, 1);
   }
 }
