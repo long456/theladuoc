@@ -32,7 +32,7 @@
 
       <div nz-col [nzSpan]="12">
         <span>
-          Số tài khoản
+          {{ 'account_number' | translate }}
         </span>
 
         <input nz-input formControlName="bankAccountNumber">
@@ -64,7 +64,7 @@
 <!--          class="text-danger"-->
 <!--          *ngIf="(refundForm.get('amountPaid')?.touched || isSubmit) &&-->
 <!--                  refundForm.get('amountPaid')?.hasError('required')">-->
-<!--            Số tiền cần hoàn không được để trống</span>-->
+<!--            Số tiền cần hoàn {{'cannot_blank' | translate}}</span>-->
 <!--        <span-->
 <!--          class="text-danger"-->
 <!--          *ngIf="(refundForm.get('amountPaid')?.touched || isSubmit) &&-->
@@ -108,7 +108,7 @@
           class="text-danger"
           *ngIf="(refundForm.get('requestImage')?.touched || isSubmit) &&
                   refundForm.get('requestImage')?.hasError('required')">
-            Ảnh yêu cầu hoàn tiền không được để trống</span>
+            Ảnh yêu cầu hoàn tiền {{'cannot_blank' | translate}}</span>
       </div>
 
       <div nz-col [nzSpan]="24">
@@ -141,7 +141,7 @@
           class="text-danger"
           *ngIf="(refundForm.get('cardImage')?.touched || isSubmit) &&
                   refundForm.get('cardImage')?.hasError('required')">
-            Ảnh CCCD học viên không được để trống</span>
+            Ảnh CCCD học viên {{'cannot_blank' | translate}}</span>
       </div>
     </div>
   </form>

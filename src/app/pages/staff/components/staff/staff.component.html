@@ -1,19 +1,19 @@
 <div class="title-page">
-  Danh sách nhân viên
+  {{ 'staffs' | translate }}
 </div>
 
 <div class="header-btn">
 
   <ng-container *ngIf="(staff$ | async) as staff">
     <nz-collapse class="filter-form" [class.expand]="isExpand">
-      <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
+      <nz-collapse-panel [nzHeader]="'filter' | translate"  (nzActiveChange)="setExpand($event)">
         <app-filter-form [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"></app-filter-form>
       </nz-collapse-panel>
     </nz-collapse>
 
 
-    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-<!--    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>-->
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+<!--    <button nz-button class="add-btn primary" (click)="delete()">{{ 'remove' | translate }}</button>-->
 
     <app-table
       [rows]="staff.rows"
@@ -27,12 +27,12 @@
       [loading]="loading"
     >
 <!--      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>-->
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Tên nhân viên" key="fullName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'staff_name' | translate }}" key="fullName" [width]="'200px'"></table-column>
       <table-column header="Email" key="email" [width]="'200px'"></table-column>
-      <table-column header="SĐT" key="mobile" [width]="'200px'"></table-column>
-      <table-column header="Vai trò" key="type" [width]="'200px'"></table-column>
-      <table-column header="Nhóm quyền" key="courseCode" [width]="'100%'">
+      <table-column header="{{ 'phone_number' | translate }}" key="mobile" [width]="'200px'"></table-column>
+      <table-column header="{{ 'role' | translate }}" key="type" [width]="'200px'"></table-column>
+      <table-column header="{{ 'permission_group' | translate }}" key="courseCode" [width]="'100%'">
         <ng-template appCell let-data>
           <span *ngFor="let role of data.roles; index as i">
             <span *ngIf="i <= 2">
@@ -44,14 +44,14 @@
           </span>
         </ng-template>
       </table-column>
-      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
-          <span class="custom-action" (click)="edit(data)">Sửa</span>
+          <span class="custom-action" (click)="edit(data)">{{ 'edit' | translate }}</span>
         </ng-template>
       </table-column>
     </app-table>

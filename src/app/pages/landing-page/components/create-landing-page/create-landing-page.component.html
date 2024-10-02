@@ -1,5 +1,11 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới landing page' : 'Chỉnh sửa landing page'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  landing page
 </div>
 
 <div nz-row>
@@ -8,81 +14,64 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên landing page
+            {{ 'landing_page_name' | translate }}
             <span class="text-danger">*</span>
           </span>
-          <input
-            #landingPageName
-            nz-input autofocus formControlName="name"
+          <input #landingPageName nz-input autofocus formControlName="name"
             [nzStatus]="(landingPageForm.get('name')?.invalid && (landingPageForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(landingPageForm.get('name')?.touched || isSubmit)  && landingPageForm.get('name')?.hasError('required')"
-          >
-            Tên landing page không được để trống
+            *ngIf="(landingPageForm.get('name')?.touched || isSubmit)  && landingPageForm.get('name')?.hasError('required')">
+            {{ 'landing_page_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">Mã landing page</span>
-          <input
-            nz-input formControlName="landingPageCode"
-            [nzStatus]="(landingPageForm.get('landingPageCode')?.invalid && (landingPageForm.get('landingPageCode')?.touched || isSubmit)) ? 'error' : ''"
-          >
+          <span class="text-label">{{ 'landing_page_code' | translate }}</span>
+          <input nz-input formControlName="landingPageCode"
+            [nzStatus]="(landingPageForm.get('landingPageCode')?.invalid && (landingPageForm.get('landingPageCode')?.touched || isSubmit)) ? 'error' : ''">
           <span class="text-danger"
-                *ngIf="(landingPageForm.get('landingPageCode')?.touched || isSubmit)  && landingPageForm.get('landingPageCode')?.hasError('pattern')"
-          >
-            Mã landing page không đúng định dạng
+            *ngIf="(landingPageForm.get('landingPageCode')?.touched || isSubmit)  && landingPageForm.get('landingPageCode')?.hasError('pattern')">
+            {{ 'landing_page_code' | translate }} {{'invalid_format' | translate}}
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8" >
-          <div class="text-label">Trạng thái</div>
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Khóa học
+            {{ 'course' | translate }}
             <span class="text-danger">*</span>
           </span>
 
           <div>
-            <nz-select [nzDisabled]="!isCreate"
-              formControlName="courseId"
-              [nzStatus]="(landingPageForm.get('courseId')?.invalid && (landingPageForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
-            >
-              <nz-option
-                *ngFor="let course of listCourse"
-                [nzValue]="course.id"
-                [nzLabel]="course.title"
-              ></nz-option>
+            <nz-select [nzDisabled]="!isCreate" formControlName="courseId"
+              [nzStatus]="(landingPageForm.get('courseId')?.invalid && (landingPageForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''">
+              <nz-option *ngFor="let course of listCourse" [nzValue]="course.id" [nzLabel]="course.title"></nz-option>
             </nz-select>
           </div>
 
           <span class="text-danger"
-                *ngIf="(landingPageForm.get('courseId')?.touched || isSubmit) && landingPageForm.get('courseId')?.hasError('required')"
-          >
-            Tên khóa học không được để trống
+            *ngIf="(landingPageForm.get('courseId')?.touched || isSubmit) && landingPageForm.get('courseId')?.hasError('required')">
+            {{ 'course_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="24">
           <span class="text-label">
-            Trang landing page
+            {{'landing_page_content' | translate}}
           </span>
-          <ckeditor
-            name="ckeditor_text"
-            formControlName="htmlContent"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
-            [config]="ckEditorConfig"
-          ></ckeditor>
+          <ckeditor name="ckeditor_text" formControlName="htmlContent"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tiêu đề seo
+            {{'seo_title' | translate}}
           </span>
 
           <input nz-input formControlName="seoTitle">
@@ -90,7 +79,7 @@
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Từ khóa seo
+            {{'seo_keywords' | translate}}
           </span>
 
           <input nz-input formControlName="seoKeyWords">
@@ -98,7 +87,7 @@
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Ảnh seo
+            {{'seo_image' | translate}}
           </span>
 
           <div class="select-seo-img">
@@ -112,24 +101,18 @@
 
         <div nz-col [nzSpan]="16">
           <span class="text-label">
-            Mô tả seo
+            {{'seo_description' | translate}}
           </span>
 
-          <textarea
-            nz-input [nzAutosize]="{ minRows: 3}" formControlName="description"
-          ></textarea>
+          <textarea nz-input [nzAutosize]="{ minRows: 3}" formControlName="description"></textarea>
         </div>
 
         <div nz-col [nzSpan]="24">
           <span class="text-label">
             PixelCode
           </span>
-          <ckeditor
-            name="ckeditor_text"
-            formControlName="pixelCode"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
-            [config]="ckEditorConfig"
-          ></ckeditor>
+          <ckeditor name="ckeditor_text" formControlName="pixelCode"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
       </div>
     </form>
@@ -138,9 +121,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

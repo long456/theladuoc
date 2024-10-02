@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới đường dẫn trên thanh menu' : 'Chỉnh sửa đường dẫn trên thanh menu'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'link_on_menu'|translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -8,57 +16,43 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên hiển thị
+            {{ 'display_name' | translate }}
             <span class="text-danger">*</span>
           </span>
-          <input
-            nz-input autofocus formControlName="displayName"
+          <input nz-input autofocus formControlName="displayName"
             [nzStatus]="(headerForm.get('displayName')?.invalid && (headerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(headerForm.get('displayName')?.touched || isSubmit)  && headerForm.get('displayName')?.hasError('required')"
-          >
-            Tên hiển thị không được để trống
+            *ngIf="(headerForm.get('displayName')?.touched || isSubmit)  && headerForm.get('displayName')?.hasError('required')">
+            {{ 'display_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">Thứ tự hiển thị trên thanh menu</div>
-          <nz-input-number
-            style="width: 100%"
-            [nzMin]="0" [nzStep]="1"
-            formControlName="no"></nz-input-number>
+          <div class="text-label">{{ 'position' | translate }}</div>
+          <nz-input-number style="width: 100%" [nzMin]="0" [nzStep]="1" formControlName="no"></nz-input-number>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">Trạng thái</div>
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status"></nz-switch>
         </div>
 
         <div nz-col [nzSpan]="11">
           <span class="text-label">
-            Đường dẫn
+            {{'page_url' | translate}}
           </span>
 
           <div class="select-group">
-            <nz-select
-              class="link-to"
-              [(ngModel)]="external"
-              [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectExternal($event)"
-            >
-              <nz-option [nzValue]="false" [nzLabel]="'Trong hệ thống'"></nz-option>
-              <nz-option [nzValue]="true" [nzLabel]="'Bên ngoài'"></nz-option>
+            <nz-select class="link-to" [(ngModel)]="external" [ngModelOptions]="{standalone: true}"
+              (ngModelChange)="onSelectExternal($event)">
+              <nz-option [nzValue]="false" [nzLabel]="'internal' | translate"></nz-option>
+              <nz-option [nzValue]="true" [nzLabel]="'external' | translate"></nz-option>
             </nz-select>
 
             <div class="link-place">
-              <nz-select
-                *ngIf="!external"
-                formControlName="pageId"
-                nzAllowClear>
-                <nz-option
-                  *ngFor="let page of listAllPage"
-                  [nzValue]="page.id"
-                  [nzLabel]="page.name">
+              <nz-select *ngIf="!external" formControlName="pageId" nzAllowClear>
+                <nz-option *ngFor="let page of listAllPage" [nzValue]="page.id" [nzLabel]="page.name">
                 </nz-option>
               </nz-select>
 
@@ -69,27 +63,20 @@
 
         <div nz-col [nzSpan]="5">
           <span class="text-label">
-            nằm trong đường dẫn
+            {{'parent_link' | translate}}
           </span>
 
           <div>
-            <nz-select
-              formControlName="navParentId"
-              nzAllowClear
-              [nzStatus]="(headerForm.get('navParentId')?.invalid && (headerForm.get('navParentId')?.touched || isSubmit)) ? 'error' : ''"
-            >
-              <nz-option
-                *ngFor="let header of listAllHeader"
-                [nzValue]="header.id"
-                [nzLabel]="header.displayName"
-              >
+            <nz-select formControlName="navParentId" nzAllowClear
+              [nzStatus]="(headerForm.get('navParentId')?.invalid && (headerForm.get('navParentId')?.touched || isSubmit)) ? 'error' : ''">
+              <nz-option *ngFor="let header of listAllHeader" [nzValue]="header.id" [nzLabel]="header.displayName">
               </nz-option>
             </nz-select>
           </div>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">chứa đường dẫn</div>
+          <div class="text-label">Dropdown</div>
           <nz-switch formControlName="isDropdown"></nz-switch>
         </div>
       </div>
@@ -99,9 +86,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

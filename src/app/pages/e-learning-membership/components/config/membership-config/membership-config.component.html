@@ -1,10 +1,12 @@
 <div class="title-page">
-  Cấu hình tư cách thành viên
+  {{ 'membership_settings' | translate }}
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(membershipConfig$ | async) as config">
-    <button nz-button class="add-btn primary" (click)="edit()" >Chỉnh sửa</button>
+    <button nz-button class="add-btn primary" (click)="edit()" >
+      {{'edit' | translate}}
+    </button>
 
     <app-table
       [rows]="config.rows"
@@ -16,29 +18,29 @@
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
     >
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Tổ chức" key="organizationName" [width]="'180px'"></table-column>
-      <table-column header="Chính sách hạ cấp" key="description" [width]="'180px'"></table-column>
-      <table-column header="Thời hạn hạ cấp (Ngày)" key="numberDaysInactivity" [width]="'180px'"></table-column>
-      <table-column header="Gói một tháng" key="isShowPriceMonth" [width]="'180px'">
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'downgrade_policy' | translate }}" key="description" [width]="'180px'"></table-column>
+      <table-column header="{{ 'downgrade_duration' | translate }}" key="numberDaysInactivity" [width]="'180px'"></table-column>
+      <table-column header="{{ 'monthly_package' | translate }}" key="isShowPriceMonth" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-invalid" *ngIf="!data.isShowPriceMonth">Ẩn</span>
           <span class="text-valid" *ngIf="data.isShowPriceMonth">Kích hoạt</span>
         </ng-template>
       </table-column>
-      <table-column header="Gói 3 tháng" key="isShowPrice3Month" [width]="'180px'">
+      <table-column header="{{ 'quarterly_package' | translate }}" key="isShowPrice3Month" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-invalid" *ngIf="!data.isShowPrice3Month">Ẩn</span>
           <span class="text-valid" *ngIf="data.isShowPrice3Month">Kích hoạt</span>
         </ng-template>
       </table-column>
-      <table-column header="Gói một năm" key="isShowPriceYear" [width]="'180px'">
+      <table-column header="{{ 'yearly_package' | translate }}" key="isShowPriceYear" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-invalid" *ngIf="!data.isShowPriceYear">Ẩn</span>
           <span class="text-valid" *ngIf="data.isShowPriceYear">Kích hoạt</span>
         </ng-template>
       </table-column>
-      <table-column header="Gói vĩnh viễn" key="isShowPriceForever" [width]="'180px'">
+      <table-column header="{{ 'lifetime_package' | translate }}" key="isShowPriceForever" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-invalid" *ngIf="!data.isShowPriceForever">Ẩn</span>
           <span class="text-valid" *ngIf="data.isShowPriceForever">Kích hoạt</span>
@@ -46,7 +48,7 @@
       </table-column>
 <!--      <table-column [width]="'180px'" fixColumn="right" >-->
 <!--        <ng-template appHeader>-->
-<!--          Chức năng-->
+<!--          {{ 'actions' | translate }}-->
 <!--        </ng-template>-->
 
 <!--        <ng-template appCell let-data>-->

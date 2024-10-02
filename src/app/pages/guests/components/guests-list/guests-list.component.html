@@ -1,5 +1,5 @@
 <div class="title-page">
-  Danh sách yêu cầu liên hệ
+  {{ 'contact_request_list' | translate }}
 </div>
 
 <div class="header-btn">
@@ -14,17 +14,18 @@
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
     >
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ngày đăng ký" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Họ và tên" key="fullName" [width]="'200px'"></table-column>
-      <table-column header="Số điện thoại" key="phoneNumber" [width]="'120px'"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'created_at' | translate }}" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="{{ 'full_name' | translate }}" key="fullName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'phone_number' | translate }}" key="phoneNumber" [width]="'120px'"></table-column>
       <table-column header="Email" key="email" [width]="'200px'"></table-column>
-      <table-column header="Nội dung yêu cầu" key="demand" [width]="'200px'"></table-column>
-      <table-column header="Người liên hệ" key="" [width]="'180px'"></table-column>
-      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'request_demand' | translate }}" key="demand" [width]="'200px'"></table-column>
+      <!-- <table-column header="Người liên hệ" key="" [width]="'180px'"></table-column> -->
+      <table-column header="{{'receiver' | translate}}" key="" [width]="'180px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>

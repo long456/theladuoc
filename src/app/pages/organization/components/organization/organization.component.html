@@ -1,45 +1,45 @@
 <div class="title-page">
-  Danh sách tổ chức
+  {{ 'organization_list' | translate }}
 </div>
 
 
 <div class="header-btn">
-  <button nz-button class="add-btn primary" (click)="createOrg()">Thêm mới</button>
+  <button nz-button class="add-btn primary" (click)="createOrg()">{{ 'add_new' | translate }}</button>
 </div>
 
 <app-table [rows]="rowData">
-  <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-  <table-column header="Tên tổ chức" key="name" [width]="'200px'"></table-column>
-  <table-column header="Admin" key="userName" [width]="'200px'"></table-column>
+  <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+  <table-column header="{{ 'organization_name' | translate }}" key="name" [width]="'200px'"></table-column>
+  <table-column header="{{ 'admin' | translate}}" key="userName" [width]="'200px'"></table-column>
   <table-column header="Website" key="website" [width]="'200px'"></table-column>
 
   <table-column [width]="'180px'" fixColumn="right" >
     <ng-template appHeader>
-      Chức năng
+      {{ 'actions' | translate }}
     </ng-template>
 
     <ng-template appCell let-data>
       <span class="custom-action">
         <span
-          nzTooltipTitle="Thiết lập" nzTooltipPlacement="top" nz-tooltip
+          nzTooltipTitle="{{ 'settings' | translate }}" nzTooltipPlacement="top" nz-tooltip
           nz-icon nzType="setting" nzTheme="outline" (click)="edit(data)"></span>
         </span>
 
       <span class="custom-action">
         <span
-          nzTooltipTitle="Phân quyền" nzTooltipPlacement="top" nz-tooltip
+          nzTooltipTitle="{{ 'permission' | translate }}" nzTooltipPlacement="top" nz-tooltip
           nz-icon nzType="tool" nzTheme="outline" (click)="updatePermission(data)"></span>
       </span>
 
       <span class="custom-action">
         <span
-          nzTooltipTitle="Cấu hình rút tiền" nzTooltipPlacement="top" nz-tooltip
+          nzTooltipTitle="{{ 'withdrawal_settings' | translate }}" nzTooltipPlacement="top" nz-tooltip
           nz-icon nzType="dollar" nzTheme="outline" (click)="withdrawConfig()"></span>
       </span>
 
 <!--      <span class="custom-action">-->
 <!--        <span-->
-<!--          nzTooltipTitle="Xóa" nzTooltipPlacement="top" nz-tooltip-->
+<!--          nzTooltipTitle="{{ 'remove' | translate }}" nzTooltipPlacement="top" nz-tooltip-->
 <!--          nz-icon nzType="delete" nzTheme="outline" class="delete"></span>-->
 <!--      </span>-->
     </ng-template>

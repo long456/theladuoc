@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MenuItem } from "../../models/MenuItem";
+import { type MenuItem } from "../../models/MenuItem";
 import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss']
+  styleUrls: [ './side-bar.component.scss' ]
 })
 export class SideBarComponent implements OnInit {
 
@@ -19,502 +19,505 @@ export class SideBarComponent implements OnInit {
 
   treeMenu: MenuItem[] = [
     {
-      name: 'Báo cáo',
       icon: 'bar-chart',
       link: '',
+      name: 'reports',
       children: [
         {
-          name: 'Tăng trưởng',
           icon: '',
           link: '',
+          name: 'growth',
         },
         {
-          name: 'Hiệu quả khóa học',
           icon: '',
           link: '',
+          name: 'course_outcomes',
           children: [
             {
-              name: 'Phễu khóa học',
               icon: '',
               link: '',
+              name: 'funnel_course',
               children: [
                 {
-                  name: 'Khóa học phễu',
                   icon: '',
                   link: 'page/report/report-funnel-course',
+                  name: 'tiered_courses',
                 },
                 {
-                  name: 'Khóa học lớn',
                   icon: '',
                   link: 'page/report/report-big-course',
-                }
-              ]
-            },
-            {
-              name: 'E-learning',
-              icon: '',
-              link: '',
-              children: [
-                {
-                  name: 'Khóa học miễn phí',
-                  icon: '',
-                  link: 'page/report/report-free-course',
-                },
-                {
-                  name: 'Khóa học thành viên',
-                  icon: '',
-                  link: 'page/report/report-member-course',
-                },
-                {
-                  name: 'Khóa học trả phí',
-                  icon: '',
-                  link: 'page/report/report-paid-course',
-                },
-                {
-                  name: 'Khóa học cộng tác viên',
-                  icon: '',
-                  link: 'page/report/report-collaborator-course',
-                },
-                {
-                  name: 'Khóa học giảng viên',
-                  icon: '',
-                  link: 'page/report/report-instructor-course',
-                }
-              ]
-            },
-          ]
-        },
-        {
-          name: 'Hiệu quả nhân sự',
-          icon: '',
-          link: '',
-          children: [
-            {
-              name: 'Diễn giả',
-              icon: '',
-              link: 'page/report/report-speaker',
-            },
-            {
-              name: 'Nhân viên sales',
-              icon: '',
-              link: 'page/report/report-sales-staff',
-            }
-          ]
-        }
-      ]
-    },
-    {
-      name: 'Vận hành',
-      icon: 'reconciliation',
-      link: '',
-      children: [
-        {
-          name: 'Học viên',
-          icon: '',
-          link: '',
-          children: [
-            {
-              name: 'Chưa chia',
-              icon: '',
-              link: 'page/student/none-divide',
-            },
-            {
-              name: 'Đang chờ',
-              icon: '',
-              link: 'page/student/waiting',
-            },
-            {
-              name: 'Đang chăm',
-              icon: '',
-              link: 'page/student/take-care',
-            },
-            {
-              name: 'Đang học',
-              icon: '',
-              link: 'page/student/studying',
-            },
-            {
-              name: 'Referral',
-              icon: '',
-              link: '',
-            },
-          ]
-        },
-        {
-          name: 'Điểm danh',
-          icon: '',
-          link: '',
-          children: [
-            {
-              name: 'Danh sách buổi học',
-              icon: '',
-              link: 'page/attendance/lesson',
-            },
-            {
-              name: 'Danh sách điểm danh',
-              icon: '',
-              link: 'page/attendance/attend',
-            }
-          ]
-        },
-        {
-          name: 'E-learning',
-          icon: '',
-          link: '',
-          children: [
-            {
-              name: 'Chưa chia',
-              icon: '',
-              link: 'page/e-learning-student/none-divide',
-            },
-            {
-              name: 'Đang chờ',
-              icon: '',
-              link: 'page/e-learning-student/waiting',
-            },
-            {
-              name: 'Đang chăm',
-              icon: '',
-              link: 'page/e-learning-student/take-care',
-            },
-            {
-              name: 'Đăng ký khóa học',
-              icon: '',
-              link: 'page/e-learning-student/register',
-            },
-            {
-              name: 'Đang học',
-              icon: '',
-              link: 'page/e-learning-student/studying',
-            },
-            {
-              name: 'Danh sách đại lý',
-              icon: '',
-              link: 'page/e-learning-student/agency',
-            },
-          ]
-        },
-        {
-          name: 'Nghiệp vụ kế toán',
-          icon: '',
-          link: '',
-          children: [
-            {
-              name: 'Xác thực thanh toán',
-              icon: '',
-              link: 'page/payment/auth',
-            },
-            {
-              name: 'Yêu cầu hoàn tiền',
-              icon: '',
-              link: 'page/payment/refund',
-            },
-            {
-              name: 'Lịch sử thanh toán',
-              icon: '',
-              link: 'page/transaction-history',
-            },
-            {
-              name: 'Yêu cầu rút tiền',
-              icon: '',
-              link: 'page/payment/withdraw',
-            },
-          ],
-        },
-        {
-          name: 'Tư cách thành viên',
-          icon: '',
-          link: '',
-          children: [
-            {
-              name: 'Yêu cầu nâng hạng',
-              icon: '',
-              link: 'page/membership-policy/request-upgrade',
-            },
-          ]
-        },
-        {
-          name: 'Yêu cầu liên hệ',
-          icon: '',
-          link: 'page/guests',
-        },
-        {
-          name: 'Nhật ký gửi mail',
-          icon: '',
-          link: 'page/setting/email/queue',
-        },
-        {
-          name: 'Nhân sự',
-          icon: '',
-          link: '',
-          children: [
-            {
-              name: 'Trao quyền',
-              icon: '',
-              link: 'page/staff',
-            }
-          ],
-        },
-      ]
-    },
-    {
-      name: 'Thiết lập',
-      icon: 'setting',
-      link: '',
-      children: [
-        {
-          name: 'Tổ chức',
-          icon: '',
-          link: 'page/organization',
-        },
-        {
-          name: 'Phương thức thanh toán',
-          icon: '',
-          link: 'page/payment/method',
-        },
-        {
-          name: 'Tính năng',
-          icon: '',
-          link: '',
-          children: [
-            {
-              name: 'Nhóm quyền',
-              icon: '',
-              link: 'page/setting/permission',
-            },
-            {
-              name: 'Referral',
-              icon: '',
-              children: [
-                {
-                  name: 'Cuộc thi tính điểm',
-                  icon: '',
-                  link: 'page/setting/referral/loyalty',
-                },
-                {
-                  name: 'Tri ân học viên',
-                  icon: '',
-                  link: '',
-                },
-              ]
-            },
-            {
-              name: 'Website',
-              icon: '',
-              link: '',
-              children: [
-                {
-                  name: 'Thiết lập website',
-                  icon: '',
-                  link: 'page/setting/website-config/config',
-                },
-                {
-                  name: 'Danh sách trang',
-                  icon: '',
-                  link: 'page/setting/website-config/page-config',
-                },
-                {
-                  name: 'Cấu hình thanh menu',
-                  icon: '',
-                  link: 'page/setting/website-config/header',
-                },
-                {
-                  name: 'Cấu hình chân trang',
-                  icon: '',
-                  link: 'page/setting/website-config/footer',
-                },
-              ]
-            },
-            {
-              name: 'Tin tức hoạt động',
-              icon: '',
-              link: '',
-              children: [
-                {
-                  name: 'Danh mục tin tức',
-                  icon: '',
-                  link: 'page/news-category',
-                },
-                {
-                  name: 'Danh sách tin tức',
-                  icon: '',
-                  link: 'page/news',
-                },
-                {
-                  name: 'Sự kiện giáo dục',
-                  icon: '',
-                  link: 'page/event',
-                },
-                {
-                  name: 'Lời chứng thực',
-                  icon: '',
-                  link: 'page/testimonials',
+                  name: 'big_courses',
                 },
               ],
             },
             {
-              name: 'Phễu khóa học',
               icon: '',
               link: '',
+              name: 'e_learning',
               children: [
                 {
-                  name: 'Khóa học',
+                  icon: '',
+                  link: 'page/report/report-free-course',
+                  name: 'free_courses',
+                },
+                {
+                  icon: '',
+                  link: 'page/report/report-member-course',
+                  name: 'membership_courses',
+                },
+                {
+                  icon: '',
+                  link: 'page/report/report-paid-course',
+                  name: 'paid_courses',
+                },
+                {
+                  icon: '',
+                  link: 'page/report/report-collaborator-course',
+                  name: 'partner_courses',
+                },
+                {
+                  icon: '',
+                  link: 'page/report/report-instructor-course',
+                  name: 'tutor_courses',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          icon: '',
+          link: '',
+          name: 'staff_productivity',
+          children: [
+            {
+              icon: '',
+              link: 'page/report/report-speaker',
+              name: 'teachers',
+            },
+            {
+              icon: '',
+              link: 'page/report/report-sales-staff',
+              name: 'sales',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      icon: 'reconciliation',
+      link: '',
+      name: 'operation',
+      children: [
+        {
+          icon: '',
+          link: '',
+          name: 'learners',
+          children: [
+            {
+              icon: '',
+              link: 'page/student/none-divide',
+              name: 'bystanding',
+            },
+            {
+              icon: '',
+              link: 'page/student/waiting',
+              name: 'waiting',
+            },
+            {
+              icon: '',
+              link: 'page/student/take-care',
+              name: 'caring',
+            },
+            {
+              icon: '',
+              link: 'page/student/studying',
+              name: 'studying',
+            },
+            {
+              icon: '',
+              link: '',
+              name: 'Referral',
+            },
+          ],
+        },
+        {
+          icon: '',
+          link: '',
+          name: 'check_in',
+          children: [
+            {
+              icon: '',
+              link: 'page/attendance/lesson',
+              name: 'lessons',
+            },
+            {
+              icon: '',
+              link: 'page/attendance/attend',
+              name: 'check_in_list',
+            },
+          ],
+        },
+        {
+          icon: '',
+          link: '',
+          name: 'e_learning',
+          children: [
+            {
+              icon: '',
+              link: 'page/e-learning-student/none-divide',
+              name: 'bystanding',
+            },
+            {
+              icon: '',
+              link: 'page/e-learning-student/waiting',
+              name: 'waiting',
+            },
+            {
+              icon: '',
+              link: 'page/e-learning-student/take-care',
+              name: 'caring',
+            },
+            {
+              icon: '',
+              link: 'page/e-learning-student/register',
+              name: 'joined_course',
+            },
+            {
+              icon: '',
+              link: 'page/e-learning-student/studying',
+              name: 'studying',
+            },
+            {
+              icon: '',
+              link: 'page/e-learning-student/agency',
+              name: 'agencies',
+            },
+          ],
+        },
+        {
+          icon: '',
+          link: '',
+          name: 'accounting',
+          children: [
+            {
+              icon: '',
+              link: 'page/payment/auth',
+              name: 'payment_verification',
+            },
+            {
+              icon: '',
+              link: 'page/payment/refund',
+              name: 'refund_requests',
+            },
+            {
+              icon: '',
+              link: 'page/transaction-history',
+              name: 'transaction_history',
+            },
+            {
+              icon: '',
+              link: 'page/payment/withdraw',
+              name: 'withdraw_requests',
+            },
+          ],
+        },
+        {
+          icon: '',
+          link: '',
+          name: 'membership',
+          children: [
+            {
+              icon: '',
+              link: 'page/membership-policy/request-upgrade',
+              name: 'upgrade_request_list',
+            },
+            {
+              icon: '',
+              link: 'page/e-learning-student/agency',
+              name: 'Danh sách đại lý',
+            },
+          ],
+        },
+        {
+          icon: '',
+          link: 'page/guests',
+          name: 'contact_requests',
+        },
+        {
+          icon: '',
+          link: 'page/setting/email/queue',
+          name: 'email_logs',
+        },
+        {
+          icon: '',
+          link: '',
+          name: 'staff',
+          children: [
+            {
+              icon: '',
+              link: 'page/staff',
+              name: 'permission_management',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      icon: 'setting',
+      link: '',
+      name: 'settings',
+      children: [
+        {
+          icon: '',
+          link: 'page/organization',
+          name: 'organizations',
+        },
+        {
+          icon: '',
+          link: 'page/payment/method',
+          name: 'payment_methods',
+        },
+        {
+          icon: '',
+          link: '',
+          name: 'features',
+          children: [
+            {
+              icon: '',
+              link: 'page/setting/permission',
+              name: 'permission_groups',
+            },
+            {
+              icon: '',
+              link: '',
+              name: 'Referral',
+              children: [
+                {
+                  icon: '',
+                  link: 'page/setting/referral/loyalty',
+                  name: 'point_contests',
+                },
+                {
+                  icon: '',
+                  link: '',
+                  name: 'student_appreciations',
+                },
+              ],
+            },
+            {
+              icon: '',
+              link: '',
+              name: 'Website',
+              children: [
+                {
+                  icon: '',
+                  link: 'page/setting/website-config/config',
+                  name: 'website_settings',
+                },
+                {
+                  icon: '',
+                  link: 'page/setting/website-config/page-config',
+                  name: 'pages',
+                },
+                {
+                  icon: '',
+                  link: 'page/setting/website-config/header',
+                  name: 'menu_settings',
+                },
+                {
+                  icon: '',
+                  link: 'page/setting/website-config/footer',
+                  name: 'footer_settings',
+                },
+              ],
+            },
+            {
+              icon: '',
+              link: '',
+              name: 'news',
+              children: [
+                {
+                  icon: '',
+                  link: 'page/news-category',
+                  name: 'posting_categories',
+                },
+                {
+                  icon: '',
+                  link: 'page/news',
+                  name: 'posts',
+                },
+                {
+                  icon: '',
+                  link: 'page/event',
+                  name: 'edu_events',
+                },
+                {
+                  icon: '',
+                  link: 'page/testimonials',
+                  name: 'testimonials',
+                },
+              ],
+            },
+            {
+              icon: '',
+              link: '',
+              name: 'funnel_course',
+              children: [
+                {
                   icon: '',
                   link: 'page/setting/course',
+                  name: 'courses',
                 },
                 {
-                  name: 'Lớp học',
                   icon: '',
                   link: 'page/setting/class',
+                  name: 'classes',
                 },
                 {
-                  name: 'Buổi học',
                   icon: '',
                   link: 'page/setting/lesson',
+                  name: 'lessons',
                 },
                 {
-                  name: 'Landing page',
                   icon: '',
                   link: 'page/setting/landing-page',
+                  name: 'Landing page',
                 },
                 {
-                  name: 'Vé khóa học',
                   icon: '',
                   link: 'page/setting/ticket',
+                  name: 'learning_tickets',
                 },
                 {
-                  name: 'Form đăng ký',
                   icon: '',
                   link: 'page/setting/register-form',
+                  name: 'registration_form',
                 },
-              ]
+              ],
             },
             {
-              name: 'E-learning',
               icon: '',
               link: '',
+              name: 'e_learning',
               children: [
                 {
-                  name: 'Danh sách khóa học',
                   icon: '',
                   link: 'page/e-course',
+                  name: 'course_list',
                 },
                 {
-                  name: 'Danh mục khóa học',
                   icon: '',
                   link: 'page/e-category',
+                  name: 'course_categories',
                 },
                 {
-                  name: 'Video giới thiệu',
                   icon: '',
                   link: 'page/e-learning-config/intro-video/list',
+                  name: 'introduction_video',
                 },
-              ]
+              ],
             },
             {
-              name: 'Tư cách thành viên',
               icon: '',
               link: '',
+              name: 'membership',
               children: [
                 {
-                  name: 'Hạng thành viên',
                   icon: '',
                   link: 'page/membership-policy',
+                  name: 'membership_tier',
                 },
                 {
-                  name: 'Cấu hình chung',
                   icon: '',
                   link: 'page/membership-policy/config',
+                  name: 'membership_settings',
                 },
-              ]
+              ],
             },
             {
-              name: 'Diễn đàn cộng đồng',
               icon: '',
               link: '',
+              name: 'forum',
               children: [
                 {
-                  name: 'Cấu hình chung',
                   icon: '',
                   link: 'page/forum',
+                  name: 'forum_settings',
                 },
                 {
-                  name: 'Danh mục cộng đồng',
                   icon: '',
                   link: 'page/forum/category',
+                  name: 'community_category',
                 },
                 {
-                  name: 'Danh sách cộng đồng',
                   icon: '',
                   link: 'page/forum/sub-forum',
-                }
-              ]
+                  name: 'forum_communities',
+                },
+              ],
             },
             {
-              name: 'Email SMTP',
               icon: '',
               link: 'page/setting/email-account',
+              name: 'Email SMTP',
             },
             {
-              name: 'Email',
               icon: '',
+              link: '',
+              name: 'Email',
               children: [
-                // {
-                //   name : 'Email hệ thống',
-                //   icon: '',
-                //   link: 'page/setting/email/system-email',
-                // },
                 {
-                  name: 'Email thông báo',
                   icon: '',
                   link: 'page/setting/email/notifications-email',
+                  name: 'notification_emails',
                 },
-              ]
+              ],
             },
             {
-              name: 'Ấn phẩm',
               icon: '',
               link: 'page/setting/publication',
+              name: 'publications',
             },
             {
-              name: 'Sản phẩm',
               icon: '',
               link: '',
+              name: 'products',
               children: [
                 {
-                  name: 'Danh sách sản phẩm',
                   icon: '',
                   link: 'page/setting/product',
+                  name: 'product_list',
                 },
                 {
-                  name: 'Danh sách kho hàng',
                   icon: '',
                   link: 'page/setting/warehouse',
+                  name: 'warehouse_list',
                 },
-              ]
+              ],
             },
             {
-              name: 'Dịch vụ khách hàng',
               icon: '',
               link: '',
+              name: 'customer_service',
               children: [
                 {
-                  name: 'Danh sách khách hàng',
                   icon: '',
                   link: 'page/customer',
+                  name: 'customers',
                 },
                 {
-                  name: 'Đơn chạy Ads',
                   icon: '',
                   link: 'page/customer/ads',
+                  name: 'ads_order',
                 },
-              ]
-            }
-          ]
+              ],
+            },
+          ],
         },
-      ]
+      ],
     },
-  ];
+  ]
+    ;
 
   ngOnInit() {
     if (localStorage.getItem('org') != null) {

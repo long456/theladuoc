@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới lời chứng thực' : 'Chỉnh sửa lời chứng thực'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'testimonial' | translate}}
+  </span>
 </div>
 
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
@@ -8,55 +16,47 @@
       <div nz-row [nzGutter]="[16, 16]">
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Họ và tên
+            {{'full_name' | translate}}
             <span class="text-danger">*</span>
           </span>
 
-          <input
-            nz-input autofocus formControlName="fullName"
-            [nzStatus]="(testimonialForm.get('fullName')?.invalid &&
+          <input nz-input autofocus formControlName="fullName" [nzStatus]="(testimonialForm.get('fullName')?.invalid &&
                         (testimonialForm.get('fullName')?.touched || isSubmit)) ? 'error' : ''">
-          <span
-            class="text-danger"
-            *ngIf="(testimonialForm.get('fullName')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(testimonialForm.get('fullName')?.touched || isSubmit)  &&
                     testimonialForm.get('fullName')?.hasError('required')">
-              Họ và tên không được để trống
+            {{'full_name' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Chức danh
+            {{'job_title' | translate}}
             <span class="text-danger">*</span>
           </span>
 
-          <input
-            nz-input formControlName="position"
-            [nzStatus]="(testimonialForm.get('position')?.invalid &&
+          <input nz-input formControlName="position" [nzStatus]="(testimonialForm.get('position')?.invalid &&
                         (testimonialForm.get('position')?.touched || isSubmit)) ? 'error' : ''">
-          <span
-            class="text-danger"
-            *ngIf="(testimonialForm.get('position')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(testimonialForm.get('position')?.touched || isSubmit)  &&
                     testimonialForm.get('position')?.hasError('required')">
-              Chức danh không được để trống
+            {{'job_title' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Phân loại
+            {{'type' | translate}}
           </span>
 
-          <nz-select formControlName="type" >
-            <nz-option [nzValue]="1" [nzLabel]="'Học viên'"></nz-option>
-            <nz-option [nzValue]="2" [nzLabel]="'Giảng viên'"></nz-option>
-            <nz-option [nzValue]="3" [nzLabel]="'Đối tác'"></nz-option>
+          <nz-select formControlName="type">
+            <nz-option [nzValue]="1" [nzLabel]="'learners' | translate"></nz-option>
+            <nz-option [nzValue]="2" [nzLabel]="'teachers' | translate"></nz-option>
+            <nz-option [nzValue]="3" [nzLabel]="'partners | translate'"></nz-option>
           </nz-select>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Ảnh đại diện
+            {{'avatar' | translate}}
           </span>
 
           <div class="avatar">
@@ -70,7 +70,7 @@
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Đánh giá
+            {{'star_rating' | translate}}
           </span>
 
           <nz-rate style="display: block" formControlName="starRate"></nz-rate>
@@ -78,13 +78,10 @@
 
         <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="16">
           <span class="text-label">
-            Nội dung
+            {{'content' | translate}}
           </span>
 
-          <textarea
-            nz-input formControlName="content"
-            [nzAutosize]="{ minRows: 3 }"
-          ></textarea>
+          <textarea nz-input formControlName="content" [nzAutosize]="{ minRows: 3 }"></textarea>
         </div>
       </div>
     </form>
@@ -93,9 +90,16 @@
   <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="4" [nzLg]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

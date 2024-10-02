@@ -12,6 +12,7 @@ export class ActiveCourseComponent implements OnInit{
   readonly nzModalData = inject(NZ_MODAL_DATA);
   upgradeCourseForm!: FormGroup;
   listELearningCourse: any[] = [];
+  isActive: boolean = false;
   constructor(
     private fb: FormBuilder,
     private eLearningStudentService: ELearningStudentService,
@@ -22,7 +23,7 @@ export class ActiveCourseComponent implements OnInit{
       name: [null],
       studentId: [null],
       elearningId: [null],
-      courseElearningPriceType: [null]
+      courseElearningPriceType: [1]
     });
     this.pathDataForm();
     this.eLearningStudentService.getECourseToActive().subscribe({
@@ -32,6 +33,15 @@ export class ActiveCourseComponent implements OnInit{
         }
       }
     })
+
+    this.upgradeCourseForm.controls['elearningId'].valueChanges.subscribe(change => {
+      const courseType = this.listELearningCourse.filter(course => course.id === change)[0].type;
+      if (courseType === 3) {
+        this.isActive = true;
+      } else {
+        this.isActive = false;
+      }
+    });
   }
 
   pathDataForm() {

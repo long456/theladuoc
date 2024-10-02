@@ -45,6 +45,7 @@ registerLocaleData(vi);
     NzI18nModule,
     NzInputModule,
     TranslateModule.forRoot({
+      defaultLanguage: 'vi',
       loader: {
         provide: TranslateLoader,
         useFactory: (http: HttpBackend) => {

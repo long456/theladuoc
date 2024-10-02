@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới phương thức thanh toán' : 'Chỉnh sửa phương thức thanh toán'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'payment_method'|translate}}
+  </span>
 </div>
 
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
@@ -8,18 +16,18 @@
       <div nz-row [nzGutter]="[16, 16]">
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
           <span class="text-label">
-            Chọn phương thức
+           {{'pick_a_method'|translate}}
           </span>
 
           <nz-select formControlName="type" style="display: block" [nzDisabled]="!isCreate">
-            <nz-option [nzValue]="1" [nzLabel]="'Chuyển khoản'"></nz-option>
-            <nz-option [nzValue]="2" [nzLabel]="'VnPay'"></nz-option>
+            <nz-option [nzValue]="1" [nzLabel]="'bank_transfer' | translate"></nz-option>
+            <nz-option [nzValue]="2" [nzLabel]="'vnpay' | translate"></nz-option>
           </nz-select>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
           <span class="text-label">
-            Trạng thái
+            {{ 'status' | translate }}
           </span>
 
           <nz-switch formControlName="status" style="display: block"></nz-switch>
@@ -28,7 +36,7 @@
         <ng-container *ngIf="paymentMethodForm.value?.type === 1">
           <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
           <span class="text-label">
-            Tên ngân hàng
+            {{'bank' | translate }}
             <span class="text-danger">*</span>
           </span>
 
@@ -38,13 +46,13 @@
             <span class="text-danger"
                   *ngIf="(paymentMethodForm.get('bankName')?.touched || isSubmit)  &&
                           paymentMethodForm.get('bankName')?.hasError('requireValue')">
-              Tên ngân hàng không được để trống
+              {{'bank' | translate}} {{'cannot_blank' | translate}}
             </span>
           </div>
 
           <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
           <span class="text-label">
-            Số tài khoản
+            {{ 'account_number' | translate }}
             <span class="text-danger">*</span>
           </span>
 
@@ -54,13 +62,13 @@
             <span class="text-danger"
                   *ngIf="(paymentMethodForm.get('bankNumber')?.touched || isSubmit)  &&
                           paymentMethodForm.get('bankNumber')?.hasError('requireValue')">
-              Số tài khoản không được để trống
+              {{ 'account_number' | translate }} {{'cannot_blank' | translate}}
             </span>
           </div>
 
           <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
           <span class="text-label">
-            Tên chủ tài khoản
+            {{ 'account_holder' | translate }}
             <span class="text-danger">*</span>
           </span>
 
@@ -70,13 +78,13 @@
             <span class="text-danger"
                   *ngIf="(paymentMethodForm.get('bankUserName')?.touched || isSubmit)  &&
                           paymentMethodForm.get('bankUserName')?.hasError('requireValue')">
-              Tên chủ tài khoản không được để trống
+              {{ 'account_holder' | translate }} {{'cannot_blank' | translate}}
             </span>
           </div>
 
           <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
           <span class="text-label">
-            Mã QR
+            {{'qr_code' | translate}}
             <span class="text-danger">*</span>
           </span>
 
@@ -92,7 +100,7 @@
             <span class="text-danger"
                   *ngIf="(paymentMethodForm.get('bankQR')?.touched || isSubmit)  &&
                           paymentMethodForm.get('bankQR')?.hasError('requireValue')">
-                  Mã QR không được để trống
+                  {{'qr_code' | translate}} {{'cannot_blank' | translate}}
             </span>
           </div>
         </ng-container>
@@ -110,7 +118,7 @@
             <span class="text-danger"
                   *ngIf="(paymentMethodForm.get('vnPayTmnCode')?.touched || isSubmit)  &&
                           paymentMethodForm.get('vnPayTmnCode')?.hasError('requireValue')">
-                  VnPay-TmnCode không được để trống
+                  VnPay-TmnCode {{'cannot_blank' | translate}}
             </span>
           </div>
 
@@ -126,7 +134,7 @@
             <span class="text-danger"
                   *ngIf="(paymentMethodForm.get('vnPayHashSecret')?.touched || isSubmit)  &&
                           paymentMethodForm.get('vnPayHashSecret')?.hasError('requireValue')">
-                  VnPay-ashSecret không được để trống
+                  VnPay-ashSecret {{'cannot_blank' | translate}}
             </span>
           </div>
 
@@ -142,7 +150,7 @@
             <span class="text-danger"
                   *ngIf="(paymentMethodForm.get('vnPayPaymentUrl')?.touched || isSubmit)  &&
                           paymentMethodForm.get('vnPayPaymentUrl')?.hasError('requireValue')">
-                  VnPay-PaymentUrl không được để trống
+                  VnPay-PaymentUrl {{'cannot_blank' | translate}}
             </span>
           </div>
 
@@ -159,7 +167,7 @@
             <span class="text-danger"
                   *ngIf="(paymentMethodForm.get('vnPayReturnUrl')?.touched || isSubmit)  &&
                           paymentMethodForm.get('vnPayReturnUrl')?.hasError('requireValue')">
-                  VnPay-ReturnUrl không được để trống
+                  VnPay-ReturnUrl {{'cannot_blank' | translate}}
             </span>
           </div>
         </ng-container>
@@ -170,9 +178,16 @@
   <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="4" [nzLg]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+</button>
     </div>
   </div>
 </div>

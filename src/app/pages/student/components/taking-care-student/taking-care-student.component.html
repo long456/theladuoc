@@ -1,12 +1,12 @@
 <div class="title-page">
-  Danh sách học viên đang chăm
+  {{'caring_learners' | translate}}
 </div>
 
 <div class="header-btn">
 
   <ng-container *ngIf="(takeCareStudent$ | async) as takeCareStudent">
     <nz-collapse class="filter-form" [class.expand]="isExpand">
-      <nz-collapse-panel [nzHeader]="'Lọc'"  (nzActiveChange)="setExpand($event)">
+      <nz-collapse-panel [nzHeader]="'filter' | translate"  (nzActiveChange)="setExpand($event)">
         <app-filter-form
           [filterData]="listOfColumn" (getFilterData)="handleFilterForm($event)"
           [isExportExcel]="true" (getExcelData)="handleExportExcel($event)"></app-filter-form>
@@ -14,8 +14,8 @@
     </nz-collapse>
 
 
-    <!--    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>-->
-    <!--    <button nz-button class="add-btn primary" (click)="delete()">Xóa</button>-->
+    <!--    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>-->
+    <!--    <button nz-button class="add-btn primary" (click)="delete()">{{ 'remove' | translate }}</button>-->
 
     <app-table
       [rows]="takeCareStudent.rows"
@@ -27,20 +27,20 @@
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
     >
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ngày đăng ký" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Loại vé" key="ticket"></table-column>
-      <table-column header="Số tiền" key="price" [width]="'150px'">
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'created_at' | translate }}" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="{{ 'ticket_type' | translate }}" key="ticket"></table-column>
+      <table-column header="{{ 'price' | translate }}" key="price" [width]="'150px'">
         <ng-template appCell let-data>
           {{data.price | currency: 'VND'}}
         </ng-template>
       </table-column>
-      <table-column header="Số tiền đã thanh toán" key="amountPaid" [width]="'150px'">
+      <table-column header="{{ 'paid_amount' | translate }}" key="amountPaid" [width]="'150px'">
         <ng-template appCell let-data>
           {{data.amountPaid | currency: 'VND'}}
         </ng-template>
       </table-column>
-      <table-column header="Trạng thái thanh toán" key="isPay" [width]="'180px'">
+      <table-column header="{{ 'payment_status' | translate }}" key="isPay" [width]="'180px'">
         <ng-template appCell let-data>
           <span *ngIf="data.isPay === 0">Chưa thanh toán</span>
           <span *ngIf="data.isPay === 1">Đã thanh toán</span>
@@ -50,13 +50,13 @@
           <span *ngIf="data.isPay === 5">Hoàn tiền thừa</span>
         </ng-template>
       </table-column>
-      <table-column header="Cập nhật thanh toán" key="isVerifyPay" [width]="'180px'">
+      <table-column header="{{ 'update_payment' | translate }}" key="isVerifyPay" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-invalid" *ngIf="!data.isVerifyPay">Chưa xác thực</span>
           <span class="text-valid" *ngIf="data.isVerifyPay">Đã xác thực</span>
         </ng-template>
       </table-column>
-      <table-column header="Thẻ tag" key="tagNote" [width]="'220px'">
+      <table-column header="{{ 'tag' | translate }}" key="tagNote" [width]="'220px'">
         <ng-template appCell let-data>
           <nz-select style="display: block" nzPlaceHolder="Chọn thẻ tag" [ngModel]="data.tagNote"
                      [nzCustomTemplate]="selectTag" nzBorderless (ngModelChange)="onTagChange($event, data)">
@@ -71,33 +71,33 @@
           </ng-template>
         </ng-template>
       </table-column>
-      <table-column header="Tên học viên" key="name" [width]="'180px'"></table-column>
-      <table-column header="Số điện thoại" key="mobile" [width]="'120px'"></table-column>
+      <table-column header="{{ 'learner_name' | translate }}" key="name" [width]="'180px'"></table-column>
+      <table-column header="{{ 'phone_number' | translate }}" key="mobile" [width]="'120px'"></table-column>
       <table-column header="Email" key="email" [width]="'200px'"></table-column>
-      <table-column header="Mã học viên" key="code" [width]="'180px'"></table-column>
-      <table-column header="Khu vực" key="area" [width]="'180px'">
+      <table-column header="{{ 'learner_code' | translate }}" key="code" [width]="'180px'"></table-column>
+      <table-column header="{{ 'area' | translate }}" key="area" [width]="'180px'">
         <ng-template appCell let-data>
           <span *ngIf="data.area === 1">Miền Bắc</span>
           <span *ngIf="data.area === 2">Miền Trung</span>
           <span *ngIf="data.area === 3">Miền Nam</span>
         </ng-template>
       </table-column>
-      <table-column header="Người giới thiệu" key="emailRef" [width]="'180px'"></table-column>
-      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="lecturerName" [width]="'200px'"></table-column>
-      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
-      <table-column header="Tên lớp học" key="className" [width]="'200px'"></table-column>
-      <table-column header="Tên landing page" key="landingPageName" [width]="'200px'"></table-column>
-      <table-column header="Số điểm" key="title" [width]="'200px'"></table-column>
-      <table-column header="Nhân viên chăm sóc" key="caregiverName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'referrer' | translate }}" key="emailRef" [width]="'180px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'teacher_name' | translate }}" key="lecturerName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'course_name' | translate }}" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'class_name' | translate }}" key="className" [width]="'200px'"></table-column>
+      <table-column header="{{ 'landing_page' | translate }}" key="landingPageName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'point' | translate }}" key="title" [width]="'200px'"></table-column>
+      <table-column header="{{ 'caring_by' | translate }}" key="caregiverName" [width]="'200px'"></table-column>
 
-      <table-column header="Xác thực email" key="isAuthEmail" [width]="'180px'">
+      <table-column header="{{ 'email_verification' | translate }}" key="isAuthEmail" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.isAuthEmail">Đã xác thực</span>
           <span class="text-invalid" *ngIf="!data.isAuthEmail">Chưa xác thực</span>
         </ng-template>
       </table-column>
-      <table-column header="Trạng thái" key="isAccount" [width]="'180px'">
+      <table-column header="{{ 'status' | translate }}" key="isAccount" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.isAccount">Có tài khoản</span>
           <span class="text-invalid" *ngIf="!data.isAccount">Chưa có tài khoản</span>
@@ -105,32 +105,32 @@
       </table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
           <span class="custom-action" (click)="detail(data)"
-                nz-tooltip nzTooltipTitle="Chi tiết học viên">
+                nz-tooltip nzTooltipTitle="{{ 'details' | translate }}">
             <span nz-icon nzType="search" nzTheme="outline"></span>
           </span>
 
           <span class="custom-action"
-                nz-tooltip nzTooltipTitle="Gọi điện">
+                nz-tooltip nzTooltipTitle="{{ 'make_a_call' | translate }}">
             <span nz-icon nzType="phone" nzTheme="outline"></span>
           </span>
 
           <span class="custom-action" (click)="upgradeCourse(data)"
-                nz-tooltip nzTooltipTitle="Nâng cấp khóa học">
+                nz-tooltip nzTooltipTitle="{{ 'upgrade_course' | translate }}">
             <span nz-icon nzType="arrow-up" nzTheme="outline"></span>
           </span>
 
           <span class="custom-action" (click)="paymentCheck(data)"
-                nz-tooltip nzTooltipTitle="Xác thực thanh toán">
+                nz-tooltip nzTooltipTitle="{{ 'payment_verification' | translate }}">
             <span nz-icon nzType="wallet" nzTheme="outline"></span>
           </span>
 
           <span class="custom-action" (click)="openDrawer(data)"
-                nz-tooltip nzTooltipTitle="Ghi chú">
+                nz-tooltip nzTooltipTitle="{{ 'take_note' | translate }}">
             <span nz-icon nzType="edit" nzTheme="outline"></span>
           </span>
         </ng-template>

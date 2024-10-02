@@ -43,7 +43,7 @@
     <div nz-row [nzGutter]="24">
         <div nz-col [nzSpan]="12">
             <nz-form-item>
-                <nz-form-label>Tên khóa học</nz-form-label>
+                <nz-form-label>{{ 'course_name' | translate }}</nz-form-label>
                 <nz-select nzPlaceHolder="---Chọn---" formControlName="courseNameCtrl" class="w-100" nzAllowClear
                     nzShowSearch>
                     <nz-option *ngFor="let item of dropModel.coursesResponse" [nzValue]="item.id"
@@ -65,7 +65,7 @@
     <div nz-row [nzGutter]="24">
         <div nz-col [nzSpan]="12">
             <nz-form-item>
-                <nz-form-label>Tên diễn giả</nz-form-label>
+                <nz-form-label>{{ 'teacher_name' | translate }}</nz-form-label>
                 <nz-select nzPlaceHolder="---Chọn---" formControlName="speakerNameCtrl" class="w-100" nzAllowClear
                     nzShowSearch>
                     <nz-option *ngFor="let item of dropModel.speakersResponse" [nzValue]="item.id"
@@ -88,7 +88,7 @@
         <div nz-col [nzSpan]="24" class="search-area">
             <button nz-button type="button" [nzType]="'primary'" (click)="onSave()" style="margin-right: 10px;">Áp
                 dụng</button>
-            <button nz-button type="button" (click)="resetForm()">Cài đặt lại</button>
+            <button nz-button type="button" (click)="resetForm()">{{ 'reset' | translate }}</button>
         </div>
     </div>
 </form>

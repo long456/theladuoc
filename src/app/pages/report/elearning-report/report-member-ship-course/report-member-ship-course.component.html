@@ -63,8 +63,8 @@
         nzShowPagination="false" (nzQueryParams)="onQueryParamsChange($event)">
         <thead style="overflow-y: hidden;">
             <tr>
-                <th [nzLeft]="true" nzWidth="50px" nzAlign="center">STT</th>
-                <th nzWidth="260px" [nzLeft]="true" nzAlign="center">Tên khóa học</th>
+                <th [nzLeft]="true" nzWidth="50px" nzAlign="center">{{ 'no' | translate }}</th>
+                <th nzWidth="260px" [nzLeft]="true" nzAlign="center">{{ 'course_name' | translate }}</th>
                 <th nzWidth="180px" nzColumnKey="adsAmount" [nzSortFn]="true" nzAlign="center">Số tiền Ads</th>
                 <th nzWidth="180px" nzColumnKey="numberOfRegistrations" [nzSortFn]="true" nzAlign="center">Số người
                     đăng ký</th>
@@ -81,10 +81,10 @@
                     học 90%</th>
                 <th nzWidth="180px" nzColumnKey="numberOfLearners100Percent" [nzSortFn]="true" nzAlign="center">Số người
                     học 100%</th>
-                <th nzWidth="180px" nzAlign="center">Tên diễn giả</th>
+                <th nzWidth="180px" nzAlign="center">{{ 'teacher_name' | translate }}</th>
                 <th nzWidth="180px" nzAlign="center">Số điện thoại</th>
                 <th nzWidth="180px" nzAlign="center">Tổ chức</th>
-                <th [nzRight]="true" nzWidth="120px" nzAlign="center">Chức năng</th>
+                <th [nzRight]="true" nzWidth="120px" nzAlign="center">{{ 'actions' | translate }}</th>
             </tr>
         </thead>
         <tbody style="overflow-y: hidden;">

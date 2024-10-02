@@ -1,5 +1,5 @@
 <div class="title-page">
-  Danh sách yêu cầu nâng hạng
+  {{ 'upgrade_request_list' | translate }}
 </div>
 
 <div class="header-btn">
@@ -14,19 +14,19 @@
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
     >
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ngày tạo" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'180px'"></table-column>
-      <table-column header="Mã đơn hàng" key="code" [width]="'180px'"></table-column>
-      <table-column header="Tên học viên" key="fullName" [width]="'180px'"></table-column>
-      <table-column header="Mã học viên" key="codeUser" [width]="'180px'"></table-column>
-      <table-column header="Số điện thoại" key="phoneNumber" [width]="'180px'"></table-column>
-      <table-column header="Nguời giới thiệu" key="userReferralName" [width]="'180px'"></table-column>
-      <table-column header="Số tiền" key="price" [width]="'180px'">
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'created_at' | translate }}" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'180px'"></table-column>
+      <table-column header="{{ 'order_code' | translate }}" key="code" [width]="'180px'"></table-column>
+      <table-column header="{{ 'learner_name' | translate }}" key="fullName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'learner_code' | translate }}" key="codeUser" [width]="'180px'"></table-column>
+      <table-column header="{{ 'phone_number' | translate }}" key="phoneNumber" [width]="'180px'"></table-column>
+      <table-column header="{{ 'referrer' | translate }}" key="userReferralName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'price' | translate }}" key="price" [width]="'180px'">
         <ng-template appCell let-data>
           {{data.price | currency: 'VND'}}
         </ng-template>
       </table-column>
-      <table-column header="Thời hạn gói" key="priceMemberPolicyType" [width]="'180px'">
+      <table-column header="{{ 'package_duration' | translate }}" key="priceMemberPolicyType" [width]="'180px'">
         <ng-template appCell let-data>
           <span *ngIf="data.priceMemberPolicyType === 1">Gói một tháng</span>
           <span *ngIf="data.priceMemberPolicyType === 2">Gói 3 tháng</span>
@@ -34,15 +34,15 @@
           <span *ngIf="data.priceMemberPolicyType === 4">Gói vĩnh viễn</span>
         </ng-template>
       </table-column>
-      <table-column header="Hạng thành viên" key="memberPolicyLevelName" [width]="'180px'"></table-column>
-      <table-column header="Phương thức thanh toán" key="paymentMethod" [width]="'200px'">
+      <table-column header="{{ 'membership_tier' | translate }}" key="memberPolicyLevelName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'payment_method' | translate }}" key="paymentMethod" [width]="'200px'">
         <ng-template appCell let-data>
           <span *ngIf="data.paymentMethod === 1">Thanh toán điểm</span>
           <span *ngIf="data.paymentMethod === 2">Thanh toán VnPay</span>
           <span *ngIf="data.paymentMethod === 3">Chuyển khoản</span>
         </ng-template>
       </table-column>
-      <table-column header="Trạng thái thanh toán" key="paymentStatus" [width]="'180px'">
+      <table-column header="{{ 'payment_status' | translate }}" key="paymentStatus" [width]="'180px'">
         <ng-template appCell let-data>
           <span *ngIf="data.paymentStatus === 0">Chưa thanh toán</span>
           <span *ngIf="data.paymentStatus === 1">Đã thanh toán</span>
@@ -50,11 +50,11 @@
           <span *ngIf="data.paymentStatus === 3">Huỷ thanh toán</span>
         </ng-template>
       </table-column>
-      <table-column header="Nhân viên chăm sóc" key="caregiverName" [width]="'180px'"></table-column>
-      <table-column header="Tổ chức" key="organizationName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'caring_by' | translate }}" key="caregiverName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'180px'"></table-column>
 <!--      <table-column [width]="'180px'" fixColumn="right" >-->
 <!--        <ng-template appHeader>-->
-<!--          Chức năng-->
+<!--          {{ 'actions' | translate }}-->
 <!--        </ng-template>-->
 
 <!--        <ng-template appCell let-data>-->

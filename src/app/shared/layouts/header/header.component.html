@@ -6,13 +6,12 @@
     <span nz-icon nzType="download" nzTheme="outline"></span>
   </div>
 
-  <!--  <span>{{'greeting'| translate}}</span>-->
-<!--  <div class="switch-language">-->
-<!--    <nz-select [(ngModel)]="lang" (ngModelChange)="changeLang($event)">-->
-<!--      <nz-option nzValue="vi" nzLabel="Tiếng việt"></nz-option>-->
-<!--      <nz-option nzValue="en" nzLabel="English"></nz-option>-->
-<!--    </nz-select>-->
-<!--  </div>-->
+  <div class="switch-language">
+    <nz-select [(ngModel)]="lang" (ngModelChange)="changeLang($event)">
+      <nz-option nzValue="vi" nzLabel="Tiếng việt"></nz-option>
+      <nz-option nzValue="en" nzLabel="English"></nz-option>
+    </nz-select>
+  </div>
 
   <span nz-tooltip [nzTooltipTitle]="titleTemplate" nzTooltipPlacement="left" [nzTooltipColor]="'#3c4043e6'">
     <button *ngIf="!linkAvatar" nz-button nzType="default" nzShape="circle" nz-dropdown [nzDropdownMenu]="menu"
@@ -37,7 +36,7 @@
       <li nz-menu-item>
         <button nz-button nzType="text" (click)="editProfile()">
           <span nz-icon nzType="user" nzTheme="outline"></span>
-          {{'Thông tin user' | translate}}
+          {{'user_info' | translate}}
         </button>
       </li>
 
@@ -46,7 +45,7 @@
       <li nz-menu-item>
         <button nz-button nzType="text" (click)="signOut()">
           <span nz-icon nzType="logout" nzTheme="outline"></span>
-          {{'Đăng xuất' | translate}}
+          {{'logout' | translate}}
         </button>
       </li>
     </ul>

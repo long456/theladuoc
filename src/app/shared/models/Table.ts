@@ -17,11 +17,11 @@ export type filterItem = {
   value?: any
 }
 
-export const FilterType: {[key: string]: filterItem} = {
+export const FilterType: { [key: string]: filterItem } = {
   createdDate: {
     title: 'Ngày đăng ký',
     name: 'createdDate',
-    type: "date-range"
+    type: "date-range",
   },
   ticketType: {
     title: 'Loại vé',

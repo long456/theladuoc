@@ -18,7 +18,7 @@
           <span class="text-danger"
                 *ngIf="(subForumForm.get('name')?.touched || isSubmit)  &&
                         subForumForm.get('name')?.hasError('required')">
-            Tên cộng đồng không được để trống!
+            Tên cộng đồng {{'cannot_blank' | translate}}!
           </span>
         </div>
 
@@ -41,7 +41,7 @@
           <span class="text-danger"
                 *ngIf="(subForumForm.get('communityCategoryId')?.touched || isSubmit)  &&
                         subForumForm.get('communityCategoryId')?.hasError('required')"
-          >Danh mục không được để trống!</span>
+          >Danh mục {{'cannot_blank' | translate}}!</span>
         </div>
 
         <div nz-col [nzSpan]="2">
@@ -81,7 +81,7 @@
           <span class="text-danger"
                 *ngIf="(subForumForm.get('banner')?.touched || isSubmit)  &&
                         subForumForm.get('banner')?.hasError('required')"
-          >Đường dẫn ảnh banner không được để trống!</span>
+          >Đường dẫn ảnh banner {{'cannot_blank' | translate}}!</span>
         </div>
 
         <div nz-col [nzSpan]="8">
@@ -103,7 +103,7 @@
           <span class="text-danger"
                 *ngIf="(subForumForm.get('avatar')?.touched || isSubmit)  &&
                         subForumForm.get('avatar')?.hasError('required')"
-          >Đường dẫn ảnh avatar không được để trống!</span>
+          >Đường dẫn ảnh avatar {{'cannot_blank' | translate}}!</span>
         </div>
 
         <div nz-col [nzSpan]="16">
@@ -147,7 +147,9 @@
       <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
         Lưu
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+</button>
     </div>
   </div>
 </div>

@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới vé khóa học' : 'Chỉnh sửa vé khóa học'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'learning_ticket'|translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -8,71 +16,54 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Tên vé
+            {{'ticket_name' | translate}}
           </span>
-          <input
-            nz-input autofocus formControlName="name"
+          <input nz-input autofocus formControlName="name"
             [nzStatus]="(ticketForm.get('name')?.invalid && (ticketForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(ticketForm.get('name')?.touched || isSubmit)  && ticketForm.get('name')?.hasError('required')"
-          >
-            Tên vé khóa học không được để trống
+            *ngIf="(ticketForm.get('name')?.touched || isSubmit)  && ticketForm.get('name')?.hasError('required')">
+            {{'ticket_name' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Trạng thái
+            {{ 'status' | translate }}
           </span>
 
           <div class="width-50">
-            <nz-switch formControlName="status"
-            ></nz-switch>
+            <nz-switch formControlName="status"></nz-switch>
           </div>
         </div>
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Khóa học
+            {{ 'course' | translate }}
             <span class="text-danger">*</span>
           </span>
 
           <div>
-            <nz-select [nzDisabled]="!isCreate"
-                       style="display: block"
-                       formControlName="courseId"
-                       [nzStatus]="(ticketForm.get('courseId')?.invalid && (ticketForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
-            >
-              <nz-option
-                *ngFor="let course of listCourse"
-                [nzValue]="course.id"
-                [nzLabel]="course.title"
-              ></nz-option>
+            <nz-select [nzDisabled]="!isCreate" style="display: block" formControlName="courseId"
+              [nzStatus]="(ticketForm.get('courseId')?.invalid && (ticketForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''">
+              <nz-option *ngFor="let course of listCourse" [nzValue]="course.id" [nzLabel]="course.title"></nz-option>
             </nz-select>
           </div>
 
           <span class="text-danger"
-                *ngIf="(ticketForm.get('courseId')?.touched || isSubmit) && ticketForm.get('courseId')?.hasError('required')"
-          >
-            Tên khóa học không được để trống
+            *ngIf="(ticketForm.get('courseId')?.touched || isSubmit) && ticketForm.get('courseId')?.hasError('required')">
+            {{ 'course_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Giá vé
+            {{'price' | translate}}
           </span>
 
           <div class="width-50">
-            <nz-input-number
-              formControlName="price"
-              style="width: 100%"
-              [nzMin]="0"
-              [nzStep]="1"
-              [nzFormatter]="formatterVnd"
-              [nzParser]="parserVnd"
-            ></nz-input-number>
+            <nz-input-number formControlName="price" style="width: 100%" [nzMin]="0" [nzStep]="1"
+              [nzFormatter]="formatterVnd" [nzParser]="parserVnd"></nz-input-number>
           </div>
         </div>
 
@@ -83,9 +74,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

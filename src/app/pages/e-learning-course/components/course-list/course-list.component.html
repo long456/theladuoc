@@ -1,11 +1,11 @@
 <div class="title-page">
-  Danh sách khóa học E-learning
+  {{ 'course_list' | translate }} E-learning
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(course$ | async) as course">
-    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+    <button nz-button class="add-btn" (click)="delete()">{{ 'remove' | translate }}</button>
 
     <app-table
       [rows]="course.rows"
@@ -19,12 +19,12 @@
       [loading]="loading"
     >
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Tên khóa học" key="name" [width]="'200px'"></table-column>
-      <table-column header="Mã khoá học" key="code" [width]="'200px'"></table-column>
-      <table-column header="Giá bán" key="price" [width]="'200px'">
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'course_name' | translate }}" key="name" [width]="'200px'"></table-column>
+      <table-column header="{{ 'course_code' | translate }}" key="code" [width]="'200px'"></table-column>
+      <table-column header="{{ 'price' | translate }}" key="price" [width]="'200px'">
       </table-column>
-      <table-column header="Loại khóa học" key="type" [width]="'200px'">
+      <table-column header="{{ 'course_type' | translate }}" key="type" [width]="'200px'">
         <ng-template appCell let-data>
           <span *ngIf="data.type === 1">Miễn phí</span>
           <span *ngIf="data.type === 2">Thành viên</span>
@@ -33,13 +33,13 @@
           <span *ngIf="data.type === 5">Giảng viên</span>
         </ng-template>
       </table-column>
-      <table-column header="Danh mục" key="categoryName" [width]="'200px'"></table-column>
-      <table-column header="Điểm đăng ký" key="registerPoint" [width]="'200px'"></table-column>
-      <table-column header="Điểm giới thiệu trực tiếp" key="directReferralPoint" [width]="'200px'"></table-column>
-      <table-column header="Điểm giới thiệu gián tiếp" key="indirectReferralPoint " [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="teacherName" [width]="'200px'"></table-column>
-      <table-column header="Tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Trạng thái" key="status" [width]="'180px'">
+      <table-column header="{{ 'category' | translate }}" key="categoryName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'registration_point' | translate }}" key="registerPoint" [width]="'200px'"></table-column>
+      <table-column header="{{ 'direct_referral_points' | translate }}" key="directReferralPoint" [width]="'200px'"></table-column>
+      <table-column header="{{ 'indirect_referral_points' | translate }}" key="indirectReferralPoint " [width]="'200px'"></table-column>
+      <table-column header="{{ 'teacher_name' | translate }}" key="teacherName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'status' | translate }}" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
           <span class="text-invalid" *ngIf="!data.status">Tạm dừng</span>
@@ -47,22 +47,22 @@
       </table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
           <span class="custom-action" (click)="edit(data)"
-                nz-tooltip nzTooltipTitle="Chỉnh sửa khóa học">
+                nz-tooltip nzTooltipTitle="{{'edit' | translate}}">
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
           </span>
 
           <span class="custom-action" (click)="navigateToChapter(data)"
-                nz-tooltip nzTooltipTitle="Chương trình học">
+                nz-tooltip nzTooltipTitle="{{'curriculum' | translate}}">
             <span nz-icon nzType="appstore-add" nzTheme="outline" class="custom-icon"></span>
           </span>
 
           <span class="custom-action" (click)="navigateToResources(data)"
-                nz-tooltip nzTooltipTitle="Tài nguyên">
+                nz-tooltip nzTooltipTitle="{{'resource'|translate}}">
             <span nz-icon nzType="gold" nzTheme="outline" class="custom-icon"></span>
           </span>
         </ng-template>
