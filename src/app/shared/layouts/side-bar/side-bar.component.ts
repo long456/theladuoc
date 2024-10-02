@@ -221,6 +221,7 @@ export class SideBarComponent implements OnInit {
             {
               name: 'Danh sách đại lý',
               icon: '',
+              i18n_key: 'agencies',
               link: 'page/e-learning-student/agency',
             },
           ]
