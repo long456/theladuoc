@@ -1,5 +1,5 @@
 <div class="title-page">
-  Danh sách yêu cầu rút tiền
+  {{ 'withdraw_requests' | translate }}
 </div>
 
 <div class="header-btn">
@@ -14,28 +14,28 @@
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
     >
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ngày yêu cầu" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Tên thành viên" key="fullName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'requested_date' | translate }}" key="createdDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="{{ 'member_name' | translate }}" key="fullName" [width]="'200px'"></table-column>
       <table-column header="Email" key="email" [width]="'180px'"></table-column>
-      <table-column header="SĐT" key="phoneNumber" [width]="'180px'"></table-column>
-      <table-column header="Mã thành viên" key="codeUser" [width]="'180px'"></table-column>
-      <table-column header="Số tiền" key="total" [width]="'180px'">
+      <table-column header="{{ 'phone_number' | translate }}" key="phoneNumber" [width]="'180px'"></table-column>
+      <table-column header="{{ 'member_code' | translate }}" key="codeUser" [width]="'180px'"></table-column>
+      <table-column header="{{ 'price' | translate }}" key="total" [width]="'180px'">
         <ng-template appCell let-data>
           {{data.total | currency: 'VND'}}
         </ng-template>
       </table-column>
-      <table-column header="Tài khoản nhận tiền" key="bankNumber" [width]="'180px'"></table-column>
-      <table-column header="Tên chủ tài khoản" key="bankUserName" [width]="'180px'"></table-column>
-      <table-column header="Tên ngân hàng" key="bankName" [width]="'180px'"></table-column>
-      <table-column header="Nhân viên chăm sóc" key="caregiverName" [width]="'180px'"></table-column>
-      <table-column header="Loại yêu cầu" key="referalHistoryType" [width]="'180px'">
+      <table-column header="{{ 'account_number_receiver' | translate }}" key="bankNumber" [width]="'180px'"></table-column>
+      <table-column header="{{ 'account_holder' | translate }}" key="bankUserName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'bank' | translate }}" key="bankName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'caring_by' | translate }}" key="caregiverName" [width]="'180px'"></table-column>
+      <table-column header="{{ 'request_type' | translate }}" key="referalHistoryType" [width]="'180px'">
         <ng-template appCell let-data>
           <span *ngIf="data.referalHistoryType === 4">rút tiền</span>
           <span *ngIf="data.referalHistoryType === 5">ứng tiền</span>
         </ng-template>
       </table-column>
-      <table-column header="Trạng thái" key="withdrawStatus" [width]="'180px'">
+      <table-column header="{{ 'status' | translate }}" key="withdrawStatus" [width]="'180px'">
         <ng-template appCell let-data>
           <span *ngIf="data.withdrawStatus === 0">Chờ xử lý</span>
           <span *ngIf="data.withdrawStatus === 1">Đã xử lý</span>
@@ -44,7 +44,7 @@
       </table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>

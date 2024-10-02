@@ -14,15 +14,15 @@
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
     >
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="Tên email" key="emailSubject" [width]="'200px'"></table-column>
-      <table-column header="Tên buổi học" key="" [width]="'200px'"></table-column>
-      <table-column header="Tên lớp học" key="" [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="roleName" [width]="'200px'"></table-column>
-      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'lesson_name' | translate }}" key="" [width]="'200px'"></table-column>
+      <table-column header="{{ 'class_name' | translate }}" key="" [width]="'200px'"></table-column>
+      <table-column header="{{ 'teacher_name' | translate }}" key="roleName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'course_name' | translate }}" key="courseName" [width]="'200px'"></table-column>
       <table-column header="Tiêu đề email" key="roleName" [width]="'200px'"></table-column>
-      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Trạng thái" key="status" [width]="'180px'">
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'status' | translate }}" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
           <span class="text-invalid" *ngIf="!data.status">Không kích hoạt</span>
@@ -30,11 +30,11 @@
       </table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
-          <span class="custom-action" (click)="edit(data)">Thiết lập</span>
+          <span class="custom-action" (click)="edit(data)">{{ 'settings' | translate }}</span>
         </ng-template>
       </table-column>
     </app-table>

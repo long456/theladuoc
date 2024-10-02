@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo hạng thành viên' : 'Chỉnh sửa hạng thành viên'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'membership_tier' | translate}}
+  </span>
 </div>
 
 
@@ -10,50 +18,46 @@
         <div nz-col [nzSpan]="24">
           <div class="content-block" nz-row [nzGutter]=[16,8]>
             <!--Cấu hình gói-->
-            <div nz-col [nzSpan]="24" class="content-block-title">Cấu hình gói</div>
+            <div nz-col [nzSpan]="24" class="content-block-title">
+              {{'membership_settings' | translate}}
+            </div>
             <nz-divider class="mt-10"></nz-divider>
             <div nz-col [nzSpan]="20">
-              <span class="text-label">Tên hạng thành viên <span class="text-danger">*</span></span>
-              <span
-                class="text-danger error-message"
-                *ngIf="(membershipForm.get('name')?.touched || isSubmit) &&
-                      membershipForm.get('name')?.hasError('required')">
-                Tên hạng không được để trống!
+              <span class="text-label">
+                {{ 'tier_name' | translate }} <span class="text-danger">*</span>
               </span>
-              <input
-                nz-input autofocus formControlName="name"
-                [nzStatus]="(membershipForm.get('name')?.invalid &&
+              <span class="text-danger error-message" *ngIf="(membershipForm.get('name')?.touched || isSubmit) &&
+                      membershipForm.get('name')?.hasError('required')">
+                {{ 'tier_name' | translate }} {{'cannot_blank' | translate}}!
+              </span>
+              <input nz-input autofocus formControlName="name" [nzStatus]="(membershipForm.get('name')?.invalid &&
                             (membershipForm.get('name')?.touched || isSubmit)) ?
                             'error' : ''">
             </div>
 
             <div nz-col [nzSpan]="4">
-              <div class="text-label">Trạng thái</div>
+              <div class="text-label">{{ 'status' | translate }}</div>
               <nz-switch formControlName="status"></nz-switch>
             </div>
 
             <div nz-col [nzSpan]="10">
-              <span class="text-label">Thứ hạng</span>
-              <nz-input-number
-                style="width: 100%"
-                [(ngModel)]="membershipLevel" [ngModelOptions]="{standalone: true}"
-                (ngModelChange)="pathLevelValue($event)"
-                [nzMin]="1"
-                [nzStep]="1"
-              ></nz-input-number>
+              <span class="text-label">
+                {{'level' | translate}}
+              </span>
+              <nz-input-number style="width: 100%" [(ngModel)]="membershipLevel" [ngModelOptions]="{standalone: true}"
+                (ngModelChange)="pathLevelValue($event)" [nzMin]="1" [nzStep]="1"></nz-input-number>
             </div>
 
             <div nz-col [nzSpan]="10">
-              <span class="text-label">Huy hiệu</span>
-              <span
-                class="text-danger error-message"
-                *ngIf="(membershipForm.get('icon')?.touched || isSubmit) &&
+              <span class="text-label">
+                {{'badge' | translate}}
+              </span>
+              <span class="text-danger error-message" *ngIf="(membershipForm.get('icon')?.touched || isSubmit) &&
                         membershipForm.get('icon')?.hasError('required')">
-                        Huy hiệu không được để trống!
+                {{'badge' | translate}} {{'cannot_blank' | translate}}!
               </span>
               <div class="select-icon">
-                <input nz-input [value]="membershipForm.get('icon')?.value" formControlName="icon"
-                       [nzStatus]="(membershipForm.get('icon')?.invalid &&
+                <input nz-input [value]="membershipForm.get('icon')?.value" formControlName="icon" [nzStatus]="(membershipForm.get('icon')?.invalid &&
                                    (membershipForm.get('icon')?.touched || isSubmit)) ?
                                    'error' : ''">
 
@@ -64,7 +68,9 @@
             </div>
 
             <div nz-col [nzSpan]="4">
-              <div class="text-label">Phổ biến</div>
+              <div class="text-label">
+                {{'is_popular' | translate}}
+              </div>
               <nz-switch formControlName="isPopular"></nz-switch>
             </div>
           </div>
@@ -72,23 +78,21 @@
 
         <div nz-col [nzSpan]="24">
           <div class="content-block" nz-row [nzGutter]=[16,8]>
-            <div nz-col [nzSpan]="24" class="content-block-title">Nội dung gói</div>
+            <div nz-col [nzSpan]="24" class="content-block-title">
+              {{'tier_description' | translate}}
+            </div>
             <nz-divider class="mt-10"></nz-divider>
 
             <div nz-col [nzSpan]="24">
               <span class="text-label">
-                Thêm nội dung
+                {{'add_content' | translate}}
               </span>
 
               <span class="input-content">
-                <input
-                  #inputContent
-                  nz-input
-                  [class.inactive]="!isActive"
-                  [(ngModel)]="webData"
-                  [ngModelOptions]="{standalone: true}"
-                >
-                <button nz-button nzType="primary" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="changeActive()">
+                <input #inputContent nz-input [class.inactive]="!isActive" [(ngModel)]="webData"
+                  [ngModelOptions]="{standalone: true}">
+                <button nz-button nzType="primary" [nzSize]="'small'" nzShape="circle" class="size-custom"
+                  (click)="changeActive()">
                   <span nz-icon nzType="plus" *ngIf="!isActive"></span>
                   <span nz-icon nzType="check" *ngIf="isActive"></span>
                 </button>
@@ -97,7 +101,8 @@
               <div class="content-list">
                 <div class="content-item" *ngFor="let item of membershipForm.get('content')?.value">
                   {{item}}
-                  <button nz-button nzType="text" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="deleteContent(item)">
+                  <button nz-button nzType="text" [nzSize]="'small'" nzShape="circle" class="size-custom"
+                    (click)="deleteContent(item)">
                     <span nz-icon nzType="delete" class="color-dagger"></span>
                   </button>
                 </div>
@@ -108,18 +113,17 @@
 
         <div nz-col [nzSpan]="24" *ngIf="membershipLevel > lowestMemLv && membershipOpList.length > 0">
           <div class="content-block" nz-row [nzGutter]=[16,8]>
-            <div nz-col [nzSpan]="24" class="content-block-title">Chiết khấu khi nâng gói</div>
+            <div nz-col [nzSpan]="24" class="content-block-title">
+              {{'upgrade_package_discount' | translate}}
+            </div>
             <nz-divider class="mt-10"></nz-divider>
 
             <ng-container *ngFor="let op of membershipOpList">
               <div nz-col [nzSpan]="12" *ngIf="op.level < membershipLevel">
                 <div class="text-label">{{op.name}} (hạng {{op.level}})</div>
                 <nz-input-number-group nzSuffix="%" style="width: 100%">
-                  <nz-input-number
-                    [(ngModel)]="op.discount" [ngModelOptions]="{standalone: true}"
-                    [nzMin]="0"
-                    [nzMax]="100"
-                    [nzStep]="1">
+                  <nz-input-number [(ngModel)]="op.discount" [ngModelOptions]="{standalone: true}" [nzMin]="0"
+                    [nzMax]="100" [nzStep]="1">
                   </nz-input-number>
                 </nz-input-number-group>
               </div>
@@ -133,52 +137,50 @@
       <div nz-row [nzGutter]=[8,24]>
         <div nz-col [nzSpan]="24">
           <div class="content-block" nz-row [nzGutter]=[8,8]>
-            <div nz-col [nzSpan]="24" class="content-block-title">Chính sách giá</div>
+            <div nz-col [nzSpan]="24" class="content-block-title">
+              {{'tier_price' | translate}}
+            </div>
             <nz-divider class="mt-10"></nz-divider>
 
             <div nz-col [nzSpan]="12">
-              <div class="text-label">1 tháng</div>
+              <div class="text-label">
+                {{'price_for_1_month' | translate}}
+              </div>
               <nz-input-number-group nzSuffix="VND" style="width: 100%">
-                <nz-input-number
-                  formControlName="priceMonth"
-                  [nzMin]="0"
-                  [nzStep]="1000"
+                <nz-input-number formControlName="priceMonth" [nzMin]="0" [nzStep]="1000"
                   [nzFormatter]="formatterCurrency">
                 </nz-input-number>
               </nz-input-number-group>
             </div>
 
             <div nz-col [nzSpan]="12">
-              <div class="text-label">3 tháng</div>
+              <div class="text-label">
+                {{'price_for_3_months' | translate}}
+              </div>
               <nz-input-number-group nzSuffix="VND" style="width: 100%">
-                <nz-input-number
-                  formControlName="price3Month"
-                  [nzMin]="0"
-                  [nzStep]="1000"
+                <nz-input-number formControlName="price3Month" [nzMin]="0" [nzStep]="1000"
                   [nzFormatter]="formatterCurrency">
                 </nz-input-number>
               </nz-input-number-group>
             </div>
 
             <div nz-col [nzSpan]="12">
-              <div class="text-label">1 năm</div>
+              <div class="text-label">
+                {{'price_for_1_year' | translate}}
+              </div>
               <nz-input-number-group nzSuffix="VND" style="width: 100%">
-                <nz-input-number
-                  formControlName="priceYear"
-                  [nzMin]="0"
-                  [nzStep]="1000"
+                <nz-input-number formControlName="priceYear" [nzMin]="0" [nzStep]="1000"
                   [nzFormatter]="formatterCurrency">
                 </nz-input-number>
               </nz-input-number-group>
             </div>
 
             <div nz-col [nzSpan]="12">
-              <div class="text-label">Vĩnh viễn</div>
+              <div class="text-label">
+                {{'price_for_lifetime' | translate}}
+              </div>
               <nz-input-number-group nzSuffix="VND" style="width: 100%">
-                <nz-input-number
-                  formControlName="priceForever"
-                  [nzMin]="0"
-                  [nzStep]="1000"
+                <nz-input-number formControlName="priceForever" [nzMin]="0" [nzStep]="1000"
                   [nzFormatter]="formatterCurrency">
                 </nz-input-number>
               </nz-input-number-group>
@@ -188,27 +190,27 @@
 
         <div nz-col [nzSpan]="24">
           <div class="content-block" nz-row [nzGutter]=[8,8]>
-            <div nz-col [nzSpan]="24" class="content-block-title" >Chính sách hoa hồng</div>
+            <div nz-col [nzSpan]="24" class="content-block-title">
+              {{'commission_policy' | translate}}
+            </div>
             <nz-divider class="mt-10"></nz-divider>
 
             <div nz-col [nzSpan]="12">
-              <div class="text-label">Giới thiệu trực tiếp</div>
+              <div class="text-label">
+                {{'direct_referral' | translate}}
+              </div>
               <nz-input-number-group nzSuffix="%" style="width: 100%">
-                <nz-input-number
-                  formControlName="referrerReward"
-                  [nzMin]="0"
-                  [nzStep]="1">
+                <nz-input-number formControlName="referrerReward" [nzMin]="0" [nzStep]="1">
                 </nz-input-number>
               </nz-input-number-group>
             </div>
 
             <div nz-col [nzSpan]="12">
-              <div class="text-label">Giới thiệu gián tiếp</div>
+              <div class="text-label">
+                {{'indirect_referral' | translate}}
+              </div>
               <nz-input-number-group nzSuffix="%" style="width: 100%">
-                <nz-input-number
-                  formControlName="referrerReward2"
-                  [nzMin]="0"
-                  [nzStep]="1">
+                <nz-input-number formControlName="referrerReward2" [nzMin]="0" [nzStep]="1">
                 </nz-input-number>
               </nz-input-number-group>
             </div>
@@ -218,14 +220,19 @@
         <div nz-col [nzSpan]="24">
           <div class="btn-panel">
             <button class="btn primary" nz-button (click)="edit()">
-              {{isCreate? 'Tạo mới' : 'Lưu'}}
+              <span *ngIf="isCreate">
+                {{'add_new'|translate}}
+              </span>
+              <span *ngIf="!isCreate">
+                {{'save'|translate}}
+              </span>
             </button>
-            <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+            <button class="btn" nz-button (click)="navigateBack()">
+              {{'cancel'|translate}}
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </form>
-
-

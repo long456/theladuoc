@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới khóa học' : 'Chỉnh sửa khóa học'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'course' | translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -7,86 +15,72 @@
     <form [formGroup]="courseForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-            <span class="text-label">
-              Tên khóa học
-              <span class="text-danger">*</span>
-            </span>
-            <input
-              #courseName
-              nz-input autofocus formControlName="title"
-              [nzStatus]="(courseForm.get('title')?.invalid && (courseForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
+          <span class="text-label">
+            {{ 'course_name' | translate }}
+            <span class="text-danger">*</span>
+          </span>
+          <input #courseName nz-input autofocus formControlName="title"
+            [nzStatus]="(courseForm.get('title')?.invalid && (courseForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
 
-            <span class="text-danger"
-                  *ngIf="(courseForm.get('title')?.touched || isSubmit)  && courseForm.get('title')?.hasError('required')"
-            >
-              Tên khóa học không được để trống
-            </span>
-        </div>
-
-        <div nz-col [nzSpan]="8">
-          <span class="text-label">Mã khóa học</span>
-          <input
-            nz-input formControlName="courseCode"
-            [nzStatus]="(courseForm.get('courseCode')?.invalid && (courseForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''"
-          >
           <span class="text-danger"
-                *ngIf="(courseForm.get('courseCode')?.touched || isSubmit)  && courseForm.get('courseCode')?.hasError('pattern')"
-          >
-            Mã khóa học không đúng định dạng
+            *ngIf="(courseForm.get('title')?.touched || isSubmit)  && courseForm.get('title')?.hasError('required')">
+            {{ 'course_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8" >
-          <div class="text-label">Trạng thái</div>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">{{ 'course_code' | translate }}</span>
+          <input nz-input formControlName="courseCode"
+            [nzStatus]="(courseForm.get('courseCode')?.invalid && (courseForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''">
+          <span class="text-danger"
+            *ngIf="(courseForm.get('courseCode')?.touched || isSubmit)  && courseForm.get('courseCode')?.hasError('pattern')">
+            {{ 'course_code' | translate }} {{'invalid_format' | translate}}
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
 
         <div nz-col [nzSpan]="24" class="no-padding">
           <div nz-col [nzSpan]="16">
-            <div class="text-label">Mô tả</div>
-            <textarea nz-input placeholder="Nhập mô tả" formControlName="description"></textarea>
+            <div class="text-label">{{ 'description' | translate }}</div>
+            <textarea nz-input placeholder="{{'enter' | translate}} {{ 'description' | translate }}"
+              formControlName="description"></textarea>
           </div>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Giáo viên
+            {{'teacher' | translate}}
             <span class="text-danger">*</span>
           </span>
 
           <div>
-            <nz-select
-              formControlName="teacherId"
-              [nzStatus]="(courseForm.get('teacherId')?.invalid && (courseForm.get('teacherId')?.touched || isSubmit)) ? 'error' : ''"
-            >
-              <nz-option
-                *ngFor="let teacher of listTeacher"
-                [nzValue]="teacher.id"
-                [nzLabel]="teacher.fullName"
-                >
+            <nz-select formControlName="teacherId"
+              [nzStatus]="(courseForm.get('teacherId')?.invalid && (courseForm.get('teacherId')?.touched || isSubmit)) ? 'error' : ''">
+              <nz-option *ngFor="let teacher of listTeacher" [nzValue]="teacher.id" [nzLabel]="teacher.fullName">
               </nz-option>
             </nz-select>
           </div>
 
           <span class="text-danger"
-                *ngIf="(courseForm.get('teacherId')?.touched || isSubmit) && courseForm.get('teacherId')?.hasError('required')"
-          >
-            Tên giáo viên không được để trống
+            *ngIf="(courseForm.get('teacherId')?.touched || isSubmit) && courseForm.get('teacherId')?.hasError('required')">
+            Tên giáo viên {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Loại khóa học
+            {{ 'course_type' | translate }}
           </span>
 
           <div>
-            <nz-select
-              formControlName="type"
-            >
-              <nz-option [nzValue]="1" [nzLabel]="'Khóa phễu'"></nz-option>
-              <nz-option [nzValue]="2" [nzLabel]="'Khóa lớn'"></nz-option>
+            <nz-select formControlName="type">
+              <nz-option [nzValue]="1" [nzLabel]="'funnel_course' | translate"></nz-option>
+              <nz-option [nzValue]="2" [nzLabel]="'big_course' | translate"></nz-option>
             </nz-select>
           </div>
         </div>
@@ -94,65 +88,46 @@
         <div nz-col [nzSpan]="24">
           <div nz-row [nzGutter]=[16,16]>
             <div nz-col [nzSpan]="6">
-            <span class="text-label">
-              Điểm đăng ký
-            </span>
+              <span class="text-label">
+                {{ 'registration_point' | translate }}
+              </span>
 
               <div>
-                <nz-input-number
-                  class="input-nz-number"
-                  formControlName="registerPoint"
-                  [nzMin]="0"
-                  [nzMax]="100"
-                  [nzStep]="1"
-                ></nz-input-number>
+                <nz-input-number class="input-nz-number" formControlName="registerPoint" [nzMin]="0" [nzMax]="100"
+                  [nzStep]="1"></nz-input-number>
               </div>
             </div>
 
             <div nz-col [nzSpan]="6">
               <span class="text-label">
-                Điểm giới thiệu trực tiếp
+                {{ 'direct_referral_points' | translate }}
               </span>
 
               <div>
-                <nz-input-number
-                  class="input-nz-number"
-                  formControlName="directReferralPoint"
-                  [nzMin]="0"
-                  [nzStep]="1"
-                ></nz-input-number>
+                <nz-input-number class="input-nz-number" formControlName="directReferralPoint" [nzMin]="0"
+                  [nzStep]="1"></nz-input-number>
               </div>
             </div>
 
             <div nz-col [nzSpan]="6">
               <span class="text-label">
-                Điểm giới thiệu gián tiếp
+                {{ 'indirect_referral_points' | translate }}
               </span>
 
               <div>
-                <nz-input-number
-                  class="input-nz-number"
-                  formControlName="indirectReferralPoint"
-                  [nzMin]="0"
-                  [nzStep]="1"
-                ></nz-input-number>
+                <nz-input-number class="input-nz-number" formControlName="indirectReferralPoint" [nzMin]="0"
+                  [nzStep]="1"></nz-input-number>
               </div>
             </div>
 
             <div nz-col [nzSpan]="6">
               <span class="text-label">
-                Giá khóa học
+                {{ 'price' | translate }}
               </span>
 
               <div>
-                <nz-input-number
-                  class="input-nz-number"
-                  formControlName="price"
-                  [nzMin]="0"
-                  [nzStep]="1000"
-                  [nzFormatter]="formatterVnd"
-                  [nzParser]="parserVnd"
-                ></nz-input-number>
+                <nz-input-number class="input-nz-number" formControlName="price" [nzMin]="0" [nzStep]="1000"
+                  [nzFormatter]="formatterVnd" [nzParser]="parserVnd"></nz-input-number>
               </div>
             </div>
           </div>
@@ -160,26 +135,18 @@
 
         <div nz-col [nzSpan]="24">
           <span class="text-label">
-            Thể lệ chương trình referral 1
+            {{'program_rule' | translate}} referral 1
           </span>
-          <ckeditor
-            name="ckeditor_text"
-            formControlName="referralHtmlTop"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
-            [config]="ckEditorConfig"
-          ></ckeditor>
+          <ckeditor name="ckeditor_text" formControlName="referralHtmlTop"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
 
         <div nz-col [nzSpan]="24">
           <span class="text-label">
-            Thể lệ chương trình referral 2
+            {{'program_rule' | translate}} referral 2
           </span>
-          <ckeditor
-            name="ckeditor_text"
-            formControlName="referralHtmlBottom"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
-            [config]="ckEditorConfig"
-          ></ckeditor>
+          <ckeditor name="ckeditor_text" formControlName="referralHtmlBottom"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
       </div>
     </form>
@@ -188,9 +155,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

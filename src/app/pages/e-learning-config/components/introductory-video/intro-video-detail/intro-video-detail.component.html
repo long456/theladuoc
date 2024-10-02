@@ -23,7 +23,7 @@
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Đường dẫn video
+            {{ 'video_link' | translate }}
           </span>
 
           <div class="select-url">
@@ -44,7 +44,9 @@
       <button class="btn primary" nz-button (click)="edit()">
         Lưu
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+</button>
     </div>
   </div>
 </div>

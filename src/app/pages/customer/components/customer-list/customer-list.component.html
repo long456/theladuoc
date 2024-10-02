@@ -1,10 +1,10 @@
 <div class="title-page">
-  Danh sách khách hàng
+  {{ 'customers' | translate }}
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(customer$ | async) as customer">
-    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
 
     <app-table
       [rows]="customer.rows"
@@ -16,28 +16,28 @@
       (pageSizeChange)="pageSize$.next($event)"
       [loading]="loading"
     >
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Ngày đăng ký" key="createDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
-      <table-column header="Tên khách hàng" key="name" [width]="'200px'"></table-column>
-      <table-column header="Mã khách hàng" key="customerCode" [width]="'200px'"></table-column>
-      <table-column header="Số điện thoại" key="phoneNumber" [width]="'120px'"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'created_at' | translate }}" key="createDate" [dataType]="COL_DATA_TYPE.DATE" [width]="'150px'"></table-column>
+      <table-column header="{{'customer_name' | translate}}" key="name" [width]="'200px'"></table-column>
+      <table-column header="{{'customer_code' | translate}}" key="customerCode" [width]="'200px'"></table-column>
+      <table-column header="{{ 'phone_number' | translate }}" key="phoneNumber" [width]="'120px'"></table-column>
       <table-column header="Email" key="email" [width]="'200px'"></table-column>
-      <table-column header="Địa chỉ" key="address" [width]="'200px'"></table-column>
-      <table-column header="Người giới thiệu" key="emailRef" [width]="'180px'"></table-column>
-      <table-column header="Thuộc tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{'address'|translate}}" key="address" [width]="'200px'"></table-column>
+      <table-column header="{{ 'referrer' | translate }}" key="emailRef" [width]="'180px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
           <span class="custom-action" (click)="edit(data)"
-                nz-tooltip nzTooltipTitle="Chỉnh sửa thông tin khách hàng">
+                nz-tooltip nzTooltipTitle="{{'edit' | translate}}">
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
           </span>
 
           <span class="custom-action" (click)="assignRole(data)"
-                nz-tooltip nzTooltipTitle="Phân quyền">
+                nz-tooltip nzTooltipTitle="{{ 'permission' | translate }}">
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
           </span>
         </ng-template>

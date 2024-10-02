@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới khách hàng' : 'Chỉnh sửa thông tin khách hàng'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'customer' | translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -8,18 +16,15 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên khách hàng
+            {{'customer_name' | translate}}
             <span class="text-danger">*</span>
           </span>
-          <input
-            nz-input autofocus formControlName="name"
-            [nzStatus]="(customerForm.get('name')?.invalid &&
+          <input nz-input autofocus formControlName="name" [nzStatus]="(customerForm.get('name')?.invalid &&
                         (customerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-                *ngIf="(customerForm.get('name')?.touched || isSubmit) &&
+          <span class="text-danger" *ngIf="(customerForm.get('name')?.touched || isSubmit) &&
                         customerForm.get('name')?.hasError('required')">
-            Tên khách hàng không được để trống
+            {{'customer_name' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
@@ -28,21 +33,17 @@
             Email
             <span class="text-danger">*</span>
           </span>
-          <input
-            nz-input autofocus formControlName="email" [readonly]="!isCreate"
-            [nzStatus]="(customerForm.get('email')?.invalid &&
+          <input nz-input autofocus formControlName="email" [readonly]="!isCreate" [nzStatus]="(customerForm.get('email')?.invalid &&
                         (customerForm.get('email')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-                *ngIf="(customerForm.get('email')?.touched || isSubmit) &&
+          <span class="text-danger" *ngIf="(customerForm.get('email')?.touched || isSubmit) &&
                         customerForm.get('email')?.hasError('required')">
-            Email khách hàng không được để trống
+            Email {{'cannot_blank' | translate}}
           </span>
 
-          <span class="text-danger"
-                *ngIf="(customerForm.get('email')?.touched || isSubmit) &&
+          <span class="text-danger" *ngIf="(customerForm.get('email')?.touched || isSubmit) &&
                         customerForm.get('email')?.hasError('email')">
-            Email khách hàng không đúng định dạng
+            Email {{'invalid_format' | translate}}
           </span>
         </div>
 
@@ -50,21 +51,19 @@
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Số điện thoại
+            {{'phone_number' | translate}}
           </span>
-          <input nz-input formControlName="phoneNumber"
-                 [nzStatus]="(customerForm.get('phoneNumber')?.invalid &&
+          <input nz-input formControlName="phoneNumber" [nzStatus]="(customerForm.get('phoneNumber')?.invalid &&
                              (customerForm.get('phoneNumber')?.touched || isSubmit)) ? 'error' : ''">
-          <span class="text-danger"
-                *ngIf="(customerForm.get('phoneNumber')?.touched || isSubmit) &&
+          <span class="text-danger" *ngIf="(customerForm.get('phoneNumber')?.touched || isSubmit) &&
                         customerForm.get('phoneNumber')?.hasError('email')">
-            Số điện thoại không đúng định dạng
+            {{'phone_number' | translate}} {{'invalid_format' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Địa chỉ
+            {{'address' | translate}}
           </span>
           <input nz-input formControlName="address">
         </div>
@@ -74,9 +73,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

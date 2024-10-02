@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới nhóm quyền' : 'Chỉnh sửa nhóm quyền'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'permission_group'|translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -7,22 +15,26 @@
 
     <div nz-col [nzSpan]="20" class="block-content">
       <div nz-col [nzSpan]="6">
-        <span class="text-label">Tên nhóm quyền</span>
+        <span class="text-label">{{ 'permission_group_name' | translate }}</span>
         <input nz-input [(ngModel)]="roleName" autofocus>
       </div>
 
       <div class="permission-status">
-        <div class="text-label">Trạng thái</div>
+        <div class="text-label">{{ 'status' | translate }}</div>
         <nz-switch [(ngModel)]="permissionStatus"></nz-switch>
       </div>
     </div>
 
     <div nz-col [nzSpan]="20" class="block-content">
-      <span class="text-label">Mô tả</span>
+      <span class="text-label">
+        {{'description' | translate}}
+      </span>
       <textarea nz-input [(ngModel)]="description"></textarea>
     </div>
 
-    <span class="text-label">Danh sách quyền chọn</span>
+    <span class="text-label">
+      {{'pick_permissions' | translate}}
+    </span>
 
     <div class="permission-picker">
       <div nz-row  *ngFor="let permission of listPermission" class="permission-group">
@@ -50,9 +62,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+</button>
     </div>
   </div>
 </div>

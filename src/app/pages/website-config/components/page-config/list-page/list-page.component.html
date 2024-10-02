@@ -1,11 +1,11 @@
 <div class="title-page">
-  Danh sách trang
+  {{ 'pages' | translate }}
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(pageConfig$ | async) as config">
-    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+    <button nz-button class="add-btn" (click)="delete()">{{ 'remove' | translate }}</button>
 
     <app-table
       [rows]="config.rows"
@@ -19,21 +19,21 @@
       [loading]="loading"
     >
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Tên trang" key="pageName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'page_name' | translate }}" key="pageName" [width]="'200px'"></table-column>
       <table-column header="URL" key="url" [width]="'200px'"></table-column>
-      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Người đại diện" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization_representative' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column header="Email" key="organizationEmail" [width]="'200px'"></table-column>
-      <table-column header="Số điện thoại" key="organizationPhoneNumber" [width]="'200px'"></table-column>
+      <table-column header="{{ 'phone_number' | translate }}" key="organizationPhoneNumber" [width]="'200px'"></table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
           <span class="custom-action" (click)="edit(data)"
-                nz-tooltip nzTooltipTitle="Chỉnh sửa">
+                nz-tooltip nzTooltipTitle="{{ 'edit' | translate }}">
             <span nz-icon nzType="edit" nzTheme="outline"></span>
           </span>
         </ng-template>

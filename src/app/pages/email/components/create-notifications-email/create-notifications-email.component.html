@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo email thông báo' : 'Thiết lập email thông báo'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'notification_email'|translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -8,149 +16,111 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tiêu đề email
+            {{'title' | translate }} email
             <span class="text-danger">*</span>
           </span>
-          <input
-            nz-input autofocus formControlName="emailSubject"
+          <input nz-input autofocus formControlName="emailSubject"
             [nzStatus]="(emailNotificationForm.get('emailSubject')?.invalid && (emailNotificationForm.get('emailSubject')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(emailNotificationForm.get('emailSubject')?.touched || isSubmit)  && emailNotificationForm.get('emailSubject')?.hasError('required')"
-          >
-            Tiêu đề email không được để trống
+            *ngIf="(emailNotificationForm.get('emailSubject')?.touched || isSubmit)  && emailNotificationForm.get('emailSubject')?.hasError('required')">
+            {{'title' | translate }} email {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">Loại email</div>
-          <nz-select
-            [nzDisabled]="!isCreate &&
+          <div class="text-label">{{ 'email_type' | translate }}</div>
+          <nz-select [nzDisabled]="!isCreate &&
                           emailNotificationForm.value?.notiEmailTemplateType === 1 ||
                           emailNotificationForm.value?.notiEmailTemplateType === 2"
-            formControlName="notiEmailTemplateType"
-            style="display: block;"
-            [nzPlaceHolder]="'Chọn loại email'"
-            [nzStatus]="(emailNotificationForm.get('notiEmailTemplateType')?.invalid && (emailNotificationForm.get('notiEmailTemplateType')?.touched || isSubmit)) ? 'error' : ''"
-          >
-            <nz-option
-              *ngFor="let type of notiEmailTemplateTypeList"
-              [nzValue]="type.dataValue"
-              [nzLabel]="type.name"
-              [nzDisabled]="type.disabled"
-            ></nz-option>
+            formControlName="notiEmailTemplateType" style="display: block;"
+            nzPlaceHolder="{{'pick' | translate}} {{'email_type' | translate}}"
+            [nzStatus]="(emailNotificationForm.get('notiEmailTemplateType')?.invalid && (emailNotificationForm.get('notiEmailTemplateType')?.touched || isSubmit)) ? 'error' : ''">
+            <nz-option *ngFor="let type of notiEmailTemplateTypeList" [nzValue]="type.dataValue" [nzLabel]="type.name"
+              [nzDisabled]="type.disabled"></nz-option>
           </nz-select>
 
-          <span
-            class="text-danger"
-            *ngIf="(emailNotificationForm.get('notiEmailTemplateType')?.touched || isSubmit) &&
+          <span class="text-danger" *ngIf="(emailNotificationForm.get('notiEmailTemplateType')?.touched || isSubmit) &&
                     emailNotificationForm.get('notiEmailTemplateType')?.hasError('required')">
-            Loại email không được để trống
+            {{ 'email_type' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="2" nzOffset="1">
-          <div class="text-label">Trạng thái</div>
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Khóa học
+            {{ 'course' | translate }}
             <span class="text-danger">*</span>
           </span>
 
           <div>
-            <nz-select
-              formControlName="courseId"
-              style="display: block;"
-              [nzPlaceHolder]="'Chọn khóa học'"
-              [(ngModel)]="courseId"
+            <nz-select formControlName="courseId" style="display: block;"
+              nzPlaceHolder="{{'pick' | translate}} {{'course' | translate}}" [(ngModel)]="courseId"
               (ngModelChange)="onCourseSelect($event)"
-              [nzStatus]="(emailNotificationForm.get('courseId')?.invalid && (emailNotificationForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''"
-            >
-              <nz-option
-                *ngFor="let course of courseList"
-                [nzValue]="course.id"
-                [nzLabel]="course.title + ' - ' + course.courseCode"
-              ></nz-option>
+              [nzStatus]="(emailNotificationForm.get('courseId')?.invalid && (emailNotificationForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''">
+              <nz-option *ngFor="let course of courseList" [nzValue]="course.id"
+                [nzLabel]="course.title + ' - ' + course.courseCode"></nz-option>
             </nz-select>
           </div>
 
           <span class="text-danger"
-                *ngIf="(emailNotificationForm.get('courseId')?.touched || isSubmit) && emailNotificationForm.get('courseId')?.hasError('required')"
-          >
-            Tên khóa học không được để trống
+            *ngIf="(emailNotificationForm.get('courseId')?.touched || isSubmit) && emailNotificationForm.get('courseId')?.hasError('required')">
+            {{ 'course_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8" *ngIf="emailNotificationForm.value?.notiEmailTemplateType === 5 || emailNotificationForm.value?.notiEmailTemplateType === 6">
+        <div nz-col [nzSpan]="8"
+          *ngIf="emailNotificationForm.value?.notiEmailTemplateType === 5 || emailNotificationForm.value?.notiEmailTemplateType === 6">
           <span class="text-label">
-            Buổi học
+            {{'lesson' | translate}}
             <span class="text-danger">*</span>
           </span>
 
           <div>
-            <nz-select
-              formControlName="lessonId"
-              style="display: block;"
-              [nzPlaceHolder]="'Chọn buổi học'"
-              [nzStatus]="(emailNotificationForm.hasError('lessonRequired') && (emailNotificationForm.get('lessonId')?.touched || isSubmit)) ? 'error' : ''"
-            >
-              <nz-option
-                *ngFor="let lesson of lessonList"
-                [nzValue]="lesson.id"
-                [nzLabel]="lesson.name"
-              ></nz-option>
+            <nz-select formControlName="lessonId" style="display: block;"
+              nzPlaceHolder="{{'pick' | translate}} {{'lesson' | translate}}"
+              [nzStatus]="(emailNotificationForm.hasError('lessonRequired') && (emailNotificationForm.get('lessonId')?.touched || isSubmit)) ? 'error' : ''">
+              <nz-option *ngFor="let lesson of lessonList" [nzValue]="lesson.id" [nzLabel]="lesson.name"></nz-option>
             </nz-select>
           </div>
 
           <span class="text-danger"
-                *ngIf="(emailNotificationForm.get('lessonId')?.touched || isSubmit) && emailNotificationForm.hasError('lessonRequired')"
-          >
-            Tên buổi học không được để trống
+            *ngIf="(emailNotificationForm.get('lessonId')?.touched || isSubmit) && emailNotificationForm.hasError('lessonRequired')">
+            {{'lesson_name' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8" *ngIf="emailNotificationForm.value?.notiEmailTemplateType === 7">
           <span class="text-label">
-            Lớp học
+            {{'class_name' | translate}}
             <span class="text-danger">*</span>
           </span>
 
           <div>
-            <nz-select
-              formControlName="classId"
-              style="display: block;"
-              [nzPlaceHolder]="'Chọn lớp học'"
-              [nzStatus]="(emailNotificationForm.hasError('classRequired') && (emailNotificationForm.get('classId')?.touched || isSubmit)) ? 'error' : ''"
-            >
-              <nz-option
-                *ngFor="let class of classList"
-                [nzValue]="class.id"
-                [nzLabel]="class.className"
-              ></nz-option>
+            <nz-select formControlName="classId" style="display: block;"
+              nzPlaceHolder="{{'pick' | translate}} {{'class' | translate}}"
+              [nzStatus]="(emailNotificationForm.hasError('classRequired') && (emailNotificationForm.get('classId')?.touched || isSubmit)) ? 'error' : ''">
+              <nz-option *ngFor="let class of classList" [nzValue]="class.id" [nzLabel]="class.className"></nz-option>
             </nz-select>
           </div>
 
           <span class="text-danger"
-                *ngIf="(emailNotificationForm.get('classId')?.touched || isSubmit) && emailNotificationForm.hasError('classRequired')"
-          >
-            Tên lớp học không được để trống
+            *ngIf="(emailNotificationForm.get('classId')?.touched || isSubmit) && emailNotificationForm.hasError('classRequired')">
+            {{'class_name' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="18">
           <span class="text-label">
-            Nội dung email
+            {{'content' | translate}} email
           </span>
-          <ckeditor
-            name="ckeditor_text"
-            formControlName="content"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
-            [config]="ckEditorConfig"
-          ></ckeditor>
+          <ckeditor name="ckeditor_text" formControlName="content"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
       </div>
     </form>
@@ -159,10 +129,17 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
 
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

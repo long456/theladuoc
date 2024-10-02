@@ -1,12 +1,12 @@
 <div class="title-page">
-  Danh sách email thông báo
+  {{'notification_email_list' | translate}}
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(notificationsEmail$ | async) as notificationsEmail">
 
-    <button nz-button class="add-btn primary" (click)="create()">Thêm mới</button>
-    <button nz-button class="add-btn" (click)="delete()">Xóa</button>
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+    <button nz-button class="add-btn" (click)="delete()">{{ 'remove' | translate }}</button>
 
     <app-table
       [rows]="notificationsEmail.rows"
@@ -20,15 +20,15 @@
       [loading]="loading"
     >
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Tên email" key="emailSubject" [width]="'200px'"></table-column>
-      <table-column header="Loại email" key="typeName" [width]="'250px'"></table-column>
-      <table-column header="Tên buổi học" key="lessonName" [width]="'200px'"></table-column>
-      <table-column header="Tên lớp học" key="className" [width]="'200px'"></table-column>
-      <table-column header="Tên khóa học" key="courseName" [width]="'200px'"></table-column>
-      <table-column header="Tên diễn giả" key="speakerName" [width]="'200px'"></table-column>
-      <table-column header="Tên tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column header="Trạng thái" key="status" [width]="'180px'">
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'email_name' | translate }}" key="emailSubject" [width]="'200px'"></table-column>
+      <table-column header="{{ 'email_type' | translate }}" key="typeName" [width]="'250px'"></table-column>
+      <table-column header="{{ 'lesson_name' | translate }}" key="lessonName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'class_name' | translate }}" key="className" [width]="'200px'"></table-column>
+      <table-column header="{{ 'course_name' | translate }}" key="courseName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'teacher_name' | translate }}" key="speakerName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'status' | translate }}" key="status" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.status">Hiển thị</span>
           <span class="text-invalid" *ngIf="!data.status">Không hiển thị</span>
@@ -36,11 +36,11 @@
       </table-column>
       <table-column [width]="'180px'" fixColumn="right" >
         <ng-template appHeader>
-          Chức năng
+          {{ 'actions' | translate }}
         </ng-template>
 
         <ng-template appCell let-data>
-          <span class="custom-action" (click)="edit(data)">Thiết lập</span>
+          <span class="custom-action" (click)="edit(data)">{{ 'settings' | translate }}</span>
         </ng-template>
       </table-column>
     </app-table>

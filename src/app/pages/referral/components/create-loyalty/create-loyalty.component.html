@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới cuộc thi' : 'Chỉnh sửa cuộc thi'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'contest'|translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -8,70 +16,57 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên cuộc thi
+            {{'contest_name' | translate}}
             <span class="text-danger">*</span>
           </span>
-          <input
-            nz-input autofocus formControlName="loyaltyName"
+          <input nz-input autofocus formControlName="loyaltyName"
             [nzStatus]="(loyaltyForm.get('loyaltyName')?.invalid && (loyaltyForm.get('loyaltyName')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(loyaltyForm.get('loyaltyName')?.touched || isSubmit)  && loyaltyForm.get('loyaltyName')?.hasError('required')"
-          >
-            Tên cuộc thi không được để trống
+            *ngIf="(loyaltyForm.get('loyaltyName')?.touched || isSubmit)  && loyaltyForm.get('loyaltyName')?.hasError('required')">
+            {{'contest_name' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Mã khóa học
+            {{ 'course_code' | translate }}
             <span class="text-danger">*</span>
           </span>
 
           <div>
-            <nz-select style="display: block"
-              formControlName="courseCode"
-              [nzStatus]="(loyaltyForm.get('courseCode')?.invalid && (loyaltyForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''"
-            >
-              <nz-option
-                *ngFor="let course of listCourse"
-                [nzValue]="course.courseCode"
-                [nzLabel]="course.title"
-              >
+            <nz-select style="display: block" formControlName="courseCode"
+              [nzStatus]="(loyaltyForm.get('courseCode')?.invalid && (loyaltyForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''">
+              <nz-option *ngFor="let course of listCourse" [nzValue]="course.courseCode" [nzLabel]="course.title">
               </nz-option>
             </nz-select>
           </div>
 
           <span class="text-danger"
-                *ngIf="(loyaltyForm.get('courseCode')?.touched || isSubmit) && loyaltyForm.get('courseCode')?.hasError('required')"
-          >
-            Mã khóa học không được để trống
+            *ngIf="(loyaltyForm.get('courseCode')?.touched || isSubmit) && loyaltyForm.get('courseCode')?.hasError('required')">
+            {{ 'course_code' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8" >
-          <div class="text-label">Trạng thái</div>
+        <div nz-col [nzSpan]="8">
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="isActive">
           </nz-switch>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Thời lượng
+            {{'duration' | translate}}
             <span class="text-danger">*</span>
           </span>
 
-          <nz-range-picker
-            style="width: 100%"
-            [nzShowTime]="true"
+          <nz-range-picker style="width: 100%" [nzShowTime]="true"
             [nzStatus]="(loyaltyForm.get('date')?.invalid && (loyaltyForm.get('date')?.touched || isSubmit)) ? 'error' : ''"
-            formControlName="date"
-            nzFormat="dd/MM/YYYY HH:mm:ss"
-          ></nz-range-picker>
+            formControlName="date" nzFormat="dd/MM/YYYY HH:mm:ss"></nz-range-picker>
 
           <span class="text-danger"
-                *ngIf="(loyaltyForm.get('date')?.touched || isSubmit)  && loyaltyForm.get('date')?.hasError('required')">
-            Thời lượng không được để trống
+            *ngIf="(loyaltyForm.get('date')?.touched || isSubmit)  && loyaltyForm.get('date')?.hasError('required')">
+            {{'duration' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
@@ -83,9 +78,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo danh mục khóa học' : 'Chỉnh sửa danh mục khóa học'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'course_categories' | translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -8,56 +16,48 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên danh mục
+            {{'category_name' | translate}}
             <span class="text-danger">*</span>
           </span>
-          <input
-            nz-input autofocus formControlName="title"
+          <input nz-input autofocus formControlName="title"
             [nzStatus]="(categoryForm.get('title')?.invalid && (categoryForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(categoryForm.get('title')?.touched || isSubmit)  && categoryForm.get('title')?.hasError('required')"
-          >
-            Tên danh mục không được để trống
+            *ngIf="(categoryForm.get('title')?.touched || isSubmit)  && categoryForm.get('title')?.hasError('required')">
+            {{'category_name' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]=5>
           <span class="text-label">
-            Trạng thái
+            {{ 'status' | translate }}
           </span>
 
-          <nz-select style="width: 100%"  formControlName="status">
-            <nz-option [nzValue]="1" [nzLabel]="'Kích hoạt'"></nz-option>
-            <nz-option [nzValue]="0" [nzLabel]="'Vô hiệu'"></nz-option>
+          <nz-select style="width: 100%" formControlName="status">
+            <nz-option [nzValue]="1" [nzLabel]="'activated' | translate"></nz-option>
+            <nz-option [nzValue]="0" [nzLabel]="'disabled' | translate"></nz-option>
           </nz-select>
         </div>
 
         <div nz-col [nzSpan]="5">
-          <div class="text-label">Thứ tự hiển thị</div>
-          <nz-input-number
-            style="width: 100%"
-            [nzMin]="0" [nzStep]="1"
-            formControlName="priority"></nz-input-number>
+          <div class="text-label">{{ 'position' | translate }}</div>
+          <nz-input-number style="width: 100%" [nzMin]="0" [nzStep]="1" formControlName="priority"></nz-input-number>
         </div>
 
         <div nz-col [nzSpan]="11">
-          <div class="text-label">Mô tả (Tối đa 200 ký tự)</div>
-          <textarea
-            nz-input placeholder="Mô tả ngắn"
-            [nzAutosize]="{ minRows: 3}" formControlName="description"
-            [nzStatus]="(categoryForm.get('description')?.invalid &&
+          <div class="text-label">{{'short_description' | translate}} ({{'max_200_chars' | translate}})</div>
+          <textarea nz-input placeholder="{{'short_description' | translate}}" [nzAutosize]="{ minRows: 3}"
+            formControlName="description" [nzStatus]="(categoryForm.get('description')?.invalid &&
                         (categoryForm.get('description')?.touched || isSubmit)) ? 'error' : ''"></textarea>
-          <span class="text-danger"
-                *ngIf="(categoryForm.get('description')?.touched || isSubmit) &&
+          <span class="text-danger" *ngIf="(categoryForm.get('description')?.touched || isSubmit) &&
                         categoryForm.get('description')?.hasError('maxlength')">
-            Mô tả không thể vượt quá 200 ký tự
+            {{'short_description' | translate}} {{'max_200_chars' | translate}}
           </span>
         </div>
 
-        <div nz-col [nzSpan]="7" >
+        <div nz-col [nzSpan]="7">
           <span class="text-label">
-            Icon danh mục
+            {{'category_icon' | translate}}
           </span>
 
           <div class="select-icon">
@@ -68,13 +68,13 @@
             </button>
           </div>
 
-<!--          <div class="select-file">-->
-<!--            <div class="btn-select-file" (click)="selectFile()" *ngIf="categoryForm.get('iconPath')?.value === ''">-->
-<!--              <span nz-icon nzType="plus" nzTheme="outline"></span>-->
-<!--              <div style="margin-top: 8px;">Upload</div>-->
-<!--            </div>-->
-<!--            <img class="img-preview" [src]="categoryForm.get('iconPath')?.value" *ngIf="categoryForm.get('iconPath')?.value !== ''">-->
-<!--          </div>-->
+          <!--          <div class="select-file">-->
+          <!--            <div class="btn-select-file" (click)="selectFile()" *ngIf="categoryForm.get('iconPath')?.value === ''">-->
+          <!--              <span nz-icon nzType="plus" nzTheme="outline"></span>-->
+          <!--              <div style="margin-top: 8px;">{{'upload' | translate}}</div>-->
+          <!--            </div>-->
+          <!--            <img class="img-preview" [src]="categoryForm.get('iconPath')?.value" *ngIf="categoryForm.get('iconPath')?.value !== ''">-->
+          <!--          </div>-->
         </div>
       </div>
     </form>
@@ -83,9 +83,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

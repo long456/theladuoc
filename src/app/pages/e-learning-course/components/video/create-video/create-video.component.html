@@ -16,7 +16,7 @@
 
           <span class="text-danger"
             *ngIf="(videoForm.get('title')?.touched || isSubmit)  && videoForm.get('title')?.hasError('required')">
-            Tiêu đề video không được để trống!
+            Tiêu đề video {{'cannot_blank' | translate}}!
           </span>
         </div>
 
@@ -36,12 +36,12 @@
 
           <span class="text-danger" *ngIf="(videoForm.get('chapterId')?.touched || isSubmit) &&
                         videoForm.get('chapterId')?.hasError('required')">
-            Tên học phần không được để trống
+            Tên học phần {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="4">
-          <div class="text-label">Trạng thái</div>
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
@@ -90,7 +90,7 @@
 
             <span class="text-danger"
               *ngIf="(videoForm.get('mediaPath')?.touched || isSubmit)  && videoForm.get('mediaPath')?.hasError('required')">
-              Link video không được để trống!
+              Link video {{'cannot_blank' | translate}}!
             </span>
           </div>
         </div>
@@ -101,9 +101,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+</button>
     </div>
   </div>
 </div>

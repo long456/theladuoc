@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới tin tức' : 'Chỉnh sửa tin tức'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'post'|translate}}
+  </span>
 </div>
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
   <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="20" [nzLg]="20">
@@ -7,33 +15,29 @@
       <div nz-row [nzGutter]="[16, 16]">
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Tên tin tức
+            {{'title' | translate}}
             <span class="text-danger">*</span>
           </span>
 
-          <input
-            nz-input autofocus formControlName="title"
-            [nzStatus]="(newsForm.get('title')?.invalid &&
+          <input nz-input autofocus formControlName="title" [nzStatus]="(newsForm.get('title')?.invalid &&
                         (newsForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
-          <span
-            class="text-danger"
-            *ngIf="(newsForm.get('title')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(newsForm.get('title')?.touched || isSubmit)  &&
                     newsForm.get('title')?.hasError('required')">
-              Tên tin tức không được để trống
+            {{'title' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Từ khóa
+            {{'keywords' | translate}}
           </span>
 
-          <input nz-input placeholder="Nhập từ khóa" formControlName="keyWords">
+          <input nz-input placeholder="{{'enter' | translate}} {{'keywords' | translate}}" formControlName="keyWords">
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Trạng thái
+            {{ 'status' | translate }}
           </span>
 
           <nz-switch formControlName="status" style="display: block"></nz-switch>
@@ -41,7 +45,7 @@
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Ảnh đại diện
+            {{'avatar' | translate}}
           </span>
 
           <div style="display: flex">
@@ -54,68 +58,55 @@
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Trang hiển thị
+            {{'display_page' | translate}}
           </span>
 
           <nz-select nzMode="multiple" formControlName="showBys" style="display: block">
-            <nz-option [nzValue]="1" [nzLabel]="'Trang chủ'"></nz-option>
+            <nz-option [nzValue]="1" [nzLabel]="'homepage' | translate"></nz-option>
             <nz-option [nzValue]="2" [nzLabel]="'E-Learning'"></nz-option>
           </nz-select>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Danh mục
+            {{'category' | translate}}
           </span>
 
           <nz-select nzMode="multiple" formControlName="categories">
-            <nz-option
-              *ngFor="let category of categoryList"
-              [nzValue]="category.id"
-              [nzLabel]="category.title">
+            <nz-option *ngFor="let category of categoryList" [nzValue]="category.id" [nzLabel]="category.title">
             </nz-option>
           </nz-select>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24">
           <span class="text-label">
-            Mô tả
+            {{'description' | translate}}
             <span class="text-danger">*</span>
           </span>
 
-          <textarea
-            nz-input formControlName="description"
-            placeholder="Mô tả ngắn"
-            [nzAutosize]="{ minRows: 3}"
-            [nzStatus]="(newsForm.get('description')?.invalid &&
-                        (newsForm.get('description')?.touched || isSubmit)) ? 'error' : ''"
-          ></textarea>
+          <textarea nz-input formControlName="description" placeholder="{{'description' | translate}}"
+            [nzAutosize]="{ minRows: 3}" [nzStatus]="(newsForm.get('description')?.invalid &&
+                        (newsForm.get('description')?.touched || isSubmit)) ? 'error' : ''"></textarea>
 
-          <span
-            class="text-danger"
-            *ngIf="(newsForm.get('description')?.touched || isSubmit)  &&
-                    newsForm.get('description')?.hasError('required')"
-          >Mô tả không được để trống</span>
+          <span class="text-danger" *ngIf="(newsForm.get('description')?.touched || isSubmit)  &&
+                    newsForm.get('description')?.hasError('required')">
+            {{'description' | translate}} {{'cannot_blank' | translate }}
+          </span>
 
-          <span
-            class="text-danger"
-            *ngIf="(newsForm.get('description')?.touched || isSubmit)  &&
-                    newsForm.get('description')?.hasError('maxlength')"
-          >Mô tả không thể nhiều hơn 500 ký tự</span>
+          <span class="text-danger" *ngIf="(newsForm.get('description')?.touched || isSubmit)  &&
+                    newsForm.get('description')?.hasError('maxlength')">
+            {{'description' | translate}} {{'max_500_chars' | translate}}
+          </span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24">
           <span class="text-label">
-            Nội dung
+            {{'content' | translate}}
             <span class="text-danger">*</span>
           </span>
 
-          <ckeditor
-            name="ckeditor_text"
-            formControlName="content"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js"
-            [config]="ckEditorConfig"
-          ></ckeditor>
+          <ckeditor name="ckeditor_text" formControlName="content"
+            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
 
       </div>
@@ -125,11 +116,16 @@
   <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="4" [nzLg]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>
-
-

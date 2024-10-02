@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo tổ chức' : 'Thiết lập tổ chức'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'organization'|translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -8,22 +16,20 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Tên tổ chức
+            {{'organization_name' | translate }}
             <span class="text-danger">*</span>
           </span>
-          <input
-            nz-input autofocus formControlName="name"
+          <input nz-input autofocus formControlName="name"
             [nzStatus]="(this.orgForm.get('name')?.invalid && (orgForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(orgForm.get('name')?.touched || isSubmit)  && orgForm.get('name')?.hasError('required')"
-          >
-            Tên tổ chức không được để trống
+            *ngIf="(orgForm.get('name')?.touched || isSubmit)  && orgForm.get('name')?.hasError('required')">
+            {{'organization_name' | translate }} {{'cannot_blank' | translate }}
           </span>
         </div>
 
         <div nz-col [nzSpan]="9" class="text-right">
-          <div class="text-label">Trạng thái</div>
+          <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
@@ -32,63 +38,57 @@
           <span class="text-label">
             Email
           </span>
-          <input
-            nz-input formControlName="email"
+          <input nz-input formControlName="email"
             [nzStatus]="(this.orgForm.get('email')?.invalid && (orgForm.get('email')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(orgForm.get('email')?.touched || isSubmit)  && orgForm.get('email')?.hasError('email')"
-          >
-            Email không đúng định dạng
+            *ngIf="(orgForm.get('email')?.touched || isSubmit)  && orgForm.get('email')?.hasError('email')">
+            Email {{'invalid_format' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Số điện thoại
+            {{'phone_number' | translate }}
           </span>
-          <input
-            nz-input formControlName="mobile"
+          <input nz-input formControlName="mobile"
             [nzStatus]="(this.orgForm.get('mobile')?.invalid && (orgForm.get('mobile')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger"
-                *ngIf="(orgForm.get('mobile')?.touched || isSubmit)  && orgForm.get('mobile')?.hasError('pattern')"
-          >
-            Số điện thoại không đúng định dạng
+            *ngIf="(orgForm.get('mobile')?.touched || isSubmit)  && orgForm.get('mobile')?.hasError('pattern')">
+            {{'phone_number' | translate}} {{'invalid_format' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Người đại diện
+            {{ 'organization_representative' | translate }}
           </span>
 
           <div>
             <nz-select class="width-100" formControlName="userId">
-              <nz-option *ngFor="let user of listDirectors"
-                         [nzValue]="user.id" [nzLabel]="user.fullName"
-              ></nz-option>
+              <nz-option *ngFor="let user of listDirectors" [nzValue]="user.id" [nzLabel]="user.fullName"></nz-option>
             </nz-select>
           </div>
         </div>
 
         <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Kiểu chia data
+            {{'data_process_type' | translate}}
           </span>
 
           <div>
             <nz-select class="width-100" formControlName="splitData">
-              <nz-option [nzValue]="1" nzLabel="Tự động"></nz-option>
-              <nz-option [nzValue]="2" nzLabel="Thủ công"></nz-option>
+              <nz-option [nzValue]="1" nzLabel="{{'auto' | translate}}"></nz-option>
+              <nz-option [nzValue]="2" nzLabel="{{'manual' | translate}}"></nz-option>
             </nz-select>
           </div>
         </div>
 
-        <div nz-col [nzSpan]="9" >
+        <div nz-col [nzSpan]="9">
           <div style="margin-bottom: 16px">
             <span class="text-label">
-              Tên miền trang E-leaning
+              {{'e_learning_domain' | translate}}
             </span>
 
             <input nz-input formControlName="websiteElearning">
@@ -96,23 +96,21 @@
 
           <div>
             <span class="text-label">
-              Tên miền trang quản trị
+              {{'acp_domain' | translate}}
               <span class="text-danger">*</span>
             </span>
 
-            <input
-              nz-input formControlName="websiteCms"
+            <input nz-input formControlName="websiteCms"
               [nzStatus]="(this.orgForm.get('websiteCms')?.invalid && (orgForm.get('websiteCms')?.touched || isSubmit)) ? 'error' : ''">
 
             <span class="text-danger"
-                  *ngIf="(orgForm.get('websiteCms')?.touched || isSubmit)  && orgForm.get('websiteCms')?.hasError('required')"
-            >
-              Tên miền trang quản trị không được để trống
+              *ngIf="(orgForm.get('websiteCms')?.touched || isSubmit)  && orgForm.get('websiteCms')?.hasError('required')">
+              {{'acp_domain' | translate}} {{'cannot_blank' | translate }}
             </span>
           </div>
         </div>
 
-        <div nz-col [nzSpan]="3" >
+        <div nz-col [nzSpan]="3">
           <span class="text-label">
             Logo
           </span>
@@ -120,21 +118,17 @@
           <div class="select-file">
             <div class="btn-select-file" (click)="selectFile('logo')" *ngIf="!orgForm.get('logo')?.value">
               <span nz-icon nzType="plus" nzTheme="outline"></span>
-              <div style="margin-top: 8px;">Upload</div>
+              <div style="margin-top: 8px;">{{'upload' | translate}}</div>
             </div>
             <img class="img-preview" [src]="orgForm.get('logo')?.value" *ngIf="orgForm.get('logo')?.value">
 
             <div class="overlay" *ngIf="orgForm.get('logo')?.value">
               <div class="btn-file">
-                <a
-                  nz-button nzType="link"
-                  nz-tooltip nzTooltipTitle="Upload ảnh mới"
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}"
                   (click)="selectFile('logo')">
                   <span nz-icon nzType="upload"></span>
                 </a>
-                <a
-                  nz-button nzType="link"
-                  nz-tooltip nzTooltipTitle="Xóa"
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
                   (click)="deleteImg('logo')">
                   <span nz-icon nzType="delete"></span>
                 </a>
@@ -143,7 +137,7 @@
           </div>
         </div>
 
-        <div nz-col [nzSpan]="3" >
+        <div nz-col [nzSpan]="3">
           <span class="text-label">
             Logo1x1
           </span>
@@ -151,21 +145,17 @@
           <div class="select-file">
             <div class="btn-select-file" (click)="selectFile('logo1x1')" *ngIf="!orgForm.get('logo1x1')?.value">
               <span nz-icon nzType="plus" nzTheme="outline"></span>
-              <div style="margin-top: 8px;">Upload</div>
+              <div style="margin-top: 8px;">{{'upload' | translate}}</div>
             </div>
             <img class="img-preview" [src]="orgForm.get('logo1x1')?.value" *ngIf="orgForm.get('logo1x1')?.value">
 
             <div class="overlay" *ngIf="orgForm.get('logo1x1')?.value">
               <div class="btn-file">
-                <a
-                  nz-button nzType="link"
-                  nz-tooltip nzTooltipTitle="Upload ảnh mới"
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}"
                   (click)="selectFile('logo1x1')">
                   <span nz-icon nzType="upload"></span>
                 </a>
-                <a
-                  nz-button nzType="link"
-                  nz-tooltip nzTooltipTitle="Xóa"
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
                   (click)="deleteImg('logo1x1')">
                   <span nz-icon nzType="delete"></span>
                 </a>
@@ -175,7 +165,7 @@
           </div>
         </div>
 
-        <div nz-col [nzSpan]="3" >
+        <div nz-col [nzSpan]="3">
           <span class="text-label">
             favicon
           </span>
@@ -183,21 +173,17 @@
           <div class="select-file">
             <div class="btn-select-file" (click)="selectFile('favicon')" *ngIf="!orgForm.get('favicon')?.value">
               <span nz-icon nzType="plus" nzTheme="outline"></span>
-              <div style="margin-top: 8px;">Upload</div>
+              <div style="margin-top: 8px;">{{'upload' | translate}}</div>
             </div>
             <img class="img-preview" [src]="orgForm.get('favicon')?.value" *ngIf="orgForm.get('favicon')?.value">
 
             <div class="overlay" *ngIf="orgForm.get('favicon')?.value">
               <div class="btn-file">
-                <a
-                  nz-button nzType="link"
-                  nz-tooltip nzTooltipTitle="Upload ảnh mới"
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}"
                   (click)="selectFile('favicon')">
                   <span nz-icon nzType="upload"></span>
                 </a>
-                <a
-                  nz-button nzType="link"
-                  nz-tooltip nzTooltipTitle="Xóa"
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
                   (click)="deleteImg('favicon')">
                   <span nz-icon nzType="delete"></span>
                 </a>
@@ -206,35 +192,32 @@
           </div>
         </div>
 
-        <div nz-col [nzSpan]="9" >
+        <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Tên miền trang diễn đàn
+            {{'forum_domain' | translate}}
           </span>
 
           <input nz-input formControlName="websiteForum">
         </div>
 
-        <div nz-col [nzSpan]="9" >
+        <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Tên miền trang chủ
+            {{'homepage_domain' | translate}}
             <span class="text-danger">*</span>
           </span>
 
-          <input
-            nz-input formControlName="website"
-            [nzStatus]="(orgForm.get('website')?.invalid &&
+          <input nz-input formControlName="website" [nzStatus]="(orgForm.get('website')?.invalid &&
                         (orgForm.get('website')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-                *ngIf="(orgForm.get('website')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(orgForm.get('website')?.touched || isSubmit)  &&
                         orgForm.get('website')?.hasError('required')">
-                Tên miền trang chủ không được để trống
+            {{'homepage_domain' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
-        <div nz-col [nzSpan]="9" >
+        <div nz-col [nzSpan]="9">
           <span class="text-label">
-            Địa chỉ
+            {{'address' | translate}}
           </span>
 
           <input nz-input formControlName="address">
@@ -242,53 +225,50 @@
 
         <div nz-col [nzSpan]="18">
           <span class="text-label">
-            Nhúng bản đồ
+            {{'embed_map' | translate}}
           </span>
-          <textarea
-            nz-input formControlName="map"
-            [nzAutosize]="{ minRows: 3, maxRows: 6 }"
-          ></textarea>
+          <textarea nz-input formControlName="map" [nzAutosize]="{ minRows: 3, maxRows: 6 }"></textarea>
         </div>
 
-<!--        <div nz-col [nzSpan]="18">-->
-<!--          <span class="text-label">-->
-<!--            Tên miền trang chủ-->
-<!--          </span>-->
+        <!--        <div nz-col [nzSpan]="18">-->
+        <!--          <span class="text-label">-->
+        <!--            Tên miền trang chủ-->
+        <!--          </span>-->
 
-<!--          <span class="input-website">-->
-<!--            <input-->
-<!--              #inputWebsite-->
-<!--              nz-input-->
-<!--              [class.inactive]="!isActive"-->
-<!--              [(ngModel)]="webData"-->
-<!--              [ngModelOptions]="{standalone: true}"-->
-<!--            >-->
-<!--            <button nz-button nzType="primary" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="changeActive()">-->
-<!--              <span nz-icon nzType="plus" *ngIf="!isActive"></span>-->
-<!--              <span nz-icon nzType="check" *ngIf="isActive"></span>-->
-<!--            </button>-->
-<!--          </span>-->
+        <!--          <span class="input-website">-->
+        <!--            <input-->
+        <!--              #inputWebsite-->
+        <!--              nz-input-->
+        <!--              [class.inactive]="!isActive"-->
+        <!--              [(ngModel)]="webData"-->
+        <!--              [ngModelOptions]="{standalone: true}"-->
+        <!--            >-->
+        <!--            <button nz-button nzType="primary" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="changeActive()">-->
+        <!--              <span nz-icon nzType="plus" *ngIf="!isActive"></span>-->
+        <!--              <span nz-icon nzType="check" *ngIf="isActive"></span>-->
+        <!--            </button>-->
+        <!--          </span>-->
 
 
 
-<!--          <div class="domain-list" [class.invalid]="this.orgForm.get('website')?.invalid && isSubmit">-->
-<!--            <div-->
-<!--              class="domain-item"-->
-<!--              *ngFor="let item of orgForm.get('website')?.value"-->
-<!--            >-->
-<!--              {{item}}-->
-<!--              <button nz-button nzType="text" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="deleteWeb(item)">-->
-<!--                <span nz-icon nzType="delete" class="color-dagger"></span>-->
-<!--              </button>-->
-<!--            </div>-->
-<!--          </div>-->
+        <!--          <div class="domain-list" [class.invalid]="this.orgForm.get('website')?.invalid && isSubmit">-->
+        <!--            <div-->
+        <!--              class="domain-item"-->
+        <!--              *ngFor="let item of orgForm.get('website')?.value"-->
+        <!--            >-->
+        <!--              {{item}}-->
+        <!--              <button nz-button nzType="text" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="deleteWeb(item)">-->
+        <!--                <span nz-icon nzType="delete" class="color-dagger"></span>-->
+        <!--              </button>-->
+        <!--            </div>-->
+        <!--          </div>-->
 
-<!--          <span class="text-danger"-->
-<!--                *ngIf="(orgForm.get('website')?.touched || isSubmit)  && orgForm.get('website')?.hasError('required')"-->
-<!--          >-->
-<!--            Tên miền không được để trống-->
-<!--          </span>-->
-<!--        </div>-->
+        <!--          <span class="text-danger"-->
+        <!--                *ngIf="(orgForm.get('website')?.touched || isSubmit)  && orgForm.get('website')?.hasError('required')"-->
+        <!--          >-->
+        <!--            Tên miền {{'cannot_blank' | translate}}-->
+        <!--          </span>-->
+        <!--        </div>-->
 
       </div>
     </form>
@@ -298,9 +278,16 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="editOrg()">
-        {{isCreate? 'Tạo mới' : 'Lưu'}}
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
       </button>
-      <button class="btn" nz-button (click)="navigateBack()">Hủy</button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
     </div>
   </div>
 </div>

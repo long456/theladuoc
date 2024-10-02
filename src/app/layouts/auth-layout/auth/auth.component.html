@@ -14,12 +14,12 @@
       <span class="text-danger"
             *ngIf="(loginForm.get('email')?.touched || isSubmit) &&
                 loginForm.get('email')?.hasError('required')">
-              Email không được để trống!
+              Email {{'cannot_blank' | translate}}!
       </span>
       <span class="text-danger"
             *ngIf="(loginForm.get('email')?.touched || isSubmit) &&
                 loginForm.get('email')?.hasError('email')">
-            Email không đúng định dạng!
+            Email {{'invalid_format' | translate}}!
       </span>
 
       <input id="user" nz-input placeholder="Email"
@@ -37,7 +37,7 @@
       <span class="text-danger"
             *ngIf="(loginForm.get('password')?.touched || isSubmit) &&
                     loginForm.get('password')?.hasError('required')">
-            Mật khẩu không được để trống!
+            Mật khẩu {{'cannot_blank' | translate}}!
       </span>
       <input id="password" nz-input placeholder="Mật khẩu"
              formControlName="password" [type]="isPasswordVisible? 'text' : 'password'"

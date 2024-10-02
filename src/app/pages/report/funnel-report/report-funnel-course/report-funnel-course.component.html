@@ -64,9 +64,9 @@
         <thead style="overflow-y: hidden;">
             <tr>
                 <th [nzLeft]="true" nzWidth="50px" nzAlign="center">
-                    STT
+                    {{ 'no' | translate }}
                 </th>
-                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên khóa học</th>
+                <th nzWidth="160px" [nzLeft]="true" nzAlign="center">{{ 'course_name' | translate }}</th>
                 <th nzWidth="160px" [nzLeft]="true" nzAlign="center">Tên lớp học</th>
                 <th nzWidth="180px" nzColumnKey="totalAdsAmount" [nzSortFn]="true" nzAlign="center">Số tiền Ads</th>
                 <th nzWidth="180px" nzColumnKey="totalNumberOfRegistrations" [nzSortFn]="true" nzAlign="center">Số lượt
@@ -92,10 +92,10 @@
                 </th>
                 <th nzWidth="180px" nzColumnKey="courseProfits" [nzSortFn]="true" nzAlign="center">Lợi nhuận khóa học
                 </th>
-                <th nzWidth="180px" nzAlign="center">Tên diễn giả</th>
+                <th nzWidth="180px" nzAlign="center">{{ 'teacher_name' | translate }}</th>
                 <th nzWidth="180px" nzAlign="center">Số điện thoại</th>
                 <th nzWidth="180px" nzAlign="center">Tổ chức</th>
-                <th [nzRight]="true" nzWidth="120px" nzAlign="center">Chức năng</th>
+                <th [nzRight]="true" nzWidth="120px" nzAlign="center">{{ 'actions' | translate }}</th>
             </tr>
         </thead>
         <tbody style="overflow-y: hidden;">
