@@ -1,1 +1,32 @@
-<p>add-agency works!</p>
+<form [formGroup]="agencyForm">
+  <div nz-row [nzGutter]=[16,16]>
+    <div nz-col [nzSpan]="24">
+      <span>
+        Tên học viên
+      </span>
+
+      <div>
+        <input nz-input formControlName="name" readonly/>
+      </div>
+    </div>
+
+    <div nz-col [nzSpan]="24">
+      <span>
+        Mã đại lý (tối đa 5 ký tự)
+      </span>
+      <input nz-input formControlName="agentCode" autofocus
+             [nzStatus]="(agencyForm.get('agentCode')?.invalid &&
+                         (agencyForm.get('agentCode')?.touched)) ?
+                         'error' : ''">
+      <span class="text-danger"
+            *ngIf="(agencyForm.get('agentCode')?.touched)  &&
+                    agencyForm.get('agentCode')?.hasError('required')"
+      >Mã đại lý không được để trống!</span>
+
+      <span class="text-danger"
+            *ngIf="(agencyForm.get('agentCode')?.touched)  &&
+                    agencyForm.get('agentCode')?.hasError('maxlength')"
+      >Mã đại lý không được vượt quá 5 ký tự!</span>
+    </div>
+  </div>
+</form>

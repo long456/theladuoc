@@ -1,1 +1,38 @@
-<p>agency-list works!</p>
+<div class="title-page">
+  Danh sách đại lý
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(agencyListPage$ | async) as agency">
+    <app-table
+      [rows]="agency.rows"
+      [page]="agency.page"
+      [pageSize]="agency.pageSize"
+      [pageTotal]="agency.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      [loading]="loading"
+    >
+      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="Mã đại lý" key="agentCode" [width]="'200px'"></table-column>
+      <table-column header="Tên học viên" key="fullName" [width]="'200px'"></table-column>
+      <table-column header="Số điện thoại" key="phoneNumber" [width]="'200px'"></table-column>
+      <table-column header="Email" key="email" [width]="'200px'"></table-column>
+      <table-column header="Mã học viên" key="codeUser" [width]="'200px'"></table-column>
+      <table-column header="Tổ chức" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          Chức năng
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action delete" (click)="disableAgency(data)"
+                nz-tooltip nzTooltipTitle="Hủy quyền đại lý">
+            <span nz-icon nzType="stop" nzTheme="outline" class="custom-icon"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

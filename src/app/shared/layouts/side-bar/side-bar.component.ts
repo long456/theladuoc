@@ -187,6 +187,11 @@ export class SideBarComponent implements OnInit {
               icon: '',
               link: 'page/e-learning-student/studying',
             },
+            {
+              name: 'Danh sách đại lý',
+              icon: '',
+              link: 'page/e-learning-student/agency',
+            },
           ]
         },
         {
