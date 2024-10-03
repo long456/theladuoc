@@ -512,6 +512,24 @@ export class SideBarComponent implements OnInit {
                 },
               ],
             },
+            {
+              name: 'platform_transfer',
+              icon: '',
+              link: '',
+              children: [
+                {
+                  name: 'price_list_config',
+                  icon: '',
+                  children: [
+                    {
+                      name: 'category',
+                      icon: '',
+                      link: 'page/price-list/catalog',
+                    }
+                  ]
+                },
+              ]
+            }
           ],
         },
       ],

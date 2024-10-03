@@ -35,6 +35,7 @@ export class CreateEventComponent implements OnInit{
       imagePath: [null,[Validators.required]],
       local: [null,[Validators.required]],
       link: [null,[Validators.required]],
+      description: [null],
       status: [1],
     });
 
