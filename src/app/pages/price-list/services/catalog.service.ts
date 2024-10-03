@@ -30,14 +30,14 @@ export class CatalogService {
   }
 
   getCatalogDetail(id: number): Observable<any>{
-    return this.http.get('CommunityCategory/' + id);
+    return this.http.get('Catalog/' + id);
   }
 
   createCatalog(data: Catalog): Observable<any>{
-    return this.http.post('CommunityCategory', data);
+    return this.http.post('Catalog', data);
   }
 
   updateCatalog(data: Catalog): Observable<any>{
-    return this.http.put('CommunityCategory', data);
+    return this.http.put('Catalog', data);
   }
 }

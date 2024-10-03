@@ -702,5 +702,8 @@
   "zoom_id": "ID of Zoom room",
   "zoom_link": "Zoom Link",
   "zoom_password": "Password of Zoom room",
-  "price_list_categories": "Price list categories"
+  "price_list_categories": "Price list categories",
+  "create_catalog": "Create a new price list category",
+  "update_catalog": "Updating the price list list",
+  "deactivate": "Deactivate"
 }

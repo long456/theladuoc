@@ -20,11 +20,11 @@
     >
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="{{ 'category_name' | translate }}" key="name" [width]="'200px'"></table-column>
+      <table-column header="{{ 'category_name' | translate }}" key="catalogName" [width]="'200px'"></table-column>
       <table-column header="{{ 'status' | translate }}" key="status" [width]="'200px'">
         <ng-template appCell let-data>
-          <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
-          <span class="text-invalid" *ngIf="!data.status">Tạm dừng</span>
+          <span class="text-valid" *ngIf="data.status">{{'activated' | translate}}</span>
+          <span class="text-invalid" *ngIf="!data.status">{{'deactivate' | translate}}</span>
         </ng-template>
       </table-column>
       <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>

@@ -5,6 +5,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CatalogListComponent } from './components/catalog/catalog-list/catalog-list.component';
 import { CatalogDetailComponent } from './components/catalog/catalog-detail/catalog-detail.component';
+import {NzSwitchModule} from "ng-zorro-antd/switch";
 
 
 
@@ -18,7 +19,8 @@ import { CatalogDetailComponent } from './components/catalog/catalog-detail/cata
     PriceListRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NzSwitchModule
   ]
 })
 export class PriceListModule { }
