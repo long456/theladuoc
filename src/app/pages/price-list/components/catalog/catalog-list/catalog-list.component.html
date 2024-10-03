@@ -1,0 +1,45 @@
+<div class="title-page">
+  {{'price_list_categories' | translate}}
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(catalogListPage$ | async) as catalog">
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+    <button nz-button class="add-btn" (click)="delete()">{{ 'remove' | translate }}</button>
+
+    <app-table
+      [rows]="catalog.rows"
+      [page]="catalog.page"
+      [pageSize]="catalog.pageSize"
+      [pageTotal]="catalog.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      (onItemSelection)="getItemSelection($event)"
+      [loading]="loading"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'category_name' | translate }}" key="name" [width]="'200px'"></table-column>
+      <table-column header="{{ 'status' | translate }}" key="status" [width]="'200px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
+          <span class="text-invalid" *ngIf="!data.status">Tạm dừng</span>
+        </ng-template>
+      </table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          {{ 'actions' | translate }}
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="{{'edit' | translate}}">
+            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

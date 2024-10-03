@@ -31,11 +31,11 @@
   "payment_verification": "Xác thực thanh toán",
   "refund_requests": "Yêu cầu hoàn tiền",
   "transaction_history": "Lịch sử thanh toán",
-  "withdraw_requests": "Danh sách yêu cầu rút tiền",
+  "withdraw_requests": "Yêu cầu rút tiền",
   "paid_at": "Ngày thanh toán",
   "membership": "Tư cách thành viên",
   "upgrade_requests": "Yêu cầu nâng hạng",
-  "upgrade_request_list": "Danh sách yêu cầu nâng hạng",
+  "upgrade_request_list": "Yêu cầu nâng hạng",
   "contact_request_list": "Danh sách yêu cầu liên hệ",
   "contact_requests": "Yêu cầu liên hệ",
   "email_logs": "Nhật ký gửi mail",
@@ -699,5 +699,6 @@
   "executing_staff": "Nhân viên thực thi",
   "name_code_campaign": "Tên/Mã chiến dịch",
   "total_budget": "Tổng ngân sách",
-  "staff_phone": "Số điện thoại nhân viên"
+  "staff_phone": "Số điện thoại nhân viên",
+  "price_list_categories": "Danh mục bảng giá"
 }
