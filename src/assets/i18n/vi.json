@@ -705,5 +705,7 @@
   "price_list_categories": "Danh mục bảng giá",
   "create_catalog": "Tạo mới danh mục bảng giá",
   "update_catalog": "Cập nhật danh mục bảng giá",
-  "deactivate": "Tạm dừng"
+  "deactivate": "Tạm dừng",
+  "platform_transfer": "Chuyển giao nền tảng",
+  "price_list_config": "Cấu hình bảng giá"
 }

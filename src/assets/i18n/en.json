@@ -705,5 +705,7 @@
   "price_list_categories": "Price list categories",
   "create_catalog": "Create a new price list category",
   "update_catalog": "Updating the price list list",
-  "deactivate": "Deactivate"
+  "deactivate": "Deactivate",
+  "platform_transfer": "Platform Transfer",
+  "price_list_config": "Price List Configuration"
 }

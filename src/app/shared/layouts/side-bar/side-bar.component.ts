@@ -513,16 +513,16 @@ export class SideBarComponent implements OnInit {
               ],
             },
             {
-              name: 'Chuyển giao nền tảng',
+              name: 'platform_transfer',
               icon: '',
               link: '',
               children: [
                 {
-                  name: 'Cấu hình bảng giá',
+                  name: 'price_list_config',
                   icon: '',
                   children: [
                     {
-                      name: 'Danh mục',
+                      name: 'category',
                       icon: '',
                       link: 'page/price-list/catalog',
                     }
