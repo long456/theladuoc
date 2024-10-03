@@ -687,7 +687,6 @@
   "website_setting_list": "Danh sách cấu hình website",
   "website_settings": "Cấu hình website",
   "wednesday": "Thứ 4",
-  "weekly": "Hàng tuần",
   "withdraw_requests": "Danh sách yêu cầu rút tiền",
   "withdrawal_limit": "Hạn mức rút tiền",
   "withdrawal_settings": "Cấu hình rút tiền",
@@ -701,5 +700,6 @@
   "zalo_messages_sent": "Đã gửi tin nhắn Zalo",
   "zoom_id": "ID phòng Zoom",
   "zoom_link": "Link Zoom",
-  "zoom_password": "Mật khẩu phòng Zoom"
+  "zoom_password": "Mật khẩu phòng Zoom",
+  "price_list_categories": "Danh mục bảng giá"
 }
