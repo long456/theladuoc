@@ -113,6 +113,7 @@ export class TransactionHistoryComponent implements OnInit {
             userReferralName: z.userReferralName,
             userReferralPhone: z.userReferralPhone,
             userReferralMail: z.userReferralMail,
+            userReferralCode: z.userReferralCode,
             userReferralMemberPolicyLevelName: z.userReferralMemberPolicyLevelName,
             userReferralAccountNumber: z.userReferralAccountNumber,
             userReferralBankName: z.userReferralBankName,
