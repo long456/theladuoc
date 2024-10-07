@@ -205,11 +205,6 @@ export class SideBarComponent implements OnInit {
               link: 'page/payment/refund',
             },
             {
-              name: 'Lịch sử thanh toán',
-              icon: '',
-              link: 'page/transaction-history',
-            },
-            {
               name: 'Yêu cầu rút tiền',
               icon: '',
               link: 'page/payment/withdraw',
@@ -221,6 +216,11 @@ export class SideBarComponent implements OnInit {
           icon: '',
           link: '',
           children: [
+            {
+              name: 'Lịch sử thanh toán',
+              icon: '',
+              link: 'page/transaction-history',
+            },
             {
               name: 'Yêu cầu nâng hạng',
               icon: '',
