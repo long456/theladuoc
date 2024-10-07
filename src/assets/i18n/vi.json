@@ -707,5 +707,10 @@
   "update_catalog": "Cập nhật danh mục bảng giá",
   "deactivate": "Tạm dừng",
   "platform_transfer": "Chuyển giao nền tảng",
-  "price_list_config": "Cấu hình bảng giá"
+  "price_list_config": "Cấu hình bảng giá",
+  "price_list": "Bảng giá",
+  "create_price_list": "Tạo mới bảng giá",
+  "update_price_list": "Cập nhât bảng giá",
+  "price_name": "Tên bảng giá",
+  "settlement_date": "Ngày kết toán trong tháng"
 }

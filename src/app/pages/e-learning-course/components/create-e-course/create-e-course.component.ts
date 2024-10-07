@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ECourseService } from '../../services/e-course.service';
 import { FileManagerService } from "../../../../shared/services/file-manager.service";
-import { take } from "rxjs";
+import {finalize, take} from "rxjs";
 import { config } from "../../../../shared/models/ckeditor";
 import { teacher } from 'src/app/pages/setting/models/course';
 import { CourseService } from 'src/app/pages/setting/services/course.service';
@@ -54,6 +54,7 @@ export class CreateECourseComponent implements OnInit {
     introVideo: 'Link video giới thiệu',
     imgBanner: 'Ảnh banner',
     isCertificate: 'Chứng chỉ',
+    certificateImage: 'Ảnh chứng chỉ',
     status: 'Trạng thái'
   };
 
@@ -62,6 +63,7 @@ export class CreateECourseComponent implements OnInit {
     description: 300,
     introVideo: 300,
   };
+  loading = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -104,6 +106,7 @@ export class CreateECourseComponent implements OnInit {
       introVideo: [null, [Validators.maxLength(this.maxlengthConfig.introVideo)]],
       imgBanner: [null],
       isCertificate: [false],
+      certificateImage: [null, [this.requireCerImgValidator()]],
       status: [1],
     },{validators: [this.validPriceCourse()]})
 
@@ -145,9 +148,20 @@ export class CreateECourseComponent implements OnInit {
     }
   }
 
+  requireCerImgValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const isValid = control.value === null || control.value === '';
+      const isCertificate = this.courseForm?.get('isCertificate')?.value === true
+      if (isValid && isCertificate) {
+        return {requireCerImg: true}
+      }
+      return null
+    }
+  }
+
   getErrorMessage(controlKey: string): string {
     const control = this.courseForm.get(controlKey);
-    if (control?.hasError('required')) {
+    if (control?.hasError('required') || control?.hasError('requireCerImg')) {
       return `${this.controlNames[controlKey as keyof typeof this.controlNames]} không được để trống!`;
     }
     if (control?.hasError('allowedValues')) {
@@ -163,22 +177,27 @@ export class CreateECourseComponent implements OnInit {
   edit(): void {
     this.isSubmit = true;
     if (this.courseForm.valid) {
+      const priceFields = ['price30Day', 'price90Day', 'price180Day', 'price365Day', 'priceForever'];
+
       const data = {
         ...this.courseForm.value,
         courseElearningId: this.courseElearningId,
         teacherId: parseInt(this.courseForm.get('teacherId')?.value),
         categoryId: parseInt(this.courseForm.get('categoryId')?.value),
         status: this.courseForm.get('status')?.value ? 1 : 0,
-        price30Day: this.courseForm.get('price30Day')?.value === '' ? null : this.courseForm.get('price30Day'),
-        price90Day: this.courseForm.get('price90Day')?.value === '' ? null : this.courseForm.get('price90Day'),
-        price180Day: this.courseForm.get('price180Day')?.value === '' ? null : this.courseForm.get('price180Day'),
-        price365Day: this.courseForm.get('price365Day')?.value === '' ? null : this.courseForm.get('price365Day'),
-        priceForever: this.courseForm.get('priceForever')?.value === '' ? null : this.courseForm.get('priceForever'),
+        ...Object.fromEntries(
+          priceFields.map(field => [field, this.courseForm.get(field)?.value || null])
+        )
       }
-      if (this.isCreate) {
+      this.loading = true;
+      const actionECourse = this.isCreate
+        ? this.eCourseService.createCourse(data)
+        : this.eCourseService.updateCourse(data);
 
-        this.eCourseService.createCourse(data).subscribe({
-          next: res => {
+      actionECourse
+        .pipe(finalize(() => this.loading = false))
+        .subscribe({
+          next: (res) => {
             if (res.success) {
               this.message.success(res.messages);
               this.navigateBack();
@@ -186,22 +205,10 @@ export class CreateECourseComponent implements OnInit {
               this.message.error(res.errorMessages);
             }
           },
-          error: err => {
-            this.message.error(err.error);
-          }
-        })
-      } else {
-        this.eCourseService.updateCourse(data).subscribe({
-          next: res => {
-            if (res.success) {
-              this.message.success(res.messages);
-              this.navigateBack();
-            } else {
-              this.message.error(res.errorMessages);
-            }
+          error: (err) => {
+            this.message.error(err);
           },
         });
-      }
     }
   }
 
@@ -210,29 +217,15 @@ export class CreateECourseComponent implements OnInit {
     this.isSpecialCourse = value == 3;
   }
 
-  selectFile(typeImg: string) {
+  selectFile(typeImg: 'thumbImg' | 'imgBanner' | 'certificateImage'):void {
     this.fileManagerService.selectFile();
     this.fileManagerService.selectedFile.pipe(take(1)).subscribe((data) => {
-      switch (typeImg) {
-        case ('thumbImg'):
-          this.courseForm.get('thumbImg')?.patchValue(data);
-          break;
-        case ('imgBanner'):
-          this.courseForm.get('imgBanner')?.patchValue(data);
-          break;
-      }
+      this.courseForm.get(typeImg)?.patchValue(data);
     });
   }
 
-  deleteImg(type: 'thumbImg' | 'imgBanner'): void {
-    switch (type) {
-      case ('thumbImg'):
-        this.courseForm.get('thumbImg')?.patchValue('');
-        break;
-      case ('imgBanner'):
-        this.courseForm.get('imgBanner')?.patchValue('');
-        break;
-    }
+  deleteImg(type: 'thumbImg' | 'imgBanner' | 'certificateImage'): void {
+    this.courseForm.get(type)?.patchValue('');
   }
 
   validPriceCourse(): ValidatorFn {

@@ -707,5 +707,10 @@
   "update_catalog": "Updating the price list list",
   "deactivate": "Deactivate",
   "platform_transfer": "Platform Transfer",
-  "price_list_config": "Price List Configuration"
+  "price_list_config": "Price List Configuration",
+  "price_list": "Price List",
+  "create_price_list": "Create a new price list",
+  "update_price_list": "Update price list",
+  "price_name": "The price list name",
+  "settlement_date": "Settlement date of the month"
 }

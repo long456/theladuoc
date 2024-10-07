@@ -6,13 +6,19 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CatalogListComponent } from './components/catalog/catalog-list/catalog-list.component';
 import { CatalogDetailComponent } from './components/catalog/catalog-detail/catalog-detail.component';
 import {NzSwitchModule} from "ng-zorro-antd/switch";
+import { PriceListComponent } from './components/price/price-list/price-list.component';
+import { PriceDetailComponent } from './components/price/price-detail/price-detail.component';
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 
 
 
 @NgModule({
   declarations: [
     CatalogListComponent,
-    CatalogDetailComponent
+    CatalogDetailComponent,
+    PriceListComponent,
+    PriceDetailComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +26,9 @@ import {NzSwitchModule} from "ng-zorro-antd/switch";
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzSelectModule,
+    NzInputNumberModule
   ]
 })
 export class PriceListModule { }

@@ -231,7 +231,35 @@
             </div>
           </div>
         </div>
+        <!-- Ảnh chứng chỉ -->
+        <div nz-col [nzXs]="24" [nzSm]="12">
+          <span class="text-label">{{controlNames.certificateImage}}</span>
+          <span class="text-danger message-error"
+              *ngIf="courseForm.get('certificateImage')?.hasError('requireCerImg') &&
+                    (courseForm.get('certificateImage')?.touched || isSubmit)">
+              Ảnh chứng chỉ không được để trống!
+          </span>
+          <div class="select-file">
+            <div class="btn-select-file" (click)="selectFile('certificateImage')" *ngIf="!courseForm.get('certificateImage')?.value">
+              <span nz-icon nzType="plus" nzTheme="outline"></span>
+              <div style="margin-top: 8px;">{{'upload' | translate}}</div>
+            </div>
+            <img class="img-preview" [src]="courseForm.get('certificateImage')?.value"
+                 *ngIf="courseForm.get('certificateImage')?.value">
 
+            <div class="overlay" *ngIf="courseForm.get('certificateImage')?.value">
+              <div class="btn-file">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}" (click)="selectFile('certificateImage')">
+                  <span nz-icon nzType="upload"></span>
+                </a>
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
+                   (click)="deleteImg('certificateImage')">
+                  <span nz-icon nzType="delete"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Link video giới thiệu -->
         <div nz-col [nzSpan]="24">
           <div nz-row>
@@ -401,7 +429,7 @@
 
         <div nz-col [nzSpan]="24">
           <div class="btn-panel">
-            <button class="btn primary" nz-button (click)="edit()">
+            <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
               <span *ngIf="isCreate">
                 {{'add_new'|translate}}
               </span>

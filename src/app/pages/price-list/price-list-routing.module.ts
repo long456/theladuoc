@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {CatalogListComponent} from "./components/catalog/catalog-list/catalog-list.component";
 import {CatalogDetailComponent} from "./components/catalog/catalog-detail/catalog-detail.component";
+import {PriceListComponent} from "./components/price/price-list/price-list.component";
+import {PriceDetailComponent} from "./components/price/price-detail/price-detail.component";
 
 
 const routes: Routes = [
@@ -31,6 +33,30 @@ const routes: Routes = [
         path: ':id',
         data: {isCreate: false},
         component: CatalogDetailComponent,
+      }
+    ]
+  },
+  {
+    path: 'price',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'list'
+      },
+      {
+        path: 'list',
+        component: PriceListComponent,
+      },
+      {
+        path: 'create',
+        data: {isCreate: true},
+        component: PriceDetailComponent,
+      },
+      {
+        path: ':id',
+        data: {isCreate: false},
+        component: PriceDetailComponent,
       }
     ]
   }
