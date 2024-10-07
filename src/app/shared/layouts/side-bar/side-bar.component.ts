@@ -206,11 +206,6 @@ export class SideBarComponent implements OnInit {
             },
             {
               icon: '',
-              link: 'page/transaction-history',
-              name: 'transaction_history',
-            },
-            {
-              icon: '',
               link: 'page/payment/withdraw',
               name: 'withdraw_requests',
             },
@@ -221,6 +216,11 @@ export class SideBarComponent implements OnInit {
           link: '',
           name: 'membership',
           children: [
+            {
+              icon: '',
+              link: 'page/transaction-history',
+              name: 'transaction_history',
+            },
             {
               icon: '',
               link: 'page/membership-policy/request-upgrade',
