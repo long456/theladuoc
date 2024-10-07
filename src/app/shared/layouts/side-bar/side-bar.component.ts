@@ -187,11 +187,6 @@ export class SideBarComponent implements OnInit {
               link: 'page/e-learning-student/studying',
               name: 'studying',
             },
-            {
-              icon: '',
-              link: 'page/e-learning-student/agency',
-              name: 'agencies',
-            },
           ],
         },
         {
@@ -234,7 +229,7 @@ export class SideBarComponent implements OnInit {
             {
               icon: '',
               link: 'page/e-learning-student/agency',
-              name: 'Danh sách đại lý',
+              name: 'agencies',
             },
           ],
         },
@@ -525,6 +520,11 @@ export class SideBarComponent implements OnInit {
                       name: 'category',
                       icon: '',
                       link: 'page/price-list/catalog',
+                    },
+                    {
+                      name: 'price_list',
+                      icon: '',
+                      link: 'page/price-list/price',
                     }
                   ]
                 },

@@ -40,4 +40,8 @@ export class CatalogService {
   updateCatalog(data: Catalog): Observable<any>{
     return this.http.put('Catalog', data);
   }
+
+  getAllCatalog(): Observable<any>{
+    return this.http.get('Catalog/get-all');
+  }
 }
