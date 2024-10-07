@@ -177,7 +177,8 @@ export class CreateECourseComponent implements OnInit {
   edit(): void {
     this.isSubmit = true;
     if (this.courseForm.valid) {
-      const priceFields = ['price30Day', 'price90Day', 'price180Day', 'price365Day', 'priceForever'];
+      const priceFields = ['price30Day', 'price90Day', 'price180Day', 'price365Day', 'priceForever',
+                           'price30DayOld', 'price90DayOld', 'price180DayOld', 'price365DayOld', 'priceForeverOld'];
 
       const data = {
         ...this.courseForm.value,
