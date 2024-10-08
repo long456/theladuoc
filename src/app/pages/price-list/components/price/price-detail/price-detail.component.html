@@ -61,7 +61,7 @@
 
       <ng-template #currencyTemplate>
         <nz-select formControlName="currency">
-          <nz-option *ngFor="let currency of currencyData" [nzLabel]="currency.code" [nzValue]="currency.key"></nz-option>
+          <nz-option *ngFor="let currency of currencyData" [nzLabel]="currency.code" [nzValue]="currency.code"></nz-option>
         </nz-select>
       </ng-template>
     </form>

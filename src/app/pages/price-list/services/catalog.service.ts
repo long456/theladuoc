@@ -42,6 +42,6 @@ export class CatalogService {
   }
 
   getAllCatalog(): Observable<any>{
-    return this.http.get('Catalog/get-all');
+    return this.http.get('');
   }
 }

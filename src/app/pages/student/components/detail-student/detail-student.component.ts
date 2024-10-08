@@ -10,8 +10,6 @@ import {StudentService} from "../../services/student.service";
 export class DetailStudentComponent implements OnInit{
 
   detailStudentForm!: FormGroup;
-
-  renderData = [];
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,
