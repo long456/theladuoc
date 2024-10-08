@@ -8,7 +8,7 @@ export class TransactionHistoryResponse {
 
     customerCode?: string;
 
-    customerEmail? : string;
+    customerEmail?: string;
 
     customerPhone?: string;
 
@@ -42,21 +42,25 @@ export class TransactionHistoryResponse {
 
     paymentMethodName?: string;
 
-    memberPolicyLevelName? : string;
+    memberPolicyLevelName?: string;
 
-    userCareName? : string;
+    userCareName?: string;
 
-    agencyName? : string;
+    agencyName?: string;
 
-    userReferralBankName? : string;
+    agencyCode?: string;
 
-    userReferralBankBranchName? : string;
+    userReferralBankName?: string;
 
-    userReferralPhone? : string;
+    userReferralBankBranchName?: string;
 
-    userReferralMail? : string;
+    userReferralPhone?: string;
 
-    userReferralAccountNumber? : string;
+    userReferralMail?: string;
 
-    userReferralMemberPolicyLevelName? : string;
+    userReferralAccountNumber?: string;
+
+    userReferralMemberPolicyLevelName?: string;
+
+    userReferralCode?: string;
 }

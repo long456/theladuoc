@@ -53,9 +53,11 @@ export class TransactionHistoryComponent implements OnInit {
           'Gói thành viên',
           'Số tiền đã thanh toán',
           'Thuộc đại lý',
+          'Mã đại lý',
           'Tên người giới thiệu',
           'Số điện thoại người giới thiệu',
           'Email người giới thiệu',
+          'Mã người giới thiệu',
           'Hạng thành viên người giới thiệu',
           'Số tài khoản người giới thiệu',
           'Ngân hàng người giới thiệu',
@@ -70,6 +72,8 @@ export class TransactionHistoryComponent implements OnInit {
         const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet([]);
 
         var wscols = [
+          { width: 20 },
+          { width: 20 },
           { width: 20 },
           { width: 20 },
           { width: 20 },
@@ -105,9 +109,11 @@ export class TransactionHistoryComponent implements OnInit {
             priceMemberPolicyTypeName: z.priceMemberPolicyTypeName,
             price: z.price,
             agencyName: z.agencyName,
+            agencyCode: z.agencyCode,
             userReferralName: z.userReferralName,
             userReferralPhone: z.userReferralPhone,
             userReferralMail: z.userReferralMail,
+            userReferralCode: z.userReferralCode,
             userReferralMemberPolicyLevelName: z.userReferralMemberPolicyLevelName,
             userReferralAccountNumber: z.userReferralAccountNumber,
             userReferralBankName: z.userReferralBankName,
