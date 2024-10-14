@@ -36,8 +36,12 @@
       <table-column header="{{ 'note_content' | translate }}" key="reasonContent" [width]="'200px'"></table-column>
       <table-column header="{{ 'status' | translate }}" key="verifyPay" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-valid" *ngIf="data.verifyPay">Đã xử lý</span>
-          <span class="text-invalid" *ngIf="!data.verifyPay">Chưa xử lý</span>
+          <span class="text-valid" *ngIf="data.verifyPay">
+            {{'processed' | translate}}
+          </span>
+          <span class="text-invalid" *ngIf="!data.verifyPay">
+            {{'pending' | translate}}
+          </span>
         </ng-template>
       </table-column>
       <table-column [width]="'180px'" fixColumn="right" >
@@ -48,14 +52,14 @@
         <ng-template appCell let-data>
           <span class="custom-action" *ngIf="data.receiptImage">
             <span
-              nzTooltipTitle="Xem ảnh" nzTooltipPlacement="top" nz-tooltip
+              nzTooltipTitle="{{'view_image' | translate}}" nzTooltipPlacement="top" nz-tooltip
               nz-icon nzType="picture" nzTheme="outline" (click)="showImg(data)">
             </span>
           </span>
 
           <span class="custom-action" *ngIf="!data.verifyPay">
             <span
-              nzTooltipTitle="Xác nhận" nzTooltipPlacement="top" nz-tooltip
+              nzTooltipTitle="{{'confirm' | translate}}" nzTooltipPlacement="top" nz-tooltip
               nz-icon nzType="check" nzTheme="outline" (click)="verifyPayment(data, tplContent)">
             </span>
           </span>
@@ -68,10 +72,10 @@
 <ng-template #tplContent let-params>
   <div nz-row (paste)="onPaste($event)">
     <div nz-col [nzSpan]="24">
-      <span>Upload ảnh ủy nhiệm chi</span>
+      <span>{{'upload' | translate}} {{'proof_of_payment_image' | translate}}</span>
       <label for="file" class="upload">
         <span nz-icon nzType="upload" nzTheme="outline"></span>
-        Ảnh ủy nhiệm chi
+        {{'proof_of_payment_image' | translate}}
         <div class="file-name">{{nameFilePreview}}</div>
       </label>
       <input type="file" (change)="uploadFile($event)"

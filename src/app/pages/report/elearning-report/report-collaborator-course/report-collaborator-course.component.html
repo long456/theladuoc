@@ -29,7 +29,7 @@
                                 <div style="width: 80%;display: flex;">
                                     <nz-date-picker nzMode="year" formControlName="quarterYearCtrl"
                                         [nzAllowClear]="true" class="min-width-140 mg-r-10"></nz-date-picker>
-                                    <nz-select nzPlaceHolder="---Chọn---" formControlName="quarterOfYearCtrl"
+                                    <nz-select nzPlaceHolder="---{{'pick' | translate }}---" formControlName="quarterOfYearCtrl"
                                         [nzAllowClear]="true" class="min-width-140">
                                         <nz-option *ngFor="let option of lstQuarterOfYear" [nzValue]="option.value"
                                             [nzLabel]="option.label"></nz-option>
@@ -81,8 +81,12 @@
                 <th nzWidth="180px" nzColumnKey="numberOfLearners100Percent" [nzSortFn]="true" nzAlign="center">Số người
                     học 100%</th>
                 <th nzWidth="180px" nzAlign="center">{{ 'teacher_name' | translate }}</th>
-                <th nzWidth="180px" nzAlign="center">Số điện thoại</th>
-                <th nzWidth="180px" nzAlign="center">Tổ chức</th>
+                <th nzWidth="180px" nzAlign="center">
+                    {{'phone_number' | translate }}
+                </th>
+                <th nzWidth="180px" nzAlign="center">
+                    {{ 'organization' | translate }}
+                </th>
                 <th [nzRight]="true" nzWidth="120px" nzAlign="center">{{ 'actions' | translate }}</th>
             </tr>
         </thead>

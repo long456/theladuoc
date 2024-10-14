@@ -3,7 +3,9 @@
 </div>
 
 <div class="header-btn">
-  <button nz-button class="add-btn primary" (click)="create()">Tạo mới</button>
+  <button nz-button class="add-btn primary" (click)="create()">
+    {{'add_new' | translate}}
+  </button>
   <ng-container *ngIf="(loyalty$ | async) as loyalty">
 
     <app-table

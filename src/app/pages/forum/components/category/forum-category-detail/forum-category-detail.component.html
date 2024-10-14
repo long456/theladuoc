@@ -1,5 +1,13 @@
 <div class="title-page">
-  {{isCreate? 'Tạo mới danh mục cộng đồng' : 'Chỉnh sửa danh mục cộng đồng'}}
+  <span *ngIf="isCreate">
+    {{'add_new'|translate}}
+  </span>
+  <span *ngIf="!isCreate">
+    {{'modify'|translate}}
+  </span>
+  <span>
+    {{'community_category' | translate}}
+  </span>
 </div>
 
 <div nz-row>
@@ -11,12 +19,10 @@
             {{'category_name' | translate }}
             <span class="text-danger">*</span>
           </span>
-          <input nz-input autofocus formControlName="name"
-                 [nzStatus]="(forumCategoryForm.get('name')?.invalid &&
+          <input nz-input autofocus formControlName="name" [nzStatus]="(forumCategoryForm.get('name')?.invalid &&
                              (forumCategoryForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-                *ngIf="(forumCategoryForm.get('name')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(forumCategoryForm.get('name')?.touched || isSubmit)  &&
                         forumCategoryForm.get('name')?.hasError('required')">
             {{'category_name' | translate }} {{'cannot_blank' | translate}}!
           </span>
@@ -24,13 +30,12 @@
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Đường dẫn ảnh banner
+          {{'banner_link'}} 
             <span class="text-danger">*</span>
           </span>
 
           <div class="select-url">
-            <input nz-input [value]="forumCategoryForm.get('banner')?.value" formControlName="banner"
-                   [nzStatus]="(forumCategoryForm.get('banner')?.invalid &&
+            <input nz-input [value]="forumCategoryForm.get('banner')?.value" formControlName="banner" [nzStatus]="(forumCategoryForm.get('banner')?.invalid &&
                                (forumCategoryForm.get('banner')?.touched || isSubmit)) ?
                                'error' : ''">
 
@@ -39,21 +44,20 @@
             </button>
           </div>
 
-          <span class="text-danger"
-                *ngIf="(forumCategoryForm.get('banner')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(forumCategoryForm.get('banner')?.touched || isSubmit)  &&
                         forumCategoryForm.get('banner')?.hasError('required')">
-            Đường dẫn ảnh banner {{'cannot_blank' | translate}}!
+            {{'banner_link'}} {{'cannot_blank' | translate}}!
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8" >
+        <div nz-col [nzSpan]="8">
           <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">Thứ tự</div>
+          <div class="text-label">{{'order' | translate}}</div>
           <nz-input-number style="width: 100%" formControlName="number" [nzMin]="0" [nzStep]="1">
           </nz-input-number>
         </div>
@@ -61,7 +65,9 @@
         <div nz-col [nzSpan]="8"></div>
 
         <div nz-col [nzSpan]="16">
-          <div class="text-label">Mô tả ngắn</div>
+          <div class="text-label">
+            {{'short_description' | translate}}
+          </div>
           <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="shortDescription"></textarea>
         </div>
       </div>
@@ -71,7 +77,7 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
-        Lưu
+        {{'save'|translate}}
       </button>
       <button class="btn" nz-button (click)="navigateBack()">
         {{'cancel'|translate}}
@@ -79,4 +85,3 @@
     </div>
   </div>
 </div>
-

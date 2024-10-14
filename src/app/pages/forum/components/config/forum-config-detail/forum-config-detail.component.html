@@ -1,5 +1,5 @@
 <div class="title-page">
-  Cấu hình diễn đàn cộng đồng
+  {{'forum_settings' | translate}}
 </div>
 
 <div nz-row>
@@ -8,37 +8,34 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Tên diễn đàn
+            {{ 'forum_name' | translate }}
             <span class="text-danger">*</span>
           </span>
-          <input nz-input autofocus formControlName="name"
-                 [nzStatus]="(forumConfigForm.get('name')?.invalid &&
+          <input nz-input autofocus formControlName="name" [nzStatus]="(forumConfigForm.get('name')?.invalid &&
                              (forumConfigForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-                *ngIf="(forumConfigForm.get('name')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(forumConfigForm.get('name')?.touched || isSubmit)  &&
                         forumConfigForm.get('name')?.hasError('required')">
-            Tên diễn đàn {{'cannot_blank' | translate}}!
+            {{'forum_name' | translate }} {{'cannot_blank' | translate}}!
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8" >
+        <div nz-col [nzSpan]="8">
           <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
 
-        <div nz-col [nzSpan]="8" ></div>
+        <div nz-col [nzSpan]="8"></div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Đường dẫn ảnh logo
+            {{'logo_link' | translate}}
             <span class="text-danger">*</span>
           </span>
 
           <div class="select-url">
-            <input nz-input [value]="forumConfigForm.get('logo')?.value" formControlName="logo"
-                   [nzStatus]="(forumConfigForm.get('logo')?.invalid &&
+            <input nz-input [value]="forumConfigForm.get('logo')?.value" formControlName="logo" [nzStatus]="(forumConfigForm.get('logo')?.invalid &&
                                (forumConfigForm.get('logo')?.touched || isSubmit)) ?
                                'error' : ''">
 
@@ -47,22 +44,21 @@
             </button>
           </div>
 
-          <span class="text-danger"
-                *ngIf="(forumConfigForm.get('logo')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(forumConfigForm.get('logo')?.touched || isSubmit)  &&
                         forumConfigForm.get('logo')?.hasError('required')">
-            Đường dẫn ảnh logo {{'cannot_blank' | translate}}!
+            {{'logo_link' | translate}}
+            {{'cannot_blank' | translate}}!
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Đường dẫn ảnh banner
+            {{ 'banner_link' | translate }}
             <span class="text-danger">*</span>
           </span>
 
           <div class="select-url">
-            <input nz-input [value]="forumConfigForm.get('banner')?.value" formControlName="banner"
-                   [nzStatus]="(forumConfigForm.get('banner')?.invalid &&
+            <input nz-input [value]="forumConfigForm.get('banner')?.value" formControlName="banner" [nzStatus]="(forumConfigForm.get('banner')?.invalid &&
                                (forumConfigForm.get('banner')?.touched || isSubmit)) ?
                                'error' : ''">
 
@@ -71,10 +67,9 @@
             </button>
           </div>
 
-          <span class="text-danger"
-                *ngIf="(forumConfigForm.get('banner')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(forumConfigForm.get('banner')?.touched || isSubmit)  &&
                         forumConfigForm.get('banner')?.hasError('required')">
-            Đường dẫn ảnh banner {{'cannot_blank' | translate}}!
+            {{ 'banner_link' | translate }} {{'cannot_blank' | translate}}!
           </span>
         </div>
       </div>
@@ -84,11 +79,11 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
-        Lưu
+        {{'save' | translate}}
       </button>
       <button class="btn" nz-button (click)="navigateBack()">
         {{'cancel'|translate}}
-</button>
+      </button>
     </div>
   </div>
 </div>

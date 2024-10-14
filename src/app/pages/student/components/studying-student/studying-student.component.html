@@ -1,5 +1,5 @@
 <div class="title-page">
-  Danh sách học viên đang học
+  {{'studying_learners' | translate}}
 </div>
 
 <div class="header-btn">
@@ -35,18 +35,18 @@
       </table-column>
       <table-column header="{{ 'payment_status' | translate }}" key="isPay" [width]="'180px'">
         <ng-template appCell let-data>
-          <span *ngIf="data.isPay === 0">Chưa thanh toán</span>
-          <span *ngIf="data.isPay === 1">Đã thanh toán</span>
-          <span *ngIf="data.isPay === 2">Thanh toán một phần</span>
-          <span *ngIf="data.isPay === 3">Thanh toán thừa</span>
-          <span *ngIf="data.isPay === 4">Hoàn học phí</span>
-          <span *ngIf="data.isPay === 5">Hoàn tiền thừa</span>
+          <span *ngIf="data.isPay === 0">{{'unpaid' | translate}}</span>
+          <span *ngIf="data.isPay === 1">{{'fully_paid' | translate}}</span>
+          <span *ngIf="data.isPay === 2">{{'partial_paid' | translate}}</span>
+          <span *ngIf="data.isPay === 3">{{'over_paid' | translate}}</span>
+          <span *ngIf="data.isPay === 4">{{'tutiton_refunded' | translate}}</span>
+          <span *ngIf="data.isPay === 5">{{'excess_refunded' | translate}}</span>
         </ng-template>
       </table-column>
       <table-column header="{{ 'payment_verification' | translate }}" key="isVerifyPay" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-invalid" *ngIf="!data.isVerifyPay">Chưa xác thực</span>
-          <span class="text-valid" *ngIf="data.isVerifyPay">Đã xác thực</span>
+          <span class="text-invalid" *ngIf="!data.isVerifyPay">{{'unverified' | translate}}</span>
+          <span class="text-valid" *ngIf="data.isVerifyPay">{{'verified' | translate}}</span>
         </ng-template>
       </table-column>
       <table-column header="{{ 'class' | translate }}" key="className" [width]="'180px'"></table-column>
@@ -60,7 +60,7 @@
       <table-column header="{{ 'teacher_name' | translate }}" key="lecturerName" [width]="'180px'"></table-column>
 <!--      <table-column header="{{ 'tags' | translate }}" key="tagNote" [width]="'220px'">-->
 <!--        <ng-template appCell let-data>-->
-<!--          <nz-select style="display: block" nzPlaceHolder="Chọn thẻ tag" [ngModel]="data.tagNote"-->
+<!--          <nz-select style="display: block" nzPlaceHolder="{{'pick_a_tag' | translate}}" [ngModel]="data.tagNote"-->
 <!--                     [nzCustomTemplate]="selectTag" nzBorderless (ngModelChange)="onTagChange($event, data)">-->
 <!--            <nz-option *ngFor="let tag of li{{ 'no' | translate }}ag" nzCustomContent-->
 <!--                       [nzValue]="tag.value" [nzLabel]="tag.title" [nzTitle]="tag.color">-->
@@ -86,7 +86,7 @@
           </span>
 
           <span class="custom-action" (click)="refundPayment(data)"
-                nz-tooltip nzTooltipTitle="Hoàn học phí">
+                nz-tooltip nzTooltipTitle="{{'tutiton_refunded' | translate}}">
             <span nz-icon nzType="undo" nzTheme="outline"></span>
           </span>
         </ng-template>
