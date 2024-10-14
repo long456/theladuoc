@@ -13,6 +13,8 @@ import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import { BenefitListComponent } from './components/benefit-group/benefit-list/benefit-list.component';
 import { BenefitDetailComponent } from './components/benefit-group/benefit-detail/benefit-detail.component';
 import { BenefitConfigComponent } from './components/catalog/benefit-config/benefit-config.component';
+import { BusinessAccessListComponent } from './components/business-access/business-access-list/business-access-list.component';
+import { BusinessAccessDetailComponent } from './components/business-access/business-access-detail/business-access-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { BenefitConfigComponent } from './components/catalog/benefit-config/bene
     BenefitListComponent,
     BenefitDetailComponent,
     BenefitConfigComponent,
+    BusinessAccessListComponent,
+    BusinessAccessDetailComponent,
   ],
   imports: [
     CommonModule,

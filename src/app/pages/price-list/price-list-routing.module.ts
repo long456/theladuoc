@@ -7,6 +7,12 @@ import {PriceDetailComponent} from "./components/price/price-detail/price-detail
 import {BenefitListComponent} from "./components/benefit-group/benefit-list/benefit-list.component";
 import {BenefitDetailComponent} from "./components/benefit-group/benefit-detail/benefit-detail.component";
 import {BenefitConfigComponent} from "./components/catalog/benefit-config/benefit-config.component";
+import {
+  BusinessAccessListComponent
+} from "./components/business-access/business-access-list/business-access-list.component";
+import {
+  BusinessAccessDetailComponent
+} from "./components/business-access/business-access-detail/business-access-detail.component";
 
 const routes: Routes = [
   {
@@ -71,6 +77,30 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: 'business-access',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'list'
+      },
+      {
+        path: 'list',
+        component: BusinessAccessListComponent,
+      },
+      {
+        path: 'create',
+        data: {isCreate: true},
+        component: BusinessAccessDetailComponent,
+      },
+      {
+        path: ':id',
+        data: {isCreate: false},
+        component: BusinessAccessDetailComponent,
+      }
+    ]
+  }
   // {
   //   path: 'benefit-group',
   //   children: [

@@ -57,7 +57,7 @@
                                   'error' : ''"
           >
             <nz-option *ngFor="let catalog of catalogList"
-                       [nzLabel]="catalog.catalogName" [nzValue]="catalog.id"
+                       [nzLabel]="catalog.catalogName" [nzValue]="catalog.catalogId"
             ></nz-option>
           </nz-select>
 
@@ -72,7 +72,7 @@
               {{'price_one_year' | translate }}
             </span>
           <nz-input-group [nzAddOnAfter]="currencyTemplate" nzCompact>
-            <nz-input-number [nzMin]="1" formControlName="priceValueSix" style="width: 100%"
+            <nz-input-number [nzMin]="1" formControlName="priceValueYear" style="width: 100%"
                              [nzStatus]="(priceForm.get('priceValueYear')?.invalid &&
                                          (priceForm.get('priceValueYear')?.touched || isSubmit)) ?
                                           'error' : ''"

@@ -58,7 +58,7 @@ export class PriceDetailComponent implements OnInit{
     this.catalogService.getAllCatalog().subscribe({
       next: res => {
         if (res.success) {
-          this.catalogList = res.data;
+          this.catalogList = res.data.listCatalog;
         } else {
           this.message.error(res.errorMessages);
         }
@@ -97,7 +97,7 @@ export class PriceDetailComponent implements OnInit{
     this.loading = true;
     const actionPrice = this.isCreate
       ? this.priceService.createPrice(catalog)
-      : this.priceService.updatePrice({ ...catalog, id: Number(this.priceId) });
+      : this.priceService.updatePrice({ ...catalog, priceListId: Number(this.priceId) });
 
     actionPrice
       .pipe(finalize(() => this.loading = false))

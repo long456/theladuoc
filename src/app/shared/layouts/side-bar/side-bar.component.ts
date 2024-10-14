@@ -526,6 +526,11 @@ export class SideBarComponent implements OnInit {
                       icon: '',
                       link: 'page/price-list/price',
                     },
+                    // {
+                    //   name: 'business_empower',
+                    //   icon: '',
+                    //   link: 'page/price-list/business-access',
+                    // }
                   ]
                 },
               ]

@@ -1,5 +1,5 @@
 export interface Price {
-  id?: number;
+  priceListId?: number;
   priceListName: string;
   priceValueSix: number;
   priceValueYear: number;
