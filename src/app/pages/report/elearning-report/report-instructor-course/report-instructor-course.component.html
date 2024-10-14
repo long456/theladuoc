@@ -29,7 +29,7 @@
                                 <div style="width: 80%;display: flex;">
                                     <nz-date-picker nzMode="year" formControlName="quarterYearCtrl"
                                         [nzAllowClear]="true" class="min-width-140 mg-r-10"></nz-date-picker>
-                                    <nz-select nzPlaceHolder="---Chọn---" formControlName="quarterOfYearCtrl"
+                                    <nz-select nzPlaceHolder="---{{'pick' | translate }}---" formControlName="quarterOfYearCtrl"
                                         [nzAllowClear]="true" class="min-width-140">
                                         <nz-option *ngFor="let option of lstQuarterOfYear" [nzValue]="option.value"
                                             [nzLabel]="option.label"></nz-option>
@@ -93,13 +93,48 @@
                     <td [nzLeft]="true">{{i + 1 + ((currentPage - 1) * pageSize)}} </td>
                     <!-- <td> {{ data.funnelCourseDate | date: 'dd-MM-yyy'}} </td> -->
                     <td nzAlign="center" [nzLeft]="true"> {{ data.courseElearningName }} </td>
-                    <td nzAlign="right"> {{ data.numberOfRegistrations }} </td>
-                    <td nzAlign="right"> {{ data.numberOfLearners5Percent }} </td>
-                    <td nzAlign="right"> {{ data.numberOfLearners25Percent }} </td>
-                    <td nzAlign="right"> {{ data.numberOfLearners50Percent }} </td>
-                    <td nzAlign="right"> {{ data.numberOfLearners75Percent }}</td>
-                    <td nzAlign="right"> {{ data.numberOfLearners90Percent }} </td>
-                    <td nzAlign="right"> {{ data.numberOfLearners100Percent }} </td>
+                    <td nzAlign="right">
+                        <span class="cursor-pointer"
+                            (click)="openListStudentsDialog(data.numberOfRegistrations ,data.courseElearningId)">
+                            {{ data.numberOfRegistrations }}
+                        </span>
+                    </td>
+                    <td nzAlign="right">
+                        <span class="cursor-pointer"
+                            (click)="openListStudentsDialog(data.numberOfLearners5Percent,data.courseElearningId, false,false,false,false,false,true)">
+                            {{ data.numberOfLearners5Percent }}
+                        </span>
+                    </td>
+                    <td nzAlign="right">
+                        <span class="cursor-pointer"
+                            (click)="openListStudentsDialog(data.numberOfLearners25Percent,data.courseElearningId, false,false,false,false,true)">
+                            {{ data.numberOfLearners25Percent }}
+                        </span>
+                    </td>
+                    <td nzAlign="right">
+                        <span class="cursor-pointer"
+                            (click)="openListStudentsDialog(data.numberOfLearners50Percent,data.courseElearningId, false,false,false,true)">
+                            {{ data.numberOfLearners50Percent }}
+                        </span>
+                    </td>
+                    <td nzAlign="right">
+                        <span class="cursor-pointer"
+                            (click)="openListStudentsDialog(data.numberOfLearners75Percent,data.courseElearningId, false,false, true)">
+                            {{ data.numberOfLearners75Percent }}
+                        </span>
+                    </td>
+                    <td nzAlign="right">
+                        <span class="cursor-pointer"
+                            (click)="openListStudentsDialog(data.numberOfLearners90Percent,data.courseElearningId, false, true)">
+                            {{ data.numberOfLearners90Percent }}
+                        </span>
+                    </td>
+                    <td nzAlign="right">
+                        <span class="cursor-pointer"
+                            (click)="openListStudentsDialog(data.numberOfLearners100Percent,data.courseElearningId, true)">
+                            {{ data.numberOfLearners100Percent }}
+                        </span>
+                    </td>
                     <td nzAlign="center"> {{ data.speakerName }} </td>
                     <td nzAlign="center"> {{ data.phoneNumber }} </td>
                     <td nzAlign="center"> {{ data.organizationName }} </td>

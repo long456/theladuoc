@@ -44,8 +44,8 @@
       </table-column>
       <table-column header="{{ 'payment_status' | translate }}" key="paymentStatus" [width]="'180px'">
         <ng-template appCell let-data>
-          <span *ngIf="data.paymentStatus === 0">Chưa thanh toán</span>
-          <span *ngIf="data.paymentStatus === 1">Đã thanh toán</span>
+          <span *ngIf="data.paymentStatus === 0">{{'unpaid' | translate}}</span>
+          <span *ngIf="data.paymentStatus === 1">{{'fully_paid' | translate}}</span>
           <span *ngIf="data.paymentStatus === 2">Lỗi thanh toán</span>
           <span *ngIf="data.paymentStatus === 3">Huỷ thanh toán</span>
         </ng-template>

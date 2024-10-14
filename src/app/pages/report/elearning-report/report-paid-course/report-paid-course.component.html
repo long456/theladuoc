@@ -29,7 +29,7 @@
                                 <div style="width: 80%;display: flex;">
                                     <nz-date-picker nzMode="year" formControlName="quarterYearCtrl"
                                         class="min-width-140 mg-r-10"></nz-date-picker>
-                                    <nz-select nzPlaceHolder="---Chọn---" formControlName="quarterOfYearCtrl"
+                                    <nz-select nzPlaceHolder="---{{'pick' | translate }}---" formControlName="quarterOfYearCtrl"
                                         class="min-width-140">
                                         <nz-option *ngFor="let option of lstQuarterOfYear" [nzValue]="option.value"
                                             [nzLabel]="option.label"></nz-option>

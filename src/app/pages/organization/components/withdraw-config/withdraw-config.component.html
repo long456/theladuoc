@@ -1,5 +1,5 @@
 <div class="title-page">
-  Cấu hình rút tiền
+  {{'withdrawal_settings' | translate}}
 </div>
 
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
@@ -8,34 +8,34 @@
       <div nz-row [nzGutter]="[16, 16]">
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Khoảng thời gian rút tiền định kỳ
+            {{'recurring_withdrawal_period' | translate}}
           </span>
 
           <nz-select formControlName="withdrawMoneyType" style="display: block">
-            <nz-option [nzValue]="1" [nzLabel]="'Hàng tuần'"></nz-option>
-            <nz-option [nzValue]="2" [nzLabel]="'Hàng tháng'"></nz-option>
+            <nz-option [nzValue]="1" [nzLabel]="'weekly' | translate"></nz-option>
+            <nz-option [nzValue]="2" [nzLabel]="'monthly' | translate"></nz-option>
           </nz-select>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" *ngIf="withdrawForm.get('withdrawMoneyType')?.value === 1">
           <span class="text-label">
-            Chọn thứ trong tuần
+            {{'pick_a_day_in_a_week' | translate}}
           </span>
 
           <nz-select formControlName="dayOfWeek" style="display: block">
-            <nz-option [nzValue]="1" [nzLabel]="'Chủ nhật'"></nz-option>
-            <nz-option [nzValue]="2" [nzLabel]="'Thứ 2'"></nz-option>
-            <nz-option [nzValue]="3" [nzLabel]="'Thứ 3'"></nz-option>
-            <nz-option [nzValue]="4" [nzLabel]="'Thứ 4'"></nz-option>
-            <nz-option [nzValue]="5" [nzLabel]="'Thứ 5'"></nz-option>
-            <nz-option [nzValue]="6" [nzLabel]="'Thứ 6'"></nz-option>
-            <nz-option [nzValue]="7" [nzLabel]="'Thứ 7'"></nz-option>
+            <nz-option [nzValue]="1" [nzLabel]="'sunday' | translate"></nz-option>
+            <nz-option [nzValue]="2" [nzLabel]="'monday' | translate"></nz-option>
+            <nz-option [nzValue]="3" [nzLabel]="'tuesday' | translate"></nz-option>
+            <nz-option [nzValue]="4" [nzLabel]="'wednesday' | translate"></nz-option>
+            <nz-option [nzValue]="5" [nzLabel]="'thursday' | translate"></nz-option>
+            <nz-option [nzValue]="6" [nzLabel]="'friday' | translate"></nz-option>
+            <nz-option [nzValue]="7" [nzLabel]="'saturday' | translate"></nz-option>
           </nz-select>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" *ngIf="withdrawForm.get('withdrawMoneyType')?.value === 2">
           <span class="text-label">
-            Chọn ngày trong tháng
+            {{'pick_a_day_in_a_month' | translate }}
           </span>
 
           <nz-input-number formControlName="dayOfMonth" [nzMin]="1" [nzMax]="31" [nzStep]="1"></nz-input-number>
@@ -45,53 +45,39 @@
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Hạn mức rút tiền
+            {{'withdrawal_limit' | translate}}
           </span>
 
-          <nz-input-number-group nzSuffix="VND" style="width: 100%"
-                                 [nzStatus]="(withdrawForm.get('minimumWithdrawLimit')?.invalid &&
+          <nz-input-number-group nzSuffix="VND" style="width: 100%" [nzStatus]="(withdrawForm.get('minimumWithdrawLimit')?.invalid &&
                                              (withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit)) ?
                                              'error' : ''">
-            <nz-input-number
-              formControlName="minimumWithdrawLimit"
-              [nzMin]="0"
-              [nzStep]="1000"
-              [nzFormatter]="formatterCurrency">
+            <nz-input-number formControlName="minimumWithdrawLimit" [nzMin]="0" [nzStep]="1000" [nzFormatter]="formatterCurrency">
             </nz-input-number>
           </nz-input-number-group>
 
-          <span
-            class="text-danger error-message"
-            *ngIf="(withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit) &&
+          <span class="text-danger error-message" *ngIf="(withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit) &&
                     withdrawForm.get('minimumWithdrawLimit')?.hasError('min')">
-                Hạn mức rút tiền không thể nhỏ hơn hoặc bằng 0 vnđ!
+            {{'withdrawal_limit' | translate}} {{'cannot_lower_0' | translate}} vnđ!
           </span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
           <span class="text-label">
-            Hạn mức ứng tiền
+            {{'advance_limit' | translate}}
           </span>
 
           <nz-input-number-group nzSuffix="%" style="width: 100%">
-            <nz-input-number
-              formControlName="maximumAdvanceLimit"
-              [nzMin]="0"
-              [nzMax]="100"
-              [nzStep]="1">
+            <nz-input-number formControlName="maximumAdvanceLimit" [nzMin]="0" [nzMax]="100" [nzStep]="1">
             </nz-input-number>
           </nz-input-number-group>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="16" [nzMd]="16">
           <span class="text-label">
-            Mô tả
+            {{'description' | translate}}
           </span>
 
-          <textarea
-            nz-input formControlName="withdrawMoneyDesc"
-            placeholder="Mô tả ngắn"
-            [nzAutosize]="{ minRows: 3}">
+          <textarea nz-input formControlName="withdrawMoneyDesc" placeholder="{{'description' | translate}}" [nzAutosize]="{ minRows: 3}">
           </textarea>
         </div>
       </div>
@@ -101,11 +87,11 @@
   <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="4" [nzLg]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        Lưu
+        {{'save' | translate}}
       </button>
       <button class="btn" nz-button (click)="navigateBack()">
         {{'cancel'|translate}}
-</button>
+      </button>
     </div>
   </div>
 </div>

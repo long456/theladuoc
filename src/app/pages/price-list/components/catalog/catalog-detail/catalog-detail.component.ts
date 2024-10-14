@@ -16,8 +16,7 @@ export class CatalogDetailComponent implements OnInit {
   catalogId!: number;
   isCreate: boolean = false;
   isSubmit: boolean = false;
-  loading = false;
-
+  loading: boolean = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -72,7 +71,7 @@ export class CatalogDetailComponent implements OnInit {
     this.loading = true;
     const actionCatalog = this.isCreate
       ? this.catalogService.createCatalog(catalog)
-      : this.catalogService.updateCatalog({ ...catalog, id: Number(this.catalogId) });
+      : this.catalogService.updateCatalog({ ...catalog, catalogId: Number(this.catalogId) });
 
     actionCatalog
       .pipe(finalize(() => this.loading = false))

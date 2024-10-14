@@ -89,5 +89,9 @@ export class CatalogListComponent implements OnInit{
     this.router.navigate(["page/price-list/catalog/create"]).then();
   }
 
+  benefitConfig(data: any): void {
+    this.router.navigate(["page/price-list/catalog/benefit-config/" + data.id]).then();
+  }
+
   delete():void {}
 }

@@ -28,8 +28,12 @@
       <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column header="{{ 'status' | translate }}" key="status" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-valid" *ngIf="data.status">Đang hoạt động</span>
-          <span class="text-invalid" *ngIf="!data.status">Không hoạt động</span>
+          <span class="text-valid" *ngIf="data.status">
+            {{'running' | translate}}
+          </span>
+          <span class="text-invalid" *ngIf="!data.status">
+            {{'stopped' | translate}}
+          </span>
         </ng-template>
       </table-column>
 

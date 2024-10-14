@@ -1,5 +1,5 @@
 <div class="title-page">
-  Cấu hình video giới thiệu
+  {{'intro_video_settings' | translate}}
 </div>
 
 <div nz-row>
@@ -8,12 +8,11 @@
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
           <span class="text-label">
-            Đường dẫn ảnh banner
+            {{'banner_link' | translate}}
           </span>
 
           <div class="select-url">
-            <input nz-input [value]="introVideoForm.get('bannerVideoIntroElearning')?.value"
-                   formControlName="bannerVideoIntroElearning">
+            <input nz-input [value]="introVideoForm.get('bannerVideoIntroElearning')?.value" formControlName="bannerVideoIntroElearning">
 
             <button nz-button nzType="primary" (click)="selectFile()">
               <span nz-icon nzType="upload"></span>
@@ -27,8 +26,7 @@
           </span>
 
           <div class="select-url">
-            <input nz-input [value]="introVideoForm.get('videoIntroElearning')?.value"
-                   formControlName="videoIntroElearning">
+            <input nz-input [value]="introVideoForm.get('videoIntroElearning')?.value" formControlName="videoIntroElearning">
 
             <button nz-button nzType="primary" (click)="selectVideoUrl()">
               <span nz-icon nzType="upload"></span>
@@ -42,11 +40,11 @@
   <div nz-col [nzSpan]="4">
     <div class="btn-panel">
       <button class="btn primary" nz-button (click)="edit()">
-        Lưu
+        {{'save'|translate}}
       </button>
       <button class="btn" nz-button (click)="navigateBack()">
         {{'cancel'|translate}}
-</button>
+      </button>
     </div>
   </div>
 </div>

@@ -12,6 +12,7 @@ import { FreeCourseModelResponse } from '../../model/course-elearning-reponse';
 import { finalize } from 'rxjs';
 import { FilterElearningCourseReportComponent } from '../../funnel-report/dialog/filter-elearning-course-report/filter-elearning-course-report.component';
 import { DateTimeTypeSearch } from '../../constant/date-time-type-search.const';
+import { ListStudentDialogComponent } from '../list-student-dialog/list-student-dialog.component';
 
 @Component({
   selector: 'app-report-free-course',
@@ -67,6 +68,56 @@ export class ReportFreeCourseComponent {
     this.currentPage = 1;
     this.pageSize = 10;
     this.onSearch();
+  }
+
+  openListStudentsDialog(countStudents?: number, courseElearningId?: number,
+    numberOfLearners100Percent: boolean = false,
+    numberOfLearners90Percent: boolean = false,
+    numberOfLearners75Percent: boolean = false,
+    numberOfLearners50Percent: boolean = false,
+    numberOfLearners25Percent: boolean = false,
+    numberOfLearners5Percent: boolean = false) {
+
+    if (countStudents == 0) {
+      this.message.warning("Không có học viên hợp lệ.");
+      return;
+    }
+
+    let title = "Số người đăng ký khóa học miễn phí"
+    if (numberOfLearners100Percent == true) {
+      title = "Số học viên hoàn thành khóa học miễn phí 100%"
+    } else if (numberOfLearners90Percent == true) {
+      title = "Số học viên hoàn thành khóa học miễn phí 90%"
+    }
+    else if (numberOfLearners75Percent == true) {
+      title = "Số học viên hoàn thành khóa học miễn phí 75%"
+    }
+    else if (numberOfLearners50Percent == true) {
+      title = "Số học viên hoàn thành khóa học miễn phí 50%"
+    }
+    else if (numberOfLearners25Percent == true) {
+      title = "Số học viên hoàn thành khóa học miễn phí 25%"
+    }
+    else if (numberOfLearners5Percent == true) {
+      title = "Số học viên hoàn thành khóa học miễn phí 5%"
+    }
+
+    const modal: NzModalRef = this.modal.create<ListStudentDialogComponent>({
+      nzTitle: title,
+      nzContent: ListStudentDialogComponent,
+      nzFooter: null,
+      nzWidth: '60%',
+      nzData: {
+        courseElearningId: courseElearningId,
+        numberOfLearners100Percent: numberOfLearners100Percent,
+        numberOfLearners90Percent: numberOfLearners90Percent,
+        numberOfLearners75Percent: numberOfLearners75Percent,
+        numberOfLearners50Percent: numberOfLearners50Percent,
+        numberOfLearners25Percent: numberOfLearners25Percent,
+        numberOfLearners5Percent: numberOfLearners5Percent,
+      },
+      nzMaskClosable: false
+    });
   }
 
   onQueryParamsChange(params: NzTableQueryParams): void {
@@ -171,10 +222,11 @@ export class ReportFreeCourseComponent {
         }
 
         this.filter = { ...x.dataFilter, ...this.getFilterDateTime() };
+        this.onSearch();
       } else if (x == 0) {
         this.filter = {};
+        this.onSearch();
       }
-      this.onSearch();
     })
   }
 

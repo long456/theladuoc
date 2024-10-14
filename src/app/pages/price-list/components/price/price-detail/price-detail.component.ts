@@ -22,7 +22,7 @@ export class PriceDetailComponent implements OnInit{
   isSubmit: boolean = false;
   loading = false;
   currencyData: Currency[] = CurrencyData;
-  catalogList: Catalog[] = []
+  catalogList: Catalog[] = [];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -38,9 +38,10 @@ export class PriceDetailComponent implements OnInit{
 
     this.priceForm = this.fb.group({
       priceListName: [null, [Validators.required]],
-      priceValue: [null, [Validators.required]],
+      priceValueSix: [null, [Validators.required]],
+      priceValueYear: [null, [Validators.required]],
       catalogId: [null, [Validators.required]],
-      currency: ['vnd'],
+      currency: ['VND'],
       status: [1],
     });
     this.getDataCatalog();
@@ -57,7 +58,7 @@ export class PriceDetailComponent implements OnInit{
     this.catalogService.getAllCatalog().subscribe({
       next: res => {
         if (res.success) {
-          this.catalogList = res.data;
+          this.catalogList = res.data.listCatalog;
         } else {
           this.message.error(res.errorMessages);
         }
@@ -96,7 +97,7 @@ export class PriceDetailComponent implements OnInit{
     this.loading = true;
     const actionPrice = this.isCreate
       ? this.priceService.createPrice(catalog)
-      : this.priceService.updatePrice({ ...catalog, id: Number(this.priceId) });
+      : this.priceService.updatePrice({ ...catalog, priceListId: Number(this.priceId) });
 
     actionPrice
       .pipe(finalize(() => this.loading = false))
