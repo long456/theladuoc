@@ -180,7 +180,7 @@ export class SideBarComponent implements OnInit {
             {
               icon: '',
               link: 'page/e-learning-student/register',
-              name: 'joined_course',
+              name: 'registered',
             },
             {
               icon: '',

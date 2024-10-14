@@ -1,34 +1,24 @@
 <div class="title-page">
-  Danh sách đại lý
+  {{'agency_list' | translate}}
 </div>
 
 <div class="header-btn">
   <ng-container *ngIf="(agencyListPage$ | async) as agency">
-    <app-table
-      [rows]="agency.rows"
-      [page]="agency.page"
-      [pageSize]="agency.pageSize"
-      [pageTotal]="agency.rowTotal"
-      [clientPagination]="false"
-      (pageIndexChange)="page$.next($event)"
-      (pageSizeChange)="pageSize$.next($event)"
-      [loading]="loading"
-    >
-      <table-column header="STT" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Mã đại lý" key="agentCode" [width]="'200px'"></table-column>
-      <table-column header="Tên học viên" key="fullName" [width]="'200px'"></table-column>
-      <table-column header="Số điện thoại" key="phoneNumber" [width]="'200px'"></table-column>
+    <app-table [rows]="agency.rows" [page]="agency.page" [pageSize]="agency.pageSize" [pageTotal]="agency.rowTotal" [clientPagination]="false" (pageIndexChange)="page$.next($event)" (pageSizeChange)="pageSize$.next($event)" [loading]="loading">
+      <table-column header="{{'no' | translate}}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{'agency_code' | translate}}" key="agentCode" [width]="'200px'"></table-column>
+      <table-column header="{{'learner_name' | translate}}" key="fullName" [width]="'200px'"></table-column>
+      <table-column header="{{'phone_number' | translate}}" key="phoneNumber" [width]="'200px'"></table-column>
       <table-column header="Email" key="email" [width]="'200px'"></table-column>
-      <table-column header="Mã học viên" key="codeUser" [width]="'200px'"></table-column>
-      <table-column header="Tổ chức" key="organizationName" [width]="'200px'"></table-column>
-      <table-column [width]="'180px'" fixColumn="right" >
+      <table-column header="{{'learner_code' | translate}}" key="codeUser" [width]="'200px'"></table-column>
+      <table-column header="{{'organization' | translate}}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right">
         <ng-template appHeader>
-          Chức năng
+          {{'actions' | translate}}
         </ng-template>
 
         <ng-template appCell let-data>
-          <span class="custom-action delete" (click)="disableAgency(data)"
-                nz-tooltip nzTooltipTitle="Hủy quyền đại lý">
+          <span class="custom-action delete" (click)="disableAgency(data)" nz-tooltip nzTooltipTitle="{{'cancel_agency_permission' | translate}}">
             <span nz-icon nzType="stop" nzTheme="outline" class="custom-icon"></span>
           </span>
         </ng-template>

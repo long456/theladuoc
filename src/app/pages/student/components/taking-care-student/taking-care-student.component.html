@@ -42,23 +42,23 @@
       </table-column>
       <table-column header="{{ 'payment_status' | translate }}" key="isPay" [width]="'180px'">
         <ng-template appCell let-data>
-          <span *ngIf="data.isPay === 0">Chưa thanh toán</span>
-          <span *ngIf="data.isPay === 1">Đã thanh toán</span>
-          <span *ngIf="data.isPay === 2">Thanh toán một phần</span>
-          <span *ngIf="data.isPay === 3">Thanh toán thừa</span>
-          <span *ngIf="data.isPay === 4">Hoàn học phí</span>
-          <span *ngIf="data.isPay === 5">Hoàn tiền thừa</span>
+          <span *ngIf="data.isPay === 0">{{'unpaid' | translate}}</span>
+          <span *ngIf="data.isPay === 1">{{'fully_paid' | translate}}</span>
+          <span *ngIf="data.isPay === 2">{{'partial_paid' | translate}}</span>
+          <span *ngIf="data.isPay === 3">{{'over_paid' | translate}}</span>
+          <span *ngIf="data.isPay === 4">{{'tutiton_refunded' | translate}}</span>
+          <span *ngIf="data.isPay === 5">{{'excess_refunded' | translate}}</span>
         </ng-template>
       </table-column>
       <table-column header="{{ 'update_payment' | translate }}" key="isVerifyPay" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-invalid" *ngIf="!data.isVerifyPay">Chưa xác thực</span>
-          <span class="text-valid" *ngIf="data.isVerifyPay">Đã xác thực</span>
+          <span class="text-invalid" *ngIf="!data.isVerifyPay">{{'unverified' | translate}}</span>
+          <span class="text-valid" *ngIf="data.isVerifyPay">{{'verified' | translate}}</span>
         </ng-template>
       </table-column>
       <table-column header="{{ 'tag' | translate }}" key="tagNote" [width]="'220px'">
         <ng-template appCell let-data>
-          <nz-select style="display: block" nzPlaceHolder="Chọn thẻ tag" [ngModel]="data.tagNote"
+          <nz-select style="display: block" nzPlaceHolder="{{'pick_a_tag' | translate}}" [ngModel]="data.tagNote"
                      [nzCustomTemplate]="selectTag" nzBorderless (ngModelChange)="onTagChange($event, data)">
             <nz-option *ngFor="let tag of listTag" nzCustomContent
                        [nzValue]="tag.value" [nzLabel]="tag.title" [nzTitle]="tag.color">
@@ -93,14 +93,22 @@
 
       <table-column header="{{ 'email_verification' | translate }}" key="isAuthEmail" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-valid" *ngIf="data.isAuthEmail">Đã xác thực</span>
-          <span class="text-invalid" *ngIf="!data.isAuthEmail">Chưa xác thực</span>
+          <span class="text-valid" *ngIf="data.isAuthEmail">
+            {{'verified' | translate}}
+          </span>
+          <span class="text-invalid" *ngIf="!data.isAuthEmail">
+            {{'unverified' | translate}}
+          </span>
         </ng-template>
       </table-column>
       <table-column header="{{ 'status' | translate }}" key="isAccount" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-valid" *ngIf="data.isAccount">Có tài khoản</span>
-          <span class="text-invalid" *ngIf="!data.isAccount">Chưa có tài khoản</span>
+          <span class="text-valid" *ngIf="data.isAccount">
+            {{'has_account' | translate}}
+          </span>
+          <span class="text-invalid" *ngIf="!data.isAccount">
+            {{'no_account' | translate}}
+          </span>
         </ng-template>
       </table-column>
       <table-column [width]="'180px'" fixColumn="right" >
@@ -140,10 +148,14 @@
 </div>
 
 <ng-template #drawerTemplate let-data let-drawerRef="drawerRef">
-  <textarea  class="take-note" nz-input placeholder="Viết ghi chú ở đây" [(ngModel)]="note"></textarea>
+  <textarea  class="take-note" nz-input placeholder="{{'take_note_here' | translate}}" [(ngModel)]="note"></textarea>
   <div class="take-note-btn">
-    <button nz-button nzType="primary" (click)="addNote(data)" (click)="drawerRef.close()">Lưu</button>
-    <button nz-button (click)="drawerRef.close()">Hủy</button>
+    <button nz-button nzType="primary" (click)="addNote(data)" (click)="drawerRef.close()">
+      {{ 'save' | translate }}
+    </button>
+    <button nz-button (click)="drawerRef.close()">
+      {{ 'cancel' | translate }}
+    </button>
   </div>
 </ng-template>
 
