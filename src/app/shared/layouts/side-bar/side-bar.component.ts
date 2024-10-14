@@ -525,7 +525,7 @@ export class SideBarComponent implements OnInit {
                       name: 'price_list',
                       icon: '',
                       link: 'page/price-list/price',
-                    }
+                    },
                   ]
                 },
               ]

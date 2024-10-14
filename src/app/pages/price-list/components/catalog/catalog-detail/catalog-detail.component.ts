@@ -16,8 +16,7 @@ export class CatalogDetailComponent implements OnInit {
   catalogId!: number;
   isCreate: boolean = false;
   isSubmit: boolean = false;
-  loading = false;
-
+  loading: boolean = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,

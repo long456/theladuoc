@@ -10,15 +10,19 @@ import { PriceListComponent } from './components/price/price-list/price-list.com
 import { PriceDetailComponent } from './components/price/price-detail/price-detail.component';
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
-
-
+import { BenefitListComponent } from './components/benefit-group/benefit-list/benefit-list.component';
+import { BenefitDetailComponent } from './components/benefit-group/benefit-detail/benefit-detail.component';
+import { BenefitConfigComponent } from './components/catalog/benefit-config/benefit-config.component';
 
 @NgModule({
   declarations: [
     CatalogListComponent,
     CatalogDetailComponent,
     PriceListComponent,
-    PriceDetailComponent
+    PriceDetailComponent,
+    BenefitListComponent,
+    BenefitDetailComponent,
+    BenefitConfigComponent,
   ],
   imports: [
     CommonModule,

@@ -714,5 +714,13 @@
   "create_price_list": "Tạo mới bảng giá",
   "update_price_list": "Cập nhât bảng giá",
   "price_name": "Tên bảng giá",
-  "settlement_date": "Ngày kết toán trong tháng"
+  "settlement_date": "Ngày kết toán trong tháng",
+  "benefit_package": "Nhóm quyền lợi",
+  "benefit_package_list": "Danh mục nhóm quyền lợi",
+  "create_benefit_package": "Tạo mới nhóm quyền lợi",
+  "update_benefit_package": "Cập nhật nhóm quyền lợi",
+  "configure_benefit_package": "Cấu hình nhóm quyền lợi",
+  "benefit_package_name": "Tên nhóm quyền lợi",
+  "price_six_months": "Giá 6 tháng",
+  "price_one_year": "Giá 1 năm"
 }

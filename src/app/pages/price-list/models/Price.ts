@@ -1,7 +1,8 @@
 export interface Price {
   id?: number;
   priceListName: string;
-  priceValue: number;
+  priceValueSix: number;
+  priceValueYear: number;
   catalogId: number;
   currency: string;
   status: number;

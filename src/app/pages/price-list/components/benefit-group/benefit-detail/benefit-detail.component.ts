@@ -1,54 +1,47 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Catalog} from "../../../models/Catalog";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
-import {PriceService} from "../../../services/price.service";
-import {finalize} from "rxjs";
-import {Price} from "../../../models/Price";
-import {CurrencyData} from "../../../../../shared/helper/CurrencyData";
-import {Currency} from "../../../../../shared/models/Currency";
-import {Catalog} from "../../../models/Catalog";
+import {BenefitService} from "../../../services/benefit.service";
 import {CatalogService} from "../../../services/catalog.service";
+import {finalize} from "rxjs";
+import {BenefitGroup} from "../../../models/BenefitGroup";
 
 @Component({
-  selector: 'app-price-detail',
-  templateUrl: './price-detail.component.html',
-  styleUrls: ['./price-detail.component.scss']
+  selector: 'app-benefit-detail',
+  templateUrl: './benefit-detail.component.html',
+  styleUrls: ['./benefit-detail.component.scss']
 })
-export class PriceDetailComponent implements OnInit{
-  priceForm!: FormGroup;
-  priceId!: number;
+export class BenefitDetailComponent implements OnInit{
+  benefitForm!: FormGroup;
+  benefitId!: number;
   isCreate: boolean = false;
   isSubmit: boolean = false;
   loading = false;
-  currencyData: Currency[] = CurrencyData;
   catalogList: Catalog[] = [];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private message: NzMessageService,
     private fb: FormBuilder,
-    private priceService: PriceService,
+    private benefitService: BenefitService,
     private catalogService: CatalogService
   ) {}
 
   ngOnInit() {
     this.isCreate = this.route.snapshot.data['isCreate'];
-    this.priceId = Number(this.route.snapshot.params['id']);
+    this.benefitId = Number(this.route.snapshot.params['id']);
 
-    this.priceForm = this.fb.group({
-      priceListName: [null, [Validators.required]],
-      priceValueSix: [null, [Validators.required]],
-      priceValueYear: [null, [Validators.required]],
+    this.benefitForm = this.fb.group({
+      name: [null, [Validators.required]],
       catalogId: [null, [Validators.required]],
-      currency: ['VND'],
-      status: [1],
     });
     this.getDataCatalog();
     if (!this.isCreate) {
       this.route.params.pipe().subscribe(params => {
         const { id } = params;
-        this.priceId = id;
+        this.benefitId = id;
         this.pathDataForm();
       });
     }
@@ -70,10 +63,10 @@ export class PriceDetailComponent implements OnInit{
   }
 
   pathDataForm(): void {
-    this.priceService.getPriceDetail(this.priceId).subscribe({
+    this.benefitService.getBenefitGroupDetail(this.benefitId).subscribe({
       next: res => {
         if (res.success) {
-          this.priceForm.patchValue(res.data);
+          this.benefitForm.patchValue(res.data);
         } else {
           this.message.error(res.errorMessages);
         }
@@ -86,20 +79,20 @@ export class PriceDetailComponent implements OnInit{
 
   edit():void {
     this.isSubmit = true;
-    if (!this.priceForm.valid) return;
+    if (!this.benefitForm.valid) return;
 
 
-    const catalog: Price = {
-      ...this.priceForm.value,
-      status: this.priceForm.value.status? 1 : 0
+    const benefit: BenefitGroup = {
+      ...this.benefitForm.value,
+      status: this.benefitForm.value.status? 1 : 0
     }
 
     this.loading = true;
-    const actionPrice = this.isCreate
-      ? this.priceService.createPrice(catalog)
-      : this.priceService.updatePrice({ ...catalog, id: Number(this.priceId) });
+    const actionBenefit = this.isCreate
+      ? this.benefitService.createBenefitGroup(benefit)
+      : this.benefitService.updateBenefitGroup({ ...benefit, id: Number(this.benefitId) });
 
-    actionPrice
+    actionBenefit
       .pipe(finalize(() => this.loading = false))
       .subscribe({
         next: (res) => {
@@ -118,6 +111,6 @@ export class PriceDetailComponent implements OnInit{
 
   navigateBack():void {
     // navigate đến trang danh sách
-    this.router.navigate(['page/price-list/price']).then();
+    this.router.navigate(['page/price-list/benefit-group']).then();
   }
 }

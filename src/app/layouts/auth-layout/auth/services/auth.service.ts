@@ -66,4 +66,12 @@ export class AuthService {
   getProfileTeacher(): Observable<any>{
     return this.http.get('User/get-detail-profile-teacher');
   }
+
+  isSuperAdmin():boolean {
+    const data = this.getUserData();
+    if (data && data.id === 1) {
+      return true;
+    }
+    return false;
+  }
 }

@@ -24,20 +24,20 @@
 
         <div nz-col [nzSpan]="8">
             <span class="text-label">
-              {{'price' | translate }}
+              {{'price_six_months' | translate }}
             </span>
             <nz-input-group [nzAddOnAfter]="currencyTemplate" nzCompact>
-                <nz-input-number [nzMin]="1" formControlName="priceValue" style="width: 100%"
-                       [nzStatus]="(priceForm.get('priceValue')?.invalid &&
-                                   (priceForm.get('priceValue')?.touched || isSubmit)) ?
+                <nz-input-number [nzMin]="1" formControlName="priceValueSix" style="width: 100%"
+                       [nzStatus]="(priceForm.get('priceValueSix')?.invalid &&
+                                   (priceForm.get('priceValueSix')?.touched || isSubmit)) ?
                                     'error' : ''"
                 ></nz-input-number>
             </nz-input-group>
 
             <span class="text-danger"
-                  *ngIf="(priceForm.get('priceValue')?.touched || isSubmit)  &&
-                          priceForm.get('priceValue')?.hasError('required')"
-            >{{'price' | translate }} {{'cannot_blank' | translate}}!</span>
+                  *ngIf="(priceForm.get('priceValueSix')?.touched || isSubmit)  &&
+                          priceForm.get('priceValueSix')?.hasError('required')"
+            >{{'price_six_months' | translate }} {{'cannot_blank' | translate}}!</span>
         </div>
 
         <div nz-col [nzSpan]="8">
@@ -51,11 +51,38 @@
               <span class="text-danger">*</span>
             </span>
 
-          <nz-select formControlName="catalogId">
+          <nz-select formControlName="catalogId"
+                     [nzStatus]="(priceForm.get('catalogId')?.invalid &&
+                                 (priceForm.get('catalogId')?.touched || isSubmit)) ?
+                                  'error' : ''"
+          >
             <nz-option *ngFor="let catalog of catalogList"
                        [nzLabel]="catalog.catalogName" [nzValue]="catalog.id"
             ></nz-option>
           </nz-select>
+
+          <span class="text-danger"
+                *ngIf="(priceForm.get('catalogId')?.touched || isSubmit)  &&
+                        priceForm.get('catalogId')?.hasError('required')"
+          >{{'category' | translate }} {{'cannot_blank' | translate}}!</span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              {{'price_one_year' | translate }}
+            </span>
+          <nz-input-group [nzAddOnAfter]="currencyTemplate" nzCompact>
+            <nz-input-number [nzMin]="1" formControlName="priceValueSix" style="width: 100%"
+                             [nzStatus]="(priceForm.get('priceValueYear')?.invalid &&
+                                         (priceForm.get('priceValueYear')?.touched || isSubmit)) ?
+                                          'error' : ''"
+            ></nz-input-number>
+          </nz-input-group>
+
+          <span class="text-danger"
+                *ngIf="(priceForm.get('priceValueYear')?.touched || isSubmit)  &&
+                        priceForm.get('priceValueYear')?.hasError('required')"
+          >{{'price_one_year' | translate }} {{'cannot_blank' | translate}}!</span>
         </div>
       </div>
 

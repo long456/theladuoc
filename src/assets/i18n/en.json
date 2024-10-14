@@ -713,5 +713,13 @@
   "create_price_list": "Create a new price list",
   "update_price_list": "Update price list",
   "price_name": "The price list name",
-  "settlement_date": "Settlement date of the month"
+  "settlement_date": "Settlement date of the month",
+  "benefit_package": "Benefit package",
+  "benefit_package_list": "Benefit package list",
+  "create_benefit_package": "Create a new benefit package",
+  "update_benefit_package": "Update benefit package",
+  "configure_benefit_package": "Configure benefit package",
+  "benefit_package_name": "Benefit package name",
+  "price_six_months": "Price 6 months",
+  "price_one_year": "Price for 1 year"
 }
