@@ -39,7 +39,9 @@
     <div class="permission-picker">
       <div nz-row  *ngFor="let permission of listPermission" class="permission-group">
         <div class="permission-group-label">
-          <label nz-checkbox [(ngModel)]="permission.checked" (ngModelChange)="updateAllChecked($event,permission)">{{permission.name}}</label>
+          <label nz-checkbox [(ngModel)]="permission.checked" (ngModelChange)="updateAllChecked($event,permission)">
+            {{permission.name}}
+          </label>
         </div>
         <div nz-col [nzSpan]="20" class="permission-border">
           <div *ngIf="permission.children.length > 0" class="permission-area">

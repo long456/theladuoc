@@ -19,18 +19,22 @@
     >
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="Tên diễn đàn" key="name" [width]="'200px'"></table-column>
-      <table-column header="Đăng bài viết" key="" [width]="'200px'"></table-column>
-      <table-column header="Đánh giá sao khóa học" key="" [width]="'200px'"></table-column>
-      <table-column header="Trả lời người khác" key="" [width]="'200px'"></table-column>
-      <table-column header="Người khác trả lời" key="" [width]="'200px'"></table-column>
-      <table-column header="Thả tim bình luận" key="" [width]="'200px'"></table-column>
-      <table-column header="Bình luận được thả tim" key="" [width]="'200px'"></table-column>
+      <table-column header="{{ 'forum_name' | translate }}" key="name" [width]="'200px'"></table-column>
+      <table-column header="{{ 'publish_posts' | translate }}" key="" [width]="'200px'"></table-column>
+      <table-column header="{{ 'stars_rating_course' | translate }}" key="" [width]="'200px'"></table-column>
+      <table-column header="{{ 'reply_others' | translate }}" key="" [width]="'200px'"></table-column>
+      <table-column header="{{ 'others_repliable' | translate}}" key="" [width]="'200px'"></table-column>
+      <table-column header="{{ 'comment_reaction' | translate }}" key="" [width]="'200px'"></table-column>
+      <table-column header="{{ 'reacted_comment' | translate }}" key="" [width]="'200px'"></table-column>
       <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column header="{{ 'status' | translate }}" key="status" [width]="'200px'">
         <ng-template appCell let-data>
-          <span class="text-valid" *ngIf="data.status">Kích hoạt</span>
-          <span class="text-invalid" *ngIf="!data.status">Tạm dừng</span>
+          <span class="text-valid" *ngIf="data.status">
+            {{ 'activated' | translate }}
+          </span>
+          <span class="text-invalid" *ngIf="!data.status">
+            {{ 'suspended' | translate }}
+          </span>
         </ng-template>
       </table-column>
       <table-column [width]="'180px'" fixColumn="right" >
@@ -40,7 +44,7 @@
 
         <ng-template appCell let-data>
           <span class="custom-action" (click)="edit(data)"
-                nz-tooltip nzTooltipTitle="Chỉnh sửa cấu hình">
+                nz-tooltip nzTooltipTitle="{{'edit' | translate}}">
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
           </span>
         </ng-template>

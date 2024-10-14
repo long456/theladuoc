@@ -1,5 +1,5 @@
 <div class="title-page">
-  {{ 'proof_of_payment_list' | translate }}
+  {{ 'proof_of_payment_verification_list' | translate }}
 </div>
 
 <div class="header-btn">
@@ -36,8 +36,8 @@
       </table-column>
       <table-column header="{{ 'payment_verification' | translate }}" key="verifyPay" [width]="'180px'">
         <ng-template appCell let-data>
-          <span class="text-valid" *ngIf="data.verifyPay">Đã xác thực</span>
-          <span class="text-invalid" *ngIf="!data.verifyPay">Chưa xác thực</span>
+          <span class="text-valid" *ngIf="data.verifyPay">{{'verified' | translate}}</span>
+          <span class="text-invalid" *ngIf="!data.verifyPay">{{'unverified' | translate}}</span>
         </ng-template>
       </table-column>
 

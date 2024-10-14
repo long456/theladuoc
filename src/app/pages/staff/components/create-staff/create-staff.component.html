@@ -15,15 +15,17 @@
     <form [formGroup]="userForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'staff_name' | translate}}
-            <span class="text-danger">*</span>
-          </span>
-          <input nz-input autofocus formControlName="fullName"
-            [nzStatus]="(userForm.get('fullName')?.invalid && (userForm.get('fullName')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-content-between">
+            <span class="text-label">
+              {{'staff_name' | translate}}
+              <span class="text-danger">*</span>
+            </span>
 
-          <span class="text-danger"
-            *ngIf="(userForm.get('fullName')?.touched || isSubmit)  && userForm.get('fullName')?.hasError('required')">
+            <span nzTooltipTitle="Tên của nhân viên nên được viết hoa chữ cái đầu và không nên chứa kí tự đặc biệt hoặc số" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="dollar" nzTheme="outline"></span>
+          </div>
+          <input nz-input autofocus formControlName="fullName" [nzStatus]="(userForm.get('fullName')?.invalid && (userForm.get('fullName')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger" *ngIf="(userForm.get('fullName')?.touched || isSubmit)  && userForm.get('fullName')?.hasError('required')">
             {{'staff_name' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
@@ -35,15 +37,13 @@
           </span>
 
           <div>
-            <nz-select formControlName="type" nzMode="multiple"
-              [nzStatus]="(userForm.get('type')?.invalid && (userForm.get('type')?.touched || isSubmit)) ? 'error' : ''">
+            <nz-select formControlName="type" nzMode="multiple" [nzStatus]="(userForm.get('type')?.invalid && (userForm.get('type')?.touched || isSubmit)) ? 'error' : ''">
               <nz-option *ngFor="let type of listUserType" [nzValue]="type.key" [nzLabel]="type.name">
               </nz-option>
             </nz-select>
           </div>
 
-          <span class="text-danger"
-            *ngIf="(userForm.get('type')?.touched || isSubmit) && userForm.get('type')?.hasError('required')">
+          <span class="text-danger" *ngIf="(userForm.get('type')?.touched || isSubmit) && userForm.get('type')?.hasError('required')">
             {{'role' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
@@ -61,36 +61,29 @@
             Email
             <span class="text-danger" *ngIf="isCreate">*</span>
           </div>
-          <input nz-input formControlName="email" [readonly]="!isCreate"
-            [nzStatus]="(userForm.get('email')?.invalid && (userForm.get('email')?.touched || isSubmit)) ? 'error' : ''">
+          <input nz-input formControlName="email" [readonly]="!isCreate" [nzStatus]="(userForm.get('email')?.invalid && (userForm.get('email')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-            *ngIf="(userForm.get('email')?.touched || isSubmit) && userForm.get('email')?.hasError('required')">
+          <span class="text-danger" *ngIf="(userForm.get('email')?.touched || isSubmit) && userForm.get('email')?.hasError('required')">
             Email {{'cannot_blank' | translate}}
           </span>
-          <span class="text-danger"
-            *ngIf="(userForm.get('email')?.touched || isSubmit) && userForm.get('email')?.hasError('email')">
+          <span class="text-danger" *ngIf="(userForm.get('email')?.touched || isSubmit) && userForm.get('email')?.hasError('email')">
             Email {{'invalid_format' | translate}}
           </span>
         </div>
 
-        <div nz-col [nzSpan]="8"
-          *ngIf="userForm.get('type')?.value?.includes(4) || userForm.get('type')?.value?.includes(1)">
+        <div nz-col [nzSpan]="8" *ngIf="userForm.get('type')?.value?.includes(4) || userForm.get('type')?.value?.includes(1)">
           <div class="text-label">
             Slug
             <span class="text-danger">*</span>
 
-            <button nz-button nzType="text" nzShape="circle" class="tooltip" nz-popover
-              nzPopoverContent="Mã slug là 1 chuỗi ký tự gồm số hoặc chữ thường viết liền không dấu hoặc cách nhau bởi dấu gạch ngang (-) và không chứa ký tự đặc biệt">
+            <button nz-button nzType="text" nzShape="circle" class="tooltip" nz-popover nzPopoverContent="Mã slug là 1 chuỗi ký tự gồm số hoặc chữ thường viết liền không dấu hoặc cách nhau bởi dấu gạch ngang (-) và không chứa ký tự đặc biệt">
               <span nz-icon nzType="question" style="height: 14px"></span>
             </button>
           </div>
 
-          <input nz-input formControlName="slugTeacher" placeholder="{{'example' | translate}}: nguyen-van-a1"
-            [nzStatus]="(userForm.get('slugTeacher')?.invalid && (userForm.get('slugTeacher')?.touched || isSubmit)) ? 'error' : ''">
+          <input nz-input formControlName="slugTeacher" placeholder="{{'example' | translate}}: nguyen-van-a1" [nzStatus]="(userForm.get('slugTeacher')?.invalid && (userForm.get('slugTeacher')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-            *ngIf="(userForm.get('slugTeacher')?.touched || isSubmit) && userForm.get('slugTeacher')?.hasError('required')">
+          <span class="text-danger" *ngIf="(userForm.get('slugTeacher')?.touched || isSubmit) && userForm.get('slugTeacher')?.hasError('required')">
             Slug {{'cannot_blank' | translate}}
           </span>
         </div>
@@ -102,8 +95,7 @@
 
           <div>
             <nz-select formControlName="roleIds" nzMode="multiple">
-              <nz-option *ngFor="let permission of listPermission" [nzValue]="permission.id"
-                [nzLabel]="permission.roleName">
+              <nz-option *ngFor="let permission of listPermission" [nzValue]="permission.id" [nzLabel]="permission.roleName">
               </nz-option>
             </nz-select>
           </div>
