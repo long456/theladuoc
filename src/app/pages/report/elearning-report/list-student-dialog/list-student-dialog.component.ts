@@ -20,7 +20,12 @@ export class ListStudentDialogComponent implements OnInit {
   totalItem: number = 0;
   isLoading: boolean = false;
   filter: any = {};
-
+  dateFormat = 'dd/MM/yyyy';
+  activeDate: any;
+  studentName = '';
+  studentPhone = '';
+  studentEmail = '';
+  studentCode = '';
   constructor(private reportService: ReportService,
     private dateTimeHelper: DateTimeHelper,
     private message: NzMessageService,
@@ -29,7 +34,7 @@ export class ListStudentDialogComponent implements OnInit {
     @Inject(NZ_MODAL_DATA) public data: any) {
   }
   ngOnInit(): void {
-    this.onSearch();
+    // this.onSearch();
   }
 
   onQueryParamsChange(params: NzTableQueryParams): void {
@@ -51,6 +56,22 @@ export class ListStudentDialogComponent implements OnInit {
     this.onSearch();
   }
 
+  clearStudentName() {
+    this.studentName = '';
+  }
+
+  clearStudentPhone() {
+    this.studentPhone = '';
+  }
+
+  clearStudentCode() {
+    this.studentCode = '';
+  }
+
+  clearStudentEmail() {
+    this.studentEmail = '';
+  }
+
   onSearch(sortField: string | null = null, sortOrder: string | null = null) {
     this.isLoading = true;
 
@@ -60,7 +81,15 @@ export class ListStudentDialogComponent implements OnInit {
       delete this.filter.sortBy;
     }
 
-    this.filter = { ...this.data };
+    this.filter = {
+      ...this.data,
+      studentCode: this.studentCode,
+      studentEmail: this.studentEmail,
+      studentName: this.studentName,
+      studentPhone: this.studentPhone,
+      activeDateFrom: this.activeDate ? this.dateTimeHelper.formatDate(this.activeDate[0]) : null,
+      activeDateTo: this.activeDate ? this.dateTimeHelper.formatDate(this.activeDate[1]) : null
+    };
 
     this.reportService.getStudentsByCourse(this.currentPage, this.pageSize, this.filter).subscribe(x => {
       if (x) {
@@ -73,6 +102,15 @@ export class ListStudentDialogComponent implements OnInit {
 
   exportExcel() {
     this.isLoading = true;
+    this.filter = {
+      ...this.data,
+      studentCode: this.studentCode,
+      studentEmail: this.studentEmail,
+      studentName: this.studentName,
+      studentPhone: this.studentPhone,
+      activeDateFrom: this.activeDate ? this.dateTimeHelper.formatDate(this.activeDate[0]) : null,
+      activeDateTo: this.activeDate ? this.dateTimeHelper.formatDate(this.activeDate[1]) : null
+    };
     this.reportService.exportExcel(this.filter).subscribe(x => {
       if (x.data.length > 0) {
         let heading = [[

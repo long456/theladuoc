@@ -16,6 +16,14 @@ export class DateTimeHelper {
         return moment(dateTime).format('DD/MM/YYYY HH:mm:ss');
     }
 
+    formatDate(dateTime: any) {
+        if (!dateTime) {
+            return '';
+        }
+
+        return moment(dateTime).format('DD/MM/YYYY');
+    }
+
     getQuarterOfYear(quy: number, year?: number) {
         let result = {
             start: '',
