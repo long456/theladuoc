@@ -35,7 +35,8 @@ export class ConfigDetailComponent implements OnInit{
       isShowPriceYear: [true],
       isShowPriceForever: [true],
       referralPointType: [null,[Validators.required]],
-      discountUpgradeType: [null,[Validators.required]]
+      discountUpgradeType: [null,[Validators.required]],
+      dateAgentMembershipCalculator: [1],
     });
     this.membershipConfigService.getDetailMembershipConfig().subscribe({
       next: res => {

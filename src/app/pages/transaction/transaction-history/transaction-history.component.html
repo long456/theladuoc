@@ -40,9 +40,11 @@
                 <th nzWidth="180px" nzAlign="center">{{ 'member_package' | translate }}</th>
                 <th nzWidth="200px" nzColumnKey="price" [nzSortFn]="true" nzAlign="center">{{ 'paid_amount' | translate }}</th>
                 <th nzWidth="180px" nzAlign="center">{{ 'agent' | translate }}</th>
+                <th nzWidth="180px" nzAlign="center">{{ 'agent_code' | translate }}</th>
                 <th nzWidth="220px" nzAlign="center">{{ 'referrer' | translate }}</th>
                 <th nzWidth="240px" nzAlign="center">{{ 'referral_phone' | translate }}</th>
                 <th nzWidth="230px" nzAlign="center">{{ 'referral_email' | translate }}</th>
+                <th nzWidth="230px" nzAlign="center">{{ 'referral_code' | translate }}</th>
                 <th nzWidth="260px" nzAlign="center">{{ 'referral_membership_tier' | translate }}</th>
                 <th nzWidth="260px" nzAlign="center">{{ 'refferal_account_number' | translate }}</th>
                 <th nzWidth="260px" nzAlign="center">{{ 'referral_bank' | translate }}</th>
@@ -69,9 +71,11 @@
                     <td nzAlign="center" nzBreakWord> {{ data.priceMemberPolicyTypeName }} </td>
                     <td nzAlign="right" nzBreakWord> {{ data.price | number }} </td>
                     <td nzAlign="center" nzBreakWord>{{ data.agencyName }}</td>
+                    <td nzAlign="center" nzBreakWord>{{ data.agencyCode }}</td>
                     <td nzAlign="center" nzBreakWord> {{ data.userReferralName }} </td>
                     <td nzAlign="center" nzBreakWord>{{ data.userReferralPhone }}</td>
                     <td nzAlign="center" nzBreakWord>{{ data.userReferralMail }}</td>
+                    <td nzAlign="center" nzBreakWord>{{ data.userReferralCode }}</td>
                     <td nzAlign="center" nzBreakWord>{{ data.userReferralMemberPolicyLevelName }}</td>
                     <td nzAlign="center" nzBreakWord>{{ data.userReferralAccountNumber }}</td>
                     <td nzAlign="center" nzBreakWord>{{ data.userReferralBankName }}</td>

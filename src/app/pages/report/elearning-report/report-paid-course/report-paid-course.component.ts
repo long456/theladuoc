@@ -117,23 +117,23 @@ export class ReportPaidCourseComponent {
       return;
     }
 
-    let title = "Số người đăng ký khóa học"
+    let title = "Số người đăng ký khóa học trả phí"
     if (numberOfLearners100Percent == true) {
-      title = "Số học viên hoàn thành khóa học 100%"
+      title = "Số học viên hoàn thành khóa học trả phí 100%"
     } else if (numberOfLearners90Percent == true) {
-      title = "Số học viên hoàn thành khóa học 90%"
+      title = "Số học viên hoàn thành khóa học trả phí 90%"
     }
     else if (numberOfLearners75Percent == true) {
-      title = "Số học viên hoàn thành khóa học 75%"
+      title = "Số học viên hoàn thành khóa học trả phí 75%"
     }
     else if (numberOfLearners50Percent == true) {
-      title = "Số học viên hoàn thành khóa học 50%"
+      title = "Số học viên hoàn thành khóa học trả phí 50%"
     }
     else if (numberOfLearners25Percent == true) {
-      title = "Số học viên hoàn thành khóa học 25%"
+      title = "Số học viên hoàn thành khóa học trả phí 25%"
     }
     else if (numberOfLearners5Percent == true) {
-      title = "Số học viên hoàn thành khóa học 5%"
+      title = "Số học viên hoàn thành khóa học trả phí 5%"
     }
 
     const modal: NzModalRef = this.modal.create<ListStudentDialogComponent>({
@@ -224,8 +224,8 @@ export class ReportPaidCourseComponent {
         this.onSearch();
       } else if (x == 0) {
         this.filter = {};
+        this.onSearch();
       }
-      this.onSearch();
     })
   }
 

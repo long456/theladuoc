@@ -57,6 +57,7 @@
   "agency_code": "Mã đại lý",
   "agency_list": "Danh sách đại lý",
   "agent": "Thuộc đại lý",
+  "agent_code": "Mã đại lý",
   "apply": "Áp dụng",
   "approve_order": "Duyệt đơn hàng",
   "approve_payment_request": "Xác nhận yêu cầu thanh toán",
@@ -749,5 +750,16 @@
   "zalo_messages_sent": "Đã gửi tin nhắn Zalo",
   "zoom_id": "ID phòng Zoom",
   "zoom_link": "Link Zoom",
-  "zoom_password": "Mật khẩu phòng Zoom"
+  "zoom_password": "Mật khẩu phòng Zoom",
+  "price_list_categories": "Danh mục bảng giá",
+  "create_catalog": "Tạo mới danh mục bảng giá",
+  "update_catalog": "Cập nhật danh mục bảng giá",
+  "deactivate": "Tạm dừng",
+  "platform_transfer": "Chuyển giao nền tảng",
+  "price_list_config": "Cấu hình bảng giá",
+  "price_list": "Bảng giá",
+  "create_price_list": "Tạo mới bảng giá",
+  "update_price_list": "Cập nhât bảng giá",
+  "price_name": "Tên bảng giá",
+  "settlement_date": "Ngày kết toán trong tháng"
 }
