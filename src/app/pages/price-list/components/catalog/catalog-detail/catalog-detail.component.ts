@@ -31,7 +31,7 @@ export class CatalogDetailComponent implements OnInit {
 
     this.catalogForm = this.fb.group({
       catalogName: [null, [Validators.required]],
-      status: [1],
+      catalogStatus: [1],
     });
 
     if (!this.isCreate) {
