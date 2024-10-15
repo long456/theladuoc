@@ -57,6 +57,7 @@
   "agency_code": "Mã đại lý",
   "agency_list": "Danh sách đại lý",
   "agent": "Thuộc đại lý",
+  "agent_code": "Mã đại lý",
   "apply": "Áp dụng",
   "approve_order": "Duyệt đơn hàng",
   "approve_payment_request": "Xác nhận yêu cầu thanh toán",
@@ -777,5 +778,16 @@
   "guide_header_menu_name": "Đây là tên nút bấm sẽ hiện ra ở thanh menu đầu trang như trang chủ, giới thiệu, khóa học...",
   "guide_header_menu_position": "Thứ tự hiển thị trên thanh menu. Tính từ trái qua phải",
   "guide_header_menu_status": "Nếu bật, nút bấm sẽ hiện lên ở thanh menu. Nếu tắt, nút bấm này sẽ ẩn đi.",
-  "guide_header_menu_parent_link": "Nếu muốn nút bấm này là thư mục con (category) nằm trong 1 nút bấm khác (navigation) thì hãy chọn phần này, nếu không thì để trống."
+  "guide_header_menu_parent_link": "Nếu muốn nút bấm này là thư mục con (category) nằm trong 1 nút bấm khác (navigation) thì hãy chọn phần này, nếu không thì để trống.",
+  "price_list_categories": "Danh mục bảng giá",
+  "create_catalog": "Tạo mới danh mục bảng giá",
+  "update_catalog": "Cập nhật danh mục bảng giá",
+  "deactivate": "Tạm dừng",
+  "platform_transfer": "Chuyển giao nền tảng",
+  "price_list_config": "Cấu hình bảng giá",
+  "price_list": "Bảng giá",
+  "create_price_list": "Tạo mới bảng giá",
+  "update_price_list": "Cập nhât bảng giá",
+  "price_name": "Tên bảng giá",
+  "settlement_date": "Ngày kết toán trong tháng"
 }

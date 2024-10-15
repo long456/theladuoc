@@ -187,11 +187,6 @@ export class SideBarComponent implements OnInit {
               link: 'page/e-learning-student/studying',
               name: 'studying',
             },
-            {
-              icon: '',
-              link: 'page/e-learning-student/agency',
-              name: 'agencies',
-            },
           ],
         },
         {
@@ -211,11 +206,6 @@ export class SideBarComponent implements OnInit {
             },
             {
               icon: '',
-              link: 'page/transaction-history',
-              name: 'transaction_history',
-            },
-            {
-              icon: '',
               link: 'page/payment/withdraw',
               name: 'withdraw_requests',
             },
@@ -228,13 +218,18 @@ export class SideBarComponent implements OnInit {
           children: [
             {
               icon: '',
+              link: 'page/transaction-history',
+              name: 'transaction_history',
+            },
+            {
+              icon: '',
               link: 'page/membership-policy/request-upgrade',
               name: 'upgrade_request_list',
             },
             {
               icon: '',
               link: 'page/e-learning-student/agency',
-              name: 'Danh sách đại lý',
+              name: 'agencies',
             },
           ],
         },
@@ -512,6 +507,29 @@ export class SideBarComponent implements OnInit {
                 },
               ],
             },
+            {
+              name: 'platform_transfer',
+              icon: '',
+              link: '',
+              children: [
+                {
+                  name: 'price_list_config',
+                  icon: '',
+                  children: [
+                    {
+                      name: 'category',
+                      icon: '',
+                      link: 'page/price-list/catalog',
+                    },
+                    {
+                      name: 'price_list',
+                      icon: '',
+                      link: 'page/price-list/price',
+                    }
+                  ]
+                },
+              ]
+            }
           ],
         },
       ],

@@ -19,28 +19,28 @@ export type filterItem = {
 
 export const FilterType: { [key: string]: filterItem } = {
   createdDate: {
-    title: 'Ngày đăng ký',
+    title: 'created_at',
     name: 'createdDate',
     type: "date-range",
   },
   ticketType: {
-    title: 'Loại vé',
+    title: 'ticket_type',
     name: 'ticket',
   },
   studentName: {
-    title: 'Tên học viên',
+    title: 'learner_name',
     name: 'name',
   },
   fullName: {
-    title: 'Tên học viên',
+    title: 'learner_name',
     name: 'fullName',
   },
   studentNameAttendance: {
-    title: 'Tên học viên',
+    title: 'learner_name',
     name: 'studentName',
   },
   mobile: {
-    title: 'Số điện thoại',
+    title: 'phone_number',
     name: 'mobile',
   },
   email: {
@@ -48,131 +48,131 @@ export const FilterType: { [key: string]: filterItem } = {
     name: 'email',
   },
   studentCode: {
-    title: 'Mã học viên',
+    title: 'learner_code',
     name: 'code',
   },
   emailRef:{
-    title: 'Người giới thiệu',
+    title: 'referrer',
     name: 'emailRef',
   },
   lecturerName:{
-    title: 'Tên diễn giả',
+    title: 'teacher_name',
     name: 'lecturerName',
   },
   caregiverName:    {
-    title: 'Nhân viên chăm sóc',
+    title: 'caring_by',
     name: 'caregiverName',
   },
   userRefName: {
-    title: 'Người giới thiệu',
+    title: 'referrer',
     name: 'userRefName',
   },
   courseName:{
-    title: 'Tên khóa học',
+    title: 'course_name',
     name: 'courseName',
   },
   price: {
-    title: 'Số tiền',
+    title: 'price',
     name: 'price',
   },
   landingPageName: {
-    title: 'Tên landing page',
+    title: 'landing_page_name',
     name: 'landingPageName',
   },
   isAuthEmail:{
-    title: 'Xác thực email',
+    title: 'email_verification',
     name: 'isAuthEmail',
     type: "select",
     value: true,
     data: [
       {
-        label: 'Đã xác thực',
+        label: 'verified',
         key: true
       },
       {
-        label: 'Chưa xác thực',
+        label: 'unverified',
         key: false
       }
     ]
   },
   isAccount: {
-    title: 'Trạng thái',
+    title: 'status',
     name: 'isAccount',
     type: "select",
     value: true,
     data: [
       {
-        label: 'Đã có tài khoản',
+        label: 'has_account',
         key: true
       },
       {
-        label: 'Chưa có tài khoản',
+        label: 'unregistered',
         key: false
       }
     ]
   },
   isPay: {
-    title: 'Thanh toán',
+    title: 'payment',
     name: 'isPay',
     type: "select",
     value: true,
     data: [
       {
-        label: 'Chưa thanh toán',
+        label: 'unpaid',
         key: 0
       },
       {
-        label: 'Đã thanh toán',
+        label: 'fully_paid',
         key: 1
       },
       {
-        label: 'Thanh toán một phần',
+        label: 'partial_paid',
         key: 2
       },
       {
-        label: 'Thanh toán thừa',
+        label: 'over_paid',
         key: 3
       },
       {
-        label: 'Hoàn tiền',
+        label: 'refunded',
         key: 4
       },
       {
-        label: 'Hoàn tiền thừa',
+        label: 'excess_refunded',
         key: 5
       }
     ]
   },
   organizationName: {
-    title: 'Thuộc tổ chức',
+    title: 'organization',
     name: 'organizationName',
   },
   className:{
-    title: 'Tên lớp',
+    title: 'class_name',
     name: 'className',
   },
   area: {
-    title: 'Khu vực',
+    title: 'area',
     name: 'area',
     type: "select",
     value: 1,
     data: [
       {
-        label: 'Miền Bắc',
+        label: 'the_north',
         key: 1
       },
       {
-        label: 'Miền Trung',
+        label: 'the_central',
         key: 2
       },
       {
-        label: 'Miền Nam',
+        label: 'the_south',
         key: 3
       }
     ]
   },
   tag: {
-    title: 'Thẻ tag',
+    title: 'tag',
     name: 'tagNote',
     type: "select",
     data: [
@@ -211,19 +211,19 @@ export const FilterType: { [key: string]: filterItem } = {
     ]
   },
   speakerName:{
-    title: 'Tên diễn giả',
+    title: 'teacher_name',
     name: 'speakerName',
   },
   nameForm:{
-    title: 'Tên form',
+    title: 'form_name',
     name: 'title',
   },
   lessonName: {
-    title: 'Tên buổi học',
+    title: 'lesson_name',
     name: 'lessonName',
   },
   studentPhoneNumber: {
-    title: 'Số điện thoại',
+    title: 'phone_number',
     name: 'studentPhoneNumber',
   },
   studentEmail: {
@@ -231,19 +231,19 @@ export const FilterType: { [key: string]: filterItem } = {
     name: 'studentEmail',
   },
   emailSendBy: {
-    title: 'Người gửi',
+    title: 'sender',
     name: 'emailSendBy',
   },
   emailReceiveBy: {
-    title: 'Người nhận',
+    title: 'receiver',
     name: 'emailReceiveBy',
   },
   subject: {
-    title: 'Loại email',
+    title: 'email_type',
     name: 'subject',
   },
   emailDate: {
-    title: 'Ngày gửi',
+    title: 'sent_date',
     name: 'emailDate',
     type: 'email-date'
   },

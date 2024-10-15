@@ -777,5 +777,16 @@
   "guide_header_menu_name": "This is the name of the button that will appear in the top menu, such as home, introduction, courses...",
   "guide_header_menu_position": "The display order on the menu, counting from left to right.",
   "guide_header_menu_status": "If enabled, the button will appear in the menu. If disabled, this button will be hidden.",
-  "guide_header_menu_parent_link": "If you want this button to be a subcategory (category) under another button (navigation), select this option; if not, leave it blank."
+  "guide_header_menu_parent_link": "If you want this button to be a subcategory (category) under another button (navigation), select this option; if not, leave it blank.",
+  "price_list_categories": "Price list categories",
+  "create_catalog": "Create a new price list category",
+  "update_catalog": "Updating the price list list",
+  "deactivate": "Deactivate",
+  "platform_transfer": "Platform Transfer",
+  "price_list_config": "Price List Configuration",
+  "price_list": "Price List",
+  "create_price_list": "Create a new price list",
+  "update_price_list": "Update price list",
+  "price_name": "The price list name",
+  "settlement_date": "Settlement date of the month"
 }

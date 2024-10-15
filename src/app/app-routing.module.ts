@@ -101,6 +101,10 @@ const routes: Routes = [
         path: 'forum',
         loadChildren: () => import('./pages/forum/forum.module').then(m => m.ForumModule),
       },
+      {
+        path: 'price-list',
+        loadChildren: () => import('./pages/price-list/price-list.module').then(m => m.PriceListModule),
+      },
     ],
   },
 ];

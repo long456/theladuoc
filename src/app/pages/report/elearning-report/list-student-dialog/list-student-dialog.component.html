@@ -1,12 +1,55 @@
-<nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed" [nzScroll]="{ x: 'auto', y : '550px' }"
-    nzShowPagination="false" (nzQueryParams)="onQueryParamsChange($event)">
+<div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+        <nz-form-item class="mg-r-20">
+            <nz-range-picker style="width: 100%;" [(ngModel)]="activeDate" [nzAllowClear]="true"
+                [nzFormat]="dateFormat"></nz-range-picker>
+        </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+        <nz-form-item class="mg-r-20">
+            <input [(ngModel)]="studentName" nz-input placeholder="Tên học viên" />
+        </nz-form-item>
+        <i nz-icon nzType="close-circle" class="clear-icon" *ngIf="studentName" (click)="clearStudentName()"
+            style="position: absolute; right: 40px; top: 40%; transform: translateY(-50%); cursor: pointer;">
+        </i>
+    </div>
+    <div nz-col [nzSpan]="8">
+        <nz-form-item class="mg-r-20">
+            <input [(ngModel)]="studentPhone" nz-input placeholder="Số điện thoại" />
+        </nz-form-item>
+        <i nz-icon nzType="close-circle" class="clear-icon" *ngIf="studentPhone" (click)="clearStudentPhone()"
+            style="position: absolute; right: 40px; top: 40%; transform: translateY(-50%); cursor: pointer;">
+        </i>
+    </div>
+</div>
+<div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+        <nz-form-item class="mg-r-20">
+            <input [(ngModel)]="studentCode" nz-input placeholder="Mã học viên" />
+        </nz-form-item>
+        <i nz-icon nzType="close-circle" class="clear-icon" *ngIf="studentCode" (click)="clearStudentCode()"
+        style="position: absolute; right: 40px; top: 40%; transform: translateY(-50%); cursor: pointer;">
+    </i>
+    </div>
+    <div nz-col [nzSpan]="8">
+        <nz-form-item class="mg-r-20">
+            <input [(ngModel)]="studentEmail" nz-input placeholder="Email" />
+        </nz-form-item>
+        <i nz-icon nzType="close-circle" class="clear-icon" *ngIf="studentEmail" (click)="clearStudentEmail()"
+        style="position: absolute; right: 40px; top: 40%; transform: translateY(-50%); cursor: pointer;">
+    </i>
+    </div>
+</div>
+
+<nz-table #nzTable [nzLoading]="isLoading" [nzData]="items" nzTableLayout="fixed"
+    [nzScroll]="{ x: 'auto', y : '350px' }" nzShowPagination="false" (nzQueryParams)="onQueryParamsChange($event)">
     <thead style="overflow-y: hidden;">
         <tr>
             <th nzWidth="50px" nzAlign="center">STT</th>
-            <th nzWidth="260px" nzAlign="center">Ngày kích hoạt</th>
-            <th nzWidth="180px" nzAlign="center">Tên học viên</th>
-            <th nzWidth="180px" nzAlign="center">Số điện thoại</th>
-            <th nzWidth="180px" nzAlign="center">Email</th>
+            <th nzWidth="160px" nzAlign="center">Ngày kích hoạt</th>
+            <th nzWidth="230px" nzAlign="center">Tên học viên</th>
+            <th nzWidth="120px" nzAlign="center">Số điện thoại</th>
+            <th nzWidth="260px" nzAlign="center">Email</th>
             <th nzWidth="180px" nzAlign="center">Mã học viên</th>
         </tr>
     </thead>
@@ -36,6 +79,8 @@
 
 <div nz-row class="header-btn">
     <div nz-col [nzSpan]="24" class="search-area">
+        <button nz-button type="button" [nzType]="'primary'" (click)="onSearch()" style="margin-right: 10px;">Tìm
+            kiếm</button>
         <button nz-button type="button" [nzType]="'primary'" (click)="exportExcel()" style="margin-right: 10px;">Xuất
             Excel</button>
         <button nz-button type="button" (click)="onClose()">Đóng</button>

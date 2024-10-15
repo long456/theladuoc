@@ -1,0 +1,45 @@
+<div class="title-page">
+  {{(isCreate? 'create_catalog' : 'update_catalog') | translate}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="catalogForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            {{'category_name' | translate }}
+            <span class="text-danger">*</span>
+          </span>
+          <input nz-input autofocus formControlName="catalogName"
+                 [nzStatus]="(catalogForm.get('catalogName')?.invalid &&
+                             (catalogForm.get('catalogName')?.touched || isSubmit)) ?
+                             'error' : ''"
+          >
+          <span class="text-danger"
+                *ngIf="(catalogForm.get('catalogName')?.touched || isSubmit)  &&
+                        catalogForm.get('catalogName')?.hasError('required')"
+          >{{'category_name' | translate }} {{'cannot_blank' | translate}}!</span>
+        </div>
+
+        <div nz-col [nzSpan]="8" >
+          <div class="text-label">{{ 'status' | translate }}</div>
+          <nz-switch formControlName="status"></nz-switch>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
+        Lưu
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
+    </div>
+  </div>
+</div>
+
+
