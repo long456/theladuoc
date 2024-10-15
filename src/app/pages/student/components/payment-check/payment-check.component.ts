@@ -3,6 +3,7 @@ import {NZ_MODAL_DATA, NzModalRef} from "ng-zorro-antd/modal";
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {NzUploadFile} from "ng-zorro-antd/upload";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {CurrencyPipe} from "@angular/common";
 
 @Component({
   selector: 'app-payment-check',
@@ -68,11 +69,15 @@ export class PaymentCheckComponent implements OnInit{
   }
 
   formatterVnd(value: number): string {
-    return `${value} VND`
+    const currency = new CurrencyPipe('vi-VN');
+    const transformed = currency.transform(value, 'VND', 'symbol', '1.0-0');
+    return transformed !== null && transformed !== undefined ? transformed : '';
   }
 
   parserVnd(value: string): string {
-    return value.replace(' VND', '');
+    const currency = new CurrencyPipe('vi-VN');
+    const transformed = currency.transform(value, 'VND', 'symbol', '1.0-0');
+    return transformed !== null && transformed !== undefined ? transformed : '';
   }
 
   blobToDataUrl(file: File) {
