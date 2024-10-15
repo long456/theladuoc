@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {COL_DATA_TYPE} from "../../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
+import {BusinessAccessService} from "../../../services/business-access.service";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzModalService} from "ng-zorro-antd/modal";
-import {CatalogService} from "../../../services/catalog.service";
 
 @Component({
-  selector: 'app-catalog-list',
-  templateUrl: './catalog-list.component.html',
-  styleUrls: ['./catalog-list.component.scss']
+  selector: 'app-business-access-list',
+  templateUrl: './business-access-list.component.html',
+  styleUrls: ['./business-access-list.component.scss']
 })
-export class CatalogListComponent implements OnInit{
+export class BusinessAccessListComponent implements OnInit{
   COL_DATA_TYPE = COL_DATA_TYPE;
-  catalogListPage$!: Observable<{
+  businessListPage$!: Observable<{
     rows: any[],
     filter?: any,
     page: number;
@@ -30,11 +30,11 @@ export class CatalogListComponent implements OnInit{
     private router: Router,
     private message: NzMessageService,
     private modal :NzModalService,
-    private catalogService: CatalogService
+    private businessAccessService: BusinessAccessService
   ) {}
 
   ngOnInit() {
-    this.catalogListPage$ = combineLatest([
+    this.businessListPage$ = combineLatest([
       this.page$,
       this.pageSize$,
       this.filterList$,
@@ -43,14 +43,14 @@ export class CatalogListComponent implements OnInit{
     .pipe(
       tap(() => this.loading = true),
       mergeMap(([page, pageSize, filter]) => {
-        return this.catalogService.getListCatalog(page, pageSize, filter)
+        return this.businessAccessService.getListBusinessAccess(page, pageSize, filter)
           .pipe(
             map((value) => {
               if (!value.success) {
                 throw new Error(value.errorMessages);
               }
               return {
-                rows: value.data.categoryList,
+                rows: value.data.permissionList,
                 page: value.data.paginationInfo.pageCurrent,
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
@@ -87,10 +87,6 @@ export class CatalogListComponent implements OnInit{
 
   create():void {
     this.router.navigate(["page/price-list/catalog/create"]).then();
-  }
-
-  benefitConfig(data: any): void {
-    this.router.navigate(["page/price-list/catalog/benefit-config/" + data.id]).then();
   }
 
   delete():void {}

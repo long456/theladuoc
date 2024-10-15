@@ -37,6 +37,10 @@
                 nz-tooltip nzTooltipTitle="{{'edit' | translate}}">
             <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
           </span>
+          <span class="custom-action" (click)="benefitConfig(data)"
+                nz-tooltip nzTooltipTitle="{{'configure_benefit_package' | translate}}">
+            <span nz-icon nzType="ordered-list" nzTheme="outline" class="custom-icon"></span>
+          </span>
         </ng-template>
       </table-column>
     </app-table>

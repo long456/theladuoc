@@ -42,6 +42,10 @@ export class CatalogService {
   }
 
   getAllCatalog(): Observable<any>{
-    return this.http.get('');
+    return this.http.get('Catalog/get-all-catalog');
+  }
+
+  updateBenefitCatalog(data: any): Observable<any>{
+    return this.http.post('Catalog/update-table', data);
   }
 }

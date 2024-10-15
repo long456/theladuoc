@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {COL_DATA_TYPE} from "../../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzModalService} from "ng-zorro-antd/modal";
-import {CatalogService} from "../../../services/catalog.service";
+import {BenefitService} from "../../../services/benefit.service";
+import {COL_DATA_TYPE} from "../../../../../shared/models/Table";
 
 @Component({
-  selector: 'app-catalog-list',
-  templateUrl: './catalog-list.component.html',
-  styleUrls: ['./catalog-list.component.scss']
+  selector: 'app-benefit-list',
+  templateUrl: './benefit-list.component.html',
+  styleUrls: ['./benefit-list.component.scss']
 })
-export class CatalogListComponent implements OnInit{
+export class BenefitListComponent implements OnInit{
   COL_DATA_TYPE = COL_DATA_TYPE;
-  catalogListPage$!: Observable<{
+  benefitGroupListPage$!: Observable<{
     rows: any[],
     filter?: any,
     page: number;
@@ -26,15 +26,16 @@ export class CatalogListComponent implements OnInit{
   refreshTrigger$ = new BehaviorSubject<void>(undefined);
   loading = false;
   itemSelectList: number[] = [];
+
   constructor(
     private router: Router,
     private message: NzMessageService,
     private modal :NzModalService,
-    private catalogService: CatalogService
+    private benefitService: BenefitService
   ) {}
 
-  ngOnInit() {
-    this.catalogListPage$ = combineLatest([
+  ngOnInit(): void {
+    this.benefitGroupListPage$ = combineLatest([
       this.page$,
       this.pageSize$,
       this.filterList$,
@@ -43,21 +44,21 @@ export class CatalogListComponent implements OnInit{
     .pipe(
       tap(() => this.loading = true),
       mergeMap(([page, pageSize, filter]) => {
-        return this.catalogService.getListCatalog(page, pageSize, filter)
+        return this.benefitService.getListBenefitGroup(page, pageSize, filter)
           .pipe(
             map((value) => {
               if (!value.success) {
                 throw new Error(value.errorMessages);
               }
               return {
-                rows: value.data.categoryList,
+                rows: value.data.permissionList,
                 page: value.data.paginationInfo.pageCurrent,
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
               }
             }),
             catchError(err => {
-              this.message.error(err.message? err.message : 'Lỗi load dữ liệu danh mục diễn đàn');
+              this.message.error(err.message? err.message : 'Lỗi load dữ liệu nhóm quyền lợi');
               return of({
                 rows: [],
                 page: 0,
@@ -82,15 +83,11 @@ export class CatalogListComponent implements OnInit{
   }
 
   edit(data: any):void {
-    this.router.navigate(['page/price-list/catalog/' + data.id]).then();
+    this.router.navigate(['page/price-list/benefit-group/' + data.id]).then();
   }
 
   create():void {
-    this.router.navigate(["page/price-list/catalog/create"]).then();
-  }
-
-  benefitConfig(data: any): void {
-    this.router.navigate(["page/price-list/catalog/benefit-config/" + data.id]).then();
+    this.router.navigate(["page/price-list/benefit-group/create"]).then();
   }
 
   delete():void {}

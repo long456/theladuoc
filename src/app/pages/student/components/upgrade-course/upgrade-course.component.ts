@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NZ_MODAL_DATA} from "ng-zorro-antd/modal";
 import {CourseService} from "../../../setting/services/course.service";
 import {NzMessageService} from "ng-zorro-antd/message";
+import {CurrencyPipe} from "@angular/common";
 
 @Component({
   selector: 'app-upgrade-course',
@@ -72,11 +73,15 @@ export class UpgradeCourseComponent implements OnInit{
   }
 
   formatterVnd(value: number): string {
-    return `${value} VND`;
+    const currency = new CurrencyPipe('vi-VN');
+    const transformed = currency.transform(value, 'VND', 'symbol', '1.0-0');
+    return transformed !== null && transformed !== undefined ? transformed : '';
   }
 
   parserVnd(value: string): string {
-    return value.replace(' VND', '');
+    const currency = new CurrencyPipe('vi-VN');
+    const transformed = currency.transform(value, 'VND', 'symbol', '1.0-0');
+    return transformed !== null && transformed !== undefined ? transformed : '';
   }
 
   uploadFile(e: Event) {

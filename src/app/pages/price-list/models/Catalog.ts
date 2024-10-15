@@ -1,5 +1,5 @@
 export interface Catalog {
-  id?: number;
+  catalogId?: number;
   catalogName: string;
-  status: number;
+  catalogStatus: number;
 }

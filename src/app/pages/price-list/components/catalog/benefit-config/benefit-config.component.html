@@ -1,0 +1,94 @@
+<div class="title-page">
+  {{'Cấu hình nhóm quyền lợi'}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <div nz-col [nzSpan]="24">
+      <div class="text-label">
+        Tên danh mục : {{catalogData?.catalogName}}
+
+        <button nz-button nzType="primary" nz-tooltip
+                nzTooltipTitle="{{ 'add' | translate}} {{ 'benefit_package' | translate}}"
+                (click)="addPackage()" style="margin-left: 5px">
+          <span nz-icon nzType="plus"></span>
+        </button>
+      </div>
+
+      <nz-table class="benefit-table" [nzData]="listBenefitPackage"
+                [nzFrontPagination]="false"
+                [nzTemplateMode]="listBenefitPackage.length > 0">
+        <thead>
+        <tr>
+          <th nzAlign="center" nzWidth="50%">
+            {{'your_perks' | translate}}
+          </th>
+          <th nzAlign="center" *ngFor="let price of listPrice">{{ price.priceListName }}</th>
+          <th nzWidth="10%"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <ng-container *ngFor="let package of listBenefitPackage; index as i">
+          <!--render group nhóm quyền lợi-->
+          <tr>
+            <td>
+              <input nz-input class="group-name" placeholder="{{ 'perk_group' | translate }}"
+                     [(ngModel)]="package.groupName" [ngModelOptions]="{standalone: true}">
+            </td>
+            <td nzAlign="center" *ngFor="let price of listPrice"></td>
+            <td nzAlign="center">
+              <button nz-button nzType="primary" nz-tooltip
+                      nzTooltipTitle="{{ 'add' | translate}} {{ 'perk' | translate}}"
+                      (click)="addBenefit(package.benefits, i)" style="margin-right: 5px">
+                <span nz-icon nzType="plus"></span>
+              </button>
+
+              <button nz-button nz-tooltip nzTooltipTitle="{{ 'remove' | translate }} {{'perk' | translate}}"
+                      (click)="removePackage(i)" class="delete-btn">
+                <span nz-icon nzType="delete"></span>
+              </button>
+            </td>
+          </tr>
+          <!--render quyền lợi-->
+          <tr *ngFor="let benefit of package.benefits; index as iB" class="editable-row">
+            <td>
+              <div class="editable-cell" [hidden]="editId === benefit.benefitId" (click)="startEdit(benefit.benefitId)">
+                {{ benefit.benefitName }}
+              </div>
+              <textarea nz-input placeholder="Tên quyền lợi" type="text"
+                        [(ngModel)]="benefit.benefitName" [ngModelOptions]="{standalone: true}"
+                        [hidden]="editId !== benefit.benefitId" (blur)="stopEdit()"
+              ></textarea>
+            </td>
+
+            <td nzAlign="center" *ngFor="let price of listPrice">
+              <input type="checkbox"
+                     (click)="onChecked(price.id, benefit?.priceListIds)"
+                     [checked]="updateSingleChecked(price.id, benefit.priceListIds)">
+            </td>
+
+            <td nzAlign="center">
+              <button nz-button nz-tooltip nzTooltipTitle="{{ 'remove' | translate }} {{'perk' | translate}}"
+                      (click)="removeBenefit(iB, package)" class="delete-btn">
+                <span nz-icon nzType="delete"></span>
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
+        Lưu
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
+    </div>
+  </div>
+</div>
