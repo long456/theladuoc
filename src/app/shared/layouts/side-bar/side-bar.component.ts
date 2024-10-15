@@ -224,7 +224,7 @@ export class SideBarComponent implements OnInit {
             {
               icon: '',
               link: 'page/membership-policy/request-upgrade',
-              name: 'upgrade_request_list',
+              name: 'upgrade_requests',
             },
             {
               icon: '',
