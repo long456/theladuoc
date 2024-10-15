@@ -15,37 +15,58 @@
     <form [formGroup]="headerForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{ 'display_name' | translate }}
-            <span class="text-danger">*</span>
-          </span>
-          <input nz-input autofocus formControlName="displayName"
-            [nzStatus]="(headerForm.get('displayName')?.invalid && (headerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-between align-items-center">
+            <span class="text-label">
+              {{'display_name' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_header_menu_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+          </div>
+          <input nz-input autofocus formControlName="displayName" [nzStatus]="(headerForm.get('displayName')?.invalid && (headerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-            *ngIf="(headerForm.get('displayName')?.touched || isSubmit)  && headerForm.get('displayName')?.hasError('required')">
+          <span class="text-danger" *ngIf="(headerForm.get('displayName')?.touched || isSubmit)  && headerForm.get('displayName')?.hasError('required')">
             {{ 'display_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">{{ 'position' | translate }}</div>
+          <div class="d-flex justify-between align-items-center">
+            <span class="text-label">
+              {{'position' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_header_menu_position' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+          </div>
           <nz-input-number style="width: 100%" [nzMin]="0" [nzStep]="1" formControlName="no"></nz-input-number>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">{{ 'status' | translate }}</div>
+          <div class="d-flex justify-between align-items-center">
+            <span class="text-label">
+              {{'status' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_header_menu_status' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+          </div>
           <nz-switch formControlName="status"></nz-switch>
         </div>
 
         <div nz-col [nzSpan]="11">
-          <span class="text-label">
-            {{'page_url' | translate}}
-          </span>
+          <ng-template #tooltipMenuPageUrl>
+            Bạn có thể chọn lấy đường dẫn từ trang bên trong hệ thống hoặc bên ngoài hệ thống.<br />
+            - Nếu chọn trang bên trong hệ thống: bạn sẽ chọn một trong những trang mà bạn đã tạo ở phần thiết lập các trang con.<br />
+            - Nếu chọn trang bên ngoài hệ thống: bạn sẽ copy đường link của trang bên ngoài mà bạn muốn gán vào nút bấm này
+          </ng-template>
+          <div class="d-flex justify-between align-items-center">
+            <span class="text-label">
+              {{'page_url' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span [nzTooltipTitle]="tooltipMenuPageUrl" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+          </div>
 
           <div class="select-group">
-            <nz-select class="link-to" [(ngModel)]="external" [ngModelOptions]="{standalone: true}"
-              (ngModelChange)="onSelectExternal($event)">
+            <nz-select class="link-to" [(ngModel)]="external" [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectExternal($event)">
               <nz-option [nzValue]="false" [nzLabel]="'internal' | translate"></nz-option>
               <nz-option [nzValue]="true" [nzLabel]="'external' | translate"></nz-option>
             </nz-select>
@@ -62,13 +83,15 @@
         </div>
 
         <div nz-col [nzSpan]="5">
-          <span class="text-label">
-            {{'parent_link' | translate}}
-          </span>
+          <div class="d-flex justify-between align-items-center">
+            <span class="text-label">
+              {{'parent_link' | translate}}
+            </span>
+            <span nzTooltipTitle="{{'guide_header_menu_parent_link' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+          </div>
 
           <div>
-            <nz-select formControlName="navParentId" nzAllowClear
-              [nzStatus]="(headerForm.get('navParentId')?.invalid && (headerForm.get('navParentId')?.touched || isSubmit)) ? 'error' : ''">
+            <nz-select formControlName="navParentId" nzAllowClear [nzStatus]="(headerForm.get('navParentId')?.invalid && (headerForm.get('navParentId')?.touched || isSubmit)) ? 'error' : ''">
               <nz-option *ngFor="let header of listAllHeader" [nzValue]="header.id" [nzLabel]="header.displayName">
               </nz-option>
             </nz-select>

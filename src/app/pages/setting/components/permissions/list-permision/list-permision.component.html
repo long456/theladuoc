@@ -3,7 +3,9 @@
 </div>
 
 <div class="header-btn">
-  <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+  <button nz-button class="add-btn primary" (click)="create()" nzTooltipTitle="{{'guide_group_permission_add_new' | translate}}" nzTooltipPlacement="top" nz-tooltip>
+    {{ 'add_new' | translate }}
+  </button>
   <app-table [rows]="rowData">
     <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
     <table-column header="{{ 'permission_group_name' | translate }} " key="roleName" [width]="'200px'"></table-column>
