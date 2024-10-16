@@ -4,9 +4,6 @@
 
 <div class="header-btn">
   <ng-container *ngIf="(businessListPage$ | async) as business">
-    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
-    <button nz-button class="add-btn" (click)="delete()">{{ 'remove' | translate }}</button>
-
     <app-table
       [rows]="business.rows"
       [page]="business.page"
@@ -18,13 +15,36 @@
       (onItemSelection)="getItemSelection($event)"
       [loading]="loading"
     >
-      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
-      <table-column header="{{ 'category_name' | translate }}" key="catalogName" [width]="'200px'"></table-column>
-      <table-column header="{{ 'status' | translate }}" key="status" [width]="'200px'">
+      <table-column header="{{ 'organization' | translate }}" key="orgName" [width]="'200px'"></table-column>
+      <table-column header="{{ 'homepage' | translate }}" key="homePage" [width]="'200px'">
         <ng-template appCell let-data>
-          <span class="text-valid" *ngIf="data.status">{{'activated' | translate}}</span>
-          <span class="text-invalid" *ngIf="!data.status">{{'deactivate' | translate}}</span>
+          <span class="text-valid" *ngIf="data.homePage">{{'activated' | translate}}</span>
+          <span class="text-invalid" *ngIf="!data.homePage">{{'deactivate' | translate}}</span>
+        </ng-template>
+      </table-column>
+      <table-column header="{{ 'e_learning' | translate }}" key="elearning" [width]="'200px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.elearning">{{'activated' | translate}}</span>
+          <span class="text-invalid" *ngIf="!data.elearning">{{'deactivate' | translate}}</span>
+        </ng-template>
+      </table-column>
+      <table-column header="{{ 'forum' | translate }}" key="forum" [width]="'200px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.forum">{{'activated' | translate}}</span>
+          <span class="text-invalid" *ngIf="!data.forum">{{'deactivate' | translate}}</span>
+        </ng-template>
+      </table-column>
+      <table-column header="{{ 'collaborators_page' | translate }}" key="collab" [width]="'200px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.collab">{{'activated' | translate}}</span>
+          <span class="text-invalid" *ngIf="!data.collab">{{'deactivate' | translate}}</span>
+        </ng-template>
+      </table-column>
+      <table-column header="{{ 'retail_site' | translate }}" key="retail" [width]="'200px'">
+        <ng-template appCell let-data>
+          <span class="text-valid" *ngIf="data.retail">{{'activated' | translate}}</span>
+          <span class="text-invalid" *ngIf="!data.retail">{{'deactivate' | translate}}</span>
         </ng-template>
       </table-column>
       <table-column [width]="'180px'" fixColumn="right" >

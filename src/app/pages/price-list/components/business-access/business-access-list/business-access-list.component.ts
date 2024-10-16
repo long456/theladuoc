@@ -82,12 +82,6 @@ export class BusinessAccessListComponent implements OnInit{
   }
 
   edit(data: any):void {
-    this.router.navigate(['page/price-list/catalog/' + data.id]).then();
+    this.router.navigate(['page/price-list/business-access/' + data.id]).then();
   }
-
-  create():void {
-    this.router.navigate(["page/price-list/catalog/create"]).then();
-  }
-
-  delete():void {}
 }

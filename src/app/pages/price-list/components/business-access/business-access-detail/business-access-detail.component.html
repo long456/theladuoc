@@ -1,1 +1,57 @@
-<p>business-access-detail works!</p>
+<div class="title-page">
+  {{'business_empower' | translate}}
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <div style="margin-bottom: 8px">
+          <span class="text-label">
+            {{'price_list_dis' | translate}}
+          </span>
+    </div>
+    <form [formGroup]="accessForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="4">
+          <label nz-checkbox formControlName="homePage">
+            {{'homepage' | translate}}
+          </label>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+          <label nz-checkbox formControlName="elearning">
+            {{'e_learning' | translate}}
+          </label>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+          <label nz-checkbox formControlName="forum">
+            {{'forum' | translate}}
+          </label>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+          <label nz-checkbox formControlName="collab">
+            {{'collaborators_page' | translate}}
+          </label>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+          <label nz-checkbox formControlName="retail">
+            {{'retail_site' | translate}}
+          </label>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
+        {{'save'|translate}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
+    </div>
+  </div>
+</div>
