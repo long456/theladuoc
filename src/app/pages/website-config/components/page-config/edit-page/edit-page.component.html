@@ -16,7 +16,7 @@
       <div nz-row [nzGutter]="[16, 16]">
         <div nz-col [nzSpan]="8">
           <!-- Page Name Input -->
-          <div class="d-flex justify-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">{{ 'page_name' | translate }}<span class="text-danger">*</span></span>
             <span nzTooltipTitle="{{ 'guide_page_name' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
           </div>
@@ -33,7 +33,7 @@
             Thông thường sẽ là tên của trang con viết không dấu, nối liền vởi dấu gạch ngang.<br />
             <strong>Ví dụ:</strong> trang-chu, gioi-thieu,...
           </ng-template>
-          <div class="d-flex justify-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">Slug<span class="text-danger">*</span></span>
             <span [nzTooltipTitle]="tooltipPageSlug" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
           </div>
@@ -50,7 +50,7 @@
             Bạn chỉ có thể tạo 1 trang chủ, đây là trang mặc định khi truy cập website của bạn.<br />
             Bạn có thể tạo nhiều trang thông thường.
           </ng-template>
-          <div class="d-flex justify-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">{{ 'page_type' | translate }}<span class="text-danger">*</span></span>
             <span [nzTooltipTitle]="tooltipPageType" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
           </div>
@@ -62,7 +62,7 @@
     
         <div nz-col [nzSpan]="16">
           <!-- Description Textarea -->
-          <div class="d-flex justify-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">{{ 'description' | translate }}<span class="text-danger">*</span></span>
             <span nzTooltipTitle="{{ 'guide_page_description' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
           </div>
@@ -71,7 +71,7 @@
     
         <div nz-col [nzSpan]="24">
           <!-- Page Content CKEditor -->
-          <div class="d-flex justify-between align-items-center">
+          <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">{{ 'page_content' | translate }}<span class="text-danger">*</span></span>
             <span nzTooltipTitle="{{ 'guide_page_content' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
           </div>
