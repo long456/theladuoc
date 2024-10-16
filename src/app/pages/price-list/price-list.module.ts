@@ -15,6 +15,7 @@ import { BenefitDetailComponent } from './components/benefit-group/benefit-detai
 import { BenefitConfigComponent } from './components/catalog/benefit-config/benefit-config.component';
 import { BusinessAccessListComponent } from './components/business-access/business-access-list/business-access-list.component';
 import { BusinessAccessDetailComponent } from './components/business-access/business-access-detail/business-access-detail.component';
+import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 
 @NgModule({
   declarations: [
@@ -28,15 +29,16 @@ import { BusinessAccessDetailComponent } from './components/business-access/busi
     BusinessAccessListComponent,
     BusinessAccessDetailComponent,
   ],
-  imports: [
-    CommonModule,
-    PriceListRoutingModule,
-    SharedModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NzSwitchModule,
-    NzSelectModule,
-    NzInputNumberModule
-  ]
+    imports: [
+        CommonModule,
+        PriceListRoutingModule,
+        SharedModule,
+        ReactiveFormsModule,
+        FormsModule,
+        NzSwitchModule,
+        NzSelectModule,
+        NzInputNumberModule,
+        NzCheckboxModule
+    ]
 })
 export class PriceListModule { }

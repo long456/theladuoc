@@ -10,6 +10,8 @@ import {Tag} from "../../models/tag";
 import {NzDrawerRef, NzDrawerService} from "ng-zorro-antd/drawer";
 import {UpgradeCourseComponent} from "../upgrade-course/upgrade-course.component";
 import {environment} from "../../../../../environments/environment";
+import {TranslatePipe} from "@ngx-translate/core/lib/translate.pipe";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-taking-care-student',
@@ -74,7 +76,8 @@ export class TakingCareStudentComponent implements OnInit{
     private studentService: StudentService,
     private modal: NzModalService,
     private viewContainerRef: ViewContainerRef,
-    private drawerService: NzDrawerService
+    private drawerService: NzDrawerService,
+    private translate: TranslateService
   ) {
   }
 
@@ -163,8 +166,10 @@ export class TakingCareStudentComponent implements OnInit{
   }
 
   paymentCheck(data : any) {
+    const translateTitle = this.translate.instant('payment_updates')
+
     const modal: NzModalRef = this.modal.create<PaymentCheckComponent>({
-      nzTitle: 'Xác thực thanh toán',
+      nzTitle: translateTitle,
       nzContent: PaymentCheckComponent,
       nzViewContainerRef: this.viewContainerRef,
       nzData: {
