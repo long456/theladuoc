@@ -14,7 +14,7 @@
               {{'website_name' | translate }}
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_website_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_website_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <input nz-input autofocus formControlName="name" [nzStatus]="(configForm.get('name')?.invalid && (configForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
@@ -29,7 +29,7 @@
               {{'copyright_text' | translate }}
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_website_copyright' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_website_copyright' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <input nz-input formControlName="copyright">
         </div>
@@ -40,7 +40,7 @@
               Logo header
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_website_logo_header' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_website_logo_header' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
 
           <div style="display: flex">
@@ -57,7 +57,7 @@
               Background header
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_website_background_header' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_website_background_header' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <div class="color-picker" (click)="active(bgHeader)">
             <input #bgHeader formControlName="headerBackground" type="color" (change)="onColorChange($event, 1)">
@@ -73,7 +73,7 @@
               Logo footer
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_website_logo_footer' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_website_logo_footer' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
 
           <div style="display: flex">
@@ -90,7 +90,7 @@
               Background footer
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_website_background_footer' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_website_background_footer' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <div class="color-picker" (click)="active(bgFooter)">
             <input #bgFooter formControlName="footerBackground" type="color" (change)="onColorChange($event, 0)">
@@ -106,7 +106,7 @@
               Link facebook
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_website_social_links' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_website_social_links' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <input nz-input formControlName="facebookLink" [nzStatus]="(configForm.get('facebookLink')?.invalid &&
                     (configForm.get('facebookLink')?.touched || isSubmit)) ? 'error' : ''">
@@ -122,7 +122,7 @@
               Link youtube
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_website_social_links' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_website_social_links' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <input nz-input formControlName="youtubeLink" [nzStatus]="(configForm.get('youtubeLink')?.invalid &&
                     (configForm.get('youtubeLink')?.touched || isSubmit)) ? 'error' : ''">
@@ -138,7 +138,7 @@
               Link tiktok
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_website_social_links' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_website_social_links' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <input nz-input formControlName="tiktokLink" [nzStatus]="(configForm.get('tiktokLink')?.invalid &&
                     (configForm.get('tiktokLink')?.touched || isSubmit)) ? 'error' : ''">
@@ -154,7 +154,7 @@
               Link zalo
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_website_social_links' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_website_social_links' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <input nz-input formControlName="zaloLink" [nzStatus]="(configForm.get('zaloLink')?.invalid &&
                     (configForm.get('zaloLink')?.touched || isSubmit)) ? 'error' : ''">
@@ -170,7 +170,7 @@
               {{'description' | translate}}
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_website_description' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_website_description' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <textarea nz-input [nzAutosize]="{ minRows: 3}" formControlName="footerDescription"></textarea>
         </div>
