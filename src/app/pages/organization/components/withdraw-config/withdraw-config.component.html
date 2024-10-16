@@ -16,7 +16,7 @@
               {{'recurring_withdrawal_period' | translate }}
               <span class="text-danger">*</span>
             </span>
-            <span [nzTooltipTitle]="tooltipRecurringWithdrawal" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span [nzTooltipTitle]="tooltipRecurringWithdrawal" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
 
           <nz-select formControlName="withdrawMoneyType" style="display: block">
@@ -35,7 +35,7 @@
               {{'pick_a_day_in_a_week' | translate }}
               <span class="text-danger">*</span>
             </span>
-            <span [nzTooltipTitle]="tooltipPickADay" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span [nzTooltipTitle]="tooltipPickADay" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
 
           <nz-select formControlName="dayOfWeek" style="display: block">
@@ -65,7 +65,7 @@
               {{'withdrawal_limit' | translate }}
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_organization_withdrawal_limit' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_organization_withdrawal_limit' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
 
           <nz-input-number-group nzSuffix="VND" style="width: 100%" [nzStatus]="(withdrawForm.get('minimumWithdrawLimit')?.invalid &&    (withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit)) ? 'error' : ''">
@@ -88,7 +88,7 @@
               {{'advance_limit' | translate }}
               <span class="text-danger">*</span>
             </span>
-            <span [nzTooltipTitle]="tooltipAdvanceLimit" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span [nzTooltipTitle]="tooltipAdvanceLimit" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
 
           <nz-input-number-group nzSuffix="%" style="width: 100%">
@@ -107,7 +107,7 @@
               {{'description' | translate }}
               <span class="text-danger">*</span>
             </span>
-            <span [nzTooltipTitle]="tooltipDescription" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span [nzTooltipTitle]="tooltipDescription" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
 
           <textarea nz-input formControlName="withdrawMoneyDesc" placeholder="{{'description' | translate}}" [nzAutosize]="{ minRows: 3}">

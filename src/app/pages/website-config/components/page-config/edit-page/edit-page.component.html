@@ -18,7 +18,7 @@
           <!-- Page Name Input -->
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">{{ 'page_name' | translate }}<span class="text-danger">*</span></span>
-            <span nzTooltipTitle="{{ 'guide_page_name' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{ 'guide_page_name' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
           <input nz-input autofocus formControlName="name" [nzStatus]="(pageForm.get('name')?.invalid && (pageForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
           <span class="text-danger" *ngIf="(pageForm.get('name')?.touched || isSubmit) && pageForm.get('name')?.hasError('required')">
@@ -35,7 +35,7 @@
           </ng-template>
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">Slug<span class="text-danger">*</span></span>
-            <span [nzTooltipTitle]="tooltipPageSlug" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span [nzTooltipTitle]="tooltipPageSlug" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
           <input nz-input formControlName="slug" [nzStatus]="(pageForm.get('slug')?.invalid && (pageForm.get('slug')?.touched || isSubmit)) ? 'error' : ''">
           <span class="text-danger" *ngIf="(pageForm.get('slug')?.touched || isSubmit) && pageForm.get('slug')?.hasError('pattern')">
@@ -52,7 +52,7 @@
           </ng-template>
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">{{ 'page_type' | translate }}<span class="text-danger">*</span></span>
-            <span [nzTooltipTitle]="tooltipPageType" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span [nzTooltipTitle]="tooltipPageType" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
           <nz-select formControlName="type">
             <nz-option [nzValue]="1" [nzLabel]="'homepage' | translate"></nz-option>
@@ -64,7 +64,7 @@
           <!-- Description Textarea -->
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">{{ 'description' | translate }}<span class="text-danger">*</span></span>
-            <span nzTooltipTitle="{{ 'guide_page_description' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{ 'guide_page_description' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
           <textarea nz-input placeholder="{{ 'enter' | translate }} {{ 'description' | translate }}" formControlName="description" [nzAutosize]="{ minRows: 3 }"></textarea>
         </div>
@@ -73,7 +73,7 @@
           <!-- Page Content CKEditor -->
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">{{ 'page_content' | translate }}<span class="text-danger">*</span></span>
-            <span nzTooltipTitle="{{ 'guide_page_content' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{ 'guide_page_content' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
           <ckeditor name="ckeditor_text" formControlName="contentHtml" editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>

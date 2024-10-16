@@ -20,7 +20,7 @@
               {{'display_name' | translate}}
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_header_menu_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_header_menu_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
           <input nz-input autofocus formControlName="displayName" [nzStatus]="(headerForm.get('displayName')?.invalid && (headerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
@@ -35,7 +35,7 @@
               {{'position' | translate}}
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_header_menu_position' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_header_menu_position' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
           <nz-input-number style="width: 100%" [nzMin]="0" [nzStep]="1" formControlName="no"></nz-input-number>
         </div>
@@ -46,7 +46,7 @@
               {{'status' | translate}}
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_header_menu_status' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_header_menu_status' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
           <nz-switch formControlName="status"></nz-switch>
         </div>
@@ -62,7 +62,7 @@
               {{'page_url' | translate}}
               <span class="text-danger">*</span>
             </span>
-            <span [nzTooltipTitle]="tooltipMenuPageUrl" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span [nzTooltipTitle]="tooltipMenuPageUrl" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
 
           <div class="select-group">
@@ -87,7 +87,7 @@
             <span class="text-label">
               {{'parent_link' | translate}}
             </span>
-            <span nzTooltipTitle="{{'guide_header_menu_parent_link' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_header_menu_parent_link' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question" nzTheme="outline"></span>
           </div>
 
           <div>
