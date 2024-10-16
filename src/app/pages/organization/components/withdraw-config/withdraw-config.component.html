@@ -65,7 +65,7 @@
               {{'withdrawal_limit' | translate }}
               <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_organization_withdrawal_limit'}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_organization_withdrawal_limit' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="info-circle" nzTheme="outline"></span>
           </div>
 
           <nz-input-number-group nzSuffix="VND" style="width: 100%" [nzStatus]="(withdrawForm.get('minimumWithdrawLimit')?.invalid &&    (withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit)) ? 'error' : ''">
