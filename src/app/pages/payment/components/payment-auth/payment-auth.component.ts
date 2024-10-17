@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {COL_DATA_TYPE, filterItem} from "../../../../shared/models/Table";
+import {COL_DATA_TYPE, FIX_COLUMN, filterItem, FilterType} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
@@ -34,47 +34,13 @@ export class PaymentAuthComponent implements OnInit{
   filterList$ = new BehaviorSubject(null);
 
   listOfColumn: filterItem[] = [
-    {
-      title: 'Ngày đăng ký',
-      name: 'createdDate',
-      type: "date-range"
-    },
-    {
-      title: 'Tên học viên',
-      name: 'name',
-    },
-    {
-      title: 'Số điện thoại',
-      name: 'mobile',
-    },
-    {
-      title: 'Email',
-      name: 'email',
-    },
-    {
-      title: 'Nhân viên chăm sóc',
-      name: 'caregiverName',
-    },
-    {
-      title: 'Số tiền',
-      name: 'price',
-    },
-    {
-      title: 'Trạng thái',
-      name: 'verifyPay',
-      type: "select",
-      value: true,
-      data: [
-        {
-          label: 'Đã xác thực',
-          key: true
-        },
-        {
-          label: 'Chưa xác thực',
-          key: false
-        }
-      ]
-    },
+    FilterType['createdDate'],
+    FilterType['studentName'],
+    FilterType['mobile'],
+    FilterType['email'],
+    FilterType['caregiverName'],
+    FilterType['price'],
+    FilterType['verifyPay'],
   ];
 
   constructor(

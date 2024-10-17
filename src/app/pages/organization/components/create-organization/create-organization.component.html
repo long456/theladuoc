@@ -15,55 +15,70 @@
     <form [formGroup]="orgForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            {{'organization_name' | translate }}
-            <span class="text-danger">*</span>
-          </span>
-          <input nz-input autofocus formControlName="name"
-            [nzStatus]="(this.orgForm.get('name')?.invalid && (orgForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'organization_name' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_organization_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input nz-input autofocus formControlName="name" [nzStatus]="(this.orgForm.get('name')?.invalid && (orgForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-            *ngIf="(orgForm.get('name')?.touched || isSubmit)  && orgForm.get('name')?.hasError('required')">
+          <span class="text-danger" *ngIf="(orgForm.get('name')?.touched || isSubmit)  && orgForm.get('name')?.hasError('required')">
             {{'organization_name' | translate }} {{'cannot_blank' | translate }}
           </span>
         </div>
 
         <div nz-col [nzSpan]="9" class="text-right">
-          <div class="text-label">{{ 'status' | translate }}</div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{ 'status' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_organization_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
 
         <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            Email
-          </span>
-          <input nz-input formControlName="email"
-            [nzStatus]="(this.orgForm.get('email')?.invalid && (orgForm.get('email')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              Email
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_organization_email' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input nz-input formControlName="email" [nzStatus]="(this.orgForm.get('email')?.invalid && (orgForm.get('email')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-            *ngIf="(orgForm.get('email')?.touched || isSubmit)  && orgForm.get('email')?.hasError('email')">
+          <span class="text-danger" *ngIf="(orgForm.get('email')?.touched || isSubmit)  && orgForm.get('email')?.hasError('email')">
             Email {{'invalid_format' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            {{'phone_number' | translate }}
-          </span>
-          <input nz-input formControlName="mobile"
-            [nzStatus]="(this.orgForm.get('mobile')?.invalid && (orgForm.get('mobile')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'phone_number' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_organization_phone' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input nz-input formControlName="mobile" [nzStatus]="(this.orgForm.get('mobile')?.invalid && (orgForm.get('mobile')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-            *ngIf="(orgForm.get('mobile')?.touched || isSubmit)  && orgForm.get('mobile')?.hasError('pattern')">
+          <span class="text-danger" *ngIf="(orgForm.get('mobile')?.touched || isSubmit)  && orgForm.get('mobile')?.hasError('pattern')">
             {{'phone_number' | translate}} {{'invalid_format' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            {{ 'organization_representative' | translate }}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'organization_representative' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_organization_admin' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <div>
             <nz-select class="width-100" formControlName="userId">
@@ -73,9 +88,17 @@
         </div>
 
         <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            {{'data_process_type' | translate}}
-          </span>
+          <ng-template #tooltipDataProcessType>
+            - Thủ công: Trưởng phòng sale chủ động chia data cho nhân viên sale của tổ chức<br />
+            - Tự động: Hệ thống sẽ tự chia đều data cho các nhân viên sale của tổ chức theo logic xoay vòng (1234512345...).
+          </ng-template>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'data_process_type' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span [nzTooltipTitle]="tooltipDataProcessType" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <div>
             <nz-select class="width-100" formControlName="splitData">
@@ -87,33 +110,48 @@
 
         <div nz-col [nzSpan]="9">
           <div style="margin-bottom: 16px">
-            <span class="text-label">
-              {{'e_learning_domain' | translate}}
-            </span>
-
+            <ng-template #tooltipELearningDomain>
+              Đây là tên miền để học viên truy cập vào hệ thống học tập e-learning.<br />
+              <strong>Lưu ý:</strong> tên miền không cần điền https://www.
+            </ng-template>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="text-label">
+                {{'e_learning_domain' | translate}}
+                <span class="text-danger">*</span>
+              </span>
+              <span [nzTooltipTitle]="tooltipELearningDomain" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+            </div>
             <input nz-input formControlName="websiteElearning">
           </div>
 
           <div>
-            <span class="text-label">
-              {{'acp_domain' | translate}}
-              <span class="text-danger">*</span>
-            </span>
+            <ng-template #tooltipAcpDomain>
+              Đây là tên miền để nhân sự của tổ chức truy cập vào quản trị vận hành hệ thống.<br />
+              <strong>Lưu ý:</strong> tên miền không cần điền https://www.
+            </ng-template>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="text-label">
+                {{'acp_domain' | translate}}
+                <span class="text-danger">*</span>
+              </span>
+              <span [nzTooltipTitle]="tooltipAcpDomain" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+            </div>
 
-            <input nz-input formControlName="websiteCms"
-              [nzStatus]="(this.orgForm.get('websiteCms')?.invalid && (orgForm.get('websiteCms')?.touched || isSubmit)) ? 'error' : ''">
+            <input nz-input formControlName="websiteCms" [nzStatus]="(this.orgForm.get('websiteCms')?.invalid && (orgForm.get('websiteCms')?.touched || isSubmit)) ? 'error' : ''">
 
-            <span class="text-danger"
-              *ngIf="(orgForm.get('websiteCms')?.touched || isSubmit)  && orgForm.get('websiteCms')?.hasError('required')">
+            <span class="text-danger" *ngIf="(orgForm.get('websiteCms')?.touched || isSubmit)  && orgForm.get('websiteCms')?.hasError('required')">
               {{'acp_domain' | translate}} {{'cannot_blank' | translate }}
             </span>
           </div>
         </div>
 
         <div nz-col [nzSpan]="3">
-          <span class="text-label">
-            Logo
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              Logo
+            </span>
+            <span nzTooltipTitle="{{ 'guide_organization_logo' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <div class="select-file">
             <div class="btn-select-file" (click)="selectFile('logo')" *ngIf="!orgForm.get('logo')?.value">
@@ -124,12 +162,10 @@
 
             <div class="overlay" *ngIf="orgForm.get('logo')?.value">
               <div class="btn-file">
-                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}"
-                  (click)="selectFile('logo')">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}" (click)="selectFile('logo')">
                   <span nz-icon nzType="upload"></span>
                 </a>
-                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
-                  (click)="deleteImg('logo')">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}" (click)="deleteImg('logo')">
                   <span nz-icon nzType="delete"></span>
                 </a>
               </div>
@@ -151,12 +187,10 @@
 
             <div class="overlay" *ngIf="orgForm.get('logo1x1')?.value">
               <div class="btn-file">
-                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}"
-                  (click)="selectFile('logo1x1')">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}" (click)="selectFile('logo1x1')">
                   <span nz-icon nzType="upload"></span>
                 </a>
-                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
-                  (click)="deleteImg('logo1x1')">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}" (click)="deleteImg('logo1x1')">
                   <span nz-icon nzType="delete"></span>
                 </a>
               </div>
@@ -179,12 +213,10 @@
 
             <div class="overlay" *ngIf="orgForm.get('favicon')?.value">
               <div class="btn-file">
-                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}"
-                  (click)="selectFile('favicon')">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}" (click)="selectFile('favicon')">
                   <span nz-icon nzType="upload"></span>
                 </a>
-                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
-                  (click)="deleteImg('favicon')">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}" (click)="deleteImg('favicon')">
                   <span nz-icon nzType="delete"></span>
                 </a>
               </div>
@@ -193,18 +225,33 @@
         </div>
 
         <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            {{'forum_domain' | translate}}
-          </span>
+          <ng-template #tooltipForumDomain>
+            Đây là tên miền để học viên truy cập vào hệ thống diễn đàn của cộng đồng.<br />
+            <strong>Lưu ý:</strong> tên miền không cần điền https://www.
+          </ng-template>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'forum_domain' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span [nzTooltipTitle]="tooltipForumDomain" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <input nz-input formControlName="websiteForum">
         </div>
 
         <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            {{'homepage_domain' | translate}}
-            <span class="text-danger">*</span>
-          </span>
+          <ng-template #tooltipHomepageDomain>
+            Đây là tên miền để học viên truy cập vào trang chủ của tổ chức, các landingpage và thực hiện chức năng đăng ký khóa học.<br />
+            <strong>Lưu ý:</strong> tên miền không cần điền https://www.
+          </ng-template>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'homepage_domain' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span [nzTooltipTitle]="tooltipHomepageDomain" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <input nz-input formControlName="website" [nzStatus]="(orgForm.get('website')?.invalid &&
                         (orgForm.get('website')?.touched || isSubmit)) ? 'error' : ''">
@@ -216,17 +263,25 @@
         </div>
 
         <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            {{'address' | translate}}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'address' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{ 'guide_organization_address' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <input nz-input formControlName="address">
         </div>
 
         <div nz-col [nzSpan]="18">
-          <span class="text-label">
-            {{'embed_map' | translate}}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'embed_map' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{ 'guide_organization_embed_map' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <textarea nz-input formControlName="map" [nzAutosize]="{ minRows: 3, maxRows: 6 }"></textarea>
         </div>
 

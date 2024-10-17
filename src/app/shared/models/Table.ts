@@ -10,14 +10,14 @@ export enum COL_DATA_TYPE {
 export type FIX_COLUMN = 'left' | 'right' | 'none'
 
 export type filterItem = {
-  title : string
+  title: string
   name: string
   type?: 'number' | 'date' | 'date-range' | 'text' | 'phone-number' | 'select' | 'email-date'
   data?: any
   value?: any
 }
 
-export const FilterType: { [key: string]: filterItem } = {
+export const FilterType: { [ key: string ]: filterItem } = {
   createdDate: {
     title: 'created_at',
     name: 'createdDate',
@@ -51,15 +51,15 @@ export const FilterType: { [key: string]: filterItem } = {
     title: 'learner_code',
     name: 'code',
   },
-  emailRef:{
+  emailRef: {
     title: 'referrer',
     name: 'emailRef',
   },
-  lecturerName:{
+  lecturerName: {
     title: 'teacher_name',
     name: 'lecturerName',
   },
-  caregiverName:    {
+  caregiverName: {
     title: 'caring_by',
     name: 'caregiverName',
   },
@@ -67,7 +67,7 @@ export const FilterType: { [key: string]: filterItem } = {
     title: 'referrer',
     name: 'userRefName',
   },
-  courseName:{
+  courseName: {
     title: 'course_name',
     name: 'courseName',
   },
@@ -79,7 +79,7 @@ export const FilterType: { [key: string]: filterItem } = {
     title: 'landing_page_name',
     name: 'landingPageName',
   },
-  isAuthEmail:{
+  isAuthEmail: {
     title: 'email_verification',
     name: 'isAuthEmail',
     type: "select",
@@ -147,7 +147,7 @@ export const FilterType: { [key: string]: filterItem } = {
     title: 'organization',
     name: 'organizationName',
   },
-  className:{
+  className: {
     title: 'class_name',
     name: 'className',
   },
@@ -210,11 +210,11 @@ export const FilterType: { [key: string]: filterItem } = {
       },
     ]
   },
-  speakerName:{
+  speakerName: {
     title: 'teacher_name',
     name: 'speakerName',
   },
-  nameForm:{
+  nameForm: {
     title: 'form_name',
     name: 'title',
   },
@@ -247,6 +247,37 @@ export const FilterType: { [key: string]: filterItem } = {
     name: 'emailDate',
     type: 'email-date'
   },
+  bankAccountNumber: {
+    title: 'account_number_receiver',
+    name: 'bankAccountNumber',
+  },
+  bankAccountHolder: {
+    title: 'account_holder',
+    name: 'bankAccountHolder',
+  },
+  bankName: {
+    title: 'bank',
+    name: 'bankName',
+  },
+  verifyPay: {
+    title: 'tag',
+    name: 'verifyPay',
+    type: "select",
+    data: [
+      {
+        label: 'Đã xác thực',
+        key: true
+      },
+      {
+        label: 'Chưa xác thực',
+        key: false
+      }
+    ]
+  },
+  staffName: {
+    title: 'staff_name',
+    name: 'fullName',
+  }
 }
 
 

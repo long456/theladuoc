@@ -1,5 +1,5 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
-import {COL_DATA_TYPE, filterItem} from "../../../../shared/models/Table";
+import {COL_DATA_TYPE, filterItem, FilterType} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
@@ -34,55 +34,16 @@ export class PaymentRefundComponent implements OnInit{
   isExpand = false;
 
   listOfColumn: filterItem[] = [
-    {
-      title: 'Ngày yêu cầu',
-      name: 'createdDate',
-      type: "date-range"
-    },
-    {
-      title: 'Tên học viên',
-      name: 'name',
-    },
-    {
-      title: 'Số điện thoại',
-      name: 'mobile',
-    },
-    {
-      title: 'Email',
-      name: 'email',
-    },
-    {
-      title: 'Nhân viên chăm sóc',
-      name: 'caregiverName',
-    },
-    {
-      title: 'Tài khoản hoàn tiền',
-      name: 'bankAccountNumber',
-    },
-    {
-      title: 'Tên chủ tài khoản',
-      name: 'bankAccountFullName',
-    },
-    {
-      title: 'Tên ngân hàng',
-      name: 'bankName',
-    },
-    {
-      title: 'Trạng thái',
-      name: 'verifyPay',
-      type: "select",
-      value: true,
-      data: [
-        {
-          label: 'Đã xác thực',
-          key: true
-        },
-        {
-          label: 'Chưa xác thực',
-          key: false
-        }
-      ]
-    },
+    FilterType['createdDate'],
+    FilterType['studentName'],
+    FilterType['mobile'],
+    FilterType['email'],
+    FilterType['caregiverName'],
+    FilterType['price'],
+    FilterType['bankAccountNumber'],
+    FilterType['bankAccountHolder'],
+    FilterType['bankName'],
+    FilterType['verifyPay'],
   ];
 
   receiptImg!: any;
