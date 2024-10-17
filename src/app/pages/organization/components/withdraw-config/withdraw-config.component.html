@@ -7,9 +7,17 @@
     <form [formGroup]="withdrawForm">
       <div nz-row [nzGutter]="[16, 16]">
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-          <span class="text-label">
-            {{'recurring_withdrawal_period' | translate}}
-          </span>
+          <ng-template #tooltipRecurringWithdrawal>
+            - Thủ công: Trưởng phòng sale chủ động chia data cho nhân viên sale của tổ chức<br />
+            - Tự động: Hệ thống sẽ tự chia đều data cho các nhân viên sale của tổ chức theo logic xoay vòng (1234512345...).
+          </ng-template>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'recurring_withdrawal_period' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span [nzTooltipTitle]="tooltipRecurringWithdrawal" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <nz-select formControlName="withdrawMoneyType" style="display: block">
             <nz-option [nzValue]="1" [nzLabel]="'weekly' | translate"></nz-option>
@@ -18,9 +26,17 @@
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" *ngIf="withdrawForm.get('withdrawMoneyType')?.value === 1">
-          <span class="text-label">
-            {{'pick_a_day_in_a_week' | translate}}
-          </span>
+          <ng-template #tooltipPickADay>
+            - Nếu bạn chọn rút tiền theo tháng, bạn sẽ điền vào ngày nào bạn muốn thành viên thực hiện lệnh rút tiền. <br />
+            - Nếu bạn chọn rút tiền theo tuần, bạn sẽ chọn thứ nào bạn muốn thành viên thực hiện lệnh rút tiền.
+          </ng-template>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'pick_a_day_in_a_week' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span [nzTooltipTitle]="tooltipPickADay" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <nz-select formControlName="dayOfWeek" style="display: block">
             <nz-option [nzValue]="1" [nzLabel]="'sunday' | translate"></nz-option>
@@ -44,27 +60,36 @@
         <div nz-col [nzMd]="8"></div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-          <span class="text-label">
-            {{'withdrawal_limit' | translate}}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'withdrawal_limit' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_organization_withdrawal_limit' | translate }}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
-          <nz-input-number-group nzSuffix="VND" style="width: 100%" [nzStatus]="(withdrawForm.get('minimumWithdrawLimit')?.invalid &&
-                                             (withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit)) ?
-                                             'error' : ''">
+          <nz-input-number-group nzSuffix="VND" style="width: 100%" [nzStatus]="(withdrawForm.get('minimumWithdrawLimit')?.invalid &&    (withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit)) ? 'error' : ''">
             <nz-input-number formControlName="minimumWithdrawLimit" [nzMin]="0" [nzStep]="1000" [nzFormatter]="formatterCurrency">
             </nz-input-number>
           </nz-input-number-group>
 
-          <span class="text-danger error-message" *ngIf="(withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit) &&
-                    withdrawForm.get('minimumWithdrawLimit')?.hasError('min')">
+          <span class="text-danger error-message" *ngIf="(withdrawForm.get('minimumWithdrawLimit')?.touched || isSubmit) &&  withdrawForm.get('minimumWithdrawLimit')?.hasError('min')">
             {{'withdrawal_limit' | translate}} {{'cannot_lower_0' | translate}} vnđ!
           </span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-          <span class="text-label">
-            {{'advance_limit' | translate}}
-          </span>
+          <ng-template #tooltipAdvanceLimit>
+            Chỉ áp dụng với hình thức rút tiền theo tháng <br />
+            Điền vào đây số % tổng số tiền có trong tài khoản của thành viên mà bạn cho phép rút sớm. Lưu ý: số % phải lớn hơn 0.
+          </ng-template>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'advance_limit' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span [nzTooltipTitle]="tooltipAdvanceLimit" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <nz-input-number-group nzSuffix="%" style="width: 100%">
             <nz-input-number formControlName="maximumAdvanceLimit" [nzMin]="0" [nzMax]="100" [nzStep]="1">
@@ -73,9 +98,17 @@
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="16" [nzMd]="16">
-          <span class="text-label">
-            {{'description' | translate}}
-          </span>
+          <ng-template #tooltipDescription>
+            Đây là phần ghi chủ mà bạn muốn thông báo cho thành viên. Nội dung này sẽ hiển thị ở phần
+            <strong>Số dư tài khoản</strong>
+          </ng-template>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'description' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span [nzTooltipTitle]="tooltipDescription" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <textarea nz-input formControlName="withdrawMoneyDesc" placeholder="{{'description' | translate}}" [nzAutosize]="{ minRows: 3}">
           </textarea>

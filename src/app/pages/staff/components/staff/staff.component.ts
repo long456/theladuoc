@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzModalService} from "ng-zorro-antd/modal";
-import {COL_DATA_TYPE, filterItem} from "../../../../shared/models/Table";
+import {COL_DATA_TYPE, filterItem, FilterType} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {StaffService} from "../../services/staff.service";
 
@@ -22,18 +22,9 @@ export class StaffComponent implements OnInit{
   isExpand = false;
 
   listOfColumn: filterItem[] = [
-    {
-      title: 'Tên nhân viên',
-      name: 'fullName',
-    },
-    {
-      title: 'Email',
-      name: 'email',
-    },
-    {
-      title: 'SĐT',
-      name: 'mobile',
-    },
+    FilterType['staffName'],
+    FilterType['email'],
+    FilterType['mobile'],
   ];
 
   staff$ !: Observable<{

@@ -15,7 +15,13 @@
 
     <div nz-col [nzSpan]="20" class="block-content">
       <div nz-col [nzSpan]="6">
-        <span class="text-label">{{ 'permission_group_name' | translate }}</span>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="text-label">
+            {{'permission_group_name' | translate }}
+            <span class="text-danger">*</span>
+          </span>
+          <span nzTooltipTitle="{{'guide_group_permission_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+        </div>
         <input nz-input [(ngModel)]="roleName" autofocus>
       </div>
 
@@ -32,9 +38,13 @@
       <textarea nz-input [(ngModel)]="description"></textarea>
     </div>
 
-    <span class="text-label">
-      {{'pick_permissions' | translate}}
-    </span>
+    <div class="d-flex align-items-center">
+      <span class="text-label" style="margin-right:.5rem">
+        {{'pick_permissions' | translate }}
+        <span class="text-danger">*</span>
+      </span>
+      <span nzTooltipTitle="{{'guide_group_permission_pick' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+    </div>
 
     <div class="permission-picker">
       <div nz-row  *ngFor="let permission of listPermission" class="permission-group">
