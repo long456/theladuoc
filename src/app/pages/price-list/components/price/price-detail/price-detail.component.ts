@@ -9,6 +9,7 @@ import {CurrencyData} from "../../../../../shared/helper/CurrencyData";
 import {Currency} from "../../../../../shared/models/Currency";
 import {Catalog} from "../../../models/Catalog";
 import {CatalogService} from "../../../services/catalog.service";
+import {CurrencyPipe} from "@angular/common";
 
 @Component({
   selector: 'app-price-detail',
