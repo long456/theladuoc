@@ -42,6 +42,7 @@ export class PriceDetailComponent implements OnInit{
       priceValueSix: [null, [Validators.required]],
       priceValueYear: [null, [Validators.required]],
       catalogId: [null, [Validators.required]],
+      description: [null],
       currency: ['VND'],
       status: [1],
     });
