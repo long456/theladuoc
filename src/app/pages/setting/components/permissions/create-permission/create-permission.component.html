@@ -26,15 +26,22 @@
       </div>
 
       <div class="permission-status">
-        <div class="text-label">{{ 'status' | translate }}</div>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="text-label" style="margin-right:.5rem">{{ 'status' | translate }}</span>
+          <span nzTooltipTitle="{{'guide_group_permission_status' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+        </div>
         <nz-switch [(ngModel)]="permissionStatus"></nz-switch>
       </div>
     </div>
 
     <div nz-col [nzSpan]="20" class="block-content">
-      <span class="text-label">
-        {{'description' | translate}}
-      </span>
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="text-label">
+          {{'description' | translate}}
+          <span class="text-danger">*</span>
+        </span>
+        <span nzTooltipTitle="{{'guide_group_permission_description' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+      </div>
       <textarea nz-input [(ngModel)]="description"></textarea>
     </div>
 
@@ -47,7 +54,7 @@
     </div>
 
     <div class="permission-picker">
-      <div nz-row  *ngFor="let permission of listPermission" class="permission-group">
+      <div nz-row *ngFor="let permission of listPermission" class="permission-group">
         <div class="permission-group-label">
           <label nz-checkbox [(ngModel)]="permission.checked" (ngModelChange)="updateAllChecked($event,permission)">
             {{permission.name}}
@@ -62,7 +69,7 @@
                     <label nz-checkbox [nzValue]=item.id [(ngModel)]="item.checked">{{item.name}}</label>
                   </div>
                 </ng-container>
-              </div >
+              </div>
             </nz-checkbox-wrapper>
           </div>
           <span></span>
@@ -83,7 +90,7 @@
       </button>
       <button class="btn" nz-button (click)="navigateBack()">
         {{'cancel'|translate}}
-</button>
+      </button>
     </div>
   </div>
 </div>

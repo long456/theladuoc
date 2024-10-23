@@ -15,21 +15,28 @@
     <form [formGroup]="footerForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{ 'display_name' | translate }}
-            <span class="text-danger">*</span>
-          </span>
-          <input nz-input autofocus formControlName="displayName"
-            [nzStatus]="(footerForm.get('displayName')?.invalid && (footerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'display_name' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_footer_item_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input nz-input autofocus formControlName="displayName" [nzStatus]="(footerForm.get('displayName')?.invalid && (footerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-            *ngIf="(footerForm.get('displayName')?.touched || isSubmit)  && footerForm.get('displayName')?.hasError('required')">
+          <span class="text-danger" *ngIf="(footerForm.get('displayName')?.touched || isSubmit)  && footerForm.get('displayName')?.hasError('required')">
             {{ 'display_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">{{ 'position' | translate }}</div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'position' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_footer_item_position' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <nz-input-number style="width: 100%" [nzMin]="0" [nzStep]="1" formControlName="no"></nz-input-number>
         </div>
 
@@ -38,18 +45,26 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">{{ 'column_name' | translate }}</div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'column_name' | translate}}
+            </span>
+            <span nzTooltipTitle="{{'guide_footer_column_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <input nz-input formControlName="columnName">
         </div>
 
         <div nz-col [nzSpan]="11">
-          <span class="text-label">
-            {{'page_url' | translate}}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'page_url' | translate}}
+            </span>
+            <span *ngIf="external" nzTooltipTitle="{{'guide_external_selection' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+            <span *ngIf="!external" nzTooltipTitle="{{'guide_internal_selection' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <div class="select-group">
-            <nz-select class="link-to" [(ngModel)]="external" [ngModelOptions]="{standalone: true}"
-              (ngModelChange)="onSelectExternal($event)">
+            <nz-select class="link-to" [(ngModel)]="external" [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectExternal($event)">
               <nz-option [nzValue]="false" [nzLabel]="'internal' | translate"></nz-option>
               <nz-option [nzValue]="true" [nzLabel]="'external' | translate"></nz-option>
             </nz-select>
