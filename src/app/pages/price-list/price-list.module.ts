@@ -16,6 +16,7 @@ import { BenefitConfigComponent } from './components/catalog/benefit-config/bene
 import { BusinessAccessListComponent } from './components/business-access/business-access-list/business-access-list.component';
 import { BusinessAccessDetailComponent } from './components/business-access/business-access-detail/business-access-detail.component';
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {CKEditorModule} from "ckeditor4-angular";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
         NzSwitchModule,
         NzSelectModule,
         NzInputNumberModule,
-        NzCheckboxModule
+        NzCheckboxModule,
+        CKEditorModule
     ]
 })
 export class PriceListModule { }

@@ -39,6 +39,14 @@ export class PaymentMethodCreateComponent implements OnInit{
       vnPayHashSecret: [null, [this.requireValidator(2)]],
       vnPayPaymentUrl: [null, [this.requireValidator(2)]],
       vnPayReturnUrl: [null, [this.requireValidator(2)]],
+
+      baoKimApiKey: [null, [this.requireValidator(3)]],
+      baoKimApiSecret: [null, [this.requireValidator(3)]],
+      baoKimApiUrl: [null, [this.requireValidator(3)]],
+      baoKimMerchantId: [null, [this.requireValidator(3)]],
+      baoKimUrlSuccess: [null, [this.requireValidator(3)]],
+      baoKimWebhooks: [null, [this.requireValidator(3)]],
+      baoKimAudience: [null, [this.requireValidator(3)]],
     });
 
     if (!this.isCreate) {
@@ -49,7 +57,13 @@ export class PaymentMethodCreateComponent implements OnInit{
           next: res => {
             if (res.success)
               this.paymentMethodForm.patchValue(res.data);
+            else
+              this.message.error(res.errorMessages);
+          },
+          error: err => {
+            this.message.error(err);
           }
+
         });
       })
     }
@@ -62,7 +76,7 @@ export class PaymentMethodCreateComponent implements OnInit{
     });
   }
 
-  requireValidator(type: 1|2): ValidatorFn {
+  requireValidator(type: 1|2|3): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (this.paymentMethodForm?.value?.type === type) {
         const requireValid = (control.value as string)?.trim() === '' || control.value === null

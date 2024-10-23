@@ -5,5 +5,6 @@ export interface Price {
   priceValueYear: number;
   catalogId: number;
   currency: string;
+  description: string;
   status: number;
 }

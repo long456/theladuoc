@@ -27,10 +27,10 @@
               {{'price_six_months' | translate }}
             </span>
             <nz-input-group [nzAddOnAfter]="currencyTemplate" nzCompact>
-                <nz-input-number [nzMin]="1" formControlName="priceValueSix" style="width: 100%"
-                       [nzStatus]="(priceForm.get('priceValueSix')?.invalid &&
-                                   (priceForm.get('priceValueSix')?.touched || isSubmit)) ?
-                                    'error' : ''"
+                <nz-input-number [nzMin]="0" [nzStep]="1000" formControlName="priceValueSix" style="width: 100%"
+                                 [nzStatus]="(priceForm.get('priceValueSix')?.invalid &&
+                                             (priceForm.get('priceValueSix')?.touched || isSubmit)) ?
+                                              'error' : ''"
                 ></nz-input-number>
             </nz-input-group>
 
@@ -72,7 +72,7 @@
               {{'price_one_year' | translate }}
             </span>
           <nz-input-group [nzAddOnAfter]="currencyTemplate" nzCompact>
-            <nz-input-number [nzMin]="1" formControlName="priceValueYear" style="width: 100%"
+            <nz-input-number [nzMin]="0" [nzStep]="1000" formControlName="priceValueYear" style="width: 100%"
                              [nzStatus]="(priceForm.get('priceValueYear')?.invalid &&
                                          (priceForm.get('priceValueYear')?.touched || isSubmit)) ?
                                           'error' : ''"
@@ -83,6 +83,15 @@
                 *ngIf="(priceForm.get('priceValueYear')?.touched || isSubmit)  &&
                         priceForm.get('priceValueYear')?.hasError('required')"
           >{{'price_one_year' | translate }} {{'cannot_blank' | translate}}!</span>
+        </div>
+
+        <div nz-col [nzSpan]="16">
+          <div class="text-label">
+            {{'short_description' | translate}}
+          </div>
+          <ckeditor name="ckeditor_text" formControlName="description"
+                    editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"
+          ></ckeditor>
         </div>
       </div>
 

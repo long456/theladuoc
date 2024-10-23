@@ -9,6 +9,8 @@ import {CurrencyData} from "../../../../../shared/helper/CurrencyData";
 import {Currency} from "../../../../../shared/models/Currency";
 import {Catalog} from "../../../models/Catalog";
 import {CatalogService} from "../../../services/catalog.service";
+import {CurrencyPipe} from "@angular/common";
+import {config} from "../../../../../shared/models/ckeditor";
 
 @Component({
   selector: 'app-price-detail',
@@ -41,6 +43,7 @@ export class PriceDetailComponent implements OnInit{
       priceValueSix: [null, [Validators.required]],
       priceValueYear: [null, [Validators.required]],
       catalogId: [null, [Validators.required]],
+      description: [null],
       currency: ['VND'],
       status: [1],
     });
@@ -120,4 +123,6 @@ export class PriceDetailComponent implements OnInit{
     // navigate đến trang danh sách
     this.router.navigate(['page/price-list/price']).then();
   }
+
+  protected readonly ckEditorConfig = config;
 }

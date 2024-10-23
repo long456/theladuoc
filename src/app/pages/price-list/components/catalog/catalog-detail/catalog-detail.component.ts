@@ -65,7 +65,7 @@ export class CatalogDetailComponent implements OnInit {
 
     const catalog: Catalog = {
       ...this.catalogForm.value,
-      status: this.catalogForm.value.status? 1 : 0
+      catalogStatus: this.catalogForm.value.catalogStatus? 1 : 0
     }
 
     this.loading = true;
