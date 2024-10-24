@@ -41,10 +41,9 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="d-flex justify-content-between align-items-center">
-            <span class="text-label">
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right:.5rem">
               {{'status' | translate}}
-              <span class="text-danger">*</span>
             </span>
             <span nzTooltipTitle="{{'guide_header_menu_status' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
@@ -53,9 +52,8 @@
 
         <div nz-col [nzSpan]="11">
           <ng-template #tooltipMenuPageUrl>
-            Bạn có thể chọn lấy đường dẫn từ trang bên trong hệ thống hoặc bên ngoài hệ thống.<br />
-            - Nếu chọn trang bên trong hệ thống: bạn sẽ chọn một trong những trang mà bạn đã tạo ở phần thiết lập các trang con.<br />
-            - Nếu chọn trang bên ngoài hệ thống: bạn sẽ copy đường link của trang bên ngoài mà bạn muốn gán vào nút bấm này
+            - {{'internal' | translate}}: {{'guide_internal_selection' | translate}}.<br />
+            - {{'external' | translate}}: {{'guide_external_selection' | translate}}.
           </ng-template>
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">

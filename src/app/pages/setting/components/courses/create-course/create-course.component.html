@@ -15,25 +15,29 @@
     <form [formGroup]="courseForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{ 'course_name' | translate }}
-            <span class="text-danger">*</span>
-          </span>
-          <input #courseName nz-input autofocus formControlName="title"
-            [nzStatus]="(courseForm.get('title')?.invalid && (courseForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'course_name' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_course_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input #courseName nz-input autofocus formControlName="title" [nzStatus]="(courseForm.get('title')?.invalid && (courseForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-            *ngIf="(courseForm.get('title')?.touched || isSubmit)  && courseForm.get('title')?.hasError('required')">
+          <span class="text-danger" *ngIf="(courseForm.get('title')?.touched || isSubmit)  && courseForm.get('title')?.hasError('required')">
             {{ 'course_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">{{ 'course_code' | translate }}</span>
-          <input nz-input formControlName="courseCode"
-            [nzStatus]="(courseForm.get('courseCode')?.invalid && (courseForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''">
-          <span class="text-danger"
-            *ngIf="(courseForm.get('courseCode')?.touched || isSubmit)  && courseForm.get('courseCode')?.hasError('pattern')">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'course_code' | translate}}
+            </span>
+            <span nzTooltipTitle="{{'guide_course_code' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input nz-input formControlName="courseCode" [nzStatus]="(courseForm.get('courseCode')?.invalid && (courseForm.get('courseCode')?.touched || isSubmit)) ? 'error' : ''">
+          <span class="text-danger" *ngIf="(courseForm.get('courseCode')?.touched || isSubmit)  && courseForm.get('courseCode')?.hasError('pattern')">
             {{ 'course_code' | translate }} {{'invalid_format' | translate}}
           </span>
         </div>
@@ -46,36 +50,50 @@
 
         <div nz-col [nzSpan]="24" class="no-padding">
           <div nz-col [nzSpan]="16">
-            <div class="text-label">{{ 'description' | translate }}</div>
-            <textarea nz-input placeholder="{{'enter' | translate}} {{ 'description' | translate }}"
-              formControlName="description"></textarea>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="text-label">
+                {{'description' | translate}}
+                <span class="text-danger">*</span>
+              </span>
+              <span nzTooltipTitle="{{'guide_course_description' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+            </div>
+            <textarea nz-input placeholder="{{'enter' | translate}} {{ 'description' | translate }}" formControlName="description"></textarea>
           </div>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'teacher' | translate}}
-            <span class="text-danger">*</span>
-          </span>
-
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'teacher' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_course_teacher' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <div>
-            <nz-select formControlName="teacherId"
-              [nzStatus]="(courseForm.get('teacherId')?.invalid && (courseForm.get('teacherId')?.touched || isSubmit)) ? 'error' : ''">
+            <nz-select formControlName="teacherId" [nzStatus]="(courseForm.get('teacherId')?.invalid && (courseForm.get('teacherId')?.touched || isSubmit)) ? 'error' : ''">
               <nz-option *ngFor="let teacher of listTeacher" [nzValue]="teacher.id" [nzLabel]="teacher.fullName">
               </nz-option>
             </nz-select>
           </div>
 
-          <span class="text-danger"
-            *ngIf="(courseForm.get('teacherId')?.touched || isSubmit) && courseForm.get('teacherId')?.hasError('required')">
+          <span class="text-danger" *ngIf="(courseForm.get('teacherId')?.touched || isSubmit) && courseForm.get('teacherId')?.hasError('required')">
             Tên giáo viên {{'cannot_blank' | translate}}
           </span>
         </div>
 
+
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{ 'course_type' | translate }}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'course_type' | translate}}
+            </span>
+            <ng-template #tooltipCourseType>
+              {{'guide_course_type_funnel' | translate}}
+              <br />
+              {{'guide_course_type_funnel' | translate}}
+            </ng-template>
+            <span [nzTooltipTitle]="tooltipCourseType" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <div>
             <nz-select formControlName="type">
@@ -88,35 +106,42 @@
         <div nz-col [nzSpan]="24">
           <div nz-row [nzGutter]=[16,16]>
             <div nz-col [nzSpan]="6">
-              <span class="text-label">
-                {{ 'registration_point' | translate }}
-              </span>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-label">
+                  {{'registration_point' | translate}}
+                  <span class="text-danger">*</span>
+                </span>
+                <span nzTooltipTitle="{{'guide_course_registration_point' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+              </div>
 
               <div>
-                <nz-input-number class="input-nz-number" formControlName="registerPoint" [nzMin]="0" [nzMax]="100"
-                  [nzStep]="1"></nz-input-number>
+                <nz-input-number class="input-nz-number" formControlName="registerPoint" [nzMin]="0" [nzMax]="100" [nzStep]="1"></nz-input-number>
               </div>
             </div>
 
             <div nz-col [nzSpan]="6">
-              <span class="text-label">
-                {{ 'direct_referral_points' | translate }}
-              </span>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-label">
+                  {{'direct_referral_points' | translate}}
+                  <span class="text-danger">*</span>
+                </span>
+                <span nzTooltipTitle="{{'guide_course_direct_referral_point' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+              </div>
 
               <div>
-                <nz-input-number class="input-nz-number" formControlName="directReferralPoint" [nzMin]="0"
-                  [nzStep]="1"></nz-input-number>
+                <nz-input-number class="input-nz-number" formControlName="directReferralPoint" [nzMin]="0" [nzStep]="1"></nz-input-number>
               </div>
             </div>
 
             <div nz-col [nzSpan]="6">
-              <span class="text-label">
-                {{ 'indirect_referral_points' | translate }}
-              </span>
-
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-label">
+                  {{'indirect_referral_points' | translate}}
+                </span>
+                <span nzTooltipTitle="{{'guide_course_indirect_referral_point' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+              </div>
               <div>
-                <nz-input-number class="input-nz-number" formControlName="indirectReferralPoint" [nzMin]="0"
-                  [nzStep]="1"></nz-input-number>
+                <nz-input-number class="input-nz-number" formControlName="indirectReferralPoint" [nzMin]="0" [nzStep]="1"></nz-input-number>
               </div>
             </div>
 
@@ -126,27 +151,42 @@
               </span>
 
               <div>
-                <nz-input-number class="input-nz-number" formControlName="price" [nzMin]="0" [nzStep]="1000"
-                  [nzFormatter]="formatterVnd" [nzParser]="parserVnd"></nz-input-number>
+                <nz-input-number class="input-nz-number" formControlName="price" [nzMin]="0" [nzStep]="1000" [nzFormatter]="formatterVnd" [nzParser]="parserVnd"></nz-input-number>
               </div>
             </div>
           </div>
         </div>
 
         <div nz-col [nzSpan]="24">
-          <span class="text-label">
-            {{'program_rule' | translate}} referral 1
-          </span>
-          <ckeditor name="ckeditor_text" formControlName="referralHtmlTop"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <span class="text-label" style="margin-right:.5rem">
+                {{'program_rule' | translate}} referral 1
+              </span>
+              <span nzTooltipTitle="{{'guide_course_refferal_program' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+            </div>
+
+            <button class="btn" nz-button (click)="loadExampleProgramRule('referralHtmlTop', 1)">
+              {{ 'load_example' | translate }}
+            </button>
+          </div>
+          <ckeditor name="ckeditor_text" formControlName="referralHtmlTop" editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
 
         <div nz-col [nzSpan]="24">
-          <span class="text-label">
-            {{'program_rule' | translate}} referral 2
-          </span>
-          <ckeditor name="ckeditor_text" formControlName="referralHtmlBottom"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <span class="text-label" style="margin-right:.5rem">
+                {{'program_rule' | translate}} referral 2
+              </span>
+              <span nzTooltipTitle="{{'guide_course_refferal_program' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+            </div>
+
+            <button class="btn" nz-button (click)="loadExampleProgramRule('referralHtmlBottom', 2)">
+              {{ 'load_example' | translate }}
+            </button>
+          </div>
+          <ckeditor name="ckeditor_text" formControlName="referralHtmlBottom" editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
       </div>
     </form>

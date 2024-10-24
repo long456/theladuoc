@@ -15,17 +15,17 @@
     <form [formGroup]="paymentMethodForm">
       <div nz-row [nzGutter]="[16, 16]">
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
-          <ng-template #tooltipPickADay>
-            - <strong>Chuyển khoản</strong> là phương pháp thanh toán thủ công, bạn cần chủ động kích hoạt tài khoản thành viên và khóa học e-learning bằng tay.<br />
-            - <strong>VNPay hoặc các phương pháp khác</strong> là phương pháp thanh toán tự động, tất cả các khâu thanh toán, xác thực và kích hoạt khóa học cũng như hạng thành viên đều hoàn toàn tự động. <br />
-            <strong>Lưu ý:</strong> khi thiết lập phần thanh toán này, bạn nên liên hệ với đội ngũ hỗ trợ của chúng tôi. Hotline: 0969218765
+          <ng-template #tooltipPaymentMethods>
+            - <strong>{{'bank_transfer' | translate}}</strong> {{'guide_withdrawal_bank_transfer' | translate}} <br />
+            - <strong>VNPay {{'or' | translate}} {{'other_methods' | translate}}</strong> {{'guide_withdrawal_vnpay' | translate}}. <br />
+            <strong>{{'caution' | translate}}:</strong> {{'guide_withdrawal_payment_method_note' | translate}}
           </ng-template>
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">
               {{'pick_a_method' | translate }}
               <span class="text-danger">*</span>
             </span>
-            <span [nzTooltipTitle]="tooltipPickADay" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+            <span [nzTooltipTitle]="tooltipPaymentMethods" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
 
           <nz-select formControlName="type" style="display: block" [nzDisabled]="!isCreate">

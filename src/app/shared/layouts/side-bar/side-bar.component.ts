@@ -356,7 +356,7 @@ export class SideBarComponent implements OnInit {
             {
               icon: '',
               link: '',
-              name: 'funnel_course',
+              name: 'course_funnel',
               children: [
                 {
                   icon: '',
