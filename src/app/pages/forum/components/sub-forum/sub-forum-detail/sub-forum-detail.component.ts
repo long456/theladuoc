@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {FileManagerService} from "../../../../../shared/services/file-manager.service";
 import {SubForumService} from "../../../services/sub-forum.service";
-import {debounceTime, distinctUntilChanged, finalize, of, Subject, switchMap, take} from "rxjs";
+import {debounceTime, distinctUntilChanged, finalize, of, Subject, switchMap, take, tap} from "rxjs";
 import {SubForum} from "../../../models/SubForum";
 import {ForumCategoryService} from "../../../services/forum-category.service";
 import {ForumCategory} from "../../../models/ForumCategory";
@@ -14,12 +14,13 @@ import {ForumCategory} from "../../../models/ForumCategory";
   templateUrl: './sub-forum-detail.component.html',
   styleUrls: ['./sub-forum-detail.component.scss']
 })
-export class SubForumDetailComponent implements OnInit{
+export class SubForumDetailComponent implements OnInit, OnDestroy {
   subForumForm!: FormGroup;
   subForumId!: number;
   isCreate: boolean = false;
   isSubmit: boolean = false;
   loading = false;
+  isLoadingSearch = false;
   categoryData: ForumCategory[] = [];
   listUserPolicyLevel: any[]=[];
   listUserRole: any[]=[];
@@ -75,21 +76,28 @@ export class SubForumDetailComponent implements OnInit{
       .pipe(
         debounceTime(300), // Đợi 300ms sau mỗi lần nhập
         distinctUntilChanged(), // Chỉ gọi API khi giá trị thay đổi
+        tap(() => this.isLoadingSearch = true),
         switchMap((searchText) => {
           if (searchText.trim().length === 0) {
             // Nếu không có text search, trả về mảng rỗng hoặc dữ liệu mặc định
-            return of([]);
+            return of({
+              success: true,
+              data: [],
+            });
           }
           // Gọi API search
           return this.subForumService.getUserByString(searchText, this.subForumId);
-        })
+        }),
+        finalize(() => this.isLoadingSearch = false),
       )
       .subscribe({
         next: res => {
-          if (res.success)
+          if (res.success) {
             this.listOpAdmin = res.data;
-          else
+          }
+          else {
             this.message.error(res.errorMessages);
+          }
         },
         error: err => {
           this.message.error(err);
@@ -126,6 +134,8 @@ export class SubForumDetailComponent implements OnInit{
 
             this.selectedPolicy = res.data.userPolicyLevelAllowJoin;
             this.selectedRole = res.data.userRoleAllowJoin;
+            this.isFreeAllowed = this.selectedPolicy.length === 0 &&
+                                 this.selectedRole.length === 0;
           } else {
             this.message.error(res.errorMessages);
           }
@@ -155,7 +165,9 @@ export class SubForumDetailComponent implements OnInit{
 
     const subForum: SubForum = {
       ...this.subForumForm.value,
-      status: this.subForumForm.value.status? 1 : 0
+      status: this.subForumForm.value.status? 1 : 0,
+      userPolicyLevelAllowJoin: this.selectedPolicy,
+      userRoleAllowJoin: this.selectedRole,
     }
 
     this.loading = true;
@@ -185,26 +197,24 @@ export class SubForumDetailComponent implements OnInit{
   }
 
   onValueChange(event: any, type: 'role' | 'policy'):void {
-    if (type === "role")
-      this.subForumForm.get('userRoleAllowJoin')?.patchValue(event);
-    else
-      this.subForumForm.get('userPolicyLevelAllowJoin')?.patchValue(event);
+    const target = type === 'role' ? 'selectedRole' : 'selectedPolicy';
+    this[target] = event;
   }
 
   onSwitchChange(event: boolean):void {
-    console.log(event);
     if (event) {
-      this.selectedPolicy = []
-      this.subForumForm.get('userRoleAllowJoin')?.patchValue(null);
-      this.subForumForm.get('userPolicyLevelAllowJoin')?.patchValue(null);
-      console.log(this.selectedPolicy)
+      this.selectedRole = [];
+      this.selectedPolicy = [];
     }
   }
 
   isChecked(value: number, type: 'role' | 'policy'): boolean {
-    if (type === "role")
-      return this.selectedRole.includes(value);
-    else
-      return this.selectedPolicy.includes(value);
+    return type === 'role'
+      ? this.selectedRole.includes(value)
+      : this.selectedPolicy.includes(value);
+  }
+
+  ngOnDestroy() {
+    this.searchSubject.complete();
   }
 }

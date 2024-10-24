@@ -151,30 +151,42 @@
             ></nz-switch>
           </div>
 
-          <nz-checkbox-wrapper class="width-100 pd-t-10"
-                               (nzOnChange)="onValueChange($event, 'policy')"
-                               *ngIf="!isFreeAllowed"
-          >
-            <div nz-row>
-              <div nz-col nzSpan="8" *ngFor="let user of listUserPolicyLevel">
-                <label nz-checkbox [nzValue]="user.id"
-                       [nzChecked]="isChecked(user.id, 'role')"
-                >{{user.name}}</label>
-              </div>
-            </div>
-          </nz-checkbox-wrapper>
 
-          <nz-checkbox-wrapper class="width-100 pd-t-10"
-                               (nzOnChange)="onValueChange($event, 'role')"
-                               *ngIf="!isFreeAllowed">
-            <div nz-row>
-              <div nz-col nzSpan="8" *ngFor="let user of listUserRole">
-                <label nz-checkbox [nzValue]="user.value"
-                       [nzChecked]="isChecked(user.value, 'role')"
-                >{{user.name}}</label>
-              </div>
+
+          <ng-container *ngIf="!isFreeAllowed">
+            <div class="allow-text">
+              {{'role' | translate}}
             </div>
-          </nz-checkbox-wrapper>
+
+            <nz-checkbox-wrapper class="width-100 pd-t-10"
+                                 (nzOnChange)="onValueChange($event, 'role')">
+              <div nz-row>
+                <div nz-col nzSpan="8" *ngFor="let user of listUserRole">
+                  <label nz-checkbox [nzValue]="user.value"
+                         [nzChecked]="isChecked(user.value, 'role')"
+                  >{{user.name}}</label>
+                </div>
+              </div>
+            </nz-checkbox-wrapper>
+          </ng-container>
+
+          <ng-container *ngIf="!isFreeAllowed">
+            <div class="allow-text">
+              {{'membership_tier' | translate}}
+            </div>
+
+            <nz-checkbox-wrapper class="width-100 pd-t-10"
+                                 (nzOnChange)="onValueChange($event, 'policy')">
+              <div nz-row>
+                <div nz-col nzSpan="8" *ngFor="let user of listUserPolicyLevel">
+                  <label nz-checkbox [nzValue]="user.id"
+                         [nzChecked]="isChecked(user.id, 'policy')"
+                  >{{user.name}}</label>
+                </div>
+              </div>
+            </nz-checkbox-wrapper>
+          </ng-container>
+
         </div>
 
         <div nz-col [nzSpan]="16" *ngIf="!isCreate">
@@ -187,8 +199,9 @@
             nzServerSearch
             nzPlaceHolder="input search text"
             formControlName="adminIds"
-            [nzShowArrow]="false"
             nzMode="multiple"
+            [nzShowArrow]="false"
+            [nzLoading]="isLoadingSearch"
             [nzFilterOption]="nzFilterOption"
             (nzOnSearch)="searchAdmin($event)"
           >
