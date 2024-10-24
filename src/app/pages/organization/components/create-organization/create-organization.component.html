@@ -30,12 +30,11 @@
         </div>
 
         <div nz-col [nzSpan]="9" class="text-right">
-          <div class="d-flex justify-content-between align-items-center">
-            <span class="text-label">
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right:.5rem">
               {{ 'status' | translate }}
-              <span class="text-danger">*</span>
             </span>
-            <span nzTooltipTitle="{{'guide_organization_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+            <span nzTooltipTitle="{{'guide_organization_status' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <nz-switch formControlName="status">
           </nz-switch>
@@ -88,15 +87,15 @@
         </div>
 
         <div nz-col [nzSpan]="9">
-          <ng-template #tooltipDataProcessType>
-            - Thủ công: Trưởng phòng sale chủ động chia data cho nhân viên sale của tổ chức<br />
-            - Tự động: Hệ thống sẽ tự chia đều data cho các nhân viên sale của tổ chức theo logic xoay vòng (1234512345...).
-          </ng-template>
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">
               {{'data_process_type' | translate}}
               <span class="text-danger">*</span>
             </span>
+            <ng-template #tooltipDataProcessType>
+              - {{'guide_organization_data_process_manual' | translate}}<br />
+              - {{'guide_organization_data_process_auto' | translate}}
+            </ng-template>
             <span [nzTooltipTitle]="tooltipDataProcessType" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
 
@@ -111,8 +110,9 @@
         <div nz-col [nzSpan]="9">
           <div style="margin-bottom: 16px">
             <ng-template #tooltipELearningDomain>
-              Đây là tên miền để học viên truy cập vào hệ thống học tập e-learning.<br />
-              <strong>Lưu ý:</strong> tên miền không cần điền https://www.
+              {{'guide_organization_e_learning_domain' | translate}} 
+              <br />
+              <strong>{{'caution' | translate}}</strong>: {{'guide_domain_without_prefix' | translate}}
             </ng-template>
             <div class="d-flex justify-content-between align-items-center">
               <span class="text-label">
@@ -126,8 +126,9 @@
 
           <div>
             <ng-template #tooltipAcpDomain>
-              Đây là tên miền để nhân sự của tổ chức truy cập vào quản trị vận hành hệ thống.<br />
-              <strong>Lưu ý:</strong> tên miền không cần điền https://www.
+              {{'guide_organization_acp_domain' | translate}} 
+              <br />
+              <strong>{{'caution' | translate}}</strong>: {{'guide_domain_without_prefix' | translate}}
             </ng-template>
             <div class="d-flex justify-content-between align-items-center">
               <span class="text-label">
@@ -226,8 +227,9 @@
 
         <div nz-col [nzSpan]="9">
           <ng-template #tooltipForumDomain>
-            Đây là tên miền để học viên truy cập vào hệ thống diễn đàn của cộng đồng.<br />
-            <strong>Lưu ý:</strong> tên miền không cần điền https://www.
+            {{'guide_organization_forum_domain' | translate}} 
+            <br />
+            <strong>{{'caution' | translate}}</strong>: {{'guide_domain_without_prefix' | translate}}
           </ng-template>
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">
@@ -242,8 +244,9 @@
 
         <div nz-col [nzSpan]="9">
           <ng-template #tooltipHomepageDomain>
-            Đây là tên miền để học viên truy cập vào trang chủ của tổ chức, các landingpage và thực hiện chức năng đăng ký khóa học.<br />
-            <strong>Lưu ý:</strong> tên miền không cần điền https://www.
+            {{'guide_organization_homepage_domain' | translate}} 
+              <br />
+              {{'caution' | translate}}: {{'guide_domain_without_prefix' | translate}}
           </ng-template>
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">

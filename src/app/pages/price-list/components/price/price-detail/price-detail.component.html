@@ -89,7 +89,9 @@
           <div class="text-label">
             {{'short_description' | translate}}
           </div>
-          <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="description"></textarea>
+          <ckeditor name="ckeditor_text" formControlName="description"
+                    editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"
+          ></ckeditor>
         </div>
       </div>
 

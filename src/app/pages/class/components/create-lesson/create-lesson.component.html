@@ -1,32 +1,37 @@
 <form [formGroup]="lessonForm">
   <div nz-row [nzGutter]=[16,16]>
     <div nz-col [nzSpan]="18">
-      <span class="text-label">
-        {{'lesson_name' | translate}}
-        <span class="text-danger">*</span>
-      </span>
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="text-label">
+          {{'lesson_name' | translate}}
+          <span class="text-danger">*</span>
+        </span>
+        <span nzTooltipTitle="{{'guide_lesson_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+      </div>
 
-      <input nz-input formControlName="name"
-        [nzStatus]="(lessonForm.get('name')?.invalid && (lessonForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+      <input nz-input formControlName="name" [nzStatus]="(lessonForm.get('name')?.invalid && (lessonForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
-      <span class="text-danger"
-        *ngIf="(lessonForm.get('name')?.touched || isSubmit)  && lessonForm.get('name')?.hasError('required')">
+      <span class="text-danger" *ngIf="(lessonForm.get('name')?.touched || isSubmit)  && lessonForm.get('name')?.hasError('required')">
         {{'lesson_name' | translate}} {{'cannot_blank' | translate}}
       </span>
     </div>
 
     <div nz-col [nzSpan]="18">
-      <span class="text-label">
-        {{'duration' | translate}}
-        <span class="text-danger">*</span>
-      </span>
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="text-label">
+          {{'duration' | translate}}
+          <span class="text-danger">*</span>
+        </span>
+        <ng-template #tooltipLessonDuration>
+          {{'guide_lesson_duration' | translate}}
+          {{'guide_lesson_duration_note' | translate}}
+        </ng-template>
+        <span nzTooltipTitle="tooltipLessonDuration" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+      </div>
 
-      <nz-range-picker
-        [nzStatus]="(lessonForm.get('duration')?.invalid && (lessonForm.get('duration')?.touched || isSubmit)) ? 'error' : ''"
-        formControlName="duration" [nzShowTime]="{ nzFormat: 'HH:mm' }" nzFormat="dd/MM/YYYY HH:mm"></nz-range-picker>
+      <nz-range-picker [nzStatus]="(lessonForm.get('duration')?.invalid && (lessonForm.get('duration')?.touched || isSubmit)) ? 'error' : ''" formControlName="duration" [nzShowTime]="{ nzFormat: 'HH:mm' }" nzFormat="dd/MM/YYYY HH:mm"></nz-range-picker>
 
-      <span class="text-danger"
-        *ngIf="(lessonForm.get('duration')?.touched || isSubmit)  && lessonForm.get('duration')?.hasError('required')">
+      <span class="text-danger" *ngIf="(lessonForm.get('duration')?.touched || isSubmit)  && lessonForm.get('duration')?.hasError('required')">
         {{'duration' | translate}} {{'cannot_blank' | translate}}
       </span>
     </div>

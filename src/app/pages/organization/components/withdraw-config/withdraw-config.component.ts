@@ -34,7 +34,11 @@ export class WithdrawConfigComponent implements OnInit{
     this.withdrawService.getWithdrawConfig().subscribe({
       next: res => {
         if (res.success) {
-          this.withdrawForm.patchValue(res.data);
+          const dataWithDraw = {
+            ...res.data,
+            withdrawMoneyType: res.data.withdrawMoneyType? res.data.withdrawMoneyType: 1,
+          }
+          this.withdrawForm.patchValue(dataWithDraw);
         }
       },
     })

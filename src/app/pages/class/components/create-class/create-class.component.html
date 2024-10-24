@@ -15,44 +15,49 @@
     <form [formGroup]="classForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'class_name' | translate}}
-            <span class="text-danger">*</span>
-          </span>
-          <input nz-input autofocus formControlName="name"
-            [nzStatus]="(classForm.get('name')?.invalid && (classForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'class_name' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_class_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input nz-input autofocus formControlName="name" [nzStatus]="(classForm.get('name')?.invalid && (classForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-            *ngIf="(classForm.get('name')?.touched || isSubmit)  && classForm.get('name')?.hasError('required')">
+          <span class="text-danger" *ngIf="(classForm.get('name')?.touched || isSubmit)  && classForm.get('name')?.hasError('required')">
             {{'class_name' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{ 'course' | translate }}
-            <span class="text-danger">*</span>
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{ 'course' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_class_course' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <div>
-            <nz-select [nzDisabled]="!isCreate" style="display: block" formControlName="courseId"
-              [nzStatus]="(classForm.get('courseId')?.invalid && (classForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''">
+            <nz-select [nzDisabled]="!isCreate" style="display: block" formControlName="courseId" [nzStatus]="(classForm.get('courseId')?.invalid && (classForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''">
               <nz-option *ngFor="let course of listCourse" [nzValue]="course.id" [nzLabel]="course.title"></nz-option>
             </nz-select>
           </div>
 
-          <span class="text-danger"
-            *ngIf="(classForm.get('courseId')?.touched || isSubmit) && classForm.get('courseId')?.hasError('required')">
+          <span class="text-danger" *ngIf="(classForm.get('courseId')?.touched || isSubmit) && classForm.get('courseId')?.hasError('required')">
             {{ 'course_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'max_absences' | translate}}
-          </span>
-          <nz-input-number style="width: 100%" [nzMin]="0" [nzStep]="1"
-            formControlName="maximumLessonWithoutAttendance"></nz-input-number>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{ 'max_absences' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_class_max_absences' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <nz-input-number style="width: 100%" [nzMin]="0" [nzStep]="1" formControlName="maximumLessonWithoutAttendance"></nz-input-number>
         </div>
 
       </div>

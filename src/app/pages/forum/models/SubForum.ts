@@ -12,4 +12,7 @@ export type SubForum = {
   communityCategoryId: number;
   pined: boolean;
   isFeature: boolean;
+  userRoleAllowJoin: number[];
+  userPolicyLevelAllowJoin: number[];
+  adminIds: number[];
 }

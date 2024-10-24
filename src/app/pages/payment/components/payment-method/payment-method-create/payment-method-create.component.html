@@ -15,22 +15,23 @@
     <form [formGroup]="paymentMethodForm">
       <div nz-row [nzGutter]="[16, 16]">
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
-          <ng-template #tooltipPickADay>
-            - <strong>Chuyển khoản</strong> là phương pháp thanh toán thủ công, bạn cần chủ động kích hoạt tài khoản thành viên và khóa học e-learning bằng tay.<br />
-            - <strong>VNPay hoặc các phương pháp khác</strong> là phương pháp thanh toán tự động, tất cả các khâu thanh toán, xác thực và kích hoạt khóa học cũng như hạng thành viên đều hoàn toàn tự động. <br />
-            <strong>Lưu ý:</strong> khi thiết lập phần thanh toán này, bạn nên liên hệ với đội ngũ hỗ trợ của chúng tôi. Hotline: 0969218765
+          <ng-template #tooltipPaymentMethods>
+            - <strong>{{'bank_transfer' | translate}}</strong> {{'guide_withdrawal_bank_transfer' | translate}} <br />
+            - <strong>VNPay {{'or' | translate}} {{'other_methods' | translate}}</strong> {{'guide_withdrawal_vnpay' | translate}}. <br />
+            <strong>{{'caution' | translate}}:</strong> {{'guide_withdrawal_payment_method_note' | translate}}
           </ng-template>
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">
               {{'pick_a_method' | translate }}
               <span class="text-danger">*</span>
             </span>
-            <span [nzTooltipTitle]="tooltipPickADay" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+            <span [nzTooltipTitle]="tooltipPaymentMethods" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
 
           <nz-select formControlName="type" style="display: block" [nzDisabled]="!isCreate">
             <nz-option [nzValue]="1" [nzLabel]="'bank_transfer' | translate"></nz-option>
             <nz-option [nzValue]="2" [nzLabel]="'vnpay' | translate"></nz-option>
+            <nz-option [nzValue]="3" [nzLabel]="'bao_kim' | translate"></nz-option>
           </nz-select>
         </div>
 
@@ -180,6 +181,120 @@
             </span>
           </div>
         </ng-container>
+
+        <ng-container *ngIf="paymentMethodForm.value?.type === 3">
+          <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
+            <span class="text-label">
+              BaoKim-ApiKey
+              <span class="text-danger">*</span>
+            </span>
+
+            <input nz-input formControlName="baoKimApiKey"
+                   [nzStatus]="(paymentMethodForm.get('baoKimApiKey')?.invalid &&
+                               (paymentMethodForm.get('baoKimApiKey')?.touched || isSubmit)) ? 'error' : ''">
+            <span class="text-danger"
+                  *ngIf="(paymentMethodForm.get('baoKimApiKey')?.touched || isSubmit)  &&
+                          paymentMethodForm.get('baoKimApiKey')?.hasError('requireValue')">
+                  BaoKim-ApiKey {{'cannot_blank' | translate}}
+            </span>
+          </div>
+
+          <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
+            <span class="text-label">
+              BaoKim-ApiSecret
+              <span class="text-danger">*</span>
+            </span>
+
+            <input nz-input formControlName="baoKimApiSecret"
+                   [nzStatus]="(paymentMethodForm.get('baoKimApiSecret')?.invalid &&
+                               (paymentMethodForm.get('baoKimApiSecret')?.touched || isSubmit)) ? 'error' : ''">
+            <span class="text-danger"
+                  *ngIf="(paymentMethodForm.get('baoKimApiSecret')?.touched || isSubmit)  &&
+                          paymentMethodForm.get('baoKimApiSecret')?.hasError('requireValue')">
+                  BaoKim-ApiSecret {{'cannot_blank' | translate}}
+            </span>
+          </div>
+
+          <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
+            <span class="text-label">
+              BaoKim-ApiUrl
+              <span class="text-danger">*</span>
+            </span>
+
+            <input nz-input formControlName="baoKimApiUrl"
+                   [nzStatus]="(paymentMethodForm.get('baoKimApiUrl')?.invalid &&
+                               (paymentMethodForm.get('baoKimApiUrl')?.touched || isSubmit)) ? 'error' : ''">
+            <span class="text-danger"
+                  *ngIf="(paymentMethodForm.get('baoKimApiUrl')?.touched || isSubmit)  &&
+                          paymentMethodForm.get('baoKimApiUrl')?.hasError('requireValue')">
+                  BaoKim-ApiUrl {{'cannot_blank' | translate}}
+            </span>
+          </div>
+
+          <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
+            <span class="text-label">
+              BaoKim-MerchantId
+              <span class="text-danger">*</span>
+            </span>
+
+            <input nz-input formControlName="baoKimMerchantId"
+                   [nzStatus]="(paymentMethodForm.get('baoKimMerchantId')?.invalid &&
+                               (paymentMethodForm.get('baoKimMerchantId')?.touched || isSubmit)) ? 'error' : ''">
+            <span class="text-danger"
+                  *ngIf="(paymentMethodForm.get('baoKimMerchantId')?.touched || isSubmit)  &&
+                          paymentMethodForm.get('baoKimMerchantId')?.hasError('requireValue')">
+                  BaoKim-MerchantId {{'cannot_blank' | translate}}
+            </span>
+          </div>
+
+          <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
+            <span class="text-label">
+              BaoKim-UrlSuccess
+              <span class="text-danger">*</span>
+            </span>
+
+            <input nz-input formControlName="baoKimUrlSuccess"
+                   [nzStatus]="(paymentMethodForm.get('baoKimUrlSuccess')?.invalid &&
+                               (paymentMethodForm.get('baoKimUrlSuccess')?.touched || isSubmit)) ? 'error' : ''">
+            <span class="text-danger"
+                  *ngIf="(paymentMethodForm.get('baoKimUrlSuccess')?.touched || isSubmit)  &&
+                          paymentMethodForm.get('baoKimUrlSuccess')?.hasError('requireValue')">
+                  BaoKim-UrlSuccess {{'cannot_blank' | translate}}
+            </span>
+          </div>
+
+          <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
+            <span class="text-label">
+              BaoKim-Webhooks
+              <span class="text-danger">*</span>
+            </span>
+
+            <input nz-input formControlName="baoKimWebhooks"
+                   [nzStatus]="(paymentMethodForm.get('baoKimWebhooks')?.invalid &&
+                               (paymentMethodForm.get('baoKimWebhooks')?.touched || isSubmit)) ? 'error' : ''">
+            <span class="text-danger"
+                  *ngIf="(paymentMethodForm.get('baoKimWebhooks')?.touched || isSubmit)  &&
+                          paymentMethodForm.get('baoKimWebhooks')?.hasError('requireValue')">
+                  BaoKim-Webhooks {{'cannot_blank' | translate}}
+            </span>
+          </div>
+
+          <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
+            <span class="text-label">
+              BaoKim-Audience
+              <span class="text-danger">*</span>
+            </span>
+
+            <input nz-input formControlName="baoKimAudience"
+                   [nzStatus]="(paymentMethodForm.get('baoKimAudience')?.invalid &&
+                               (paymentMethodForm.get('baoKimAudience')?.touched || isSubmit)) ? 'error' : ''">
+            <span class="text-danger"
+                  *ngIf="(paymentMethodForm.get('baoKimAudience')?.touched || isSubmit)  &&
+                          paymentMethodForm.get('baoKimAudience')?.hasError('requireValue')">
+                  BaoKim-Audience {{'cannot_blank' | translate}}
+            </span>
+          </div>
+        </ng-container>
       </div>
     </form>
   </div>
@@ -196,7 +311,7 @@
       </button>
       <button class="btn" nz-button (click)="navigateBack()">
         {{'cancel'|translate}}
-</button>
+      </button>
     </div>
   </div>
 </div>

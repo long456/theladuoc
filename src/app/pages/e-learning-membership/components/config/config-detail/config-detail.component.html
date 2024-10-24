@@ -125,10 +125,10 @@
                 <tr>
                   <td nzAlign="center">{{'level' | translate}} {{i+1}}</td>
                   <td nzAlign="center">
-                    <nz-input-number [nzMin]="1" [nzStep]="1" nzBorderless [(ngModel)]="bonus.commissionPercentage" [ngModelOptions]="{standalone: true}"></nz-input-number>
+                    <nz-input-number [nzMin]="1" [nzStep]="1" nzBorderless [(ngModel)]="bonus.countTransaction" [ngModelOptions]="{standalone: true}"></nz-input-number>
                   </td>
                   <td nzAlign="center">
-                    <nz-input-number [nzMin]="1" [nzStep]="1" nzBorderless [(ngModel)]="bonus.countTransaction" [ngModelOptions]="{standalone: true}"></nz-input-number>
+                    <nz-input-number [nzMin]="1" [nzStep]="1" nzBorderless [(ngModel)]="bonus.commissionPercentage" [ngModelOptions]="{standalone: true}"></nz-input-number>
                   </td>
                   <td nzAlign="center">
                     <button nz-button nz-tooltip nzTooltipTitle="{{'remove' | translate}}" class="delete-btn" (click)="removeBonus(i)">
