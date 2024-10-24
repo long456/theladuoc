@@ -137,7 +137,7 @@
           <input nz-input formControlName="twitterLink">
         </div>
 
-        <div nz-col [nzSpan]="16">
+        <div nz-col [nzSpan]="16" *ngIf="!isCreate">
           <span class="text-label">
             {{'participation' | translate }}
           </span>
@@ -146,7 +146,9 @@
             <span>
               {{'allow_free_participation' | translate}}
             </span>
-            <nz-switch [(ngModel)]="isFreeAllowed" [ngModelOptions]="{standalone: true}"></nz-switch>
+            <nz-switch [(ngModel)]="isFreeAllowed" [ngModelOptions]="{standalone: true}"
+                       (ngModelChange)="onSwitchChange($event)"
+            ></nz-switch>
           </div>
 
           <nz-checkbox-wrapper class="width-100 pd-t-10"
@@ -155,7 +157,9 @@
           >
             <div nz-row>
               <div nz-col nzSpan="8" *ngFor="let user of listUserPolicyLevel">
-                <label nz-checkbox [nzValue]="user.id">{{user.name}}</label>
+                <label nz-checkbox [nzValue]="user.id"
+                       [nzChecked]="isChecked(user.id, 'role')"
+                >{{user.name}}</label>
               </div>
             </div>
           </nz-checkbox-wrapper>
@@ -165,13 +169,15 @@
                                *ngIf="!isFreeAllowed">
             <div nz-row>
               <div nz-col nzSpan="8" *ngFor="let user of listUserRole">
-                <label nz-checkbox [nzValue]="user.value">{{user.name}}</label>
+                <label nz-checkbox [nzValue]="user.value"
+                       [nzChecked]="isChecked(user.value, 'role')"
+                >{{user.name}}</label>
               </div>
             </div>
           </nz-checkbox-wrapper>
         </div>
 
-        <div nz-col [nzSpan]="16">
+        <div nz-col [nzSpan]="16" *ngIf="!isCreate">
           <span class="text-label">
             {{'specify_admin' | translate }}
           </span>

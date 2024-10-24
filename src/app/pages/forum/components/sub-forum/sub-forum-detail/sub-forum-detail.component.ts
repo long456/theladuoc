@@ -24,12 +24,15 @@ export class SubForumDetailComponent implements OnInit{
   listUserPolicyLevel: any[]=[];
   listUserRole: any[]=[];
   listOpAdmin: any[] = [];
+
   isFreeAllowed: boolean = false;
   // Tạo Subject để xử lý search admin
   searchSubject = new Subject<string>();
   // Đặt thành true để tắt việc filter local của ng-zorro
   nzFilterOption = () => true;
 
+  selectedPolicy : number[] = [];
+  selectedRole : number[] = [];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -116,6 +119,13 @@ export class SubForumDetailComponent implements OnInit{
             this.listUserPolicyLevel = res.data.userRoleAndUserPolicyLevel.listUserPolicyLevel;
             this.listUserRole = res.data.userRoleAndUserPolicyLevel.listUserRole;
             this.listOpAdmin = res.data.listAdmin;
+            if (this.listOpAdmin.length > 0) {
+              const admin = this.listOpAdmin.map(item => item.id);
+              this.subForumForm.get('adminIds')?.patchValue(admin);
+            }
+
+            this.selectedPolicy = res.data.userPolicyLevelAllowJoin;
+            this.selectedRole = res.data.userRoleAllowJoin;
           } else {
             this.message.error(res.errorMessages);
           }
@@ -174,10 +184,27 @@ export class SubForumDetailComponent implements OnInit{
     this.searchSubject.next(value);
   }
 
-  onValueChange(event: any, type: 'role' | 'policy') {
+  onValueChange(event: any, type: 'role' | 'policy'):void {
     if (type === "role")
       this.subForumForm.get('userRoleAllowJoin')?.patchValue(event);
     else
       this.subForumForm.get('userPolicyLevelAllowJoin')?.patchValue(event);
+  }
+
+  onSwitchChange(event: boolean):void {
+    console.log(event);
+    if (event) {
+      this.selectedPolicy = []
+      this.subForumForm.get('userRoleAllowJoin')?.patchValue(null);
+      this.subForumForm.get('userPolicyLevelAllowJoin')?.patchValue(null);
+      console.log(this.selectedPolicy)
+    }
+  }
+
+  isChecked(value: number, type: 'role' | 'policy'): boolean {
+    if (type === "role")
+      return this.selectedRole.includes(value);
+    else
+      return this.selectedPolicy.includes(value);
   }
 }
