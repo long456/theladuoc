@@ -44,4 +44,8 @@ export class SubForumService {
   softDeleteSubForum(data: number[]): Observable<any> {
     return this.http.delete('SubCommunity/soft-delete',{body: data})
   }
+
+  getUserByString(str: string, id: number): Observable<any>{
+    return this.http.get('SubCommunity/get-list-user-by-sub-community', {params: {SubCommunityId: id, SearchString: str}});
+  }
 }

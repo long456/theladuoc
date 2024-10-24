@@ -823,5 +823,8 @@
   "collaborators_page": "Trang cộng tác viên",
   "retail_site": "Trang bán lẻ",
   "price_list_dis": "Cấu hình hiển thị bảng giá",
-  "bao_kim": "Thanh toán Bảo Kim"
+  "bao_kim": "Thanh toán Bảo Kim",
+  "specify_admin": "Chỉ định quản trị viên",
+  "participation": "Quyền tham gia",
+  "allow_free_participation": "Cho phép tham gia miễn phí"
 }

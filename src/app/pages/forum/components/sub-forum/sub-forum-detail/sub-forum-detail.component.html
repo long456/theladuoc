@@ -137,6 +137,61 @@
           <input nz-input formControlName="twitterLink">
         </div>
 
+        <div nz-col [nzSpan]="16">
+          <span class="text-label">
+            {{'participation' | translate }}
+          </span>
+
+          <div class="allow-free">
+            <span>
+              {{'allow_free_participation' | translate}}
+            </span>
+            <nz-switch [(ngModel)]="isFreeAllowed" [ngModelOptions]="{standalone: true}"></nz-switch>
+          </div>
+
+          <nz-checkbox-wrapper class="width-100 pd-t-10"
+                               (nzOnChange)="onValueChange($event, 'policy')"
+                               *ngIf="!isFreeAllowed"
+          >
+            <div nz-row>
+              <div nz-col nzSpan="8" *ngFor="let user of listUserPolicyLevel">
+                <label nz-checkbox [nzValue]="user.id">{{user.name}}</label>
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+
+          <nz-checkbox-wrapper class="width-100 pd-t-10"
+                               (nzOnChange)="onValueChange($event, 'role')"
+                               *ngIf="!isFreeAllowed">
+            <div nz-row>
+              <div nz-col nzSpan="8" *ngFor="let user of listUserRole">
+                <label nz-checkbox [nzValue]="user.value">{{user.name}}</label>
+              </div>
+            </div>
+          </nz-checkbox-wrapper>
+        </div>
+
+        <div nz-col [nzSpan]="16">
+          <span class="text-label">
+            {{'specify_admin' | translate }}
+          </span>
+
+          <nz-select
+            nzShowSearch
+            nzServerSearch
+            nzPlaceHolder="input search text"
+            formControlName="adminIds"
+            [nzShowArrow]="false"
+            nzMode="multiple"
+            [nzFilterOption]="nzFilterOption"
+            (nzOnSearch)="searchAdmin($event)"
+          >
+            <nz-option *ngFor="let op of listOpAdmin"
+                       [nzValue]="op.id"
+                       [nzLabel]="op.name + ' - ' + op.email + ' - ' + op.code"
+            ></nz-option>
+          </nz-select>
+        </div>
       </div>
     </form>
   </div>
