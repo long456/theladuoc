@@ -25,13 +25,12 @@
             {{ 'page_name' | translate }} {{ 'cannot_blank' | translate }}
           </span>
         </div>
-    
+
         <div nz-col [nzSpan]="8">
           <!-- Slug Input -->
           <ng-template #tooltipPageSlug>
-            Đường dẫn đến trang con của bạn.<br />
-            Thông thường sẽ là tên của trang con viết không dấu, nối liền vởi dấu gạch ngang.<br />
-            <strong>Ví dụ:</strong> trang-chu, gioi-thieu,...
+            {{'guide_page_slug' | translate}}.<br />
+            <strong>{{'example' | translate}}:</strong> trang-chu, gioi-thieu,...
           </ng-template>
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">Slug<span class="text-danger">*</span></span>
@@ -42,13 +41,12 @@
             Slug {{ 'invalid_format' | translate }}
           </span>
         </div>
-    
+
         <div nz-col [nzSpan]="8">
           <!-- Page Type Select -->
           <ng-template #tooltipPageType>
-            Có 2 loại trang là Trang chủ và trang thông thường.<br />
-            Bạn chỉ có thể tạo 1 trang chủ, đây là trang mặc định khi truy cập website của bạn.<br />
-            Bạn có thể tạo nhiều trang thông thường.
+            - {{'homepage' | translate}}: {{'guide_homepage_creation' | translate}}.<br />
+            - {{'normal_page' | translate}}: {{'guide_normal_page_creation' | translate}}.
           </ng-template>
           <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">{{ 'page_type' | translate }}<span class="text-danger">*</span></span>
@@ -59,7 +57,7 @@
             <nz-option [nzValue]="2" [nzLabel]="'normal_page' | translate"></nz-option>
           </nz-select>
         </div>
-    
+
         <div nz-col [nzSpan]="16">
           <!-- Description Textarea -->
           <div class="d-flex justify-content-between align-items-center">
@@ -68,7 +66,7 @@
           </div>
           <textarea nz-input placeholder="{{ 'enter' | translate }} {{ 'description' | translate }}" formControlName="description" [nzAutosize]="{ minRows: 3 }"></textarea>
         </div>
-    
+
         <div nz-col [nzSpan]="24">
           <!-- Page Content CKEditor -->
           <div class="d-flex justify-content-between align-items-center">
@@ -77,7 +75,7 @@
           </div>
           <ckeditor name="ckeditor_text" formControlName="contentHtml" editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
-    
+
         <div nz-col [nzSpan]="24">
           <!-- SEO Tags CKEditor -->
           <span class="text-label">{{ 'seo_tags' | translate }}</span>
@@ -85,7 +83,7 @@
         </div>
       </div>
     </form>
-    
+
   </div>
 
   <div nz-col [nzSpan]="4">
