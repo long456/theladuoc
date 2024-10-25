@@ -3,5 +3,6 @@ export type ForumConfig = {
   name: string;
   logo: string;
   banner: string;
+  favicon: string;
   status: number;
 }
