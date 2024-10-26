@@ -15,15 +15,18 @@
     <form [formGroup]="builderForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            {{'title' | translate}}
-          </span>
 
-          <input nz-input formControlName="title" autofocus
-            [nzStatus]="(this.builderForm.get('title')?.invalid && (builderForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label ">
+              {{ 'title' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_registration_form_title' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
-          <span class="text-danger"
-            *ngIf="(builderForm.get('title')?.touched || isSubmit)  && builderForm.get('title')?.hasError('required')">
+          <input nz-input formControlName="title" autofocus [nzStatus]="(this.builderForm.get('title')?.invalid && (builderForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
+
+          <span class="text-danger" *ngIf="(builderForm.get('title')?.touched || isSubmit)  && builderForm.get('title')?.hasError('required')">
             {{'title' | translate}} {{'cannot_blank' | translate}}
           </span>
         </div>
@@ -35,12 +38,20 @@
         </div>
 
         <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            {{'zalo_group_link' | translate}}
-          </span>
 
-          <input nz-input formControlName="zaloLink"
-            [nzStatus]="(this.builderForm.get('zaloLink')?.invalid && (builderForm.get('zaloLink')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label ">
+              {{ 'zalo_group_link' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <ng-template #tooltipRegistrationFormSocialGroup>
+              {{'guide_registration_form_social_group' | translate}}
+              <br /> <strong>{{'caution' | translate}}:</strong> {{'guide_registration_form_social_group_note' | translate}}
+            </ng-template>
+            <span [nzTooltipTitle]="tooltipRegistrationFormSocialGroup" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+
+          <input nz-input formControlName="zaloLink" [nzStatus]="(this.builderForm.get('zaloLink')?.invalid && (builderForm.get('zaloLink')?.touched || isSubmit)) ? 'error' : ''">
 
           <!--          <span class="text-danger"-->
           <!--                *ngIf="(builderForm.get('zaloLink')?.touched || isSubmit)  && builderForm.get('zaloLink')?.hasError('pattern')"-->
@@ -50,59 +61,76 @@
         </div>
 
         <div nz-col [nzSpan]="9" *ngIf="!isCreate">
-          <span class="text-label">
-            {{'redirect_link' | translate}}
-          </span>
 
-          <input [readonly]="!isCreate" nz-input formControlName="redirectLink"
-            [nzStatus]="(builderForm.get('redirectLink')?.invalid && (builderForm.get('redirectLink')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'redirect_link' | translate}}
+            </span>
+            <span nzTooltipTitle="{{'guide_registration_form_redirect' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input [readonly]="!isCreate" nz-input formControlName="redirectLink" [nzStatus]="(builderForm.get('redirectLink')?.invalid && (builderForm.get('redirectLink')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-            *ngIf="(builderForm.get('redirectLink')?.touched || isSubmit)  && builderForm.get('redirectLink')?.hasError('pattern')">
+          <span class="text-danger" *ngIf="(builderForm.get('redirectLink')?.touched || isSubmit)  && builderForm.get('redirectLink')?.hasError('pattern')">
             {{'redirect_link' | translate}} {{'invalid_format' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="9">
-          <span class="text-label">
-            {{ 'course' | translate }}
-            <span class="text-danger">*</span>
-          </span>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label ">
+              {{ 'course' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_registration_form_course' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <div>
-            <nz-select [nzDisabled]="!isCreate" formControlName="courseId"
-              [nzStatus]="(builderForm.get('courseId')?.invalid && (builderForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''">
+            <nz-select [nzDisabled]="!isCreate" formControlName="courseId" [nzStatus]="(builderForm.get('courseId')?.invalid && (builderForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''">
               <nz-option *ngFor="let course of listCourse" [nzValue]="course.id" [nzLabel]="course.title"></nz-option>
             </nz-select>
           </div>
 
-          <span class="text-danger"
-            *ngIf="(builderForm.get('courseId')?.touched || isSubmit) && builderForm.get('courseId')?.hasError('required')">
+          <span class="text-danger" *ngIf="(builderForm.get('courseId')?.touched || isSubmit) && builderForm.get('courseId')?.hasError('required')">
             {{ 'course_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="18">
-          <span class="text-label">
-            {{'description' | translate}}
-          </span>
+
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right: .5rem">
+              {{ 'description' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_registration_form_description' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <textarea nz-input formControlName="description"></textarea>
         </div>
 
         <div nz-col [nzSpan]="18">
-          <span class="text-label">
-            {{'thank_you_page_content' | translate}}
-          </span>
-          <ckeditor name="ckeditor_text" formControlName="thankYouHtml"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"
-            (ready)="onCkEditorReady($event)"></ckeditor>
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right: .5rem">
+              {{ 'thank_you_page_content' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <ng-template #tooltipRegistrationFormThankYou>
+              {{'guide_registration_form_thankyou' | translate}}
+              <br />{{'guide_registration_form_thankyou_2' | translate}}
+            </ng-template>
+            <span [nzTooltipTitle]="tooltipRegistrationFormThankYou" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <ckeditor name="ckeditor_text" formControlName="thankYouHtml" editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig" (ready)="onCkEditorReady($event)"></ckeditor>
         </div>
 
         <div nz-col [nzSpan]="18">
-          <span class="text-label">
-            {{'collected_information' | translate}}
-          </span>
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right: .5rem">
+              {{'collected_information' | translate}}
+            </span>
+            <span nzTooltipTitle="{{'guide_registration_form_collective_info' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <div nz-row [nzGutter]=[8,8] class="form-selection">
             <div nz-col nzSpan="8">

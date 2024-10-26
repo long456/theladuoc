@@ -26,7 +26,7 @@
           {{'guide_lesson_duration' | translate}}
           {{'guide_lesson_duration_note' | translate}}
         </ng-template>
-        <span nzTooltipTitle="tooltipLessonDuration" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+        <span [nzTooltipTitle]="tooltipLessonDuration" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
       </div>
 
       <nz-range-picker [nzStatus]="(lessonForm.get('duration')?.invalid && (lessonForm.get('duration')?.touched || isSubmit)) ? 'error' : ''" formControlName="duration" [nzShowTime]="{ nzFormat: 'HH:mm' }" nzFormat="dd/MM/YYYY HH:mm"></nz-range-picker>

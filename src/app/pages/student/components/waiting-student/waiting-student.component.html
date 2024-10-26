@@ -69,7 +69,7 @@
       <table-column header="{{ 'status' | translate }}" key="isAccount" [width]="'180px'">
         <ng-template appCell let-data>
           <span class="text-valid" *ngIf="data.isAccount">{{'has_account' | translate}}</span>
-          <span class="text-invalid" *ngIf="!data.isAccount">Chưa {{'has_account' | translate}}</span>
+          <span class="text-invalid" *ngIf="!data.isAccount">{{'no_account' | translate}}</span>
         </ng-template>
       </table-column>
 
