@@ -40,4 +40,8 @@ export class PriceService {
   updatePrice(data: Price): Observable<any>{
     return this.http.put('PriceList', data);
   }
+
+  softDeletePrice(data: number[]): Observable<any> {
+    return this.http.delete('Pricelist/soft-delete',{body: data})
+  }
 }

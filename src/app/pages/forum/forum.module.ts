@@ -14,8 +14,6 @@ import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 
-
-
 @NgModule({
   declarations: [
     ForumConfigComponent,
@@ -25,16 +23,16 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
     SubForumListComponent,
     SubForumDetailComponent
   ],
-  imports: [
-    CommonModule,
-    ForumRoutingModule,
-    SharedModule,
-    ReactiveFormsModule,
-    NzSwitchModule,
-    NzSelectModule,
-    NzInputNumberModule,
-    NzCheckboxModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        ForumRoutingModule,
+        SharedModule,
+        ReactiveFormsModule,
+        NzSwitchModule,
+        NzSelectModule,
+        NzInputNumberModule,
+        NzCheckboxModule,
+        FormsModule,
+    ]
 })
 export class ForumModule { }
