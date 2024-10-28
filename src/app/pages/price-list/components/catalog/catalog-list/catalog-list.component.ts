@@ -93,5 +93,29 @@ export class CatalogListComponent implements OnInit{
     this.router.navigate(["page/price-list/catalog/benefit-config/" + data.id]).then();
   }
 
-  delete():void {}
+  delete():void {
+    if (this.itemSelectList.length === 0) {
+      this.message.error('Chưa có mục nào được chọn');
+    } else {
+      this.modal.confirm({
+        nzTitle: 'Xác nhận xóa',
+        nzContent: 'Bạn có chắc chắn muốn xóa những mục đã chọn ?',
+        nzOnOk: () => {
+          this.catalogService.softDeleteCatalog(this.itemSelectList).subscribe({
+            next: value => {
+              if (value.success) {
+                this.message.success(value.messages);
+                this.refreshData();
+              } else {
+                this.message.error(value.errorMessages);
+              }
+            },
+            error: err => {
+              this.message.error(err);
+            }
+          })
+        }
+      });
+    }
+  }
 }

@@ -13,25 +13,33 @@
     <form [formGroup]="landingPageForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{ 'landing_page_name' | translate }}
-            <span class="text-danger">*</span>
-          </span>
-          <input #landingPageName nz-input autofocus formControlName="name"
-            [nzStatus]="(landingPageForm.get('name')?.invalid && (landingPageForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{ 'landing_page_name' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_landing_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input #landingPageName nz-input autofocus formControlName="name" [nzStatus]="(landingPageForm.get('name')?.invalid && (landingPageForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger"
-            *ngIf="(landingPageForm.get('name')?.touched || isSubmit)  && landingPageForm.get('name')?.hasError('required')">
+          <span class="text-danger" *ngIf="(landingPageForm.get('name')?.touched || isSubmit)  && landingPageForm.get('name')?.hasError('required')">
             {{ 'landing_page_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">{{ 'landing_page_code' | translate }}</span>
-          <input nz-input formControlName="landingPageCode"
-            [nzStatus]="(landingPageForm.get('landingPageCode')?.invalid && (landingPageForm.get('landingPageCode')?.touched || isSubmit)) ? 'error' : ''">
-          <span class="text-danger"
-            *ngIf="(landingPageForm.get('landingPageCode')?.touched || isSubmit)  && landingPageForm.get('landingPageCode')?.hasError('pattern')">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{ 'landing_page_code' | translate }}
+            </span>
+            <ng-template #tooltipLandingCode>
+              {{'guide_landing_code' | translate}}
+              <br /> {{'caution' | translate}} {{'guide_landing_code_note' | translate}}
+            </ng-template>
+            <span [nzTooltipTitle]="tooltipLandingCode" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input nz-input formControlName="landingPageCode" [nzStatus]="(landingPageForm.get('landingPageCode')?.invalid && (landingPageForm.get('landingPageCode')?.touched || isSubmit)) ? 'error' : ''">
+          <span class="text-danger" *ngIf="(landingPageForm.get('landingPageCode')?.touched || isSubmit)  && landingPageForm.get('landingPageCode')?.hasError('pattern')">
             {{ 'landing_page_code' | translate }} {{'invalid_format' | translate}}
           </span>
         </div>
@@ -43,52 +51,72 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{ 'course' | translate }}
-            <span class="text-danger">*</span>
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{ 'course' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_landing_course' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <div>
-            <nz-select [nzDisabled]="!isCreate" formControlName="courseId"
-              [nzStatus]="(landingPageForm.get('courseId')?.invalid && (landingPageForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''">
+            <nz-select [nzDisabled]="!isCreate" formControlName="courseId" [nzStatus]="(landingPageForm.get('courseId')?.invalid && (landingPageForm.get('courseId')?.touched || isSubmit)) ? 'error' : ''">
               <nz-option *ngFor="let course of listCourse" [nzValue]="course.id" [nzLabel]="course.title"></nz-option>
             </nz-select>
           </div>
 
-          <span class="text-danger"
-            *ngIf="(landingPageForm.get('courseId')?.touched || isSubmit) && landingPageForm.get('courseId')?.hasError('required')">
+          <span class="text-danger" *ngIf="(landingPageForm.get('courseId')?.touched || isSubmit) && landingPageForm.get('courseId')?.hasError('required')">
             {{ 'course_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzSpan]="24">
-          <span class="text-label">
-            {{'landing_page_content' | translate}}
-          </span>
-          <ckeditor name="ckeditor_text" formControlName="htmlContent"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right:.5rem;">
+              {{ 'landing_page_content' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <ng-template #tooltipLandingContent>
+              {{'guide_landing_content' | translate}}
+              <br /> <strong>{{'caution' | translate}}:</strong> {{'guide_ckeditor' | translate}}
+              <br /> - {{'guide_ckeditor_step_1' | translate}}
+              <br /> - {{'guide_ckeditor_step_2' | translate}}
+              <br /> - {{'guide_ckeditor_step_3' | translate}}
+            </ng-template>
+            <span [nzTooltipTitle]="tooltipLandingContent" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <ckeditor name="ckeditor_text" formControlName="htmlContent" editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'seo_title' | translate}}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{ 'seo_title' | translate }}
+            </span>
+            <span nzTooltipTitle="{{'guide_landing_seo_title' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <input nz-input formControlName="seoTitle">
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'seo_keywords' | translate}}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{ 'seo_title' | translate }}
+            </span>
+            <span nzTooltipTitle="{{'guide_landing_seo_keywords' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <input nz-input formControlName="seoKeyWords">
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'seo_image' | translate}}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{ 'seo_image' | translate }}
+            </span>
+            <span nzTooltipTitle="{{'guide_landing_seo_image' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <div class="select-seo-img">
             <input nz-input [value]="landingPageForm.get('seoImage')?.value" formControlName="seoImage">
@@ -100,19 +128,29 @@
         </div>
 
         <div nz-col [nzSpan]="16">
-          <span class="text-label">
-            {{'seo_description' | translate}}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{ 'seo_description' | translate }}
+            </span>
+            <span nzTooltipTitle="{{'guide_landing_seo_description' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <textarea nz-input [nzAutosize]="{ minRows: 3}" formControlName="description"></textarea>
         </div>
 
         <div nz-col [nzSpan]="24">
-          <span class="text-label">
-            PixelCode
-          </span>
-          <ckeditor name="ckeditor_text" formControlName="pixelCode"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right:.5rem;">
+              pixel code
+            </span>
+            <ng-template #tooltipLandingPixelCode>
+              - {{'guide_ckeditor_step_1' | translate}}
+              <br /> - {{'guide_ckeditor_step_2' | translate}}
+              <br /> - {{'guide_ckeditor_step_3' | translate}}
+            </ng-template>
+            <span [nzTooltipTitle]="tooltipLandingPixelCode" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <ckeditor name="ckeditor_text" formControlName="pixelCode" editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
       </div>
     </form>

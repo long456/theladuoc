@@ -36,6 +36,7 @@ export class ForumConfigDetailComponent implements OnInit {
       name: [null, [Validators.required]],
       logo: [null, [Validators.required]],
       banner: [null, [Validators.required]],
+      favicon: [null],
       status: [1],
     });
 
@@ -59,7 +60,7 @@ export class ForumConfigDetailComponent implements OnInit {
     }
   }
 
-  onSelectFile(type: 'logo' | 'banner'):void{
+  onSelectFile(type: 'logo' | 'banner' | 'favicon'):void{
     this.fileManagerService.selectFile();
     this.fileManagerService.selectedFile.pipe(take(1)).subscribe((data) => {
       this.forumConfigForm.get(type)?.patchValue(data);

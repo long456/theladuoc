@@ -58,7 +58,45 @@
     color: #1677ff;
   }
 
-  &.delete:hover {
+  .delete:hover {
     color: #ff4d4f;
   }
+}
+
+.upload-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.upload{
+  display: block;
+  height: 32px;
+  width: 200px;
+  border: 1px solid #d9d9d9;
+  text-align: center;
+  line-height: 32px;
+  cursor: pointer;
+  padding: 0 15px;
+  position: relative;
+  span{
+    margin-right: 8px;
+  }
+
+  &:hover{
+    border: 1px solid #40a9ff;
+    color: #40a9ff;
+  }
+}
+
+.file-name{
+  text-align: start;
+  position: absolute;
+  left: 240px;
+  color: #001529!important;
+  width: 100%;
+  top: 0;
 }

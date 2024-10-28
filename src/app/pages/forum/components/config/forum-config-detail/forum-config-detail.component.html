@@ -72,6 +72,24 @@
             {{ 'banner_link' | translate }} {{'cannot_blank' | translate}}!
           </span>
         </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Favicon
+          </span>
+
+          <div class="select-url">
+            <input nz-input [value]="forumConfigForm.get('favicon')?.value" formControlName="favicon">
+
+            <button nz-button nzType="primary" (click)="onSelectFile('favicon')">
+              <span nz-icon nzType="upload"></span>
+            </button>
+          </div>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+
+        </div>
       </div>
     </form>
   </div>
