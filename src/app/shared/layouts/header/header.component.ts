@@ -129,10 +129,11 @@ export class HeaderComponent implements OnInit {
 
   startBoarding(key: string): void {
     let translate = this.translateService
-    const lang = translate.currentLang || 'vi'
     let boarding = new Boarding({
+      className: 'ant-card',
       animate: true,
       padding: 10,
+      closeBtnText: translate.instant('close'),
       doneBtnText: translate.instant('finish'),
       nextBtnText: translate.instant('next'),
       prevBtnText: translate.instant('back'),
@@ -151,6 +152,15 @@ export class HeaderComponent implements OnInit {
           inline: 'start'
         });
       },
+      onPopoverRender(el: any) {
+        el.popoverPrevBtn.classList.add('ant-btn', 'ant-btn-sm')
+        el.popoverNextBtn.classList.add('ant-btn', 'ant-btn-sm', 'ant-btn-primary')
+        el.popoverCloseBtn.classList.add('ant-btn', 'ant-btn-sm', 'ant-btn-dashed')
+        el.popoverPrevBtn.style.marginRight = '.5rem'
+        el.popoverPrevBtn.style.marginLeft = '2rem'
+        el.popoverFooter.style.marginTop = '1rem'
+        console.log(el)
+      }
     });
     const commonSettingSteps = [ {
       element: '#settings .ant-menu-submenu-title',
