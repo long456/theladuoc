@@ -1,8 +1,8 @@
 <ng-container *ngFor="let item of menuData" >
-  <li *ngIf="item.children" nz-submenu [nzTitle]="item.name | translate" nzIcon="{{item.icon}}">
+  <li *ngIf="item.children" nz-submenu [nzTitle]="item.name | translate" [id]="item['name']" nzIcon="{{item.icon}}">
     <app-menu-item [menuData]="item.children"></app-menu-item>
   </li>
-  <li *ngIf="!item.children" nz-menu-item nzMatchRouter (click)="navigate(item.link)">
+  <li *ngIf="!item.children" [id]="item['name']" nz-menu-item nzMatchRouter (click)="navigate(item.link)">
     {{item.name | translate}}
   </li>
 </ng-container>
