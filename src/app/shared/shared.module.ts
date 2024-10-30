@@ -24,6 +24,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { HeaderComponent } from './layouts/header/header.component';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
@@ -69,6 +70,7 @@ import {TranslateModule} from "@ngx-translate/core";
     NzButtonModule,
     NzSpinModule,
     NzDropDownModule,
+    NzAutocompleteModule,
     NzDividerModule,
     NzCheckboxModule,
     NzPaginationModule,

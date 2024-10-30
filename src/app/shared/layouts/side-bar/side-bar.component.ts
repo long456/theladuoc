@@ -376,7 +376,7 @@ export class SideBarComponent implements OnInit {
                 {
                   icon: '',
                   link: 'page/setting/landing-page',
-                  name: 'Landing page',
+                  name: 'landing_page',
                 },
                 {
                   icon: '',
