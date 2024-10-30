@@ -13,6 +13,7 @@ import { SubForumDetailComponent } from './components/sub-forum/sub-forum-detail
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {NzDividerModule} from "ng-zorro-antd/divider";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
         NzInputNumberModule,
         NzCheckboxModule,
         FormsModule,
+        NzDividerModule,
     ]
 })
 export class ForumModule { }
