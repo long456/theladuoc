@@ -37,6 +37,7 @@ export class FileSelectorComponent implements ControlValueAccessor{
   }
 
   setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   writeValue(value: string): void {
@@ -52,10 +53,12 @@ export class FileSelectorComponent implements ControlValueAccessor{
     this.onTouched();
   }
 
-  onBtnClick() {
+  onBtnClick(): void {
     this.fileManagerService.selectFile();
     this.fileManagerService.selectedFile.pipe(take(1)).subscribe((data) => {
       this.value = data;
+      this.onChange(this.value);
+      this.onTouched();
     });
   }
 }

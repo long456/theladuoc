@@ -35,16 +35,11 @@
             <span class="text-danger">*</span>
           </span>
 
-          <div class="select-url">
-            <input nz-input [value]="forumConfigForm.get('logo')?.value" formControlName="logo"
-                   [nzStatus]="(forumConfigForm.get('logo')?.invalid &&
-                               (forumConfigForm.get('logo')?.touched || isSubmit)) ?
-                               'error' : ''">
-
-            <button nz-button nzType="primary" (click)="onSelectFile('logo')">
-              <span nz-icon nzType="upload"></span>
-            </button>
-          </div>
+          <app-file-selector formControlName="logo"
+                             [status]="(forumConfigForm.get('logo')?.invalid &&
+                                         (forumConfigForm.get('logo')?.touched || isSubmit)) ?
+                                         'error' : ''"
+          ></app-file-selector>
 
           <span class="text-danger"
                 *ngIf="(forumConfigForm.get('logo')?.touched || isSubmit)  &&
@@ -60,16 +55,11 @@
             <span class="text-danger">*</span>
           </span>
 
-          <div class="select-url">
-            <input nz-input [value]="forumConfigForm.get('banner')?.value" formControlName="banner"
-                   [nzStatus]="(forumConfigForm.get('banner')?.invalid &&
-                               (forumConfigForm.get('banner')?.touched || isSubmit)) ?
-                               'error' : ''">
-
-            <button nz-button nzType="primary" (click)="onSelectFile('banner')">
-              <span nz-icon nzType="upload"></span>
-            </button>
-          </div>
+          <app-file-selector formControlName="banner"
+                             [status]="(forumConfigForm.get('banner')?.invalid &&
+                                       (forumConfigForm.get('banner')?.touched || isSubmit)) ?
+                                       'error' : ''"
+          ></app-file-selector>
 
           <span class="text-danger"
                 *ngIf="(forumConfigForm.get('banner')?.touched || isSubmit)  &&
@@ -83,13 +73,7 @@
             Favicon
           </span>
 
-          <div class="select-url">
-            <input nz-input [value]="forumConfigForm.get('favicon')?.value" formControlName="favicon">
-
-            <button nz-button nzType="primary" (click)="onSelectFile('favicon')">
-              <span nz-icon nzType="upload"></span>
-            </button>
-          </div>
+          <app-file-selector formControlName="favicon"></app-file-selector>
         </div>
         <nz-divider nzText="Cấu hình footer diễn đàn"></nz-divider>
         <div nz-col [nzSpan]="8">
@@ -97,19 +81,14 @@
             Logo footer
           </span>
 
-          <div class="select-url">
-            <input nz-input formControlName="footerLogo">
-            <button nz-button nzType="primary" (click)="onSelectFile('footerLogo')">
-              <span nz-icon nzType="upload"></span>
-            </button>
-          </div>
+          <app-file-selector formControlName="footerLogo"></app-file-selector>
         </div>
 
         <div nz-col [nzSpan]="8">
           <span class="text-label">
             Màu chữ footer
           </span>
-          <app-color-picker formControlName="footerTextColor"></app-color-picker> 
+          <app-color-picker formControlName="footerTextColor"></app-color-picker>
         </div>
 
         <div nz-col [nzSpan]="8"></div>
@@ -119,12 +98,7 @@
             Ảnh nền footer
           </span>
 
-          <div class="select-url">
-            <input nz-input formControlName="footerBackgroundImage">
-            <button nz-button nzType="primary" (click)="onSelectFile('footerBackgroundImage')">
-              <span nz-icon nzType="upload"></span>
-            </button>
-          </div>
+          <app-file-selector formControlName="footerBackgroundImage"></app-file-selector>
         </div>
 
         <div nz-col [nzSpan]="8">

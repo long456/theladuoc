@@ -159,7 +159,6 @@ export class HeaderComponent implements OnInit {
         el.popoverPrevBtn.style.marginRight = '.5rem'
         el.popoverPrevBtn.style.marginLeft = '2rem'
         el.popoverFooter.style.marginTop = '1rem'
-        console.log(el)
       }
     });
     const commonSettingSteps = [ {
