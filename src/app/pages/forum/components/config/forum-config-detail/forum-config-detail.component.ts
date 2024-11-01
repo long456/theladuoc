@@ -38,6 +38,12 @@ export class ForumConfigDetailComponent implements OnInit {
       banner: [null, [Validators.required]],
       favicon: [null],
       status: [1],
+
+      footerLogo : [null],
+      footerBackgroundImage : [null],
+      footerBackgroundColor  : [null],
+      footerTextColor  : [null],
+      footerDescription : [null],
     });
 
     if (!this.isCreate) {
@@ -60,7 +66,7 @@ export class ForumConfigDetailComponent implements OnInit {
     }
   }
 
-  onSelectFile(type: 'logo' | 'banner' | 'favicon'):void{
+  onSelectFile(type: 'logo' | 'banner' | 'favicon' | 'footerLogo' | 'footerBackgroundImage'):void{
     this.fileManagerService.selectFile();
     this.fileManagerService.selectedFile.pipe(take(1)).subscribe((data) => {
       this.forumConfigForm.get(type)?.patchValue(data);

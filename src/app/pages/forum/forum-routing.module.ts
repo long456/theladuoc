@@ -8,6 +8,8 @@ import {
 } from "./components/category/forum-category-detail/forum-category-detail.component";
 import {SubForumListComponent} from "./components/sub-forum/sub-forum-list/sub-forum-list.component";
 import {SubForumDetailComponent} from "./components/sub-forum/sub-forum-detail/sub-forum-detail.component";
+import {NavigationListComponent} from "./components/navigation-forum/navigation-list/navigation-list.component";
+import {NavigationDetailComponent} from "./components/navigation-forum/navigation-detail/navigation-detail.component";
 
 const routes: Routes = [
   {
@@ -60,6 +62,30 @@ const routes: Routes = [
         path: ':id',
         data: {isCreate: false},
         component: SubForumDetailComponent
+      },
+    ]
+  },
+  {
+    path: 'nav-forum',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'list'
+      },
+      {
+        path: 'list',
+        component: NavigationListComponent,
+      },
+      {
+        path: 'create',
+        data: {isCreate: true},
+        component: NavigationDetailComponent
+      },
+      {
+        path: ':id',
+        data: {isCreate: false},
+        component: NavigationDetailComponent
       },
     ]
   },

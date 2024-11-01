@@ -24,6 +24,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { HeaderComponent } from './layouts/header/header.component';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
@@ -37,6 +38,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { ScrollNearBottomDirective } from './directives/table/scroll-near-bottom.directive';
 import {TranslateModule} from "@ngx-translate/core";
+import { ColorPickerComponent } from './components/color-picker/color-picker.component';
+import { FileSelectorComponent } from './components/file-selector/file-selector.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,8 @@ import {TranslateModule} from "@ngx-translate/core";
     FilesManagerComponent,
     CardImageComponent,
     ScrollNearBottomDirective,
+    ColorPickerComponent,
+    FileSelectorComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +74,7 @@ import {TranslateModule} from "@ngx-translate/core";
     NzButtonModule,
     NzSpinModule,
     NzDropDownModule,
+    NzAutocompleteModule,
     NzDividerModule,
     NzCheckboxModule,
     NzPaginationModule,
@@ -103,7 +109,9 @@ import {TranslateModule} from "@ngx-translate/core";
     NzTableModule,
     NzPaginationModule,
     NzDatePickerModule,
-    TranslateModule
+    TranslateModule,
+    ColorPickerComponent,
+    FileSelectorComponent
   ]
 })
 export class SharedModule { }

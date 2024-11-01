@@ -21,6 +21,7 @@
     "@angular/router": "^16.2.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "boarding.js": "^3.6.0",
     "ckeditor4-angular": "^5.1.0",
     "class-transformer": "^0.5.1",
     "html2canvas": "^1.4.1",

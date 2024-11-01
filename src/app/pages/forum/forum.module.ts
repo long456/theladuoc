@@ -13,6 +13,9 @@ import { SubForumDetailComponent } from './components/sub-forum/sub-forum-detail
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzInputNumberModule} from "ng-zorro-antd/input-number";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {NzDividerModule} from "ng-zorro-antd/divider";
+import { NavigationListComponent } from './components/navigation-forum/navigation-list/navigation-list.component';
+import { NavigationDetailComponent } from './components/navigation-forum/navigation-detail/navigation-detail.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
     ForumCategoryListComponent,
     ForumCategoryDetailComponent,
     SubForumListComponent,
-    SubForumDetailComponent
+    SubForumDetailComponent,
+    NavigationListComponent,
+    NavigationDetailComponent
   ],
     imports: [
         CommonModule,
@@ -33,6 +38,7 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
         NzInputNumberModule,
         NzCheckboxModule,
         FormsModule,
+        NzDividerModule,
     ]
 })
 export class ForumModule { }

@@ -1,0 +1,39 @@
+<div class="title-page">
+  Cấu hình chân trang forum
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(forumNavPage$ | async) as nav">
+    <button nz-button class="add-btn primary" (click)="create()">{{ 'add_new' | translate }}</button>
+    <button nz-button class="add-btn" (click)="delete()">{{ 'remove' | translate }}</button>
+    <app-table
+      [rows]="nav.rows"
+      [page]="nav.page"
+      [pageSize]="nav.pageSize"
+      [pageTotal]="nav.rowTotal"
+      [clientPagination]="false"
+      (pageIndexChange)="page$.next($event)"
+      (pageSizeChange)="pageSize$.next($event)"
+      (onItemSelection)="getItemSelection($event)"
+      [loading]="loading"
+    >
+      <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'category_name' | translate }}" key="name" [width]="'200px'"></table-column>
+      <table-column header="{{ 'order' | translate }}" key="no" [width]="'200px'"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right" >
+        <ng-template appHeader>
+          {{ 'actions' | translate }}
+        </ng-template>
+
+        <ng-template appCell let-data>
+          <span class="custom-action" (click)="edit(data)"
+                nz-tooltip nzTooltipTitle="{{'edit' | translate}}">
+            <span nz-icon nzType="edit" nzTheme="outline" class="custom-icon"></span>
+          </span>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>

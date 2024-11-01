@@ -376,7 +376,7 @@ export class SideBarComponent implements OnInit {
                 {
                   icon: '',
                   link: 'page/setting/landing-page',
-                  name: 'Landing page',
+                  name: 'landing_page',
                 },
                 {
                   icon: '',
@@ -448,6 +448,11 @@ export class SideBarComponent implements OnInit {
                   icon: '',
                   link: 'page/forum/sub-forum',
                   name: 'forum_communities',
+                },
+                {
+                  icon: '',
+                  link: 'page/forum/nav-forum',
+                  name: 'footer_settings',
                 },
               ],
             },
