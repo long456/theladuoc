@@ -14,28 +14,28 @@
     <form [formGroup]="newsCategoryForm">
       <div nz-row [nzGutter]="[16, 16]">
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-          <span class="text-label">
-            {{'category_name' | translate }}
-            <span class="text-danger">*</span>
-          </span>
-
-          <input
-            nz-input autofocus formControlName="title"
-            [nzStatus]="(newsCategoryForm.get('title')?.invalid &&
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'category_name' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_news_category_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input nz-input autofocus formControlName="title" [nzStatus]="(newsCategoryForm.get('title')?.invalid &&
                         (newsCategoryForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
-          <span
-            class="text-danger"
-            *ngIf="(newsCategoryForm.get('title')?.touched || isSubmit)  &&
+          <span class="text-danger" *ngIf="(newsCategoryForm.get('title')?.touched || isSubmit)  &&
                     newsCategoryForm.get('title')?.hasError('required')">
-              {{'category_name' | translate }} {{'cannot_blank' | translate}}
+            {{'category_name' | translate }} {{'cannot_blank' | translate}}
           </span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-          <span class="text-label">
-            {{ 'status' | translate }}
-          </span>
-
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right:.5rem">
+              {{'status' | translate }}
+            </span>
+            <span nzTooltipTitle="{{'guide_news_category_status' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <nz-switch formControlName="status" style="display: block"></nz-switch>
         </div>
       </div>
@@ -54,8 +54,7 @@
       </button>
       <button class="btn" nz-button (click)="navigateBack()">
         {{'cancel'|translate}}
-</button>
+      </button>
     </div>
   </div>
 </div>
-

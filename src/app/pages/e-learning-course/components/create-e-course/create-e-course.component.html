@@ -15,30 +15,34 @@
         <div nz-col [nzXs]="24" [nzSm]="24" [nzXl]="16">
           <!-- Tên khoá học -->
           <div style="margin-bottom: 16px;">
-            <span class="text-label">
-              {{controlNames.name}}
-              <span class="text-danger">*</span>
-              <span class="text-danger message-error"
-                *ngIf="courseForm.get('name')?.invalid && courseForm.get('name')?.touched">
-                {{ getErrorMessage('name') }}
+            <div class="d-flex align-items-center">
+              <span class="text-label" style="margin-right: 8px;">
+                {{controlNames.name | translate}}
+                <span class="text-danger">*</span>
               </span>
+
+              <span nzTooltipTitle="{{'guide_course_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+            </div>
+            <input nz-input autofocus formControlName="name" [nzStatus]="(courseForm.get('name')?.invalid && (courseForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+            <span class="text-danger message-error" *ngIf="courseForm.get('name')?.invalid && courseForm.get('name')?.touched">
+              {{ getErrorMessage('name') }}
             </span>
-            <input nz-input autofocus formControlName="name"
-              [nzStatus]="(courseForm.get('name')?.invalid && (courseForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
           </div>
           <!-- Giới thiệu ngắn -->
           <div>
-            <span class="text-label">
-              {{controlNames.description}}
-              <span class="text-danger">*</span>
-              <span class="text-danger message-error"
-                *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched">
-                {{ getErrorMessage('description') }}
+
+            <div class="d-flex align-items-center">
+              <span class="text-label" style="margin-right: 8px;">
+                {{controlNames.description | translate}}
+                <span class="text-danger">*</span>
               </span>
-            </span>
-            <textarea nz-input autofocus formControlName="description"
-              [nzStatus]="(courseForm.get('description')?.invalid && (courseForm.get('description')?.touched || isSubmit)) ? 'error' : ''">
+              <span nzTooltipTitle="{{'guide_course_description' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+            </div>
+            <textarea nz-input autofocus formControlName="description" [nzStatus]="(courseForm.get('description')?.invalid && (courseForm.get('description')?.touched || isSubmit)) ? 'error' : ''">
             </textarea>
+            <span class="text-danger message-error" *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched">
+              {{ getErrorMessage('description') }}
+            </span>
           </div>
         </div>
         <!-- Giá -->
@@ -66,12 +70,10 @@
             <!--30 day-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.price30Day}}
-                <nz-input-number class="input-nz-number" formControlName="price30Day" [nzMin]="0" [nzStep]="1"
-                  [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
+                {{controlNames.price30Day | translate }}
+                <nz-input-number class="input-nz-number" formControlName="price30Day" [nzMin]="0" [nzStep]="1" [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
                                              (courseForm.get('price30Day')?.touched || isSubmit)) ? 'error' : ''"></nz-input-number>
-                <span class="text-danger message-error"
-                  *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price30Day')?.touched">
+                <span class="text-danger message-error" *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price30Day')?.touched">
                   Khóa học đặc biệt phải có tối thiểu 1 loại giá mới khả dụng!
                 </span>
               </span>
@@ -79,24 +81,20 @@
             <!--90 day-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.price90Day}}
-                <nz-input-number class="input-nz-number" formControlName="price90Day" [nzMin]="0" [nzStep]="1"
-                  [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
+                {{controlNames.price90Day | translate}}
+                <nz-input-number class="input-nz-number" formControlName="price90Day" [nzMin]="0" [nzStep]="1" [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
                                              (courseForm.get('price90Day')?.touched || isSubmit)) ? 'error' : ''"></nz-input-number>
-                <span class="text-danger message-error"
-                  *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price90Day')?.touched">Khóa
+                <span class="text-danger message-error" *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price90Day')?.touched">Khóa
                   học đặc biệt phải có tối thiểu 1 loại giá mới khả dụng!</span>
               </span>
             </div>
             <!--180 day-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.price180Day}}
-                <nz-input-number class="input-nz-number" formControlName="price180Day" [nzMin]="0" [nzStep]="1"
-                  [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
+                {{controlNames.price180Day | translate}}
+                <nz-input-number class="input-nz-number" formControlName="price180Day" [nzMin]="0" [nzStep]="1" [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
                                              (courseForm.get('price180Day')?.touched || isSubmit)) ? 'error' : ''"></nz-input-number>
-                <span class="text-danger message-error"
-                  *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price180Day')?.touched">
+                <span class="text-danger message-error" *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price180Day')?.touched">
                   Khóa học đặc biệt phải có tối thiểu 1 loại giá mới khả dụng!
                 </span>
               </span>
@@ -104,12 +102,10 @@
             <!--360 day-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.price365Day}}
-                <nz-input-number class="input-nz-number" formControlName="price365Day" [nzMin]="0" [nzStep]="1"
-                  [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
+                {{controlNames.price365Day | translate}}
+                <nz-input-number class="input-nz-number" formControlName="price365Day" [nzMin]="0" [nzStep]="1" [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
                                              (courseForm.get('price365Day')?.touched || isSubmit)) ? 'error' : ''"></nz-input-number>
-                <span class="text-danger message-error"
-                  *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price365Day')?.touched">
+                <span class="text-danger message-error" *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('price365Day')?.touched">
                   Khóa học đặc biệt phải có tối thiểu 1 loại giá mới khả dụng!
                 </span>
               </span>
@@ -117,12 +113,10 @@
             <!--Forever-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.priceForever}}
-                <nz-input-number class="input-nz-number" formControlName="priceForever" [nzMin]="0" [nzStep]="1"
-                  [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
+                {{controlNames.priceForever | translate}}
+                <nz-input-number class="input-nz-number" formControlName="priceForever" [nzMin]="0" [nzStep]="1" [nzStatus]="(courseForm.invalid && courseForm.hasError('invalidPrice') &&
                                              (courseForm.get('priceForever')?.touched || isSubmit)) ? 'error' : ''"></nz-input-number>
-                <span class="text-danger message-error"
-                  *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('priceForever')?.touched">
+                <span class="text-danger message-error" *ngIf="courseForm.invalid && courseForm.hasError('invalidPrice') && courseForm.get('priceForever')?.touched">
                   Khóa học đặc biệt phải có tối thiểu 1 loại giá mới khả dụng!
                 </span>
               </span>
@@ -136,41 +130,36 @@
             <!--30 day-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.price30DayOld}}
-                <nz-input-number class="input-nz-number" formControlName="price30DayOld" [nzMin]="0"
-                  [nzStep]="1"></nz-input-number>
+                {{controlNames.price30DayOld | translate}}
+                <nz-input-number class="input-nz-number" formControlName="price30DayOld" [nzMin]="0" [nzStep]="1"></nz-input-number>
               </span>
             </div>
             <!--90 day-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.price90DayOld}}
-                <nz-input-number class="input-nz-number" formControlName="price90DayOld" [nzMin]="0"
-                  [nzStep]="1"></nz-input-number>
+                {{controlNames.price90DayOld | translate}}
+                <nz-input-number class="input-nz-number" formControlName="price90DayOld" [nzMin]="0" [nzStep]="1"></nz-input-number>
               </span>
             </div>
             <!--180 day-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.price180DayOld}}
-                <nz-input-number class="input-nz-number" formControlName="price180DayOld" [nzMin]="0"
-                  [nzStep]="1"></nz-input-number>
+                {{controlNames.price180DayOld | translate}}
+                <nz-input-number class="input-nz-number" formControlName="price180DayOld" [nzMin]="0" [nzStep]="1"></nz-input-number>
               </span>
             </div>
             <!--360 day-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.price365DayOld}}
-                <nz-input-number class="input-nz-number" formControlName="price365DayOld" [nzMin]="0"
-                  [nzStep]="1"></nz-input-number>
+                {{controlNames.price365DayOld | translate}}
+                <nz-input-number class="input-nz-number" formControlName="price365DayOld" [nzMin]="0" [nzStep]="1"></nz-input-number>
               </span>
             </div>
             <!--Forever-->
             <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
               <span class="text-label">
-                {{controlNames.priceForeverOld}}
-                <nz-input-number class="input-nz-number" formControlName="priceForeverOld" [nzMin]="0"
-                  [nzStep]="1"></nz-input-number>
+                {{controlNames.priceForeverOld | translate}}
+                <nz-input-number class="input-nz-number" formControlName="priceForeverOld" [nzMin]="0" [nzStep]="1"></nz-input-number>
               </span>
             </div>
           </div>
@@ -178,9 +167,8 @@
         <!-- Ảnh đại diện -->
         <div nz-col [nzXs]="24" [nzSm]="12">
           <span class="text-label">
-            {{controlNames.thumbImg}} (370 x 270)
-            <span class="text-danger message-error"
-              *ngIf="courseForm.get('thumbImg')?.invalid && courseForm.get('thumbImg')?.touched">
+            {{controlNames.thumbImg | translate}} (370 x 270)
+            <span class="text-danger message-error" *ngIf="courseForm.get('thumbImg')?.invalid && courseForm.get('thumbImg')?.touched">
               {{ getErrorMessage('thumbImg') }}
             </span>
             <span class="text-danger">*</span>
@@ -191,16 +179,14 @@
               <span nz-icon nzType="plus" nzTheme="outline"></span>
               <div style="margin-top: 8px;">{{'upload' | translate}}</div>
             </div>
-            <img class="img-preview" [src]="courseForm.get('thumbImg')?.value"
-              *ngIf="courseForm.get('thumbImg')?.value">
+            <img class="img-preview" [src]="courseForm.get('thumbImg')?.value" *ngIf="courseForm.get('thumbImg')?.value">
 
             <div class="overlay" *ngIf="courseForm.get('thumbImg')?.value">
               <div class="btn-file">
                 <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}" (click)="selectFile('thumbImg')">
                   <span nz-icon nzType="upload"></span>
                 </a>
-                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
-                  (click)="deleteImg('thumbImg')">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}" (click)="deleteImg('thumbImg')">
                   <span nz-icon nzType="delete"></span>
                 </a>
               </div>
@@ -209,22 +195,20 @@
         </div>
         <!-- Ảnh banner -->
         <div nz-col [nzXs]="24" [nzSm]="12">
-          <span class="text-label">{{controlNames.imgBanner}} (1300 x 700)</span>
+          <span class="text-label">{{controlNames.imgBanner | translate}} (1300 x 700)</span>
           <div class="select-file">
             <div class="btn-select-file" (click)="selectFile('imgBanner')" *ngIf="!courseForm.get('imgBanner')?.value">
               <span nz-icon nzType="plus" nzTheme="outline"></span>
               <div style="margin-top: 8px;">{{'upload' | translate}}</div>
             </div>
-            <img class="img-preview" [src]="courseForm.get('imgBanner')?.value"
-              *ngIf="courseForm.get('imgBanner')?.value">
+            <img class="img-preview" [src]="courseForm.get('imgBanner')?.value" *ngIf="courseForm.get('imgBanner')?.value">
 
             <div class="overlay" *ngIf="courseForm.get('imgBanner')?.value">
               <div class="btn-file">
                 <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}" (click)="selectFile('imgBanner')">
                   <span nz-icon nzType="upload"></span>
                 </a>
-                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
-                  (click)="deleteImg('imgBanner')">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}" (click)="deleteImg('imgBanner')">
                   <span nz-icon nzType="delete"></span>
                 </a>
               </div>
@@ -233,27 +217,24 @@
         </div>
         <!-- Ảnh chứng chỉ -->
         <div nz-col [nzXs]="24" [nzSm]="12">
-          <span class="text-label">{{controlNames.certificateImage}}</span>
-          <span class="text-danger message-error"
-              *ngIf="courseForm.get('certificateImage')?.hasError('requireCerImg') &&
+          <span class="text-label">{{controlNames.certificateImage | translate}}</span>
+          <span class="text-danger message-error" *ngIf="courseForm.get('certificateImage')?.hasError('requireCerImg') &&
                     (courseForm.get('certificateImage')?.touched || isSubmit)">
-              Ảnh chứng chỉ không được để trống!
+            Ảnh chứng chỉ không được để trống!
           </span>
           <div class="select-file">
             <div class="btn-select-file" (click)="selectFile('certificateImage')" *ngIf="!courseForm.get('certificateImage')?.value">
               <span nz-icon nzType="plus" nzTheme="outline"></span>
               <div style="margin-top: 8px;">{{'upload' | translate}}</div>
             </div>
-            <img class="img-preview" [src]="courseForm.get('certificateImage')?.value"
-                 *ngIf="courseForm.get('certificateImage')?.value">
+            <img class="img-preview" [src]="courseForm.get('certificateImage')?.value" *ngIf="courseForm.get('certificateImage')?.value">
 
             <div class="overlay" *ngIf="courseForm.get('certificateImage')?.value">
               <div class="btn-file">
                 <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{'upload_new_image' | translate}}" (click)="selectFile('certificateImage')">
                   <span nz-icon nzType="upload"></span>
                 </a>
-                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}"
-                   (click)="deleteImg('certificateImage')">
+                <a nz-button nzType="link" nz-tooltip nzTooltipTitle="{{ 'remove' | translate }}" (click)="deleteImg('certificateImage')">
                   <span nz-icon nzType="delete"></span>
                 </a>
               </div>
@@ -265,29 +246,25 @@
           <div nz-row>
             <div nz-col [nzXs]="24" [nzSm]="24" [nzXl]="16">
               <span class="text-label">
-                {{controlNames.introVideo}}
-                <span class="text-danger message-error"
-                  *ngIf="courseForm.get('introVideo')?.invalid && courseForm.get('introVideo')?.touched">
+                {{controlNames.introVideo | translate}}
+                <span class="text-danger message-error" *ngIf="courseForm.get('introVideo')?.invalid && courseForm.get('introVideo')?.touched">
                   {{ getErrorMessage('introVideo') }}
                 </span>
               </span>
-              <input nz-input autofocus formControlName="introVideo"
-                [nzStatus]="(courseForm.get('introVideo')?.invalid && (courseForm.get('introVideo')?.touched || isSubmit)) ? 'error' : ''">
+              <input nz-input autofocus formControlName="introVideo" [nzStatus]="(courseForm.get('introVideo')?.invalid && (courseForm.get('introVideo')?.touched || isSubmit)) ? 'error' : ''">
             </div>
           </div>
         </div>
 
         <div nz-col [nzSpan]="24">
           <span class="text-label">
-            {{controlNames.overviewDescription}}
+            {{controlNames.overviewDescription | translate}}
             <span class="text-danger">*</span>
-            <span class="text-danger message-error"
-              *ngIf="courseForm.get('overviewDescription')?.invalid && courseForm.get('overviewDescription')?.touched">
+            <span class="text-danger message-error" *ngIf="courseForm.get('overviewDescription')?.invalid && courseForm.get('overviewDescription')?.touched">
               {{ getErrorMessage('overviewDescription') }}
             </span>
           </span>
-          <ckeditor name="ckeditor_text" formControlName="overviewDescription"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
+          <ckeditor name="ckeditor_text" formControlName="overviewDescription" editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
       </div>
     </div>
@@ -296,28 +273,29 @@
     <div nz-col [nzXs]="24" [nzLg]="10" [nzXl]="6">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzXs]="24" [nzSm]="24">
-          <span class="text-label">
-            {{controlNames.teacherId}}
-            <span class="text-danger">*</span>
-            <span class="text-danger message-error"
-              *ngIf="courseForm.get('teacherId')?.invalid && courseForm.get('teacherId')?.touched">
-              {{ getErrorMessage('teacherId') }}
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{controlNames.teacherId | translate}}
+              <span class="text-danger">*</span>
             </span>
-          </span>
+            <span nzTooltipTitle="{{'guide_course_teacher' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <div>
             <nz-select formControlName="teacherId">
               <nz-option *ngFor="let teacher of listTeacher" [nzValue]="teacher.id" [nzLabel]="teacher.fullName">
               </nz-option>
             </nz-select>
           </div>
+          <span class="text-danger message-error" *ngIf="courseForm.get('teacherId')?.invalid && courseForm.get('teacherId')?.touched">
+            {{ getErrorMessage('teacherId') }}
+          </span>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="24">
           <span class="text-label">
-            {{controlNames.categoryId}}
+            {{controlNames.categoryId | translate}}
             <span class="text-danger">*</span>
-            <span class="text-danger message-error"
-              *ngIf="courseForm.get('categoryId')?.invalid && courseForm.get('categoryId')?.touched">
+            <span class="text-danger message-error" *ngIf="courseForm.get('categoryId')?.invalid && courseForm.get('categoryId')?.touched">
               {{ getErrorMessage('categoryId') }}
             </span>
           </span>
@@ -331,10 +309,9 @@
 
         <div nz-col [nzXs]="24" [nzSm]="24">
           <span class="text-label">
-            {{controlNames.type}}
+            {{controlNames.type | translate}}
             <span class="text-danger">*</span>
-            <span class="text-danger message-error"
-              *ngIf="courseForm.get('type')?.invalid && courseForm.get('type')?.touched">
+            <span class="text-danger message-error" *ngIf="courseForm.get('type')?.invalid && courseForm.get('type')?.touched">
               {{ getErrorMessage('type') }}
             </span>
           </span>
@@ -351,9 +328,8 @@
 
         <div *ngIf="showMemberPolicyLevel" nz-col [nzXs]="24" [nzSm]="24">
           <span class="text-label">
-            {{controlNames.memberPolicyLevelId}}
-            <span class="text-danger message-error"
-              *ngIf="courseForm.get('memberPolicyLevelId')?.invalid && courseForm.get('memberPolicyLevelId')?.touched">
+            {{controlNames.memberPolicyLevelId | translate}}
+            <span class="text-danger message-error" *ngIf="courseForm.get('memberPolicyLevelId')?.invalid && courseForm.get('memberPolicyLevelId')?.touched">
               {{ getErrorMessage('memberPolicyLevelId') }}
             </span>
           </span>
@@ -367,19 +343,17 @@
 
         <div *ngIf="showMemberPolicyLevel" nz-col [nzXs]="24" [nzSm]="24">
           <span class="text-label">
-            {{controlNames.completedPoint}}
+            {{controlNames.completedPoint | translate}}
           </span>
 
-          <nz-input-number class="input-nz-number" formControlName="completedPoint" [nzMin]="0"
-            [nzStep]="1"></nz-input-number>
+          <nz-input-number class="input-nz-number" formControlName="completedPoint" [nzMin]="0" [nzStep]="1"></nz-input-number>
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="24">
           <span class="text-label">
-            {{controlNames.level}}
+            {{controlNames.level | translate}}
             <span class="text-danger">*</span>
-            <span class="text-danger message-error"
-              *ngIf="courseForm.get('level')?.invalid && courseForm.get('level')?.touched">
+            <span class="text-danger message-error" *ngIf="courseForm.get('level')?.invalid && courseForm.get('level')?.touched">
               {{ getErrorMessage('level') }}
             </span>
           </span>
@@ -394,10 +368,9 @@
 
         <div nz-col [nzXs]="24" [nzSm]="24">
           <span class="text-label">
-            {{controlNames.language}}
+            {{controlNames.language | translate}}
             <span class="text-danger">*</span>
-            <span class="text-danger message-error"
-              *ngIf="courseForm.get('language')?.invalid && courseForm.get('language')?.touched">
+            <span class="text-danger message-error" *ngIf="courseForm.get('language')?.invalid && courseForm.get('language')?.touched">
               {{ getErrorMessage('language') }}
             </span>
           </span>
@@ -410,16 +383,15 @@
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12">
-          <div class="text-label">{{controlNames.isCertificate}}</div>
+          <div class="text-label">{{controlNames.isCertificate | translate}}</div>
           <nz-switch formControlName="isCertificate">
           </nz-switch>
         </div>
 
         <div nz-col class="mb-30" [nzXs]="24" [nzSm]="12">
           <div class="text-label">
-            {{controlNames.status}}
-            <span class="text-danger message-error"
-              *ngIf="courseForm.get('status')?.invalid && courseForm.get('status')?.touched">
+            {{controlNames.status | translate}}
+            <span class="text-danger message-error" *ngIf="courseForm.get('status')?.invalid && courseForm.get('status')?.touched">
               {{ getErrorMessage('status') }}
             </span>
           </div>
