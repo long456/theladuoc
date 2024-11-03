@@ -15,10 +15,13 @@
     <form [formGroup]="customerForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'customer_name' | translate}}
-            <span class="text-danger">*</span>
-          </span>
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="text-label">
+              {{'customer_name' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_customer_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <input nz-input autofocus formControlName="name" [nzStatus]="(customerForm.get('name')?.invalid &&
                         (customerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
@@ -29,10 +32,13 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            Email
-            <span class="text-danger">*</span>
-          </span>
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="text-label">
+              Email
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_customer_email' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <input nz-input autofocus formControlName="email" [readonly]="!isCreate" [nzStatus]="(customerForm.get('email')?.invalid &&
                         (customerForm.get('email')?.touched || isSubmit)) ? 'error' : ''">
 
@@ -50,9 +56,12 @@
         <div nz-col [nzSpan]="8"></div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'phone_number' | translate}}
-          </span>
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="text-label">
+              {{'phone_number' | translate}}
+            </span>
+            <span nzTooltipTitle="{{'guide_customer_phone' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <input nz-input formControlName="phoneNumber" [nzStatus]="(customerForm.get('phoneNumber')?.invalid &&
                              (customerForm.get('phoneNumber')?.touched || isSubmit)) ? 'error' : ''">
           <span class="text-danger" *ngIf="(customerForm.get('phoneNumber')?.touched || isSubmit) &&

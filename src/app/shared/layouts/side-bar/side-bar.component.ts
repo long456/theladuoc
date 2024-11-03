@@ -334,7 +334,7 @@ export class SideBarComponent implements OnInit {
                 {
                   icon: '',
                   link: 'page/news-category',
-                  name: 'posting_categories',
+                  name: 'news_categories',
                 },
                 {
                   icon: '',
