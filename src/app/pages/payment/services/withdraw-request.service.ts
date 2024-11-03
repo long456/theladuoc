@@ -27,8 +27,8 @@ export class WithdrawRequestService {
     return this.http.get('DataUser/list-withdraw-money', {params: option})
   }
 
-  activeWithdraw(id: number): Observable<any>{
-    return this.http.get('DataUser/active-withdraw-money/' + id);
+  activeWithdraw(data: any): Observable<any>{
+    return this.http.post('DataUser/active-withdraw-money/' , data);
   }
 
   cancelWithdraw(id: number): Observable<any>{

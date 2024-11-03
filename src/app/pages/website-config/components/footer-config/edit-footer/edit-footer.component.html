@@ -22,7 +22,7 @@
             </span>
             <span nzTooltipTitle="{{'guide_footer_item_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
-          <input nz-input autofocus formControlName="displayName" [nzStatus]="(footerForm.get('displayName')?.invalid && (footerForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
+          <input nz-input autofocus formControlName="displayName" [nzStatus]="(footerForm.get('displayName')?.invalid && (footerForm.get('displayName')?.touched || isSubmit)) ? 'error' : ''">
 
           <span class="text-danger" *ngIf="(footerForm.get('displayName')?.touched || isSubmit)  && footerForm.get('displayName')?.hasError('required')">
             {{ 'display_name' | translate }} {{'cannot_blank' | translate}}

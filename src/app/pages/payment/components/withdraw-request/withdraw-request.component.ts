@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {COL_DATA_TYPE, filterItem} from "../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {WithdrawRequestService} from "../../services/withdraw-request.service";
-import {NzModalService} from "ng-zorro-antd/modal";
+import {NzModalRef, NzModalService} from "ng-zorro-antd/modal";
 
 @Component({
   selector: 'app-withdraw-request',
@@ -24,6 +24,12 @@ export class WithdrawRequestComponent implements OnInit{
   page$ = new BehaviorSubject(1);
   pageSize$ = new BehaviorSubject(10);
   filterList$ = new BehaviorSubject(null);
+  refreshTrigger$ = new BehaviorSubject<void>(undefined);
+
+
+  receiptImg!: any;
+  nameFilePreview!: string;
+  imgPreviewUrl!: string | ArrayBuffer | null | undefined;
 
   constructor(
     private router: Router,
@@ -36,7 +42,8 @@ export class WithdrawRequestComponent implements OnInit{
     this.withdrawRequest$ = combineLatest([
       this.page$,
       this.pageSize$,
-      this.filterList$
+      this.filterList$,
+      this.refreshTrigger$
     ])
     .pipe(
       tap(() => this.loading = true),
@@ -67,23 +74,49 @@ export class WithdrawRequestComponent implements OnInit{
     )
   }
 
-  activeWithdraw(data: any): void {
-    this.modal.confirm({
-      nzTitle: 'Xác thực rút tiền',
-      nzContent: 'Bạn muốn xác thực cho yêu cầu này?',
-      nzOnOk: () => {
-        this.withdrawRequestService.activeWithdraw(data.id).subscribe({
+  refreshData():void {
+    // Load lại trang danh sách
+    this.refreshTrigger$.next();
+  }
+
+  activeWithdraw(data: any, tplContent: TemplateRef<{}>): void {
+    const modal: NzModalRef = this.modal.create({
+      nzTitle: 'Xác nhận rút tiền',
+      nzContent: tplContent,
+      nzFooter: [
+        {
+          label: 'Hủy',
+          onClick: () => modal.destroy()
+        },
+        {
+          label: 'Xác nhận',
+          type: 'primary',
+          onClick: () => {
+            if (this.receiptImg) {
+              modal.triggerOk().then();
+            } else {
+              this.message.error('Lỗi chưa upload ảnh ủy nhiệm chi');
+            }
+          }
+        }
+      ],
+      nzOnOk: instance => {
+        const dataRefund = new FormData;
+        dataRefund.append('id', data.id);
+        dataRefund.append('receiptImage', this.receiptImg);
+
+        this.withdrawRequestService.activeWithdraw(dataRefund).subscribe({
           next: res => {
             if (res.success) {
               this.message.success(res.messages);
-              this.pageSize$.next(10);
+              this.refreshData();
             } else {
               this.message.error(res.errorMessages);
             }
           }
         })
       }
-    });
+    })
   }
 
   cancelWithdraw(data: any): void {
@@ -95,7 +128,7 @@ export class WithdrawRequestComponent implements OnInit{
           next: res => {
             if (res.success) {
               this.message.success(res.messages);
-              this.pageSize$.next(10);
+              this.refreshData();
             } else {
               this.message.error(res.errorMessages);
             }
@@ -103,5 +136,39 @@ export class WithdrawRequestComponent implements OnInit{
         })
       }
     });
+  }
+
+  blobToDataUrl(file: File) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      this.imgPreviewUrl = e.target?.result;
+    }
+    reader.readAsDataURL(file)
+  }
+
+  onPaste(e: any) {
+    const data = e.clipboardData.items;
+    let blob = null;
+
+    for (const item of data) {
+      if (item.type.indexOf('image') === 0) {
+        blob = item.getAsFile();
+      }
+    }
+    if (blob !== null) {
+      this.receiptImg = blob;
+      this.nameFilePreview = blob.name;
+      this.blobToDataUrl(blob);
+    } else {
+      this.message.error('Chưa có file nào được copy hoặc định dạng file copy không hợp lệ')
+    }
+  }
+
+  uploadFile(e: Event) {
+    const target = e.target as HTMLInputElement;
+    const files = target.files as FileList;
+    this.nameFilePreview = files[0].name;
+    this.receiptImg = files[0];
+    this.blobToDataUrl(files[0]);
   }
 }

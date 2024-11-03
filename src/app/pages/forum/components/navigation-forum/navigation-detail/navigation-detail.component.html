@@ -1,0 +1,90 @@
+<div class="title-page">
+  cấu hình chân trang
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="forumNavForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            {{'display_name' | translate}}
+            <span class="text-danger">*</span>
+          </span>
+
+          <input nz-input autofocus formControlName="name"
+                 [nzStatus]="(forumNavForm.get('name')?.invalid &&
+                             (forumNavForm.get('name')?.touched || isSubmit)) ?
+                             'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(forumNavForm.get('name')?.touched || isSubmit)  &&
+                        forumNavForm.get('name')?.hasError('required')">
+            {{ 'name' | translate }} {{'cannot_blank' | translate}}
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              {{'position' | translate}}
+            </span>
+            <nz-input-number style="width: 100%" [nzMin]="0" [nzStep]="1" formControlName="no"></nz-input-number>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            {{'url' | translate}}
+            <span class="text-danger">*</span>
+          </span>
+
+          <input nz-input formControlName="url"
+                 [nzStatus]="(forumNavForm.get('url')?.invalid &&
+                             (forumNavForm.get('url')?.touched || isSubmit)) ?
+                             'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(forumNavForm.get('url')?.touched || isSubmit)  &&
+                        forumNavForm.get('url')?.hasError('required')">
+            {{ 'name' | translate }} {{'cannot_blank' | translate}}
+          </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            {{'column_name' | translate}}
+            <span class="text-danger">*</span>
+          </span>
+
+          <input nz-input formControlName="columnName"
+                 [nzStatus]="(forumNavForm.get('columnName')?.invalid &&
+                             (forumNavForm.get('columnName')?.touched || isSubmit)) ?
+                             'error' : ''">
+
+          <span class="text-danger"
+                *ngIf="(forumNavForm.get('columnName')?.touched || isSubmit)  &&
+                        forumNavForm.get('columnName')?.hasError('required')">
+            {{ 'name' | translate }} {{'cannot_blank' | translate}}
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        <span *ngIf="isCreate">
+          {{'add_new'|translate}}
+        </span>
+        <span *ngIf="!isCreate">
+          {{'save'|translate}}
+        </span>
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
+    </div>
+  </div>
+</div>

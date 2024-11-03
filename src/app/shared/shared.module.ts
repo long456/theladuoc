@@ -38,6 +38,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { ScrollNearBottomDirective } from './directives/table/scroll-near-bottom.directive';
 import {TranslateModule} from "@ngx-translate/core";
+import { ColorPickerComponent } from './components/color-picker/color-picker.component';
+import { FileSelectorComponent } from './components/file-selector/file-selector.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import {TranslateModule} from "@ngx-translate/core";
     FilesManagerComponent,
     CardImageComponent,
     ScrollNearBottomDirective,
+    ColorPickerComponent,
+    FileSelectorComponent,
   ],
   imports: [
     CommonModule,
@@ -105,7 +109,9 @@ import {TranslateModule} from "@ngx-translate/core";
     NzTableModule,
     NzPaginationModule,
     NzDatePickerModule,
-    TranslateModule
+    TranslateModule,
+    ColorPickerComponent,
+    FileSelectorComponent
   ]
 })
 export class SharedModule { }

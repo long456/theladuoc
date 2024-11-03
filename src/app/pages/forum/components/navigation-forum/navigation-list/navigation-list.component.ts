@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {COL_DATA_TYPE} from "../../../../../shared/models/Table";
 import {BehaviorSubject, catchError, combineLatest, delay, map, mergeMap, Observable, of, tap} from "rxjs";
+import {COL_DATA_TYPE} from "../../../../../shared/models/Table";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {NzModalService} from "ng-zorro-antd/modal";
-import {PriceService} from "../../../services/price.service";
+import {ForumNavigationService} from "../../../services/forum-navigation.service";
 
 @Component({
-  selector: 'app-price-list',
-  templateUrl: './price-list.component.html',
-  styleUrls: ['./price-list.component.scss']
+  selector: 'app-navigation-list',
+  templateUrl: './navigation-list.component.html',
+  styleUrls: ['./navigation-list.component.scss']
 })
-export class PriceListComponent implements OnInit{
+export class NavigationListComponent implements OnInit{
   COL_DATA_TYPE = COL_DATA_TYPE;
-  priceListPage$!: Observable<{
+  forumNavPage$!: Observable<{
     rows: any[],
     filter?: any,
     page: number;
@@ -26,15 +26,16 @@ export class PriceListComponent implements OnInit{
   refreshTrigger$ = new BehaviorSubject<void>(undefined);
   loading = false;
   itemSelectList: number[] = [];
+
   constructor(
     private router: Router,
     private message: NzMessageService,
     private modal :NzModalService,
-    private priceService: PriceService
+    private forumNavigationService: ForumNavigationService
   ) {}
 
   ngOnInit() {
-    this.priceListPage$ = combineLatest([
+    this.forumNavPage$ = combineLatest([
       this.page$,
       this.pageSize$,
       this.filterList$,
@@ -43,21 +44,21 @@ export class PriceListComponent implements OnInit{
     .pipe(
       tap(() => this.loading = true),
       mergeMap(([page, pageSize, filter]) => {
-        return this.priceService.getPriceList(page, pageSize, filter)
+        return this.forumNavigationService.getListForumNav(page, pageSize, filter)
           .pipe(
             map((value) => {
               if (!value.success) {
                 throw new Error(value.errorMessages);
               }
               return {
-                rows: value.data.categoryList,
+                rows: value.data.communityList,
                 page: value.data.paginationInfo.pageCurrent,
                 pageSize: value.data.paginationInfo.pageSize,
                 rowTotal: value.data.paginationInfo.totalItem,
               }
             }),
             catchError(err => {
-              this.message.error(err? err.message : 'Lỗi load dữ liệu bảng giá');
+              this.message.error(err? err.message : 'Lỗi load dữ liệu danh sách cấu hình');
               return of({
                 rows: [],
                 page: 0,
@@ -81,16 +82,15 @@ export class PriceListComponent implements OnInit{
     this.refreshTrigger$.next();
   }
 
-
   edit(data: any):void {
-    this.router.navigate(['page/price-list/price/' + data.id]).then();
+    this.router.navigate(['page/forum/nav-forum/' + data.id]).then();
   }
 
   create():void {
-    this.router.navigate(["page/price-list/price/create"]).then();
+    this.router.navigate(["page/forum/nav-forum/create"]).then();
   }
 
-  delete() {
+  delete():void {
     if (this.itemSelectList.length === 0) {
       this.message.error('Chưa có mục nào được chọn');
     } else {
@@ -98,7 +98,7 @@ export class PriceListComponent implements OnInit{
         nzTitle: 'Xác nhận xóa',
         nzContent: 'Bạn có chắc chắn muốn xóa những mục đã chọn ?',
         nzOnOk: () => {
-          this.priceService.softDeletePrice(this.itemSelectList).subscribe({
+          this.forumNavigationService.softDeleteForumNav(this.itemSelectList).subscribe({
             next: value => {
               if (value.success) {
                 this.message.success(value.messages);

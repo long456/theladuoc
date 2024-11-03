@@ -449,6 +449,11 @@ export class SideBarComponent implements OnInit {
                   link: 'page/forum/sub-forum',
                   name: 'forum_communities',
                 },
+                {
+                  icon: '',
+                  link: 'page/forum/nav-forum',
+                  name: 'footer_settings',
+                },
               ],
             },
             {

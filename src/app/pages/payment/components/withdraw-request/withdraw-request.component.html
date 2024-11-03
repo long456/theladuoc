@@ -48,7 +48,7 @@
         </ng-template>
 
         <ng-template appCell let-data>
-          <span class="custom-action" (click)="activeWithdraw(data)">
+          <span class="custom-action" (click)="activeWithdraw(data, tplContent)">
             <span
               nzTooltipTitle="Xác nhận" nzTooltipPlacement="top" nz-tooltip
               nz-icon nzType="check" nzTheme="outline">
@@ -66,3 +66,28 @@
     </app-table>
   </ng-container>
 </div>
+
+<ng-template #tplContent let-params>
+  <div nz-row (paste)="onPaste($event)">
+    <div nz-col [nzSpan]="24">
+      <span>{{'upload' | translate}} {{'proof_of_payment_image' | translate}}</span>
+      <label for="file" class="upload">
+        <span nz-icon nzType="upload" nzTheme="outline"></span>
+        {{'proof_of_payment_image' | translate}}
+        <div class="file-name">{{nameFilePreview}}</div>
+      </label>
+      <input type="file" (change)="uploadFile($event)"
+             accept="image/png, image/gif, image/jpeg"
+             class="upload-file" name="file" id="file">
+      <div style="display: flex; justify-content: center; padding-top: 15px">
+        <img
+          style="margin-top: 15px"
+          nz-image
+          [src]="imgPreviewUrl"
+          width="150"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</ng-template>

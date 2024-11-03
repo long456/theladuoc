@@ -48,4 +48,8 @@ export class CatalogService {
   updateBenefitCatalog(data: any): Observable<any>{
     return this.http.post('Catalog/update-table', data);
   }
+
+  softDeleteCatalog(data: number[]): Observable<any> {
+    return this.http.delete('Catalog/soft-delete',{body: data})
+  }
 }

@@ -11,13 +11,14 @@
             {{ 'forum_name' | translate }}
             <span class="text-danger">*</span>
           </span>
-          <input nz-input autofocus formControlName="name" [nzStatus]="(forumConfigForm.get('name')?.invalid &&
+          <input nz-input autofocus formControlName="name"
+                 [nzStatus]="(forumConfigForm.get('name')?.invalid &&
                              (forumConfigForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
-          <span class="text-danger" *ngIf="(forumConfigForm.get('name')?.touched || isSubmit)  &&
-                        forumConfigForm.get('name')?.hasError('required')">
-            {{'forum_name' | translate }} {{'cannot_blank' | translate}}!
-          </span>
+          <span class="text-danger"
+                *ngIf="(forumConfigForm.get('name')?.touched || isSubmit)  &&
+                        forumConfigForm.get('name')?.hasError('required')"
+          >{{'forum_name' | translate }} {{'cannot_blank' | translate}}!</span>
         </div>
 
         <div nz-col [nzSpan]="8">
@@ -34,17 +35,14 @@
             <span class="text-danger">*</span>
           </span>
 
-          <div class="select-url">
-            <input nz-input [value]="forumConfigForm.get('logo')?.value" formControlName="logo" [nzStatus]="(forumConfigForm.get('logo')?.invalid &&
-                               (forumConfigForm.get('logo')?.touched || isSubmit)) ?
-                               'error' : ''">
+          <app-file-selector formControlName="logo"
+                             [status]="(forumConfigForm.get('logo')?.invalid &&
+                                         (forumConfigForm.get('logo')?.touched || isSubmit)) ?
+                                         'error' : ''"
+          ></app-file-selector>
 
-            <button nz-button nzType="primary" (click)="onSelectFile('logo')">
-              <span nz-icon nzType="upload"></span>
-            </button>
-          </div>
-
-          <span class="text-danger" *ngIf="(forumConfigForm.get('logo')?.touched || isSubmit)  &&
+          <span class="text-danger"
+                *ngIf="(forumConfigForm.get('logo')?.touched || isSubmit)  &&
                         forumConfigForm.get('logo')?.hasError('required')">
             {{'logo_link' | translate}}
             {{'cannot_blank' | translate}}!
@@ -57,20 +55,65 @@
             <span class="text-danger">*</span>
           </span>
 
-          <div class="select-url">
-            <input nz-input [value]="forumConfigForm.get('banner')?.value" formControlName="banner" [nzStatus]="(forumConfigForm.get('banner')?.invalid &&
-                               (forumConfigForm.get('banner')?.touched || isSubmit)) ?
-                               'error' : ''">
+          <app-file-selector formControlName="banner"
+                             [status]="(forumConfigForm.get('banner')?.invalid &&
+                                       (forumConfigForm.get('banner')?.touched || isSubmit)) ?
+                                       'error' : ''"
+          ></app-file-selector>
 
-            <button nz-button nzType="primary" (click)="onSelectFile('banner')">
-              <span nz-icon nzType="upload"></span>
-            </button>
-          </div>
-
-          <span class="text-danger" *ngIf="(forumConfigForm.get('banner')?.touched || isSubmit)  &&
+          <span class="text-danger"
+                *ngIf="(forumConfigForm.get('banner')?.touched || isSubmit)  &&
                         forumConfigForm.get('banner')?.hasError('required')">
             {{ 'banner_link' | translate }} {{'cannot_blank' | translate}}!
           </span>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Favicon
+          </span>
+
+          <app-file-selector formControlName="favicon"></app-file-selector>
+        </div>
+        <nz-divider nzText="Cấu hình footer diễn đàn"></nz-divider>
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Logo footer
+          </span>
+
+          <app-file-selector formControlName="footerLogo"></app-file-selector>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Màu chữ footer
+          </span>
+          <app-color-picker formControlName="footerTextColor"></app-color-picker>
+        </div>
+
+        <div nz-col [nzSpan]="8"></div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Ảnh nền footer
+          </span>
+
+          <app-file-selector formControlName="footerBackgroundImage"></app-file-selector>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Màu nền footer
+          </span>
+          <app-color-picker formControlName="footerBackgroundColor"></app-color-picker>
+        </div>
+
+        <div nz-col [nzSpan]="16">
+          <span class="text-label">
+            {{'description' | translate}}
+          </span>
+
+          <textarea formControlName="footerDescription" nz-input [nzAutosize]="{ minRows: 3 }"></textarea>
         </div>
       </div>
     </form>
