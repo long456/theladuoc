@@ -150,6 +150,7 @@
   "community_name": "Community name",
   "complete": "Complete",
   "configuration": "Configuration",
+  "configure": "Configure",
   "configure_benefit_package": "Configure benefit package",
   "confirm": "Confirm",
   "contact_request_list": "Contact requests",
@@ -953,4 +954,6 @@
   "guide_news_category_status": "If enabled, the category will be displayed publicly. If disabled, the category will be hidden.",
   "guide_membership_description": "Enter a short and comprehensive description of the membership, helping users understand the benefits, privileges, or requirements of this membership tier.",
   "guide_forum_favicon": "This image appears at the top of each tab in the browser as a representative logo for the forum page."
+  "homepage_link": "Homepage Link",
+  "elearning_ui_configuration": "E-learning UI Configuration"
 }

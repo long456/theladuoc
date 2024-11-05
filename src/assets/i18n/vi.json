@@ -150,6 +150,7 @@
   "community_name": "Tên cộng đồng",
   "complete": "Hoàn thành",
   "configuration": "Cấu hình",
+  "configure": "Cấu hình",
   "configure_benefit_package": "Cấu hình nhóm quyền lợi",
   "confirm": "Xác nhận",
   "contact_request_list": "Danh sách yêu cầu liên hệ",
@@ -447,7 +448,7 @@
   "indirect_referral_points": "Điểm giới thiệu gián tiếp",
   "internal": "Trong hệ thống",
   "intro_video_settings": "Cấu hình video giới thiệu",
-  "introduction_video": "Video giờ thiệu",
+  "introduction_video": "Video giới thiệu",
   "introduction_video_link": "Link video giới thiệu",
   "introduction_videos": "Danh sách video giới thiệu",
   "invalid_format": "Không đúng định dạng",
@@ -951,5 +952,7 @@
   "zalo_group_link": "Đường dẫn nhóm zalo",
   "zalo_messages_sent": "Đã gửi tin nhắn Zalo",
   "zoom_id": "ID phòng Zoom",
-  "zoom_link": "Link Zoom"
+  "zoom_link": "Link Zoom",
+  "homepage_link": "Đường dẫn trang chủ",
+  "elearning_ui_configuration": "Cấu hình giao diện E-learning"
 }
