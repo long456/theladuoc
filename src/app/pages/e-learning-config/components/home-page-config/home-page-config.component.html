@@ -1,0 +1,21 @@
+<div class="title-page">
+  Cấu hình trang chủ E-learning
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="homePageConfig">
+
+    </form>
+  </div>
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{'save'|translate}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
+    </div>
+  </div>
+</div>
