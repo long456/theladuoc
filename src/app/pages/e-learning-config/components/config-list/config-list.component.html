@@ -1,1 +1,33 @@
-<p>config-list works!</p>
+<div class="title-page">
+  {{'elearning_ui_configuration' | translate}}
+</div>
+
+<div class="header-btn">
+  <ng-container *ngIf="(configListPage$ | async) as config">
+    <app-table [rows]="config.rows" [page]="config.page" [pageSize]="config.pageSize" [pageTotal]="config.rowTotal" [clientPagination]="false" (pageIndexChange)="page$.next($event)" (pageSizeChange)="pageSize$.next($event)" (onItemSelection)="getItemSelection($event)" [loading]="loading">
+      <!-- <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column> -->
+      <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'40px'" fixColumn="left"></table-column>
+      <table-column header="{{ 'organization' | translate }}" key="name" [width]="'100px'"></table-column>
+      <table-column header="{{ 'homepage_link' | translate }}" key="url" [width]="'300px'"></table-column>
+      <table-column [width]="'180px'" fixColumn="right">
+        <ng-template appHeader>
+          {{ 'actions' | translate }}
+        </ng-template>
+
+        <ng-template appCell>
+          <button nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" nz-button nzShape="circle">
+            <span nz-icon nzType="bars"></span>
+          </button>
+
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item>
+                {{ 'configure' | translate }}
+              </li>
+            </ul>
+          </nz-dropdown-menu>
+        </ng-template>
+      </table-column>
+    </app-table>
+  </ng-container>
+</div>
