@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from "@angular/router";
 import { LoginService } from "../../../layouts/auth-layout/auth/services/login.service";
 import { environment } from "../../../../environments/environment";
@@ -14,6 +14,7 @@ import { Boarding } from "boarding.js";
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: [ './header.component.scss' ],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class HeaderComponent implements OnInit {
@@ -24,8 +25,8 @@ export class HeaderComponent implements OnInit {
   lang: string = '';
 
   tutorialModel?: { [ key: string ]: string };
-  filteredOptions: { [ key: string ]: string }[] = [];
-  options: { [ key: string ]: string }[] = [];
+  filteredTutorials: { [ key: string ]: string }[] = [];
+  tutorials: { [ key: string ]: string }[] = [];
 
   constructor(
     private router: Router,
@@ -36,11 +37,10 @@ export class HeaderComponent implements OnInit {
     private translateService: TranslateService,
   ) {
     this.subscription = new Subscription();
-    this.filteredOptions = this.options;
   }
 
   ngOnInit() {
-    this.options = [
+    this.filteredTutorials = this.tutorials = [
       { label: 'organization', keywords: 'tổ chức, to chuc' },
       { label: 'withdrawal', keywords: 'rut tien, rút tiền' },
       { label: 'payment_method', keywords: 'phuong thuc thanh toan, phương thức thanh toán' },
@@ -171,7 +171,8 @@ export class HeaderComponent implements OnInit {
         el.popoverPrevBtn.style.marginRight = '.5rem'
         el.popoverPrevBtn.style.marginLeft = '2rem'
         el.popoverFooter.style.marginTop = '1rem'
-      }
+      },
+      strictClickHandling: "block-all"
     });
     const commonSettingSteps = [ {
       element: '#settings .ant-menu-submenu-title',
@@ -264,7 +265,7 @@ export class HeaderComponent implements OnInit {
     const commonMembershipSteps = [
       ...commonFeatureSteps,
       {
-        element: '#membership .ant-menu-submenu-title', //submenu of submenu
+        element: '#settings #membership .ant-menu-submenu-title', //submenu of submenu
         popover: {
           title: " ",
           description: `${translate.instant('pick')} <strong>${translate.instant('membership')}</strong>`,
@@ -281,6 +282,19 @@ export class HeaderComponent implements OnInit {
         popover: {
           title: " ",
           description: `${translate.instant('pick')} <strong>${translate.instant('forum')}</strong>`,
+          prefferedSide: "right",
+          alignment: "center",
+        }
+      }
+    ]
+
+    const commonCustomerServiceSteps = [
+      ...commonFeatureSteps,
+      {
+        element: '#customer_service .ant-menu-submenu-title', //submenu of submenu
+        popover: {
+          title: " ",
+          description: `${translate.instant('pick')} <strong>${translate.instant('customer_service')}</strong>`,
           prefferedSide: "right",
           alignment: "center",
         }
@@ -717,7 +731,7 @@ export class HeaderComponent implements OnInit {
         //Cấu hình danh mục cộng đồng
         key: 'customer_service',
         steps: [
-          ...commonFeatureSteps,
+          ...commonCustomerServiceSteps,
           {
             element: '#customers', //submenu of submenu
             popover: {
@@ -738,13 +752,14 @@ export class HeaderComponent implements OnInit {
   }
 
   searchTutorial(value: string): void {
-    this.filteredOptions = (value.length < 1) ? this.options : this.options.filter(option => option[ 'label' ].toLowerCase().indexOf(value?.toLowerCase()) !== -1 || option[ 'keywords' ].toLowerCase().indexOf(value?.toLowerCase()) !== -1);
+    this.filteredTutorials = (value.length < 1) ? this.tutorials : this.tutorials.filter(option => option[ 'label' ].toLowerCase().indexOf(value?.toLowerCase()) !== -1 || option[ 'keywords' ].toLowerCase().indexOf(value?.toLowerCase()) !== -1)
   }
 
-  onSelectTutorial(ctx: any): void {
-    if (ctx.isUserInput) {
-      const value = ctx.source.nzValue
-      this.startBoarding(value)
-    }
-  }
+  // onSelectTutorial(ctx: any): void {
+  //   if (ctx.isUserInput) {
+  //     const value = ctx.source.nzValue
+  //     this.startBoarding(value)
+  //   }
+  // }
+
 }
