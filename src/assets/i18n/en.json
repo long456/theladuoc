@@ -148,6 +148,7 @@
   "community_name": "Community name",
   "complete": "Complete",
   "configuration": "Configuration",
+  "configure": "Configure",
   "configure_benefit_package": "Configure benefit package",
   "confirm": "Confirm",
   "contact_request_list": "Contact requests",
@@ -888,5 +889,7 @@
   "zalo_group_link": "Zalo group link",
   "zalo_messages_sent": "Sent messages on Zalo",
   "zoom_id": "ID of Zoom room",
-  "zoom_link": "Zoom Link"
+  "zoom_link": "Zoom Link",
+  "homepage_link": "Homepage Link",
+  "elearning_ui_configuration": "E-learning UI Configuration"
 }
