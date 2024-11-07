@@ -21,9 +21,8 @@
 
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul nz-menu>
-              <li nz-menu-item>
-                {{ 'configure' | translate }}
-              </li>
+              <li nz-menu-item (click)="navigateGeneralConfig()">Cấu hình chung</li>
+              <li nz-menu-item (click)="navigateHomeConfig()">Cấu hình trang chủ</li>
             </ul>
           </nz-dropdown-menu>
         </ng-template>

@@ -72,4 +72,12 @@ export class ConfigListComponent implements OnInit {
   getItemSelection(e: any) {
     this.itemSelectList = e;
   }
+
+  navigateHomeConfig(): void {
+    this.router.navigate(['page/e-learning-config/home-page']);
+  }
+
+  navigateGeneralConfig(): void {
+    this.router.navigate(['page/e-learning-config/general']);
+  }
 }

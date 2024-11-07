@@ -1,5 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {HomePageConfig} from "../../models/HomePage-Config";
+import {Router} from "@angular/router";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {ELearningConfigService} from "../../services/config.service";
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'app-home-page-config',
@@ -8,89 +13,145 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class HomePageConfigComponent implements OnInit{
   homePageConfig!: FormGroup;
+  loading: boolean = false;
 
+  configList =  [
+    { name: 'SEO', value: 'seo' },
+    { name: 'Ảnh banner', value: 'banner' },
+    { name: 'Danh mục khóa học', value: 'courseCategory' },
+    { name: 'Về chúng tôi', value: 'aboutUs' },
+    { name: 'Các khóa học', value: 'listCourse' },
+    { name: 'Video giới thiệu', value: 'introVideo' },
+    { name: 'Sự kiện giáo dục', value: 'listEvent' },
+    { name: 'Lời chứng thực', value: 'testimonial' },
+    { name: 'Lý do lựa chọn', value: 'whyChooseUs' },
+    { name: 'Tìm khóa học', value: 'findCourse' },
+    { name: 'Tin tức', value: 'listPost' },
+    { name: 'Câu hỏi thường gặp', value: 'faq' }
+  ];
+
+  currentConfig: string = this.configList[0].value;
   constructor(
     private fb: FormBuilder,
+    private router: Router,
+    private message: NzMessageService,
+    private eLearningConfigService: ELearningConfigService,
   ) {}
 
   ngOnInit() {
     this.initForm();
+    this.pathDataForm();
   }
 
   initForm():void {
     this.homePageConfig = this.fb.group({
       seo: this.fb.group({
-        title: [null, Validators.required],
-        desc: [null, Validators.required],
-        keywords: [null, Validators.required],
-        image: [null, Validators.required]
+        title: [null],
+        desc: [null],
+        keywords: [null],
+        image: [null]
       }),
       banner: this.fb.group({
-        backgroundBanner: [null, Validators.required],
-        titleSmall: [null, Validators.required],
-        title: [null, Validators.required],
-        slogan: [null, Validators.required],
-        isShowForm: [null, Validators.required],
-        imageRight: [null, Validators.required],
+        backgroundBanner: [null],
+        titleSmall: [null],
+        title: [null],
+        slogan: [null],
+        isShowForm: [true],
+        imageRight: [null],
       }),
       courseCategory: this.fb.group({
-        backgroundImage: [null, Validators.required],
+        backgroundImage: [null],
       }),
       aboutUs: this.fb.group({
-        backgroundImage: [null, Validators.required],
-        image01: [null, Validators.required],
-        image02: [null, Validators.required],
-        image03: [null, Validators.required],
-        countStudent: [null, Validators.required],
-        title: [null, Validators.required],
-        subTitle01: [null, Validators.required],
-        desc01: [null, Validators.required],
-        icon01: [null, Validators.required],
-        subTitle02: [null, Validators.required],
-        desc02: [null, Validators.required],
-        icon02: [null, Validators.required],
+        backgroundImage: [null],
+        countStudent: [null],
+        desc01: [null],
+        desc02: [null],
+        icon01: [null],
+        icon02: [null],
+        image01: [null],
+        image02: [null],
+        image03: [null],
         isShowButton: [true],
+        subTitle01: [null],
+        subTitle02: [null],
+        title: [null],
       }),
       listCourse: this.fb.group({
-        backgroundImage: [null, Validators.required],
+        backgroundImage: [null],
       }),
       introVideo: this.fb.group({
-        videoLink: [null, Validators.required],
-        videoBanner: [null, Validators.required],
+        videoLink: [null],
+        videoBanner: [null],
       }),
       listEvent: this.fb.group({
-        backgroundImage: [null, Validators.required],
+        backgroundImage: [null],
       }),
       testimonial: this.fb.group({
-        backgroundImage: [null, Validators.required],
+        backgroundImage: [null],
       }),
       whyChooseUs: this.fb.group({
-        backgroundImage: [null, Validators.required],
-        title: [null, Validators.required],
-        desc: [null, Validators.required],
-        icon01: [null, Validators.required],
-        subTitle01: [null, Validators.required],
-        subDesc01: [null, Validators.required],
-        icon02: [null, Validators.required],
-        subTitle02: [null, Validators.required],
-        subDesc02: [null, Validators.required],
+        backgroundImage: [null],
+        title: [null],
+        desc: [null],
+        icon01: [null],
+        subTitle01: [null],
+        subDesc01: [null],
+        icon02: [null],
+        subTitle02: [null],
+        subDesc02: [null],
       }),
       findCourse: this.fb.group({
-        backgroundImage: [null, Validators.required],
+        backgroundImage: [null],
       }),
       listPost: this.fb.group({
-        backgroundImage: [null, Validators.required],
+        backgroundImage: [null],
       }),
-      fag: this.fb.group({
-        backgroundImage: [null, Validators.required],
-        image01: [null, Validators.required],
-        image02: [null, Validators.required],
-        image03: [null, Validators.required],
+      faq: this.fb.group({
+        backgroundImage: [null],
+        image01: [null],
+        image02: [null],
+        image03: [null],
       })
     })
   }
 
-  edit(): void {}
+  pathDataForm(): void {
+    this.eLearningConfigService.getHomeConfig().subscribe({
+      next: res => {
+        if (res.success) {
+          this.homePageConfig.patchValue(res.data);
+        } else {
+          this.message.error(res.errorMessages);
+        }
+      },
+      error: err => {
+        this.message.error(err? err.message : 'Lỗi lấy cấu hình trang chủ');
+      }
+    })
+  }
 
-  navigateBack(): void {}
+  edit(): void {
+    const formData: HomePageConfig = this.homePageConfig.value;
+    this.eLearningConfigService.updateHomeConfig(formData)
+      .pipe(finalize(() => this.loading = false))
+      .subscribe({
+        next: (res) => {
+          if (res.success) {
+            this.message.success(res.messages);
+            this.navigateBack();
+          } else {
+            this.message.error(res.errorMessages);
+          }
+        },
+        error: (err) => {
+          this.message.error(err);
+        },
+    })
+  }
+
+  navigateBack(): void {
+    this.router.navigate(['page/e-learning-config/list']);
+  }
+
 }

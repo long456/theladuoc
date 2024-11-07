@@ -397,7 +397,7 @@ export class SideBarComponent implements OnInit {
               children: [
                 {
                   icon: '',
-                  link: 'page/e-learning-config/config/list',
+                  link: 'page/e-learning-config/list',
                   name: 'elearning_ui_configuration',
                 },
                 {

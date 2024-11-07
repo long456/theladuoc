@@ -9,8 +9,10 @@ import { ConfigListComponent } from './components/config-list/config-list.compon
 import { GeneralConfigComponent } from './components/general-config/general-config.component';
 import { HomePageConfigComponent } from './components/home-page-config/home-page-config.component';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-
-
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzSwitchModule} from "ng-zorro-antd/switch";
+import {NzInputNumberModule} from "ng-zorro-antd/input-number";
+import {NzDividerModule} from "ng-zorro-antd/divider";
 
 @NgModule({
   declarations: [
@@ -20,14 +22,17 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
     GeneralConfigComponent,
     HomePageConfigComponent
   ],
-  imports: [
-    CommonModule,
-    ELearningConfigRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedModule,
-    NzDropDownModule,
-    
-  ]
+    imports: [
+        CommonModule,
+        ELearningConfigRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SharedModule,
+        NzDropDownModule,
+        NzSelectModule,
+        NzSwitchModule,
+        NzInputNumberModule,
+        NzDividerModule,
+    ]
 })
 export class ELearningConfigModule { }
