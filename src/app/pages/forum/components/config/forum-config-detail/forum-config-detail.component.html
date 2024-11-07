@@ -7,10 +7,13 @@
     <form [formGroup]="forumConfigForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
+          <div class="d-flex justify-content-between align-items-center">
           <span class="text-label">
             {{ 'forum_name' | translate }}
             <span class="text-danger">*</span>
           </span>
+          <span nzTooltipTitle="{{'guide_forum_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <input nz-input autofocus formControlName="name"
                  [nzStatus]="(forumConfigForm.get('name')?.invalid &&
                              (forumConfigForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
@@ -22,7 +25,10 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">{{ 'status' | translate }}</div>
+          <div class="d-flex align-items-center">
+          <div class="text-label" style="margin-right:.5rem">{{ 'status' | translate }}</div>
+          <span nzTooltipTitle="{{'guide_forum_status' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <nz-switch formControlName="status">
           </nz-switch>
         </div>
@@ -69,9 +75,12 @@
         </div>
 
         <div nz-col [nzSpan]="8">
+          <div class="d-flex justify-content-between align-items-center">
           <span class="text-label">
             Favicon
           </span>
+          <span nzTooltipTitle="{{'guide_forum_favicon' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <app-file-selector formControlName="favicon"></app-file-selector>
         </div>

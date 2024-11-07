@@ -15,10 +15,13 @@
     <form [formGroup]="loyaltyForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'contest_name' | translate}}
-            <span class="text-danger">*</span>
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'contest_name' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_refferal_contest_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <input nz-input autofocus formControlName="loyaltyName"
             [nzStatus]="(loyaltyForm.get('loyaltyName')?.invalid && (loyaltyForm.get('loyaltyName')?.touched || isSubmit)) ? 'error' : ''">
 
@@ -29,10 +32,13 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{ 'course_code' | translate }}
-            <span class="text-danger">*</span>
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'course_code' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <!-- <span nzTooltipTitle="{{'guide_refferal_contest_course_code' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span> -->
+          </div>
 
           <div>
             <nz-select style="display: block" formControlName="courseCode"
@@ -49,16 +55,24 @@
         </div>
 
         <div nz-col [nzSpan]="8">
-          <div class="text-label">{{ 'status' | translate }}</div>
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right:.5rem">
+              {{'status' | translate}}
+            </span>
+            <span nzTooltipTitle="{{'guide_refferal_contest_status' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <nz-switch formControlName="isActive">
           </nz-switch>
         </div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'duration' | translate}}
-            <span class="text-danger">*</span>
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'duration' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_refferal_contest_duration' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <nz-range-picker style="width: 100%" [nzShowTime]="true"
             [nzStatus]="(loyaltyForm.get('date')?.invalid && (loyaltyForm.get('date')?.touched || isSubmit)) ? 'error' : ''"

@@ -23,16 +23,19 @@
             </div>
             <nz-divider class="mt-10"></nz-divider>
             <div nz-col [nzSpan]="20">
-              <span class="text-label">
-                {{ 'tier_name' | translate }} <span class="text-danger">*</span>
-              </span>
-              <span class="text-danger error-message" *ngIf="(membershipForm.get('name')?.touched || isSubmit) &&
-                      membershipForm.get('name')?.hasError('required')">
-                {{ 'tier_name' | translate }} {{'cannot_blank' | translate}}!
-              </span>
+              <div class="d-flex align-items-center">
+                <span class="text-label" style="margin-right:.5rem">
+                  {{ 'tier_name' | translate }} <span class="text-danger">*</span>
+                </span>
+                <span nzTooltipTitle="{{'guide_membership_tier_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+              </div>
               <input nz-input autofocus formControlName="name" [nzStatus]="(membershipForm.get('name')?.invalid &&
                             (membershipForm.get('name')?.touched || isSubmit)) ?
                             'error' : ''">
+              <span class="text-danger error-message" *ngIf="(membershipForm.get('name')?.touched || isSubmit) &&
+              membershipForm.get('name')?.hasError('required')">
+                {{ 'tier_name' | translate }} {{'cannot_blank' | translate}}!
+              </span>
             </div>
 
             <div nz-col [nzSpan]="4">
@@ -44,14 +47,16 @@
               <span class="text-label">
                 {{'level' | translate}}
               </span>
-              <nz-input-number style="width: 100%" [(ngModel)]="membershipLevel" [ngModelOptions]="{standalone: true}"
-                (ngModelChange)="pathLevelValue($event)" [nzMin]="1" [nzStep]="1"></nz-input-number>
+              <nz-input-number style="width: 100%" [(ngModel)]="membershipLevel" [ngModelOptions]="{standalone: true}" (ngModelChange)="pathLevelValue($event)" [nzMin]="1" [nzStep]="1"></nz-input-number>
             </div>
 
             <div nz-col [nzSpan]="10">
-              <span class="text-label">
-                {{'badge' | translate}}
-              </span>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="text-label">
+                  {{'badge' | translate}}
+                </span>
+                <span nzTooltipTitle="{{'guide_membership_badge' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+              </div>
               <span class="text-danger error-message" *ngIf="(membershipForm.get('icon')?.touched || isSubmit) &&
                         membershipForm.get('icon')?.hasError('required')">
                 {{'badge' | translate}} {{'cannot_blank' | translate}}!
@@ -68,8 +73,11 @@
             </div>
 
             <div nz-col [nzSpan]="4">
-              <div class="text-label">
-                {{'is_popular' | translate}}
+              <div class="d-flex align-items-center">
+                <span class="text-label" style="margin-right:.5rem">
+                  {{'is_popular' | translate}}
+                </span>
+                <span nzTooltipTitle="{{'guide_membership_popular' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
               </div>
               <nz-switch formControlName="isPopular"></nz-switch>
             </div>
@@ -79,30 +87,34 @@
         <div nz-col [nzSpan]="24">
           <div class="content-block" nz-row [nzGutter]=[16,8]>
             <div nz-col [nzSpan]="24" class="content-block-title">
-              {{'tier_description' | translate}}
+              <div class="d-flex align-items-center">
+                <span style="margin-right:.5rem">
+                  {{'tier_description' | translate}}
+                </span>
+                <span nzTooltipTitle="{{'guide_membership_content' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+              </div>
             </div>
             <nz-divider class="mt-10"></nz-divider>
 
             <div nz-col [nzSpan]="24">
-              <span class="text-label">
-                {{'add_content' | translate}}
-              </span>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="text-label">
+                  {{'add_content' | translate}}
+                </div>
 
-              <span class="input-content">
-                <input #inputContent nz-input [class.inactive]="!isActive" [(ngModel)]="webData"
-                  [ngModelOptions]="{standalone: true}">
-                <button nz-button nzType="primary" [nzSize]="'small'" nzShape="circle" class="size-custom"
-                  (click)="changeActive()">
-                  <span nz-icon nzType="plus" *ngIf="!isActive"></span>
-                  <span nz-icon nzType="check" *ngIf="isActive"></span>
-                </button>
-              </span>
+                <span class="input-content">
+                  <input #inputContent nz-input [class.inactive]="!isActive" [(ngModel)]="webData" [ngModelOptions]="{standalone: true}">
+                  <button nz-button nzType="primary" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="changeActive()">
+                    <span nz-icon nzType="plus" *ngIf="!isActive"></span>
+                    <span nz-icon nzType="check" *ngIf="isActive"></span>
+                  </button>
+                </span>
+              </div>
 
               <div class="content-list">
                 <div class="content-item" *ngFor="let item of membershipForm.get('content')?.value">
                   {{item}}
-                  <button nz-button nzType="text" [nzSize]="'small'" nzShape="circle" class="size-custom"
-                    (click)="deleteContent(item)">
+                  <button nz-button nzType="text" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="deleteContent(item)">
                     <span nz-icon nzType="delete" class="color-dagger"></span>
                   </button>
                 </div>
@@ -122,8 +134,7 @@
               <div nz-col [nzSpan]="12" *ngIf="op.level < membershipLevel">
                 <div class="text-label">{{op.name}} (hạng {{op.level}})</div>
                 <nz-input-number-group nzSuffix="%" style="width: 100%">
-                  <nz-input-number [(ngModel)]="op.discount" [ngModelOptions]="{standalone: true}" [nzMin]="0"
-                    [nzMax]="100" [nzStep]="1">
+                  <nz-input-number [(ngModel)]="op.discount" [ngModelOptions]="{standalone: true}" [nzMin]="0" [nzMax]="100" [nzStep]="1">
                   </nz-input-number>
                 </nz-input-number-group>
               </div>
@@ -138,7 +149,12 @@
         <div nz-col [nzSpan]="24">
           <div class="content-block" nz-row [nzGutter]=[8,8]>
             <div nz-col [nzSpan]="24" class="content-block-title">
-              {{'tier_price' | translate}}
+              <div class="d-flex align-items-center">
+                <span style="margin-right:.5rem">
+                  {{'tier_price' | translate}}
+                </span>
+                <span nzTooltipTitle="{{'guide_membership_price_policy' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+              </div>
             </div>
             <nz-divider class="mt-10"></nz-divider>
 
@@ -147,8 +163,7 @@
                 {{'price_for_1_month' | translate}}
               </div>
               <nz-input-number-group nzSuffix="VND" style="width: 100%">
-                <nz-input-number formControlName="priceMonth" [nzMin]="0" [nzStep]="1000"
-                  [nzFormatter]="formatterCurrency">
+                <nz-input-number formControlName="priceMonth" [nzMin]="0" [nzStep]="1000" [nzFormatter]="formatterCurrency">
                 </nz-input-number>
               </nz-input-number-group>
             </div>
@@ -158,8 +173,7 @@
                 {{'price_for_3_months' | translate}}
               </div>
               <nz-input-number-group nzSuffix="VND" style="width: 100%">
-                <nz-input-number formControlName="price3Month" [nzMin]="0" [nzStep]="1000"
-                  [nzFormatter]="formatterCurrency">
+                <nz-input-number formControlName="price3Month" [nzMin]="0" [nzStep]="1000" [nzFormatter]="formatterCurrency">
                 </nz-input-number>
               </nz-input-number-group>
             </div>
@@ -169,8 +183,7 @@
                 {{'price_for_1_year' | translate}}
               </div>
               <nz-input-number-group nzSuffix="VND" style="width: 100%">
-                <nz-input-number formControlName="priceYear" [nzMin]="0" [nzStep]="1000"
-                  [nzFormatter]="formatterCurrency">
+                <nz-input-number formControlName="priceYear" [nzMin]="0" [nzStep]="1000" [nzFormatter]="formatterCurrency">
                 </nz-input-number>
               </nz-input-number-group>
             </div>
@@ -180,8 +193,7 @@
                 {{'price_for_lifetime' | translate}}
               </div>
               <nz-input-number-group nzSuffix="VND" style="width: 100%">
-                <nz-input-number formControlName="priceForever" [nzMin]="0" [nzStep]="1000"
-                  [nzFormatter]="formatterCurrency">
+                <nz-input-number formControlName="priceForever" [nzMin]="0" [nzStep]="1000" [nzFormatter]="formatterCurrency">
                 </nz-input-number>
               </nz-input-number-group>
             </div>
@@ -196,8 +208,11 @@
             <nz-divider class="mt-10"></nz-divider>
 
             <div nz-col [nzSpan]="12">
-              <div class="text-label">
-                {{'direct_referral' | translate}}
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="text-label">
+                  {{'direct_referral' | translate}}
+                </div>
+                <span nzTooltipTitle="{{'guide_membership_direct_refferal' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
               </div>
               <nz-input-number-group nzSuffix="%" style="width: 100%">
                 <nz-input-number formControlName="referrerReward" [nzMin]="0" [nzStep]="1">
@@ -206,8 +221,11 @@
             </div>
 
             <div nz-col [nzSpan]="12">
-              <div class="text-label">
-                {{'indirect_referral' | translate}}
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="text-label">
+                  {{'indirect_referral' | translate}}
+                </div>
+                <span nzTooltipTitle="{{'guide_membership_indirect_refferal' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
               </div>
               <nz-input-number-group nzSuffix="%" style="width: 100%">
                 <nz-input-number formControlName="referrerReward2" [nzMin]="0" [nzStep]="1">

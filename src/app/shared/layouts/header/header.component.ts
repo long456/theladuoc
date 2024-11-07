@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from "@angular/router";
 import { LoginService } from "../../../layouts/auth-layout/auth/services/login.service";
 import { environment } from "../../../../environments/environment";
@@ -14,6 +14,7 @@ import { Boarding } from "boarding.js";
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: [ './header.component.scss' ],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class HeaderComponent implements OnInit {
@@ -24,8 +25,8 @@ export class HeaderComponent implements OnInit {
   lang: string = '';
 
   tutorialModel?: { [ key: string ]: string };
-  filteredOptions: { [ key: string ]: string }[] = [];
-  options: { [ key: string ]: string }[] = [];
+  filteredTutorials: { [ key: string ]: string }[] = [];
+  tutorials: { [ key: string ]: string }[] = [];
 
   constructor(
     private router: Router,
@@ -36,11 +37,10 @@ export class HeaderComponent implements OnInit {
     private translateService: TranslateService,
   ) {
     this.subscription = new Subscription();
-    this.filteredOptions = this.options;
   }
 
   ngOnInit() {
-    this.options = [
+    this.filteredTutorials = this.tutorials = [
       { label: 'organization', keywords: 'tổ chức, to chuc' },
       { label: 'withdrawal', keywords: 'rut tien, rút tiền' },
       { label: 'payment_method', keywords: 'phuong thuc thanh toan, phương thức thanh toán' },
@@ -55,6 +55,18 @@ export class HeaderComponent implements OnInit {
       { label: 'landing_page', keywords: 'landing page' },
       { label: 'learning_ticket', keywords: 've hoc tap, vé học tập' },
       { label: 'registration_form', keywords: 'form dang ky, form đăng ký' },
+      { label: 'point_contest', keywords: 'cuoc thi tinh diem, cuộc thi tính điểm' },
+      { label: 'news_category', keywords: 'danh muc tin tuc, danh mục tin tức' },
+      { label: 'write_a_news', keywords: 'viet bai tin tuc, viết bài tin tức, dang tin tuc, đăng tin tức' },
+      { label: 'edu_event', keywords: 'su kien, sự kiện' },
+      { label: 'testimonial', keywords: 'loi chung thuc, lời chứng thực' },
+      { label: 'membership_tier', keywords: 'hang thanh vien, hạng thành viên' },
+      { label: 'membership', keywords: 'tu cach thanh vien, tư cách thành viên' },
+      { label: 'forum', keywords: 'dien dan, diễn đàn' },
+      { label: 'community_category', keywords: 'danh muc cong dong, danh mục cộng đồng' },
+      { label: 'community', keywords: 'cong dong, cộng đồng' },
+      { label: 'customer_service', keywords: 'khach hang, khách hàng' },
+      // { label: 'price_list_categories', keywords: 'danh muc bang gia, danh mục bảng giá' },
     ]
 
     const baseUrl = environment.baseImgUrl
@@ -159,7 +171,8 @@ export class HeaderComponent implements OnInit {
         el.popoverPrevBtn.style.marginRight = '.5rem'
         el.popoverPrevBtn.style.marginLeft = '2rem'
         el.popoverFooter.style.marginTop = '1rem'
-      }
+      },
+      strictClickHandling: "block-all"
     });
     const commonSettingSteps = [ {
       element: '#settings .ant-menu-submenu-title',
@@ -221,6 +234,71 @@ export class HeaderComponent implements OnInit {
           alignment: "center",
         },
       },
+    ]
+
+    const commonRefferalSteps = [
+      ...commonFeatureSteps,
+      {
+        element: '#Referral .ant-menu-submenu-title', //submenu of submenu
+        popover: {
+          title: " ",
+          description: `${translate.instant('pick')} <strong>Refferal</strong>`,
+          prefferedSide: "right",
+          alignment: "center",
+        }
+      }
+    ]
+
+    const commonNewsSteps = [
+      ...commonFeatureSteps,
+      {
+        element: '#news .ant-menu-submenu-title', //submenu of submenu
+        popover: {
+          title: " ",
+          description: `${translate.instant('pick')} <strong>${translate.instant('news')}</strong>`,
+          prefferedSide: "right",
+          alignment: "center",
+        }
+      }
+    ]
+
+    const commonMembershipSteps = [
+      ...commonFeatureSteps,
+      {
+        element: '#settings #membership .ant-menu-submenu-title', //submenu of submenu
+        popover: {
+          title: " ",
+          description: `${translate.instant('pick')} <strong>${translate.instant('membership')}</strong>`,
+          prefferedSide: "right",
+          alignment: "center",
+        }
+      }
+    ]
+
+    const commonForumSteps = [
+      ...commonFeatureSteps,
+      {
+        element: '#forum .ant-menu-submenu-title', //submenu of submenu
+        popover: {
+          title: " ",
+          description: `${translate.instant('pick')} <strong>${translate.instant('forum')}</strong>`,
+          prefferedSide: "right",
+          alignment: "center",
+        }
+      }
+    ]
+
+    const commonCustomerServiceSteps = [
+      ...commonFeatureSteps,
+      {
+        element: '#customer_service .ant-menu-submenu-title', //submenu of submenu
+        popover: {
+          title: " ",
+          description: `${translate.instant('pick')} <strong>${translate.instant('customer_service')}</strong>`,
+          prefferedSide: "right",
+          alignment: "center",
+        }
+      }
     ]
 
     const addButtonStep = (text: string, prefix: string = 'setting') => ({
@@ -462,6 +540,210 @@ export class HeaderComponent implements OnInit {
           addButtonStep('registration_form')
         ]
       },
+      {
+        //Thiết lập cuộc thi tính điểm
+        key: 'point_contest',
+        steps: [
+          ...commonRefferalSteps,
+          {
+            element: '#point_contests', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('point_contests')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('point_contests')
+        ]
+      },
+      {
+        //Thiết lập danh mục tin tức
+        key: 'news_category',
+        steps: [
+          ...commonNewsSteps,
+          {
+            element: '#news_categories', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('news_categories')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('news_categories')
+        ]
+      },
+      {
+        //Viết bài tin tức
+        key: 'write_a_news',
+        steps: [
+          ...commonNewsSteps,
+          {
+            element: '#posts', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('posts')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('news', 'viết bài')
+        ]
+      },
+      {
+        //Thiết lập sự kiện
+        key: 'edu_event',
+        steps: [
+          ...commonNewsSteps,
+          {
+            element: '#edu_events', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('edu_events')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('edu_events')
+        ]
+      },
+      {
+        //Thiết lập sự kiện
+        key: 'testimonial',
+        steps: [
+          ...commonNewsSteps,
+          {
+            element: '#testimonials', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('testimonials')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('testimonials')
+        ]
+      },
+      {
+        //Thiết lập lời chứng thực
+        key: 'testimonial',
+        steps: [
+          ...commonNewsSteps,
+          {
+            element: '#testimonials', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('testimonials')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('testimonials')
+        ]
+      },
+      {
+        //Thiết lập hạng thành viên
+        key: 'membership_tier',
+        steps: [
+          ...commonMembershipSteps,
+          {
+            element: '#membership_tier', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('membership_tier')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('membership_tier')
+        ]
+      },
+      {
+        //Cấu hình tư cách thành viên
+        key: 'membership',
+        steps: [
+          ...commonMembershipSteps,
+          {
+            element: '#membership_settings', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('membership_settings')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('membership')
+        ]
+      },
+      {
+        //Cấu hình cộng đồng
+        key: 'forum',
+        steps: [
+          ...commonForumSteps,
+          {
+            element: '#forum_settings', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('forum_settings')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('forum_settings')
+        ]
+      },
+      {
+        //Cấu hình danh mục cộng đồng
+        key: 'community_category',
+        steps: [
+          ...commonForumSteps,
+          {
+            element: '#community_category', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('community_category')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('community_category')
+        ]
+      },
+      {
+        //Cấu hình danh mục cộng đồng
+        key: 'community',
+        steps: [
+          ...commonForumSteps,
+          {
+            element: '#forum_communities', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('forum_communities')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('forum_communities')
+        ]
+      },
+      {
+        //Cấu hình danh mục cộng đồng
+        key: 'customer_service',
+        steps: [
+          ...commonCustomerServiceSteps,
+          {
+            element: '#customers', //submenu of submenu
+            popover: {
+              title: " ",
+              description: `${translate.instant('pick')} <strong>${translate.instant('customers')}</strong>`,
+              prefferedSide: "right",
+              alignment: "center",
+            },
+          },
+          addButtonStep('customers')
+        ]
+      },
     ]
 
     const { steps }: any = tutorials.find((t: any) => t.key === key || t.key.includes(key))
@@ -470,13 +752,14 @@ export class HeaderComponent implements OnInit {
   }
 
   searchTutorial(value: string): void {
-    this.filteredOptions = this.options.filter(option => option[ 'label' ].toLowerCase().indexOf(value?.toLowerCase()) !== -1 || option[ 'keywords' ].toLowerCase().indexOf(value?.toLowerCase()) !== -1);
+    this.filteredTutorials = (value.length < 1) ? this.tutorials : this.tutorials.filter(option => option[ 'label' ].toLowerCase().indexOf(value?.toLowerCase()) !== -1 || option[ 'keywords' ].toLowerCase().indexOf(value?.toLowerCase()) !== -1)
   }
 
-  onSelectTutorial(ctx: any): void {
-    if (ctx.isUserInput) {
-      const value = ctx.source.nzValue
-      this.startBoarding(value)
-    }
-  }
+  // onSelectTutorial(ctx: any): void {
+  //   if (ctx.isUserInput) {
+  //     const value = ctx.source.nzValue
+  //     this.startBoarding(value)
+  //   }
+  // }
+
 }
