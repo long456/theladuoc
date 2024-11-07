@@ -14,10 +14,13 @@
     <form [formGroup]="newsForm">
       <div nz-row [nzGutter]="[16, 16]">
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-          <span class="text-label">
-            {{'title' | translate}}
-            <span class="text-danger">*</span>
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'title' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_news_title' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <input nz-input autofocus formControlName="title" [nzStatus]="(newsForm.get('title')?.invalid &&
                         (newsForm.get('title')?.touched || isSubmit)) ? 'error' : ''">
@@ -28,17 +31,23 @@
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-          <span class="text-label">
-            {{'keywords' | translate}}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'keywords' | translate}}
+            </span>
+            <span nzTooltipTitle="{{'guide_news_keywords' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <input nz-input placeholder="{{'enter' | translate}} {{'keywords' | translate}}" formControlName="keyWords">
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-          <span class="text-label">
-            {{ 'status' | translate }}
-          </span>
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right:.5rem">
+              {{ 'status' | translate }}
+            </span>
+            <span nzTooltipTitle="{{'guide_news_status' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <nz-switch formControlName="status" style="display: block"></nz-switch>
         </div>
@@ -57,9 +66,13 @@
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8">
-          <span class="text-label">
-            {{'display_page' | translate}}
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'display_page' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_news_display_page' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <nz-select nzMode="multiple" formControlName="showBys" style="display: block">
             <nz-option [nzValue]="1" [nzLabel]="'homepage' | translate"></nz-option>
@@ -80,13 +93,14 @@
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24">
-          <span class="text-label">
-            {{'description' | translate}}
-            <span class="text-danger">*</span>
-          </span>
-
-          <textarea nz-input formControlName="description" placeholder="{{'description' | translate}}"
-            [nzAutosize]="{ minRows: 3}" [nzStatus]="(newsForm.get('description')?.invalid &&
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right:.5rem">
+              {{'description' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_news_description' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <textarea nz-input formControlName="description" placeholder="{{'description' | translate}}" [nzAutosize]="{ minRows: 3}" [nzStatus]="(newsForm.get('description')?.invalid &&
                         (newsForm.get('description')?.touched || isSubmit)) ? 'error' : ''"></textarea>
 
           <span class="text-danger" *ngIf="(newsForm.get('description')?.touched || isSubmit)  &&
@@ -101,13 +115,22 @@
         </div>
 
         <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24">
-          <span class="text-label">
-            {{'content' | translate}}
-            <span class="text-danger">*</span>
-          </span>
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right:.5rem">
+              {{'content' | translate}}
+              <span class="text-danger">*</span>
+            </span>
+            <ng-template #tooltipNewsContent>
+              {{'guide_news_content' | translate}}
+              <br /> <strong>{{'caution' | translate}}:</strong> {{'guide_ckeditor' | translate}}
+              <br /> - {{'guide_ckeditor_step_1' | translate}}
+              <br /> - {{'guide_ckeditor_step_2' | translate}}
+              <br /> - {{'guide_ckeditor_step_3' | translate}}
+            </ng-template>
+            <span [nzTooltipTitle]="tooltipNewsContent" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
-          <ckeditor name="ckeditor_text" formControlName="content"
-            editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
+          <ckeditor name="ckeditor_text" formControlName="content" editorUrl="https://cdn.ckeditor.com/4.14.0/full/ckeditor.js" [config]="ckEditorConfig"></ckeditor>
         </div>
 
       </div>
