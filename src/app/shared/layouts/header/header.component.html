@@ -5,14 +5,29 @@
     <span nz-icon nzType="download" nzTheme="outline"></span>
   </div>
 
-  <div class="tutorial-box" style="margin-right:1rem">
-    <input placeholder="{{'setting_tutorial' | translate}}" nz-input [(ngModel)]="tutorialModel" (ngModelChange)="searchTutorial($event)" [nzAutocomplete]="auto" />
-    <nz-autocomplete #auto>
-      <nz-auto-option *ngFor="let option of filteredOptions" [nzValue]="option['label']" [nzLabel]="option['label'] | translate" (selectionChange)="onSelectTutorial($event)">
-        {{ option['label'] | translate }}
-      </nz-auto-option>
-    </nz-autocomplete>
+  <div>
+    <button  nzTrigger="click" nz-button nz-dropdown [nzDropdownMenu]="tutorialList">
+      Thiết lập/Cấu hình
+    </button>
+    <nz-dropdown-menu #tutorialList="nzDropdownMenu">
+      <div nz-row [nzGutter]="[16, 16]" class="tutorial-list" nz-menu>
+        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24">
+          <div class="d-flex align-items-center">
+            <input [(ngModel)]="tutorialModel" (ngModelChange)="searchTutorial($event)" nz-input placeholder="Search..." nzSize="default" />
+            <div class="close" nz-menu-item>
+              <button nz-button nzType="text" nzDanger>
+                <span nz-icon nzType="close" nzTheme="outline"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let tutorial of filteredTutorials" (click)="this.startBoarding(tutorial['label'])" nz-col [nzXs]="24" [nzSm]="12" [nzMd]="8" nz-menu-item>
+          {{tutorial['label'] | translate}}
+        </div>
+      </div>
+    </nz-dropdown-menu>
   </div>
+
 
 
   <div class="switch-language">

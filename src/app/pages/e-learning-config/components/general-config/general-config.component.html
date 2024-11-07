@@ -1,0 +1,50 @@
+<div class="title-page">
+  Cấu hình chung
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="generalConfigForm">
+      <div nz-row [nzGutter]=[16,16]>
+        <div nz-col [nzSpan]="4">
+            <span class="text-label">
+              Màu thương hiệu
+            </span>
+          <app-color-picker formControlName="colorMain"></app-color-picker>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+            <span class="text-label">
+              Màu chữ nút bấm
+            </span>
+          <app-color-picker formControlName="colorTextButton"></app-color-picker>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+            <span class="text-label">
+              Màu chữ tiêu đề
+            </span>
+          <app-color-picker formControlName="colorTextTitle"></app-color-picker>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+            <span class="text-label">
+              Màu chữ thường
+            </span>
+          <app-color-picker formControlName="colorTextDesc"></app-color-picker>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button [nzLoading]="loading" (click)="edit()">
+        {{'save'|translate}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
+    </div>
+  </div>
+</div>

@@ -334,7 +334,7 @@ export class SideBarComponent implements OnInit {
                 {
                   icon: '',
                   link: 'page/news-category',
-                  name: 'posting_categories',
+                  name: 'news_categories',
                 },
                 {
                   icon: '',
@@ -356,7 +356,7 @@ export class SideBarComponent implements OnInit {
             {
               icon: '',
               link: '',
-              name: 'course_funnel',
+              name: 'funnel_course',
               children: [
                 {
                   icon: '',
@@ -395,6 +395,11 @@ export class SideBarComponent implements OnInit {
               link: '',
               name: 'e_learning',
               children: [
+                {
+                  icon: '',
+                  link: 'page/e-learning-config/list',
+                  name: 'elearning_ui_configuration',
+                },
                 {
                   icon: '',
                   link: 'page/e-course',

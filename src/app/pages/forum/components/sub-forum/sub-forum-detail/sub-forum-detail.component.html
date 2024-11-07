@@ -15,10 +15,13 @@
     <form [formGroup]="subForumForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'community_name' | translate }}
-            <span class="text-danger">*</span>
-          </span>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="text-label">
+              {{'community_name' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_community_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
           <input nz-input autofocus formControlName="name" [nzStatus]="(subForumForm.get('name')?.invalid &&
                              (subForumForm.get('name')?.touched || isSubmit)) ? 'error' : ''">
 
@@ -53,16 +56,22 @@
         </div>
 
         <div nz-col [nzSpan]="2">
-          <div class="text-label">
-            {{'pinned' | translate }}
+          <div class="d-flex align-items-center">
+            <div class="text-label" style="margin-right: .5rem;">
+              {{'pinned' | translate }}
+            </div>
+            <span nzTooltipTitle="{{'guide_community_pinned' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <nz-switch formControlName="pined">
           </nz-switch>
         </div>
 
         <div nz-col [nzSpan]="2">
-          <div class="text-label">
-            {{'featured' | translate }}
+          <div class="d-flex align-items-center">
+            <div class="text-label" style="margin-right: .5rem;">
+              {{'featured' | translate }}
+            </div>
+            <span nzTooltipTitle="{{'guide_community_featured' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
           <nz-switch formControlName="isFeature">
           </nz-switch>
@@ -146,9 +155,7 @@
             <span>
               {{'allow_free_participation' | translate}}
             </span>
-            <nz-switch [(ngModel)]="isFreeAllowed" [ngModelOptions]="{standalone: true}"
-                       (ngModelChange)="onSwitchChange($event)"
-            ></nz-switch>
+            <nz-switch [(ngModel)]="isFreeAllowed" [ngModelOptions]="{standalone: true}" (ngModelChange)="onSwitchChange($event)"></nz-switch>
           </div>
 
 
@@ -158,13 +165,10 @@
               {{'role' | translate}}
             </div>
 
-            <nz-checkbox-wrapper class="width-100 pd-t-10"
-                                 (nzOnChange)="onValueChange($event, 'role')">
+            <nz-checkbox-wrapper class="width-100 pd-t-10" (nzOnChange)="onValueChange($event, 'role')">
               <div nz-row>
                 <div nz-col nzSpan="8" *ngFor="let user of listUserRole">
-                  <label nz-checkbox [nzValue]="user.value"
-                         [nzChecked]="isChecked(user.value, 'role')"
-                  >{{user.name}}</label>
+                  <label nz-checkbox [nzValue]="user.value" [nzChecked]="isChecked(user.value, 'role')">{{user.name}}</label>
                 </div>
               </div>
             </nz-checkbox-wrapper>
@@ -175,13 +179,10 @@
               {{'membership_tier' | translate}}
             </div>
 
-            <nz-checkbox-wrapper class="width-100 pd-t-10"
-                                 (nzOnChange)="onValueChange($event, 'policy')">
+            <nz-checkbox-wrapper class="width-100 pd-t-10" (nzOnChange)="onValueChange($event, 'policy')">
               <div nz-row>
                 <div nz-col nzSpan="8" *ngFor="let user of listUserPolicyLevel">
-                  <label nz-checkbox [nzValue]="user.id"
-                         [nzChecked]="isChecked(user.id, 'policy')"
-                  >{{user.name}}</label>
+                  <label nz-checkbox [nzValue]="user.id" [nzChecked]="isChecked(user.id, 'policy')">{{user.name}}</label>
                 </div>
               </div>
             </nz-checkbox-wrapper>
@@ -194,21 +195,8 @@
             {{'specify_admin' | translate }}
           </span>
 
-          <nz-select
-            nzShowSearch
-            nzServerSearch
-            nzPlaceHolder="input search text"
-            formControlName="adminIds"
-            nzMode="multiple"
-            [nzShowArrow]="false"
-            [nzLoading]="isLoadingSearch"
-            [nzFilterOption]="nzFilterOption"
-            (nzOnSearch)="searchAdmin($event)"
-          >
-            <nz-option *ngFor="let op of listOpAdmin"
-                       [nzValue]="op.id"
-                       [nzLabel]="op.name + ' - ' + op.email + ' - ' + op.code"
-            ></nz-option>
+          <nz-select nzShowSearch nzServerSearch nzPlaceHolder="input search text" formControlName="adminIds" nzMode="multiple" [nzShowArrow]="false" [nzLoading]="isLoadingSearch" [nzFilterOption]="nzFilterOption" (nzOnSearch)="searchAdmin($event)">
+            <nz-option *ngFor="let op of listOpAdmin" [nzValue]="op.id" [nzLabel]="op.name + ' - ' + op.email + ' - ' + op.code"></nz-option>
           </nz-select>
         </div>
       </div>

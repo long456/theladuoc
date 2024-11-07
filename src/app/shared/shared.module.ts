@@ -40,6 +40,7 @@ import { ScrollNearBottomDirective } from './directives/table/scroll-near-bottom
 import {TranslateModule} from "@ngx-translate/core";
 import { ColorPickerComponent } from './components/color-picker/color-picker.component';
 import { FileSelectorComponent } from './components/file-selector/file-selector.component';
+import { VideoSelectorComponent } from './components/video-selector/video-selector.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { FileSelectorComponent } from './components/file-selector/file-selector.
     ScrollNearBottomDirective,
     ColorPickerComponent,
     FileSelectorComponent,
+    VideoSelectorComponent,
   ],
   imports: [
     CommonModule,
@@ -111,7 +113,8 @@ import { FileSelectorComponent } from './components/file-selector/file-selector.
     NzDatePickerModule,
     TranslateModule,
     ColorPickerComponent,
-    FileSelectorComponent
+    FileSelectorComponent,
+    VideoSelectorComponent
   ]
 })
 export class SharedModule { }

@@ -85,17 +85,17 @@ export class ForumCategoryDetailComponent implements OnInit {
     actionForumCategory
       .pipe(finalize(() => this.loading = false))
       .subscribe({
-      next: (res) => {
-        if (res.success) {
-          this.message.success(res.messages);
-          this.navigateBack();
-        } else {
-          this.message.error(res.errorMessages);
-        }
-      },
-      error: (err) => {
-        this.message.error(err);
-      },
+        next: (res) => {
+          if (res.success) {
+            this.message.success(res.messages);
+            this.navigateBack();
+          } else {
+            this.message.error(res.errorMessages);
+          }
+        },
+        error: (err) => {
+          this.message.error(err);
+        },
     });
   }
 

@@ -34,9 +34,12 @@
         <div nz-col [nzSpan]="8"></div>
 
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'max_inactivity_days' | translate}}
-          </span>
+          <div class="d-flex align-items-center">
+            <span style="margin-right:.5rem">
+              {{'max_inactivity_days' | translate}}
+            </span>
+            <span nzTooltipTitle="{{'guide_membership_max_absences' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <nz-input-number formControlName="numberDaysInactivity" [nzMin]="0" [nzStep]="1"></nz-input-number>
         </div>
@@ -44,9 +47,13 @@
         <div nz-col [nzSpan]="16"></div>
 
         <div nz-col [nzSpan]="16">
-          <span class="text-label">
-            {{'description' | translate}}
-          </span>
+          <div class="d-flex align-items-center">
+            <span class="text-label" style="margin-right:.5rem">
+              {{'description' | translate}}
+            </span>
+
+            <span nzTooltipTitle="{{'guide_membership_description' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
 
           <textarea formControlName="description" nz-input [nzAutosize]="{ minRows: 3 }"></textarea>
         </div>
@@ -92,10 +99,13 @@
         </div>
 
         <div nz-col [nzSpan]="8">
+          <div class="d-flex justify-content-between align-items-center">
             <span class="text-label">
               {{'settlement_date' | translate}}
             </span>
-           <nz-input-number formControlName="dateAgentMembershipCalculator" [nzMin]="1" [nzMax]="31" [nzStep]="1"></nz-input-number>
+            <span nzTooltipTitle="{{'guide_membership_settlement_date' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <nz-input-number formControlName="dateAgentMembershipCalculator" [nzMin]="1" [nzMax]="31" [nzStep]="1"></nz-input-number>
         </div>
 
         <div nz-col [nzSpan]="24">
@@ -142,8 +152,11 @@
         </div>
 
         <div nz-col [nzSpan]="24">
-          <div class="text-label">
-            {{'perks' | translate}}
+          <div class="d-flex align-items-center">
+            <div class="text-label" style="margin-right:.5rem">
+              {{'perks' | translate}}
+            </div>
+            <span nzTooltipTitle="{{'guide_membership_perks' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
           </div>
 
           <button nz-button nzType="primary" (click)="addGroupBenefit()" class="add-gb-btn">

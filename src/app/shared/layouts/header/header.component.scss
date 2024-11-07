@@ -41,5 +41,25 @@
 }
 
 .switch-language{
-  padding-right: 8px;
+  padding-inline: 8px;
+}
+
+.tutorial-list {
+  width: 13rem;
+
+  @media (min-width: 576px) {
+    width: 25rem;
+    margin-top: unset!important;
+  }
+
+  @media (min-width: 768px) {
+    width: 35rem
+  }
+
+  .close {
+    background: transparent!important;
+    margin-left: .5rem;
+    cursor: default;
+    padding: 0
+  }
 }

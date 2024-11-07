@@ -7,22 +7,21 @@
     <form [formGroup]="catalogForm">
       <div nz-row [nzGutter]=[16,16]>
         <div nz-col [nzSpan]="8">
-          <span class="text-label">
-            {{'category_name' | translate }}
-            <span class="text-danger">*</span>
-          </span>
-          <input nz-input autofocus formControlName="catalogName"
-                 [nzStatus]="(catalogForm.get('catalogName')?.invalid &&
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="text-label">
+              {{'category_name' | translate }}
+              <span class="text-danger">*</span>
+            </span>
+            <span nzTooltipTitle="{{'guide_price_list_category_name' | translate}}" nzTooltipPlacement="top" nz-tooltip nz-icon nzType="question-circle" nzTheme="outline"></span>
+          </div>
+          <input nz-input autofocus formControlName="catalogName" [nzStatus]="(catalogForm.get('catalogName')?.invalid &&
                              (catalogForm.get('catalogName')?.touched || isSubmit)) ?
-                             'error' : ''"
-          >
-          <span class="text-danger"
-                *ngIf="(catalogForm.get('catalogName')?.touched || isSubmit)  &&
-                        catalogForm.get('catalogName')?.hasError('required')"
-          >{{'category_name' | translate }} {{'cannot_blank' | translate}}!</span>
+                             'error' : ''">
+          <span class="text-danger" *ngIf="(catalogForm.get('catalogName')?.touched || isSubmit)  &&
+                        catalogForm.get('catalogName')?.hasError('required')">{{'category_name' | translate }} {{'cannot_blank' | translate}}!</span>
         </div>
 
-        <div nz-col [nzSpan]="8" >
+        <div nz-col [nzSpan]="8">
           <div class="text-label">{{ 'status' | translate }}</div>
           <nz-switch formControlName="catalogStatus"></nz-switch>
         </div>
@@ -41,5 +40,3 @@
     </div>
   </div>
 </div>
-
-
