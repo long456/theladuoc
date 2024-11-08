@@ -132,6 +132,8 @@ export class HomePageConfigComponent implements OnInit{
   }
 
   edit(): void {
+    const countStudent = this.homePageConfig.get('aboutUs.countStudent')?.value;
+    this.homePageConfig.get('aboutUs.countStudent')?.setValue(countStudent.toString());
     const formData: HomePageConfig = this.homePageConfig.value;
     this.eLearningConfigService.updateHomeConfig(formData)
       .pipe(finalize(() => this.loading = false))
