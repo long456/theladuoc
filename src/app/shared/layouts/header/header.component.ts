@@ -161,7 +161,7 @@ export class HeaderComponent implements OnInit {
         highlightDomElement.scrollIntoView({
           behavior: 'smooth',
           block: 'nearest',
-          inline: 'start'
+          inline: 'end'
         });
       },
       onPopoverRender(el: any) {
@@ -226,7 +226,7 @@ export class HeaderComponent implements OnInit {
     const commonCourseFunnelSteps = [
       ...commonFeatureSteps,
       {
-        element: '#course_funnel .ant-menu-submenu-title', //submenu of submenu
+        element: '#settings #funnel_course .ant-menu-submenu-title', //submenu of submenu
         popover: {
           title: " ",
           description: `${translate.instant('pick')} <strong>${translate.instant('course_funnel')}</strong>`,
@@ -479,7 +479,7 @@ export class HeaderComponent implements OnInit {
         steps: [
           ...commonCourseFunnelSteps,
           {
-            element: '#course_funnel #lessons', //submenu of submenu
+            element: '#funnel_course #lessons', //submenu of submenu
             popover: {
               title: " ",
               description: `${translate.instant('pick')} <strong>${translate.instant('lessons')}</strong>`,
@@ -495,7 +495,7 @@ export class HeaderComponent implements OnInit {
         steps: [
           ...commonCourseFunnelSteps,
           {
-            element: '#course_funnel #landing_page', //submenu of submenu
+            element: '#funnel_course #landing_page', //submenu of submenu
             popover: {
               title: " ",
               description: `${translate.instant('pick')} <strong>Landing page</strong>`,
@@ -512,7 +512,7 @@ export class HeaderComponent implements OnInit {
         steps: [
           ...commonCourseFunnelSteps,
           {
-            element: '#course_funnel #learning_tickets', //submenu of submenu
+            element: '#funnel_course #learning_tickets', //submenu of submenu
             popover: {
               title: " ",
               description: `${translate.instant('pick')} <strong>${translate.instant('learning_ticket')}</strong>`,
@@ -529,7 +529,7 @@ export class HeaderComponent implements OnInit {
         steps: [
           ...commonCourseFunnelSteps,
           {
-            element: '#course_funnel #registration_form', //submenu of submenu
+            element: '#funnel_course #registration_form', //submenu of submenu
             popover: {
               title: " ",
               description: `${translate.instant('pick')} <strong>${translate.instant('registration_form')}</strong>`,
@@ -746,9 +746,11 @@ export class HeaderComponent implements OnInit {
       },
     ]
 
-    const { steps }: any = tutorials.find((t: any) => t.key === key || t.key.includes(key))
-    boarding.defineSteps(steps);
-    boarding.start();
+    const tutorial: any = tutorials?.find((t: any) => t.key === key || t.key.includes(key))
+    if (tutorial) {
+      boarding.defineSteps(tutorial.steps);
+      boarding.start();
+    }
   }
 
   searchTutorial(value: string): void {
