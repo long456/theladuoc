@@ -325,14 +325,100 @@
             <span class="text-label">
               Mô tả phụ 1
             </span>
-            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="subTitle01"></textarea>
+            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="subDesc01"></textarea>
           </div>
 
           <div nz-col [nzSpan]="16">
             <span class="text-label">
               Mô tả phụ 2
             </span>
-            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="subTitle02"></textarea>
+            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="subDesc02"></textarea>
+          </div>
+
+          <div nz-col [nzSpan]="8"></div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Icon thống kê 1 (Kích thước: 50x60)
+            </span>
+            <app-file-selector formControlName="iconStatistics01"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Icon thống kê 2 (Kích thước: 50x60)
+            </span>
+            <app-file-selector formControlName="iconStatistics02"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Icon thống kê 03 (Kích thước: 50x60)
+            </span>
+            <app-file-selector formControlName="iconStatistics03"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Icon thống kê 4 (Kích thước: 50x60)
+            </span>
+            <app-file-selector formControlName="iconStatistics04"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Sô liệu thống kê 1
+            </span>
+            <nz-input-number [nzMin]="0" [nzStep]="1" formControlName="statistics01"></nz-input-number>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Sô liệu thống kê 2
+            </span>
+            <nz-input-number [nzMin]="0" [nzStep]="1" formControlName="statistics02"></nz-input-number>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Sô liệu thống kê 3
+            </span>
+            <nz-input-number [nzMin]="0" [nzStep]="1" formControlName="statistics03"></nz-input-number>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Sô liệu thống kê 4
+            </span>
+            <nz-input-number [nzMin]="0" [nzStep]="1" formControlName="statistics04"></nz-input-number>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Nội dung thống kê 1
+            </span>
+            <input nz-input formControlName="titleStatistics01">
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Nội dung thống kê 2
+            </span>
+            <input nz-input formControlName="titleStatistics02">
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Nội dung thống kê 3
+            </span>
+            <input nz-input formControlName="titleStatistics03">
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Nội dung thống kê 4
+            </span>
+            <input nz-input formControlName="titleStatistics04">
           </div>
         </div>
       </ng-container>

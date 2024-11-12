@@ -44,6 +44,12 @@ export class ForumConfigDetailComponent implements OnInit {
       footerBackgroundColor  : [null],
       footerTextColor  : [null],
       footerDescription : [null],
+
+      postArticleScore: [0],
+      courseRateScore: [0],
+      commentScore: [0],
+      emojiReactArticleScore: [0],
+      emojiReactCommentScore: [0],
     });
 
     if (!this.isCreate) {

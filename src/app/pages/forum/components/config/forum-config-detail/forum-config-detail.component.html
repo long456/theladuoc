@@ -84,7 +84,9 @@
 
           <app-file-selector formControlName="favicon"></app-file-selector>
         </div>
+
         <nz-divider nzText="Cấu hình footer diễn đàn"></nz-divider>
+
         <div nz-col [nzSpan]="8">
           <span class="text-label">
             Logo footer
@@ -123,6 +125,43 @@
           </span>
 
           <textarea formControlName="footerDescription" nz-input [nzAutosize]="{ minRows: 3 }"></textarea>
+        </div>
+
+        <nz-divider nzText="Cấu hình điểm diễn đàn"></nz-divider>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đăng bài viết
+          </span>
+          <nz-input-number formControlName="postArticleScore" [nzMin]="0" [nzMax]="10" [nzStep]="1"></nz-input-number>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Đánh giá khóa học
+          </span>
+          <nz-input-number formControlName="courseRateScore" [nzMin]="0" [nzMax]="10" [nzStep]="1"></nz-input-number>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Bình luận bài viết
+          </span>
+          <nz-input-number formControlName="commentScore" [nzMin]="0" [nzMax]="10" [nzStep]="1"></nz-input-number>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Thả biểu tượng cảm xúc bài viết
+          </span>
+          <nz-input-number formControlName="emojiReactArticleScore" [nzMin]="0" [nzMax]="10" [nzStep]="1"></nz-input-number>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Thả biểu tượng cảm xúc bình luận
+          </span>
+          <nz-input-number formControlName="emojiReactCommentScore" [nzMin]="0" [nzMax]="10" [nzStep]="1"></nz-input-number>
         </div>
       </div>
     </form>
