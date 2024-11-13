@@ -41,7 +41,6 @@
 .input-content{
   input{
     transition: 0.25s;
-    width: 30%;
     margin-right: 4px;
     border-radius: 8px;
     &.inactive{
@@ -51,6 +50,9 @@
       margin-right: 0;
     }
   }
+  display: flex;
+  align-items: center;
+  min-width: 400px;
   margin-left: 8px;
 }
 
