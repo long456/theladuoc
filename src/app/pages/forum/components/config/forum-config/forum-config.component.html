@@ -20,12 +20,11 @@
       <table-column [dataType]="COL_DATA_TYPE.SELECTION" fixColumn="left"></table-column>
       <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
       <table-column header="{{ 'forum_name' | translate }}" key="name" [width]="'200px'"></table-column>
-      <table-column header="{{ 'publish_posts' | translate }}" key="" [width]="'200px'"></table-column>
-      <table-column header="{{ 'stars_rating_course' | translate }}" key="" [width]="'200px'"></table-column>
-      <table-column header="{{ 'reply_others' | translate }}" key="" [width]="'200px'"></table-column>
-      <table-column header="{{ 'others_repliable' | translate}}" key="" [width]="'200px'"></table-column>
-      <table-column header="{{ 'comment_reaction' | translate }}" key="" [width]="'200px'"></table-column>
-      <table-column header="{{ 'reacted_comment' | translate }}" key="" [width]="'200px'"></table-column>
+      <table-column header="{{ 'publish_posts' | translate }}" key="postArticleScore" [width]="'200px'"></table-column>
+      <table-column header="{{ 'stars_rating_course' | translate }}" key="courseRateScore" [width]="'200px'"></table-column>
+      <table-column header="{{ 'comment' | translate }}" key="commentScore" [width]="'200px'"></table-column>
+      <table-column header="{{ 'article_reaction' | translate }}" key="emojiReactArticleScore" [width]="'200px'"></table-column>
+      <table-column header="{{ 'comment_reaction' | translate }}" key="emojiReactCommentScore" [width]="'200px'"></table-column>
       <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'200px'"></table-column>
       <table-column header="{{ 'status' | translate }}" key="status" [width]="'200px'">
         <ng-template appCell let-data>

@@ -36,13 +36,13 @@ export class ForumConfigDetailComponent implements OnInit {
       name: [null, [Validators.required]],
       logo: [null, [Validators.required]],
       banner: [null, [Validators.required]],
-      favicon: [null],
+      favicon: [''],
       status: [1],
 
-      footerLogo : [null],
-      footerBackgroundImage : [null],
-      footerBackgroundColor  : [null],
-      footerTextColor  : [null],
+      footerLogo : [''],
+      footerBackgroundImage : [''],
+      footerBackgroundColor  : ['#ffffff'],
+      footerTextColor  : ['#ffffff'],
       footerDescription : [null],
 
       postArticleScore: [0],

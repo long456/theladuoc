@@ -954,5 +954,7 @@
   "zoom_id": "ID phòng Zoom",
   "zoom_link": "Link Zoom",
   "homepage_link": "Đường dẫn trang chủ",
-  "elearning_ui_configuration": "Cấu hình giao diện"
+  "elearning_ui_configuration": "Cấu hình giao diện",
+  "comment": "Bình luận",
+  "article_reaction": "Thả tim bài viết"
 }

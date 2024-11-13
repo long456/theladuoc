@@ -97,13 +97,16 @@
             <nz-divider class="mt-10"></nz-divider>
 
             <div nz-col [nzSpan]="24">
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
                 <div class="text-label">
                   {{'add_content' | translate}}
                 </div>
 
                 <span class="input-content">
-                  <input #inputContent nz-input [class.inactive]="!isActive" [(ngModel)]="webData" [ngModelOptions]="{standalone: true}">
+                  <input
+                    #inputContent nz-input
+                    [class.inactive]="!isActive"
+                    [(ngModel)]="webData" [ngModelOptions]="{standalone: true}">
                   <button nz-button nzType="primary" [nzSize]="'small'" nzShape="circle" class="size-custom" (click)="changeActive()">
                     <span nz-icon nzType="plus" *ngIf="!isActive"></span>
                     <span nz-icon nzType="check" *ngIf="isActive"></span>

@@ -4,7 +4,7 @@ import {HomePageConfig} from "../../models/HomePage-Config";
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {ELearningConfigService} from "../../services/config.service";
-import {finalize} from "rxjs";
+import {filter, finalize} from "rxjs";
 
 @Component({
   selector: 'app-home-page-config',
@@ -31,6 +31,12 @@ export class HomePageConfigComponent implements OnInit{
   ];
 
   currentConfig: string = this.configList[0].value;
+
+  private fieldsToConvert = {
+    aboutUs: ['countStudent'],
+    whyChooseUs: ['statistics01', 'statistics02', 'statistics03', 'statistics04']
+  };
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -64,7 +70,7 @@ export class HomePageConfigComponent implements OnInit{
       }),
       aboutUs: this.fb.group({
         backgroundImage: [null],
-        countStudent: [null],
+        countStudent: [''],
         desc01: [null],
         desc02: [null],
         icon01: [null],
@@ -102,16 +108,16 @@ export class HomePageConfigComponent implements OnInit{
         subDesc02: [null],
 
         iconStatistics01: [null],
-        statistics01: [0],
+        statistics01: [''],
         titleStatistics01: [null],
         iconStatistics02: [null],
-        statistics02: [0],
+        statistics02: [''],
         titleStatistics02: [null],
         iconStatistics03: [null],
-        statistics03: [0],
+        statistics03: [''],
         titleStatistics03: [null],
         iconStatistics04: [null],
-        statistics04: [0],
+        statistics04: [''],
         titleStatistics04: [null],
       }),
       findCourse: this.fb.group({
@@ -126,7 +132,38 @@ export class HomePageConfigComponent implements OnInit{
         image02: [null],
         image03: [null],
       })
-    })
+    });
+
+    this.setupValueConverters();
+  }
+
+  private setupValueConverters(): void {
+    Object.entries(this.fieldsToConvert).forEach(([sectionName, fields]) => {
+      const section = this.homePageConfig.get(sectionName) as FormGroup;
+      if (section) {
+        fields.forEach(fieldName => {
+          const control = section.get(fieldName);
+          if (control) {
+            control.valueChanges
+              .pipe(
+                filter(value => value !== null && value !== undefined)
+              )
+              .subscribe(value => {
+                const stringValue = this.convertToString(value);
+                if (stringValue !== value) {
+                  control.patchValue(stringValue, { emitEvent: false });
+                }
+              });
+          }
+        });
+      }
+    });
+  }
+
+  private convertToString(value: any): string {
+    if (typeof value === 'string') return value;
+    if (Array.isArray(value)) return value.join(',');
+    return String(value);
   }
 
   pathDataForm(): void {
@@ -144,9 +181,9 @@ export class HomePageConfigComponent implements OnInit{
     })
   }
 
+
+
   edit(): void {
-    const countStudent = this.homePageConfig.get('aboutUs.countStudent')?.value;
-    this.homePageConfig.get('aboutUs.countStudent')?.setValue(countStudent.toString());
     const formData: HomePageConfig = this.homePageConfig.value;
     this.eLearningConfigService.updateHomeConfig(formData)
       .pipe(finalize(() => this.loading = false))
@@ -166,7 +203,7 @@ export class HomePageConfigComponent implements OnInit{
   }
 
   navigateBack(): void {
-    this.router.navigate(['page/e-learning-config/list']);
+    this.router.navigate(['page/e-learning-config/list']).then();
   }
 
 }
