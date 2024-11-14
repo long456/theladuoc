@@ -233,7 +233,7 @@ export class CreateECourseComponent implements OnInit {
     return () : ValidationErrors | null => {
       const courseType = this.courseForm?.get('type')?.value;
       if (courseType && courseType === 3) {
-        const prices = ['price30Day', 'price90Day', 'price180Day', 'price365Day'];
+        const prices = ['price30Day', 'price90Day', 'price180Day', 'price365Day', 'priceForever'];
         const hasInvalidPrice = prices.every(price => {
           const value = this.courseForm?.get(price)?.value;
           return value == null || value === 0 || value === '';
