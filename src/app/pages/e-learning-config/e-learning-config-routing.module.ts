@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ConfigListComponent } from './components/config-list/config-list.component';
 import {HomePageConfigComponent} from "./components/home-page-config/home-page-config.component";
 import {GeneralConfigComponent} from "./components/general-config/general-config.component";
+import {AboutUsConfigComponent} from "./components/about-us-config/about-us-config.component";
 
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
     path: 'home-page',
     component: HomePageConfigComponent
   },
+  {
+    path: 'about-us',
+    component: AboutUsConfigComponent
+  }
 ]
 
 @NgModule({

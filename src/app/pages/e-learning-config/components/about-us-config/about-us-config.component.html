@@ -1,1 +1,471 @@
-<p>about-us-config works!</p>
+<div class="title-page">
+  Cấu hình trang giới thiệu E-learning
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="20">
+    <form [formGroup]="aboutUsConfig">
+      <div nz-row>
+        <div nz-col [nzSpan]="24">
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">Cấu hình </span>
+
+            <nz-select [(ngModel)]="currentConfig" [ngModelOptions]="{standalone: true}">
+              <nz-option *ngFor="let item of configList" [nzValue]="item.value" [nzLabel]="item.name"></nz-option>
+            </nz-select>
+          </div>
+
+          <nz-divider class="mt-10"></nz-divider>
+        </div>
+      </div>
+
+      <!--SEO-->
+      <ng-container *ngIf="currentConfig === 'seo'">
+        <div nz-row [nzGutter]=[16,16] formGroupName="seo">
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề
+            </span>
+            <input nz-input autofocus formControlName="title">
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Từ khóa SEO
+            </span>
+            <input nz-input formControlName="keywords">
+          </div>
+
+          <div nz-col [nzSpan]="8"></div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Ảnh SEO
+            </span>
+            <app-file-selector formControlName="image"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8"></div>
+
+          <div nz-col [nzSpan]="16">
+            <span class="text-label">
+              Mô tả SEO
+            </span>
+            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="desc"></textarea>
+          </div>
+        </div>
+      </ng-container>
+      <!--BANNER-->
+      <ng-container *ngIf="currentConfig === 'banner'">
+        <div nz-row [nzGutter]=[16,16] formGroupName="banner">
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Hình nền (Kích thước: 1920 x 263)
+            </span>
+            <app-file-selector formControlName="backgroundImage"></app-file-selector>
+          </div>
+        </div>
+      </ng-container>
+      <!--VỀ CHÚNG TÔI-->
+      <ng-container *ngIf="currentConfig === 'aboutUs'">
+        <div nz-row [nzGutter]=[16,16] formGroupName="aboutUs">
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Ảnh nền (Kích thước: 1920 x 720)
+            </span>
+            <app-file-selector formControlName="backgroundImage"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Ảnh 1 (Kích thước: 460x460)
+            </span>
+            <app-file-selector formControlName="image01"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Ảnh 2 (Kích thước: 272x272)
+            </span>
+            <app-file-selector formControlName="image02"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tổng số khoá học đã hoàn thành
+            </span>
+            <nz-input-number [nzMin]="0" [nzStep]="1" formControlName="countCourse"></nz-input-number>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề
+            </span>
+            <input nz-input formControlName="title">
+          </div>
+
+          <div nz-col [nzSpan]="8"></div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề phụ 1
+            </span>
+            <input nz-input formControlName="subTitle01">
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề phụ 2
+            </span>
+            <input nz-input formControlName="subTitle02">
+          </div>
+
+          <div nz-col [nzSpan]="16">
+            <span class="text-label">
+              Mô tả 1
+            </span>
+            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="desc01"></textarea>
+          </div>
+
+          <div nz-col [nzSpan]="16">
+            <span class="text-label">
+              Mô tả 2
+            </span>
+            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="desc02"></textarea>
+          </div>
+        </div>
+      </ng-container>
+      <!--DỊCH VỤ-->
+      <ng-container *ngIf="currentConfig === 'services'">
+        <div nz-row [nzGutter]=[16,16] formGroupName="services">
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề
+            </span>
+            <input nz-input formControlName="title">
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Ảnh nền (Kích thước: 1920 x 720)
+            </span>
+            <app-file-selector formControlName="backgroundImage"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8"></div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề phụ 1
+            </span>
+            <input nz-input formControlName="subTitle01">
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Icon 1
+            </span>
+            <app-file-selector formControlName="icon01"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Màu nền khối 1
+            </span>
+            <app-color-picker formControlName="backgroundColor01"></app-color-picker>
+          </div>
+
+          <div nz-col [nzSpan]="18">
+            <span class="text-label">
+              Mô tả 1
+            </span>
+            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="desc01"></textarea>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề phụ 2
+            </span>
+            <input nz-input formControlName="subTitle02">
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Icon 2
+            </span>
+            <app-file-selector formControlName="icon02"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Màu nền khối 2
+            </span>
+            <app-color-picker formControlName="backgroundColor02"></app-color-picker>
+          </div>
+
+          <div nz-col [nzSpan]="18">
+            <span class="text-label">
+              Mô tả 2
+            </span>
+            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="desc02"></textarea>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề phụ 3
+            </span>
+            <input nz-input formControlName="subTitle03">
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Icon 3
+            </span>
+            <app-file-selector formControlName="icon03"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Màu nền khối 3
+            </span>
+            <app-color-picker formControlName="backgroundColor03"></app-color-picker>
+          </div>
+
+          <div nz-col [nzSpan]="18">
+            <span class="text-label">
+              Mô tả 3
+            </span>
+            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="desc03"></textarea>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề phụ 4
+            </span>
+            <input nz-input formControlName="subTitle02">
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Icon 4
+            </span>
+            <app-file-selector formControlName="icon02"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Màu nền khối 4
+            </span>
+            <app-color-picker formControlName="backgroundColor04"></app-color-picker>
+          </div>
+
+          <div nz-col [nzSpan]="18">
+            <span class="text-label">
+              Mô tả 4
+            </span>
+            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="desc04"></textarea>
+          </div>
+        </div>
+      </ng-container>
+      <!--SỰ KIỆN SẮP TỚI-->
+      <ng-container *ngIf="currentConfig === 'listEvent'">
+        <div nz-row [nzGutter]=[16,16] formGroupName="listEvent">
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Hình nền (Kích thước: 1900 x 1400)
+            </span>
+            <app-file-selector formControlName="backgroundImage"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề
+            </span>
+            <input nz-input formControlName="title">
+          </div>
+
+          <div nz-col [nzSpan]="8"></div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Ảnh (Kích thước: 518 x 339)
+            </span>
+            <app-file-selector formControlName="image"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Video
+            </span>
+            <app-video-selector formControlName="video"></app-video-selector>
+          </div>
+
+          <div nz-col [nzSpan]="16">
+            <span class="text-label">
+              Mô tả
+            </span>
+            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="desc"></textarea>
+          </div>
+        </div>
+      </ng-container>
+      <!--TẠI SAO CHỌN CHÚNG TÔI-->
+      <ng-container *ngIf="currentConfig === 'whyChooseUs'">
+        <div nz-row [nzGutter]=[16,16] formGroupName="whyChooseUs">
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Hình nền (Kích thước: 1900 x 720)
+            </span>
+            <app-file-selector formControlName="backgroundImage"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề
+            </span>
+            <input nz-input formControlName="title">
+          </div>
+
+          <div nz-col [nzSpan]="16">
+            <span class="text-label">
+              Mô tả
+            </span>
+            <textarea nz-input [nzAutosize]="{ minRows: 3 }" formControlName="desc"></textarea>
+          </div>
+          <div nz-col [nzSpan]="8"></div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Icon 1 (Kích thước: 16 x 16)
+            </span>
+            <app-file-selector formControlName="icon01"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Icon 2 (Kích thước: 16 x 16)
+            </span>
+            <app-file-selector formControlName="icon02"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Icon 3 (Kích thước: 16 x 16)
+            </span>
+            <app-file-selector formControlName="icon03"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Icon 4 (Kích thước: 16 x 16)
+            </span>
+            <app-file-selector formControlName="icon04"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Tiêu đề phụ 1
+            </span>
+            <input nz-input formControlName="subTitle01">
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Tiêu đề phụ 2
+            </span>
+            <input nz-input formControlName="subTitle02">
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Tiêu đề phụ 3
+            </span>
+            <input nz-input formControlName="subTitle03">
+          </div>
+
+          <div nz-col [nzSpan]="6">
+            <span class="text-label">
+              Tiêu đề phụ 4
+            </span>
+            <input nz-input formControlName="subTitle04">
+          </div>
+        </div>
+      </ng-container>
+      <!--ĐỘI NGŨ GIẢNG VIÊN-->
+      <ng-container *ngIf="currentConfig === 'teachers'">
+        <div nz-row [nzGutter]=[16,16] formGroupName="teachers">
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Hình nền (Kích thước: 1900 x 800)
+            </span>
+            <app-file-selector formControlName="backgroundImage"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề
+            </span>
+            <input nz-input formControlName="title">
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Tiêu đề nhỏ
+            </span>
+            <input nz-input formControlName="titleSmall">
+          </div>
+        </div>
+      </ng-container>
+      <!--LỜI CHỨNG THỰC-->
+      <ng-container *ngIf="currentConfig === 'testimonial'">
+        <div nz-row [nzGutter]=[16,16] formGroupName="testimonial">
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Hình nền (Kích thước: 1900 x 970)
+            </span>
+            <app-file-selector formControlName="backgroundImage"></app-file-selector>
+          </div>
+        </div>
+      </ng-container>
+      <!--LỜI MỜI GIẢNG VIÊN-->
+      <ng-container *ngIf="currentConfig === 'registerTeacher'">
+        <div nz-row [nzGutter]=[16,16] formGroupName="registerTeacher">
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Hình nền (Kích thước: 562 x 272)
+            </span>
+            <app-file-selector formControlName="backgroundImage"></app-file-selector>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Ảnh đại diện (Kích thước: 217 x 251)
+            </span>
+            <app-file-selector formControlName="image"></app-file-selector>
+          </div>
+        </div>
+      </ng-container>
+      <!--LỜI MỜI CỘNG TÁC VIÊN-->
+      <ng-container *ngIf="currentConfig === 'registerCollab'">
+        <div nz-row [nzGutter]=[16,16] formGroupName="registerCollab">
+          <div nz-col [nzSpan]="8">
+            <span class="text-label">
+              Hình nền (Kích thước: 562 x 272)
+            </span>
+            <app-file-selector formControlName="backgroundImage"></app-file-selector>
+          </div>
+        </div>
+      </ng-container>
+    </form>
+  </div>
+
+  <div nz-col [nzSpan]="4">
+    <div class="btn-panel">
+      <button class="btn primary" nz-button (click)="edit()">
+        {{'save'|translate}}
+      </button>
+      <button class="btn" nz-button (click)="navigateBack()">
+        {{'cancel'|translate}}
+      </button>
+    </div>
+  </div>
+</div>

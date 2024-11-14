@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import {GeneralConfig} from "../models/GeneralConfig";
 import {HomePageConfig} from "../models/HomePage-Config";
+import {AboutUsConfig} from "../models/AboutUSConfig";
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,13 @@ export class ELearningConfigService {
 
   updateHomeConfig(data : HomePageConfig): Observable<any> {
     return this.http.post('ConfigElearningWeb/config-view-home', data);
+  }
+
+  getAboutUsConfig(): Observable<any> {
+    return this.http.get('ConfigElearningWeb/detail-config-view-about-us');
+  }
+
+  updateAboutUsConfig(data: AboutUsConfig): Observable<any> {
+    return this.http.post('ConfigElearningWeb/config-view-about-us', data);
   }
 }
