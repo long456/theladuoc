@@ -74,10 +74,14 @@ export class ConfigListComponent implements OnInit {
   }
 
   navigateHomeConfig(): void {
-    this.router.navigate(['page/e-learning-config/home-page']);
+    this.router.navigate(['page/e-learning-config/home-page']).then();
   }
 
   navigateGeneralConfig(): void {
-    this.router.navigate(['page/e-learning-config/general']);
+    this.router.navigate(['page/e-learning-config/general']).then();
+  }
+
+  navigateAboutUsConfig(): void {
+    this.router.navigate(['page/e-learning-config/about-us']).then();
   }
 }

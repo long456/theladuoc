@@ -29,7 +29,6 @@ export class HomePageConfigComponent implements OnInit{
     { name: 'Tin tức', value: 'listPost' },
     { name: 'Câu hỏi thường gặp', value: 'faq' }
   ];
-
   currentConfig: string = this.configList[0].value;
 
   private fieldsToConvert = {
