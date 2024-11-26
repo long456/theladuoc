@@ -3,7 +3,7 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn} 
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {PaymentMethodService} from "../../../services/payment-method.service";
-import {distinctUntilChanged, take, tap} from "rxjs";
+import {take} from "rxjs";
 import {FileManagerService} from "../../../../../shared/services/file-manager.service";
 
 @Component({
@@ -140,6 +140,11 @@ export class PaymentMethodCreateComponent implements OnInit{
   }
 
   navigateBack():void {
-    this.router.navigate(['/page/payment/method']);
+    this.router.navigate(['/page/payment/method']).then();
+  }
+
+  redirectSePay():void{
+    const sePayUrl = 'https://sepay.vn?gcid=dhawwluo';
+    window.open(sePayUrl, '_blank');
   }
 }
