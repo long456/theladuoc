@@ -957,5 +957,7 @@
   "homepage_link": "Homepage Link",
   "elearning_ui_configuration": "E-learning UI Configuration",
   "comment": "Comment",
-  "article_reaction": "Article reaction"
+  "article_reaction": "Article reaction",
+  "general_control": "General control",
+  "sePay": "SePay"
 }

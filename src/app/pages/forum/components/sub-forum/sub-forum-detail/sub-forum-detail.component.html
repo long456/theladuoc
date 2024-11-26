@@ -195,8 +195,13 @@
             {{'specify_admin' | translate }}
           </span>
 
-          <nz-select nzShowSearch nzServerSearch nzPlaceHolder="input search text" formControlName="adminIds" nzMode="multiple" [nzShowArrow]="false" [nzLoading]="isLoadingSearch" [nzFilterOption]="nzFilterOption" (nzOnSearch)="searchAdmin($event)">
-            <nz-option *ngFor="let op of listOpAdmin" [nzValue]="op.id" [nzLabel]="op.name + ' - ' + op.email + ' - ' + op.code"></nz-option>
+          <nz-select nzShowSearch nzServerSearch nzPlaceHolder="input search text"
+                     formControlName="adminIds" nzMode="multiple"
+                     [nzShowArrow]="false" [nzLoading]="isLoadingSearch" [nzFilterOption]="nzFilterOption"
+                     (nzOnSearch)="searchAdmin($event)">
+            <nz-option *ngFor="let op of listOpAdmin" [nzValue]="op.id"
+                       [nzLabel]="op.name + ' - ' + op.email + ' - ' + op.code"
+            ></nz-option>
           </nz-select>
         </div>
       </div>

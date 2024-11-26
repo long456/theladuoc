@@ -110,6 +110,11 @@ export class SideBarComponent implements OnInit {
       children: [
         {
           icon: '',
+          link: 'page/general-control',
+          name: 'general_control',
+        },
+        {
+          icon: '',
           link: '',
           name: 'learners',
           children: [

@@ -105,6 +105,10 @@ const routes: Routes = [
         path: 'price-list',
         loadChildren: () => import('./pages/price-list/price-list.module').then(m => m.PriceListModule),
       },
+      {
+        path: 'general-control',
+        loadChildren: () => import('./pages/general-control/general-control.module').then(m => m.GeneralControlModule),
+      },
     ],
   },
 ];

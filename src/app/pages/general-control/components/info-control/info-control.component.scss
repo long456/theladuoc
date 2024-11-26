@@ -1,0 +1,23 @@
+.info-content{
+  display: flex;
+  align-items: center;
+}
+
+nz-card, nz-select{
+  width: 100%;
+}
+
+nz-card{
+  box-shadow: 0 3px 11px #e8eafc, 0 3px 3px -2px #b2b2b21a, 0 1px 8px #9a9a9a1a;
+}
+
+form{
+  //background: #f6f7ff;
+  padding-top: 15px;
+  min-height: 60vh;
+}
+
+
+span[nz-typography]{
+  font-weight: 500;
+}

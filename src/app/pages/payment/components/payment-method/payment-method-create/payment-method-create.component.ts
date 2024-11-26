@@ -3,7 +3,7 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn} 
 import {ActivatedRoute, Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {PaymentMethodService} from "../../../services/payment-method.service";
-import {take} from "rxjs";
+import {distinctUntilChanged, take, tap} from "rxjs";
 import {FileManagerService} from "../../../../../shared/services/file-manager.service";
 
 @Component({
@@ -13,9 +13,9 @@ import {FileManagerService} from "../../../../../shared/services/file-manager.se
 })
 export class PaymentMethodCreateComponent implements OnInit{
   isCreate: boolean = false;
-  isSubmit: boolean = false;
   paymentMethodForm!: FormGroup;
   methodId!: number;
+  listBankCode: any[] = [];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -30,10 +30,10 @@ export class PaymentMethodCreateComponent implements OnInit{
     this.paymentMethodForm = this.fb.group({
       type: [1],
       status: [1],
-      bankName: [null, [this.requireValidator(1)]],
-      bankNumber: [null, [this.requireValidator(1)]],
-      bankUserName: [null, [this.requireValidator(1)]],
-      bankQR: [null, [this.requireValidator(1)]],
+      bankName: [null, [this.requireValidator(1), this.requireValidator(4)]],
+      bankNumber: [null, [this.requireValidator(1), this.requireValidator(4)]],
+      bankUserName: [null, [this.requireValidator(1), this.requireValidator(4)]],
+      bankQR: [null,this.requireValidator(1)],
 
       vnPayTmnCode: [null, [this.requireValidator(2)]],
       vnPayHashSecret: [null, [this.requireValidator(2)]],
@@ -48,25 +48,51 @@ export class PaymentMethodCreateComponent implements OnInit{
       baoKimWebhooks: [null, [this.requireValidator(3)]],
       baoKimAudience: [null, [this.requireValidator(3)]],
     });
+    this.getListBankCode();
 
     if (!this.isCreate) {
-      this.route.params.pipe().subscribe(params => {
-        const {id} = params;
-        this.methodId = id;
-        this.paymentMethodService.getMethodById(this.methodId).subscribe({
-          next: res => {
-            if (res.success)
-              this.paymentMethodForm.patchValue(res.data);
-            else
-              this.message.error(res.errorMessages);
-          },
-          error: err => {
-            this.message.error(err);
-          }
-
-        });
-      })
+      this.pathValueForm();
     }
+
+    this.paymentMethodForm?.get('type')?.valueChanges.subscribe((value) => {
+      if (value === 4 ) {
+        this.paymentMethodForm.get('bankQR')?.removeValidators(this.requireValidator(1));
+      }
+
+      if (value === 1) {
+        this.paymentMethodForm.get('bankQR')?.addValidators(this.requireValidator(1));
+      }
+      this.paymentMethodForm.get('bankQR')?.reset();
+      this.paymentMethodForm.updateValueAndValidity();
+    })
+  }
+
+  pathValueForm():void {
+    this.route.params.pipe().subscribe(params => {
+      const {id} = params;
+      this.methodId = id;
+      this.paymentMethodService.getMethodById(this.methodId).subscribe({
+        next: res => {
+          if (res.success)
+            this.paymentMethodForm.patchValue(res.data);
+          else
+            this.message.error(res.errorMessages);
+        },
+        error: err => {
+          this.message.error(err);
+        }
+      });
+    })
+  }
+
+  getListBankCode():void {
+    this.paymentMethodService.getBankCode().subscribe({
+      next: res => {
+        if (res.code === '00') {
+          this.listBankCode = res.data;
+        }
+      }
+    })
   }
 
   onSelectFile():void {
@@ -76,9 +102,10 @@ export class PaymentMethodCreateComponent implements OnInit{
     });
   }
 
-  requireValidator(type: 1|2|3): ValidatorFn {
+  requireValidator(type: 1|2|3|4): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      if (this.paymentMethodForm?.value?.type === type) {
+      const methodType = this.paymentMethodForm?.get('type')?.value
+      if (methodType && methodType === type) {
         const requireValid = (control.value as string)?.trim() === '' || control.value === null
         return requireValid
           ? {requireValue: true}
@@ -89,7 +116,7 @@ export class PaymentMethodCreateComponent implements OnInit{
   }
 
   edit(): void {
-    this.isSubmit = true;
+    this.paymentMethodForm.markAllAsTouched();
     if (!this.paymentMethodForm.valid) return;
 
     const dataMethod = { ...this.paymentMethodForm.value };

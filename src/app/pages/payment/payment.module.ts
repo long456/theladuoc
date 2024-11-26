@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { PaymentAuthComponent } from './components/payment-auth/payment-auth.component';
 import {SharedModule} from "../../shared/shared.module";
 import { NzImageModule } from 'ng-zorro-antd/image';
@@ -22,16 +22,17 @@ import { WithdrawRequestComponent } from './components/withdraw-request/withdraw
     PaymentMethodCreateComponent,
     WithdrawRequestComponent,
   ],
-  imports: [
-    CommonModule,
-    PaymentRoutingModule,
-    SharedModule,
-    NzImageModule,
-    NzCollapseModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NzSelectModule,
-    NzSwitchModule,
-  ]
+    imports: [
+        CommonModule,
+        PaymentRoutingModule,
+        SharedModule,
+        NzImageModule,
+        NzCollapseModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NzSelectModule,
+        NzSwitchModule,
+        NgOptimizedImage,
+    ]
 })
 export class PaymentModule { }
