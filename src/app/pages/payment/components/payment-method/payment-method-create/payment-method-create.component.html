@@ -42,6 +42,12 @@
           </span>
 
           <nz-switch formControlName="status" style="display: block"></nz-switch>
+          <button
+            nz-button nzType="link"
+            class="sePay-register"
+            (click)="redirectSePay()"
+            *ngIf="paymentMethodForm.value?.type === 4"
+          >Chưa đăng ký SePay ?</button>
         </div>
 
         <ng-container *ngIf="paymentMethodForm.value?.type === 1 || paymentMethodForm.value?.type === 4">
