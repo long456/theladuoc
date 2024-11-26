@@ -24,6 +24,8 @@
         <ng-template appCell let-data>
           <span *ngIf="data.type === 1">Chuyển khoản</span>
           <span *ngIf="data.type === 2">VnPay</span>
+          <span *ngIf="data.type === 3">Bảo Kim</span>
+          <span *ngIf="data.type === 4">SePay</span>
         </ng-template>
       </table-column>
       <table-column header="{{ 'bank' | translate }}" key="bankName" [width]="'200px'"></table-column>

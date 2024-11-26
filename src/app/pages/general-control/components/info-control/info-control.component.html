@@ -1,0 +1,95 @@
+<form [formGroup]="userInfoForm">
+  <div nz-row [nzGutter]=[16,16]>
+    <div nz-col [nzSpan]="10">
+      <nz-card>
+        <nz-card-meta
+          [nzAvatar]="avatarTemplate"
+          [nzTitle]="userInfoForm.get('fullName')?.value + ' - ' + userInfoForm.get('code')?.value"
+          [nzDescription]="infoTemplate"
+        ></nz-card-meta>
+      </nz-card>
+    </div>
+
+    <div nz-col [nzSpan]="14">
+      <nz-card  nzTitle="Thông tin  ">
+        <div nz-row [nzGutter]=[8,8]>
+          <div nz-col [nzSpan]="8">
+            <span nz-typography>Link giới thiệu</span>
+            <input nz-input nzBorderless readonly formControlName="referralLink" placeholder="Trống"/>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span nz-typography>Tên người giới thiệu</span>
+            <input nz-input nzBorderless readonly formControlName="referralUserName" placeholder="Trống"/>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span nz-typography>Email người giới thiệu</span>
+            <input nz-input nzBorderless readonly formControlName="referralUserEmail" placeholder="Trống"/>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span nz-typography>Người chăm sóc</span>
+            <input nz-input nzBorderless readonly formControlName="userCaregiverName" placeholder="Trống"/>
+          </div>
+
+          <div nz-col [nzSpan]="8">
+            <span nz-typography>Email người chăm sóc</span>
+            <input nz-input nzBorderless readonly formControlName="userCaregiverEmail" placeholder="Trống"/>
+          </div>
+
+          <div nz-col [nzSpan]="24" *ngIf="hasValue('memberShipLevels') &&
+                                           getValue('memberShipLevels').length > 0" >
+            <nz-list [nzBordered]="true" nzHeader="Hạng thành viên">
+              <nz-list-item *ngFor="let item of getValue('memberShipLevels')">
+                {{item.name}}
+              </nz-list-item>
+            </nz-list>
+          </div>
+
+          <div nz-col [nzSpan]="24" *ngIf="hasValue('userRole')">
+            <nz-select formControlName="userRole" nzMode="multiple">
+              <nz-option *ngFor="let role of listRole" [nzValue]="role.key" [nzLabel]="role.name" nzDisabled >
+              </nz-option>
+            </nz-select>
+          </div>
+        </div>
+      </nz-card>
+    </div>
+  </div>
+
+  <ng-template #avatarTemplate>
+    <nz-avatar  [nzSize]="150" nzIcon="user" [nzSrc]="(baseUrl + userInfoForm.get('avatar')?.value)"></nz-avatar>
+  </ng-template>
+
+  <ng-template #infoTemplate>
+    <div nz-row [nzGutter]=[8,8]>
+      <div *ngIf="hasValue('birthDay')" nz-col [nzSpan]="12" class="info-content">
+        <span nz-icon nzType="calendar" nzTheme="outline"></span>
+        <input nz-input nzBorderless readonly formControlName="birthDay"/>
+      </div>
+
+      <div *ngIf="hasValue('gender')" nz-col [nzSpan]="12" class="info-content">
+        <span nz-icon nzType="man" nzTheme="outline"></span>
+        <input nz-input nzBorderless readonly formControlName="gender"/>
+      </div>
+
+      <div *ngIf="hasValue('phoneNumber')" nz-col [nzSpan]="24" class="info-content">
+        <span nz-icon nzType="phone" nzTheme="outline"></span>
+        <input nz-input nzBorderless readonly formControlName="phoneNumber"/>
+      </div>
+
+      <div *ngIf="hasValue('email')" nz-col [nzSpan]="24" class="info-content">
+        <span nz-icon nzType="mail" nzTheme="outline"></span>
+        <input nz-input nzBorderless readonly formControlName="email"/>
+      </div>
+
+      <div *ngIf="hasValue('address')" nz-col [nzSpan]="24" class="info-content">
+        <span nz-icon nzType="home" nzTheme="outline"></span>
+        <input nz-input nzBorderless readonly formControlName="address"/>
+      </div>
+    </div>
+  </ng-template>
+</form>
+
+

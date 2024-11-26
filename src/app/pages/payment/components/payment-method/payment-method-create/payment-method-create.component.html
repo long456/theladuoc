@@ -32,6 +32,7 @@
             <nz-option [nzValue]="1" [nzLabel]="'bank_transfer' | translate"></nz-option>
             <nz-option [nzValue]="2" [nzLabel]="'vnpay' | translate"></nz-option>
             <nz-option [nzValue]="3" [nzLabel]="'bao_kim' | translate"></nz-option>
+            <nz-option [nzValue]="4" [nzLabel]="'sePay' | translate"></nz-option>
           </nz-select>
         </div>
 
@@ -43,18 +44,26 @@
           <nz-switch formControlName="status" style="display: block"></nz-switch>
         </div>
 
-        <ng-container *ngIf="paymentMethodForm.value?.type === 1">
+        <ng-container *ngIf="paymentMethodForm.value?.type === 1 || paymentMethodForm.value?.type === 4">
           <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
-          <span class="text-label">
-            {{'bank' | translate }}
-            <span class="text-danger">*</span>
-          </span>
+            <span class="text-label">
+              {{'bank' | translate }}
+              <span class="text-danger">*</span>
+            </span>
 
-            <input nz-input formControlName="bankName"
-                   [nzStatus]="(paymentMethodForm.get('bankName')?.invalid &&
-                               (paymentMethodForm.get('bankName')?.touched || isSubmit)) ? 'error' : ''">
+            <nz-select nzShowSearch nzAllowClear formControlName="bankName"
+                       [nzStatus]="(paymentMethodForm.get('bankName')?.invalid &&
+                                   (paymentMethodForm.get('bankName')?.touched)) ? 'error' : ''"
+            >
+              <ng-container *ngFor="let bank of listBankCode">
+                <nz-option nzCustomContent [nzLabel]="bank.name + ' - ' + bank.code" [nzValue]="bank.short_name" >
+                  <img [src]="bank.logo" class="bank-logo">
+                  {{bank.name}}
+                </nz-option>
+              </ng-container>
+            </nz-select>
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('bankName')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('bankName')?.touched)  &&
                           paymentMethodForm.get('bankName')?.hasError('requireValue')">
               {{'bank' | translate}} {{'cannot_blank' | translate}}
             </span>
@@ -68,9 +77,9 @@
 
             <input nz-input formControlName="bankNumber"
                    [nzStatus]="(paymentMethodForm.get('bankNumber')?.invalid &&
-                               (paymentMethodForm.get('bankNumber')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('bankNumber')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('bankNumber')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('bankNumber')?.touched)  &&
                           paymentMethodForm.get('bankNumber')?.hasError('requireValue')">
               {{ 'account_number' | translate }} {{'cannot_blank' | translate}}
             </span>
@@ -84,15 +93,15 @@
 
             <input nz-input formControlName="bankUserName"
                    [nzStatus]="(paymentMethodForm.get('bankUserName')?.invalid &&
-                               (paymentMethodForm.get('bankUserName')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('bankUserName')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('bankUserName')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('bankUserName')?.touched)  &&
                           paymentMethodForm.get('bankUserName')?.hasError('requireValue')">
               {{ 'account_holder' | translate }} {{'cannot_blank' | translate}}
             </span>
           </div>
 
-          <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9">
+          <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="9" *ngIf="paymentMethodForm.value?.type !== 4">
           <span class="text-label">
             {{'qr_code' | translate}}
             <span class="text-danger">*</span>
@@ -101,14 +110,14 @@
             <div style="display: flex">
               <input nz-input formControlName="bankQR"
                      [nzStatus]="(paymentMethodForm.get('bankQR')?.invalid &&
-                                 (paymentMethodForm.get('bankQR')?.touched || isSubmit)) ? 'error' : ''">
+                                 (paymentMethodForm.get('bankQR')?.touched)) ? 'error' : ''">
               <button nz-button nzType="primary" (click)="onSelectFile()">
                 <span nz-icon nzType="upload"></span>
               </button>
             </div>
 
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('bankQR')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('bankQR')?.touched)  &&
                           paymentMethodForm.get('bankQR')?.hasError('requireValue')">
                   {{'qr_code' | translate}} {{'cannot_blank' | translate}}
             </span>
@@ -124,9 +133,9 @@
 
             <input nz-input formControlName="vnPayTmnCode"
                    [nzStatus]="(paymentMethodForm.get('vnPayTmnCode')?.invalid &&
-                               (paymentMethodForm.get('vnPayTmnCode')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('vnPayTmnCode')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('vnPayTmnCode')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('vnPayTmnCode')?.touched)  &&
                           paymentMethodForm.get('vnPayTmnCode')?.hasError('requireValue')">
                   VnPay-TmnCode {{'cannot_blank' | translate}}
             </span>
@@ -140,9 +149,9 @@
 
             <input nz-input formControlName="vnPayHashSecret"
                    [nzStatus]="(paymentMethodForm.get('vnPayHashSecret')?.invalid &&
-                               (paymentMethodForm.get('vnPayHashSecret')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('vnPayHashSecret')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('vnPayHashSecret')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('vnPayHashSecret')?.touched)  &&
                           paymentMethodForm.get('vnPayHashSecret')?.hasError('requireValue')">
                   VnPay-ashSecret {{'cannot_blank' | translate}}
             </span>
@@ -156,9 +165,9 @@
 
             <input nz-input formControlName="vnPayPaymentUrl"
                    [nzStatus]="(paymentMethodForm.get('vnPayPaymentUrl')?.invalid &&
-                               (paymentMethodForm.get('vnPayPaymentUrl')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('vnPayPaymentUrl')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('vnPayPaymentUrl')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('vnPayPaymentUrl')?.touched)  &&
                           paymentMethodForm.get('vnPayPaymentUrl')?.hasError('requireValue')">
                   VnPay-PaymentUrl {{'cannot_blank' | translate}}
             </span>
@@ -172,10 +181,10 @@
 
             <input nz-input formControlName="vnPayReturnUrl"
                    [nzStatus]="(paymentMethodForm.get('vnPayReturnUrl')?.invalid &&
-                               (paymentMethodForm.get('vnPayReturnUrl')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('vnPayReturnUrl')?.touched)) ? 'error' : ''">
 
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('vnPayReturnUrl')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('vnPayReturnUrl')?.touched)  &&
                           paymentMethodForm.get('vnPayReturnUrl')?.hasError('requireValue')">
                   VnPay-ReturnUrl {{'cannot_blank' | translate}}
             </span>
@@ -191,9 +200,9 @@
 
             <input nz-input formControlName="baoKimApiKey"
                    [nzStatus]="(paymentMethodForm.get('baoKimApiKey')?.invalid &&
-                               (paymentMethodForm.get('baoKimApiKey')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('baoKimApiKey')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('baoKimApiKey')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('baoKimApiKey')?.touched)  &&
                           paymentMethodForm.get('baoKimApiKey')?.hasError('requireValue')">
                   BaoKim-ApiKey {{'cannot_blank' | translate}}
             </span>
@@ -207,9 +216,9 @@
 
             <input nz-input formControlName="baoKimApiSecret"
                    [nzStatus]="(paymentMethodForm.get('baoKimApiSecret')?.invalid &&
-                               (paymentMethodForm.get('baoKimApiSecret')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('baoKimApiSecret')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('baoKimApiSecret')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('baoKimApiSecret')?.touched)  &&
                           paymentMethodForm.get('baoKimApiSecret')?.hasError('requireValue')">
                   BaoKim-ApiSecret {{'cannot_blank' | translate}}
             </span>
@@ -223,9 +232,9 @@
 
             <input nz-input formControlName="baoKimApiUrl"
                    [nzStatus]="(paymentMethodForm.get('baoKimApiUrl')?.invalid &&
-                               (paymentMethodForm.get('baoKimApiUrl')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('baoKimApiUrl')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('baoKimApiUrl')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('baoKimApiUrl')?.touched)  &&
                           paymentMethodForm.get('baoKimApiUrl')?.hasError('requireValue')">
                   BaoKim-ApiUrl {{'cannot_blank' | translate}}
             </span>
@@ -239,9 +248,9 @@
 
             <input nz-input formControlName="baoKimMerchantId"
                    [nzStatus]="(paymentMethodForm.get('baoKimMerchantId')?.invalid &&
-                               (paymentMethodForm.get('baoKimMerchantId')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('baoKimMerchantId')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('baoKimMerchantId')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('baoKimMerchantId')?.touched)  &&
                           paymentMethodForm.get('baoKimMerchantId')?.hasError('requireValue')">
                   BaoKim-MerchantId {{'cannot_blank' | translate}}
             </span>
@@ -255,9 +264,9 @@
 
             <input nz-input formControlName="baoKimUrlSuccess"
                    [nzStatus]="(paymentMethodForm.get('baoKimUrlSuccess')?.invalid &&
-                               (paymentMethodForm.get('baoKimUrlSuccess')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('baoKimUrlSuccess')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('baoKimUrlSuccess')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('baoKimUrlSuccess')?.touched)  &&
                           paymentMethodForm.get('baoKimUrlSuccess')?.hasError('requireValue')">
                   BaoKim-UrlSuccess {{'cannot_blank' | translate}}
             </span>
@@ -271,9 +280,9 @@
 
             <input nz-input formControlName="baoKimWebhooks"
                    [nzStatus]="(paymentMethodForm.get('baoKimWebhooks')?.invalid &&
-                               (paymentMethodForm.get('baoKimWebhooks')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('baoKimWebhooks')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('baoKimWebhooks')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('baoKimWebhooks')?.touched)  &&
                           paymentMethodForm.get('baoKimWebhooks')?.hasError('requireValue')">
                   BaoKim-Webhooks {{'cannot_blank' | translate}}
             </span>
@@ -287,9 +296,9 @@
 
             <input nz-input formControlName="baoKimAudience"
                    [nzStatus]="(paymentMethodForm.get('baoKimAudience')?.invalid &&
-                               (paymentMethodForm.get('baoKimAudience')?.touched || isSubmit)) ? 'error' : ''">
+                               (paymentMethodForm.get('baoKimAudience')?.touched)) ? 'error' : ''">
             <span class="text-danger"
-                  *ngIf="(paymentMethodForm.get('baoKimAudience')?.touched || isSubmit)  &&
+                  *ngIf="(paymentMethodForm.get('baoKimAudience')?.touched)  &&
                           paymentMethodForm.get('baoKimAudience')?.hasError('requireValue')">
                   BaoKim-Audience {{'cannot_blank' | translate}}
             </span>

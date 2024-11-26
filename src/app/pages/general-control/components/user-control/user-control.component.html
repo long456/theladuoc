@@ -1,0 +1,42 @@
+<div class="title-page">
+  Bảng điều khiển chung
+</div>
+
+<div nz-row>
+  <div nz-col [nzSpan]="24">
+    <div nz-row class="search-user">
+      <div nz-col [nzSpan]="12">
+        <span class="text-label">
+          Tìm kiếm
+        </span>
+        <nz-select nzShowSearch nzServerSearch class="user-input"
+                   nzPlaceHolder="Nhập tên, email, số điện thoại hoặc code của người dùng"
+                   [nzShowArrow]="false" [nzLoading]="isLoading"
+                   [(ngModel)]="userData" [ngModelOptions]="{standalone: true}"
+                   (ngModelChange)="onSelectionChange($event)"
+                   [nzFilterOption]="nzFilterOption" (nzOnSearch)="searchUser($event)">
+                <nz-option *ngFor="let user of listUser" [nzValue]="user"
+                           [nzLabel]="user.name + ' - ' + user.email + ' - ' + user.code"
+                ></nz-option>
+        </nz-select>
+      </div>
+    </div>
+    <nz-divider class="mt-15"></nz-divider>
+
+    <ng-container *ngIf="userData; else blank">
+      <nz-tabset [nzTabPosition]="'left'">
+        <nz-tab [nzTitle]="'Thông tin học viên'">
+          <router-outlet></router-outlet>
+        </nz-tab>
+
+        <nz-tab [nzTitle]="'Quản lý tài chính'" (nzSelect)="log($event)">
+          <router-outlet></router-outlet>
+        </nz-tab>
+      </nz-tabset>
+    </ng-container>
+
+    <ng-template #blank>
+      <nz-empty nzNotFoundImage="simple"></nz-empty>
+    </ng-template>
+  </div>
+</div>

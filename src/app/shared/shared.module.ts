@@ -41,6 +41,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import { ColorPickerComponent } from './components/color-picker/color-picker.component';
 import { FileSelectorComponent } from './components/file-selector/file-selector.component';
 import { VideoSelectorComponent } from './components/video-selector/video-selector.component';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { VideoSelectorComponent } from './components/video-selector/video-select
     NzEmptyModule,
     NzPaginationModule,
     TranslateModule,
+    NzTypographyModule
 
   ],
   exports: [
@@ -114,7 +116,8 @@ import { VideoSelectorComponent } from './components/video-selector/video-select
     TranslateModule,
     ColorPickerComponent,
     FileSelectorComponent,
-    VideoSelectorComponent
+    VideoSelectorComponent,
+    NzTypographyModule
   ]
 })
 export class SharedModule { }

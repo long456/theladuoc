@@ -956,5 +956,7 @@
   "homepage_link": "Đường dẫn trang chủ",
   "elearning_ui_configuration": "Cấu hình giao diện",
   "comment": "Bình luận",
-  "article_reaction": "Thả tim bài viết"
+  "article_reaction": "Thả tim bài viết",
+  "general_control": "Điều khiển chung",
+  "sePay": "Thanh toán SePay"
 }
