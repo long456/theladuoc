@@ -35,4 +35,20 @@ export class UserControlService {
   getUserInfo(id: number, type: number): Observable<any> {
     return this.http.get('GeneralControlPanel/get-personal-information', {params: {id: id, UserType: type}});
   }
+
+  getCommissionStatistics(id: number, type: number): Observable<any> {
+    return this.http.get('GeneralControlPanel/get-page-list-commission-statistics', {params: {id: id, UserType: type}});
+  }
+
+  getTransactionHistory(id: number, type: number): Observable<any> {
+    return this.http.get('GeneralControlPanel/get-page-list-transaction-history', {params: {id: id, UserType: type}});
+  }
+
+  getWithdrawalHistory(id: number, type: number): Observable<any> {
+    return this.http.get('GeneralControlPanel/get-page-list-cashflow-history', {params: {id: id, UserType: type}});
+  }
+
+  getAccountBalance(id: number, type: number): Observable<any> {
+    return this.http.get('GeneralControlPanel/get-account-balance', {params: {id: id, UserType: type}});
+  }
 }
