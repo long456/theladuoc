@@ -958,5 +958,11 @@
   "comment": "Bình luận",
   "article_reaction": "Thả tim bài viết",
   "general_control": "Điều khiển chung",
-  "sePay": "Thanh toán SePay"
+  "sePay": "Thanh toán SePay",
+  "referred_user": "Người được giới thiệu",
+  "origin": "Nguồn phát sinh",
+  "revenue": "Doanh thu",
+  "tax_deduction": "Khấu trừ thuế",
+  "actual_earnings": "Thực lĩnh",
+  "bank_branch": "Chi nhánh"
 }

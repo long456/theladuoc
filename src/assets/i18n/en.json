@@ -959,5 +959,11 @@
   "comment": "Comment",
   "article_reaction": "Article reaction",
   "general_control": "General control",
-  "sePay": "SePay"
+  "sePay": "SePay",
+  "referred_user": "Referred user",
+  "origin": "Origin",
+  "revenue": "Revenue",
+  "tax_deduction": "Tax deduction",
+  "actual_earnings": "Actual earnings",
+  "bank_branch": "Bank branch"
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from "@angular/router";
 import { NzI18nService, en_US, vi_VN, NzI18nInterface } from 'ng-zorro-antd/i18n';
 import customViVn from './custom-vi-vn';
 import { SpinnerService } from './shared/services/spinner-service';
-import { Observable } from 'rxjs';
+import {delay, Observable, tap} from 'rxjs';
 import {OrganizationService} from "./pages/organization/services/organization.service";
 
 @Component({
@@ -11,18 +11,24 @@ import {OrganizationService} from "./pages/organization/services/organization.se
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
   isLoading : Observable<boolean>;
-  favIcon: HTMLLinkElement | null = document.querySelector('#favIcon');
-  titleCms: InnerHTML | null = document.querySelector("title");
+  favIcon: HTMLLinkElement | null = null;
+  titleCms: InnerHTML | null = null;
 
   constructor(
     public router: Router,
     private i18n: NzI18nService,
     private spinnerService: SpinnerService,
-    private organizationService: OrganizationService
+    private organizationService: OrganizationService,
+    private cdr: ChangeDetectorRef
   ) {
+    this.isLoading = this.spinnerService.loading$.pipe(
+      delay(0),
+      tap(() => this.cdr.detectChanges())
+    );
+
     this.router.events.subscribe(ev => {
       if (ev instanceof NavigationStart) {
         this.spinnerService.showLoading();
@@ -31,8 +37,8 @@ export class AppComponent implements OnInit {
         this.spinnerService.hideLoading();
       }
     });
-    this.isLoading = this.spinnerService.loading$;
   }
+
   ngOnInit(): void {
     this.i18n.setLocale(customViVn);
     this.organizationService.getInfoOrganization().subscribe({
@@ -49,6 +55,11 @@ export class AppComponent implements OnInit {
         }
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.favIcon = document.querySelector('#favIcon');
+    this.titleCms = document.querySelector('title');
   }
 
   cacheOrgData(data: any): void{

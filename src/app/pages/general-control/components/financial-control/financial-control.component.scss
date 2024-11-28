@@ -1,0 +1,39 @@
+.financial-select{
+  width: 250px;
+  margin-bottom: 25px;
+}
+
+.spin-container{
+  text-align: center;
+  padding: 30px 50px;
+  margin: 20px 0;
+
+  span[nz-icon] {
+    font-size: 36px;
+  }
+}
+
+.account-info{
+  width: 100%;
+  p{
+    font-size: 15px;
+    font-weight: 600;
+    span{
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}
+
+.text-center{
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.balance{
+  padding-top: 15px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #198754;
+}

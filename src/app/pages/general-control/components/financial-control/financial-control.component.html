@@ -1,1 +1,143 @@
-<p>financial-control works!</p>
+<div nz-row [nzGutter]=[16,16]>
+  <div nz-col [nzSpan]="24">
+    <nz-select class="financial-select" [(ngModel)]="currentSelection">
+      <nz-option [nzValue]="1" [nzLabel]="'Thống kê hoa hồng'"></nz-option>
+      <nz-option [nzValue]="2" [nzLabel]="'Lịch sử giao dịch'"></nz-option>
+      <nz-option [nzValue]="3" [nzLabel]="'Lịch sử rút nạp'"></nz-option>
+      <nz-option [nzValue]="4" [nzLabel]="'Số dư tài khoản'"></nz-option>
+    </nz-select>
+
+    <ng-container *ngIf="currentSelection === 1">
+      <ng-container *ngIf="(commissionStatistics$ | async) as commission;else loadingScreen">
+        <app-table
+          [rows]="commission.rows"
+          [page]="commission.page"
+          [pageSize]="commission.pageSize"
+          [pageTotal]="commission.rowTotal"
+          [clientPagination]="false"
+          (pageIndexChange)="page$.next($event)"
+          (pageSizeChange)="pageSize$.next($event)"
+          [loading]="loading"
+        >
+          <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+          <table-column header="{{ 'time' | translate }}" key="createDate" [width]="'150px'"></table-column>
+          <table-column header="{{ 'referred_user' | translate }}" key="refferedUserName" [width]="'180px'"></table-column>
+          <table-column header="Email" key="refferedUserEmail" [width]="'200px'"></table-column>
+          <table-column header="{{ 'origin' | translate }}" key="descriptionReferral" [width]="'180px'"></table-column>
+          <table-column header="{{ 'revenue' | translate }}" key="price" [width]="'180px'">
+            <ng-template appCell let-data>
+              {{data.price | currency: 'VND'}}
+            </ng-template>
+          </table-column>
+          <table-column header="{{ 'commission' | translate }}" key="commission" [width]="'180px'">
+            <ng-template appCell let-data>
+              {{data.commission | currency: 'VND'}}
+            </ng-template>
+          </table-column>
+          <table-column header="{{ 'tax_deduction' | translate }}" key="taxDeduction" [width]="'180px'">
+            <ng-template appCell let-data>
+              {{data.taxDeduction | currency: 'VND'}}
+            </ng-template>
+          </table-column>
+          <table-column header="{{ 'actual_earnings' | translate }}" key="point" [width]="'180px'">
+            <ng-template appCell let-data>
+              {{data.point | currency: 'VND'}}
+            </ng-template>
+          </table-column>
+        </app-table>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="currentSelection === 2">
+      <ng-container *ngIf="(transactionHistory$ | async) as transaction;else loadingScreen">
+        <app-table
+          [rows]="transaction.rows"
+          [page]="transaction.page"
+          [pageSize]="transaction.pageSize"
+          [pageTotal]="transaction.rowTotal"
+          [clientPagination]="false"
+          (pageIndexChange)="page$.next($event)"
+          (pageSizeChange)="pageSize$.next($event)"
+          [loading]="loading"
+        >
+          <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+          <table-column header="{{ 'time' | translate }}" key="createDate" [width]="'150px'"></table-column>
+          <table-column header="{{ 'price' | translate }}" key="price" [width]="'180px'">
+            <ng-template appCell let-data>
+              {{data.price | currency: 'VND'}}
+            </ng-template>
+          </table-column>
+          <table-column header="{{ 'package_type' | translate }}" key="priceMemberPolicyTypeDisplay" [width]="'180px'"></table-column>
+          <table-column header="{{ 'payment_method' | translate }}" key="paymentMethodDisplay" [width]="'180px'"></table-column>
+          <table-column header="{{ 'status' | translate }}" key="orderPaymentStatusDisplay" [width]="'180px'"></table-column>
+        </app-table>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="currentSelection === 3">
+      <ng-container *ngIf="(withdrawalHistory$ | async) as withdrawal;else loadingScreen">
+        <app-table
+          [rows]="withdrawal.rows"
+          [page]="withdrawal.page"
+          [pageSize]="withdrawal.pageSize"
+          [pageTotal]="withdrawal.rowTotal"
+          [clientPagination]="false"
+          (pageIndexChange)="page$.next($event)"
+          (pageSizeChange)="pageSize$.next($event)"
+          [loading]="loading"
+        >
+          <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+          <table-column header="{{ 'time' | translate }}" key="createDate" [width]="'150px'"></table-column>
+          <table-column header="{{ 'price' | translate }}" key="point" [width]="'180px'">
+            <ng-template appCell let-data>
+              {{data.point | currency: 'VND'}}
+            </ng-template>
+          </table-column>
+          <table-column header="{{ 'actions' | translate }}" key="descriptionReferral" [width]="'180px'"></table-column>
+          <table-column header="{{ 'status' | translate }}" key="statusDisplay" [width]="'180px'"></table-column>
+        </app-table>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="currentSelection === 4">
+      <ng-container *ngIf="(accountBalance$ | async) as balance;else loadingScreen">
+        <div nz-row [nzGutter]=[16,16]>
+          <div nz-col [nzSpan]="12">
+            <nz-card class="account-info">
+              <p>
+                {{ 'account_holder' | translate }} :
+                <span>{{balance.bankAccountOwner}}</span>
+              </p>
+              <p>
+                {{ 'account_number' | translate }} :
+                <span nz-typography
+                      nzCopyable [nzCopyText]="balance.bankAccountNumber"
+                >{{balance.bankAccountNumber}}</span>
+              </p>
+              <p>
+                {{ 'bank' | translate }} :
+                <span>{{balance.bankAccountName}}</span>
+              </p>
+              <p>
+                {{ 'bank_branch' | translate }} :
+                <span>{{balance.bankAccountBranch}}</span>
+              </p>
+            </nz-card>
+          </div>
+          <div nz-col [nzSpan]="12">
+            <div class="text-center">{{'account_balance' | translate}}</div>
+            <div class="text-center balance">{{balance.accountBalance| currency: 'VND'}}</div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+  </div>
+</div>
+
+<ng-template #loadingScreen>
+  <div class="spin-container">
+    <ng-template #indicatorTemplate><span nz-icon nzType="loading"></span></ng-template>
+    <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
+  </div>
+</ng-template>
