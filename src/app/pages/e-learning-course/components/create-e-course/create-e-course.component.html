@@ -164,6 +164,25 @@
             </div>
           </div>
         </div>
+        <!--Hoa hồng giới thiệu-->
+        <div nz-col [nzXs]="24" [nzSm]="24" [nzXl]="8" *ngIf="isSpecialCourse">
+          <div nz-row [nzGutter]=[16,16]>
+            <!--tầng 1-->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.referrelReward | translate}}
+                <nz-input-number class="input-nz-number" formControlName="referrelReward" [nzMin]="0" [nzStep]="1"></nz-input-number>
+              </span>
+            </div>
+            <!--tầng 2-->
+            <div nz-col [nzXs]="24" [nzSm]="12" [nzXl]="24">
+              <span class="text-label">
+                {{controlNames.referrelReward2 | translate}}
+                <nz-input-number class="input-nz-number" formControlName="referrelReward2" [nzMin]="0" [nzStep]="1"></nz-input-number>
+              </span>
+            </div>
+          </div>
+        </div>
         <!-- Ảnh đại diện -->
         <div nz-col [nzXs]="24" [nzSm]="12">
           <span class="text-label">
@@ -396,6 +415,14 @@
             </span>
           </div>
           <nz-switch formControlName="status">
+          </nz-switch>
+        </div>
+
+        <div nz-col class="mb-30" [nzXs]="24" [nzSm]="12">
+          <div class="text-label">
+            {{controlNames.stopSelling | translate}}
+          </div>
+          <nz-switch formControlName="stopSelling">
           </nz-switch>
         </div>
 

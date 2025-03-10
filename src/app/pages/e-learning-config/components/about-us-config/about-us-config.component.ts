@@ -95,6 +95,7 @@ export class AboutUsConfigComponent implements OnInit{
         video: [null],
       }),
       whyChooseUs: this.fb.group({
+        imageLeft: [null],
         backgroundImage: [null],
         title: [null],
         desc: [null],

@@ -1,0 +1,25 @@
+<ng-container *ngIf="(refAcc$ | async) as acc;else loadingScreen">
+  <app-table
+    [rows]="acc.rows"
+    [page]="acc.page"
+    [pageSize]="acc.pageSize"
+    [pageTotal]="acc.rowTotal"
+    [clientPagination]="false"
+    (pageIndexChange)="page$.next($event)"
+    (pageSizeChange)="pageSize$.next($event)"
+    [loading]="(loading$ | async) || false"
+  >
+    <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+    <table-column header="{{ 'member_name' | translate }}" key="fullName" [width]="'150px'"></table-column>
+    <table-column header="{{ 'member_code' | translate }}" key="code" [width]="'150px'"></table-column>
+    <table-column header="{{ 'member_email' | translate }}" key="email" [width]="'150px'"></table-column>
+    <table-column header="{{ 'member_phone' | translate }}" key="phoneNumber" [width]="'150px'"></table-column>
+  </app-table>
+</ng-container>
+
+<ng-template #loadingScreen>
+  <div class="spin-container">
+    <ng-template #indicatorTemplate><span nz-icon nzType="loading"></span></ng-template>
+    <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
+  </div>
+</ng-template>

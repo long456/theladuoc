@@ -14,6 +14,8 @@ import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzCardModule} from "ng-zorro-antd/card";
 import {NzListModule} from "ng-zorro-antd/list";
 import { FinancialControlComponent } from './components/financial-control/financial-control.component';
+import { LearningProcessComponent } from './components/learning-process/learning-process.component';
+import { ReferralAccountComponent } from './components/referral-account/referral-account.component';
 
 
 
@@ -21,7 +23,9 @@ import { FinancialControlComponent } from './components/financial-control/financ
   declarations: [
     UserControlComponent,
     InfoControlComponent,
-    FinancialControlComponent
+    FinancialControlComponent,
+    LearningProcessComponent,
+    ReferralAccountComponent
   ],
   imports: [
     CommonModule,

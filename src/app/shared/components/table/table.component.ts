@@ -17,7 +17,7 @@ import {COL_DATA_TYPE} from "../../models/Table"
 })
 export class TableComponent implements OnInit{
 
-  @Input() loading = false;
+  @Input() loading: boolean = false;
   @Input() rows = <any>[];
   @Input() clientPagination = true;
   @Input() page = 1;

@@ -965,5 +965,9 @@
   "revenue": "Revenue",
   "tax_deduction": "Tax deduction",
   "actual_earnings": "Actual earnings",
-  "bank_branch": "Bank branch"
+  "bank_branch": "Bank branch",
+  "progress": "Progress",
+  "stopSelling": "Stop selling",
+  "ref_reward1": "Referral commission level 1 (%)",
+  "ref_reward2": "Referral commission level 2 (%)"
 }

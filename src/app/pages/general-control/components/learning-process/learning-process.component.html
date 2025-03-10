@@ -1,0 +1,106 @@
+<div nz-row [nzGutter]=[16,16]>
+  <div nz-col [nzSpan]="4">
+    <nz-select class="financial-select" [(ngModel)]="currentSelection" (ngModelChange)="onSelect()">
+      <nz-option [nzValue]="1" [nzLabel]="'Phễu khóa học'"></nz-option>
+      <nz-option [nzValue]="2" [nzLabel]="'E-learning'"></nz-option>
+    </nz-select>
+  </div>
+
+  <div nz-col [nzSpan]="6" *ngIf="currentSelection === 1">
+    <div class="funnel-type">
+      <span>Lọc theo</span>
+      <nz-select class="financial-select" [(ngModel)]="currentType" (ngModelChange)="onTypeChange($event)">
+        <nz-option [nzValue]="1" [nzLabel]="'Khóa học'"></nz-option>
+        <nz-option [nzValue]="2" [nzLabel]="'Lớp học'"></nz-option>
+        <nz-option [nzValue]="3" [nzLabel]="'Buổi học'"></nz-option>
+        <nz-option [nzValue]="4" [nzLabel]="'Điểm danh'"></nz-option>
+      </nz-select>
+    </div>
+  </div>
+
+  <div nz-col [nzSpan]="24">
+    <ng-container *ngIf="currentSelection === 1">
+      <ng-container *ngIf="(funnelCourse$ | async) as course;else loadingScreen">
+        <app-table
+          [rows]="course.rows"
+          [page]="course.page"
+          [pageSize]="course.pageSize"
+          [pageTotal]="course.rowTotal"
+          [clientPagination]="false"
+          (pageIndexChange)="page$.next($event)"
+          (pageSizeChange)="pageSize$.next($event)"
+          [loading]="(loading$ | async) || false"
+        >
+          <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+          <ng-container *ngIf="currentType === 1">
+            <table-column header="{{ 'time' | translate }}" key="createDate" [width]="'150px'"></table-column>
+            <table-column header="{{ 'course_name' | translate }}" key="title" [width]="'150px'"></table-column>
+            <table-column header="{{ 'tutor' | translate }}" key="teacherName" [width]="'150px'"></table-column>
+            <table-column header="{{ 'course_type' | translate }}" key="typeDisplay" [width]="'150px'"></table-column>
+            <table-column header="{{ 'price' | translate }}" key="price" [width]="'180px'">
+              <ng-template appCell let-data>
+                {{data.price | currency: 'VND'}}
+              </ng-template>
+            </table-column>
+          </ng-container>
+
+          <ng-container *ngIf="currentType === 2">
+            <table-column header="{{ 'class_name' | translate }}" key="name" [width]="'150px'"></table-column>
+            <table-column header="{{ 'course_name' | translate }}" key="courseName" [width]="'150px'"></table-column>
+          </ng-container>
+
+          <ng-container *ngIf="currentType === 3">
+            <table-column header="{{ 'lesson_name' | translate }}" key="name" [width]="'150px'"></table-column>
+            <table-column header="{{ 'class_name' | translate }}" key="className" [width]="'150px'"></table-column>
+            <table-column header="{{ 'course_name' | translate }}" key="courseName" [width]="'150px'"></table-column>
+          </ng-container>
+
+          <ng-container *ngIf="currentType === 4">
+            <table-column header="{{ 'time' | translate }}" key="attendanceTime" [width]="'150px'"></table-column>
+            <table-column header="{{ 'lesson_name' | translate }}" key="lessonName" [width]="'150px'"></table-column>
+            <table-column header="{{ 'class_name' | translate }}" key="className" [width]="'150px'"></table-column>
+            <table-column header="{{ 'course_name' | translate }}" key="courseName" [width]="'150px'"></table-column>
+            <table-column header="{{ 'tutor' | translate }}" key="teacherName" [width]="'150px'"></table-column>
+            <table-column header="{{ 'caring_by' | translate }}" key="caregiverName" [width]="'150px'"></table-column>
+          </ng-container>
+
+          <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'150px'"></table-column>
+        </app-table>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="currentSelection === 2">
+      <ng-container *ngIf="(eLearning$ | async) as course;else loadingScreen">
+        <app-table
+          [rows]="course.rows"
+          [page]="course.page"
+          [pageSize]="course.pageSize"
+          [pageTotal]="course.rowTotal"
+          [clientPagination]="false"
+          (pageIndexChange)="page$.next($event)"
+          (pageSizeChange)="pageSize$.next($event)"
+          [loading]="(loading$ | async) || false"
+        >
+          <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
+          <table-column header="{{ 'start_date' | translate }}" key="activedTime" [width]="'150px'"></table-column>
+          <table-column header="{{ 'end_date' | translate }}" key="endTime" [width]="'150px'"></table-column>
+          <table-column header="{{ 'course_name' | translate }}" key="courseName" [width]="'150px'"></table-column>
+          <table-column header="{{ 'progress' | translate }}" key="progress" [width]="'150px'">
+            <ng-template appCell let-data>
+              {{data.progress + ' %'}}
+            </ng-template>
+          </table-column>
+          <table-column header="{{ 'certificate_image' | translate }}" key="certificateImagePath" [width]="'150px'"></table-column>
+          <table-column header="{{ 'organization' | translate }}" key="organizationName" [width]="'150px'"></table-column>
+        </app-table>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #loadingScreen>
+  <div class="spin-container">
+    <ng-template #indicatorTemplate><span nz-icon nzType="loading"></span></ng-template>
+    <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
+  </div>
+</ng-template>

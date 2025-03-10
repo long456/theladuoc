@@ -5,7 +5,7 @@
 <div nz-row>
   <div nz-col [nzSpan]="20">
     <form [formGroup]="generalConfigForm">
-      <div nz-row [nzGutter]=[16,16]>
+      <div nz-row [nzGutter]=[16,16] class="form-content">
         <div nz-col [nzSpan]="4">
             <span class="text-label">
               Màu thương hiệu
@@ -32,6 +32,59 @@
               Màu chữ thường
             </span>
           <app-color-picker formControlName="colorTextDesc"></app-color-picker>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]=[16,16] formGroupName="header" class="form-content">
+        <div nz-col [nzSpan]="4">
+          <span class="text-label">
+            Màu nền Header
+          </span>
+          <app-color-picker formControlName="backgroundColor"></app-color-picker>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+          <span class="text-label">
+            Màu chữ Header
+          </span>
+          <app-color-picker formControlName="textColor"></app-color-picker>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Logo Header
+          </span>
+          <app-file-selector formControlName="logo"></app-file-selector>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]=[16,16] formGroupName="footer" class="form-content">
+        <div nz-col [nzSpan]="4">
+          <span class="text-label">
+            Màu nền Footer
+          </span>
+          <app-color-picker formControlName="backgroundColor"></app-color-picker>
+        </div>
+
+        <div nz-col [nzSpan]="4">
+          <span class="text-label">
+            Màu chữ Footer
+          </span>
+          <app-color-picker formControlName="textColor"></app-color-picker>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Logo Footer
+          </span>
+          <app-file-selector formControlName="logo"></app-file-selector>
+        </div>
+
+        <div nz-col [nzSpan]="8">
+          <span class="text-label">
+            Link báo cáo bộ công thương
+          </span>
+          <input nz-input formControlName="linkBCT">
         </div>
       </div>
     </form>
