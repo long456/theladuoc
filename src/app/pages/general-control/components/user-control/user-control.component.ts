@@ -15,6 +15,13 @@ export class UserControlComponent implements OnInit{
   isLoading: boolean = false;
   listUser : UserData[] = [];
   userData!: UserData;
+  currentTab: string = "info";
+  tabs = [
+    { key: 'info', title: 'Thông tin học viên' },
+    { key: 'financial', title: 'Quản lý tài chính' },
+    { key: 'learning', title: 'Quá trình học tập' },
+    { key: 'referral', title: 'Tài khoản được giới thiệu' }
+  ];
   nzFilterOption = () => true;
   constructor(
     private userControlService: UserControlService,
@@ -60,15 +67,16 @@ export class UserControlComponent implements OnInit{
 
   onSelectionChange(event: UserData):void {
     this.userControlService.setUserData(event);
-    this.navigateBack();
+    // this.navigateTab(this.tabs[0].key);
   }
 
-  navigateBack():void {
-    this.router.navigate(['page/general-control/user-control/info']).then();
+  onTabChange(index: number) {
+    this.currentTab = this.tabs[index].key;
+    this.navigateTab(this.tabs[index].key);
   }
 
-  log(e: any){
-    console.log(e)
-    this.router.navigate(['page/general-control/user-control/financial']).then();
+  navigateTab(tab: string) {
+    this.currentTab = tab;
+    this.router.navigate(['page/general-control/user-control/' + tab]).then();
   }
 }

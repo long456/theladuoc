@@ -1,3 +1,8 @@
+.select-url{
+  display: flex;
+  justify-content: space-between;
+}
+
 .title-page{
   font-size: 16px;
   font-weight: 600;
@@ -35,6 +40,34 @@
   width: 100%;
 }
 
-.form-content{
-  padding: 15px;
+.input-nz-number{
+  min-width: 100%;
+}
+
+.no-padding{
+  padding: 0!important;
+}
+
+nz-select{
+  display: block;
+}
+
+.width-100{
+  width: 100%;
+}
+
+.pd-t-10{
+  padding-top: 10px;
+}
+.allow-free{
+  padding-top: 10px;
+  span{
+    margin-right: 8px;
+    font-weight: 600;
+  }
+}
+
+.allow-text {
+  padding-top: 8px;
+  font-weight: 600;
 }

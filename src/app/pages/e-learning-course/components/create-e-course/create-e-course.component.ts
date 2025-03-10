@@ -55,7 +55,10 @@ export class CreateECourseComponent implements OnInit {
     imgBanner: 'banner',
     isCertificate: 'has_certificate',
     certificateImage: 'certificate_image',
-    status: 'status'
+    status: 'status',
+    stopSelling: 'stopSelling',
+    referrelReward: 'ref_reward1',
+    referrelReward2: 'ref_reward2'
   };
 
   maxlengthConfig = {
@@ -98,6 +101,8 @@ export class CreateECourseComponent implements OnInit {
       price365DayOld: [0],
       priceForever: [0],
       priceForeverOld: [0],
+      referrelReward: [null],
+      referrelReward2: [null],
       completedPoint: [null],
       type: [1, [Validators.required, allowedValuesValidator([1, 2, 3, 4, 5])]],
       memberPolicyLevelId: [null],
@@ -108,6 +113,7 @@ export class CreateECourseComponent implements OnInit {
       isCertificate: [false],
       certificateImage: [null, [this.requireCerImgValidator()]],
       status: [1],
+      stopSelling: [false]
     },{validators: [this.validPriceCourse()]})
 
     const typeControl = this.courseForm.get('type');

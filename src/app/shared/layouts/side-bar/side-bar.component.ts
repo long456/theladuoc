@@ -518,6 +518,18 @@ export class SideBarComponent implements OnInit {
               ],
             },
             {
+              icon: '',
+              link: '',
+              name: 'Khuyến mãi',
+              children: [
+                {
+                  icon: '',
+                  link: 'page/promotion/coupon',
+                  name: 'Phiếu giảm giá',
+                },
+              ]
+            },
+            {
               name: 'platform_transfer',
               icon: '',
               link: '',
@@ -538,11 +550,11 @@ export class SideBarComponent implements OnInit {
                     },
                   ]
                 },
-                {
-                  name: 'business_empower',
-                  icon: '',
-                  link: 'page/price-list/business-access',
-                }
+                // {
+                //   name: 'business_empower',
+                //   icon: '',
+                //   link: 'page/price-list/business-access',
+                // }
               ]
             },
           ],

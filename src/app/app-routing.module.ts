@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {PageComponent} from "./layouts/page-layout/page/page.component";
 import {AuthComponent} from "./layouts/auth-layout/auth/auth.component";
+import {PromotionRoutingModule} from "./pages/promotion/promotion-routing.module";
 
 const routes: Routes = [
   {
@@ -109,6 +110,10 @@ const routes: Routes = [
         path: 'general-control',
         loadChildren: () => import('./pages/general-control/general-control.module').then(m => m.GeneralControlModule),
       },
+      {
+        path: 'promotion',
+        loadChildren: () => import('./pages/promotion/promotion.module').then(m => m.PromotionModule),
+      }
     ],
   },
 ];

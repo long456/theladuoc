@@ -938,7 +938,7 @@
   "website_settings": "Cấu hình website",
   "wednesday": "Thứ 4",
   "weekly": "Hàng tuần",
-  "withdraw_requests": "Danh sách yêu cầu rút tiền",
+  "withdraw_requests": "Yêu cầu rút tiền",
   "withdrawal": "Rút tiền",
   "withdrawal_limit": "Hạn mức rút tiền",
   "withdrawal_settings": "Cấu hình rút tiền",
@@ -964,5 +964,9 @@
   "revenue": "Doanh thu",
   "tax_deduction": "Khấu trừ thuế",
   "actual_earnings": "Thực lĩnh",
-  "bank_branch": "Chi nhánh"
+  "bank_branch": "Chi nhánh",
+  "progress": "Tiến độ",
+  "stopSelling": "Ngừng bán",
+  "ref_reward1": "Mức hoa hồng giới thiệu tầng 1 (%)",
+  "ref_reward2": "Mức hoa hồng giới thiệu tầng 2 (%)"
 }

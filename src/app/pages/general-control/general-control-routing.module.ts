@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {UserControlComponent} from "./components/user-control/user-control.component";
 import {InfoControlComponent} from "./components/info-control/info-control.component";
 import {FinancialControlComponent} from "./components/financial-control/financial-control.component";
+import {LearningProcessComponent} from "./components/learning-process/learning-process.component";
+import {ReferralAccountComponent} from "./components/referral-account/referral-account.component";
 
 const routes: Routes = [
   {
@@ -21,6 +23,14 @@ const routes: Routes = [
       {
         path: 'financial',
         component: FinancialControlComponent,
+      },
+      {
+        path: 'learning',
+        component: LearningProcessComponent,
+      },
+      {
+        path: 'referral',
+        component: ReferralAccountComponent,
       }
     ]
   }

@@ -1,6 +1,6 @@
 <div nz-row [nzGutter]=[16,16]>
   <div nz-col [nzSpan]="24">
-    <nz-select class="financial-select" [(ngModel)]="currentSelection">
+    <nz-select class="financial-select" [(ngModel)]="currentSelection" (ngModelChange)="onSelect()">
       <nz-option [nzValue]="1" [nzLabel]="'Thống kê hoa hồng'"></nz-option>
       <nz-option [nzValue]="2" [nzLabel]="'Lịch sử giao dịch'"></nz-option>
       <nz-option [nzValue]="3" [nzLabel]="'Lịch sử rút nạp'"></nz-option>
@@ -17,7 +17,7 @@
           [clientPagination]="false"
           (pageIndexChange)="page$.next($event)"
           (pageSizeChange)="pageSize$.next($event)"
-          [loading]="loading"
+          [loading]="(loading$ | async) || false"
         >
           <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
           <table-column header="{{ 'time' | translate }}" key="createDate" [width]="'150px'"></table-column>
@@ -58,7 +58,7 @@
           [clientPagination]="false"
           (pageIndexChange)="page$.next($event)"
           (pageSizeChange)="pageSize$.next($event)"
-          [loading]="loading"
+          [loading]="(loading$ | async) || false"
         >
           <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
           <table-column header="{{ 'time' | translate }}" key="createDate" [width]="'150px'"></table-column>
@@ -84,7 +84,7 @@
           [clientPagination]="false"
           (pageIndexChange)="page$.next($event)"
           (pageSizeChange)="pageSize$.next($event)"
-          [loading]="loading"
+          [loading]="(loading$ | async) || false"
         >
           <table-column header="{{ 'no' | translate }}" key="id" [dataType]="COL_DATA_TYPE.INDEX" [width]="'80px'" fixColumn="left"></table-column>
           <table-column header="{{ 'time' | translate }}" key="createDate" [width]="'150px'"></table-column>

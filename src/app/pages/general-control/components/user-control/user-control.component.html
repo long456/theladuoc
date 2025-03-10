@@ -24,13 +24,17 @@
     <nz-divider class="mt-15"></nz-divider>
 
     <ng-container *ngIf="userData; else blank">
-      <nz-tabset [nzTabPosition]="'left'">
-        <nz-tab [nzTitle]="'Thông tin học viên'">
-          <router-outlet></router-outlet>
-        </nz-tab>
-
-        <nz-tab [nzTitle]="'Quản lý tài chính'" (nzSelect)="log($event)">
-          <router-outlet></router-outlet>
+      <nz-tabset
+        [nzTabPosition]="'left'"
+        (nzSelectedIndexChange)="onTabChange($event)"
+      >
+        <nz-tab
+          *ngFor="let tab of tabs"
+          [nzTitle]="tab.title"
+        >
+          <ng-container *ngIf="currentTab === tab.key">
+            <router-outlet></router-outlet>
+          </ng-container>
         </nz-tab>
       </nz-tabset>
     </ng-container>

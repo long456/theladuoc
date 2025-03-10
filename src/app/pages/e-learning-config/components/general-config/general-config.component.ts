@@ -24,10 +24,21 @@ export class GeneralConfigComponent implements OnInit{
 
   ngOnInit() {
     this.generalConfigForm = this.fb.group({
-      colorMain: [null],
-      colorTextButton: [null],
-      colorTextTitle: [null],
-      colorTextDesc: [null],
+      colorMain: ['#fff'],
+      colorTextButton: ['#fff'],
+      colorTextTitle: ['#fff'],
+      colorTextDesc: ['#fff'],
+      header: this.fb.group({
+        backgroundColor: ['#fff'],
+        logo: [null],
+        textColor: ['#fff'],
+      }),
+      footer: this.fb.group({
+        backgroundColor: ['#fff'],
+        logo: [null],
+        textColor: ['#fff'],
+        linkBCT: [null],
+      })
     })
 
     this.pathDataForm();
